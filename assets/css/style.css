@@ -2339,7 +2339,7 @@ body.fixed-left .side-menu.left {
     position: relative;
     z-index: 9999;
     height: 64px;
-    width: 64px; }
+    width:75px; }
   .user-details .user-info {
     text-align: center; }
     .user-details .user-info .user-status {

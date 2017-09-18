@@ -1,5 +1,4 @@
 <!-- Start right Content here -->
-
 <div class="content-page">
 <!-- Start content -->
 <div class="content">
@@ -51,7 +50,7 @@
               <li class="list-inline-item dropdown notification-list">
                   <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
                      aria-haspopup="false" aria-expanded="false">
-                      <img src="<?php echo base_url(); ?>assets/images/users/avatar-1.jpg" alt="user" class="rounded-circle">
+                      <img src="<?php echo base_url(); ?>assets/images/admin/admin.png" alt="user" class="rounded-circle">
                   </a>
                   <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                       <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>

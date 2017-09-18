@@ -29,7 +29,7 @@
     <div class="topbar-left">
         <div class="text-center">
             <!--<a href="index.html" class="logo">Admiry</a>-->
-            <a href="#" class="logo"><img src="<?php echo base_url(); ?>assets/images/logo.png" height="42" alt="logo"></a>
+            <a href="#" class="logo"><img src="<?php echo base_url(); ?>assets/images/logo.png" height="" alt="logo"></a>
         </div>
     </div>
 
@@ -37,11 +37,11 @@
 
         <div class="user-details">
             <div class="text-center">
-                <img src="<?php echo base_url(); ?>assets/images/users/avatar-1.jpg" alt="" class="rounded-circle">
+                <img src="<?php echo base_url(); ?>assets/images/admin/admin.png" alt="" class="rounded-circle">
             </div>
             <div class="user-info">
-                <h4 class="font-16">Anderson Barden</h4>
-                <span class="text-muted user-status"><i class="fa fa-dot-circle-o text-success"></i> Online</span>
+                <h4 class="font-16">Admin</h4>
+                <!--span class="text-muted user-status"><i class="fa fa-dot-circle-o text-success"></i> Online</span-->
             </div>
         </div>
 
@@ -55,9 +55,9 @@
                 </li>
 
                 <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-buffer"></i> <span> Country </span> </a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-buffer"></i> <span> Masters </span> </a>
                     <ul class="list-unstyled">
-                        <li><a href="#">Buttons</a></li>
+                        <li><a href="<?php echo base_url();?>Countrymasters/home">Country</a></li>
                         <li><a href="#">Cards</a></li>
                     </ul>
                 </li>
