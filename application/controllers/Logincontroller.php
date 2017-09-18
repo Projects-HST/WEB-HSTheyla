@@ -11,7 +11,15 @@ class Logincontroller extends CI_Controller {
 	
 	public function index()
 	{
-		$this->load->view('login');
+		$user_id=$this->session->userdata('id');
+			if($user_id){
+				redirect('adminlogin/dashboard');
+			}else{
+				$this->load->view('login');
+			}
+
+
+		
 	}
 
 }
