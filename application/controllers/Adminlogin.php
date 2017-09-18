@@ -43,7 +43,7 @@ class Adminlogin extends CI_Controller {
 						switch($user_type1){
 							case '1':
 								$user_name=$result['user_name'];$msg=$result['msg'];$mobile_no=$result['mobile_no'];$email_id=$result['email_id'];$status=$result['status'];$id=$result['id'];$user_role=$result['user_role'];$login_mode=$result['login_mode'];
-								
+
 								$datas= array("user_name"=>$user_name, "msg"=>$msg,"mobile_no"=>$mobile_no,"email_id"=>$email_id,"status"=>$status,"id"=>$id,"user_role"=>$user_role,"login_mode"=>$login_mode,);
 								//$this->session->userdata($user_name);
 								$session_data=$this->session->set_userdata($datas);
@@ -68,5 +68,14 @@ class Adminlogin extends CI_Controller {
 
 
     }
+
+    public function logout(){
+		$datas=$this->session->userdata();
+		$this->session->unset_userdata($datas);
+		$this->session->sess_destroy();
+		redirect('/');
+	}
+
+	
 
 }
