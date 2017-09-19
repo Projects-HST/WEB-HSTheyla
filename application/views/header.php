@@ -48,7 +48,7 @@
         <div id="sidebar-menu">
             <ul>
                 <li>
-                    <a href="" class="waves-effect">
+                    <a href="<?php echo base_url();?>adminlogin/home" class="waves-effect">
                         <i class="mdi mdi-view-dashboard"></i>
                         <span> Dashboard </span>
                     </a>
@@ -57,8 +57,8 @@
                 <li class="has_sub">
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-buffer"></i> <span> Masters </span> </a>
                     <ul class="list-unstyled">
-                        <li><a href="<?php echo base_url();?>Countrymasters/home">Country</a></li>
-                        <li><a href="#">Cards</a></li>
+                        <li><a href="<?php echo base_url();?>country/home">Country</a></li>
+                        <li><a href="<?php echo base_url();?>city/home">City</a></li>
                     </ul>
                 </li>
 
