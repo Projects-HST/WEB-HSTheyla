@@ -11,6 +11,7 @@
 <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="<?php echo base_url(); ?>assets/css/icons.css" rel="stylesheet" type="text/css">
 <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet" type="text/css">
+<link href="<?php echo base_url(); ?>assets/css/button.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -52,7 +53,28 @@
                 <a href="#" class="text-muted"><i class="mdi mdi-lock"></i> Forgot your password?</a>
             </div>
             <div class="col-sm-5 m-t-20">
-                <a href="#" class="text-muted"><i class="mdi mdi-account-circle"></i> Create an account</a>
+              <?php
+             $this->load->library('googleplus');
+             $CLIENT_ID = '56118066242-ndqa7sis300o0ce5otglegn629ktmjj5.apps.googleusercontent.com';
+             $CLIENT_SECRET = 'QBjwPGP5PE6tzJt3bDekC4a1';
+             $APPLICATION_NAME = "Heyla";
+             $client = new Google_Client();
+             $client->setApplicationName($APPLICATION_NAME);
+             $client->setClientId($CLIENT_ID);
+             $client->setClientSecret($CLIENT_SECRET);
+             $client->setAccessType("offline");
+             $client->setRedirectUri('http://localhost/heyla/adminlogin/glogin/');
+             $client->setScopes('email');
+             $objOAuthService = new Google_Service_Plus($client);
+
+             $client->setScopes(array('https://www.googleapis.com/auth/userinfo.email','https://www.googleapis.com/auth/userinfo.profile'));
+             $authUrl=$client->createAuthUrl();
+             echo '<a class="loginBtn loginBtn--google" href="'.$authUrl.'">Login to google</a>';
+             ?>
+             <p>
+               <button class="loginBtn loginBtn--facebook">
+                 Login with Facebook
+               </button>
             </div>
         </div>
     </form>
