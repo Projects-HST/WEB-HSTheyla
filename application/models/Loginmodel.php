@@ -27,7 +27,7 @@ Class Loginmodel extends CI_Model
                  switch($status)
                  {
                     case "Y":
-                      $data = array("user_name" => $rows->user_name,"msg"  =>"success","mobile_no"=>$rows->mobile_no,"status"=>$rows->status,"email_id"=>$rows->email_id,"login_mode"=>$rows->login_mode,"user_role"=>$rows->user_role,"id"=>$rows->id);
+                      $data = array("user_name" => $rows->user_name,"msg"  =>"success","mobile_no"=>$rows->mobile_no,"status"=>$rows->status,"email_id"=>$rows->email_id,"user_role"=>$rows->user_role,"id"=>$rows->id);
                       return $data;
                       //break;
                      //print_r($data);exit;
@@ -38,7 +38,7 @@ Class Loginmodel extends CI_Model
                       break;
                   }
 
-                 $data =  array("user_name" => $rows->user_name,"msg"  =>"success","mobile_no"=>$rows->mobile_no,"status"=>$rows->status,"email_id"=>$rows->email_id,"login_mode"=>$rows->login_mode,"user_role"=>$rows->user_role,"id"=>$rows->id);
+                 $data =  array("user_name" => $rows->user_name,"msg"  =>"success","mobile_no"=>$rows->mobile_no,"status"=>$rows->status,"email_id"=>$rows->email_id,"user_role"=>$rows->user_role,"id"=>$rows->id);
    	            $this->session->set_userdata($data);
    	            return $data;
                }

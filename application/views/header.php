@@ -13,6 +13,11 @@
 <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="<?php echo base_url(); ?>assets/css/icons.css" rel="stylesheet" type="text/css">
 <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet" type="text/css">
+
+<link href="<?php echo base_url(); ?>assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>assets/plugins/bootstrap-touchspin/css/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
+
 </head>
 
 <body class="fixed-left">
@@ -34,7 +39,6 @@
     </div>
 
     <div class="sidebar-inner slimscrollleft">
-
         <div class="user-details">
             <div class="text-center">
                 <img src="<?php echo base_url(); ?>assets/images/admin/admin.png" alt="" class="rounded-circle">
@@ -58,15 +62,17 @@
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-buffer"></i> <span> Masters </span> </a>
                     <ul class="list-unstyled">
                         <li><a href="<?php echo base_url();?>country/home">Country</a></li>
+                        <li><a href="<?php echo base_url();?>state/home">State</a></li>
                         <li><a href="<?php echo base_url();?>city/home">City</a></li>
+                        <li><a href="<?php echo base_url();?>category/home">Category</a></li>
                     </ul>
                 </li>
 
                 <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-cube-outline"></i> <span>City</span> </a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-cube-outline"></i> <span>Events</span> </a>
                     <ul class="list-unstyled">
-                        <li><a href="#">Animation</a></li>
-                        <li><a href="#">Highlight</a></li>
+                        <li><a href="<?php echo base_url();?>events/home">Add Events</a></li>
+                        <li><a href="#">View Events</a></li>
                     </ul>
                 </li>
 

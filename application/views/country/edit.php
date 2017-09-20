@@ -11,8 +11,6 @@
                <i class="ion-ios7-bell noti-icon"></i>
                <span class="badge badge-success noti-icon-badge">3</span>
                </a>
-               <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-menu-lg">
-                  <!-- item-->
             </li>
             <li class="list-inline-item dropdown notification-list">
             <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"

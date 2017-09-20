@@ -11,8 +11,7 @@
                <i class="ion-ios7-bell noti-icon"></i>
                <span class="badge badge-success noti-icon-badge">3</span>
                </a>
-               <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-menu-lg">
-                  <!-- item-->
+          
             </li>
             <li class="list-inline-item dropdown notification-list">
             <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
@@ -66,6 +65,22 @@
                            </div> 
 
                            <div class="form-group row">
+                              <label class="col-sm-4 col-form-label">State Name</label>
+                              <div class="col-sm-6">
+                              <input class="form-control" type="hidden" value="<?php echo $res->state_id; ?>" name="stateid">
+                              <div id="old" style="display:none;"">
+                               <input class="form-control" type="text" value="<?php echo $res->state_name; ?>"  >
+                                 </div>
+                              <div id="msg"></div>
+                                 <select class="form-control" name="newstateid" id="staname" >
+                                     <option value=""><?php echo $res->state_name; ?></option>
+                                 </select>
+                                <!--script language="JavaScript">document.cityform.eventsts.value="<?php echo $res->state_id; ?>";</script-->
+                              </div>
+                           </div> 
+
+
+                           <div class="form-group row">
                               <label for="example-text-input" class="col-sm-4 col-form-label">City Name</label>
                               <div class="col-sm-6">
                                  <input class="form-control" type="text" required="" name="cityname" value="<?php echo $res->city_name; ?>" id="example-text-input">
@@ -102,4 +117,41 @@
     <!-- Top Bar Start -->
 </div>
 <!-- content -->
-
+<script type="text/javascript">
+ function getstatename(cid) {
+           //alert(cid);
+            $.ajax({
+               type: 'post',
+               url: '<?php echo base_url(); ?>city/get_sate_name',
+               data: {
+                   country_id:cid
+               },
+             dataType: "JSON",
+             cache: false,
+            success:function(test)
+            {
+              // alert(test);
+               var len = test.length;
+               //alert(len);
+                var statename='';
+                if(test!='')
+                 {       //alert(len);
+                   for(var i=0; i<len; i++)
+                   {
+                     var stateid = test[i].id;
+                     var state_name = test[i].state_name;
+                     //alert(state_name);
+                     statename +='<select class="form-control" name="newstateid" id="staname" ><option value=' + stateid + '> ' + state_name + ' </option></select>';
+                  }
+                  $("#staname").html(statename).show();
+                  $("#msg").hide();
+                  
+                  }else{
+                  $("#msg").html('<p style="color: red;">Stata Name Not Found</p>').show();
+                  $("#staname").hide();
+                  //$("#old").show();
+                 }
+            }
+          }); 
+       }
+</script>

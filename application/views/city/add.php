@@ -11,8 +11,6 @@
                <i class="ion-ios7-bell noti-icon"></i>
                <span class="badge badge-success noti-icon-badge">3</span>
                </a>
-               <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-menu-lg">
-                  <!-- item-->
             </li>
             <li class="list-inline-item dropdown notification-list">
             <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
@@ -49,8 +47,8 @@
                   <div class="card m-b-20">
                      <div class="card-block">
                         <h4 class="mt-0 header-title"></h4>
-                       
-                        <form class="" method="post" action="<?php echo base_url();?>city/add_city" name="cityform">
+
+                        <form method="post" action="<?php echo base_url();?>city/add_city" name="cityform">
                             
                             <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Country Name</label>
@@ -63,6 +61,18 @@
                                  </select>
                               </div>
                            </div> 
+
+
+                           <div class="form-group row">
+                              <label class="col-sm-4 col-form-label">State Name</label>
+                              <div class="col-sm-6">
+                                 <select class="form-control" name="stateid" id="staname" required="">
+                                   <option value="">Select State Name</option>
+                                 </select>
+                                 <div id="msg"></div>
+                              </div>
+                           </div> 
+
 
                             <div class="form-group row">
                               <label for="example-text-input" class="col-sm-4 col-form-label">City Name</label>
@@ -99,8 +109,7 @@
                <div class="col-12">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title">View All Countries</h4>
-                        
+                        <h4 class="mt-0 header-title">View All City</h4>
                            <?php if($this->session->flashdata('msg')): ?>
                         <div class="alert alert-success">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
@@ -112,8 +121,9 @@
                            <thead>
                               <tr>
 							            <th>S.NO</th>
-                                 <th>City Name</th>
                                  <th>Country Name</th>
+                                 <th>State Name</th>
+                                 <th>City Name</th>
                                  <th>Event Status</th>
                                  <th>Action</th>
                               </tr>
@@ -126,8 +136,10 @@
                                 ?>
                               <tr>
                                  <td><?php  echo $i; ?></td>
-                                 <td><?php  echo $rows->city_name; ?></td>
                                  <td><?php  echo $rows->country_name; ?></td>
+                                 <td><?php  echo $rows->state_name; ?></td>
+                                 <td><?php  echo $rows->city_name; ?></td>
+                               
                                  <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
 								         <td><a href="<?php echo base_url();?>city/edit_city/<?php echo $rows->id;?>"><i class="fa fa-pencil-square-o"></a></td>
                               </tr>
@@ -149,38 +161,38 @@
 </div>
 <!-- content -->
 <script type="text/javascript">
- // function getstatename(cid) {
- //           alert(cid);
- //            $.ajax({
- //               type: 'post',
- //               url: '<?php echo base_url(); ?>city/get_sate_name',
- //               data: {
- //                   country_id:cid
- //               },
- //              dataType: 'json',
- //               success: function(test1) {
- //   				alert(test1.status);
- //                if (test1.status=='Success') {
- //                       var sid = test1.stateid;
- //   					     //alert(sub.length);
- //                       var sname = test1.statename;
- //                       var len=sid.length;
- //   					     //alert(len);
- //                       var i;
- //                       var statename = '';
- //                       for (i = 0; i < len; i++) {
- //   						'<form name="exam" id="examvalidate">';
- //                           statename += '<option value="' + sid[i] + '">' + sname[i] + '</option>';
- //   						'</form>';
-   
- //                           $("#state").html(statename);
- //                           $('#msg').html('');
- //                       }
- //                   } else {
- //   					    $('#msg').html('<span style="color:red;text-align:center;">State Not Found</p>');
- //   					    $("#ajaxres").html('');
- //                   }
- //               }
- //           }); 
- //       }
+ function getstatename(cid) {
+           //alert(cid);
+            $.ajax({
+               type: 'post',
+               url: '<?php echo base_url(); ?>city/get_sate_name',
+               data: {
+                   country_id:cid
+               },
+             dataType: "JSON",
+             cache: false,
+            success:function(test)
+            {
+              // alert(test);
+               var len = test.length;
+               //alert(len);
+                var statename='';
+                if(test!='')
+                 {       //alert(len);
+                   for(var i=0; i<len; i++)
+                   {
+                     var stateid = test[i].id;
+                     var state_name = test[i].state_name;
+                     //alert(state_name);
+                     statename +='<option value=' + stateid + '> ' + state_name + ' </option>';
+                  }
+                  $("#staname").html(statename).show();
+                  $("#msg").hide();
+                  }else{
+                  $("#msg").html('<p style="color: red;">Stata Name Not Found</p>').show();
+                  $("#staname").hide();
+                 }
+            }
+          }); 
+       }
 </script>

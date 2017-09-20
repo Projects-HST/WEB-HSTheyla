@@ -44,7 +44,15 @@
 <!-- Datatable init js -->
 <script src="<?php echo base_url(); ?>assets/pages/datatables.init.js"></script>
 
-        
+ <!-- Plugins js -->
+<script src="<?php echo base_url(); ?>assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/bootstrap-touchspin/js/jquery.bootstrap-touchspin.min.js" type="text/javascript"></script>
+
+ <!-- Plugins Init js -->
+<script src="<?php echo base_url(); ?>assets/pages/form-advanced.js"></script>
+
 <script src="<?php echo base_url(); ?>assets/js/app.js"></script>
 
 </body>
