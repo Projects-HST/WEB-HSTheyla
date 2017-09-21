@@ -8,18 +8,24 @@ class Logincontroller extends CI_Controller {
 		  $this->load->helper('url');
 		  $this->load->library('session');
  }
-	
+
 	public function index()
 	{
 		$user_id=$this->session->userdata('id');
-			if($user_id){
+		$user_role=$this->session->userdata('user_role');
+
+			if($user_role==1){
 				redirect('adminlogin/dashboard');
+			}else if($user_role==2){
+				echo "user organiser";
+			}else if($user_role==3){
+				echo "user Page";
 			}else{
 				$this->load->view('login');
 			}
 
 
-		
+
 	}
 
 }
