@@ -49,7 +49,7 @@
                </button>
             </li>
             <li class="hide-phone list-inline-item app-search">
-               <h3 class="page-title">Add Events</h3>
+               <h3 class="page-title">Edit Events</h3>
             </li>
          </ul>
          <div class="clearfix"></div>
@@ -72,8 +72,8 @@
                         </div>
                         <?php endif; ?>
 
-
-                <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>events/add_events" name="eventform" onSubmit='return check();'>
+                <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>events/update_events" name="eventform" onSubmit='return check();'>
+                  <?php foreach($edit as $rows){}?>
                         <div class="form-group row">
                             
                             <label for="Category" class="col-sm-2 col-form-label">Select Category</label>
@@ -84,11 +84,12 @@
                                         <option value="<?php echo $res->id; ?>"><?php echo $res->category_name; ?></option>
                                      <?php } ?>
                                 </select>
+                              <script language="JavaScript">document.eventform.category.value="<?php echo $rows->category_id; ?>";</script>
                             </div>
 
                             <label for="Name" class="col-sm-2 col-form-label">Event Name</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" required="" name="event_name">
+                                <input class="form-control" type="text" required="" name="event_name" value="<?php echo $rows->event_name; ?>">
                             </div>
 
                         </div>
@@ -101,23 +102,25 @@
                                         <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
                                      <?php } ?>
                                 </select>
+                                <script language="JavaScript">document.eventform.country.value="<?php echo $rows->event_country; ?>";</script>
                             </div>
                              <label for="city" class="col-sm-2 col-form-label">Select City</label>
                             <div class="col-sm-4">
+
                                <select class="form-control" name="city" required="" id="ctname">
                                 </select>
-                                <div id="cmsg"></div>
+                                 <div id="cmsg"></div>
                             </div>
                         </div>
                         <div class="form-group row">
                            
                             <label for="Venue" class="col-sm-2 col-form-label">Venue</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" required="" name="venue"  >
+                                <input class="form-control" type="text" value="<?php echo $rows->event_venue; ?>" required="" name="venue"  >
                             </div>
                              <label for="Address" class="col-sm-2 col-form-label">Address</label>
                             <div class="col-sm-4">
-                               <textarea id="textarea" name="address" required="" class="form-control" maxlength="240" rows="3" placeholder=""></textarea>
+                               <textarea id="textarea" name="address" required="" class="form-control" maxlength="240" rows="3" placeholder=""><?php echo $rows->event_address; ?></textarea>
                             </div>
 
                         </div>
@@ -125,7 +128,7 @@
                            
                             <label for="Description" class="col-sm-2 col-form-label">Description</label>
                             <div class="col-sm-4">
-                                <textarea  id="textarea" required="" name="description" class="form-control" maxlength="30000" rows="3" placeholder=""></textarea>
+                                <textarea  id="textarea" required="" name="description" class="form-control" maxlength="30000" rows="3" placeholder=""><?php echo $rows->description; ?></textarea>
                             </div>
 
                              <label for="ecost" class="col-sm-2 col-form-label">Event Type</label>
@@ -135,6 +138,7 @@
                                     <option value="Paid">Paid</option>
                                     <option value="Invite">Invite</option>
                                 </select>
+                                <script language="JavaScript">document.eventform.eventcost.value="<?php echo $rows->event_type; ?>";</script>
                             </div>
                         </div>
                        <div class="form-group row">
@@ -142,7 +146,7 @@
                             <label for="sdate" class="col-sm-2 col-form-label">Start Date</label>
                             <div class="col-sm-4">
                               <div class="input-group">
-                                <input type="text" class="form-control" required="" name="start_date" id="datepicker-autoclose">
+                                <input type="text" class="form-control" required="" value="<?php echo $rows->start_date; ?>" name="start_date" id="datepicker-autoclose">
                                 <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
                             </div>
                             </div>
@@ -150,7 +154,7 @@
                              <label for="edate" class="col-sm-2 col-form-label">End Date</label>
                             <div class="col-sm-4">
                                <div class="input-group">
-                                <input type="text" class="form-control" required="" name="end_date" id="datepicker">
+                                <input type="text" class="form-control" required="" value="<?php echo $rows->end_date; ?>" name="end_date" id="datepicker">
                                 <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
                             </div>
                             </div>
@@ -161,8 +165,9 @@
                             <div class="col-sm-4">
                                 <select name="start_time" required="" class="form-control" >
                                      <option value="">Select Start Time</option>
-									 <option value=""><?php echo get_times(); ?></option>
-								</select>
+									                   <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
+								                </select>
+                                <script language="JavaScript">document.eventform.start_time.value="<?php echo $rows->start_time; ?>";</script>
 
                             </div>
 
@@ -170,9 +175,9 @@
                             <div class="col-sm-4">
                                 <select name="end_time" required="" class="form-control" >
                                      <option value="">Select End Time</option>
-
-									 <option value=""><?php echo get_times(); ?></option>
-								</select>
+									                   <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
+								                </select>
+                                 <script language="JavaScript">document.eventform.end_time.value="<?php echo $rows->end_time; ?>";</script>
                             </div>
 
                         </div>
@@ -180,33 +185,33 @@
                            
                             <label for="latitude" class="col-sm-2 col-form-label">Event Latitude</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" name="txtLatitude"  id="lat" >
+                                <input class="form-control" type="text" name="txtLatitude" value="<?php echo $rows->event_latitude; ?>" id="lat" >
                                 <div id="ermsg"></div> <div id="ermsg2"></div>
                             </div>
                               <label for="longitude" class="col-sm-2 col-form-label">Event Longitude</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" name="txtLongitude" id="lng">
+                                <input class="form-control" type="text" value="<?php echo $rows->event_longitude; ?>" name="txtLongitude" id="lng">
                                  <div id="ermsg1"></div> <div id="ermsg3"></div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="primarycell" class="col-sm-2 col-form-label">primary Contact Phone</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" required="" name="pcontact_cell" maxlength="10" value="">
+                                <input class="form-control" type="text" required="" value="<?php echo $rows->primary_contact_no; ?>" name="pcontact_cell" maxlength="10" value="">
                             </div>
                             <label for="seccell" class="col-sm-2 col-form-label">secondary Contact Phone</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" name="scontact_cell" value="" >
+                                <input class="form-control" type="text" value="<?php echo $rows->secondary_contact_no; ?>" name="scontact_cell" value="" >
                             </div>
                         </div>
                        <div class="form-group row">
                             <label for="Person" class="col-sm-2 col-form-label">Contact Person</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" required="" name="contact_person" value="">
+                                <input class="form-control" type="text" required="" value="<?php echo $rows->contact_person; ?>" name="contact_person" value="">
                             </div>
                             <label for="Email" class="col-sm-2 col-form-label">Contact Email</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" required="" name="email" value="" >
+                                <input class="form-control" type="text" value="<?php echo $rows->contact_email; ?>" required="" name="email" value="" >
                             </div>
                         </div>
 
@@ -219,6 +224,7 @@
                                     <option value="Y">Yes</option>
                                     <option value="N">No</option>
                                 </select>
+                                <script language="JavaScript">document.eventform.eadv_status.value="<?php echo $rows->adv_status; ?>";</script>
                             </div>
                         
                         <label for="Colour" class="col-sm-2 col-form-label">Booking Display</label>
@@ -228,6 +234,7 @@
                                     <option value="Y">Yes</option>
                                     <option value="N">No</option>
                                 </select>
+                                <script language="JavaScript">document.eventform.booking_sts.value="<?php echo $rows->booking_status; ?>";</script>
                             </div>
                        </div>
 
@@ -240,6 +247,7 @@
                                     <option value="Y">Yes</option>
                                     <option value="N">No</option>
                                 </select>
+                                <script language="JavaScript">document.eventform.hotspot_sts.value="<?php echo $rows->hotspot_status; ?>";</script>
                             </div>
 
                             <label for="Colour" class="col-sm-2 col-form-label">Colour</label>
@@ -251,6 +259,7 @@
                                     <option value="blue">Blue</option>
                                     <option value="red">Red</option>
                                 </select>
+                                <script language="JavaScript">document.eventform.colour_scheme.value="<?php echo $rows->event_colour_scheme; ?>";</script>
 
                             </div>
 
@@ -266,6 +275,7 @@
                                     <option value="Y">Yes</option>
                                     <option value="N">No</option>
                                 </select>
+                                <script language="JavaScript">document.eventform.event_status.value="<?php echo $rows->event_status; ?>";</script>
                             </div>
 
                             <label class="col-sm-2 col-form-label">Event Banner</label>

@@ -8,7 +8,7 @@
 <!-- END wrapper -->
 
 <!-- jQuery  -->
-<script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
+
 <script src="<?php echo base_url(); ?>assets/js/tether.min.js"></script><!-- Tether for Bootstrap -->
 <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/modernizr.min.js"></script>
@@ -19,14 +19,8 @@
 <script src="<?php echo base_url(); ?>assets/js/waves.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.nicescroll.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.scrollTo.min.js"></script>
-<!--Morris Chart
-<script src="assets/plugins/morris/morris.min.js"></script>
-<script src="assets/plugins/raphael/raphael-min.js"></script>
-<script src="assets/pages/dashborad.js"></script>-->
-<!-- App js -->
 
 <!-- Required datatable js -->
-<script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
 <!-- Buttons examples -->
 <script src="<?php echo base_url(); ?>assets/plugins/datatables/dataTables.buttons.min.js"></script>
