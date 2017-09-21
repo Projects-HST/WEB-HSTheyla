@@ -13,7 +13,13 @@
 		return $output;
     }
 ?>
-
+<style type="text/css">
+   .img-circle{
+          width: 90px;
+         border-radius: 30px;
+         margin-top: 10px;
+       }
+</style>
 <div class="content-page">
 <!-- Footer Close-->
 <!-- Start content -->
@@ -98,7 +104,7 @@
                             <div class="col-sm-4">
                               <select class="form-control" name="country" required="" onchange="getcityname(this.value)">
                               <option value="">Select Country Name</option>
-                                     <?php foreach($countyr_list as $cntry){ ?>
+                                     <?php foreach($country_list as $cntry){ ?>
                                         <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
                                      <?php } ?>
                                 </select>
@@ -106,10 +112,14 @@
                             </div>
                              <label for="city" class="col-sm-2 col-form-label">Select City</label>
                             <div class="col-sm-4">
-
+                              <input class="form-control" type="text" id="cityid" value="<?php echo $rows->city_name; ?>" required="" >
+                               <input class="form-control" type="hidden" name="oldcityid" value="<?php echo $rows->event_city; ?>" required="">
+                               <div style="display:none;" id="new">
                                <select class="form-control" name="city" required="" id="ctname">
+                                
                                 </select>
                                  <div id="cmsg"></div>
+                               </div>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -281,20 +291,19 @@
                             <label class="col-sm-2 col-form-label">Event Banner</label>
                               <div class="col-sm-4">
                                  <input type="file" name="eventbanner" class="form-control" accept="image/*" >
+                               <input type="hidden" name="currentcpic" class="form-control" value="<?php echo $rows->event_banner;?>" >
+                              <input type="hidden" name="eventid" class="form-control" value="<?php echo $rows->id; ?>" >
+                               <img src="<?php echo base_url(); ?>assets/events/banner/<?php echo $rows->event_banner; ?>" class="img-circle">
                               </div>                            
                         </div>
 
-
                         <div class="form-group row">
-                            
                             <label class="col-sm-2 col-form-label"></label>
                             <div class="col-sm-2">
                               <button type="submit" class="btn btn-primary waves-effect waves-light">
-                              Submit </button></div>
+                              Update </button></div>
                               <div class="col-sm-2">
-                              <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                              Reset
-                              </button></div>
+                              </div>
                         </div>
                      </form>
                     </div>
@@ -302,7 +311,7 @@
             </div> <!-- end col -->
         </div> <!-- end row -->
 
-                        </div><!-- container -->
+   </div><!-- container -->
    </div>
    <!-- Page content Wrapper -->
 </div>
@@ -338,6 +347,8 @@
                   }
                   $("#ctname").html(cityname).show();
                   $("#cmsg").hide();
+                  $("#cityid").hide();
+                  $("#new").show();
                   }else{
                   $("#cmsg").html('<p style="color: red;">City Not Found</p>').show();
                   $("#ctname").hide();

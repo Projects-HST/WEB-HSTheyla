@@ -13,7 +13,7 @@ public function __construct()
     
     function getall_country_list()
     {
-        $sql="SELECT * FROM country_master ORDER BY id ASC";
+        $sql="SELECT id,country_name,event_status FROM country_master WHERE event_status='Y' ORDER BY id ASC";
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
 	  	return $res;

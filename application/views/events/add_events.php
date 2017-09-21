@@ -97,7 +97,7 @@
                             <div class="col-sm-4">
                               <select class="form-control" name="country" required="" onchange="getcityname(this.value)">
                               <option value="">Select Country Name</option>
-                                     <?php foreach($countyr_list as $cntry){ ?>
+                                     <?php foreach($country_list as $cntry){ ?>
                                         <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
                                      <?php } ?>
                                 </select>
@@ -170,7 +170,6 @@
                             <div class="col-sm-4">
                                 <select name="end_time" required="" class="form-control" >
                                      <option value="">Select End Time</option>
-
 									 <option value=""><?php echo get_times(); ?></option>
 								</select>
                             </div>

@@ -21,7 +21,7 @@ public function __construct()
 
     function getall_country_list()
     {
-      $sql="SELECT id,country_name FROM country_master ORDER BY id ASC";
+      $sql="SELECT id,country_name,event_status FROM country_master WHERE event_status='Y' ORDER BY id ASC";
       $resu=$this->db->query($sql);
       $res=$resu->result();
       return $res;
@@ -34,6 +34,15 @@ public function __construct()
       $res=$resu->result();
       return $res;
     }
+    
+    function getall_city_list()
+    {
+      $sql="SELECT id,city_name FROM city_master ORDER BY id ASC";
+      $resu=$this->db->query($sql);
+      $res=$resu->result();
+      return $res;
+    }
+
 
     function insert_events_details($event_name,$category,$country,$city,$venue,$address,$description,$eventcost,$start_date,$end_date,$start_time,$end_time,$txtLatitude,$txtLongitude,$pcontact_cell,$scontact_cell,$contact_person,$email,$event_banner,$colour_scheme,$event_status,$eadv_status,$booking_sts,$hotspot_sts,$user_id,$user_role)
     {
@@ -63,10 +72,18 @@ public function __construct()
     
     function edit_events_details($id)
     {
-        $query="SELECT * FROM events WHERE id='$id'";
+        $query="SELECT e.*,ci.city_name FROM events AS e, city_master AS ci WHERE e.id='$id' AND e.event_city=ci.id";
         $resultset=$this->db->query($query);
         $row=$resultset->result();
         return $row;
+    }
+
+    function update_events_details($eventid,$event_name,$category,$country,$city,$venue,$address,$description,$eventcost,$start_date,$end_date,$start_time,$end_time,$txtLatitude,$txtLongitude,$pcontact_cell,$scontact_cell,$contact_person,$email,$event_banner,$colour_scheme,$event_status,$eadv_status,$booking_sts,$hotspot_sts,$user_id,$user_role)
+      {
+      $sql="UPDATE events SET category_id='$category',event_name='$event_name',event_venue='$venue',event_address='$address',description='$description',start_date='$start_date',end_date='$end_date',start_time='$start_time',end_time='$end_time',event_banner='$event_banner',event_latitude='$txtLatitude',event_longitude='$txtLongitude',event_country='$country',event_city='$city',primary_contact_no='$pcontact_cell',secondary_contact_no='$scontact_cell',contact_person='$contact_person',contact_email='$email',event_type='$eventcost',adv_status='$eadv_status',booking_status='$booking_sts',hotspot_status='$hotspot_sts',event_colour_scheme='$colour_scheme',event_status='$event_status',updated_by='$user_id',updated_at=NOW() WHERE id='$eventid'";
+        $eresultset=$this->db->query($sql);
+        $data= array("status"=>"success");
+        return $data;
     }
 
 }
