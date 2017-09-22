@@ -72,9 +72,12 @@
              echo '<a class="loginBtn loginBtn--google" href="'.$authUrl.'">Login to google</a>';
              ?>
              <p>
-               <button class="loginBtn loginBtn--facebook">
+               <a  href="<?php echo base_url(); ?>adminlogin/web_login" class="loginBtn loginBtn--facebook">
                  Login with Facebook
-               </button>
+               </a>
+
+
+              
             </div>
         </div>
     </form>

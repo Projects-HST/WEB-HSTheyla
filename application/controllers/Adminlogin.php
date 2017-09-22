@@ -9,17 +9,17 @@ function __construct()
 	$this->load->model('loginmodel');
 	$this->load->helper('url');
 	$this->load->library('session');
+
 }
 
 public function home()
 {
 	$username=$this->input->post('username');
 	$password=md5($this->input->post('pwd'));
-	//echo $username; echo $password; exit;
+
 	$result = $this->loginmodel->login($username,$password);
 	$msg=$result['msg'];
-	//echo $msg1=$result['status'];
-	// print_r($result); exit;
+
 	if($result['status']=='Deactive')
 	{
 		$datas['user_data']=array("status"=>$result['status'],"msg"=>$result['msg']);
@@ -156,11 +156,65 @@ public function dashboard()
 			}
 
 
+			public function web_login()
+				{
+					$datas=$this->session->userdata();
+					$this->load->library('facebook');
+					$data['user'] = array();
 
-			public function out() {
-						session_unset();
+					// Check if user is logged in
+					if ($this->facebook->is_authenticated())
+					{
+						// User logged in, get user details
+						$user = $this->facebook->request('get', '/me?fields=id,name,email');
+
+						if (!isset($user['error']))
+						{
+							$data['user'] = $user;
+							$firstname= $data['user']['name'];
+							$email=$data['user']['email'];
+
+							$datas['result'] = $this->loginmodel->getuserfb($firstname,$email);
+							$role=$datas['result']['user_role'];
+							$status=$datas['result']['status'];
+							if($status=='Y'){
+								if($role==3){
+									 redirect('adminlogin/ghome');
+								}else if($role==2){
+									redirect('adminlogin/ghome');
+								}else{
+									redirect('/');
+								}
+							}else{
+								echo "Account Deactive";
+
+							}
+						}else{
+							echo "login here";
+						}
+
+					}else{
+						$this->load->view('web', $data);
 					}
 
+
+
+
+
+				}
+
+
+
+
+			public function fblogout()
+			{
+				$this->load->library('facebook');
+				session_unset();
+				$this->facebook->destroy_session();
+				redirect('/');
+			}
+
+			
 
 
 }

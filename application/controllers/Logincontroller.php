@@ -11,6 +11,7 @@ class Logincontroller extends CI_Controller {
 
 	public function index()
 	{
+		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
 
@@ -19,7 +20,8 @@ class Logincontroller extends CI_Controller {
 			}else if($user_role==2){
 				echo "user organiser";
 			}else if($user_role==3){
-				echo "user Page";
+				print_r($datas);
+				// echo $user_role;
 			}else{
 				$this->load->view('login');
 			}
