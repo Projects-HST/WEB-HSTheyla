@@ -113,10 +113,10 @@
                              <label for="city" class="col-sm-2 col-form-label">Select City</label>
                             <div class="col-sm-4">
                               <input class="form-control" type="text" id="cityid" value="<?php echo $rows->city_name; ?>" required="" >
-                               <input class="form-control" type="hidden" name="oldcityid" value="<?php echo $rows->event_city; ?>" required="">
+                               <input class="form-control" type="hidden" name="oldcityid" value="<?php echo $rows->event_city; ?>">
                                <div style="display:none;" id="new">
-                               <select class="form-control" name="city" required="" id="ctname">
-                                
+                               <select class="form-control" name="city" id="ctname">
+                                <!--option value="<?php echo $rows->event_city; ?>"><?php echo $rows->city_name; ?></option-->
                                 </select>
                                  <div id="cmsg"></div>
                                </div>

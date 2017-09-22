@@ -86,6 +86,7 @@
                         <tbody>
                         <?php foreach($result as $rows){ 
                            $adv_sts=$rows->adv_status;
+                           $etype=$rows->event_type;
                           if($adv_sts=='Y'){ ?>
                         <tr>
                             <td><?php echo $rows->event_name ; ?></td>
@@ -93,13 +94,18 @@
                             <td><?php echo $rows->city_name ; ?></td>
                             <td>
                              <a href="<?php echo base_url();?>events/edit_events/<?php echo $rows->id;?>">
-                              <img  src="<?php echo base_url();?>assets/icons/edit.png"></a>
-                             <a href="<?php echo base_url();?>events/view_events/<?php echo $rows->id;?>">
-                              <img  src="<?php echo base_url();?>assets/icons/view.png"></a>
-                              <a href="<?php echo base_url();?>events/delete_events/<?php echo $rows->id;?>">
-                              <img  src="<?php echo base_url();?>assets/icons/delete.png"></a>
-                              <a href="<?php echo base_url();?>events/booking_events/<?php echo $rows->id;?>">
-                              <img  src="<?php echo base_url();?>assets/icons/booking.png"></a>
+                              <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
+
+                             <a href="<?php echo base_url();?>events/view_single_events/<?php echo $rows->id;?>">
+                              <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a>
+
+                              <a href="<?php echo base_url();?>events/delete_events/<?php echo $rows->id;?>">   
+                              <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
+
+                              <?php if($etype=='Paid'){?>
+                              <a href="<?php echo base_url();?>booking/home/<?php echo $rows->id;?>">
+                              <img title="Booking Events" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
+                              <?php } ?>
                             </td>
                         </tr>
                        <?php } } ?>
@@ -120,12 +126,27 @@
                         <tbody>
                         <?php foreach($result as $rows){ 
                            $hotspot_sts=$rows->hotspot_status;
+                           $etype=$rows->event_type;
                           if($hotspot_sts=='Y'){ ?>
                         <tr>
                             <td><?php echo $rows->event_name ; ?></td>
                             <td><?php echo $rows->category_name ; ?></td>
                             <td><?php echo $rows->city_name ; ?></td>
-                            <td><a href="<?php echo base_url();?>events/edit_events/<?php echo $rows->id;?>"><i class="fa fa-pencil-square-o"></a></td>
+                           <td>
+                             <a href="<?php echo base_url();?>events/edit_events/<?php echo $rows->id;?>">
+                              <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
+
+                             <a href="<?php echo base_url();?>events/view_single_events/<?php echo $rows->id;?>">
+                              <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a>
+
+                              <a href="<?php echo base_url();?>events/delete_events/<?php echo $rows->id;?>">   
+                              <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
+                              
+                              <?php if($etype=='Paid'){?>
+                              <a href="<?php echo base_url();?>booking/home/<?php echo $rows->id;?>">
+                              <img title="Booking Events" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
+                              <?php } ?>
+                            </td>
                         </tr>
                        <?php } }  ?>
                         </tbody>
@@ -146,13 +167,28 @@
                         <?php foreach($result as $rows){
                            $adv_sts=$rows->adv_status;
                            $hotspot_sts=$rows->hotspot_status;
+                           $etype=$rows->event_type;
                           if($hotspot_sts=='N' && $adv_sts=='N'){ 
                            ?>
                         <tr>
                             <td><?php echo $rows->event_name ; ?></td>
                             <td><?php echo $rows->category_name ; ?></td>
                             <td><?php echo $rows->city_name ; ?></td>
-                            <td><a href="<?php echo base_url();?>events/edit_events/<?php echo $rows->id;?>"><i class="fa fa-pencil-square-o"></a></td>
+                           <td>
+                             <a href="<?php echo base_url();?>events/edit_events/<?php echo $rows->id;?>">
+                              <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
+
+                             <a href="<?php echo base_url();?>events/view_single_events/<?php echo $rows->id;?>">
+                              <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a>
+
+                              <a href="<?php echo base_url();?>events/delete_events/<?php echo $rows->id;?>">   
+                              <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
+                              
+                              <?php if($etype=='Paid'){?>
+                              <a href="<?php echo base_url();?>booking/home/<?php echo $rows->id;?>">
+                              <img title="Booking Events" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
+                              <?php } ?>
+                            </td>
                         </tr>
                        <?php } }  ?>
                         </tbody>
