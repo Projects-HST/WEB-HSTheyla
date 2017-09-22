@@ -20,6 +20,10 @@
 <script src="<?php echo base_url(); ?>assets/js/jquery.nicescroll.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.scrollTo.min.js"></script>
 
+<!-- Sweet Alerts-->
+ <script src="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+ <script src="<?php echo base_url(); ?>assets/pages/sweet-alert.init.js"></script>
+
 <!-- Required datatable js -->
 <script src="<?php echo base_url(); ?>assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
 <!-- Buttons examples -->

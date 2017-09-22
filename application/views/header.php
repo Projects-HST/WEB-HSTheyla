@@ -14,6 +14,8 @@
 <link href="<?php echo base_url(); ?>assets/css/icons.css" rel="stylesheet" type="text/css">
 <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet" type="text/css">
 
+ <link href="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
+ 
 <!-- Datatables-->
  <link href="<?php echo base_url(); ?>assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
  <link href="<?php echo base_url(); ?>assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -62,7 +64,7 @@
         <div id="sidebar-menu">
             <ul>
                 <li>
-                    <a href="<?php echo base_url();?>adminlogin/home" class="waves-effect">
+                    <a href="<?php echo base_url();?>adminlogin/dashboard" class="waves-effect">
                         <i class="mdi mdi-view-dashboard"></i>
                         <span> Dashboard </span>
                     </a>

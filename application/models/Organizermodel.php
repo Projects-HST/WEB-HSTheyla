@@ -7,31 +7,72 @@ Class Organizermodel extends CI_Model
 		  parent::__construct();
 	 }
   
-//--------------------------------Create Events Organizer-------------------------------------
-	function create_events($Category,$user_id,$user_role)
+
+    function get_country()
     {
-        echo $Category;
-		echo $user_id;
-		echo $user_role;
-	
+      $sql="SELECT id,country_name FROM country_master WHERE event_status = 'Y' ORDER BY id ASC";
+      $resu=$this->db->query($sql);
+      $res=$resu->result();
+      return $res;
+    }
+    
+    function get_category()
+    {
+      $sql="SELECT id,category_name FROM category_master ORDER BY id ASC";
+      $resu=$this->db->query($sql);
+      $res=$resu->result();
+      return $res;
+    }
+  
+    function get_city($country_id)
+    {
+        $query="SELECT id,city_name FROM city_master WHERE country_id='$country_id'";
+        $resultset=$this->db->query($query);
+        $row=$resultset->result();
+        return $row;
+    }
+    
+    function edit_events_details($id)
+    {
+        $query="SELECT * FROM events WHERE id='$id'";
+        $resultset=$this->db->query($query);
+        $row=$resultset->result();
+        return $row;
+    }
+
+  
+//--------------------------------Create Events Organizer-------------------------------------
+	function create_events($event_name,$category,$country,$city,$venue,$address,$description,$eventcost,$start_date,$end_date,$start_time,$end_time,$txtLatitude,$txtLongitude,$pcontact_cell,$scontact_cell,$contact_person,$email,$event_banner,$colour_scheme,$event_status,$eadv_status,$booking_sts,$hotspot_sts,$user_id,$user_role)
+    {
+		$check_eve = "SELECT * FROM events WHERE event_name='$event_name' AND category_id='$category'";
+        $result = $this->db->query($check_eve);
+        	if($result->num_rows()==0)
+			{
+				$query="INSERT INTO events(category_id,event_name,event_venue,event_address,description,start_date,end_date,start_time, end_time,event_banner,event_latitude,event_longitude,event_country,event_city,primary_contact_no, secondary_contact_no,contact_person,contact_email,event_type,adv_status,booking_status,hotspot_status, event_colour_scheme,event_status,created_by,created_at) VALUES('$category','$event_name','$venue','$address','$description','$start_date','$end_date','$start_time','$end_time','$event_banner','$txtLatitude','$txtLongitude','$country','$city','$pcontact_cell','$scontact_cell','$contact_person','$email','$eventcost','$eadv_status','N','$hotspot_sts','$colour_scheme','$event_status','$user_id',NOW())";
+           		$resultset = $this->db->query($query);
+  		     	$data = array("status"=>"success");
+  		     	return $data;
+          	}else{
+              $data = array("status"=>"Already Exist");
+               return $data;
+            }
     }
 //--------------------------------End Create Events Organizer-------------------------------------
+
+//--------------------------------List Events Organizer-------------------------------------
+	function list_events($user_id)
+    {
+      	$sql="SELECT ev.*,ci.city_name,ca.category_name FROM city_master AS ci,category_master AS ca,events AS ev WHERE ev.created_by ='$user_id' AND ev.category_id = ca.id AND ev.event_city = ci.id  ORDER BY ev.category_id DESC";
+	  	$resu=$this->db->query($sql);
+	  	$res=$resu->result();
+	  	return $res;
+    }
+//--------------------------------End List Events Organizer-------------------------------------
 
 //--------------------------------Update Events Organizer-------------------------------------
 	function update_events($categoryname,$categorypic1,$status,$user_id,$user_role)
     {
-         $check_category = "SELECT * FROM category_master WHERE category_name='$categoryname' AND status='$status'";
-         $result=$this->db->query($check_category);
-         if($result->num_rows()==0)
-         {
-           $query="INSERT INTO category_master(category_name,category_image,status,created_by,created_at) VALUES ('$categoryname','$categorypic1','$status','$user_id',NOW())";
-           $resultset=$this->db->query($query);
-  		     $data= array("status"=>"success");
-  		     return $data;
-         }else{
-              $data= array("status"=>"Already Exist");
-              return $data;
-            }
+
 
     }
 //--------------------------------End Update Events Organizer-------------------------------------
@@ -39,40 +80,12 @@ Class Organizermodel extends CI_Model
 //--------------------------------Delete Events Organizer-------------------------------------
 	function delete_events($categoryname,$categorypic1,$status,$user_id,$user_role)
     {
-         $check_category = "SELECT * FROM category_master WHERE category_name='$categoryname' AND status='$status'";
-         $result=$this->db->query($check_category);
-         if($result->num_rows()==0)
-         {
-           $query="INSERT INTO category_master(category_name,category_image,status,created_by,created_at) VALUES ('$categoryname','$categorypic1','$status','$user_id',NOW())";
-           $resultset=$this->db->query($query);
-  		     $data= array("status"=>"success");
-  		     return $data;
-         }else{
-              $data= array("status"=>"Already Exist");
-              return $data;
-            }
+
 
     }
 //--------------------------------End Delete Events Organizer-------------------------------------
 
-//--------------------------------List Events Organizer-------------------------------------
-	function list_events($categoryname,$categorypic1,$status,$user_id,$user_role)
-    {
-         $check_category = "SELECT * FROM category_master WHERE category_name='$categoryname' AND status='$status'";
-         $result=$this->db->query($check_category);
-         if($result->num_rows()==0)
-         {
-           $query="INSERT INTO category_master(category_name,category_image,status,created_by,created_at) VALUES ('$categoryname','$categorypic1','$status','$user_id',NOW())";
-           $resultset=$this->db->query($query);
-  		     $data= array("status"=>"success");
-  		     return $data;
-         }else{
-              $data= array("status"=>"Already Exist");
-              return $data;
-            }
 
-    }
-//--------------------------------End List Events Organizer-------------------------------------
 
 }
 ?>

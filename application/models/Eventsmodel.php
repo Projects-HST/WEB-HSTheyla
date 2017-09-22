@@ -37,7 +37,7 @@ public function __construct()
     
     function getall_city_list()
     {
-      $sql="SELECT id,city_name FROM city_master ORDER BY id ASC";
+      $sql="SELECT id,city_name FROM city_master WHERE event_status='Y' ORDER BY id ASC";
       $resu=$this->db->query($sql);
       $res=$resu->result();
       return $res;
@@ -64,7 +64,7 @@ public function __construct()
     
     function getcityname($country_id)
     {
-        $query="SELECT id,city_name FROM city_master WHERE country_id='$country_id'";
+        $query="SELECT id,city_name FROM city_master WHERE country_id='$country_id' AND event_status='Y'";
         $resultset=$this->db->query($query);
         $row=$resultset->result();
         return $row;
