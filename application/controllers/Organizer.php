@@ -50,7 +50,7 @@ class Organizer extends CI_Controller
     public function get_city_name()
      {
 	   	 $country_id = $this->input->post('country_id');
-		 $data['res']= $this->organizermodel->get_cityname($country_id);
+		 $data['res']= $this->organizermodel->get_city($country_id);
 		 echo json_encode( $data['res']);
      }
 //----------------------------------------------------------
@@ -123,14 +123,14 @@ class Organizer extends CI_Controller
 
 	    if($sta=="success"){
 			$this->session->set_flashdata('msg','Added Successfully');
-			redirect('organizer/view_events');
+			redirect('organizer/viewevents');
 	     }else if($sta=="Already Exist"){
 			$this->session->set_flashdata('msg','Already Exist');
-			redirect('organizer/view_events');
+			redirect('organizer/viewevents');
 	     }
 	     else{
 			$this->session->set_flashdata('msg','Faild To Add');
-			redirect('organizer/view_events');
+			redirect('organizer/viewevents');
 	     }
 	 }
 
@@ -153,14 +153,19 @@ class Organizer extends CI_Controller
 	 			redirect('/');
 	 	}
 	 }
-//----------------------------------------------------------	 
+//----------------------------------------------------------
 	 
-	 
-	 public function updateevents()
+	 public function updateevents($id)
 	 {
+		
 	 	$datas = $this->session->userdata();
 	    $user_id = $this->session->userdata('id');
 	    $user_role = $this->session->userdata('user_role');
+		
+		$datas['country_list'] = $this->organizermodel->get_country();
+	    $datas['category_list'] = $this->organizermodel->get_category();
+	    $datas['city_list'] = $this->organizermodel->get_city_list();
+	    $datas['edit'] = $this->organizermodel->events_details($id);
 
 		if($user_role==2)
 		{
@@ -172,7 +177,95 @@ class Organizer extends CI_Controller
 	 		 }
 	 }
 
+//----------------------------------------------------------
 
+     public function updateeventsdetails()
+     {
+        
+        $datas=$this->session->userdata();
+	    $user_id=$this->session->userdata('id');
+	    $user_role=$this->session->userdata('user_role');
+
+
+	    $event_name=$this->db->escape_str($this->input->post('event_name'));
+        $category=$this->input->post('category');
+        $country=$this->input->post('country');
+
+        $city=$this->input->post('city');
+        $oldcityid=$this->input->post('oldcityid');
+
+        $venue=$this->input->post('venue');
+        $address=$this->db->escape_str($this->input->post('address'));
+        $description=$this->db->escape_str($this->input->post('description'));
+        $eventcost=$this->input->post('eventcost');
+
+        $sdate=$this->input->post('start_date');
+		$dateTime = new DateTime($sdate);
+		$start_date=date_format($dateTime,'Y-m-d');
+
+        $edate=$this->input->post('end_date');
+        $dateTime = new DateTime($edate);
+		$end_date=date_format($dateTime,'Y-m-d');
+
+
+        $start_time=$this->input->post('start_time');
+        $end_time=$this->input->post('end_time');
+        
+        //echo $start_time; echo'<br>'; echo $end_time; exit;
+
+        $txtLatitude=$this->input->post('txtLatitude');
+        $txtLongitude=$this->input->post('txtLongitude');
+        $pcontact_cell=$this->input->post('pcontact_cell');
+        $scontact_cell=$this->input->post('scontact_cell');
+        $contact_person=$this->input->post('contact_person');
+        $email=$this->input->post('email');
+        
+        
+        $currentcpic=$this->input->post('currentcpic');
+        $eventid=$this->input->post('eventid');
+
+        $event_pic=$_FILES['eventbanner']['name']; 
+		$event_banner=trim($event_pic);
+		$uploaddir='assets/events/banner/';
+		$profilepic=$uploaddir.$event_banner;
+		move_uploaded_file($_FILES['eventbanner']['tmp_name'],$profilepic);
+
+        $eadv_status=$this->input->post('eadv_status');
+		$booking_sts=$this->input->post('booking_sts');
+		$hotspot_sts=$this->input->post('hotspot_sts');
+		
+        $colour_scheme=$this->input->post('colour_scheme');
+		$event_status=$this->input->post('event_status');
+          
+         if(empty($event_banner)){
+            $event_banner=$currentcpic;
+         }else{
+         	$event_banner=$event_banner;
+         }
+
+         if(empty($city)){
+           $city=$oldcityid;
+         }else{
+         	$city=$city;
+         }
+
+        $datas=$this->organizermodel->update_events_details($eventid,$event_name,$category,$country,$city,$venue,$address,$description,$eventcost,$start_date,$end_date,$start_time,$end_time,$txtLatitude,$txtLongitude,$pcontact_cell,$scontact_cell,$contact_person,$email,$event_banner,$colour_scheme,$event_status,$eadv_status,$booking_sts,$hotspot_sts,$user_id,$user_role);
+        $sta=$datas['status'];
+	   // print_r($sta);exit;
+	    if($sta=="success"){
+	       $this->session->set_flashdata('msg','Update Successfully');
+		   redirect('organizer/viewevents');
+	     }else if($sta=="Already Exist"){
+             $this->session->set_flashdata('msg','Already Exist');
+		     redirect('organizer/viewevents');
+	     }
+	     else{
+	     	 $this->session->set_flashdata('msg','Faild To Update');
+		     redirect('organizer/viewevents');
+	     }
+
+
+     }
 
 
 }

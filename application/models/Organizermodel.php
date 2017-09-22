@@ -24,6 +24,14 @@ Class Organizermodel extends CI_Model
       return $res;
     }
   
+    function get_city_list()
+    {
+      $sql="SELECT id,city_name FROM city_master ORDER BY id ASC";
+      $resu=$this->db->query($sql);
+      $res=$resu->result();
+      return $res;
+    }
+	
     function get_city($country_id)
     {
         $query="SELECT id,city_name FROM city_master WHERE country_id='$country_id'";
@@ -32,9 +40,9 @@ Class Organizermodel extends CI_Model
         return $row;
     }
     
-    function edit_events_details($id)
+    function events_details($id)
     {
-        $query="SELECT * FROM events WHERE id='$id'";
+       $query="SELECT e.*,ci.city_name FROM events AS e, city_master AS ci WHERE e.id='$id' AND e.event_city=ci.id";
         $resultset=$this->db->query($query);
         $row=$resultset->result();
         return $row;
@@ -62,7 +70,7 @@ Class Organizermodel extends CI_Model
 //--------------------------------List Events Organizer-------------------------------------
 	function list_events($user_id)
     {
-      	$sql="SELECT ev.*,ci.city_name,ca.category_name FROM city_master AS ci,category_master AS ca,events AS ev WHERE ev.created_by ='$user_id' AND ev.category_id = ca.id AND ev.event_city = ci.id  ORDER BY ev.category_id DESC";
+      	$sql = "SELECT ev.*,ci.city_name,ca.category_name FROM city_master AS ci,category_master AS ca,events AS ev WHERE ev.created_by ='$user_id' AND ev.category_id = ca.id AND ev.event_city = ci.id  ORDER BY ev.category_id DESC";
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
 	  	return $res;
@@ -70,13 +78,17 @@ Class Organizermodel extends CI_Model
 //--------------------------------End List Events Organizer-------------------------------------
 
 //--------------------------------Update Events Organizer-------------------------------------
-	function update_events($categoryname,$categorypic1,$status,$user_id,$user_role)
+	function update_events_details($eventid,$event_name,$category,$country,$city,$venue,$address,$description,$eventcost,$start_date,$end_date,$start_time,$end_time,$txtLatitude,$txtLongitude,$pcontact_cell,$scontact_cell,$contact_person,$email,$event_banner,$colour_scheme,$event_status,$eadv_status,$booking_sts,$hotspot_sts,$user_id,$user_role)
     {
-
+		$sql="UPDATE events SET category_id='$category',event_name='$event_name',event_venue='$venue',event_address='$address',description='$description',start_date='$start_date',end_date='$end_date',start_time='$start_time',end_time='$end_time',event_banner='$event_banner',event_latitude='$txtLatitude',event_longitude='$txtLongitude',event_country='$country',event_city='$city',primary_contact_no='$pcontact_cell',secondary_contact_no='$scontact_cell',contact_person='$contact_person',contact_email='$email',event_type='$eventcost',adv_status='$eadv_status',booking_status='$booking_sts',hotspot_status='$hotspot_sts',event_colour_scheme='$colour_scheme',event_status='$event_status',updated_by='$user_id',updated_at=NOW() WHERE id='$eventid'";
+        $eresultset=$this->db->query($sql);
+        $data= array("status"=>"success");
+        return $data;
 
     }
 //--------------------------------End Update Events Organizer-------------------------------------
 
+	
 //--------------------------------Delete Events Organizer-------------------------------------
 	function delete_events($categoryname,$categorypic1,$status,$user_id,$user_role)
     {
