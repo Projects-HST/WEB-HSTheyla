@@ -91,7 +91,16 @@
                             <td><?php echo $rows->event_name ; ?></td>
                             <td><?php echo $rows->category_name ; ?></td>
                             <td><?php echo $rows->city_name ; ?></td>
-                            <td><a href="<?php echo base_url();?>events/edit_events/<?php echo $rows->id;?>"><i class="fa fa-pencil-square-o"></a></td>
+                            <td>
+                             <a href="<?php echo base_url();?>events/edit_events/<?php echo $rows->id;?>">
+                              <img  src="<?php echo base_url();?>assets/icons/edit.png"></a>
+                             <a href="<?php echo base_url();?>events/view_events/<?php echo $rows->id;?>">
+                              <img  src="<?php echo base_url();?>assets/icons/view.png"></a>
+                              <a href="<?php echo base_url();?>events/delete_events/<?php echo $rows->id;?>">
+                              <img  src="<?php echo base_url();?>assets/icons/delete.png"></a>
+                              <a href="<?php echo base_url();?>events/booking_events/<?php echo $rows->id;?>">
+                              <img  src="<?php echo base_url();?>assets/icons/booking.png"></a>
+                            </td>
                         </tr>
                        <?php } } ?>
                         </tbody>
