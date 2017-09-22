@@ -260,5 +260,112 @@ class Events extends CI_Controller
 
      }
 
+
+     public function view_single_events($id)
+      {
+        $datas=$this->session->userdata();
+	    $user_id=$this->session->userdata('id');
+	    $user_role=$this->session->userdata('user_role');
+        $datas['view']=$this->eventsmodel->view_single_events_plans($id);
+        //print_r($datas['edit']);exit;
+        if($user_role==1)
+		{
+		  $this->load->view('header');
+		  $this->load->view('events/events_details',$datas);
+		  $this->load->view('footer');
+	 	}else{
+	 			redirect('/');
+	 		 }
+     }
+
+    public function delete_events($id)
+    {
+        $datas=$this->session->userdata();
+	    $user_id=$this->session->userdata('id');
+	    $user_role=$this->session->userdata('user_role');
+        $datas=$this->eventsmodel->delete_single_events_plans($id);
+        $sta=$datas['status'];
+        if($sta=="success"){
+	       $this->session->set_flashdata('msg','Deleted Successfully');
+		   redirect('events/view_events');
+	     }else{
+	     	 $this->session->set_flashdata('msg','Faild To Delete');
+		     redirect('events/view_events');
+	     }
+    }
+
+    public function add_events_gallery($id)
+    {
+    	$datas=$this->session->userdata();
+	    $user_id=$this->session->userdata('id');
+	    $user_role=$this->session->userdata('user_role');
+	    $datas['evnid']=$id;
+
+	    $datas['view_pic']=$this->eventsmodel->view_upload_events_pic($id);
+         
+	    if($user_role==1)
+		{
+		  $this->load->view('header');
+		  $this->load->view('events/add_gallery',$datas);
+		  $this->load->view('footer');
+	 	}else{
+	 			redirect('/');
+	 		 }
+
+    } 
+    
+    public function add_gallery()
+    {
+    	$datas=$this->session->userdata();
+	    $user_id=$this->session->userdata('id');
+	    $user_role=$this->session->userdata('user_role');
+
+        $eventid=$this->input->post('eventid'); 
+         
+        if(!empty($_FILES['eventpicture']['name'])) 
+        {
+	        $allowedExts = array("gif", "jpeg", "jpg", "png");
+	        $error_uploads = 0;
+	        $total_uploads = array();
+	        $upload_path = 'assets/events/gallery/';
+	        foreach($_FILES['eventpicture']['name'] as $key => $value) {
+	            $temp = explode(".", $_FILES['eventpicture']['name'][$key]);
+	            $extension = end($temp);
+	            if ($_FILES["eventpicture"]["type"][$key] != "image/gif"
+	                && $_FILES["eventpicture"]["type"][$key] != "image/jpeg"
+	                && $_FILES["eventpicture"]["type"][$key] != "image/jpg"
+	                && $_FILES["eventpicture"]["type"][$key] != "image/pjpeg"
+	                && $_FILES["eventpicture"]["type"][$key] != "image/x-png"
+	                && $_FILES["eventpicture"]["type"][$key] != "image/png"
+	                && !in_array($extension, $allowedExts)) {
+	                $error_uploads++;
+	                continue;
+	            }
+	            $file_name = time().rand(1,5).rand(6,10).'_'.str_replace(' ', '_', $_FILES["eventpicture"]['name'][$key]);
+	            if(move_uploaded_file($_FILES["eventpicture"]['tmp_name'][$key], $upload_path.$file_name)) 
+	            {
+	                $total_uploads[] = $file_name;
+	               
+	            }else{
+	                $error_uploads++;
+	            }
+	        } 
+	        //print_r($total_uploads);exit;
+
+	        $datas=$this->eventsmodel->upload_events_pic($eventid,$total_uploads);
+            $sta=$datas['status'];
+	        if($sta=="success"){
+		       $this->session->set_flashdata('msg','Added Successfully');
+			   redirect('events/add_events_gallery/'.$eventid.'');
+		     }else{
+		     	 $this->session->set_flashdata('msg','Faild To Add');
+			     redirect('events/add_events_gallery/'.$eventid.'');
+		     }
+
+        }
+    
+    }
+
+
 }
 ?>

@@ -45,7 +45,7 @@ class Category extends CI_Controller
         //echo $categoryname; echo $status;
 
 	    $category_pic=$_FILES['categorypic']['name']; 
-		$categorypic1=trim($category_pic);
+		$categorypic1=$category_pic;
 		$uploaddir='assets/category/';
 		$profilepic=$uploaddir.$categorypic1;
 		move_uploaded_file($_FILES['categorypic']['tmp_name'],$profilepic);

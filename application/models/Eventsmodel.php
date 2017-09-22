@@ -86,5 +86,47 @@ public function __construct()
         return $data;
     }
 
+  function view_single_events_plans($id)
+   {
+     $sql="SELECT e.*,ca.category_name,ci.city_name,cn.country_name FROM events AS e,category_master AS ca,city_master AS ci,country_master AS cn WHERE e.id='$id' AND e.category_id=ca.id AND e.event_country=cn.id AND e.event_city=ci.id ";
+     $resu=$this->db->query($sql);
+     $res=$resu->result();
+     return $res;
+   }
+
+  function delete_single_events_plans($id)
+  {
+    $delete="DELETE FROM events WHERE id='$id'";
+    $resu=$this->db->query($delete);
+    
+    $delete1="DELETE FROM booking_plan WHERE event_id='$id'";
+    $resu1=$this->db->query($delete1);
+
+    $data= array("status"=>"success");
+    return $data;
+  }
+  
+  function view_upload_events_pic($id)
+  {
+    $msql="SELECT ei.*,e.event_name FROM event_images AS ei,events AS e WHERE ei.event_id='$id' AND ei.event_id=e.id ";
+    $resu=$this->db->query($msql);
+    $res=$resu->result();
+    return $res;
+  }
+
+  function upload_events_pic($eventid,$total_uploads)
+  {
+    $tlt=count($total_uploads);
+   //print_r($total_uploads); echo $eventid;  exit;
+    for($i=0;$i<$tlt;$i++)
+    {
+      $epic=$total_uploads[$i];
+      $sql="INSERT INTO event_images(event_id,event_image) VALUES ('$eventid','$epic')";
+      $eresultset=$this->db->query($sql);
+    }
+    $data= array("status"=>"success");
+    return $data;
+
+  }
 }
 ?>

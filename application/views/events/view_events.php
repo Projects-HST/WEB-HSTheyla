@@ -106,6 +106,10 @@
                               <a href="<?php echo base_url();?>booking/home/<?php echo $rows->id;?>">
                               <img title="Booking Events" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
                               <?php } ?>
+
+                              <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo $rows->id;?>">   
+                              <img title="Add Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/></a>
+
                             </td>
                         </tr>
                        <?php } } ?>
@@ -146,6 +150,10 @@
                               <a href="<?php echo base_url();?>booking/home/<?php echo $rows->id;?>">
                               <img title="Booking Events" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
                               <?php } ?>
+
+                              <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo $rows->id;?>">   
+                              <img title="Add Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/></a>
+
                             </td>
                         </tr>
                        <?php } }  ?>
@@ -188,6 +196,11 @@
                               <a href="<?php echo base_url();?>booking/home/<?php echo $rows->id;?>">
                               <img title="Booking Events" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
                               <?php } ?>
+
+                              <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo $rows->id;?>">   
+                              <img title="Add Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/></a>
+
+                              
                             </td>
                         </tr>
                        <?php } }  ?>

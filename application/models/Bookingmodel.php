@@ -44,6 +44,8 @@ function edit_events_plans($id)
 	 return $res;
 }
 
+
+
 function update_events_details($eventid,$planid,$planname,$seats,$amount,$user_id)
 {
    $sql="UPDATE booking_plan SET event_id='$eventid',plan_name='$planname',seat_available='$seats',seat_rate='$amount',updated_by='$user_id',updated_at=NOW() WHERE  id='$planid'";
