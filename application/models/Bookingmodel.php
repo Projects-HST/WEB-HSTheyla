@@ -27,6 +27,10 @@ function add_events_details($eventid,$planname,$seats,$amount,$user_id)
   // {	
     $query="INSERT INTO booking_plan(event_id,plan_name,seat_available,seat_rate,created_by,created_at) VALUES ('$eventid','$planname','$seats','$amount','$user_id',NOW())";	
      $resultset=$this->db->query($query);
+    
+    $update="UPDATE events SET booking_status='Y',updated_by='$user_id',updated_at=NOW() WHERE id='$eventid' ";
+     $update1=$this->db->query($update);
+     
      $data= array("status"=>"success");
      return $data;
    // }else{

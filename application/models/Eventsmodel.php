@@ -13,10 +13,18 @@ public function __construct()
     
     function getall_events_details()
     {
-      $sql="SELECT ev.*,ci.city_name,ca.category_name FROM city_master AS ci,category_master AS ca,events AS ev WHERE ev.category_id=ca.id AND ev.event_city=ci.id  ORDER BY ev.category_id DESC";
+      $sql="SELECT ev.*,ci.city_name,ca.category_name FROM city_master AS ci,category_master AS ca,events AS ev WHERE ev.category_id=ca.id AND ev.event_city=ci.id ORDER BY ev.id DESC";
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
 	  	return $res;
+    }
+
+    function events_popularity()
+    {
+      $popular="SELECT ev.id,ev.event_name,ep.user_id,ep.event_id,count(ep.event_id) as popular FROM event_popularity AS ep,events AS ev WHERE ev.id=ep.event_id GROUP BY ep.event_id";
+      $resu=$this->db->query($popular);
+      $res=$resu->result();
+      return $res;
     }
 
     function getall_country_list()
@@ -108,7 +116,7 @@ public function __construct()
   
   function view_upload_events_pic($id)
   {
-    $msql="SELECT ei.*,e.event_name FROM event_images AS ei,events AS e WHERE ei.event_id='$id' AND ei.event_id=e.id ";
+    $msql="SELECT ei.*,e.event_name,e.id as eventid FROM event_images AS ei,events AS e WHERE ei.event_id='$id' AND ei.event_id=e.id ORDER BY ei.id DESC  ";
     $resu=$this->db->query($msql);
     $res=$resu->result();
     return $res;
@@ -127,6 +135,14 @@ public function __construct()
     $data= array("status"=>"success");
     return $data;
 
+  }
+
+  function delete_events_pic($id,$eventid)
+  {
+      $imgdel="DELETE FROM event_images WHERE id='$id' AND event_id='$eventid'";
+      $imgresu=$this->db->query($imgdel);
+      $data= array("status"=>"success");
+      return $data;
   }
 }
 ?>

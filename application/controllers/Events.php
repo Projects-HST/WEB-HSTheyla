@@ -90,7 +90,8 @@ class Events extends CI_Controller
         
          //echo $city; exit;
         $event_pic=$_FILES['eventbanner']['name']; 
-		$event_banner=trim($event_pic);
+        $file_name = time().rand(1,5).rand(6,10);
+		$event_banner=$file_name.$event_pic ;
 		$uploaddir='assets/events/banner/';
 		$profilepic=$uploaddir.$event_banner;
 		move_uploaded_file($_FILES['eventbanner']['tmp_name'],$profilepic);
@@ -138,6 +139,8 @@ class Events extends CI_Controller
 	    $user_role=$this->session->userdata('user_role');
 	   
 	    $datas['result'] = $this->eventsmodel->getall_events_details();
+	    $datas['popular'] = $this->eventsmodel->events_popularity();
+
         //echo '<pre>'; print_r($datas['result']); exit;
 		if($user_role==1)
 		{
@@ -218,7 +221,8 @@ class Events extends CI_Controller
         $eventid=$this->input->post('eventid');
 
         $event_pic=$_FILES['eventbanner']['name']; 
-		$event_banner=trim($event_pic);
+        $file_name = time().rand(1,5).rand(6,10);
+		$event_banner=$file_name.$event_pic;
 		$uploaddir='assets/events/banner/';
 		$profilepic=$uploaddir.$event_banner;
 		move_uploaded_file($_FILES['eventbanner']['tmp_name'],$profilepic);
@@ -328,21 +332,22 @@ class Events extends CI_Controller
 	        $error_uploads = 0;
 	        $total_uploads = array();
 	        $upload_path = 'assets/events/gallery/';
-	        foreach($_FILES['eventpicture']['name'] as $key => $value) {
+	        foreach($_FILES['eventpicture']['name'] as $key => $value) 
+	        {
 	            $temp = explode(".", $_FILES['eventpicture']['name'][$key]);
 	            $extension = end($temp);
-	            if ($_FILES["eventpicture"]["type"][$key] != "image/gif"
+	               if ($_FILES["eventpicture"]["type"][$key] != "image/gif"
 	                && $_FILES["eventpicture"]["type"][$key] != "image/jpeg"
 	                && $_FILES["eventpicture"]["type"][$key] != "image/jpg"
 	                && $_FILES["eventpicture"]["type"][$key] != "image/pjpeg"
 	                && $_FILES["eventpicture"]["type"][$key] != "image/x-png"
 	                && $_FILES["eventpicture"]["type"][$key] != "image/png"
-	                && !in_array($extension, $allowedExts)) {
+	                && !in_array($extension,$allowedExts)) {
 	                $error_uploads++;
 	                continue;
 	            }
 	            $file_name = time().rand(1,5).rand(6,10).'_'.str_replace(' ', '_', $_FILES["eventpicture"]['name'][$key]);
-	            if(move_uploaded_file($_FILES["eventpicture"]['tmp_name'][$key], $upload_path.$file_name)) 
+	            if(move_uploaded_file($_FILES["eventpicture"]['tmp_name'][$key],$upload_path.$file_name)) 
 	            {
 	                $total_uploads[] = $file_name;
 	               
@@ -363,6 +368,24 @@ class Events extends CI_Controller
 		     }
 
         }
+    
+    }
+
+    public function delete_events_img($id,$eventid)
+    {
+        $datas=$this->session->userdata();
+	    $user_id=$this->session->userdata('id');
+	    $user_role=$this->session->userdata('user_role');
+          
+        $datas=$this->eventsmodel->delete_events_pic($id,$eventid);
+        $sta=$datas['status'];
+	     if($sta=="success"){
+	       $this->session->set_flashdata('msg','Deleted Successfully');
+		   redirect('events/add_events_gallery/'.$eventid.'');
+	     }else{
+	     	 $this->session->set_flashdata('msg','Faild To Delete');
+		     redirect('events/add_events_gallery/'.$eventid.'');
+	     } 
     
     }
 

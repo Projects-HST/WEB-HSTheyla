@@ -99,17 +99,6 @@ class Booking extends CI_Controller
 	     }
 	}
     
-    
-
-
-	//---------------------------------ADD GALLERY---------------------------------------------
-
-	public function add_events_gallery()
-	{
-
-	}
-    
-
 
 
 }

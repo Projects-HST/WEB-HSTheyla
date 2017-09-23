@@ -228,20 +228,19 @@
                             <div class="col-sm-4">
                                  <h4 class="header-title"> <?php $es=$rows->event_status ; if($es=='Y'){ echo "Yes";}else{ echo "No"; } ?> </h4>
                             </div>
-
-                            <label class="col-sm-2 col-form-label">Event Banner : </label>
-                              <div class="col-sm-4">
-                               <img src="<?php echo base_url(); ?>assets/events/banner/<?php echo $rows->event_banner; ?>" class="img-circle">
-                              </div>                            
-                        </div>
-
-                         <div class="form-group row">
-                             <label for="ecost" class="col-sm-2 col-form-label">Event Type : </label>
+                          <label for="ecost" class="col-sm-2 col-form-label">Event Type : </label>
                             <div class="col-sm-2">
                                    <h4 class="header-title"> <?php echo $rows->event_type ; ?> </h4>
                             </div>
-                          </div>
+                                                       
+                        </div>
 
+                         <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Event Banner : </label>
+                              <div class="col-sm-4">
+                               <img src="<?php echo base_url(); ?>assets/events/banner/<?php echo $rows->event_banner; ?>" class="img-circle">
+                              </div> 
+                            </div>
                          <div class="form-group row">
                             <label for="Description" class="col-sm-2 col-form-label">Description : </label>
                             <div class="col-sm-10">

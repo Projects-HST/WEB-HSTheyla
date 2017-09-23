@@ -80,6 +80,7 @@
                         <li><a href="<?php echo base_url();?>state/home">State</a></li>
                         <li><a href="<?php echo base_url();?>city/home">City</a></li>
                         <li><a href="<?php echo base_url();?>category/home">Category</a></li>
+                        <li><a href="<?php echo base_url();?>userrole/home">User Role</a></li>
                     </ul>
                 </li>
 
@@ -92,10 +93,11 @@
                 </li>
 
                 <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-album"></i> <span> Category </span> </a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-album"></i> <span> Advertisement Events</span> </a>
                     <ul class="list-unstyled">
-                        <li><a href="#">Material Design</a></li>
-                        <li><a href="#">Ion Icons</a></li>
+                        <li><a href="<?php echo base_url();?>advertisement/home "> Plans</a></li>
+                        <li><a href="<?php echo base_url();?>advertisement/view_adv_plan">List of Advertisement Events</a></li>
+                        <li><a href="<?php echo base_url();?>advertisement/home ">History of Advertisement Events</a></li>
                     </ul>
                 </li>
 

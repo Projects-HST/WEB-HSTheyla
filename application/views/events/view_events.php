@@ -80,18 +80,23 @@
                             <th>Event Name</th>
                             <th>Event Category</th>
                             <th>Event City</th>
+                            <th>Event popularity</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         <?php foreach($result as $rows){ 
+                           $eid=$rows->id;
                            $adv_sts=$rows->adv_status;
                            $etype=$rows->event_type;
-                          if($adv_sts=='Y'){ ?>
+                          if($adv_sts=='Y'){ 
+                             ?>
                         <tr>
                             <td><?php echo $rows->event_name ; ?></td>
                             <td><?php echo $rows->category_name ; ?></td>
                             <td><?php echo $rows->city_name ; ?></td>
+                            <td><?php foreach($popular as $values){  $evid=$values->event_id;
+                             if($eid==$evid){ echo $values->popular; } }?></td>
                             <td>
                              <a href="<?php echo base_url();?>events/edit_events/<?php echo $rows->id;?>">
                               <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
@@ -124,18 +129,23 @@
                             <th>Event Name</th>
                             <th>Event Category</th>
                             <th>Event City</th>
+                            <th>Event popularity</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         <?php foreach($result as $rows){ 
+                            $eid=$rows->id;
                            $hotspot_sts=$rows->hotspot_status;
                            $etype=$rows->event_type;
-                          if($hotspot_sts=='Y'){ ?>
+                          if($hotspot_sts=='Y'){ 
+                              ?>
                         <tr>
                             <td><?php echo $rows->event_name ; ?></td>
                             <td><?php echo $rows->category_name ; ?></td>
                             <td><?php echo $rows->city_name ; ?></td>
+                            <td><?php  foreach($popular as $values){
+                              $evid=$values->event_id; if($eid==$evid){ echo $values->popular; } }?></td>
                            <td>
                              <a href="<?php echo base_url();?>events/edit_events/<?php echo $rows->id;?>">
                               <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
@@ -168,20 +178,25 @@
                             <th>Event Name</th>
                             <th>Event Category</th>
                             <th>Event City</th>
+                            <th>Event popularity</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         <?php foreach($result as $rows){
+                            $eid=$rows->id; 
                            $adv_sts=$rows->adv_status;
                            $hotspot_sts=$rows->hotspot_status;
                            $etype=$rows->event_type;
-                          if($hotspot_sts=='N' && $adv_sts=='N'){ 
+                          if($hotspot_sts=='N' && $adv_sts=='N')
+                          {   
                            ?>
                         <tr>
                             <td><?php echo $rows->event_name ; ?></td>
                             <td><?php echo $rows->category_name ; ?></td>
                             <td><?php echo $rows->city_name ; ?></td>
+                            <td><?php foreach($popular as $values){
+                              $evid=$values->event_id; if($eid==$evid){ echo $values->popular; } }?></td>
                            <td>
                              <a href="<?php echo base_url();?>events/edit_events/<?php echo $rows->id;?>">
                               <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
@@ -200,7 +215,6 @@
                               <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo $rows->id;?>">   
                               <img title="Add Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/></a>
 
-                              
                             </td>
                         </tr>
                        <?php } }  ?>
