@@ -90,15 +90,15 @@ class City extends CI_Controller
 	    $user_role=$this->session->userdata('user_role');
         
         $countryid=$this->input->post("countryid"); 
-        $stateid=$this->input->post("stateid");
-        $newstateid=$this->input->post("newstateid");
+        //$stateid=$this->input->post("stateid");
+        $stateid=$this->input->post("newstateid");
         $cityname=$this->input->post("cityname");
         $cityid=$this->input->post("cityid");
 	    $estatus=$this->input->post("eventsts");
 
-	    if(empty($newstateid)){
-         $stateid=$stateid;
-	    }else{ $stateid=$newstateid; }
+	    // if(empty($newstateid)){
+     //     $stateid=$stateid;
+	    // }else{ $stateid=$newstateid; }
 
 	    $datas=$this->citymodel->update_city_details($countryid,$stateid,$cityname,$cityid,$estatus,$user_id,$user_role);
         $sta=$datas['status'];

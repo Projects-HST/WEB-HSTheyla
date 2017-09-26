@@ -48,7 +48,7 @@
                      <div class="card-block">
                         <h4 class="mt-0 header-title"></h4>
                         <?php foreach($edit as $res){ }?>
-                        <form class="" method="post" action="<?php echo base_url();?>userrole/update_userrole" name="usersform">
+                        <form class="" method="post" action="<?php echo base_url();?>userrole/update_userrole" id="usersform" name="usersform">
                            <div class="form-group row">
                               <label for="example-text-input"  class="col-sm-4 col-form-label">User Name</label>
                               <div class="col-sm-6">
@@ -86,4 +86,20 @@
     <!-- Top Bar Start -->
 </div>
 <!-- content -->
-
+<script type="text/javascript">
+ $(document).ready(function () {
+    $('#usersform').validate({ // initialize the plugin
+       rules: {
+         username:{required:true },
+         //categorypic:{required:true },
+         usersts:{required:true }
+        
+        },
+        messages: {
+        username:"Enter User Name",
+        //categorypic:"Select Category Picture",
+        usersts:"Select Status"
+               },
+         }); 
+   });
+ </script>

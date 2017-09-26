@@ -48,18 +48,18 @@
                      <div class="card-block">
                         <h4 class="mt-0 header-title"></h4>
                         <?php foreach($edit as $res){ }?>
-                        <form class="" method="post" action="<?php echo base_url();?>country/update_country" name="countryform">
+                        <form class="" method="post" action="<?php echo base_url();?>country/update_country" name="countryform" id="countryform">
                            <div class="form-group row">
                               <label for="example-text-input"  class="col-sm-4 col-form-label">Country Name</label>
                               <div class="col-sm-6">
-                                 <input class="form-control"  required=""  type="text" name="countryname" value="<?php echo $res->country_name; ?>" id="example-text-input">
-                                  <input class="form-control"  required=""  type="hidden" name="cnid" value="<?php echo $res->id; ?>" id="example-text-input">
+                                 <input class="form-control"    type="text" name="countryname" value="<?php echo $res->country_name; ?>" id="example-text-input">
+                                  <input class="form-control"    type="hidden" name="cnid" value="<?php echo $res->id; ?>" id="example-text-input">
                               </div>
                            </div>
                            <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Event Status</label>
                               <div class="col-sm-6">
-                                 <select class="form-control" required="" name="eventsts">
+                                 <select class="form-control" name="eventsts">
                                     <option value="Y">Yes</option>
                                     <option value="N">No</option>
                                  </select>
@@ -86,4 +86,18 @@
     <!-- Top Bar Start -->
 </div>
 <!-- content -->
-
+<script type="text/javascript">
+ $(document).ready(function () {
+    $('#countryform').validate({ // initialize the plugin
+       rules: {
+         countryname:{required:true },
+         eventsts:{required:true }
+        },
+        messages: {
+        countryname:"Enter Country Name",
+        eventsts:"Select Status"
+               },
+         }); 
+   });
+  
+</script>

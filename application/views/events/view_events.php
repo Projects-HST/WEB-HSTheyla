@@ -115,6 +115,9 @@
                               <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo $rows->id;?>">   
                               <img title="Add Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/></a>
 
+                              <a href="<?php echo base_url();?>events/view_events_reviews/<?php echo $rows->id;?>">   
+                              <img title="View Reviews" src="<?php echo base_url();?>assets/icons/review.png"/></a>
+
                             </td>
                         </tr>
                        <?php } } ?>
@@ -163,6 +166,9 @@
 
                               <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo $rows->id;?>">   
                               <img title="Add Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/></a>
+                               
+                              <a href="<?php echo base_url();?>events/view_events_reviews/<?php echo $rows->id;?>">   
+                              <img title="View Reviews" src="<?php echo base_url();?>assets/icons/review.png"/></a>
 
                             </td>
                         </tr>
@@ -214,7 +220,10 @@
 
                               <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo $rows->id;?>">   
                               <img title="Add Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/></a>
-
+                              
+                              <a href="<?php echo base_url();?>events/view_events_reviews/<?php echo $rows->id;?>">   
+                              <img title="View Reviews" src="<?php echo base_url();?>assets/icons/review.png"/></a>
+                              
                             </td>
                         </tr>
                        <?php } }  ?>

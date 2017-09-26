@@ -73,12 +73,12 @@
                         <?php endif; ?>
 
 
-                <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>events/add_events" name="eventform" onSubmit='return check();'>
+                <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>events/add_events" name="eventform" id="eventform" onSubmit='return check();'>
                         <div class="form-group row">
                             
                             <label for="Category" class="col-sm-2 col-form-label">Select Category</label>
                             <div class="col-sm-4">
-                                <select class="form-control" name="category" required="">
+                                <select class="form-control" name="category">
                                   <option value="">Select Category Name</option>
                                      <?php foreach($category_list as $res){ ?>
                                         <option value="<?php echo $res->id; ?>"><?php echo $res->category_name; ?></option>
@@ -88,14 +88,14 @@
 
                             <label for="Name" class="col-sm-2 col-form-label">Event Name</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" required="" name="event_name">
+                                <input class="form-control" type="text"  name="event_name">
                             </div>
 
                         </div>
                        <div class="form-group row">
                             <label for="country" class="col-sm-2 col-form-label">Select Country</label>
                             <div class="col-sm-4">
-                              <select class="form-control" name="country" required="" onchange="getcityname(this.value)">
+                              <select class="form-control" name="country" onchange="getcityname(this.value)">
                               <option value="">Select Country Name</option>
                                      <?php foreach($country_list as $cntry){ ?>
                                         <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
@@ -104,7 +104,7 @@
                             </div>
                              <label for="city" class="col-sm-2 col-form-label">Select City</label>
                             <div class="col-sm-4">
-                               <select class="form-control" name="city" required="" id="ctname">
+                               <select class="form-control" name="city"  id="ctname">
                                 </select>
                                 <div id="cmsg"></div>
                             </div>
@@ -113,11 +113,11 @@
                            
                             <label for="Venue" class="col-sm-2 col-form-label">Venue</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" required="" name="venue"  >
+                                <input class="form-control" type="text"  name="venue"  >
                             </div>
                              <label for="Address" class="col-sm-2 col-form-label">Address</label>
                             <div class="col-sm-4">
-                               <textarea id="textarea" name="address" required="" class="form-control" maxlength="240" rows="3" placeholder=""></textarea>
+                               <textarea id="textarea" name="address"  class="form-control" maxlength="240" rows="3" placeholder=""></textarea>
                             </div>
 
                         </div>
@@ -125,12 +125,12 @@
                            
                             <label for="Description" class="col-sm-2 col-form-label">Description</label>
                             <div class="col-sm-4">
-                                <textarea  id="textarea" required="" name="description" class="form-control" maxlength="30000" rows="3" placeholder=""></textarea>
+                                <textarea  id="textarea"  name="description" class="form-control" maxlength="30000" rows="3" placeholder=""> </textarea>
                             </div>
 
                              <label for="ecost" class="col-sm-2 col-form-label">Event Type</label>
                             <div class="col-sm-4">
-                                 <select class="form-control" required="" name="eventcost">
+                                 <select class="form-control"  name="eventcost">
                                     <option value="Free">Free</option>
                                     <option value="Paid">Paid</option>
                                     <option value="Invite">Invite</option>
@@ -142,7 +142,7 @@
                             <label for="sdate" class="col-sm-2 col-form-label">Start Date</label>
                             <div class="col-sm-4">
                               <div class="input-group">
-                                <input type="text" class="form-control" required="" name="start_date" id="datepicker-autoclose">
+                                <input type="text" class="form-control"  name="start_date" id="datepicker-autoclose">
                                 <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
                             </div>
                             </div>
@@ -150,7 +150,7 @@
                              <label for="edate" class="col-sm-2 col-form-label">End Date</label>
                             <div class="col-sm-4">
                                <div class="input-group">
-                                <input type="text" class="form-control" required="" name="end_date" id="datepicker">
+                                <input type="text" class="form-control" name="end_date" id="datepicker">
                                 <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
                             </div>
                             </div>
@@ -160,7 +160,7 @@
                            
                             <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
                             <div class="col-sm-4">
-                                <select name="start_time" required="" class="form-control" >
+                                <select name="start_time"  class="form-control" >
                                      <option value="">Select Start Time</option>
 									 <option value=""><?php echo get_times(); ?></option>
 								</select>
@@ -169,7 +169,7 @@
 
                              <label for="etime" class="col-sm-2 col-form-label">End Time</label>
                             <div class="col-sm-4">
-                                <select name="end_time" required="" class="form-control" >
+                                <select name="end_time" class="form-control" >
                                      <option value="">Select End Time</option>
 									 <option value=""><?php echo get_times(); ?></option>
 								</select>
@@ -192,7 +192,7 @@
                         <div class="form-group row">
                             <label for="primarycell" class="col-sm-2 col-form-label">primary Contact Phone</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" required="" name="pcontact_cell" maxlength="10" value="">
+                                <input class="form-control" type="text"  name="pcontact_cell" maxlength="10" value="">
                             </div>
                             <label for="seccell" class="col-sm-2 col-form-label">secondary Contact Phone</label>
                             <div class="col-sm-4">
@@ -202,11 +202,11 @@
                        <div class="form-group row">
                             <label for="Person" class="col-sm-2 col-form-label">Contact Person</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" required="" name="contact_person" value="">
+                                <input class="form-control" type="text"  name="contact_person" value="">
                             </div>
                             <label for="Email" class="col-sm-2 col-form-label">Contact Email</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" required="" name="email" value="" >
+                                <input class="form-control" type="text"  name="email" value="" >
                             </div>
                         </div>
 
@@ -261,7 +261,7 @@
                             
                             <label for="Status" class="col-sm-2 col-form-label">Event Display</label>
                             <div class="col-sm-4">
-                               <select class="form-control" required="" name="event_status">
+                               <select class="form-control"  name="event_status">
                                     <option value="">Select Status</option>
                                     <option value="Y">Yes</option>
                                     <option value="N">No</option>
@@ -300,6 +300,55 @@
 
 <script type="text/javascript">  
 
+   $(document).ready(function () {
+    $('#eventform').validate({ // initialize the plugin
+       rules: {
+         category:{required:true },
+         event_name:{required:true },
+         country:{required:true },
+         city:{required:true },
+         venue:{required:true },
+         address:{required:true },
+         description:{required:true },
+         eventcost:{required:true },
+         start_date:{required:true },
+         end_date:{required:true },
+         start_time:{required:true },
+         end_time:{required:true },
+         pcontact_cell:{required:true },
+         contact_person:{required:true },
+         email:{required:true },
+         event_status:{required:true },
+
+         txtLatitude:{required:true },
+         txtLongitude:{required:true }
+         
+        },
+
+        messages: {
+        category:"Select Category Name",
+        event_name:"Enter Event Name",
+        country:"Select Country Name",
+        city:"Select City Name",
+        venue:"Enter Venue",
+        address:"Enter Address",
+        description:"Enter Description",
+        eventcost:"Select Event Type",
+        start_date:"Select Start Date",
+        end_date:"Select End Date",
+        start_time:"Select Start Time",
+        end_time:"Select End Time",
+        pcontact_cell:"Enter Cell Number",
+        contact_person:"Enter Name",
+        email:"Enter Email",
+        event_status:"Select Status",
+
+        txtLatitude:"Enter Latitude",
+        txtLongitude:"Enter Longitude",
+        
+               },
+         }); 
+   });
   
  function getcityname(cid) {
            //alert(cid);
@@ -338,21 +387,21 @@
 
 function check()
 {
-  if(document.eventform.txtLatitude.value=="")
-    {
-            //alert("Please enter Latitude.");
-            $("#ermsg").html('<p style="color: red;">Please enter Latitude.</p>');
-            document.eventform.txtLatitude.focus();
-            return false;
-    }
+  // if(document.eventform.txtLatitude.value=="")
+  //   {
+  //           //alert("Please enter Latitude.");
+  //           $("#ermsg").html('<p style="color: red;">Please enter Latitude.</p>');
+  //           document.eventform.txtLatitude.focus();
+  //           return false;
+  //   }
     
-    if(document.eventform.txtLongitude.value=="")
-    {
-            //alert("Please enter Longitude.");
-            $("#ermsg1").html('<p style="color: red;">Please enter Longitude.</p>');
-            document.eventform.txtLongitude.focus();
-            return false;
-    }
+  //   if(document.eventform.txtLongitude.value=="")
+  //   {
+  //           //alert("Please enter Longitude.");
+  //           $("#ermsg1").html('<p style="color: red;">Please enter Longitude.</p>');
+  //           document.eventform.txtLongitude.focus();
+  //           return false;
+  //   }
 
   if(document.eventform.txtLatitude.value!="")
     {

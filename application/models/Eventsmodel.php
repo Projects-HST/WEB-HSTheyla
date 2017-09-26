@@ -144,5 +144,14 @@ public function __construct()
       $data= array("status"=>"success");
       return $data;
   }
+
+  function view_all_reviews($id)
+  {
+     $sql="SELECT r.*,p.photo,e.event_name FROM event_reviews AS r LEFT JOIN event_review_photos AS p ON r.id = p.review_id LEFT JOIN events AS e On r.event_id=e.id WHERE r.status='Y' AND r.event_id='$id' ORDER BY r.id DESC";
+    $resu=$this->db->query($sql);
+    $res=$resu->result();
+    return $res;
+  }
+
 }
 ?>

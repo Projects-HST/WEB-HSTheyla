@@ -29,9 +29,9 @@
 <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
 
-<!--script src="<?php echo base_url(); ?>assets/js/jquery.validate.min"></script>
-<script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></scrip-t-->
-
+ <!--  Forms Validations Plugin -->
+      <script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
+      <script src="<?php echo base_url(); ?>assets/js/additional-methods.min.js"></script>
 
 </head>
 
@@ -97,15 +97,15 @@
                     <ul class="list-unstyled">
                         <li><a href="<?php echo base_url();?>advertisement/home "> Plans</a></li>
                         <li><a href="<?php echo base_url();?>advertisement/view_adv_plan">List of Advertisement Events</a></li>
-                        <li><a href="<?php echo base_url();?>advertisement/home ">History of Advertisement Events</a></li>
+                        <li><a href="<?php echo base_url();?>advertisement/view_adv_history ">History of Advertisement Events</a></li>
                     </ul>
                 </li>
 
                 <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-clipboard-outline"></i><span> Events </span></a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-clipboard-outline"></i><span> Reviews   </span></a>
                     <ul class="list-unstyled">
-                        <li><a href="#">Form Elements</a></li>
-                        <li><a href="#">Form Validation</a></li>
+                        <li><a href="<?php echo base_url();?>reviews/view_reviews ">Event Pending Reviews</a></li>
+                        <li><a href="<?php echo base_url();?>reviews/archive_reviews ">Archive Reviews</a></li>
                     </ul>
                 </li>
 

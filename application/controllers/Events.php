@@ -389,6 +389,26 @@ class Events extends CI_Controller
     
     }
 
+    public function view_events_reviews($id)
+    {
+    	$datas=$this->session->userdata();
+	    $user_id=$this->session->userdata('id');
+	    $user_role=$this->session->userdata('user_role');
+
+        $datas['views'] = $this->eventsmodel->view_all_reviews($id);
+
+        //echo'<pre>';print_r($datas['views']);exit();
+
+		if($user_role==1)
+		{
+		  $this->load->view('header');
+		  $this->load->view('events/events_reviews',$datas);
+		  $this->load->view('footer');
+	 	}else{
+	 			redirect('/');
+	 		 }
+    }
+
 
 }
 ?>

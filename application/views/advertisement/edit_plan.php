@@ -57,7 +57,7 @@
                         <h4 class="mt-0 header-title"></h4>
                         <?php foreach($edit as $res){ }?>
 
-                     <form  method="post" action="<?php echo base_url();?>advertisement/update_plans" name="advertisementform" enctype="multipart/form-data">
+                     <form  method="post" action="<?php echo base_url();?>advertisement/update_plans" name="advertisementform" id="advertisementform" enctype="multipart/form-data">
                            <div class="form-group row">
                               <label for="example-text-input" class="col-sm-4 col-form-label">Plan Name</label>
                               <div class="col-sm-6">
@@ -92,4 +92,18 @@
     <!-- Top Bar Start -->
 </div>
 <!-- content -->
-
+<script type="text/javascript">
+ $(document).ready(function () {
+    $('#advertisementform').validate({ // initialize the plugin
+       rules: {
+         planname:{required:true },
+         plan_rate:{required:true }
+        },
+        messages: {
+        planname:"Enter Plan Name",
+        plan_rate:"Enter Rate"
+               },
+         }); 
+   });
+  
+</script>

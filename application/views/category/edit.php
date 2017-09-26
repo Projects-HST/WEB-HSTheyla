@@ -56,11 +56,11 @@
                      <div class="card-block">
                         <h4 class="mt-0 header-title"></h4>
                         <?php foreach($edit as $res){ }?>
-                        <form  method="post" action="<?php echo base_url();?>category/update_category" name="categoryform" enctype="multipart/form-data">
+                        <form  method="post" action="<?php echo base_url();?>category/update_category" name="categoryform" enctype="multipart/form-data" id="categoryform">
                            <div class="form-group row">
                               <label for="example-text-input" class="col-sm-4 col-form-label">Category Name</label>
                               <div class="col-sm-6">
-                                 <input class="form-control" type="text" required="" name="categoryname" value="<?php echo $res->category_name; ?>" id="example-text-input">
+                                 <input class="form-control" type="text" name="categoryname" value="<?php echo $res->category_name; ?>" id="example-text-input">
                               </div>
                            </div>
                            <div class="form-group row">
@@ -76,7 +76,7 @@
                             <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Event Status</label>
                               <div class="col-sm-6">
-                                 <select class="form-control"  required=""  name="eventsts">
+                                 <select class="form-control"  name="eventsts">
                                     <option value="">Select Event Status</option>
                                     <option value="Y">Yes</option>
                                     <option value="N">No</option>
@@ -106,4 +106,20 @@
     <!-- Top Bar Start -->
 </div>
 <!-- content -->
-
+<script type="text/javascript">
+ $(document).ready(function () {
+    $('#categoryform').validate({ // initialize the plugin
+       rules: {
+         categoryname:{required:true },
+         //categorypic:{required:true },
+         eventsts:{required:true }
+        
+        },
+        messages: {
+        categoryname:"Enter Category Name",
+        //categorypic:"Select Category Picture",
+        eventsts:"Select Status"
+               },
+         }); 
+   });
+ </script>

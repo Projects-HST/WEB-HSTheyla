@@ -49,15 +49,15 @@
                      <div class="card-block">
                         <h4 class="mt-0 header-title"></h4>
                        
-                        <form class="" method="post" action="<?php echo base_url();?>state/add_state" name="stateform">
+                        <form class="" method="post" action="<?php echo base_url();?>state/add_state" id="stateform" name="stateform">
                             
                             <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Country Name</label>
                               <div class="col-sm-6">
-                                 <select class="form-control" name="countryid"  required="">
+                                 <select class="form-control" name="countryid"  >
                                      <option value="">Select Country Name</option>
                                      <?php foreach($countyr_list as $cntry){ ?>
-                                                <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
+                                          <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
                                      <?php } ?>
                                  </select>
                               </div>
@@ -66,14 +66,14 @@
                             <div class="form-group row">
                               <label for="example-text-input" class="col-sm-4 col-form-label">State Name</label>
                               <div class="col-sm-6">
-                                 <input class="form-control"  required=""  type="text" name="statename" id="example-text-input">
+                                 <input class="form-control"   type="text" name="statename" id="example-text-input">
                               </div>
                            </div>
 
                            <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Event Status</label>
                               <div class="col-sm-6">
-                                 <select class="form-control"  required=""  name="eventsts">
+                                 <select class="form-control"  name="eventsts">
                                     <option value="">Select Event Status</option>
                                     <option value="Y">Yes</option>
                                     <option value="N">No</option>
@@ -128,7 +128,7 @@
                                  <td><?php  echo $rows->state_name; ?></td>
                                  <td><?php  echo $rows->country_name; ?></td>
                                  <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
-								         <td><a href="<?php echo base_url();?>state/edit_state/<?php echo $rows->id;?>"><i class="fa fa-pencil-square-o"></a></td>
+								         <td><a href="<?php echo base_url();?>state/edit_state/<?php echo $rows->id;?>"><img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a></td>
                               </tr>
                              <?php $i++;  }  ?>
                            </tbody>
@@ -148,6 +148,22 @@
 </div>
 <!-- content -->
 <script type="text/javascript">
+    $(document).ready(function () {
+    $('#stateform').validate({ // initialize the plugin
+       rules: {
+         countryid:{required:true },
+         statename:{required:true },
+         eventsts:{required:true }
+        
+        },
+        messages: {
+        countryid:"Select Country Name",
+        statename:"Enter State Name",
+        eventsts:"Select Status"
+               },
+         }); 
+   });
+
  // function getstatename(cid) {
  //           alert(cid);
  //            $.ajax({

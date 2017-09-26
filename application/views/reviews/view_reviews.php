@@ -32,7 +32,7 @@
          </button>
          </li>
          <li class="hide-phone list-inline-item app-search">
-         <h3 class="page-title">View Advertisement List</h3>
+         <h3 class="page-title">View Reviews</h3>
          </li>
          </ul>
          <div class="clearfix"></div>
@@ -58,55 +58,40 @@
                         <?php endif; ?>
 
                     <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div class="tab-pane active p-3" id="home-1" role="tabpanel">
-                            <table  id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                   
+                            <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
                         <thead>
                         <tr>
                             <th>Event Name</th>
-                            <th>Event Category</th>
-                            <th>Event City</th>
+                            <th>Event Rating</th>
+                            <th>Comments</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach($result as $rows){ 
-                           $eid=$rows->id;
-                           $adv_sts=$rows->adv_status;
-                           $etype=$rows->event_type;
-                          if($adv_sts=='Y'){ 
-                             ?>
+                        <?php foreach($views as $rows){ 
+                           $sts=$rows->status; ?>
                         <tr>
                             <td><?php echo $rows->event_name ; ?></td>
-                            <td><?php echo $rows->category_name ; ?></td>
-                            <td><?php echo $rows->city_name ; ?></td>
+                            <td><?php echo $rows->event_rating ; ?></td>
+                            <td><?php echo $rows->comments ; ?></td>
+                             <td><?php if($sts=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
                             <td>
-                             <a href="<?php echo base_url();?>events/edit_events/<?php echo $rows->id;?>">
+                             <a href="<?php echo base_url();?>reviews/edit_reviews/<?php echo $rows->id;?>">
                               <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
 
-                             <a href="<?php echo base_url();?>events/view_single_events/<?php echo $rows->id;?>">
+                             <a href="<?php echo base_url();?>reviews/view_single_reviews/<?php echo $rows->id;?>">
                               <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a>
 
-                              <a href="<?php echo base_url();?>events/delete_events/<?php echo $rows->id;?>">   
+                              <a href="<?php echo base_url();?>reviews/delete_reviews/<?php echo $rows->id;?>">   
                               <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
-
-                              <?php if($etype=='Paid'){?>
-                              <a href="<?php echo base_url();?>advertisement/add_advertisement_details/<?php echo $rows->id;?>/<?php echo $rows->category_id;?>">
-                              <img title="Add Advertisement Details" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
-                              <?php } ?>
-
-                              <!--a href="<?php echo base_url();?>events/add_events_gallery/<?php echo $rows->id;?>">   
-                              <img title="Add Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/></a-->
-
                             </td>
                         </tr>
-                       <?php } } ?>
+                       <?php }  ?>
                         </tbody>
                     </table>
-                        </div>
-
-                      
-                    </div>
+                     
 
                 </div>
             </div>
@@ -116,9 +101,10 @@
      </div><!-- container -->
     </div> <!-- Page content Wrapper -->
 
+
 </div> <!-- content -->
 <script type="text/javascript">
   $(document).ready(function() {
-   
+    $('table.display').DataTable();
 } );
 </script>

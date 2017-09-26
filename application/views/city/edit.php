@@ -49,12 +49,12 @@
                      <div class="card-block">
                         <h4 class="mt-0 header-title"></h4>
                         <?php foreach($edit as $res){ }?>
-                        <form class="" method="post" action="<?php echo base_url();?>city/update_city" name="cityform">
+                        <form class="" method="post" action="<?php echo base_url();?>city/update_city" id="cityform" name="cityform">
                            
                            <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Country Name</label>
                               <div class="col-sm-6">
-                                 <select class="form-control" name="countryid"  required=""  onchange="getstatename(this.value)">
+                                 <select class="form-control" name="countryid"  onchange="getstatename(this.value)">
                                      <option value="">Select Country Name</option>
                                      <?php foreach($countyr_list as $cntry){ ?>
                                                 <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
@@ -67,15 +67,18 @@
                            <div class="form-group row">
                               <label class="col-sm-4 col-form-label">State Name</label>
                               <div class="col-sm-6">
-                              <input class="form-control" type="hidden" value="<?php echo $res->state_id; ?>" name="stateid">
+                              <!--input class="form-control" type="hidden" value="<?php echo $res->state_id; ?>" name="stateid">
                               <div id="old" style="display:none;"">
-                               <input class="form-control" type="text" value="<?php echo $res->state_name; ?>"  >
-                                 </div>
-                              <div id="msg"></div>
-                                 <select class="form-control" name="newstateid" id="staname" >
-                                     <option value=""><?php echo $res->state_name; ?></option>
+                               <input class="form-control" type="hidden" value="<?php echo $res->state_name; ?>"  >
+                                 </div-->
+                             
+                                 <select class="form-control" name="newstateid" id="staname">
+                                  <?php foreach($edit as $res){ ?>
+                                     <option value="<?php echo $res->staid; ?>"><?php echo $res->state_name; ?></option>
+                                     <?php } ?>
                                  </select>
-                                <!--script language="JavaScript">document.cityform.eventsts.value="<?php echo $res->state_id; ?>";</script-->
+                                <script language="JavaScript">document.cityform.newstateid.value="<?php echo $res->state_id; ?>";</script>
+                                 <div id="msg"></div>
                               </div>
                            </div> 
 
@@ -83,14 +86,14 @@
                            <div class="form-group row">
                               <label for="example-text-input" class="col-sm-4 col-form-label">City Name</label>
                               <div class="col-sm-6">
-                                 <input class="form-control" type="text" required="" name="cityname" value="<?php echo $res->city_name; ?>" id="example-text-input">
-                                  <input class="form-control" type="hidden" required="" name="cityid" value="<?php echo $res->id; ?>" id="example-text-input">
+                                 <input class="form-control" type="text"  name="cityname" value="<?php echo $res->city_name; ?>" id="example-text-input">
+                                  <input class="form-control" type="hidden"  name="cityid" value="<?php echo $res->id; ?>" id="example-text-input">
                               </div>
                            </div>
                            <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Event Status</label>
                               <div class="col-sm-6">
-                                 <select class="form-control" required="" name="eventsts">
+                                 <select class="form-control"  name="eventsts">
                                     <option value="Y">Yes</option>
                                     <option value="N">No</option>
                                  </select>
@@ -118,6 +121,26 @@
 </div>
 <!-- content -->
 <script type="text/javascript">
+
+   $(document).ready(function () {
+    $('#cityform').validate({ // initialize the plugin
+       rules: {
+         countryid:{required:true },
+         stateid:{required:true },
+         cityname:{required:true },
+         eventsts:{required:true }
+        
+        },
+        messages: {
+        countryid:"Select Country Name",
+        stateid:"Select State Name",
+        cityname:"Enter City Name",
+        eventsts:"Select Status"
+               },
+         }); 
+   });
+
+
  function getstatename(cid) {
            //alert(cid);
             $.ajax({

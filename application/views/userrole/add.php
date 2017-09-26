@@ -48,17 +48,17 @@
                      <div class="card-block">
                         <h4 class="mt-0 header-title"></h4>
                        
-                        <form class="" method="post" action="<?php echo base_url();?>userrole/add_users" name="usersform">
+                        <form class="" method="post" action="<?php echo base_url();?>userrole/add_users" id="usersform" name="usersform">
                            <div class="form-group row">
                               <label for="example-text-input" class="col-sm-4 col-form-label">User Name</label>
                               <div class="col-sm-6">
-                                 <input class="form-control" type="text" required="" name="username" value="" id="example-text-input">
+                                 <input class="form-control" type="text"  name="username" value="" id="example-text-input">
                               </div>
                            </div>
                            <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Status</label>
                               <div class="col-sm-6">
-                                 <select class="form-control" required="" name="usersts">
+                                 <select class="form-control"  name="usersts">
                                     <option value="">Select  Status</option>
                                     <option value="Y">Yes</option>
                                     <option value="N">No</option>
@@ -110,8 +110,10 @@
                               <tr>
                                  <td><?php  echo $i; ?></td>
                                  <td><?php  echo $rows->user_role_name; ?></td>
-                                 <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
-								         <td><a href="<?php echo base_url();?>userrole/edit_users/<?php echo $rows->id;?>"><img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
+                                 <td>
+                                    <?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
+								         <td>
+                                    <a href="<?php echo base_url();?>userrole/edit_users/<?php echo $rows->id;?>"><img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
                                  <a href="<?php echo base_url();?>userrole/delete_users/<?php echo $rows->id;?>">   
                                 <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
                                   </td>
@@ -133,4 +135,20 @@
     <!-- Top Bar Start -->
 </div>
 <!-- content -->
-
+<script type="text/javascript">
+ $(document).ready(function () {
+    $('#usersform').validate({ // initialize the plugin
+       rules: {
+         username:{required:true },
+         //categorypic:{required:true },
+         usersts:{required:true }
+        
+        },
+        messages: {
+        username:"Enter User Name",
+        //categorypic:"Select Category Picture",
+        usersts:"Select Status"
+               },
+         }); 
+   });
+ </script>

@@ -56,11 +56,11 @@
                      <div class="card-block">
                         <h4 class="mt-0 header-title"></h4>
 
-                        <form  method="post" action="<?php echo base_url();?>category/add_category" name="categoryform" enctype="multipart/form-data">
+                        <form  method="post" action="<?php echo base_url();?>category/add_category" name="categoryform" enctype="multipart/form-data" id="categoryform">
                            <div class="form-group row">
                               <label for="example-text-input" class="col-sm-4 col-form-label">Category Name</label>
                               <div class="col-sm-6">
-                                 <input class="form-control" type="text" required="" name="categoryname" value="" id="example-text-input">
+                                 <input class="form-control" type="text" name="categoryname" id="example-text-input">
                               </div>
                            </div>
                            <div class="form-group row">
@@ -73,7 +73,7 @@
                             <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Event Status</label>
                               <div class="col-sm-6">
-                                 <select class="form-control"  required=""  name="eventsts">
+                                 <select class="form-control" name="eventsts">
                                     <option value="">Select Event Status</option>
                                     <option value="Y">Yes</option>
                                     <option value="N">No</option>
@@ -131,7 +131,7 @@
                                     <img src="<?php echo base_url(); ?>assets/category/<?php echo $rows->category_image; ?>" class="img-circle">
                                  </td>
                                  <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
-								 <td><a href="<?php echo base_url();?>category/edit_category/<?php echo $rows->id;?>"><i class="fa fa-pencil-square-o"></a></td>
+								 <td><a href="<?php echo base_url();?>category/edit_category/<?php echo $rows->id;?>"><img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a></td>
                               </tr>
                              <?php $i++;  }  ?>
                            </tbody>
@@ -150,4 +150,20 @@
     <!-- Top Bar Start -->
 </div>
 <!-- content -->
-
+<script type="text/javascript">
+ $(document).ready(function () {
+    $('#categoryform').validate({ // initialize the plugin
+       rules: {
+         categoryname:{required:true },
+         categorypic:{required:true },
+         eventsts:{required:true }
+        
+        },
+        messages: {
+        categoryname:"Enter Category Name",
+        categorypic:"Select Category Picture",
+        eventsts:"Select Status"
+               },
+         }); 
+   });
+ </script>

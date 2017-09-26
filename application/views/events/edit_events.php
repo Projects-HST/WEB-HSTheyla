@@ -78,7 +78,7 @@
                         </div>
                         <?php endif; ?>
 
-                <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>events/update_events" name="eventform" onSubmit='return check();'>
+                <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>events/update_events" name="eventform" id="eventform" onSubmit='return check();'>
                   <?php foreach($edit as $rows){}?>
                         <div class="form-group row">
                             
@@ -318,7 +318,55 @@
 <!-- content -->
 
 <script type="text/javascript">  
+$(document).ready(function () {
+    $('#eventform').validate({ // initialize the plugin
+       rules: {
+         category:{required:true },
+         event_name:{required:true },
+         country:{required:true },
+         city:{required:true },
+         venue:{required:true },
+         address:{required:true },
+         description:{required:true },
+         eventcost:{required:true },
+         start_date:{required:true },
+         end_date:{required:true },
+         start_time:{required:true },
+         end_time:{required:true },
+         pcontact_cell:{required:true },
+         contact_person:{required:true },
+         email:{required:true },
+         event_status:{required:true },
 
+         txtLatitude:{required:true },
+         txtLongitude:{required:true }
+         
+        },
+
+        messages: {
+        category:"Select Category Name",
+        event_name:"Enter Event Name",
+        country:"Select Country Name",
+        city:"Select City Name",
+        venue:"Enter Venue",
+        address:"Enter Address",
+        description:"Enter Description",
+        eventcost:"Select Event Type",
+        start_date:"Select Start Date",
+        end_date:"Select End Date",
+        start_time:"Select Start Time",
+        end_time:"Select End Time",
+        pcontact_cell:"Enter Cell Number",
+        contact_person:"Enter Name",
+        email:"Enter Email",
+        event_status:"Select Status",
+
+        txtLatitude:"Enter Latitude",
+        txtLongitude:"Enter Longitude",
+        
+               },
+         }); 
+   });
   
  function getcityname(cid) {
            //alert(cid);

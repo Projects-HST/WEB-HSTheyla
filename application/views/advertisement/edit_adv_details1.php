@@ -55,7 +55,7 @@
          </button>
          </li>
          <li class="hide-phone list-inline-item app-search">
-         <h3 class="page-title">Add  Advertisement Details</h3>
+         <h3 class="page-title">Edit  Advertisement Details</h3>
          </li>
          </ul>
          <div class="clearfix"></div>
@@ -70,24 +70,39 @@
                   <div class="card m-b-20">
                      <div class="card-block">
                         <h4 class="mt-0 header-title"></h4>
-                        <form  method="post" action="<?php echo base_url();?>advertisement/add_adv_history" name="advertisementform" id="aform" enctype="multipart/form-data">
-                         <?php //echo $event_id;   echo $category_id;?>
+                        <form  method="post" action="<?php echo base_url();?>advertisement/update_adv_history_all" name="advertisementform" enctype="multipart/form-data">
+                         <?php foreach($edit AS $res){}?>
+
+                         <div class="form-group row">
+                           
+                            <label for="stime" class="col-sm-2 col-form-label">Event Name</label>
+                            <div class="col-sm-4">
+                              <input type="text" class="form-control" readonly="" value="<?php echo $res->event_name;   ?>">
+                            <input type="hidden" class="form-control"  name="event_id" value=" <?php echo $res->event_id;?>" >
+                            <input type="hidden" class="form-control"  name="id" value=" <?php echo $res->id;?>" >
+                             </div>
+
+                            <label for="etime" class="col-sm-2 col-form-label">Category Name</label>
+                            <div class="col-sm-4">
+                              <input type="text" class="form-control" readonly="" value=" <?php echo $res->category_name;   ?>">
+                            <input type="hidden" class="form-control"  name="category_id" value=" <?php echo $res->category_id;?>" >
+                              
+                            </div>
+                        </div>
+
                        <div class="form-group row">
                             <label for="sdate" class="col-sm-2 col-form-label">Start Date</label>
                             <div class="col-sm-4">
                               <div class="input-group">
-                                <input type="text" class="form-control"  name="start_date" id="datepicker-autoclose">
+                                <input type="text" class="form-control"  name="start_date"  value="<?php $date=date_create($res->date_from);echo date_format($date,"m/d/Y");  ?>" id="datepicker-autoclose">
                                 <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
-
-                           <input type="hidden" class="form-control"  name="event_id" value=" <?php echo $event_id;   ?>">
-                            <input type="hidden" class="form-control"  name="category_id" value=" <?php echo $category_id;?>" >
                             </div>
                             </div>
 
                              <label for="edate" class="col-sm-2 col-form-label">End Date</label>
                             <div class="col-sm-4">
                                <div class="input-group">
-                                <input type="text" class="form-control"  name="end_date" id="datepicker">
+                                <input type="text" class="form-control" required="" name="end_date" value="<?php $date=date_create($res->date_to);echo date_format($date,"m/d/Y");  ?>" id="datepicker">
                                 <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
                             </div>
                             </div>
@@ -96,32 +111,34 @@
                            
                              <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
                             <div class="col-sm-4">
-                                <select name="start_time"  class="form-control" >
+                                <select name="start_time" required="" class="form-control" >
                                      <option value="">Select Start Time</option>
                             <option value=""><?php echo get_times(); ?></option>
                         </select>
-
+                            <script language="JavaScript">document.advertisementform.start_time.value="<?php echo $res->time_from; ?>";</script>
                             </div>
 
                              <label for="etime" class="col-sm-2 col-form-label">End Time</label>
                             <div class="col-sm-4">
-                                <select name="end_time" class="form-control" >
+                                <select name="end_time" required="" class="form-control" >
                                      <option value="">Select End Time</option>
                             <option value=""><?php echo get_times(); ?></option>
                         </select>
+                        <script language="JavaScript">document.advertisementform.end_time.value="<?php echo $res->time_to; ?>";</script>
                             </div>
 
                         </div>
                         <div class="form-group row">
                              <label for="ecost" class="col-sm-2 col-form-label">Plans</label>
                             <div class="col-sm-4">
-                                 <select name="adv_plan" class="form-control">
-                                    <?php foreach ($plans as $values) { ?>
-                                    <option value="<?php echo $values->id; ?>"> <?php  echo $values->plan_name; ?> 
-                                    </option>
+                                 <select class="form-control" required="" name="adv_plan">
+                                    <option value="Free">Select Plans </option>
+                                    <?php foreach ($plans as $values) {?>
+                                    <option value="<?php echo $values->id; ?>"><?php  echo $values->plan_name; ?></option>
                                    <?php  } ?>
                                   
                                 </select>
+                                <script language="JavaScript">document.advertisementform.adv_plan.value="<?php echo $res->adv_plan_id; ?>";</script>
                             </div>
                             <label for="Status" class="col-sm-2 col-form-label">Status</label>
                             <div class="col-sm-4">
@@ -130,84 +147,22 @@
                                     <option value="Y">Yes</option>
                                     <option value="N">No</option>
                                 </select>
+                                 <script language="JavaScript">document.advertisementform.status.value="<?php echo $res->status; ?>";</script>
                             </div>
                         </div>
                            <div class="form-group">
                               <label class="col-sm-4 col-form-label"></label>
                               <button type="submit" class="btn btn-primary waves-effect waves-light">
-                              Submit </button>
-                              <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                              Reset
-                              </button>
+                              Update </button>
+                             
                            </div>
                      </div>
                      </form>
-                  </div>
+                  
                </div>
             </div>
             <!-- end row -->
-            <div class="row">
-               <div class="col-12">
-                  <div class="card m-b-20">
-                     <div class="card-block">
-                        <h4 class="mt-0 header-title">View Advertisement Plans</h4>
-                        
-                           <?php if($this->session->flashdata('msg')): ?>
-                        <div class="alert alert-success">
-                           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-                           ×</button> <?php echo $this->session->flashdata('msg'); ?>
-                        </div>
-                        <?php endif; ?>
-
-                        <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                           <thead>
-                              <tr>
-							     <th>S.NO</th>
-                                 <th>Event Name</th>
-                                 <th>Category Rate</th>
-                                 <th>From Date</th>
-                                 <th>To Date</th>
-                                 <th>From Time</th>
-                                 <th>To Time</th>
-                                 <th>Plan Name</th>
-                                <th>Status</th>
-                                 <th>Action</th>
-                              </tr>
-                           </thead>
-                           <tbody>
-						            <?php
-                                $i=1;
-                                foreach($result as $rows) {
-                                  $status=$rows->status;
-                                ?>
-                              <tr>
-                                 <td><?php  echo $i; ?></td>
-                                 <td><?php  echo $rows->event_name; ?></td>
-                                 <td> <?php echo $rows->category_name; ?></td>
-                                 <td><?php  $date=date_create($rows->date_from);
-                                       echo date_format($date,"d-m-Y");  ?></td>
-                                 <td> <?php $date=date_create($rows->date_to);
-                                       echo date_format($date,"d-m-Y");  ?></td>
-                                 <td><?php  echo $rows->time_from; ?></td>
-                                 <td> <?php echo $rows->time_to; ?></td>
-                                 <td><?php  echo $rows->plan_name; ?></td>
-                                 <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
-                                 <td> <a href="<?php echo base_url();?>advertisement/edit_history/<?php echo $rows->id;?>">
-                                  <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
-                                 <a href="<?php echo base_url();?>advertisement/delete_history/<?php echo $rows->id;?>">   
-                                 <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a></td>
-                                  
-                           </td>
-                              </tr>
-                             <?php $i++;  }  ?>
-                           </tbody>
-                        </table>
-                     </div>
-                  </div>
-               </div>
-               <!-- end col -->
             </div>
-            <!-- end row -->
          </div>
 		   <!-- container -->
       </div>
@@ -216,26 +171,4 @@
     <!-- Top Bar Start -->
 </div>
 <!-- content -->
-<script type="text/javascript">
- $(document).ready(function () {
-    $('#aform').validate({ // initialize the plugin
-       rules: {
-         start_date:{required:true },
-         end_date:{required:true },
-         start_time:{required:true },
-         end_time:{required:true },
-         adv_plan:{required:true },
-         status:{required:true }
-        },
-        messages: {
-        start_date:"Select Start Date",
-        start_time:"Select Start Time",
-        end_date:"Select End Date",
-        end_time:"Select End Time",
-        adv_plan:"Select Plan ",
-        status:"Select Status",
-               },
-         }); 
-   });
-  
-</script>
+

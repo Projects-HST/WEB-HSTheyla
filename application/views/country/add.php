@@ -48,17 +48,17 @@
                      <div class="card-block">
                         <h4 class="mt-0 header-title"></h4>
                        
-                        <form class="" method="post" action="<?php echo base_url();?>country/add_country" name="countryform">
+                        <form class="" method="post" action="<?php echo base_url();?>country/add_country" name="countryform" id="countryform">
                            <div class="form-group row">
                               <label for="example-text-input" class="col-sm-4 col-form-label">Country Name</label>
                               <div class="col-sm-6">
-                                 <input class="form-control" type="text" required="" name="countryname" value="" id="example-text-input">
+                                 <input class="form-control" type="text"  name="countryname" value="" id="example-text-input">
                               </div>
                            </div>
                            <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Event Status</label>
                               <div class="col-sm-6">
-                                 <select class="form-control" required="" name="eventsts">
+                                 <select class="form-control" name="eventsts">
                                     <option value="">Select Event Status</option>
                                     <option value="Y">Yes</option>
                                     <option value="N">No</option>
@@ -111,7 +111,7 @@
                                  <td><?php  echo $i; ?></td>
                                  <td><?php  echo $rows->country_name; ?></td>
                                  <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
-								 <td><a href="<?php echo base_url();?>country/edit_country/<?php echo $rows->id;?>"><i class="fa fa-pencil-square-o"></a></td>
+								 <td><a href="<?php echo base_url();?>country/edit_country/<?php echo $rows->id;?>"><img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a></td>
                               </tr>
                              <?php $i++;  }  ?>
                            </tbody>
@@ -130,4 +130,18 @@
     <!-- Top Bar Start -->
 </div>
 <!-- content -->
-
+<script type="text/javascript">
+ $(document).ready(function () {
+    $('#countryform').validate({ // initialize the plugin
+       rules: {
+         countryname:{required:true },
+         eventsts:{required:true }
+        },
+        messages: {
+        countryname:"Enter Country Name",
+        eventsts:"Select Status"
+               },
+         }); 
+   });
+  
+</script>

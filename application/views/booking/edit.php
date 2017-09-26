@@ -48,7 +48,7 @@
                      <div class="card-block">
                         <h4 class="mt-0 header-title"></h4>
                         <?php   foreach($edit as $res){ } ?>
-                           <form class="" method="post" action="<?php echo base_url();?>booking/update_plans" name="planform">
+                           <form  method="post" action="<?php echo base_url();?>booking/update_plans" name="planform" id="planform">
                             <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Plan Name </label>
                               <div class="col-sm-6">
@@ -90,4 +90,22 @@
     <!-- Top Bar Start -->
 </div>
 <!-- content -->
+<script type="text/javascript">
 
+    $(document).ready(function () {
+    $('#planform').validate({ // initialize the plugin
+       rules: {
+         planname:{required:true },
+         seats:{required:true },
+         amount:{required:true },         
+        },
+
+        messages: {
+        planname:"Enter Plan Name",
+        seats:"Enter  Seats",
+        amount:"Enter Amount"
+               },
+         }); 
+   });
+  
+</script>
