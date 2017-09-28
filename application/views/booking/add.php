@@ -50,20 +50,20 @@
                            <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Plan Name</label>
                               <div class="col-sm-6">
-                                 <input class="form-control"   type="text" name="planname" id="example-text-input">
+                                 <input class="form-control"   type="text" name="planname">
                                  <input class="form-control"  type="hidden" name="event_id" value="<?php echo $eventid ;?>">
                               </div>
                            </div>
                            <div class="form-group row">
                               <label for="example-text-input" class="col-sm-4 col-form-label">Available Seats </label>
                               <div class="col-sm-6">
-                                 <input class="form-control"  type="text" name="seats" id="example-text-input">
+                                 <input class="form-control"  type="text" name="seats" >
                               </div>
                            </div>
                            <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Amount </label>
                               <div class="col-sm-6">
-                                 <input class="form-control" type="text" name="amount" id="example-text-input">
+                                 <input class="form-control" type="text" name="amount" >
                               </div>
                            </div>
                            <div class="form-group">

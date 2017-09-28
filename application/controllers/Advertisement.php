@@ -190,21 +190,21 @@ class Advertisement extends CI_Controller
 
 	     $datas = $this->advertisementmodel->add_advertisement_plan_history($event_id,$category_id,$start_date,$end_date,$start_time,$end_time,$adv_plan,$status,$user_id);
 	     $sta=$datas['status'];
-	     $id=$datas['eid'];
-	     $category_id=$datas['cid'];
-	     //echo $id;exit; 
-
-      
+	     //$id=$datas['eid'];
+	     //$category_id=$datas['cid'];
+	      $id = str_replace(' ','',$datas['eid']);
+	      $category_id = str_replace(' ','',$datas['cid']);
+	     
         if($sta=="success"){
 	       $this->session->set_flashdata('msg','Added Successfully');
 	       //redirect('examinationresult/exam_mark_details?var1='.$clsmastid.'&var2='.$exam_id.'',$datas);
-		   redirect('advertisement/add_advertisement_details/'.$id.'/'.$category_id.'',$datas);
+		      redirect('advertisement/add_advertisement_details/'.$id.'/'.$category_id.'',$datas);
 	     }else if($sta=="Already Exist"){
 	     	 $this->session->set_flashdata('msg','Already Exist');
-		     redirect('advertisement/add_advertisement_details/'.$event_id.'/'.$category_id.'',$datas);
+		    redirect('advertisement/add_advertisement_details/'.$id.'/'.$category_id.'',$datas);
 	     }else{
 	     	 $this->session->set_flashdata('msg','Faild To Add');
-		     redirect('advertisement/add_advertisement_details/'.$event_id.'/'.$category_id.'',$datas);
+		     redirect('advertisement/add_advertisement_details/'.$id.'/'.$category_id.'',$datas);
 	     }
 
     }
@@ -314,17 +314,21 @@ class Advertisement extends CI_Controller
 
 	     $datas = $this->advertisementmodel->aupdate_advertisement_plan_history($id,$event_id,$category_id,$start_date,$end_date,$start_time,$end_time,$adv_plan,$status,$user_id);
 	     $sta=$datas['status'];
-      
+         
+         $eid = str_replace(' ','',$event_id);
+	     $ecategory_id = str_replace(' ','',$category_id);
+
+
         if($sta=="success"){
 	       $this->session->set_flashdata('msg','Updated Successfully');
 	       //redirect('examinationresult/exam_mark_details?var1='.$clsmastid.'&var2='.$exam_id.'',$datas);
-		   redirect('advertisement/add_advertisement_details/'.$event_id.'/'.$category_id.'',$datas);
+		   redirect('advertisement/add_advertisement_details/'.$eid.'/'.$ecategory_id.'',$datas);
 	     }else if($sta=="Already Exist"){
 	     	 $this->session->set_flashdata('msg','Already Exist');
-		     redirect('advertisement/add_advertisement_details/'.$event_id.'/'.$category_id.'',$datas);
+		     redirect('advertisement/add_advertisement_details/'.$eid.'/'.$ecategory_id.'',$datas);
 	     }else{
 	     	 $this->session->set_flashdata('msg','Faild To Update');
-		     redirect('advertisement/add_advertisement_details/'.$event_id.'/'.$category_id.'',$datas);
+		     redirect('advertisement/add_advertisement_details/'.$eid.'/'.$ecategory_id.'',$datas);
 	     }
 
     }

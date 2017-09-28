@@ -32,7 +32,7 @@
          </button>
          </li>
          <li class="hide-phone list-inline-item app-search">
-         <h3 class="page-title">View Advertisement List</h3>
+         <h3 class="page-title">View Users List</h3>
          </li>
          </ul>
          <div class="clearfix"></div>
@@ -63,47 +63,44 @@
                             <table  id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                         <tr>
-                           <th>S.NO</th>
-                            <th>Event Name</th>
-                            <th>Event Category</th>
-                            <th>Event City</th>
+                            <th>S.NO</th>
+                            <th>UserName</th>
+                            <th>Name</th>
+                            <th>City</th>
+                            <th>Points</th>
+                            <th>Promo</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <?php $i=1;
-                           foreach($result as $rows){ 
-                           $eid=$rows->id;
-                           $adv_sts=$rows->adv_status;
-                           $etype=$rows->event_type;
-                          if($adv_sts=='Y'){ 
-                             ?>
+                        <?php 
+                           $i=1;
+                           foreach($users_view as $rows){ 
+                           $sts=$rows->status; 
+                           $uid=$rows->user_id;  
+                              ?>
                         <tr>
-                            <td><?php echo $i ; ?></td>
-                            <td><?php echo $rows->event_name ; ?></td>
-                            <td><?php echo $rows->category_name ; ?></td>
+                            <td><?php echo $i; ?></td>
+                            <td><?php echo $rows->user_name ; ?></td>
+                            <td><?php echo $rows->name ; ?></td>
                             <td><?php echo $rows->city_name ; ?></td>
+                            <td><?php echo $rows->total_count ; ?></td>
+                            <td></td>
+                            <td><?php if($sts=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
                             <td>
-                             <a href="<?php echo base_url();?>events/edit_events/<?php echo $rows->id;?>">
+                             <a href="<?php echo base_url();?>users/edit/<?php echo $rows->id;?>">
                               <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
 
-                             <a href="<?php echo base_url();?>events/view_single_events/<?php echo $rows->id;?>">
-                              <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a>
+                             <!--a href="<?php echo base_url();?>users/view_single_events/<?php echo $rows->id;?>">
+                              <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a-->
 
-                              <a href="<?php echo base_url();?>events/delete_events/<?php echo $rows->id;?>">   
+                              <a href="<?php echo base_url();?>users/delete/<?php echo $rows->id;?>/<?php echo $rows->user_id; ?>">   
                               <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
-
-                              <?php if($etype=='Paid'){?>
-                              <a href="<?php echo base_url();?>advertisement/add_advertisement_details/<?php echo $rows->id;?>/<?php echo $rows->category_id;?>">
-                              <img title="Add Advertisement Details" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
-                              <?php $i++; } ?>
-
-                              <!--a href="<?php echo base_url();?>events/add_events_gallery/<?php echo $rows->id;?>">   
-                              <img title="Add Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/></a-->
 
                             </td>
                         </tr>
-                       <?php } } ?>
+                       <?php $i++; }  ?>
                         </tbody>
                     </table>
                         </div>

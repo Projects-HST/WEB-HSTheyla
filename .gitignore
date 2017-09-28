@@ -27,6 +27,9 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.stTheme.cache
 *.sublime-workspace
 *.sublime-project
+heyla(Them)/ui-modals.html
+heyla(Them)/ui-lightbox.html
 *.html
-*.html
-*.svg
+assets/images/users/avatar-1.jpg
+assets/images/users/avatar-2.jpg
+assets/images/users/avatar-6.jpg

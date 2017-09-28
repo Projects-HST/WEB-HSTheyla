@@ -83,7 +83,7 @@ function getall_adv_plans()
 
 function add_advertisement_plan_history($event_id,$category_id,$start_date,$end_date,$start_time,$end_time,$adv_plan,$status,$user_id)
 {   
-	$check="SELECT * FROM adv_event_history WHERE event_id='$event_id' AND category_id='$category_id' AND date_from='$start_date' AND date_to='$end_date' AND time_from='$start_time' AND time_to='$end_time' AND adv_plan_id='$adv_plan' ";
+	 $check="SELECT * FROM adv_event_history WHERE event_id='$event_id' AND category_id='$category_id' AND date_from='$start_date' AND date_to='$end_date' AND time_from='$start_time' AND time_to='$end_time' AND adv_plan_id='$adv_plan' ";
     $result=$this->db->query($check);
     if($result->num_rows()==0)
     {

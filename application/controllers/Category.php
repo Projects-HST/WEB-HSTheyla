@@ -44,8 +44,9 @@ class Category extends CI_Controller
 
         //echo $categoryname; echo $status;
 
-	    $category_pic=$_FILES['categorypic']['name']; 
-		$categorypic1=$category_pic;
+	    $category_pic=$_FILES['categorypic']['name'];
+	    $file_name = time().rand(1,5).rand(6,10); 
+		$categorypic1=$file_name.$category_pic;
 		$uploaddir='assets/category/';
 		$profilepic=$uploaddir.$categorypic1;
 		move_uploaded_file($_FILES['categorypic']['tmp_name'],$profilepic);
@@ -98,7 +99,8 @@ class Category extends CI_Controller
 
 
 	    $category_pic=$_FILES['categorypic']['name']; 
-		$categorypic1=trim($category_pic);
+	    $file_name = time().rand(1,5).rand(6,10); 
+		$categorypic1=$file_name.$category_pic;
 		$uploaddir='assets/category/';
 		$profilepic=$uploaddir.$categorypic1;
 		move_uploaded_file($_FILES['categorypic']['tmp_name'],$profilepic);

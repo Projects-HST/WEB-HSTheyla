@@ -104,40 +104,36 @@
                 <li class="has_sub">
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-clipboard-outline"></i><span> Reviews   </span></a>
                     <ul class="list-unstyled">
-                        <li><a href="<?php echo base_url();?>reviews/view_reviews ">Event Pending Reviews</a></li>
-                        <li><a href="<?php echo base_url();?>reviews/archive_reviews ">Archive Reviews</a></li>
+                        <li><a href="<?php echo base_url();?>reviews/view_reviews">Event Pending Reviews</a></li>
+                        <li><a href="<?php echo base_url();?>reviews/archive_reviews">Archive Reviews</a></li>
                     </ul>
                 </li>
 
                 <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-chart-line"></i><span> Users </span></a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-chart-line"></i><span> Booking </span></a>
                     <ul class="list-unstyled">
-                        <li><a href="#">Morris Chart</a></li>
-                        <li><a href="#">Chartist Chart</a></li>
-                        <li><a href="#">Chartjs Chart</a></li>
+                        <li><a href="<?php echo base_url();?>bookinghistory/home">History</a></li>
+                        <li><a href="<?php echo base_url();?>bookinghistory/process_details">Process</a></li>
+                        <li><a href="<?php echo base_url();?>bookinghistory/status_details">Status</a></li>
                     </ul>
                 </li>
 
                 <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-format-list-bulleted-type"></i><span> NewsLetter </span></a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-format-list-bulleted-type"></i><span> User Management</span></a>
                     <ul class="list-unstyled">
-                        <li><a href="#">NewsLetter Templates</a></li>
-                        <li><a href="#">Send NewsLetter</a></li>
+                        <li><a href="<?php echo base_url();?>users/home">User Creation</a></li>
+                        <li><a href="<?php echo base_url();?>users/view">View Users Details</a></li>
+                        <li><a href="<?php echo base_url();?>users/view_followers">View Users Followers Details</a></li>
                     </ul>
                 </li>
 
                 <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-google-maps"></i><span> Notification </span></a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-google-maps"></i><span> Newsletter </span></a>
                     <ul class="list-unstyled">
                         <li><a href="#"> Google Map</a></li>
                     </ul>
                 </li>
 
-                <li>
-                    <a href="#" class="waves-effect"><i class="mdi mdi-calendar-check"></i><span> Booking Status </span></a>
-                </li>
-
-                
             </ul>
         </div>
         <div class="clearfix"></div>

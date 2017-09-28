@@ -52,7 +52,7 @@
                             <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Plan Name </label>
                               <div class="col-sm-6">
-                                 <input class="form-control" type="text" name="planname" value="<?php echo $res->plan_name ;?>" id="example-text-input">
+                                 <input class="form-control" type="text" name="planname" value="<?php echo $res->plan_name ;?>" >
                            <input class="form-control"  type="hidden" name="event_id" value="<?php echo $res->event_id ;?>">
                            <input class="form-control"  type="hidden" name="plan_id" value="<?php echo $res->id ;?>">
                               </div>
@@ -61,14 +61,14 @@
                             <div class="form-group row">
                               <label for="example-text-input" class="col-sm-4 col-form-label">Available Seats </label>
                               <div class="col-sm-6">
-                                 <input class="form-control"  type="text" name="seats" value="<?php echo $res->seat_available ;?>" id="example-text-input">
+                                 <input class="form-control"  type="text" name="seats" value="<?php echo $res->seat_available ;?>" >
                               </div>
                            </div>
 
                            <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Amount </label>
                               <div class="col-sm-6">
-                                 <input class="form-control"  type="text" name="amount"  value="<?php echo $res->seat_rate ;?>" id="example-text-input">
+                                 <input class="form-control"  type="text" name="amount"  value="<?php echo $res->seat_rate ;?>" >
                               </div>
                            </div>
                            <div class="form-group">

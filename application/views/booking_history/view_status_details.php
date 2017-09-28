@@ -32,7 +32,7 @@
          </button>
          </li>
          <li class="hide-phone list-inline-item app-search">
-         <h3 class="page-title">Add Users</h3>
+         <h3 class="page-title">View Booking Status Details</h3>
          </li>
          </ul>
          <div class="clearfix"></div>
@@ -41,49 +41,11 @@
       <!-- Top Bar End -->
       <div class="page-content-wrapper">
          <div class="container">
-
-            <div class="row">
-               <div class="col-lg-8">
-                  <div class="card m-b-20">
-                     <div class="card-block">
-                        <h4 class="mt-0 header-title"></h4>
-                       
-                        <form class="" method="post" action="<?php echo base_url();?>userrole/add_users" id="usersform" name="usersform">
-                           <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-4 col-form-label">User Name</label>
-                              <div class="col-sm-6">
-                                 <input class="form-control" type="text"  name="username" value="" id="example-text-input">
-                              </div>
-                           </div>
-                           <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Status</label>
-                              <div class="col-sm-6">
-                                 <select class="form-control"  name="usersts">
-                                    <option value="">Select  Status</option>
-                                    <option value="Y">Yes</option>
-                                    <option value="N">No</option>
-                                 </select>
-                              </div>
-                           </div>
-                           <div class="form-group">
-                              <label class="col-sm-4 col-form-label"></label>
-                              <button type="submit" class="btn btn-primary waves-effect waves-light">
-                              Submit </button>
-                              <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                              Reset
-                              </button>
-                           </div>
-                     </div>
-                     </form>
-                  </div>
-               </div>
-            </div>
-            <!-- end row -->
             <div class="row">
                <div class="col-12">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title">View All Users</h4>
+                        <h4 class="mt-0 header-title"></h4>
                         
                            <?php if($this->session->flashdata('msg')): ?>
                         <div class="alert alert-success">
@@ -96,30 +58,28 @@
                            <thead>
                               <tr>
 							                   <th>S.NO</th>
-                                 <th>User Name</th>
-                                 <th>Status</th>
+                                 <th>Order Status</th>
+                                 <th>Payment Mode</th>
+                                 <th>Status Message</th>
+                                 <th>Amount</th>
                                  <th>Action</th>
                               </tr>
                            </thead>
                            <tbody>
 						    <?php
                                 $i=1;
-                                foreach($result as $rows) {
-									                  $status=$rows->status;
-                                    $uid=$rows->id;
+                                foreach($status as $rows) {
                                 ?>
                               <tr>
-                                  <td><?php  echo $i; ?></td>
-                                  <td><?php  echo $rows->user_role_name; ?></td>
-                                  <td>
-                                    <?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
-								                  <td>
-                                    <a href="<?php echo base_url();?>userrole/edit_users/<?php echo $rows->id;?>"><img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
-                                    <?php if($uid!=1){ ?>
-                                 <a href="<?php echo base_url();?>userrole/delete_users/<?php echo $rows->id;?>">   
-                                <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
-                                <?php } ?>
-                                  </td>
+                                 <td><?php echo $i; ?></td>
+                                 <td><?php echo $rows->order_status; ?></td>
+                                 <td><?php echo $rows->payment_mode; ?></td>
+                                 <td><?php echo $rows->status_message; ?></td>
+                                 <td><?php echo $rows->amount; ?></td>
+                                 <td>
+                                  <a href="<?php echo base_url();?>bookinghistory/view_payment_details/<?php echo $rows->id;?>">
+                                  <img title="View Attendees" src="<?php echo base_url();?>assets/icons/view.png" /> </a>
+                                </td>
                               </tr>
                              <?php $i++;  }  ?>
                            </tbody>
@@ -134,24 +94,20 @@
 		   <!-- container -->
       </div>
      <!-- Page content Wrapper -->
-   </div>
-    <!-- Top Bar Start -->
 </div>
 <!-- content -->
 <script type="text/javascript">
  $(document).ready(function () {
-    $('#usersform').validate({ // initialize the plugin
+    $('#countryform').validate({ // initialize the plugin
        rules: {
-         username:{required:true },
-         //categorypic:{required:true },
-         usersts:{required:true }
-        
+         countryname:{required:true },
+         eventsts:{required:true }
         },
         messages: {
-        username:"Enter User Name",
-        //categorypic:"Select Category Picture",
-        usersts:"Select Status"
+        countryname:"Enter Country Name",
+        eventsts:"Select Status"
                },
          }); 
    });
- </script>
+  
+</script>
