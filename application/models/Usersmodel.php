@@ -110,5 +110,5 @@ Class Usersmodel extends CI_Model
         $folres=$vfollowers1->result();
         return $folres;
     }
-
+   
 }?>

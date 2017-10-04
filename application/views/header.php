@@ -124,6 +124,8 @@
                         <li><a href="<?php echo base_url();?>users/home">User Creation</a></li>
                         <li><a href="<?php echo base_url();?>users/view">View Users Details</a></li>
                         <li><a href="<?php echo base_url();?>users/view_followers">View Users Followers Details</a></li>
+                        <li><a href="<?php echo base_url();?>guestuser/home">Guest user Details</a></li>
+
                     </ul>
                 </li>
 
