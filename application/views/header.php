@@ -132,7 +132,8 @@
                 <li class="has_sub">
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-google-maps"></i><span> Newsletter </span></a>
                     <ul class="list-unstyled">
-                        <li><a href="#"> Google Map</a></li>
+                        <li><a href="<?php echo base_url();?>emailtemplate/home"> Newsletter Template</a></li>
+                        <li><a href="<?php echo base_url();?>emailtemplate/select_users"> Send Newsletter </a></li>
                     </ul>
                 </li>
 

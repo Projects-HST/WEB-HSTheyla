@@ -49,7 +49,7 @@
                      <div class="card-block">
                         <h4 class="mt-0 header-title"></h4>
                         <?php foreach($edit as $res){ }?>
-                        <form class="" method="post" action="<?php echo base_url();?>city/update_city" id="cityform" name="cityform">
+                        <form class="" method="post" action="<?php echo base_url();?>city/update_city" id="cityform" name="cityform" onSubmit='return check();'>
                            
                            <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Country Name</label>
@@ -91,6 +91,21 @@
                               </div>
                            </div>
                            <div class="form-group row">
+                           
+                            <label for="latitude" class="col-sm-4 col-form-label">Event Latitude</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" type="text" name="txtLatitude"  id="lat" value="<?php echo $res->city_latitude; ?>">
+                                <div id="ermsg"></div> <div id="ermsg2"></div>
+                            </div>
+                          </div>
+                           <div class="form-group row">
+                              <label for="longitude" class="col-sm-4 col-form-label">Event Longitude</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" type="text" name="txtLongitude" id="lng" value="<?php echo $res->city_longitude; ?>">
+                                 <div id="ermsg1"></div> <div id="ermsg3"></div>
+                            </div>
+                        </div>
+                           <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Event Status</label>
                               <div class="col-sm-6">
                                  <select class="form-control"  name="eventsts">
@@ -128,19 +143,57 @@
          countryid:{required:true },
          stateid:{required:true },
          cityname:{required:true },
-         eventsts:{required:true }
+         eventsts:{required:true },
+         txtLatitude:{required:true },
+         txtLongitude:{required:true }
         
         },
         messages: {
         countryid:"Select Country Name",
         stateid:"Select State Name",
         cityname:"Enter City Name",
-        eventsts:"Select Status"
+        eventsts:"Select Status",
+        txtLatitude:"Enter Latitude",
+        txtLongitude:"Enter Longitude",
                },
          }); 
    });
 
+function check()
+{
+if(document.cityform.txtLatitude.value!="")
+    {
+            sLatitude = document.cityform.txtLatitude.value
+            if(isNaN(sLatitude) || sLatitude.indexOf(".")<0)
+            {
+                $("#ermsg2").html('<p style="color:red;">Please enter valid Latitude.</p>').show();
+                $("#ermsg").hide();
+                //alert ("Please enter valid Latitude.")
+                document.cityform.txtLatitude.focus();
+                return false;
+            }else{
+                 $("#ermsg").hide();
+                 $("#ermsg2").hide();
+            }
+    }
 
+    if(document.cityform.txtLongitude.value!="")
+    {
+            sLongitude = document.cityform.txtLongitude.value
+            
+            if(isNaN(sLongitude) || sLongitude.indexOf(".")<0)
+            {
+                //alert ("Please enter valid Longitude.")
+                 $("#ermsg3").html('<p style="color: red;">Please enter valid Longitude.</p>').show();
+                 $("#ermsg1").hide();
+                document.cityform.txtLongitude.focus();
+                return false;
+            }else{
+                 $("#ermsg1").hide();
+                 $("#ermsg3").hide();
+            }
+    }
+  }
  function getstatename(cid) {
            //alert(cid);
             $.ajax({

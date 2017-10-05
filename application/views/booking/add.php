@@ -55,7 +55,7 @@
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-4 col-form-label">Available Seats </label>
+                              <label for="example-text-input" class="col-sm-4 col-form-label">Available Seats</label>
                               <div class="col-sm-6">
                                  <input class="form-control"  type="text" name="seats" >
                               </div>

@@ -1,5 +1,4 @@
 <?php
-
 Class Guestusermodel extends CI_Model
 { 
 
@@ -34,7 +33,6 @@ Class Guestusermodel extends CI_Model
     return $res1;
 
     }
-
 
 }
 ?>

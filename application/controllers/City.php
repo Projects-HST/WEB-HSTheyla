@@ -45,7 +45,10 @@ class City extends CI_Controller
 	     $cityname=$this->input->post("cityname");
 	     $estatus=$this->input->post("eventsts");
 
-	     $datas=$this->citymodel->insert_city_details($countryid,$stateid,$cityname,$estatus,$user_id,$user_role);
+	     $txtLatitude=$this->input->post("txtLatitude");
+	     $txtLongitude=$this->input->post("txtLongitude");
+
+	     $datas=$this->citymodel->insert_city_details($countryid,$stateid,$cityname,$txtLatitude,$txtLongitude,$estatus,$user_id,$user_role);
          $sta=$datas['status'];
 	     //print_r($sta);exit;
 	     if($sta=="success"){
@@ -95,12 +98,13 @@ class City extends CI_Controller
         $cityname=$this->input->post("cityname");
         $cityid=$this->input->post("cityid");
 	    $estatus=$this->input->post("eventsts");
-
+         $txtLatitude=$this->input->post("txtLatitude");
+	     $txtLongitude=$this->input->post("txtLongitude");
 	    // if(empty($newstateid)){
      //     $stateid=$stateid;
 	    // }else{ $stateid=$newstateid; }
 
-	    $datas=$this->citymodel->update_city_details($countryid,$stateid,$cityname,$cityid,$estatus,$user_id,$user_role);
+	    $datas=$this->citymodel->update_city_details($countryid,$stateid,$cityname,$txtLatitude,$txtLongitude,$cityid,$estatus,$user_id,$user_role);
         $sta=$datas['status'];
 	     //print_r($sta);exit;
 	     if($sta=="success"){
