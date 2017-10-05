@@ -23,7 +23,7 @@ class Logincontroller extends CI_Controller {
 				print_r($datas);
 				// echo $user_role;
 			}else{
-				$this->load->view('login');
+				$this->load->view('Login');
 			}
 
 

@@ -147,13 +147,12 @@
                           if(empty($search_view))
                           {
                            foreach($view as $rows) { ?>
-
                             <tr>
                                <td><?php  echo $i; ?></td>
                                <td><input type="checkbox" name="email[]" id="sendmail" class="checkbox check" value="<?php  echo $rows->email_id; ?>"></td>
                                <td><?php  echo $rows->email_id; ?></td>
                             </tr>
-                       <?php $i++;  } }else{ 
+                           <?php $i++;  } }else{ 
                              foreach($search_view as $res) { ?>
                             <tr>
                                <td><?php  echo $i; ?></td>
@@ -188,15 +187,13 @@
                   </div>
                <div class="modal-body">
                <form method="post" action="<?php echo base_url();?>emailtemplate/send_email" >
-                
-                 <select class="form-control" required="" name="email_temp_id" id="email_temp_id" style="margin-bottom:05%;" >
+            <select class="form-control" required="" name="email_temp_id" id="email_temp_id" style="margin-bottom:05%;" >
                   <option value="">Select Templates</option>
                     <?php foreach($email_tem as $temp){ ?>
                         <option value="<?php echo $temp->id; ?>"><?php echo $temp->template_name; ?></option>
                      <?php } ?>
                   </select>
                 <input type="hidden" id="emails_id" name="usersemailid" class="form-control"/>
-                 
                   <div class="col-md-6 col-lg-6 col-xl-3">
                   <!--div class="mini-stat clearfix bg-primary"-->
                      <button type="submit" class="btn btn-primary waves-effect waves-light">

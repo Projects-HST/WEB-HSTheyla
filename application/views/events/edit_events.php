@@ -112,14 +112,19 @@
                             </div>
                              <label for="city" class="col-sm-2 col-form-label">Select City</label>
                             <div class="col-sm-4">
-                              <input class="form-control" type="text" id="cityid" value="<?php echo $rows->city_name; ?>" required="" >
-                               <input class="form-control" type="hidden" name="oldcityid" value="<?php echo $rows->event_city; ?>">
-                               <div style="display:none;" id="new">
-                               <select class="form-control" name="city" id="ctname">
-                                <!--option value="<?php echo $rows->event_city; ?>"><?php echo $rows->city_name; ?></option-->
+                              <select class="form-control" name="city" id="ctname">
+                              <?php 
+                                $cntyrid=$rows->event_country;
+                                $sql="SELECT id,city_name FROM city_master WHERE country_id='$cntyrid' AND event_status='Y' ORDER BY id ASC";
+                                $resu=$this->db->query($sql);
+                                $res=$resu->result();
+                                foreach ($res as $value) { ?>
+                                <option value="<?php echo $value->id; ?>"><?php echo $value->city_name; ?></option>
+                                <?php } ?>
                                 </select>
+                                <script language="JavaScript">document.eventform.city.value="<?php echo $rows->event_city; ?>";</script>
                                  <div id="cmsg"></div>
-                               </div>
+                             
                             </div>
                         </div>
                         <div class="form-group row">
@@ -395,8 +400,6 @@ $(document).ready(function () {
                   }
                   $("#ctname").html(cityname).show();
                   $("#cmsg").hide();
-                  $("#cityid").hide();
-                  $("#new").show();
                   }else{
                   $("#cmsg").html('<p style="color: red;">City Not Found</p>').show();
                   $("#ctname").hide();

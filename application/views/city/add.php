@@ -264,7 +264,7 @@ if(document.cityform.txtLatitude.value!="")
                   $("#staname").html(statename).show();
                   $("#msg").hide();
                   }else{
-                  $("#msg").html('<p style="color: red;">Stata Name Not Found</p>').show();
+                  $("#msg").html('<p style="color: red;">State Name Not Found</p>').show();
                   $("#staname").hide();
                  }
             }

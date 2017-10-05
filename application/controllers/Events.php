@@ -163,7 +163,7 @@ class Events extends CI_Controller
 	    $datas['category_list'] = $this->eventsmodel->getall_category_list();
 	    $datas['city_list'] = $this->eventsmodel->getall_city_list();
 	    $datas['edit'] = $this->eventsmodel->edit_events_details($id);
-         //echo '<pre>'; print_r($datas['edit']); exit;
+        //echo '<pre>'; print_r($datas['city_list']); exit;
         if($user_role==1)
 		{
 		  $this->load->view('header');
@@ -188,8 +188,7 @@ class Events extends CI_Controller
         $country=$this->input->post('country');
 
         $city=$this->input->post('city');
-        $oldcityid=$this->input->post('oldcityid');
-
+        
         $venue=$this->input->post('venue');
         $address=$this->db->escape_str($this->input->post('address'));
         $description=$this->db->escape_str($this->input->post('description'));
@@ -240,11 +239,7 @@ class Events extends CI_Controller
          	$event_banner=$event_banner;
          }
 
-         if(empty($city)){
-           $city=$oldcityid;
-         }else{
-         	$city=$city;
-         }
+         
 
         $datas=$this->eventsmodel->update_events_details($eventid,$event_name,$category,$country,$city,$venue,$address,$description,$eventcost,$start_date,$end_date,$start_time,$end_time,$txtLatitude,$txtLongitude,$pcontact_cell,$scontact_cell,$contact_person,$email,$event_banner,$colour_scheme,$event_status,$eadv_status,$booking_sts,$hotspot_sts,$user_id,$user_role);
         $sta=$datas['status'];
