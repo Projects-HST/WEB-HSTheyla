@@ -35,7 +35,7 @@ public function __construct()
 		$result=$this->db->query($check_city);
 		if($result->num_rows()==0)
 		 {
-		    $query="INSERT INTO city_master(country_id,state_id,city_name,city_latitude,city_longitude,event_status,created_by,created_at) VALUES ('$countryid','$stateid','$cityname','$txtLatitude','$txtLongitude',$estatus','$user_id',NOW())";
+		    $query="INSERT INTO city_master(country_id,state_id,city_name,city_latitude,city_longitude,event_status,created_by,created_at) VALUES ('$countryid','$stateid','$cityname','$txtLatitude','$txtLongitude','$estatus','$user_id',NOW())";
 		    $resultset=$this->db->query($query);
 		    $data= array("status"=>"success");
 		    return $data;

@@ -129,7 +129,7 @@
                         <label id="user"><input type="checkbox" class="checkbox" id="checkAll" style="display: inline;" />&nbsp;Check All
                          <!--div class="text-center">
                             < Large modal >
-                            <button type="button" data-toggle="modal"  id="sendAll" data-target="#addmodel" class="btn btn-primary waves-effect waves-light" >Send To All</button-->
+                            <button type="button" data-toggle="modal" id="sendAll" data-target="#addmodel" class="btn btn-primary waves-effect waves-light" >Send To All</button-->
                              <button type="button" id="sendSelectedBtn" data-toggle="modal" data-target="#addmodel" class="btn btn-primary waves-effect waves-light" >Send To Eamil</button>
                         <!--/div-->
                       </label>
@@ -225,17 +225,19 @@
  $(document).on("click", "#sendSelectedBtn", function () 
        {   
         if($('input[name="email[]"]:checked').length > 0) {
-           var selected_value=[]; // initialize empty array 
+           var selected_value=[]; //initialize empty array 
            $('#sendmail:checked').each(function()
            {
             selected_value.push($(this).val());
            });
-        $(".modal-body #emails_id").val(selected_value);
-        //$("#user").hide();
-       // $('#addmodel').modal();
-      }else {
+         $(".modal-body #emails_id").val(selected_value);
+           //$("#user").hide();
+          $('#addmodel').modal();
+
+      }else{
             alert('Please select any one user');
-            // $("#user").html('<p style="color:red;">Please select users</p>');
+            return false;
+            //$("#user").html('<p style="color:red;">Please select users</p>');
             }
    });
 
