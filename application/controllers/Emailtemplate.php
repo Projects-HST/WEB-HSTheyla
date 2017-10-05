@@ -8,6 +8,7 @@ class Emailtemplate extends CI_Controller
 		  parent::__construct();
 		  $this->load->model('emailtemplatemodel');
 		  $this->load->model('citymodel');
+		  $this->load->model('mailmodel');
 		  $this->load->helper('url');
 		  $this->load->library('session');
        }
@@ -173,6 +174,31 @@ class Emailtemplate extends CI_Controller
 		//echo $classid;exit;
 		$data['res']=$this->emailtemplatemodel->get_city_name($country_id);
 		echo json_encode( $data['res']);
+	}
+
+	public function send_email()
+	{
+		$datas=$this->session->userdata();
+	    $user_id=$this->session->userdata('id');
+	    $user_role=$this->session->userdata('user_role');
+        if($user_role==1)
+		{
+	        $email_temp_id=$this->input->post('email_temp_id');
+	        $usersemailid=$this->input->post('usersemailid');
+	        //echo $email_temp_id; echo $usersemailid; exit; 
+	        $datas['res']=$this->mailmodel->send_mail_to_users($usersemailid,$email_temp_id);
+	        $sts=$datas['status'];
+	        //print_r($sts);exit;
+	        if($sta=="success"){
+		       $this->session->set_flashdata('msg','Send Successfully');
+			   redirect('emailtemplate/select_users');
+		    }else{
+		     	 $this->session->set_flashdata('msg','Faild To Send');
+			     redirect('emailtemplate/select_users');
+		    }
+	    }else{
+	    	redirect('/');
+	    }
 	}
 
 }

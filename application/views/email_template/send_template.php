@@ -115,48 +115,53 @@
           </div>
          <?php } ?>
            </form>
-
+               <?php if($this->session->flashdata('msg')): ?>
+                        <div class="alert alert-success">
+                           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                           ×</button> <?php echo $this->session->flashdata('msg'); ?>
+                        </div>
+                        <?php endif; ?>
             <div class="row">
                <div class="col-12">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <label><input type="checkbox" class="checkbox" id="checkAll" style="display: inline;" />&nbsp;Check All
-                         <!--div class="text-center">
-                            < Large modal -->
-                            <button type="button" data-toggle="modal" data-target="#addmodel" class="btn btn-primary waves-effect waves-light" >Send To All</button>
 
-                             <button type="button" data-toggle="modal" data-target="#addmodel" class="btn btn-primary waves-effect waves-light" >Send To Selected</button>
+                        <label id="user"><input type="checkbox" class="checkbox" id="checkAll" style="display: inline;" />&nbsp;Check All
+                         <!--div class="text-center">
+                            < Large modal >
+                            <button type="button" data-toggle="modal"  id="sendAll" data-target="#addmodel" class="btn btn-primary waves-effect waves-light" >Send To All</button-->
+                             <button type="button" id="sendSelectedBtn" data-toggle="modal" data-target="#addmodel" class="btn btn-primary waves-effect waves-light" >Send To Eamil</button>
                         <!--/div-->
                       </label>
                         <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                           <thead>
-                              <tr>
-							                  <th>S.NO</th>
-                                <th>#</th>
-                               <th>Email</th>
-                              </tr>
-                           </thead>
-                           <tbody>
-						                <?php
-                                $i=1;
-                                if(empty($search_view))
-                                {
-                                 foreach($view as $rows) { ?>
-                                  <tr>
-                                     <td><?php  echo $i; ?></td>
-                                     <td><input type="checkbox" name="email[]" class="checkbox check" value="<?php  echo $rows->email_id; ?>')"></td>
-                                     <td><?php  echo $rows->email_id; ?></td>
-                                  </tr>
-                             <?php $i++;  } }else{ 
-                                   foreach($search_view as $res) { ?>
-                                  <tr>
-                                     <td><?php  echo $i; ?></td>
-                                     <td><input type="checkbox" name="email[]" class="checkbox check" value="<?php  echo $res->email_id; ?>')"></td>
-                                     <td><?php  echo $res->email_id; ?></td>
-                                  </tr>
-                             <?php $i++;  } }?>
-                           
-                           </tbody>
+                      <thead>
+                        <tr>
+                          <th>S.NO</th>
+                          <th>#</th>
+                          <th>Email</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+				                <?php
+                          $i=1;
+                          if(empty($search_view))
+                          {
+                           foreach($view as $rows) { ?>
+
+                            <tr>
+                               <td><?php  echo $i; ?></td>
+                               <td><input type="checkbox" name="email[]" id="sendmail" class="checkbox check" value="<?php  echo $rows->email_id; ?>"></td>
+                               <td><?php  echo $rows->email_id; ?></td>
+                            </tr>
+                       <?php $i++;  } }else{ 
+                             foreach($search_view as $res) { ?>
+                            <tr>
+                               <td><?php  echo $i; ?></td>
+                               <td><input type="checkbox" name="email[]" id="sendmail" class="checkbox check" value="<?php  echo $res->email_id; ?>"></td>
+                               <td><?php  echo $res->email_id; ?></td>
+                            </tr>
+                       <?php $i++;  } }?>
+                     </tbody>
                         </table>
                      </div>
                   </div>
@@ -178,14 +183,28 @@
                <!-- Modal content-->
                <div class="modal-content">
                    <div class="modal-header">
-                      <h5 class="modal-title mt-0" id="myLargeModalLabel">Large modal</h5>
+                      <h5 class="modal-title mt-0" id="myLargeModalLabel">Email Templates</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                   </div>
                <div class="modal-body">
-                   <?php foreach($email_tem as $temp){ ?> <p>
-                     <?php echo $temp->template_name; ?>
-                     <input type="hidden" name="tmpid" value="<?php echo $temp->id; ?>">
-                   </p> <?php } ?>
+               <form method="post" action="<?php echo base_url();?>emailtemplate/send_email" >
+                
+                 <select class="form-control" required="" name="email_temp_id" id="email_temp_id" style="margin-bottom:05%;" >
+                  <option value="">Select Templates</option>
+                    <?php foreach($email_tem as $temp){ ?>
+                        <option value="<?php echo $temp->id; ?>"><?php echo $temp->template_name; ?></option>
+                     <?php } ?>
+                  </select>
+                <input type="hidden" id="emails_id" name="usersemailid" class="form-control"/>
+                 
+                  <div class="col-md-6 col-lg-6 col-xl-3">
+                  <!--div class="mini-stat clearfix bg-primary"-->
+                     <button type="submit" class="btn btn-primary waves-effect waves-light">
+                      Send </button>
+                      
+                  <!--/div-->
+              </div>
+            </form>
                 </div>
                </div>
             </div>
@@ -198,23 +217,41 @@
  $(document).ready(function () {
    $('#checkAll:checkbox').change(function() {
             $("input:checkbox").prop('checked', $(this).prop("checked"));
-        });
+           // var selected_value=[]; // initialize empty array 
+           // $('#sendmail:checked').each(function(){
+           //  selected_value.push($(this).val());
+           // });
+           // console.log(selected_value);
+            });
+     });
+
+ $(document).on("click", "#sendSelectedBtn", function () 
+       {   
+        if($('input[name="email[]"]:checked').length > 0) {
+           var selected_value=[]; // initialize empty array 
+           $('#sendmail:checked').each(function()
+           {
+            selected_value.push($(this).val());
+           });
+        $(".modal-body #emails_id").val(selected_value);
+        //$("#user").hide();
+       // $('#addmodel').modal();
+      }else {
+            alert('Please select any one user');
+            // $("#user").html('<p style="color:red;">Please select users</p>');
+            }
    });
 
- $("#sendSelectedBtn").click(function() {
-            if($('input[name="email[]"]:checked').length > 0) {
-               // $('#sendEmail').val('sendSelected');
-                $('#email_modal').modal();
-            }
-            else {
-                alert('Please select any one user');
-            }
-        });
-
-        $("#sendAllBtn").click(function() {
-            //$('#sendEmail').val('sendAll');
-            $('#email_modal').modal();
-        });
+      // $(document).on("click","#sendAll", function () 
+      //  { 
+      //   var all_value=[]; // initialize empty array 
+      //      $('#sendmail:unchecked').each(function()
+      //      {
+      //       all_value.push($(this).val());
+      //      });
+      //   $(".modal-body #emails_id").val(all_value);
+      //   //$('#addmodel').modal();
+      //   });
   
   function getstatename(cid) {
            //alert(cid);
