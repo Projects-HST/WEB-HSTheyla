@@ -52,6 +52,9 @@ class Booking extends CI_Controller
         if($sta=="success"){
 	       $this->session->set_flashdata('msg','Added Successfully');
 		   redirect('booking/home/'.$eventid.'');
+	     }else if($sta=="AE"){
+	     	 $this->session->set_flashdata('msg','Already Exist');
+		     redirect('booking/home/'.$eventid.'');
 	     }else{
 	     	 $this->session->set_flashdata('msg','Faild To Add');
 		     redirect('booking/home/'.$eventid.'');

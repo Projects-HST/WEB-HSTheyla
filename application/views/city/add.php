@@ -77,7 +77,7 @@
                             <div class="form-group row">
                               <label for="example-text-input" class="col-sm-4 col-form-label">City Name</label>
                               <div class="col-sm-6">
-                                 <input class="form-control"  type="text" name="cityname" id="example-text-input">
+                                 <input class="form-control"  type="text" id="cityid" name="cityname" id="example-text-input">
                               </div>
                            </div>
 
@@ -110,9 +110,9 @@
                            </div>
                            <div class="form-group">
                               <label class="col-sm-4 col-form-label"></label>
-                              <button type="submit" class="btn btn-primary waves-effect waves-light">
+                              <button type="submit" id="save" class="btn btn-primary waves-effect waves-light">
                               Submit </button>
-                              <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                              <button type="reset" id="save1" class="btn btn-secondary waves-effect m-l-5">
                               Reset
                               </button>
                            </div>
@@ -263,16 +263,19 @@ if(document.cityform.txtLatitude.value!="")
                   }
                   $("#staname").html(statename).show();
                   $("#msg").hide();
+                  $("#cityid").show();
+                  $("#save").show();
+                  $("#save1").show();
                   }else{
                   $("#msg").html('<p style="color: red;">State Name Not Found</p>').show();
                   $("#staname").hide();
+                  $("#cityid").hide();
+                  $("#save").hide();
+                  $("#save1").hide();
+                  
                  }
             }
           }); 
        }
       
-
-  
-
-
 </script>

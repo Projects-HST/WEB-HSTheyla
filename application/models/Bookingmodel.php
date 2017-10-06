@@ -21,10 +21,10 @@ function view_plan_details($id)
 function add_events_details($eventid,$planname,$seats,$amount,$user_id)
 { 
 
-  // $check_eve="SELECT * FROM booking_plan WHERE event_id='$event_name' AND plan_name='$category'";
-  // $result=$this->db->query($check_eve);
-  // if($result->num_rows()==0)
-  // {	
+  $check_eve="SELECT * FROM booking_plan WHERE event_id='$eventid' AND plan_name='$planname' AND seat_rate='$amount' AND seat_available='$seats' ";
+  $result=$this->db->query($check_eve);
+  if($result->num_rows()==0)
+   {	
     $query="INSERT INTO booking_plan(event_id,plan_name,seat_available,seat_rate,created_by,created_at) VALUES ('$eventid','$planname','$seats','$amount','$user_id',NOW())";	
      $resultset=$this->db->query($query);
     
@@ -33,10 +33,10 @@ function add_events_details($eventid,$planname,$seats,$amount,$user_id)
      
      $data= array("status"=>"success");
      return $data;
-   // }else{
-   //    $data= array("status"=>"Already Exist");
-   //     return $data;
-   //        }
+    }else{
+       $data= array("status"=>"AE");
+       return $data;
+        }
 
 }
 

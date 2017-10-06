@@ -78,7 +78,7 @@
                         <thead>
                         <tr>
                             <th>Event Name</th>
-                            <th>Event Category</th>
+                            <!--th>Event Category</th-->
                             <th>Event City</th>
                             <th>Event popularity</th>
                             <th>Action</th>
@@ -93,7 +93,7 @@
                              ?>
                         <tr>
                             <td><?php echo $rows->event_name ; ?></td>
-                            <td><?php echo $rows->category_name ; ?></td>
+                            <!--td><?php //echo $rows->category_name ; ?></td-->
                             <td><?php echo $rows->city_name ; ?></td>
                             <td><?php foreach($popular as $values){  $evid=$values->event_id;
                              if($eid==$evid){ echo $values->popular; } }?></td>
@@ -130,7 +130,7 @@
                         <thead>
                         <tr>
                             <th>Event Name</th>
-                            <th>Event Category</th>
+                             <!--th>Event Category</th-->
                             <th>Event City</th>
                             <th>Event popularity</th>
                             <th>Action</th>
@@ -145,7 +145,7 @@
                               ?>
                         <tr>
                             <td><?php echo $rows->event_name ; ?></td>
-                            <td><?php echo $rows->category_name ; ?></td>
+                            <!--td><?php //echo $rows->category_name ; ?></td-->
                             <td><?php echo $rows->city_name ; ?></td>
                             <td><?php  foreach($popular as $values){
                               $evid=$values->event_id; if($eid==$evid){ echo $values->popular; } }?></td>
@@ -182,7 +182,7 @@
                         <thead>
                         <tr>
                             <th>Event Name</th>
-                            <th>Event Category</th>
+                             <!--th>Event Category</th-->
                             <th>Event City</th>
                             <th>Event popularity</th>
                             <th>Action</th>
@@ -199,7 +199,7 @@
                            ?>
                         <tr>
                             <td><?php echo $rows->event_name ; ?></td>
-                            <td><?php echo $rows->category_name ; ?></td>
+                            <!--td><?php // echo $rows->category_name ; ?></td-->
                             <td><?php echo $rows->city_name ; ?></td>
                             <td><?php foreach($popular as $values){
                               $evid=$values->event_id; if($eid==$evid){ echo $values->popular; } }?></td>

@@ -48,8 +48,9 @@ public function __construct()
 
 	function eidt_city_details($id)
 	{
-	    //$sql="SELECT ci.*,c.country_name,c.id AS countryid,s.state_name FROM city_master AS ci,country_master AS c,state_master AS s WHERE ci.country_id=c.id AND ci.state_id=s.id AND ci.id='$id'";
-	    $sql="SELECT c.*,s.state_name,s.id AS staid,cu.country_name,cu.id AS countryid FROM city_master AS c LEFT JOIN state_master AS s ON c.country_id=s.country_id LEFT JOIN country_master AS cu On c.country_id=cu.id WHERE c.id='$id' AND s.event_status='Y'";
+	    //$sql="SELECT ci.*,c.country_name,c.id AS countryid,s.state_name FROM city_master AS ci,country_master AS c,state_master AS s WHERE ci.country_id=c.id AND ci.state_id=s.id AND ci.id='$id'  
+	    //AND s.event_status='Y'";
+	    $sql="SELECT c.*,s.state_name,s.id AS staid,cu.country_name,cu.id AS countryid FROM city_master AS c LEFT JOIN state_master AS s ON c.country_id=s.country_id LEFT JOIN country_master AS cu On c.country_id=cu.id WHERE c.id='$id'";
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
 	  	return $res;
