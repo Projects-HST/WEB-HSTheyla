@@ -126,11 +126,12 @@
                   <div class="card m-b-20">
                      <div class="card-block">
 
-                        <label id="user"><input type="checkbox" class="checkbox" id="checkAll" style="display: inline;" />&nbsp;Check All
+                        <label id="user" style="width: 100%;"><input type="checkbox" class="checkbox" id="checkAll" style="display: inline;" />&nbsp;Check All
                          <!--div class="text-center">
-                            < Large modal >
-                            <button type="button" data-toggle="modal" id="sendAll" data-target="#addmodel" class="btn btn-primary waves-effect waves-light" >Send To All</button-->
-                             <button type="button" id="sendSelectedBtn" data-toggle="modal" data-target="#addmodel" class="btn btn-primary waves-effect waves-light" >Send To Eamil</button>
+                            < Large modal-->
+                             <button type="button" id="sendSelectedBtn" data-toggle="modal" data-target="#addmodel" class="btn btn-primary waves-effect waves-light" >Send To Selected</button>
+
+                             <button type="button" style="float: right;" data-toggle="modal" id="sendAll" data-target="#addmodel" class="btn btn-primary waves-effect waves-light" >Send To All</button>
                         <!--/div-->
                       </label>
                         <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -146,20 +147,30 @@
                           $i=1;
                           if(empty($search_view))
                           {
-                           foreach($view as $rows) { ?>
+                            $pro_id = [];
+                           foreach($view as $rows) { $pro_id[] = $rows->email_id; $a=implode(',',$pro_id);?>
                             <tr>
                                <td><?php  echo $i; ?></td>
                                <td><input type="checkbox" name="email[]" id="sendmail" class="checkbox check" value="<?php  echo $rows->email_id; ?>"></td>
                                <td><?php  echo $rows->email_id; ?></td>
                             </tr>
-                           <?php $i++;  } }else{ 
-                             foreach($search_view as $res) { ?>
+                           <?php $i++;  } ?> 
+                           <div style="display: none;">
+                              <input type="text" name="useremail[]"  class="demo" value="<?php echo $a; ?>">
+                           </div>
+                            <?php  }else{  $ser_id = [];
+                             foreach($search_view as $res){   $ser_id[] = $res->email_id; $b=implode(',',$ser_id); ?>
                             <tr>
                                <td><?php  echo $i; ?></td>
-                               <td><input type="checkbox" name="email[]" id="sendmail" class="checkbox check" value="<?php  echo $res->email_id; ?>"></td>
+                               <td>
+                                 <input type="checkbox" name="email[]" id="sendmail" class="checkbox check" value="<?php  echo $res->email_id; ?>">
+                              </td>
                                <td><?php  echo $res->email_id; ?></td>
                             </tr>
-                       <?php $i++;  } }?>
+                       <?php $i++;  } ?> 
+                       <div style="display: none;"> 
+                        <input type="text" name="useremail[]"  class="demo" value="<?php echo $b; ?>"> </div>
+                       <?php }?>
                      </tbody>
                         </table>
                      </div>
@@ -193,12 +204,13 @@
                         <option value="<?php echo $temp->id; ?>"><?php echo $temp->template_name; ?></option>
                      <?php } ?>
                   </select>
-                <input type="hidden" id="emails_id" name="usersemailid" class="form-control"/>
+                <input type="text" id="emails_id" name="usersemailid" class="form-control"/>
+               
                   <div class="col-md-6 col-lg-6 col-xl-3">
                   <!--div class="mini-stat clearfix bg-primary"-->
                      <button type="submit" class="btn btn-primary waves-effect waves-light">
                       Send </button>
-                      
+                    
                   <!--/div-->
               </div>
             </form>
@@ -223,69 +235,67 @@
      });
 
  $(document).on("click", "#sendSelectedBtn", function () 
-       {   
-        if($('input[name="email[]"]:checked').length > 0) {
-           var selected_value=[]; //initialize empty array 
-           $('#sendmail:checked').each(function()
-           {
-            selected_value.push($(this).val());
-           });
-         $(".modal-body #emails_id").val(selected_value);
-           //$("#user").hide();
-          $('#addmodel').modal();
+   {   
+     if($('input[name="email[]"]:checked').length > 0) {
+        var selected_value=[]; //initialize empty array 
+        $('#sendmail:checked').each(function()
+        {
+         selected_value.push($(this).val());
+        });
+      $(".modal-body #emails_id").val(selected_value);
+      // $('#addmodel').modal();
 
-      }else{
-            alert('Please select any one user');
-            return false;
-            //$("#user").html('<p style="color:red;">Please select users</p>');
-            }
+   }else{
+         alert('Please select any one user');
+         return false;
+         }
    });
 
-      // $(document).on("click","#sendAll", function () 
-      //  { 
-      //   var all_value=[]; // initialize empty array 
-      //      $('#sendmail:unchecked').each(function()
-      //      {
-      //       all_value.push($(this).val());
-      //      });
-      //   $(".modal-body #emails_id").val(all_value);
-      //   //$('#addmodel').modal();
-      //   });
+      $(document).on("click","#sendAll", function() 
+       { 
+           var all_value=[]; 
+           $("input:text.demo").each(function()
+           {
+            //energy=all_value.toString($(this).val());
+            all_value.push($(this).val());
+           });
+          $(".modal-body #emails_id").val(all_value);
+      });
   
   function getstatename(cid) {
-           //alert(cid);
-            $.ajax({
-               type: 'post',
-               url: '<?php echo base_url(); ?>emailtemplate/get_city_name',
-               data: {
-                   country_id:cid
-               },
-             dataType: "JSON",
-             cache: false,
-            success:function(test)
+      //alert(cid);
+      $.ajax({
+         type: 'post',
+         url: '<?php echo base_url(); ?>emailtemplate/get_city_name',
+         data: {
+             country_id:cid
+         },
+       dataType: "JSON",
+       cache: false,
+      success:function(test)
+      {
+         //alert(test);
+         var len = test.length;
+        //alert(len);
+        var citynames='';
+        if(test!='')
+         {     //alert(len);
+            for(var i=0; i<len; i++)
             {
-               //alert(test);
-               var len = test.length;
-              //alert(len);
-                var citynames='';
-                if(test!='')
-                 {     //alert(len);
-                   for(var i=0; i<len; i++)
-                   {
-                     var cityid = test[i].id;
-                     var city_name = test[i].city_name;
-                     //alert(city_name);
-                     citynames +='<option value=' + cityid + '>' + city_name + '</option>';
-                  }
-                  $("#cityname").html(citynames).show();
-                  $("#msg").hide();
-                  }else{
-                  $("#msg").html('<p style="color: red;">City Name Not Found</p>').show();
-                  $("#cityname").hide();
-                 }
+            var cityid = test[i].id;
+            var city_name = test[i].city_name;
+            //alert(city_name);
+            citynames +='<option value=' + cityid + '>' + city_name + '</option>';
             }
-          }); 
-       }
+            $("#cityname").html(citynames).show();
+            $("#msg").hide();
+            }else{
+            $("#msg").html('<p style="color: red;">City Name Not Found</p>').show();
+            $("#cityname").hide();
+           }
+      }
+    }); 
+ }
 
 </script>
 

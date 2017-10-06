@@ -184,9 +184,9 @@ class Emailtemplate extends CI_Controller
         if($user_role==1)
 		{
 	        $email_temp_id=$this->input->post('email_temp_id');
-	        $usersemailid=$this->input->post('usersemailid');
-	        //echo $email_temp_id; echo $usersemailid; exit; 
-	        $datas['res']=$this->mailmodel->send_mail_to_users($usersemailid,$email_temp_id);
+	        $mailids=$this->input->post('usersemailid');
+	       
+	        $datas['res']=$this->mailmodel->send_mail_to_users($mailids,$email_temp_id);
 	        $sts=$datas['status'];
 	        //print_r($sts);exit;
 	        if($sta=="success"){

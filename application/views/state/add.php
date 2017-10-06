@@ -125,8 +125,8 @@
                                 ?>
                               <tr>
                                  <td><?php  echo $i; ?></td>
-                                 <td><?php  echo $rows->state_name; ?></td>
                                  <td><?php  echo $rows->country_name; ?></td>
+                                  <td><?php  echo $rows->state_name; ?></td>
                                  <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
 								         <td><a href="<?php echo base_url();?>state/edit_state/<?php echo $rows->id;?>"><img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a></td>
                               </tr>
