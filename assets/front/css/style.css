@@ -1,0 +1,287 @@
+.imglogo{
+  width: 125px;
+}
+.loginbtn{
+  padding-left: 30px;
+}
+
+.about{
+  background-color: #478ECC;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  background-repeat: no-repeat;
+}
+.card{
+  padding: 50px;
+  border: none;
+}
+.form-control-plaintext{
+  width: 200px;
+}
+.socialmedia{
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.whatsheyla{
+  text-align: center;
+  font-size: 20px;
+  color: #fff;
+}
+.heading2{
+  text-align: center;
+  font-size: 25px;
+  color: #fff;
+  font-weight: 700;
+}
+.menuactive{
+
+  color:#fff !important;
+  font-weight: 800;
+  border-bottom: 2px solid  #478ECC;
+}
+.nav-tabs{
+  border: none;
+}
+.modal-content{
+  border-radius: 25px;
+}
+.modalmenu{
+  padding-left: 60px;
+}
+
+.borbtn{
+  border-bottom: 2px solid  #478ECC;
+}
+.features{
+  padding-top: 40px;
+  padding-bottom:40px;
+  border-bottom: 4px solid #DCDBD9;
+}
+.featuretext{
+  font-size: 30px;
+}
+.center-div
+{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 700px;
+  height: 520px;
+  background-color: #fff;
+  border-radius: 3px;
+}
+.cover{
+  background: url("../images/cover.png")no-repeat;
+  background-size: cover;
+  height:150px;
+}
+.profilesrc{
+  margin: 15px;
+}
+.infobox{
+  padding-left: 25px;
+  padding-top: 10px;
+}
+.per-info{
+  padding-top: 10px;
+}
+#edit-btn{
+  display: none;
+}
+#edit-btn{
+  color:#fff;
+}
+.setting{
+  color: #fff;
+  font-size: 22px;
+  margin-top: 10px;
+  margin-right: 20px;
+}
+.arrowimg{
+
+  position: relative;
+  top: -10px;
+}
+.profile{
+  background: url("../images/home-bg.png")no-repeat;
+  background-size: cover;
+  height:100vh;
+}
+.menupage{
+  background-color: #478ECC;
+}
+.listfeauture{
+  padding-top: 40px;
+}
+.featurebox{
+  padding-right: 0px;
+  padding-left: 0px;
+}
+.mediaobj{
+  padding: 20px;
+  border: 0.5px solid #F3F3F3;
+}
+.featureicons{
+  width: 75px;
+}
+.organsier{
+      background: url("../images/createevent.png")no-repeat;
+     -webkit-background-size: cover;
+     -moz-background-size: cover;
+     -o-background-size: cover;
+     height: 300px;
+
+}
+.organiserbox{
+  padding-top: 60px;
+  padding-bottom: 60px;
+  border-right: 2px solid #DCDBD9;
+}
+
+.organiserbox-last{
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+.organiser-heading{
+  font-size: 20px;
+}
+.organiserevent{
+  border-bottom: 4px solid #DCDBD9;
+}
+.form-control{
+  margin-bottom: 10px;
+  background-color: #EDEDED;
+  color: #A7A7A7;
+}
+.footer-bg{
+  background-color: #478ECC;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.fnt-footer a{
+  font-size: 18px;
+  color: #fff;
+  text-decoration: none;
+  margin-left: 30px;
+}
+.fnt-footer{
+  color:#fff;
+}
+.formbg{
+  padding-top: 60px;
+  padding-bottom:60px;
+  background-color:  #F6F6F6;
+}
+.submitbtn{
+  background-color: #478ECC;
+  color:#fff;
+}
+.normal-txt{
+  font-size: 18px;
+  text-align: center;
+}
+.heading{
+  text-align: center;
+  padding-top: 25px;
+  padding-bottom: 30px;
+  font-size: 30px;
+  color: #fff;
+}
+.carousel-caption{
+  bottom: 100px;
+}
+.btn-event{
+  padding: 10px 40px 10px 40px;
+  background-color: #478ECC;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 18px;
+  border: 2px solid #fff;
+}
+.white-color{
+  color:#fff;
+}
+.cnt{
+    padding-bottom: 50px;
+    font-size: 30px;
+    font-weight: 300;
+}
+.getin{
+  color:#478ECC;
+  font-weight: 600;
+}
+.blueline{
+  border-bottom:  2px solid #478ECC;
+  border-width: medium;
+
+}
+
+.affix.navbar{
+ background-color: blue;
+ }
+
+/*Organiser home*/
+
+.organiser-home{
+  background: url("../images/organsier-cover.jpg")no-repeat;
+ -webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+  height: 400px;
+
+}
+.organiser-title{
+  padding-top: 150px;
+  font-size: 34px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+}
+.tabs-left{
+  display: inline-block;
+
+    background-color: #fff;
+}
+.tabs-left li{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border: 1px solid;
+  border-style: ridge;
+
+}
+.tabactive{
+  background-color: #478ECC;
+
+}
+.tabs-left li a{
+  padding-left: 50px;
+  padding-right: 50px;
+  text-decoration: none;
+}
+.tabactive a{
+  color: #fff;
+}
+.organiser-bg{
+  background-color: #F3F3F3;
+}
+.organiser-menu{
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+.profilename{
+  padding-left: 20px;
+  font-size: 25px;
+}
+.form-organiser{
+  padding-left: 30px;
+  padding-top: 20px;
+}
+.profile-section{
+  border-bottom: 1px solid #dededd;
+  padding-bottom: 14px;
+
+}

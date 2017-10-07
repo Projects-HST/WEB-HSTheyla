@@ -62,7 +62,7 @@
     </p>
 
     <p>
-        This example code do 3 things
+      
         <ol>
             <li>Check if a user is logged in on page load.</li>
             <li>If user are logged in, displayes some basic information about the user and a logout button.</li>

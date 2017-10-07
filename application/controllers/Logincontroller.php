@@ -18,9 +18,9 @@ class Logincontroller extends CI_Controller {
 			if($user_role==1){
 				redirect('adminlogin/dashboard');
 			}else if($user_role==2){
-				echo "user organiser";
+				//echo "user organiser";
 			}else if($user_role==3){
-				print_r($datas);
+				//print_r($datas);
 				// echo $user_role;
 			}else{
 				$this->load->view('Login');

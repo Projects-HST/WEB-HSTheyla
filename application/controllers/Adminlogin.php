@@ -16,6 +16,7 @@ public function home()
 {
 	$username=$this->input->post('username');
 	$password=md5($this->input->post('pwd'));
+	
 
 	$result = $this->loginmodel->login($username,$password);
 	$msg=$result['msg'];
@@ -79,9 +80,9 @@ public function dashboard()
 {
 	 $datas=$this->session->userdata();
 	 $user_id=$this->session->userdata('id');
-	 $user_type=$this->session->userdata('user_role');
+	 $user_role=$this->session->userdata('user_role');
 	 $datas['result'] = $this->loginmodel->getuser($user_id);
-	 if($user_type==1){
+	 if($user_role==1){
 		$this->load->view('header',$datas);
 		$this->load->view('home',$datas);
 		$this->load->view('footer');
@@ -123,13 +124,14 @@ public function dashboard()
 			$firstname = $user['givenName'];
 			$lastname = $user['familyName'];
 			$datas['result'] = $this->loginmodel->getuserinfogoogle($email,$firstname,$lastname);
-			 $role=$datas['result']['user_role'];
+			  $user_role=$datas['result']['user_role'];
+
 			 $status=$datas['result']['status'];
 			 if($status=='Y'){
-				 if($role==3){
-						redirect('adminlogin/ghome');
-				 }else if($role==2){
-					 redirect('adminlogin/ghome');
+				 if($user_role==3){
+				 	redirect('profile');
+				 }else if($user_role==2){
+						redirect('home');
 				 }else{
 					 redirect('/');
 				 }
@@ -146,75 +148,57 @@ public function dashboard()
 
 	}
 
-			public function ghome(){
-				$datas=$this->session->userdata();
-				$user_id=$this->session->userdata('id');
-				$user_type=$this->session->userdata('user_role');
-				$datas['res']=$this->loginmodel->getuserinfo($user_id);
-				echo "<pre>";
-				print_r($datas['res']);
-			}
 
 
-			public function web_login()
-				{
-					$datas=$this->session->userdata();
-					$this->load->library('facebook');
-					$data['user'] = array();
 
-					// Check if user is logged in
-					if ($this->facebook->is_authenticated())
-					{
-						// User logged in, get user details
-						$user = $this->facebook->request('get', '/me?fields=id,name,email');
+			// public function web_login()
+			// 	{
+			// 		$datas=$this->session->userdata();
+			// 		$this->load->library('facebook');
+			// 		$data['user'] = array();
+			//
+			// 		// Check if user is logged in
+			// 		if ($this->facebook->is_authenticated())
+			// 		{
+			// 			// User logged in, get user details
+			// 			$user = $this->facebook->request('get', '/me?fields=id,name,email');
+			//
+			// 			if (!isset($user['error']))
+			// 			{
+			// 				$data['user'] = $user;
+			// 				$firstname= $data['user']['name'];
+			// 				$email=$data['user']['email'];
+			//
+			// 				$datas['result'] = $this->loginmodel->getuserfb($firstname,$email);
+			// 				$role=$datas['result']['user_role'];
+			// 				$status=$datas['result']['status'];
+			// 				if($status=='Y'){
+			// 					if($role==3){
+			// 						 redirect('adminlogin/ghome');
+			// 					}else if($role==2){
+			// 						redirect('adminlogin/ghome');
+			// 					}else{
+			// 						redirect('/');
+			// 					}
+			// 				}else{
+			// 					echo "Account Deactive";
+			//
+			// 				}
+			// 			}else{
+			// 				echo "login here";
+			// 			}
+			//
+			// 		}else{
+			// 			$this->load->view('web', $data);
+			// 		}
 
-						if (!isset($user['error']))
-						{
-							$data['user'] = $user;
-							$firstname= $data['user']['name'];
-							$email=$data['user']['email'];
-
-							$datas['result'] = $this->loginmodel->getuserfb($firstname,$email);
-							$role=$datas['result']['user_role'];
-							$status=$datas['result']['status'];
-							if($status=='Y'){
-								if($role==3){
-									 redirect('adminlogin/ghome');
-								}else if($role==2){
-									redirect('adminlogin/ghome');
-								}else{
-									redirect('/');
-								}
-							}else{
-								echo "Account Deactive";
-
-							}
-						}else{
-							echo "login here";
-						}
-
-					}else{
-						$this->load->view('web', $data);
-					}
+				// }
 
 
 
 
 
-				}
 
-
-
-
-			public function fblogout()
-			{
-				$this->load->library('facebook');
-				session_unset();
-				$this->facebook->destroy_session();
-				redirect('/');
-			}
-
-			
 
 
 }

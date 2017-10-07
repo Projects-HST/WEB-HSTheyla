@@ -116,6 +116,45 @@ Class Loginmodel extends CI_Model
      return $resultset->result();
    }
 
+   function check_email($email){
+     $check_email="SELECT * FROM user_master WHERE email_id='$email'";
+     $res=$this->db->query($check_email);
+     if($res->num_rows()>=1){
+       echo "already";
+     }else{
+       echo "success";
+     }
+   }
+   function check_mobile($mobile){
+     $check_email="SELECT * FROM user_master WHERE mobile_no='$mobile'";
+     $res=$this->db->query($check_email);
+     if($res->num_rows()>=1){
+       echo "already";
+     }else{
+       echo "success";
+     }
+   }
+   function changeprofileimage($user_id,$userFileName){
+     $update="UPDATE user_details SET user_picture='$userFileName' WHERE user_id='$user_id'";
+     $res=$this->db->query($update);
+     if($res){
+       echo "success";
+     }else{
+       echo "failed";
+     }
+   }
+
+   function save_profile_info($user_id,$name,$mobile,$email,$city){
+      $update="UPDATE user_master SET mobile_no='$mobile',email_id='$email' WHERE id='$user_id'";
+     $res=$this->db->query($update);
+     $update_user_master="UPDATE user_details SET name='$name',city_id='$city' WHERE user_id='$user_id'";
+     $result=$this->db->query($update_user_master);
+     if($result){
+          echo "success";
+     }else{
+          echo "already";
+     }
+   }
 
    function getuserfb($firstname,$email){
       $check_email="SELECT * FROM user_master WHERE email_id='$email'";
