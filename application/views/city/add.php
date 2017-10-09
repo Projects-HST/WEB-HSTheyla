@@ -67,7 +67,7 @@
                               <label class="col-sm-4 col-form-label">State Name</label>
                               <div class="col-sm-6">
                                  <select class="form-control" name="stateid" id="staname" >
-                                   <option value="">Select State Name</option>
+                                   
                                  </select>
                                  <div id="msg"></div>
                               </div>
@@ -252,6 +252,7 @@ if(document.cityform.txtLatitude.value!="")
                var len = test.length;
                //alert(len);
                 var statename='';
+                 var title='<option>Select State</option>';
                 if(test!='')
                  {       //alert(len);
                    for(var i=0; i<len; i++)
@@ -261,7 +262,7 @@ if(document.cityform.txtLatitude.value!="")
                      //alert(state_name);
                      statename +='<option value=' + stateid + '> ' + state_name + ' </option>';
                   }
-                  $("#staname").html(statename).show();
+                  $("#staname").html(title+statename).show();
                   $("#msg").hide();
                   $("#cityid").show();
                   $("#save").show();

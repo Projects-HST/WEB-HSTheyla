@@ -144,14 +144,14 @@
                         <label for="city" class="col-sm-2 col-form-label">Select State Name</label>
                             <div class="col-sm-4">
                                <select class="form-control" name="statename"  id="staname" onchange="getcityname(this.value)">
-                                 <option value="">Select State</option>
+                                 
                                 </select>
                                 <div id="smsg"></div>
                             </div>
                              <label for="city" class="col-sm-2 col-form-label">Select City</label>
                             <div class="col-sm-4">
                                <select class="form-control" name="city" id="ctname">
-                                 <option value="">Select City</option>
+                                
                                 </select>
                                 <div id="cmsg"></div>
                             </div>
@@ -295,6 +295,7 @@
                var len = test.length;
                //alert(len);
                 var statename='';
+                var title='<option>Select State</option>';
                 if(test!='')
                  {    //alert(len);
                    for(var i=0; i<len; i++)
@@ -304,7 +305,7 @@
                      //alert(city_name);
                      statename +='<option value=' + staid + '> ' + state_name + ' </option>';
                   }
-                  $("#staname").html(statename).show();
+                  $("#staname").html(title+statename).show();
                   $("#smsg").hide();
                   }else{
                   $("#smsg").html('<p style="color: red;">State Not Found</p>').show();
@@ -330,6 +331,7 @@
                var len = test.length;
                //alert(len);
                 var cityname='';
+                var ctitle='<option>Select City</option>';
                 if(test!='')
                  {    //alert(len);
                    for(var i=0; i<len; i++)
@@ -339,7 +341,7 @@
                      //alert(city_name);
                      cityname +='<option value=' + cityid + '> ' + city_name + ' </option>';
                   }
-                  $("#ctname").html(cityname).show();
+                  $("#ctname").html(ctitle+cityname).show();
                   $("#cmsg").hide();
                   }else{
                   $("#cmsg").html('<p style="color: red;">City Not Found</p>').show();

@@ -13,6 +13,8 @@
 		return $output;
     }
 ?>
+<script src="<?php echo base_url(); ?>assets/js/jquery-ui.min.js"></script>
+<link href="<?php echo base_url(); ?>assets/css/jquery-ui.css" rel="stylesheet" type="text/css">
 
 <div class="content-page">
 <!-- Footer Close-->
@@ -57,25 +59,22 @@
    </div>
    <div class="page-content-wrapper ">
      <div class="container">
-
         <div class="row">
             <div class="col-12">
                 <div class="card m-b-20">
                     <div class="card-block">
-                     
                  <h4 class="mt-0 header-title"></h4>
 
                   <?php if($this->session->flashdata('msg')): ?>
-                        <div class="alert alert-success">
-                           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-                           ×</button> <?php echo $this->session->flashdata('msg'); ?>
-                        </div>
-                        <?php endif; ?>
-
+                    <div class="alert alert-success">
+                       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                       ×</button> <?php echo $this->session->flashdata('msg'); ?>
+                    </div>
+                  <?php endif; ?>
 
                 <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>events/add_events" name="eventform" id="eventform" onSubmit='return check();'>
+
                         <div class="form-group row">
-                            
                             <label for="Category" class="col-sm-2 col-form-label">Select Category</label>
                             <div class="col-sm-4">
                                 <select class="form-control" name="category">
@@ -90,8 +89,8 @@
                             <div class="col-sm-4">
                                 <input class="form-control" type="text"  name="event_name">
                             </div>
-
                         </div>
+
                        <div class="form-group row">
                             <label for="country" class="col-sm-2 col-form-label">Select Country</label>
                             <div class="col-sm-4">
@@ -109,8 +108,8 @@
                                 <div id="cmsg"></div>
                             </div>
                         </div>
+
                         <div class="form-group row">
-                           
                             <label for="Venue" class="col-sm-2 col-form-label">Venue</label>
                             <div class="col-sm-4">
                                 <input class="form-control" type="text"  name="venue"  >
@@ -119,10 +118,9 @@
                             <div class="col-sm-4">
                                <textarea id="textarea" name="address"  class="form-control" maxlength="240" rows="3" placeholder=""></textarea>
                             </div>
-
                         </div>
+
                         <div class="form-group row">
-                           
                             <label for="Description" class="col-sm-2 col-form-label">Description</label>
                             <div class="col-sm-4">
                                 <textarea  id="textarea"  name="description" class="form-control" maxlength="30000" rows="3" placeholder=""> </textarea>
@@ -137,8 +135,8 @@
                                 </select>
                             </div>
                         </div>
+
                        <div class="form-group row">
-                           
                             <label for="sdate" class="col-sm-2 col-form-label">Start Date</label>
                             <div class="col-sm-4">
                               <div class="input-group">
@@ -152,32 +150,29 @@
                                <div class="input-group">
                                 <input type="text" class="form-control" name="end_date" id="datepicker">
                                 <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
+                                 
                             </div>
                             </div>
-                            
                         </div>
+
                         <div class="form-group row">
-                           
                             <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
                             <div class="col-sm-4">
-                                <select name="start_time"  class="form-control" >
-                                     <option value="">Select Start Time</option>
-									 <option value=""><?php echo get_times(); ?></option>
-								</select>
-
+                            <select name="start_time"  class="form-control" id="stime" >
+                                <option value="">Select Start Time</option>
+									             <option value=""><?php echo get_times(); ?></option>
+								            </select>
                             </div>
-
                              <label for="etime" class="col-sm-2 col-form-label">End Time</label>
                             <div class="col-sm-4">
-                                <select name="end_time" class="form-control" >
-                                     <option value="">Select End Time</option>
-									 <option value=""><?php echo get_times(); ?></option>
-								</select>
+                              <select name="end_time" class="form-control" id="etime" >
+                                <option value="">Select End Time</option>
+									              <option value=""><?php echo get_times(); ?></option>
+								              </select>
                             </div>
-
                         </div>
+
                         <div class="form-group row">
-                           
                             <label for="latitude" class="col-sm-2 col-form-label">Event Latitude</label>
                             <div class="col-sm-4">
                                 <input class="form-control" type="text" name="txtLatitude"  id="lat" >
@@ -189,6 +184,7 @@
                                  <div id="ermsg1"></div> <div id="ermsg3"></div>
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label for="primarycell" class="col-sm-2 col-form-label">primary Contact Phone</label>
                             <div class="col-sm-4">
@@ -199,6 +195,7 @@
                                 <input class="form-control" type="text" name="scontact_cell" value="" >
                             </div>
                         </div>
+
                        <div class="form-group row">
                             <label for="Person" class="col-sm-2 col-form-label">Contact Person</label>
                             <div class="col-sm-4">
@@ -211,7 +208,6 @@
                         </div>
 
                         <div class="form-group row">
-                           
                             <label for="Status" class="col-sm-2 col-form-label">Advertisement Display</label>
                             <div class="col-sm-4">
                                <select class="form-control" name="eadv_status">
@@ -220,7 +216,6 @@
                                     <option value="N">No</option>
                                 </select>
                             </div>
-                        
                         <label for="Colour" class="col-sm-2 col-form-label">Booking Display</label>
                             <div class="col-sm-4">
                                  <select class="form-control" name="booking_sts">
@@ -232,7 +227,6 @@
                        </div>
 
                         <div class="form-group row">
-                            
                             <label for="Status" class="col-sm-2 col-form-label">Hotspot Display</label>
                             <div class="col-sm-4">
                                <select class="form-control" name="hotspot_sts">
@@ -251,14 +245,11 @@
                                     <option value="blue">Blue</option>
                                     <option value="red">Red</option>
                                 </select>
-
                             </div>
-
                         </div>
 
 
                         <div class="form-group row">
-                            
                             <label for="Status" class="col-sm-2 col-form-label">Event Display</label>
                             <div class="col-sm-4">
                                <select class="form-control"  name="event_status">
@@ -276,7 +267,6 @@
 
 
                         <div class="form-group row">
-                            
                             <label class="col-sm-2 col-form-label"></label>
                             <div class="col-sm-2">
                               <button type="submit" class="btn btn-primary waves-effect waves-light">
@@ -286,6 +276,7 @@
                               Reset
                               </button></div>
                         </div>
+
                      </form>
                     </div>
                 </div>
@@ -298,9 +289,10 @@
 </div>
 <!-- content -->
 
-<script type="text/javascript">  
-
-   $(document).ready(function () {
+<script type="text/javascript">
+      
+  $(document).ready(function () {
+           
     $('#eventform').validate({ // initialize the plugin
        rules: {
          category:{required:true },
@@ -312,7 +304,9 @@
          description:{required:true },
          eventcost:{required:true },
          start_date:{required:true },
-         end_date:{required:true },
+         end_date:{ required:true },
+
+
          start_time:{required:true },
          end_time:{required:true },
          pcontact_cell:{required:true },
@@ -336,6 +330,7 @@
         eventcost:"Select Event Type",
         start_date:"Select Start Date",
         end_date:"Select End Date",
+
         start_time:"Select Start Time",
         end_time:"Select End Time",
         pcontact_cell:"Enter Cell Number",
@@ -366,6 +361,7 @@
                var len = test.length;
                //alert(len);
                 var cityname='';
+                var ctitle='<option>Select City</option>';
                 if(test!='')
                  {    //alert(len);
                    for(var i=0; i<len; i++)
@@ -375,7 +371,7 @@
                      //alert(city_name);
                      cityname +='<option value=' + cityid + '> ' + city_name + ' </option>';
                   }
-                  $("#ctname").html(cityname).show();
+                  $("#ctname").html(ctitle+cityname).show();
                   $("#cmsg").hide();
                   }else{
                   $("#cmsg").html('<p style="color: red;">City Not Found</p>').show();
@@ -387,6 +383,62 @@
 
 function check()
 {
+
+
+    var objFromDate = document.getElementById("datepicker-autoclose").value;
+    var objToDate = document.getElementById("datepicker").value;
+     
+    var date1 = new Date(objFromDate);
+    var date2 = new Date(objToDate);
+     
+    var date3 = new Date();
+    var date4 = date3.getMonth() + "/" + date3.getDay() + "/" + date3.getYear();
+    var currentDate = new Date(date4);
+     
+    if(date1 > date2)
+    {
+      alert("Startdate should be less than Enddate");
+      return false; 
+    }
+    // else if(date =< currentDate){
+    // alert("From Date should be less than current date");
+    // return false; 
+    // }else if(date2 > currentDate) {
+    // alert("To Date should be less than current date");
+    // return false; }
+    
+    var strStartTime = document.getElementById("stime").value;
+      var strEndTime = document.getElementById("etime").value;
+
+      var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+      var endTime = new Date(startTime);
+      endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+      // alert(startTime); alert(endTime);
+      if (startTime > endTime) {
+      alert("Start Time is greater than end time");
+      return false;
+      }
+      // if (startTime == endTime) {
+      // alert("Start Time equals end time");
+      // return false;
+      // }
+      // if (startTime < endTime) {
+      // alert("Start Time is less than end time");
+      // return false;
+      // }
+      
+      function GetHours(d) {
+      var h = parseInt(d.split(':')[0]);
+      if (d.split(':')[1].split(' ')[1] == "PM") {
+      h = h + 12;
+      }
+      return h;
+      }
+      function GetMinutes(d) {
+      return parseInt(d.split(':')[1].split(' ')[0]);
+      }
+
+    
   // if(document.eventform.txtLatitude.value=="")
   //   {
   //           //alert("Please enter Latitude.");

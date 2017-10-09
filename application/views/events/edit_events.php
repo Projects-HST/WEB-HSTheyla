@@ -178,7 +178,7 @@
                            
                             <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
                             <div class="col-sm-4">
-                                <select name="start_time" required="" class="form-control" >
+                                <select name="start_time" required="" class="form-control" id="stime" >
                                      <option value="">Select Start Time</option>
 									                   <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
 								                </select>
@@ -188,7 +188,7 @@
 
                              <label for="etime" class="col-sm-2 col-form-label">End Time</label>
                             <div class="col-sm-4">
-                                <select name="end_time" required="" class="form-control" >
+                                <select name="end_time" required="" class="form-control" id="etime">
                                      <option value="">Select End Time</option>
 									                   <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
 								                </select>
@@ -410,6 +410,24 @@ $(document).ready(function () {
 
 function check()
 {
+
+    var objFromDate = document.getElementById("datepicker-autoclose").value;
+    var objToDate = document.getElementById("datepicker").value;
+     
+    var date1 = new Date(objFromDate);
+    var date2 = new Date(objToDate);
+     
+    var date3 = new Date();
+    var date4 = date3.getMonth() + "/" + date3.getDay() + "/" + date3.getYear();
+    var currentDate = new Date(date4);
+     
+    if(date1 > date2)
+    {
+      alert("Startdate should be less than Enddate");
+      return false; 
+    }
+
+
   if(document.eventform.txtLatitude.value=="")
     {
             //alert("Please enter Latitude.");
@@ -458,6 +476,37 @@ function check()
                  $("#ermsg3").hide();
             }
     }
+
+      var strStartTime = document.getElementById("stime").value;
+      var strEndTime = document.getElementById("etime").value;
+
+      var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+      var endTime = new Date(startTime);
+      endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+      // alert(startTime); alert(endTime);
+      if (startTime > endTime) {
+      alert("Start Time is greater than end time");
+      return false;
+      }
+      // if (startTime == endTime) {
+      // alert("Start Time equals end time");
+      // return false;
+      // }
+      // if (startTime < endTime) {
+      // alert("Start Time is less than end time");
+      // return false;
+      // }
+      
+      function GetHours(d) {
+      var h = parseInt(d.split(':')[0]);
+      if (d.split(':')[1].split(' ')[1] == "PM") {
+      h = h + 12;
+      }
+      return h;
+      }
+      function GetMinutes(d) {
+      return parseInt(d.split(':')[1].split(' ')[0]);
+      }
 
     // if(document.eventform.txtLatitude.value!="")
 
