@@ -13,8 +13,6 @@
 		return $output;
     }
 ?>
-<script src="<?php echo base_url(); ?>assets/js/jquery-ui.min.js"></script>
-<link href="<?php echo base_url(); ?>assets/css/jquery-ui.css" rel="stylesheet" type="text/css">
 
 <div class="content-page">
 <!-- Footer Close-->
