@@ -258,8 +258,7 @@
                 </div>
             </div> <!-- end col -->
         </div> <!-- end row -->
-
-                        </div><!-- container -->
+      </div><!-- container -->
    </div>
    <!-- Page content Wrapper -->
 </div>
@@ -290,7 +289,6 @@
          userrole:{required:true},
          display_status:{required:true}
         },
-
         messages: {
         username:"Enter UserName",
         name:"Enter Name",
@@ -316,7 +314,7 @@
    });
   function getstatename(cuid)
   {
-    //alert(cuid);
+         //alert(cuid);
             $.ajax({
                type: 'post',
                url: '<?php echo base_url(); ?>users/get_state_name',
@@ -327,24 +325,29 @@
              cache: false,
             success:function(test)
             {
-              // alert(test);
-               var len = test.length;
-               //alert(len);
-                var statename='';
-                if(test!='')
-                 {    //alert(len);
-                   for(var i=0; i<len; i++)
-                   {
-                     var staid = test[i].id;
-                     var state_name = test[i].state_name;
-                     //alert(city_name);
-                     statename +='<option value=' + staid + '> ' + state_name + ' </option>';
+              //alert(test);
+              var len = test.length;
+              //alert(len);
+              var statename='';
+              var title='<option>Select State</option>';
+              if(test!='')
+              {    //alert(len);
+                  for(var i=0; i<len; i++)
+                  {
+                    var staid = test[i].id;
+                    var state_name = test[i].state_name;
+                    //alert(city_name);
+                    statename +='<option value=' + staid + '> ' + state_name + ' </option>';
                   }
-                  $("#staname").html(statename).show();
+                  $("#staname").html(title+statename).show();
                   $("#smsg").hide();
-                  }else{
-                  $("#smsg").html('<p style="color: red;">State Not Found</p>').show();
+                  $("#ctname").empty('');
+                  $("#ctname").show();
+                  $("#cmsg").hide();
+              }else{
+                  $("#smsg").html('<p style="color:red;">State Not Found</p>').show();
                   $("#staname").hide();
+                  $("#ctname").hide("");
                  }
             }
           });  
@@ -360,33 +363,31 @@
                },
              dataType: "JSON",
              cache: false,
-            success:function(test)
-            {
+             success:function(test)
+             {
               // alert(test);
-               var len = test.length;
-               //alert(len);
-                var cityname='';
-                if(test!='')
-                 {    //alert(len);
-                   for(var i=0; i<len; i++)
-                   {
-                     var cityid = test[i].id;
-                     var city_name = test[i].city_name;
-                     //alert(city_name);
-                     cityname +='<option value=' + cityid + '> ' + city_name + ' </option>';
-                  }
-                  $("#ctname").html(cityname).show();
+              var len = test.length;
+              //alert(len);
+              var cityname='';
+              var ctitle='<option>Select City</option>';
+              if(test!='')
+              {    //alert(len);
+                for(var i=0; i<len; i++)
+                {
+                  var cityid = test[i].id;
+                  var city_name = test[i].city_name;
+                  //alert(city_name);
+                  cityname +='<option value=' + cityid + '> ' + city_name + ' </option>';
+                }
+                  $("#ctname").html(ctitle+cityname).show();
                   $("#cmsg").hide();
                   }else{
                   $("#cmsg").html('<p style="color: red;">City Not Found</p>').show();
                   $("#ctname").hide();
-                 }
+                }
             }
           }); 
        }
-
-
-
 </script>
 
 

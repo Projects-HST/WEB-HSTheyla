@@ -89,6 +89,9 @@ class Userrole extends CI_Controller
 	    if($sta=="success"){
 	       $this->session->set_flashdata('msg','Updated Successfully');
 		   redirect('userrole/home');
+	     }else if($sta=="Already Exist"){
+             $this->session->set_flashdata('msg','Already Exist');
+		     redirect('userrole/home');
 	     }else{
 	     	 $this->session->set_flashdata('msg','Faild To Update');
 		     redirect('userrole/home');

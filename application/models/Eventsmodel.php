@@ -37,7 +37,7 @@ public function __construct()
     
     function getall_category_list()
     {
-      $sql="SELECT id,category_name FROM category_master ORDER BY id ASC";
+      $sql="SELECT id,category_name FROM category_master  WHERE status='Y' ORDER BY id ASC";
       $resu=$this->db->query($sql);
       $res=$resu->result();
       return $res;

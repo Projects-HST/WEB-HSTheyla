@@ -1,5 +1,5 @@
 <?php
-    function get_times( $default = '10:00', $interval = '+15 minutes' ) 
+  function get_times( $default = '10:00', $interval = '+15 minutes' ) 
 	{
 		$output = '';
 		$current = strtotime( '00:00:00' );
@@ -81,7 +81,6 @@
                 <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>events/update_events" name="eventform" id="eventform" onSubmit='return check();'>
                   <?php foreach($edit as $rows){}?>
                         <div class="form-group row">
-                            
                             <label for="Category" class="col-sm-2 col-form-label">Select Category</label>
                             <div class="col-sm-4">
                                 <select class="form-control" name="category" required="">
@@ -95,7 +94,7 @@
 
                             <label for="Name" class="col-sm-2 col-form-label">Event Name</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" required="" name="event_name" value="<?php echo $rows->event_name; ?>">
+                              <input class="form-control" type="text" required="" name="event_name" value="<?php echo $rows->event_name; ?>">
                             </div>
 
                         </div>
@@ -342,7 +341,6 @@ $(document).ready(function () {
          contact_person:{required:true },
          email:{required:true },
          event_status:{required:true },
-
          txtLatitude:{required:true },
          txtLongitude:{required:true }
          
@@ -365,7 +363,6 @@ $(document).ready(function () {
         contact_person:"Enter Name",
         email:"Enter Email",
         event_status:"Select Status",
-
         txtLatitude:"Enter Latitude",
         txtLongitude:"Enter Longitude",
         
@@ -426,7 +423,7 @@ function check()
       alert("Startdate should be less than Enddate");
       return false; 
     }
-
+    
 
   if(document.eventform.txtLatitude.value=="")
     {
@@ -497,25 +494,24 @@ function check()
       // return false;
       // }
       
-      function GetHours(d) {
-      var h = parseInt(d.split(':')[0]);
-      if (d.split(':')[1].split(' ')[1] == "PM") {
-      h = h + 12;
+      function GetHours(d) 
+      {
+        var h = parseInt(d.split(':')[0]);
+        if (d.split(':')[1].split(' ')[1] == "PM") {
+        h = h + 12;
       }
       return h;
       }
-      function GetMinutes(d) {
-      return parseInt(d.split(':')[1].split(' ')[0]);
+      function GetMinutes(d) 
+      {
+       return parseInt(d.split(':')[1].split(' ')[0]);
       }
 
     // if(document.eventform.txtLatitude.value!="")
-
     // {
     //     var latitude = document.eventform.txtLatitude.value;
     //     var longitude = document.eventform.txtLongitude.value;
-        
     //     var reg = new RegExp("^[-+]?[0-9]{1,3}(?:\.[0-9]{1,10})?$");
-        
     //     if( reg.exec(latitude) ) {
     //      //do nothing
     //     } else {
@@ -525,7 +521,6 @@ function check()
     //         document.eventform.txtLatitude.focus();
     //         return false;
     //     }
-        
     //     if( reg.exec(longitude) ) {
     //      //do nothing
     //     } else {
@@ -540,5 +535,4 @@ function check()
 }
 
 </script>
-
 

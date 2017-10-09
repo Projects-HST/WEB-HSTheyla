@@ -70,7 +70,7 @@
                   <div class="card m-b-20">
                      <div class="card-block">
                         <h4 class="mt-0 header-title"></h4>
-                        <form  method="post" action="<?php echo base_url();?>advertisement/update_adv_history" name="advertisementform" enctype="multipart/form-data" id="aform">
+                        <form  method="post" action="<?php echo base_url();?>advertisement/update_adv_history" name="advertisementform" enctype="multipart/form-data" id="aform" onSubmit='return check();'>
                          <?php foreach($edit AS $res){}?>
 
                          <div class="form-group row">
@@ -102,7 +102,7 @@
                              <label for="edate" class="col-sm-2 col-form-label">End Date</label>
                             <div class="col-sm-4">
                                <div class="input-group">
-                                <input type="text" class="form-control" required="" name="end_date" value="<?php $date=date_create($res->date_to);echo date_format($date,"m/d/Y");  ?>" id="datepicker">
+                                <input type="text" class="form-control"  name="end_date" value="<?php $date=date_create($res->date_to);echo date_format($date,"m/d/Y");  ?>" id="datepicker">
                                 <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
                             </div>
                             </div>
@@ -111,7 +111,7 @@
                            
                              <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
                             <div class="col-sm-4">
-                                <select name="start_time" required="" class="form-control" >
+                                <select name="start_time"  id="stime" class="form-control" >
                                      <option value="">Select Start Time</option>
                             <option value=""><?php echo get_times(); ?></option>
                         </select>
@@ -120,7 +120,7 @@
 
                              <label for="etime" class="col-sm-2 col-form-label">End Time</label>
                             <div class="col-sm-4">
-                                <select name="end_time" required="" class="form-control" >
+                                <select name="end_time"  id="etime" class="form-control" >
                                      <option value="">Select End Time</option>
                             <option value=""><?php echo get_times(); ?></option>
                         </select>
@@ -192,5 +192,54 @@
                },
          }); 
    });
-  
+  function check()
+    {
+      var objFromDate = document.getElementById("datepicker-autoclose").value;
+      var objToDate = document.getElementById("datepicker").value;
+       
+      var date1 = new Date(objFromDate);
+      var date2 = new Date(objToDate);
+       
+      var date3 = new Date();
+      var date4 = date3.getMonth() + "/" + date3.getDay() + "/" + date3.getYear();
+      var currentDate = new Date(date4);
+       
+      if(date1 > date2 )
+      {
+        alert("Startdate should be less than Enddate");
+        return false; 
+      }
+   
+
+     var strStartTime = document.getElementById("stime").value;
+      var strEndTime = document.getElementById("etime").value;
+
+      var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+      var endTime = new Date(startTime);
+      endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+      //alert(startTime); alert(endTime);
+      if (startTime > endTime) {
+      alert("Start Time is greater than end time");
+      return false;
+      }
+      // if (startTime == endTime) {
+      // alert("Start Time equals end time");
+      // return false;
+      // }
+      // if (startTime < endTime) {
+      // alert("Start Time is less than end time");
+      // return false;
+      // }
+      
+      function GetHours(d) {
+      var h = parseInt(d.split(':')[0]);
+      if (d.split(':')[1].split(' ')[1] == "PM") {
+      h = h + 12;
+      }
+      return h;
+      }
+      function GetMinutes(d) {
+      return parseInt(d.split(':')[1].split(' ')[0]);
+      }
+}
 </script>

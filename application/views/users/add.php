@@ -143,7 +143,7 @@
 
                         <label for="city" class="col-sm-2 col-form-label">Select State Name</label>
                             <div class="col-sm-4">
-                               <select class="form-control" name="statename"  id="staname" onchange="getcityname(this.value)">
+                               <select class="form-control" name="statename" required="" id="staname" onchange="getcityname(this.value)">
                                  
                                 </select>
                                 <div id="smsg"></div>
@@ -307,9 +307,13 @@
                   }
                   $("#staname").html(title+statename).show();
                   $("#smsg").hide();
+                  $("#ctname").empty('');
+                  $("#ctname").show();
+                  $("#cmsg").hide();
                   }else{
-                  $("#smsg").html('<p style="color: red;">State Not Found</p>').show();
+                  $("#smsg").html('<p style="color:red;">State Not Found</p>').show();
                   $("#staname").hide();
+                  $("#ctname").hide("");
                  }
             }
           });  
@@ -327,13 +331,13 @@
              cache: false,
             success:function(test)
             {
-              // alert(test);
-               var len = test.length;
+                 var len = test.length;
                //alert(len);
                 var cityname='';
                 var ctitle='<option>Select City</option>';
                 if(test!='')
-                 {    //alert(len);
+               // alert(test);
+              {    //alert(len);
                    for(var i=0; i<len; i++)
                    {
                      var cityid = test[i].id;
@@ -343,16 +347,15 @@
                   }
                   $("#ctname").html(ctitle+cityname).show();
                   $("#cmsg").hide();
+                  
                   }else{
+                  //$("#ctname").val("");
                   $("#cmsg").html('<p style="color: red;">City Not Found</p>').show();
                   $("#ctname").hide();
                  }
             }
           }); 
        }
-
-
-
 </script>
 
 

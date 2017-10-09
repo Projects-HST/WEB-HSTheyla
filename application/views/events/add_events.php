@@ -393,7 +393,7 @@ function check()
     var date4 = date3.getMonth() + "/" + date3.getDay() + "/" + date3.getYear();
     var currentDate = new Date(date4);
      
-    if(date1 > date2)
+    if(date1 > date2 )
     {
       alert("Startdate should be less than Enddate");
       return false; 
@@ -405,7 +405,7 @@ function check()
     // alert("To Date should be less than current date");
     // return false; }
     
-    var strStartTime = document.getElementById("stime").value;
+      var strStartTime = document.getElementById("stime").value;
       var strEndTime = document.getElementById("etime").value;
 
       var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);

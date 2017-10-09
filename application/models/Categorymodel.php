@@ -21,7 +21,7 @@ public function __construct()
 
     function insert_category($categoryname,$categorypic1,$status,$user_id,$user_role)
     {
-         $check_category="SELECT * FROM category_master WHERE category_name='$categoryname' AND status='$status'";
+         $check_category="SELECT * FROM category_master WHERE category_name='$categoryname'";
          $result=$this->db->query($check_category);
          if($result->num_rows()==0)
          {
@@ -47,7 +47,7 @@ public function __construct()
     function update_category_details($category_id,$categoryname,$categorypic1,$status,$user_id,$user_role)
     {
 
-       $check_category="SELECT * FROM category_master WHERE category_name='$categoryname' AND status='$status' AND category_image='$categorypic1' ";
+       $check_category="SELECT * FROM category_master WHERE category_name='$categoryname' AND status='$status' ";
        $result=$this->db->query($check_category);
        if($result->num_rows()==0)
        {
