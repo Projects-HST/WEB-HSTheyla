@@ -52,11 +52,12 @@
                            <div class="form-group row">
                               <label for="example-text-input" class="col-sm-4 col-form-label">User Name</label>
                               <div class="col-sm-6">
-                                 <input class="form-control" type="text"  name="username" value="" id="example-text-input">
+                            <input class="form-control" type="text"  name="username" onkeyup="checknamefun(this.value)">
+                            <div id="umsg" style="color:red;"></div>
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Status</label>
+                            <label class="col-sm-4 col-form-label">Status</label>
                               <div class="col-sm-6">
                                  <select class="form-control"  name="usersts">
                                     <option value="">Select  Status</option>
@@ -66,10 +67,10 @@
                               </div>
                            </div>
                            <div class="form-group">
-                              <label class="col-sm-4 col-form-label"></label>
-                              <button type="submit" class="btn btn-primary waves-effect waves-light">
+                             <label class="col-sm-4 col-form-label"></label>
+                              <button type="submit" id="save" class="btn btn-primary waves-effect waves-light">
                               Submit </button>
-                              <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                              <button type="reset" id="save"  class="btn btn-secondary waves-effect m-l-5">
                               Reset
                               </button>
                            </div>
@@ -154,4 +155,24 @@
                },
          }); 
    });
+
+ function checknamefun(val)
+ {
+   $.ajax({
+     type:'post',
+     url:'<?php echo base_url(); ?>/userrole/checker',
+     data:'uname='+val,
+     success:function(test)
+      { //alert(test);
+        if(test=="Username already Exit")
+          {
+             $("#umsg").html(test);
+             $("#save").hide();
+          }else{
+             $("#umsg").html(test);
+             $("#save").show();
+          }
+      }
+   });
+ }
  </script>

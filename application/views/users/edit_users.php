@@ -57,7 +57,7 @@
                         <?php endif; ?>
 
 
-                <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>users/update_user_details" name="usersform" id="usersform">
+                <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>users/update_user_details" name="usersform" id="usersform" onSubmit='return check();'>
                   <?php foreach($users_view AS $res){ }?>
                         <div class="form-group row">
 
@@ -164,6 +164,7 @@
                                 </select>
                                 <script type="text/javascript">document.usersform.statename.value="<?php echo $res->state_id; ?>";</script>
                                 <div id="smsg"></div>
+                                <div  id="st"></div>
                             </div>
 
                        </div>
@@ -265,7 +266,17 @@
 <!-- content -->
 
 <script type="text/javascript">  
+  function check(){
+          var sname = document.getElementById("staname").value;
 
+          if(sname=="Select State")
+          {
+            //$("#st").html('<p style="color:red;">Select State</p>').show(); 
+            alert("Select State");
+          }else{
+           // $("#st").html('<p style="color:red;">Select State</p>').hide(); 
+          }
+       }
    $(document).ready(function () {
     $('#usersform').validate({ // initialize the plugin
        rules: {
@@ -388,6 +399,8 @@
             }
           }); 
        }
+
+
 </script>
 
 

@@ -57,7 +57,7 @@
                         <?php endif; ?>
 
 
-                <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>users/add_user_details" name="usersform" id="usersform">
+                <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>users/add_user_details" name="usersform" id="usersform" onSubmit='return check();'>
 
                         <div class="form-group row">
                             <label for="Category" class="col-sm-2 col-form-label">User Name</label>
@@ -230,6 +230,18 @@
 <!-- content -->
 
 <script type="text/javascript">  
+
+   function check(){
+          var sname = document.getElementById("staname").value;
+          //alert(sname);
+          if(sname=="Select State")
+          {
+            //$("#st").html('<p style="color:red;">Select State</p>').show(); 
+            alert("Select State");
+          }else{
+            //$("#st").html('<p style="color:red;">Select State</p>').hide(); 
+          }
+       }
 
    $(document).ready(function () {
     $('#usersform').validate({ // initialize the plugin

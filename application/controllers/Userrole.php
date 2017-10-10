@@ -118,4 +118,18 @@ class Userrole extends CI_Controller
 
 	 }
 
+	 public function checker()
+     {
+		$uname = $this->input->post('uname');
+		$numrows = $this->userrolemodel->getusernames($uname);
+		if ($numrows > 0)
+	     {
+			echo "Username already Exit";
+		 }
+		else
+		 {
+			echo "Username Available";
+		 }
+    }
+
 }?>
