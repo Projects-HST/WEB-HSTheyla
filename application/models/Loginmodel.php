@@ -134,6 +134,36 @@ Class Loginmodel extends CI_Model
        echo "success";
      }
    }
+
+   function exist_email($email){
+     $check_email="SELECT * FROM user_master WHERE email_id='$email'";
+     $res=$this->db->query($check_email);
+     if($res->num_rows()==0){
+       echo "success";
+     }else{
+       echo "already";
+     }
+   }
+   function exist_mobile($mobile){
+     $check_email="SELECT * FROM user_master WHERE mobile_no='$mobile'";
+     $res=$this->db->query($check_email);
+     if($res->num_rows()==0){
+       echo "success";
+     }else{
+       echo "already";
+     }
+   }
+
+   function exist_username($username){
+     $check_username="SELECT * FROM user_master WHERE user_name='$username'";
+     $res=$this->db->query($check_username);
+     if($res->num_rows()==0){
+       echo "success";
+     }else{
+       echo "already";
+     }
+   }
+
    function changeprofileimage($user_id,$userFileName){
      $update="UPDATE user_details SET user_picture='$userFileName' WHERE user_id='$user_id'";
      $res=$this->db->query($update);
@@ -144,15 +174,79 @@ Class Loginmodel extends CI_Model
      }
    }
 
-   function save_profile_info($user_id,$name,$mobile,$email,$city){
+   function create_profile($name,$mobile,$email,$password){
+     $create="INSERT INTO user_master (user_name,mobile_no,email_id,user_role,email_verify,mobile_verify) VALUES('$name','$mobile','$email','$password','N','N')";
+     $res=$this->db->query($create);
+     $last_id=$this->db->insert_id();
+     $user_details="INSERT INTO user_details (user_id,newsletter_status) VALUES('$last_id','Y')";
+      $result=$this->db->query($user_details);
+      if($result){
+        echo "verify";
+      }else{
+        echo "failed";
+      }
+   }
+
+   function save_profile_info($user_id,$name,$mobile,$email,$address){
       $update="UPDATE user_master SET mobile_no='$mobile',email_id='$email' WHERE id='$user_id'";
      $res=$this->db->query($update);
-     $update_user_master="UPDATE user_details SET name='$name',city_id='$city' WHERE user_id='$user_id'";
+     $update_user_master="UPDATE user_details SET name='$name',address_line1='$address' WHERE user_id='$user_id'";
      $result=$this->db->query($update_user_master);
      if($result){
           echo "success";
      }else{
           echo "already";
+     }
+   }
+
+   function reset_password($email){
+      $check_email="SELECT * FROM user_master WHERE email_id='$email'";
+     $res=$this->db->query($check_email);
+     if($res->num_rows()==0){
+        echo "Email Not Registered";
+
+     }else{
+       $result=$res->result();
+       foreach($result as $rows){}
+       $email=$rows->email_id;
+      $length = 8;
+      $genpassword = "";
+      $possible = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      $i = 0;
+      while ($i < $length) {
+       $char = substr($possible, mt_rand(0, strlen($possible)-1), 1);
+       if (!strstr($genpassword, $char)) {
+         $genpassword .= $char;
+         $i++;
+       }
+      }
+      $to=$email;
+      $subject="Reset Password";
+      $htmlContent = '
+        <html>
+        <head>
+        <title>Reset Password</title>
+           </head>
+           <body>
+
+           <p style="margin-left:50px;">Your Account Password has been Reset Successfully.to Login Use the New Password '.$genpassword.'</p>
+           </body>
+        </html>';
+    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+    // Additional headers
+    $headers .= 'From: heylapp<info@heylapp.com>' . "\r\n";
+    $sent= mail($to,$subject,$htmlContent,$headers);
+
+      $newpassword=md5($genpassword);
+      $update_pwd="UPDATE user_master SET password='$newpassword' WHERE email_id='$email'";
+      $update_new_pwd=$this->db->query($update_pwd);
+      if($update_new_pwd){
+          echo "success";
+
+      }else{
+        echo "Something Went Wrong";
+      }
      }
    }
 

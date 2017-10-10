@@ -43,8 +43,8 @@
     }
 
     .profile-pic {
-        max-width: 150px;
-        max-height: 150px;
+        max-width: 100px;
+        max-height: 100px;
         border-radius: 25px;
         margin-top: 10px;
     }
@@ -110,7 +110,12 @@
                       <p class="float-right"><a href="#" class="btn " id="edit-btn">Edit</i></a></p>
                     </span>
                             <div class="profile-img">
+                              <?php if(empty($rows->user_picture)){ ?>
+                                  <img src="<?php echo base_url(); ?>assets/images/profile/noimage.png" class="img-circle  profile-pic">
+                            <?php  }else{ ?>
                                 <img src="<?php echo base_url(); ?>assets/images/profile/<?php echo $rows->user_picture; ?>" class="img-circle  profile-pic">
+                            <?php  } ?>
+
                                 <form id="image_upload_form" action="<?php echo base_url(); ?>home/change_pic" method="post" enctype="multipart/form-data" action='image_upload.php' autocomplete="off">
                                     <div class="upload-button">Change Picture</div>
 
@@ -144,9 +149,9 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="staticEmail" class="col-sm-2 col-form-label">City</label>
+                                        <label for="staticEmail" class="col-sm-2 col-form-label">Address</label>
                                         <div class="col-sm-5">
-                                            <?php echo $rows->city_id; ?>
+                                            <?php echo $rows->address_line1; ?>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -172,9 +177,9 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="staticEmail" class="col-sm-2 col-form-label">City</label>
+                                        <label for="staticEmail" class="col-sm-2 col-form-label">Address</label>
                                         <div class="col-sm-5">
-                                            <input type="text" class="form-control" id="city" name="city" value="<?php echo $rows->city_id; ?>">
+                                            <input type="text" class="form-control" id="address" name="address" value="<?php echo $rows->address_line1; ?>">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -253,7 +258,7 @@
             name: {
                 required: true
             },
-            city: {
+            address: {
                 required: true
             },
         },
@@ -261,7 +266,7 @@
             email: "Enter Email",
             mobile: "Enter mobile ",
             name: "Enter Name",
-            city: "Enter City "
+            address: "Enter Address "
         },
         submitHandler: function(form) {
             //alert("hi");

@@ -172,6 +172,18 @@ class Home extends CI_Controller {
 			}
 		}
 
+
+		public function verify(){
+			$this->load->view('verify');
+		}
+		public function resetpassword(){
+			$this->load->view('resetpassword');
+		}
+
+		public function reset_password(){
+			$email=$this->input->post('email');
+			$data=$this->loginmodel->reset_password($email);
+		}
 		public function checkemail(){
 			$email=$this->input->post('email');
 			$data=$this->loginmodel->check_email($email);
@@ -180,6 +192,23 @@ class Home extends CI_Controller {
 		public function checkmobile(){
 			$mobile=$this->input->post('mobile');
 			$data=$this->loginmodel->check_mobile($mobile);
+
+		}
+
+
+		public function existemail(){
+			$email=$this->input->post('email');
+			$data=$this->loginmodel->exist_email($email);
+
+		}
+		public function existmobile(){
+			$mobile=$this->input->post('mobile');
+			$data=$this->loginmodel->exist_mobile($mobile);
+
+		}
+		public function existusername(){
+			$username=$this->input->post('name');
+			$data=$this->loginmodel->exist_username($username);
 
 		}
 
@@ -193,9 +222,18 @@ class Home extends CI_Controller {
 			$profilepic = $uploaddir.$userFileName;
 			move_uploaded_file($_FILES['profilepic']['tmp_name'], $profilepic);
 			$data['res']=$this->loginmodel->changeprofileimage($user_id,$userFileName);
+		}
 
+		public function create_profile(){
+			$name=$this->input->post('name');
+			$mobile=$this->input->post('mobile');
+			$email=$this->input->post('email');
+			$password=$this->input->post('new_password');
+			$datas['res']=$this->loginmodel->create_profile($name,$mobile,$email,$password);
 
 		}
+
+
 		public function save_profile(){
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
@@ -205,9 +243,8 @@ class Home extends CI_Controller {
 				$name=$this->input->post('name');
 				$mobile=$this->input->post('mobile');
 				$email=$this->input->post('email');
-				$city=$this->input->post('city');
-
-				$datas['res']=$this->loginmodel->save_profile_info($user_id,$name,$mobile,$email,$city);
+				$address=$this->input->post('address');
+				$datas['res']=$this->loginmodel->save_profile_info($user_id,$name,$mobile,$email,$address);
 			}else{
 
 			}
