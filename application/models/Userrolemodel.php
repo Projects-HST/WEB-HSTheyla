@@ -68,5 +68,12 @@ public function __construct()
 	    return $data;
     }
 
+    function getusernames($uname)
+    {
+     $query = "SELECT * FROM user_role_master WHERE user_role_name='".$uname."'";
+	 $resultset = $this->db->query($query);
+	 return count($resultset->result());
+    }
+
 
 }?>

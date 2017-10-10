@@ -303,15 +303,12 @@
          eventcost:{required:true },
          start_date:{required:true },
          end_date:{ required:true },
-
-
          start_time:{required:true },
          end_time:{required:true },
          pcontact_cell:{required:true },
          contact_person:{required:true },
          email:{required:true },
          event_status:{required:true },
-
          txtLatitude:{required:true },
          txtLongitude:{required:true }
          
@@ -328,18 +325,15 @@
         eventcost:"Select Event Type",
         start_date:"Select Start Date",
         end_date:"Select End Date",
-
         start_time:"Select Start Time",
         end_time:"Select End Time",
         pcontact_cell:"Enter Cell Number",
         contact_person:"Enter Name",
         email:"Enter Email",
         event_status:"Select Status",
-
         txtLatitude:"Enter Latitude",
         txtLongitude:"Enter Longitude",
-        
-               },
+       },
          }); 
    });
   
@@ -348,9 +342,7 @@
             $.ajax({
                type: 'post',
                url: '<?php echo base_url(); ?>events/get_city_name',
-               data: {
-                   country_id:cid
-               },
+               data: { country_id:cid },
              dataType: "JSON",
              cache: false,
             success:function(test)
@@ -385,7 +377,6 @@ function check()
 
     var objFromDate = document.getElementById("datepicker-autoclose").value;
     var objToDate = document.getElementById("datepicker").value;
-     
     var date1 = new Date(objFromDate);
     var date2 = new Date(objToDate);
      
@@ -393,7 +384,7 @@ function check()
     var date4 = date3.getMonth() + "/" + date3.getDay() + "/" + date3.getYear();
     var currentDate = new Date(date4);
      
-    if(date1 > date2 )
+    if(date1>date2 )
     {
       alert("Startdate should be less than Enddate");
       return false; 

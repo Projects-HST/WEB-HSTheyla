@@ -50,10 +50,11 @@
                         <?php foreach($edit as $res){ }?>
                         <form class="" method="post" action="<?php echo base_url();?>userrole/update_userrole" id="usersform" name="usersform">
                            <div class="form-group row">
-                              <label for="example-text-input"  class="col-sm-4 col-form-label">User Name</label>
+                              <label for="example-text-input" class="col-sm-4 col-form-label">User Name</label>
                               <div class="col-sm-6">
-                                 <input class="form-control"  type="text" name="username" value="<?php echo $res->user_role_name; ?>" id="example-text-input">
+                                 <input class="form-control" type="text" name="username" value="<?php echo $res->user_role_name; ?>" onkeyup="checknamefun(this.value)">
                                   <input class="form-control"  type="hidden" name="userid" value="<?php echo $res->id; ?>" id="example-text-input">
+                                   <div id="umsg" style="color:red;"></div>
                               </div>
                            </div>
                            <div class="form-group row">
@@ -102,4 +103,23 @@
                },
          }); 
    });
+ function checknamefun(val)
+ {
+   $.ajax({
+     type:'post',
+     url:'<?php echo base_url(); ?>/userrole/checker',
+     data:'uname='+val,
+     success:function(test)
+      { //alert(test);
+        if(test=="Username already Exit")
+          {
+             $("#umsg").html(test);
+             $("#save").hide();
+          }else{
+             $("#umsg").html(test);
+             $("#save").show();
+          }
+      }
+   });
+ }
  </script>
