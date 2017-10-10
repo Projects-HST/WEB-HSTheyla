@@ -269,14 +269,14 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6 featurebox">
+                        <div class="col-sm-6 col-md-6 featurebox">
                             <div class="media mediaobj">
                                 <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/preminum.png" alt="Generic placeholder image">
                                 <div class="media-body">
                                     <h5 class="mt-0">Media heading</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. </div>
                             </div>
                         </div>
-                        <div class="col-6 featurebox">
+                        <div class="col-sm-6 col-md-6 featurebox">
                             <div class="media mediaobj">
                                 <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/Rewards.png" alt="Generic placeholder image">
                                 <div class="media-body">
@@ -285,14 +285,14 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6   featurebox">
+                        <div class="col-sm-6 col-md-6   featurebox">
                             <div class="media mediaobj">
                                 <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/hotspot.png" alt="Generic placeholder image">
                                 <div class="media-body">
                                     <h5 class="mt-0">Media heading</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. </div>
                             </div>
                         </div>
-                        <div class="col-6 featurebox">
+                        <div class="col-sm-6 col-md-6 featurebox">
                             <div class="media mediaobj">
                                 <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/favourite.png" alt="Generic placeholder image">
                                 <div class="media-body">
