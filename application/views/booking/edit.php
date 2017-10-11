@@ -58,12 +58,12 @@
                               </div>
                            </div> 
 
-                            <div class="form-group row">
+                            <!--div class="form-group row">
                               <label for="example-text-input" class="col-sm-4 col-form-label">Available Seats </label>
                               <div class="col-sm-6">
                                  <input class="form-control"  type="text" name="seats" value="<?php echo $res->seat_available ;?>" >
                               </div>
-                           </div>
+                           </div-->
 
                            <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Amount </label>

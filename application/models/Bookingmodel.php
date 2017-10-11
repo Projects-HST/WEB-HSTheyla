@@ -12,20 +12,20 @@ Class Bookingmodel extends CI_Model
 
 function view_plan_details($id)
 {
-	  $sql="SELECT * FROM booking_plan WHERE event_id='$id' ORDER BY id DESC";
+	  $sql="SELECT b.*,e.event_name FROM booking_plan AS b,events AS e WHERE b.event_id='$id' AND b.event_id=e.id ORDER BY b.id DESC";
 	  $resu=$this->db->query($sql);
 	  $res=$resu->result();
 	  return $res;
 }
 
-function add_events_details($eventid,$planname,$seats,$amount,$user_id)
+function add_events_details($eventid,$planname,$amount,$user_id)
 { 
 
-  $check_eve="SELECT * FROM booking_plan WHERE event_id='$eventid' AND plan_name='$planname' AND seat_rate='$amount' AND seat_available='$seats' ";
+  $check_eve="SELECT * FROM booking_plan WHERE event_id='$eventid' AND plan_name='$planname'";
   $result=$this->db->query($check_eve);
   if($result->num_rows()==0)
    {	
-    $query="INSERT INTO booking_plan(event_id,plan_name,seat_available,seat_rate,created_by,created_at) VALUES ('$eventid','$planname','$seats','$amount','$user_id',NOW())";	
+    $query="INSERT INTO booking_plan(event_id,plan_name,seat_rate,created_by,created_at) VALUES ('$eventid','$planname','$amount','$user_id',NOW())";	
      $resultset=$this->db->query($query);
     
     $update="UPDATE events SET booking_status='Y',updated_by='$user_id',updated_at=NOW() WHERE id='$eventid' ";
@@ -50,15 +50,55 @@ function edit_events_plans($id)
 
 
 
-function update_events_details($eventid,$planid,$planname,$seats,$amount,$user_id)
+function update_events_details($eventid,$planid,$planname,$amount,$user_id)
 {
-   $sql="UPDATE booking_plan SET event_id='$eventid',plan_name='$planname',seat_available='$seats',seat_rate='$amount',updated_by='$user_id',updated_at=NOW() WHERE  id='$planid'";
+   $sql="UPDATE booking_plan SET event_id='$eventid',plan_name='$planname',seat_rate='$amount',updated_by='$user_id',updated_at=NOW() WHERE  id='$planid'";
    $resultset1=$this->db->query($sql);
    $data= array("status"=>"success");
    return $data;
 }
+ 
 
+function view_plan_time_details($plaid,$eveid)
+{
+  $tim="SELECT bt.*,e.event_name,b.plan_name,b.seat_rate FROM booking_plan_timing AS bt,events AS e,booking_plan AS b WHERE bt.plan_id ='$plaid' AND bt.event_id='$eveid' AND bt.plan_id=b.id AND bt.event_id=e.id  ORDER BY bt.id DESC";
+  $tim12=$this->db->query($tim);
+  $tim123=$tim12->result();
+  return $tim123;
+} 
 
+function add_shows_times_details($plan_id,$eventid,$showtime,$seats,$user_id)
+{
+  $check_time="SELECT * FROM booking_plan_timing WHERE event_id='$eventid' AND plan_id='$plan_id' AND show_time='$showtime'";
+  $result=$this->db->query($check_time);
+  if($result->num_rows()==0)
+   {  
+    $timinsert="INSERT INTO booking_plan_timing(event_id,plan_id,show_time,seat_available,created_by,created_at) VALUES ('$eventid','$plan_id','$showtime','$seats','$user_id',NOW())";
+     $timinsert1=$this->db->query($timinsert);
+     $data= array("status"=>"success");
+     return $data;
+    }else{
+       $data= array("status"=>"AE");
+       return $data;
+        }
+}
+
+function edit_plans_time($id)
+{
+  $edittime="SELECT * FROM booking_plan_timing WHERE id='$id' ";
+  $tim=$this->db->query($edittime);
+  $tim1=$tim->result();
+  return $tim1;
+}
+
+function update_shows_times_details($time_id,$plan_id,$eventid,$showtime,$seats,$user_id)
+{
+  $updatetime="UPDATE booking_plan_timing SET show_time='$showtime',seat_available='$seats',updated_by='$user_id',updated_at=NOW() WHERE id='$time_id' AND event_id='$eventid' AND plan_id='$plan_id'";
+  $updatetime1=$this->db->query($updatetime);
+  $data= array("status"=>"success");
+  return $data;
+
+}
 
 }
 ?>

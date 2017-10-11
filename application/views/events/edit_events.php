@@ -345,7 +345,6 @@ $(document).ready(function () {
          event_status:{required:true },
          txtLatitude:{required:true },
          txtLongitude:{required:true }
-         
         },
 
         messages: {

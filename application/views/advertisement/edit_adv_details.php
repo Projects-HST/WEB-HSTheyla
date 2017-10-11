@@ -218,18 +218,17 @@
       var endTime = new Date(startTime);
       endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
       //alert(startTime); alert(endTime);
-      if (startTime > endTime) {
-      alert("Start Time is greater than end time");
+
+      var a=objFromDate + '' + startTime;
+      var b=objToDate + '' + endTime;
+     //alert(a);alert(b);
+      if (a == b || a > b) {
+      alert("Start Date & Time is greater than end Date & Time");
       return false;
       }
-      // if (startTime == endTime) {
-      // alert("Start Time equals end time");
-      // return false;
-      // }
-      // if (startTime < endTime) {
-      // alert("Start Time is less than end time");
-      // return false;
-      // }
+
+
+     
       
       function GetHours(d) {
       var h = parseInt(d.split(':')[0]);
