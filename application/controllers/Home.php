@@ -21,11 +21,12 @@ class Home extends CI_Controller {
 			if($user_role==1){
 				redirect('adminlogin/dashboard');
 			}else if($user_role==2){
-			$this->load->view('profile');
+		            redirect('home');
 			}else if($user_role==3){
-
-				$this->load->view('index');
+                redirect('profile');
+				//$this->load->view('index');
 			}else{
+			     //redirect('/');
 				$this->load->view('index');
 			}
 
@@ -65,7 +66,7 @@ class Home extends CI_Controller {
 		$lastname = $user['familyName'];
 		$datas['result'] = $this->loginmodel->getuserinfogoogle($email,$firstname,$lastname);
 		  $user_role=$datas['result']['user_role'];
-	
+
 		 $status=$datas['result']['status'];
 		 if($status=='Y'){
 			 if($user_role==3){
@@ -119,11 +120,11 @@ class Home extends CI_Controller {
 							redirect('/');
 						}
 					}else{
-						echo "Account Deactive";
+					redirect('deactive');
 
 					}
 				}else{
-					echo "login here";
+					redirect('/');
 				}
 
 			}else{
@@ -147,12 +148,11 @@ class Home extends CI_Controller {
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
 			$user_role=$this->session->userdata('user_role');
-			
+
 			$datas['res']=$this->loginmodel->getuserinfo($user_id);
+			
 			if($user_id){
-				if($user_role==2){
-					$this->load->view('organiser', $datas);
-				}else if($user_role==3){
+				if($user_role==3){
 					$this->load->view('profile', $datas);
 				}else{
 					redirect('/');
@@ -165,9 +165,10 @@ class Home extends CI_Controller {
 			$user_id=$this->session->userdata('id');
 			 $user_role=$this->session->userdata('user_role');
 			$datas['res']=$this->loginmodel->getuserinfo($user_id);
+
 			if($user_id){
 				if($user_role==2){
-						$this->load->view('organiser', $datas);
+						$this->load->view('organizer/dashboard', $datas);
 				}else{
 					redirect('/');
 				}
@@ -180,6 +181,9 @@ class Home extends CI_Controller {
 		}
 		public function resetpassword(){
 			$this->load->view('resetpassword');
+		}
+		public function deactive(){
+			$this->load->view('deactive');
 		}
 
 		public function reset_password(){

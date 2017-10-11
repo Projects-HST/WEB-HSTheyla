@@ -16,7 +16,7 @@ public function home()
 {
 	$username=$this->input->post('username');
 	$password=md5($this->input->post('pwd'));
-	
+
 
 	$result = $this->loginmodel->login($username,$password);
 	$msg=$result['msg'];
@@ -37,7 +37,7 @@ public function home()
 
 	$user_type=$this->session->userdata('user_role');
 	$user_type1=$result['user_role'];
-	
+
 		if($result['status']=='Y')
 		{
 			switch($user_type1)
@@ -60,9 +60,9 @@ public function home()
 					//$this->session->userdata($user_name);
 					$session_data=$this->session->set_userdata($datas);
 
-					
+
 					redirect('home');
-					
+
 				break;
 				case '3':
 				     $user_name=$result['user_name'];$msg=$result['msg'];$mobile_no=$result['mobile_no'];$email_id=$result['email_id'];$status=$result['status'];$id=$result['id'];$user_role=$result['user_role'];
@@ -71,9 +71,9 @@ public function home()
 					//$this->session->userdata($user_name);
 					$session_data=$this->session->set_userdata($datas);
 
-					
+
 					redirect('profile');
-					
+
 				break;
 			}
 		}
@@ -159,8 +159,8 @@ public function dashboard()
 					 redirect('/');
 				 }
 			 }else{
-				 echo "Account Deactive";
 
+				  redirect('deactive');
 			 }
 
 			}

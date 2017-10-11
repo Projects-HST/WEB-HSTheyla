@@ -57,7 +57,7 @@
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark  fixed-top menupage">
+    <nav class="navbar navbar-expand-lg navbar-dark  fixed-top  navbar-inverse menupage">
         <div class="container">
             <a class="navbar-brand" href="#"><img src="<?php echo base_url(); ?>assets/front/images/logo.png" class="imglogo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -107,7 +107,11 @@
                             <span>
                       <p class="float-right setting-btn" >
                           <a href="#" class="setting" id="setting"><i class="fa fa-cog" aria-hidden="true"></i></a></p>
-                      <p class="float-right"><a href="#" class="btn " id="edit-btn">Edit</i></a></p>
+                            <p class="float-right"><a href="#" class="btn " id="edit-btn">Edit</i></a>
+                            <br>
+                          <a href="#" class="btn " id="edit-btn">Edit</i></a></p>
+
+
                     </span>
                             <div class="profile-img">
                               <?php if(empty($rows->user_picture)){ ?>
@@ -142,12 +146,7 @@
                                             <?php echo $rows->email_id; ?>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                                        <div class="col-sm-5">
-                                            <?php echo $rows->email_id; ?>
-                                        </div>
-                                    </div>
+
                                     <div class="form-group row">
                                         <label for="staticEmail" class="col-sm-2 col-form-label">Address</label>
                                         <div class="col-sm-5">
@@ -160,6 +159,7 @@
                                             <?php echo $rows->mobile_no; ?>
                                         </div>
                                     </div>
+
 
                                 </div>
                                 <form method="post" enctype="multipart/form-data" id="form">
@@ -246,6 +246,7 @@
         $("#form").toggle();
         $('#per-info').hide();
     });
+
 
     $('#form').validate({ // initialize the plugin
         rules: {
