@@ -37,6 +37,7 @@ public function home()
 
 	$user_type=$this->session->userdata('user_role');
 	$user_type1=$result['user_role'];
+	
 		if($result['status']=='Y')
 		{
 			switch($user_type1)
@@ -51,6 +52,28 @@ public function home()
 					$this->load->view('header',$datas);
 					$this->load->view('home',$datas);
 					$this->load->view('footer');
+				break;
+				case '2':
+				     $user_name=$result['user_name'];$msg=$result['msg'];$mobile_no=$result['mobile_no'];$email_id=$result['email_id'];$status=$result['status'];$id=$result['id'];$user_role=$result['user_role'];
+
+					$datas= array("user_name"=>$user_name, "msg"=>$msg,"mobile_no"=>$mobile_no,"email_id"=>$email_id,"status"=>$status,"id"=>$id,"user_role"=>$user_role,);
+					//$this->session->userdata($user_name);
+					$session_data=$this->session->set_userdata($datas);
+
+					
+					redirect('home');
+					
+				break;
+				case '3':
+				     $user_name=$result['user_name'];$msg=$result['msg'];$mobile_no=$result['mobile_no'];$email_id=$result['email_id'];$status=$result['status'];$id=$result['id'];$user_role=$result['user_role'];
+
+					$datas= array("user_name"=>$user_name, "msg"=>$msg,"mobile_no"=>$mobile_no,"email_id"=>$email_id,"status"=>$status,"id"=>$id,"user_role"=>$user_role,);
+					//$this->session->userdata($user_name);
+					$session_data=$this->session->set_userdata($datas);
+
+					
+					redirect('profile');
+					
 				break;
 			}
 		}

@@ -125,7 +125,7 @@
                      $client->setClientId($CLIENT_ID);
                      $client->setClientSecret($CLIENT_SECRET);
                      $client->setAccessType("offline");
-                     $client->setRedirectUri('http://localhost/heyla/adminlogin/glogin/');
+                     $client->setRedirectUri('http://heylaapp.com/heyla/google_login');
                      $client->setScopes('email');
                      $objOAuthService = new Google_Service_Plus($client);
 

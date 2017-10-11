@@ -175,7 +175,8 @@ Class Loginmodel extends CI_Model
    }
 
    function create_profile($name,$mobile,$email,$password){
-     $create="INSERT INTO user_master (user_name,mobile_no,email_id,user_role,email_verify,mobile_verify) VALUES('$name','$mobile','$email','$password','N','N')";
+   	$pwd=md5($password);
+     $create="INSERT INTO user_master (user_name,mobile_no,email_id,password,user_role,email_verify,mobile_verify,status) VALUES('$name','$mobile','$email','$pwd','3','N','N','Y')";
      $res=$this->db->query($create);
      $last_id=$this->db->insert_id();
      $user_details="INSERT INTO user_details (user_id,newsletter_status) VALUES('$last_id','Y')";

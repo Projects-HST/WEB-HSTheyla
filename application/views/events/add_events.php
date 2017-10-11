@@ -384,7 +384,18 @@ function check()
     var date4 = date3.getMonth() + "/" + date3.getDay() + "/" + date3.getYear();
     var currentDate = new Date(date4);
      
-    if(date1>date2 )
+     //----------------Time------------------
+
+      var strStartTime = document.getElementById("stime").value;
+      var strEndTime = document.getElementById("etime").value;
+
+      var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+      var endTime = new Date(startTime);
+      endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+ 
+     //var a= date1.startTime;
+     //alert(a);
+    if(date1 > date2)
     {
       alert("Startdate should be less than Enddate");
       return false; 
@@ -396,17 +407,19 @@ function check()
     // alert("To Date should be less than current date");
     // return false; }
     
-      var strStartTime = document.getElementById("stime").value;
-      var strEndTime = document.getElementById("etime").value;
-
-      var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
-      var endTime = new Date(startTime);
-      endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
-      // alert(startTime); alert(endTime);
-      if (startTime > endTime) {
-      alert("Start Time is greater than end time");
+      var a=objFromDate + '' + startTime;
+      var b=objToDate + '' + endTime;
+     //alert(a);alert(b);
+      if (a == b || a > b) {
+      alert("Start Date & Time is greater than end Date & Time");
       return false;
       }
+
+      // alert(startTime); alert(endTime);
+      // if (startTime > endTime) {
+      // alert("Start Time is greater than end time");
+      // return false;
+      // }
       // if (startTime == endTime) {
       // alert("Start Time equals end time");
       // return false;
@@ -426,23 +439,6 @@ function check()
       function GetMinutes(d) {
       return parseInt(d.split(':')[1].split(' ')[0]);
       }
-
-    
-  // if(document.eventform.txtLatitude.value=="")
-  //   {
-  //           //alert("Please enter Latitude.");
-  //           $("#ermsg").html('<p style="color: red;">Please enter Latitude.</p>');
-  //           document.eventform.txtLatitude.focus();
-  //           return false;
-  //   }
-    
-  //   if(document.eventform.txtLongitude.value=="")
-  //   {
-  //           //alert("Please enter Longitude.");
-  //           $("#ermsg1").html('<p style="color: red;">Please enter Longitude.</p>');
-  //           document.eventform.txtLongitude.focus();
-  //           return false;
-  //   }
 
   if(document.eventform.txtLatitude.value!="")
     {

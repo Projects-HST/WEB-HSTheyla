@@ -408,23 +408,6 @@ $(document).ready(function () {
 function check()
 {
 
-    var objFromDate = document.getElementById("datepicker-autoclose").value;
-    var objToDate = document.getElementById("datepicker").value;
-     
-    var date1 = new Date(objFromDate);
-    var date2 = new Date(objToDate);
-     
-    var date3 = new Date();
-    var date4 = date3.getMonth() + "/" + date3.getDay() + "/" + date3.getYear();
-    var currentDate = new Date(date4);
-     
-    if(date1 > date2)
-    {
-      alert("Startdate should be less than Enddate");
-      return false; 
-    }
-    
-
   if(document.eventform.txtLatitude.value=="")
     {
             //alert("Please enter Latitude.");
@@ -473,18 +456,43 @@ function check()
                  $("#ermsg3").hide();
             }
     }
+      
+      var objFromDate = document.getElementById("datepicker-autoclose").value;
+      var objToDate = document.getElementById("datepicker").value;
+     
+      var date1 = new Date(objFromDate);
+      var date2 = new Date(objToDate);
+       
+      var date3 = new Date();
+      var date4 = date3.getMonth() + "/" + date3.getDay() + "/" + date3.getYear();
+      var currentDate = new Date(date4);
+       
+      if(date1 > date2)
+      {
+        alert("Startdate should be less than Enddate");
+        return false; 
+      }
+
 
       var strStartTime = document.getElementById("stime").value;
       var strEndTime = document.getElementById("etime").value;
 
-      var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+      var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
       var endTime = new Date(startTime);
       endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
-      // alert(startTime); alert(endTime);
-      if (startTime > endTime) {
-      alert("Start Time is greater than end time");
+      
+      var a=objFromDate + '' + startTime;
+      var b=objToDate + '' + endTime;
+     //alert(a);alert(b);
+      if (a == b || a > b) {
+      alert("Start Date & Time is greater than end Date & Time");
       return false;
       }
+
+      // if (startTime > endTime) {
+      //  alert("Start Time is greater than end time");
+      //  return false;
+      // }
       // if (startTime == endTime) {
       // alert("Start Time equals end time");
       // return false;

@@ -44,7 +44,7 @@ class Home extends CI_Controller {
 		$client->setClientId($CLIENT_ID);
 		$client->setClientSecret($CLIENT_SECRET);
 		$client->setAccessType("offline");
-		$client->setRedirectUri('http://localhost/heyla/profile');
+		$client->setRedirectUri('http://heylaapp.com/heyla/google_login');
 		$client->setScopes('email');
 		$objOAuthService = new Google_Service_Plus($client);
 		$client->setScopes(array('https://www.googleapis.com/auth/userinfo.email','https://www.googleapis.com/auth/userinfo.profile'));
@@ -65,13 +65,14 @@ class Home extends CI_Controller {
 		$lastname = $user['familyName'];
 		$datas['result'] = $this->loginmodel->getuserinfogoogle($email,$firstname,$lastname);
 		  $user_role=$datas['result']['user_role'];
-
+	
 		 $status=$datas['result']['status'];
 		 if($status=='Y'){
 			 if($user_role==3){
-				$this->load->view('organiser', $datas);
+					 redirect('profile');
 			 }else if($user_role==2){
-				$this->load->view('profile', $datas);
+			     redirect('home');
+				//$this->load->view('profile', $datas);
 			 }else{
 				 redirect('/');
 			 }
@@ -146,6 +147,7 @@ class Home extends CI_Controller {
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
 			$user_role=$this->session->userdata('user_role');
+			
 			$datas['res']=$this->loginmodel->getuserinfo($user_id);
 			if($user_id){
 				if($user_role==2){
