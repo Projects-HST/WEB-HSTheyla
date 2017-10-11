@@ -305,6 +305,8 @@
          end_date:{ required:true },
          start_time:{required:true },
          end_time:{required:true },
+         eadv_status:{required:true},
+         hotspot_sts:{required:true},
          pcontact_cell:{required:true },
          contact_person:{required:true },
          email:{required:true },
@@ -327,6 +329,8 @@
         end_date:"Select End Date",
         start_time:"Select Start Time",
         end_time:"Select End Time",
+        eadv_status:"Select Advertisement Status ",
+        hotspot_sts:"Select Hotspot Display Status ",
         pcontact_cell:"Enter Cell Number",
         contact_person:"Enter Name",
         email:"Enter Email",
@@ -400,13 +404,7 @@ function check()
       alert("Startdate should be less than Enddate");
       return false; 
     }
-    // else if(date =< currentDate){
-    // alert("From Date should be less than current date");
-    // return false; 
-    // }else if(date2 > currentDate) {
-    // alert("To Date should be less than current date");
-    // return false; }
-    
+  
       var a=objFromDate + '' + startTime;
       var b=objToDate + '' + endTime;
      //alert(a);alert(b);
@@ -415,29 +413,20 @@ function check()
       return false;
       }
 
-      // alert(startTime); alert(endTime);
-      // if (startTime > endTime) {
-      // alert("Start Time is greater than end time");
-      // return false;
-      // }
-      // if (startTime == endTime) {
-      // alert("Start Time equals end time");
-      // return false;
-      // }
-      // if (startTime < endTime) {
-      // alert("Start Time is less than end time");
-      // return false;
-      // }
       
-      function GetHours(d) {
-      var h = parseInt(d.split(':')[0]);
-      if (d.split(':')[1].split(' ')[1] == "PM") {
-      h = h + 12;
-      }
+      function GetHours(d)
+       {
+        var h = parseInt(d.split(':')[0]);
+        if (d.split(':')[1].split(' ')[1] == "PM") 
+        {
+           h = h + 12;
+        }
       return h;
       }
-      function GetMinutes(d) {
-      return parseInt(d.split(':')[1].split(' ')[0]);
+
+      function GetMinutes(d) 
+      {
+        return parseInt(d.split(':')[1].split(' ')[0]);
       }
 
   if(document.eventform.txtLatitude.value!="")

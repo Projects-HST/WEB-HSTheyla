@@ -167,8 +167,8 @@
                                  <th>Category Rate</th>
                                  <th>From Date</th>
                                  <th>To Date</th>
-                                 <th>From Time</th>
-                                 <th>To Time</th>
+                                 <!--th>From Time</th>
+                                 <th>To Time</th-->
                                  <th>Plan Name</th>
                                 <th>Status</th>
                                  <th>Action</th>
@@ -188,8 +188,8 @@
                                        echo date_format($date,"d-m-Y");  ?></td>
                                  <td> <?php $date=date_create($rows->date_to);
                                        echo date_format($date,"d-m-Y");  ?></td>
-                                 <td><?php  echo $rows->time_from; ?></td>
-                                 <td> <?php echo $rows->time_to; ?></td>
+                                 <!--td><?php  echo $rows->time_from; ?></td>
+                                 <td> <?php echo $rows->time_to; ?></td-->
                                  <td><?php  echo $rows->plan_name; ?></td>
                                  <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
                                  <td> <a href="<?php echo base_url();?>advertisement/edit_history/<?php echo $rows->id;?>">
@@ -257,13 +257,14 @@
       }
    
 
-     var strStartTime = document.getElementById("stime").value;
+      var strStartTime = document.getElementById("stime").value;
       var strEndTime = document.getElementById("etime").value;
 
       var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
       var endTime = new Date(startTime);
       endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
       //alert(startTime); alert(endTime);
+
       if (startTime > endTime) {
       alert("Start Time is greater than end time");
       return false;
@@ -277,12 +278,14 @@
       // return false;
       // }
       
-      function GetHours(d) {
-      var h = parseInt(d.split(':')[0]);
-      if (d.split(':')[1].split(' ')[1] == "PM") {
-      h = h + 12;
-      }
-      return h;
+      function GetHours(d) 
+      {
+        var h = parseInt(d.split(':')[0]);
+        if (d.split(':')[1].split(' ')[1] == "PM") 
+        {
+         h = h + 12;
+        }
+         return h;
       }
       function GetMinutes(d) {
       return parseInt(d.split(':')[1].split(' ')[0]);

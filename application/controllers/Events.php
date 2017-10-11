@@ -233,13 +233,13 @@ class Events extends CI_Controller
         $colour_scheme=$this->input->post('colour_scheme');
 		$event_status=$this->input->post('event_status');
           
-         if(empty($event_banner)){
+         if(empty($event_pic)){
             $event_banner=$currentcpic;
          }else{
          	$event_banner=$event_banner;
          }
 
-         
+         //echo $event_banner;exit;
 
         $datas=$this->eventsmodel->update_events_details($eventid,$event_name,$category,$country,$city,$venue,$address,$description,$eventcost,$start_date,$end_date,$start_time,$end_time,$txtLatitude,$txtLongitude,$pcontact_cell,$scontact_cell,$contact_person,$email,$event_banner,$colour_scheme,$event_status,$eadv_status,$booking_sts,$hotspot_sts,$user_id,$user_role);
         $sta=$datas['status'];
