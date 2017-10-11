@@ -340,6 +340,8 @@ $(document).ready(function () {
          pcontact_cell:{required:true },
          contact_person:{required:true },
          email:{required:true },
+         eadv_status:{required:true},
+         hotspot_sts:{required:true},
          event_status:{required:true },
          txtLatitude:{required:true },
          txtLongitude:{required:true }
@@ -361,6 +363,8 @@ $(document).ready(function () {
         end_time:"Select End Time",
         pcontact_cell:"Enter Cell Number",
         contact_person:"Enter Name",
+         eadv_status:"Select Advertisement Status ",
+        hotspot_sts:"Select Hotspot Display Status ",
         email:"Enter Email",
         event_status:"Select Status",
         txtLatitude:"Enter Latitude",
