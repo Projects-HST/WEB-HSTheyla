@@ -74,7 +74,39 @@
     </nav>
 
     <!-- Button trigger modal -->
+    <div class="container">
+           <?php
+               if($this->session->flashdata('msg') !=   ''){
+               ?>
 
+                   <script>
+                   $(document).ready(function(){
+                       $("#wrongpassword").modal();
+                   });
+                   </script>
+
+               <?php
+               }
+           ?>
+   </div>
+
+   <div class="modal fade" id="wrongpassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+           <div class="modal-content">
+               <div class="modal-body">
+                 <center>
+
+
+                   <p class="verify-text">
+                     <?php echo $this->session->flashdata('msg'); ?>
+
+                 </p>
+                 </center>
+               </div>
+
+           </div>
+       </div>
+   </div>
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -116,23 +148,24 @@
                                     <center>
                                         <div class="social-login">
                                             <?php
-                     $this->load->library('googleplus');
-                     $CLIENT_ID = '56118066242-ndqa7sis300o0ce5otglegn629ktmjj5.apps.googleusercontent.com';
-                     $CLIENT_SECRET = 'QBjwPGP5PE6tzJt3bDekC4a1';
-                     $APPLICATION_NAME = "Heyla";
-                     $client = new Google_Client();
-                     $client->setApplicationName($APPLICATION_NAME);
-                     $client->setClientId($CLIENT_ID);
-                     $client->setClientSecret($CLIENT_SECRET);
-                     $client->setAccessType("offline");
-                     $client->setRedirectUri('http://heylaapp.com/heyla/google_login');
-                     $client->setScopes('email');
-                     $objOAuthService = new Google_Service_Plus($client);
-
-                     $client->setScopes(array('https://www.googleapis.com/auth/userinfo.email','https://www.googleapis.com/auth/userinfo.profile'));
-                     $authUrl=$client->createAuthUrl();
-                     echo '<a class="loginBtn loginBtn--google" href="'.$authUrl.'">Login with Google</a>';
+                    //  $this->load->library('googleplus');
+                    //  $CLIENT_ID = '56118066242-ndqa7sis300o0ce5otglegn629ktmjj5.apps.googleusercontent.com';
+                    //  $CLIENT_SECRET = 'QBjwPGP5PE6tzJt3bDekC4a1';
+                    //  $APPLICATION_NAME = "Heyla";
+                    //  $client = new Google_Client();
+                    //  $client->setApplicationName($APPLICATION_NAME);
+                    //  $client->setClientId($CLIENT_ID);
+                    //  $client->setClientSecret($CLIENT_SECRET);
+                    //  $client->setAccessType("offline");
+                    //  $client->setRedirectUri('http://heylaapp.com/heyla/google_login');
+                    //  $client->setScopes('email');
+                    //  $objOAuthService = new Google_Service_Plus($client);
+                     //
+                    //  $client->setScopes(array('https://www.googleapis.com/auth/userinfo.email','https://www.googleapis.com/auth/userinfo.profile'));
+                    //  $authUrl=$client->createAuthUrl();
+                    //  echo '<a class="loginBtn loginBtn--google" href="'.$authUrl.'">Login with Google</a>';
                      ?>
+                     <a href="<?php echo base_url(); ?>google_login" class="loginBtn loginBtn--google">Login With google</a>
                                                 <a href="<?php echo base_url(); ?>facebook_login" class="loginBtn loginBtn--facebook">
                        Login with Facebook
                      </a>

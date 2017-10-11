@@ -59,5 +59,6 @@ $route['profile'] = 'home/profile';
 $route['verify'] = 'home/verify';
 $route['reset'] = 'home/resetpassword';
 $route['home'] = 'home/organiser';
+// $route['emailverfiy'] = 'home/emailverfiy';
 $route['deactive'] = 'home/deactive';
 $route['logout'] = 'home/logout';

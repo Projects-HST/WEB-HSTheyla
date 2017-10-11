@@ -27,33 +27,13 @@
     <script src="<?php echo base_url(); ?>assets/js/additional-methods.min.js"></script>
 </head>
 <style>
-
-.modal {
+.verified{
+  margin-top: 20%;
+}
+.verified-text{
+  font-size: 33px;
   text-align: center;
-  padding: 0!important;
 }
-
-.modal:before {
-  content: '';
-  display: inline-block;
-  height: 100%;
-  vertical-align: middle;
-  margin-right: -4px;
-}
-.modal-body{
-  padding-top:30px;
-  padding-bottom:30px;
-  padding-left: 20px;
-  padding-right: 20px;
-  border: 2px solid #6D6E71;
-  border-radius: 20px;
-}
-.modal-dialog {
-  display: inline-block;
-  text-align: left;
-  vertical-align: middle;
-}
-
 </style>
 
 <body>
@@ -99,28 +79,22 @@
             </div>
         </div>
     </nav>
-    <section class="verify-page profile">
+    <section class="verify-page ">
       <div class="container">
         <div class="row">
-          <div class="verify-text">
+          <div class="verified">
 
-          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" >
-              <div class="modal-dialog">
-                  <div class="modal-content">
-                      <div class="modal-body">
-                        <center>
-                          <img src="<?php echo base_url(); ?>assets/front/images/email.png" class="img-fluid">
-                          <p class="verify-text">Thanking for Registering.</p>
-                          <p class="verify-text">
 
-              Check Your Inbox for  the verification email We’ve sent you a message to your registered email ID. Click on the verification link to confirm your email ID.
-                          </p>
-                        </center>
-                      </div>
+            <p class="verified-text">
+              <?php
+                if($res['msg']=="verify"){ ?>
+                  Thank Your  Email Has been Verified Successfully .Click here to<a href="<?php echo base_url(); ?>"> Login</a>
+              <?php  }else{
+                  echo $res['msg'];
+                }
+               ?>
 
-                  </div>
-              </div>
-          </div>
+        </p>
           </div>
         </div>
       </div>
@@ -150,28 +124,13 @@
 <script src="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/pages/sweet-alert.init.js"></script>
 <script type="text/javascript">
-    $("#myModal").modal('show');
-    $('#myModall').modal({
-                         backdrop: 'static',
-                         keyboard: true,
-                         show: true
-                 });
-    $("#loginbtn").click(function() {
-        $(this).toggleClass("menuactive");
-    });
-    $('ul li a').click(function() {
-        $('li a').removeClass("menuactive");
-        $(this).addClass("menuactive");
-    });
 
-    $("#setting").click(function() {
-        $("#edit-btn").toggle();
-    });
 
-    $("#edit-btn").click(function() {
-        $("#form").toggle();
-        $('#per-info').hide();
-    });
+
+
+
+
+
 
    $('.verify-page').height($(window).height());
 

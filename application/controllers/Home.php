@@ -85,7 +85,7 @@ class Home extends CI_Controller {
 		}
 		else{
 		$authUrl=$client->createAuthUrl();
-		echo '<a href="'.$authUrl.'">login to google</a>';
+			redirect($authUrl);
 		}
 
 	}
@@ -150,7 +150,7 @@ class Home extends CI_Controller {
 			$user_role=$this->session->userdata('user_role');
 
 			$datas['res']=$this->loginmodel->getuserinfo($user_id);
-			
+
 			if($user_id){
 				if($user_role==3){
 					$this->load->view('profile', $datas);
@@ -185,11 +185,27 @@ class Home extends CI_Controller {
 		public function deactive(){
 			$this->load->view('deactive');
 		}
+		public function verified(){
+			$this->load->view('email_verification');
+		}
 
 		public function reset_password(){
 			$email=$this->input->post('email');
 			$data=$this->loginmodel->reset_password($email);
 		}
+
+		public function emailverfiy(){
+  	 $email = $this->uri->segment(3);
+  	 $has = $this->uri->segment(4);
+		$data['res']=$this->loginmodel->email_verify($email,$has);
+		if($data['res']['msg']=='verify'){
+					$this->load->view('email_verification',$data);
+		}else{
+				$this->load->view('email_verification',$data);
+		}
+
+		}
+
 		public function checkemail(){
 			$email=$this->input->post('email');
 			$data=$this->loginmodel->check_email($email);

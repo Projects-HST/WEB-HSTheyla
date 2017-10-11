@@ -173,6 +173,26 @@ Class Loginmodel extends CI_Model
        echo "failed";
      }
    }
+   function email_verify($email,$has){
+      $check_username="SELECT * FROM user_master WHERE email_id='$email' AND password='$has'";
+     $res=$this->db->query($check_username);
+     if($res->num_rows()==1){
+       foreach($res->result() as $rows){}
+         $user_id=$rows->id;
+         $update="UPDATE user_master SET email_verify='Y' WHERE id='$user_id'";
+         $result=$this->db->query($update);
+         if($result){
+          $data=array("msg"=>"verify");
+          return $data;
+         }else{
+           $data=array("msg"=>"Some Thing Went Wrong Please Contact Us");
+             return $data;
+         }
+     }else{
+       $data=array("msg"=>"Some Thing Went Wrong Please Contact Us");
+         return $data;
+     }
+   }
 
    function create_profile($name,$mobile,$email,$password){
    	$pwd=md5($password);
@@ -181,7 +201,25 @@ Class Loginmodel extends CI_Model
      $last_id=$this->db->insert_id();
      $user_details="INSERT INTO user_details (user_id,newsletter_status) VALUES('$last_id','Y')";
       $result=$this->db->query($user_details);
+
       if($result){
+        $to=$email;
+        $subject="Welcome to Heyla App";
+        $htmlContent = '
+          <html>
+          <head>
+          <title></title>
+             </head>
+             <body>
+             <p style="margin-left:50px;">Thanking for Registering with Heyla App
+             To Login Use the New Password <A href="'. base_url().'home/emailverfiy/'.$email.'/'.$pwd.'" target="_blank">Click Here to Verfiy </a> </p>
+             </body>
+          </html>';
+      $headers = "MIME-Version: 1.0" . "\r\n";
+      $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+      // Additional headers
+      $headers .= 'From: heylapp<info@heylapp.com>' . "\r\n";
+      $sent= mail($to,$subject,$htmlContent,$headers);
         echo "verify";
       }else{
         echo "failed";
