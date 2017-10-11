@@ -42,11 +42,11 @@ class Booking extends CI_Controller
 	    $user_role=$this->session->userdata('user_role');
 
 	    $planname=$this->input->post('planname');
-	    $seats=$this->input->post('seats');
+	    
 	    $amount=$this->input->post('amount');
 	    $eventid=$this->input->post('event_id');
 
-	    $datas = $this->bookingmodel->add_events_details($eventid,$planname,$seats,$amount,$user_id);
+	    $datas = $this->bookingmodel->add_events_details($eventid,$planname,$amount,$user_id);
         $sta=$datas['status'];
         //print_r($sta);exit;
         if($sta=="success"){
@@ -85,12 +85,12 @@ class Booking extends CI_Controller
 	    $user_role=$this->session->userdata('user_role');
 
 	    $planname=$this->input->post('planname');
-	    $seats=$this->input->post('seats');
+	    
 	    $amount=$this->input->post('amount');
 	    $eventid=$this->input->post('event_id');
 	    $planid=$this->input->post('plan_id');
 
-	    $datas = $this->bookingmodel->update_events_details($eventid,$planid,$planname,$seats,$amount,$user_id);
+	    $datas = $this->bookingmodel->update_events_details($eventid,$planid,$planname,$amount,$user_id);
         $sta=$datas['status'];
         //print_r($sta);exit;
         if($sta=="success"){
@@ -102,6 +102,95 @@ class Booking extends CI_Controller
 	     }
 	}
     
+    //-------------------------show_time----------------------------------
+
+    public function add_show_time($plaid,$eveid)
+    {
+        $datas=$this->session->userdata();
+	    $user_id=$this->session->userdata('id');
+	    $user_role=$this->session->userdata('user_role');
+
+        $datas['plan_time'] = $this->bookingmodel->view_plan_time_details($plaid,$eveid);
+        $datas['planid']=$plaid;
+        $datas['eventid']=$eveid;
+
+		if($user_role==1)
+		{
+		  $this->load->view('header');
+		  $this->load->view('booking/add_plan_time',$datas);
+		  $this->load->view('footer');
+	 	}else{
+	 			redirect('/');
+	 		 }
+    }
+
+    public function add_show_times_details()
+    {
+        $datas=$this->session->userdata();
+	    $user_id=$this->session->userdata('id');
+	    $user_role=$this->session->userdata('user_role');
+
+	    $plan_id=$this->input->post('plan_id');
+	    $eventid=$this->input->post('event_id');
+	    $showtime=$this->input->post('showtime');
+	    $seats=$this->input->post('seats');
+
+	    $datas = $this->bookingmodel->add_shows_times_details($plan_id,$eventid,$showtime,$seats,$user_id);
+        $sta=$datas['status'];
+        //print_r($sta);exit;
+        if($sta=="success"){
+	       $this->session->set_flashdata('msg','Added Successfully');
+		   redirect('booking/add_show_time/'.$plan_id.'/'.$eventid.'');
+	     }else if($sta=="AE"){
+	     	 $this->session->set_flashdata('msg','Already Exist');
+		    redirect('booking/add_show_time/'.$plan_id.'/'.$eventid.'');
+	     }else{
+	     	 $this->session->set_flashdata('msg','Faild To Add');
+		    redirect('booking/add_show_time/'.$plan_id.'/'.$eventid.'');
+	     }
+    }
+
+    public function edit_plan_time($id)
+    {
+    	$datas=$this->session->userdata();
+	    $user_id=$this->session->userdata('id');
+	    $user_role=$this->session->userdata('user_role');
+        $datas['edit']=$this->bookingmodel->edit_plans_time($id);
+        //print_r($datas['edit']);exit;
+        if($user_role==1)
+		{
+		  $this->load->view('header');
+		  $this->load->view('booking/edit_plan_time',$datas);
+		  $this->load->view('footer');
+	 	}else{
+	 			redirect('/');
+	 		 }
+
+    }
+
+    public function update_show_times_details()
+    {
+    	$datas=$this->session->userdata();
+	    $user_id=$this->session->userdata('id');
+	    $user_role=$this->session->userdata('user_role');
+        
+        $time_id=$this->input->post('time_id');
+	    $plan_id=$this->input->post('plan_id');
+	    $eventid=$this->input->post('event_id');
+	    $showtime=$this->input->post('showtime');
+	    $seats=$this->input->post('seats');
+
+	    $datas = $this->bookingmodel->update_shows_times_details($time_id,$plan_id,$eventid,$showtime,$seats,$user_id);
+        $sta=$datas['status'];
+        //print_r($sta);exit;
+        if($sta=="success"){
+	       $this->session->set_flashdata('msg','updated Successfully');
+		   redirect('booking/add_show_time/'.$plan_id.'/'.$eventid.'');
+	     }else{
+	     	 $this->session->set_flashdata('msg','Faild To update');
+		    redirect('booking/add_show_time/'.$plan_id.'/'.$eventid.'');
+	     }
+    }
 
 
 }

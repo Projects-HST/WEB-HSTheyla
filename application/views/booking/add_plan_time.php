@@ -32,7 +32,7 @@
                   </button>
                </li>
                <li class="hide-phone list-inline-item app-search">
-                  <h3 class="page-title">Event Plans</h3>
+                  <h3 class="page-title">Plan Show Time</h3>
                </li>
             </ul>
             <div class="clearfix"></div>
@@ -46,26 +46,22 @@
                   <div class="card m-b-20">
                      <div class="card-block">
                         <h4 class="mt-0 header-title"></h4>
-                        <form  method="post"  enctype="multipart/form-data" action="<?php echo base_url();?>booking/add_plans" name="planform" id="planform">
+                        <form  method="post"  enctype="multipart/form-data" action="<?php echo base_url();?>booking/add_show_times_details" name="plantimeform" id="plantimeform">
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Plan Name</label>
+                              <label class="col-sm-4 col-form-label">Show Time</label>
                               <div class="col-sm-6">
-                                 <input class="form-control"   type="text" name="planname">
-                                 <input class="form-control"  type="hidden" name="event_id" value="<?php echo $eventid ;?>">
+                                 <input class="form-control"   type="text" name="showtime">
+                              <input class="form-control"  type="hidden" name="event_id" value="<?php echo $eventid ;?>">
+                              <input class="form-control"  type="hidden" name="plan_id" value="<?php echo $planid ;?>">
                               </div>
                            </div>
-                           <!--div class="form-group row">
+                           <div class="form-group row">
                               <label for="example-text-input" class="col-sm-4 col-form-label">Available Seats</label>
                               <div class="col-sm-6">
                                  <input class="form-control"  type="text" name="seats" >
                               </div>
-                           </div-->
-                           <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Amount </label>
-                              <div class="col-sm-6">
-                                 <input class="form-control" type="text" name="amount" >
-                              </div>
                            </div>
+                           
                            <div class="form-group">
                               <label class="col-sm-4 col-form-label"></label>
                               <button type="submit" class="btn btn-primary waves-effect waves-light">
@@ -84,7 +80,7 @@
                <div class="col-12">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title">Plan Details</h4>
+                        <h4 class="mt-0 header-title"></h4>
                         <?php if($this->session->flashdata('msg')): ?>
                         <div class="alert alert-success">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
@@ -97,6 +93,8 @@
                                  <th>S.NO</th>
                                  <th>Event Name</th>
                                  <th>Plan Name</th>
+                                 <th>Show Time</th>
+                                 <th>Available Seats</th>
                                  <th>Amount</th>
                                  <th>Action</th>
                               </tr>
@@ -104,19 +102,17 @@
                            <tbody>
                               <?php
                                  $i=1;
-                                 foreach($view_plan as $rows) {
-                                    $eveid=$rows->event_id;
-                                    $plaid=$rows->id;
+                                 foreach($plan_time as $rows) {
                                  ?>
                               <tr>
                                  <td><?php  echo $i; ?></td>
-                                 <td><?php  echo $rows->plan_name; ?></td>
                                  <td><?php  echo $rows->event_name; ?></td>
+                                 <td><?php  echo $rows->plan_name; ?></td>
+                                 <td><?php  echo $rows->show_time; ?></td>
+                                 <td><?php  echo $rows->seat_available; ?></td>
                                  <td><?php  echo $rows->seat_rate; ?></td>
                                  <td>
-                                    <a href="<?php echo base_url();?>booking/edit_plan/<?php echo $rows->id;?>"><img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
-                                    <a href="<?php echo base_url();?>booking/add_show_time/<?php echo $plaid;?>/<?php echo $eveid;?>">
-                              <img title="Planing Times" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
+                                    <a href="<?php echo base_url();?>booking/edit_plan_time/<?php echo $rows->id;?>"><img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
                                  </td>
                               </tr>
                               <?php $i++;  }  ?>
@@ -138,17 +134,17 @@
 <!-- content -->
 <script type="text/javascript">
    $(document).ready(function () {
-   $('#planform').validate({ // initialize the plugin
+   $('#plantimeform').validate({ // initialize the plugin
       rules: {
-        planname:{required:true },
-        seats:{required:true },
-        amount:{required:true }        
+        showtime:{required:true },
+        seats:{required:true }
+              
        },
    
        messages: {
-       planname:"Enter Plan Name",
-       seats:"Enter  Seats",
-       amount:"Enter Amount"
+       showtime:"Enter Show Times",
+       seats:"Enter  Seats"
+       
               },
         }); 
    });
