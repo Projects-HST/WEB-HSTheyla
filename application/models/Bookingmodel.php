@@ -100,5 +100,17 @@ function update_shows_times_details($time_id,$plan_id,$eventid,$showtime,$seats,
 
 }
 
+function delete_plan_details($plaid)
+{
+  $plandel="DELETE FROM booking_plan WHERE id='$plaid' ";
+  $plandel1=$this->db->query($plandel);
+
+  $timedel="DELETE FROM booking_plan_timing WHERE plan_id='$plaid'";
+  $timedel1=$this->db->query($timedel);
+
+  $data= array("status"=>"success");
+  return $data;
+}
+
 }
 ?>
