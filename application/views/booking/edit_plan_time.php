@@ -1,3 +1,5 @@
+<script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
+<link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
 <!-- Start content -->
 <div class="content-page">
    <div class="content">
@@ -53,7 +55,10 @@
                            <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Show Time</label>
                               <div class="col-sm-6">
-                                 <input class="form-control"   type="text" name="showtime" value="<?php echo $res->show_time; ?>">
+
+       <input id="timepicker1" type="text" class="form-control"  name="showtime" value="<?php echo $res->show_time; ?>" >
+
+       <!--input class="form-control"   type="text" name="showtime" value="<?php echo $res->show_time; ?>"-->
                       <input class="form-control" type="hidden" name="time_id" value="<?php echo $res->id;?>">
                      <input class="form-control" type="hidden" name="event_id" value="<?php echo $res->event_id;?>">
                      <input class="form-control" type="hidden" name="plan_id"  value="<?php echo $res->plan_id; ?>">
@@ -87,6 +92,9 @@
 </div>
 <!-- content -->
 <script type="text/javascript">
+
+   $('#timepicker1').timepicki();
+
    $(document).ready(function () {
    $('#plantimeform').validate({ // initialize the plugin
       rules: {
