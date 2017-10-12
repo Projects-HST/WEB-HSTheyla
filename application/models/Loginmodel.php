@@ -21,6 +21,11 @@ Class Loginmodel extends CI_Model
 	        {
               foreach($res->result() as $rows)
                {
+                 $check_email_verify=$rows->email_verify;
+                 if($check_email_verify=='N'){
+                   $data= array("status"=>"emailverfiy","msg"=>"emailverfiy");
+                   return $data;
+                }
                  $quer="SELECT status FROM user_master WHERE id='$rows->id'";
                  $resultset=$this->db->query($quer);
                  $status=$rows->status;

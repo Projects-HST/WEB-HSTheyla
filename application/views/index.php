@@ -561,7 +561,7 @@
                 required: true
             },
             mobile: {
-                required: true,minlength: 10, maxlength: 10
+                required: true,minlength: 10, maxlength: 10, digits: true
             },
             new_password: {
                 required: true,minlength: 6, maxlength: 10

@@ -34,6 +34,12 @@ public function home()
 		$this->session->set_flashdata('msg', 'Invalid Login');
 		redirect('/');
 	}
+	if($result['status']=='emailverfiy')
+	{
+		$datas['user_data']=array("status"=>$result['status'],"msg"=>$result['msg']);
+		$this->session->set_flashdata('msg', 'You have to Verify your Email to login');
+		redirect('/');
+	}
 
 	$user_type=$this->session->userdata('user_role');
 	$user_type1=$result['user_role'];
@@ -81,7 +87,11 @@ public function home()
 		$datas['user_data']=array("status"=>$result['status'],"msg"=>$result['msg']);
 		$this->session->set_flashdata('msg', 'Password Wrong');
 		redirect('/');
-	}
+	}	elseif($msg=="emailverfiy"){
+			$datas['user_data']=array("status"=>$result['status'],"msg"=>$result['msg']);
+			$this->session->set_flashdata('msg', 'You have to Verify your Email to login');
+			redirect('/');
+		}
 	else{
 		$datas['user_data']=array("status"=>$result['status'],"msg"=>$result['msg']);
 		$this->session->set_flashdata('msg', 'Email invalid');
