@@ -116,7 +116,9 @@
                                  <td>
                                     <a href="<?php echo base_url();?>booking/edit_plan/<?php echo $rows->id;?>"><img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
                                     <a href="<?php echo base_url();?>booking/add_show_time/<?php echo $plaid;?>/<?php echo $eveid;?>">
-                              <img title="Planing Times" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
+                              <img title="Show Times" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
+                               <a href="<?php echo base_url();?>booking/delete_plan/<?php echo $plaid;?>/<?php echo $eveid;?>">
+                              <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
                                  </td>
                               </tr>
                               <?php $i++;  }  ?>

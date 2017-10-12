@@ -101,6 +101,28 @@ class Booking extends CI_Controller
 		     redirect('booking/home/'.$eventid.'');
 	     }
 	}
+
+	public function delete_plan($plaid,$eveid)
+	{
+		$datas=$this->session->userdata();
+	    $user_id=$this->session->userdata('id');
+	    $user_role=$this->session->userdata('user_role');
+         
+        if($user_role==1){ 
+	    $datas = $this->bookingmodel->delete_plan_details($plaid);
+        $sta=$datas['status'];
+        //print_r($sta);exit;
+        if($sta=="success"){
+	       $this->session->set_flashdata('msg','Deleted Successfully');
+		   redirect('booking/home/'.$eveid.'');
+	     }else{
+	     	 $this->session->set_flashdata('msg','Faild To Delete');
+		     redirect('booking/home/'.$eveid.'');
+	     }
+	   }else{
+           redirect('/');
+		 }
+	}
     
     //-------------------------show_time----------------------------------
 
