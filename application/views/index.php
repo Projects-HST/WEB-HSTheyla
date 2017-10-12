@@ -185,7 +185,7 @@
                                                 <p id="usermsg"></p>
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" class="form-control" id="email" name="email" required="" placeholder="Email" onchange="check_email()">
+                                                <input type="email" class="form-control" id="email" name="email" required="" placeholder="Email" onchange="check_email()">
                                                 <p id="emailmsg"></p>
                                             </div>
                                             <div class="form-group">
@@ -216,6 +216,7 @@
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
             </ol>
+
             <div class="carousel-inner carousel-fade" role="listbox">
                 <!-- Slide One - Set the background image for this slide in the line below -->
                 <div class="carousel-item active" style="background-image: url('<?php echo base_url(); ?>assets/front/images/slider1.jpg')">
@@ -239,6 +240,7 @@
                     </div>
                 </div>
             </div>
+
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
@@ -249,7 +251,7 @@
             </a>
         </div>
     </header>
-
+  <div id="loader"><img src="<?php echo base_url(); ?>assets/front/images/126.gif"></div>
     <!-- Page Content -->
     <section class="about" style="" id="about">
         <div class="container">
@@ -559,7 +561,7 @@
                 required: true
             },
             mobile: {
-                required: true
+                required: true,minlength: 10, maxlength: 10
             },
             new_password: {
                 required: true,minlength: 6, maxlength: 10
@@ -568,17 +570,19 @@
         messages: {
             name: { required:"Enter the Username", minlength: "Min is 6", maxlength: "Max is 10" },
             email: "Enter Valid Email ",
-            mobile: "Enter Mobile Number",
+              mobile: { required:"Enter the Mobile number", minlength: "Min is 10", maxlength: "Max is 10" },
+
             new_password: { required:"Enter the Password", minlength: "Min is 6", maxlength: "Max is 10" }
         },
         submitHandler: function(form) {
             //alert("hi");
+            $('#loader').show();
             $.ajax({
                 url: "<?php echo base_url(); ?>home/create_profile",
                 type: 'POST',
                 data: $('#formsignup').serialize(),
                 success: function(response) {
-
+                    $('#loader').hide();
                     if (response == "verify") {
                         swal({
                             title: "Success",
@@ -658,6 +662,7 @@
             }
         });
     }
+        $('#loader').hide();
 </script>
 
 </html>
