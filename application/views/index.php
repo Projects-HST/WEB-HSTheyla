@@ -611,9 +611,10 @@
 
                 if ((data) == "success") {
                     $("#submit").removeAttr("disabled");
+                      $('#emailmsg').html(' ');
                 } else {
                     $('#submit').prop('disabled', true);
-                    $('#emailmsg').html('Mobile number Already Exist');
+                    $('#emailmsg').html('Email  Already Exist');
                 }
             }
         });
@@ -654,6 +655,7 @@
                 console.log(data);
                 if ((data) == "success") {
                     $("#submit").removeAttr("disabled");
+                        $('#mobilemsg').html(' ');
                     // $('#mobilemsg').html('Username Available');
                 } else {
                     $('#submit').prop('disabled', true);

@@ -214,8 +214,13 @@ Class Loginmodel extends CI_Model
            <title></title>
               </head>
               <body>
-              <p style="margin-left:50px;">Thanking for Registering with Heyla App
-              To Login Use the New Password <A href="'. base_url().'home/emailverfiy/'.$email.'/'.$pwd.'" target="_blank">Click Here to Verfiy </a> </p>
+              <p>Dear '.$name.'</p>
+              <p style="font-size:20px;">Welcome to Heyla.</p>
+              <p style="margin-left:50px;">Thanking for Registering with Heyla App <br>
+              To allow us to confirm the validity of your email address,click this verification link.   <A href="'. base_url().'home/emailverfiy/'.$email.'/'.$pwd.'" target="_blank">Verfiy  Here</a> </p>
+              <p style="font-size:20px;">Thank you and enjoy, <br>
+                The Heyla Team
+                </p>
               </body>
            </html>';
        $headers = "MIME-Version: 1.0" . "\r\n";
