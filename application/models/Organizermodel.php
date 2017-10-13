@@ -70,6 +70,7 @@ Class Organizermodel extends CI_Model
 //--------------------------------List Events Organizer-------------------------------------
 	function list_events($user_id)
     {
+        $user_id =1;
       	$sql = "SELECT ev.*,ci.city_name,ca.category_name FROM city_master AS ci,category_master AS ca,events AS ev WHERE ev.created_by ='$user_id' AND ev.category_id = ca.id AND ev.event_city = ci.id  ORDER BY ev.category_id DESC";
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();

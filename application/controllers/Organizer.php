@@ -66,9 +66,7 @@ class Organizer extends CI_Controller
 
 		if($user_role==2)
 		{
-		  $this->load->view('header');
 		  $this->load->view('organizer/create_events',$datas);
-		  $this->load->view('footer');
 	 	}else{
 	 			redirect('/');
 	 		 }
@@ -121,16 +119,17 @@ class Organizer extends CI_Controller
         
 		$sta = $datas['status'];
 
+
 	    if($sta=="success"){
 			$this->session->set_flashdata('msg','Added Successfully');
-			redirect('organizer/viewevents');
+			redirect('/organizer/viewevents');
 	     }else if($sta=="Already Exist"){
 			$this->session->set_flashdata('msg','Already Exist');
-			redirect('organizer/viewevents');
+			redirect('/organizer/viewevents');
 	     }
 	     else{
 			$this->session->set_flashdata('msg','Faild To Add');
-			redirect('organizer/viewevents');
+			redirect('/organizer/viewevents');
 	     }
 	 }
 
@@ -146,9 +145,7 @@ class Organizer extends CI_Controller
 		
 		if($user_role==2)
 		{
-		  $this->load->view('header');
 		  $this->load->view('organizer/view_events',$datas);
-		  $this->load->view('footer');
 	 	}else{
 	 			redirect('/');
 	 	}
@@ -169,9 +166,7 @@ class Organizer extends CI_Controller
 
 		if($user_role==2)
 		{
-		  $this->load->view('header');
 		  $this->load->view('organizer/update_events',$datas);
-		  $this->load->view('footer');
 	 	}else{
 	 			redirect('/');
 	 		 }

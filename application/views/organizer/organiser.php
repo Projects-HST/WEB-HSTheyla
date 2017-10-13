@@ -33,7 +33,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="#">Home
                 <span class="sr-only"></span>
               </a>
@@ -75,37 +75,88 @@
         </div>
         </div>
       </div>
+
     </section>
 
+    <section class="organiser-section">
+      <div class="container-fluid organiser-bg">
+  <div class="row">
+    <div  class="col-sm-12">
 
-<div class="container" style="margin-top:30px;margin-bottom:50px;max-width:100%;">
 
-      <div class="row row-offcanvas row-offcanvas-right">
+  <div class="row">
+  <div class="col-md-2 organiser-menu"> <!-- required for floating -->
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs tabs-left">
+      <li class="tabactive"><a href="#home" data-toggle="tab">View Profile</a></li>
+      <li><a href="#profile" data-toggle="tab">Create Event</a></li>
+      <li><a href="#messages" data-toggle="tab">View Event</a></li>
+      <li><a href="#settings" data-toggle="tab">Payment History</a></li>
+    </ul>
+  </div>
 
-        <div class="col-12 col-md-3 sidebar-offcanvas" id="sidebar">
-          <div class="list-group">
-            <a href="<?php echo base_url(); ?>home" class="list-group-item active">Dashboard</a>
-            <a href="<?php echo base_url(); ?>organizer/createevents/" class="list-group-item">Create Events</a>
-            <a href="<?php echo base_url(); ?>organizer/viewevents/" class="list-group-item">View Events</a>
-            <a href="organizer/bookings/" class="list-group-item">Bookings</a>
-            <a href="organizer/messageboard/" class="list-group-item">Messages</a>
-            <a href="organizer/reviews/" class="list-group-item">Reviews</a>
-            <a href="organizer/followers/" class="list-group-item">Followers</a>
-          </div>
-        </div><!--/span-->
-        
-        <div class="col-12 col-md-9">
-          
-          <div class="jumbotron">
-            <h1>Hello, world!</h1>
-            <p>This is an example to show the potential of an offcanvas layout pattern in Bootstrap. Try some responsive-range viewport sizes to see it in action.</p>
-          </div>
-         
-        </div><!--/span-->
+  <div class="col-md-10 organiser-menu">
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane active" id="home">
+        <div class="profile-section">
+          <img src="<?php echo base_url(); ?>assets/front/images/add.png" class="img-fluid">
+          <span  class="profilename">Name</span>
+        </div>
+        <div class="personalinfo">
+          <div class="">
+            <form action="" method="post" class="form-organiser">
+              <div class="form-group row">
+              <label for="example-text-input" class="col-1 col-form-label">Text</label>
+              <div class="col-md-4 col-sm-12">
+                <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="example-search-input" class="col-1 col-form-label">Search</label>
+              <div class="col-md-4 col-sm-12">
+                <input class="form-control" type="search" value="How do I shoot web" id="example-search-input">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="example-email-input" class="col-1 col-form-label">Email</label>
+              <div class="col-md-6 col-sm-12">
+                <input class="form-control" type="email" value="bootstrap@example.com" id="example-email-input">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="example-search-input" class="col-1 col-form-label">Search</label>
+              <div class="col-md-4 col-sm-12">
+                <input class="form-control" type="search" value="How do I shoot web" id="example-search-input">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="example-email-input" class="col-1 col-form-label">Email</label>
+              <div class="col-md-4 col-sm-12">
+                <input class="form-control" type="email" value="bootstrap@example.com" id="example-email-input">
+              </div>
+            </div>
 
-        
-      </div><!--/row-->
- </div>
+  </form>
+  </div>
+        </div>
+
+      </div>
+      <div class="tab-pane" id="profile">Profile Tab.</div>
+      <div class="tab-pane" id="messages">Messages Tab.</div>
+      <div class="tab-pane" id="settings">Settings Tab.</div>
+    </div>
+  </div>
+    </div>
+
+  <div class="clearfix"></div>
+
+</div>
+  </div><!-- /row -->
+</div>
+    </scetion>
+
+
 
         <!-- Footer -->
         <footer class="footer-bg">
@@ -144,6 +195,3 @@
     </script>
 
     </html>
-
-
-
