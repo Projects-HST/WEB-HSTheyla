@@ -66,7 +66,9 @@ class Organizer extends CI_Controller
 
 		if($user_role==2)
 		{
-		  $this->load->view('organizer/create_events',$datas);
+		  $this->load->view('organizer/header');	
+		  $this->load->view('organizer/events/create_events',$datas);
+		  $this->load->view('organizer/footer');
 	 	}else{
 	 			redirect('/');
 	 		 }
@@ -125,11 +127,11 @@ class Organizer extends CI_Controller
 			redirect('/organizer/viewevents');
 	     }else if($sta=="Already Exist"){
 			$this->session->set_flashdata('msg','Already Exist');
-			redirect('/organizer/viewevents');
+			redirect('/organizer/events/viewevents');
 	     }
 	     else{
 			$this->session->set_flashdata('msg','Faild To Add');
-			redirect('/organizer/viewevents');
+			redirect('/organizer/events/viewevents');
 	     }
 	 }
 
@@ -145,7 +147,10 @@ class Organizer extends CI_Controller
 		
 		if($user_role==2)
 		{
-		  $this->load->view('organizer/view_events',$datas);
+		  $this->load->view('organizer/header');	
+		  $this->load->view('organizer/events/view_events',$datas);
+		  $this->load->view('organizer/footer');
+		  
 	 	}else{
 	 			redirect('/');
 	 	}
@@ -166,7 +171,9 @@ class Organizer extends CI_Controller
 
 		if($user_role==2)
 		{
-		  $this->load->view('organizer/update_events',$datas);
+		  $this->load->view('organizer/header');
+		  $this->load->view('organizer/events/update_events',$datas);
+		  $this->load->view('organizer/footer');
 	 	}else{
 	 			redirect('/');
 	 		 }
@@ -176,11 +183,9 @@ class Organizer extends CI_Controller
 
      public function updateeventsdetails()
      {
-        
         $datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-
 
 	    $event_name=$this->db->escape_str($this->input->post('event_name'));
         $category=$this->input->post('category');
@@ -205,7 +210,7 @@ class Organizer extends CI_Controller
 
         $start_time=$this->input->post('start_time');
         $end_time=$this->input->post('end_time');
-        
+
         //echo $start_time; echo'<br>'; echo $end_time; exit;
 
         $txtLatitude=$this->input->post('txtLatitude');
@@ -214,7 +219,6 @@ class Organizer extends CI_Controller
         $scontact_cell=$this->input->post('scontact_cell');
         $contact_person=$this->input->post('contact_person');
         $email=$this->input->post('email');
-        
         
         $currentcpic=$this->input->post('currentcpic');
         $eventid=$this->input->post('eventid');
@@ -258,10 +262,8 @@ class Organizer extends CI_Controller
 	     	 $this->session->set_flashdata('msg','Faild To Update');
 		     redirect('organizer/viewevents');
 	     }
-
-
      }
-
-
 }
+
+
 ?>

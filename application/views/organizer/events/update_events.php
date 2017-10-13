@@ -1,105 +1,25 @@
 <?php
-    function get_times( $default = '10:00', $interval = '+15 minutes' ) 
-	{
-		$output = '';
-		$current = strtotime( '00:00:00' );
-		$end = strtotime( '23:59:00' );
-		while( $current <= $end ) {
-			$time = date( 'H:i:s', $current );
-			$sel = ( $time == $default ) ? ' selected' : '';
-			$output .= "<option value=\"{$time}\">" . date( 'h.i A', $current ) .'</option>';
-			$current = strtotime( $interval, $current );
-		}
-		return $output;
+  function get_times( $default = '10:00', $interval = '+15 minutes' ) 
+  {
+    $output = '';
+    $current = strtotime( '00:00:00' );
+    $end = strtotime( '23:59:00' );
+    while( $current <= $end ) {
+      $time = date( 'H:i:s', $current );
+      $sel = ( $time == $default ) ? ' selected' : '';
+      $output .= "<option value=\"{$time}\">" . date( 'h.i A', $current ) .'</option>';
+      $current = strtotime( $interval, $current );
+    }
+    return $output;
     }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <meta name="theme-color" content="#999999" />
-
-    <title>HEYLA</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="<?php echo base_url(); ?>assets/front/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo base_url(); ?>assets/front/css/style.css" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="<?php echo base_url(); ?>assets/frontcss/carousel.css" rel="stylesheet">
-    <script src="<?php echo base_url(); ?>assets/front/js/jquery.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/front/js/popper.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/front/js/bootstrap.min.js"></script>
-    <style type="text/css">
+<style type="text/css">
    .img-circle{
           width: 90px;
          border-radius: 30px;
          margin-top: 10px;
        }
 </style>
-</head>
-<body>
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark  fixed-top menupage">
-        <div class="container">
-            <a class="navbar-brand" href="#"><img src="<?php echo base_url(); ?>assets/front/images/logo.png" class="imglogo"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home
-                <span class="sr-only"></span>
-              </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Create Event</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                    <?php
-                       $user_id=$this->session->userdata('user_role');
-                       if(empty($user_id)){ ?>
-                         <li class="nav-item">
-                             <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal">Login / Sign in</a>
-                         </li>
-                      <?php }else{ ?>
-                         <li class="nav-item">
-                             <a class="nav-link" href="<?php echo base_url(); ?>logout">Logout</a>
-                         </li>
-                      <?php } ?>
-
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <section class="organiser-home">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-          <p class="organiser-title">Let's create your very own event page to draw millions to experience events like never before.</p>
-        </div>
-        </div>
-      </div>
-    </section>
-
-
 <div class="container" style="margin-top:30px;margin-bottom:50px;max-width:100%;">
 
       <div class="row row-offcanvas row-offcanvas-right">
@@ -109,8 +29,8 @@
             <a href="<?php echo base_url(); ?>home" class="list-group-item">Dashboard</a>
             <a href="<?php echo base_url(); ?>organizer/createevents/" class="list-group-item">Create Events</a>
             <a href="<?php echo base_url(); ?>organizer/viewevents/" class="list-group-item active">View Events</a>
-            <a href="organizer/bookings/" class="list-group-item">Bookings</a>
-            <a href="organizer/messageboard/" class="list-group-item">Messages</a>
+            <a href="<?php echo base_url(); ?>organizerbooking/view_booking/" class="list-group-item">Bookings</a>
+            <a href="<?php echo base_url(); ?>organizerbooking/messageboard/" class="list-group-item">Messages</a>
             <a href="organizer/reviews/" class="list-group-item">Reviews</a>
             <a href="organizer/followers/" class="list-group-item">Followers</a>
           </div>
@@ -135,13 +55,13 @@
                         </div>
                         <?php endif; ?>
 
-                <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>organizer/updateeventsdetails" name="eventform" onSubmit='return check();'>
+               
+                 <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>organizer/updateeventsdetails" name="eventform" id="eventform" onSubmit='return check();'>
                   <?php foreach($edit as $rows){}?>
                         <div class="form-group row">
-                            
                             <label for="Category" class="col-sm-2 col-form-label">Select Category</label>
                             <div class="col-sm-4">
-                                <select class="form-control" name="category">
+                                <select class="form-control" name="category" required="">
                                   <option value="">Select Category Name</option>
                                      <?php foreach($category_list as $res){ ?>
                                         <option value="<?php echo $res->id; ?>"><?php echo $res->category_name; ?></option>
@@ -152,14 +72,14 @@
 
                             <label for="Name" class="col-sm-2 col-form-label">Event Name</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" name="event_name" value="<?php echo $rows->event_name; ?>">
+                              <input class="form-control" type="text" required="" name="event_name" value="<?php echo $rows->event_name; ?>">
                             </div>
 
                         </div>
                        <div class="form-group row">
                             <label for="country" class="col-sm-2 col-form-label">Select Country</label>
                             <div class="col-sm-4">
-                              <select class="form-control" name="country" onchange="getcityname(this.value)">
+                              <select class="form-control" name="country" required="" onchange="getcityname(this.value)">
                               <option value="">Select Country Name</option>
                                      <?php foreach($country_list as $cntry){ ?>
                                         <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
@@ -169,25 +89,30 @@
                             </div>
                              <label for="city" class="col-sm-2 col-form-label">Select City</label>
                             <div class="col-sm-4">
-                              <input class="form-control" type="text" id="cityid" value="<?php echo $rows->city_name; ?>" >
-                               <input class="form-control" type="hidden" name="oldcityid" value="<?php echo $rows->event_city; ?>">
-                               <div style="display:none;" id="new">
-                               <select class="form-control" name="city" id="ctname">
-                                
+                              <select class="form-control" name="city" id="ctname">
+                              <?php 
+                                $cntyrid=$rows->event_country;
+                                $sql="SELECT id,city_name FROM city_master WHERE country_id='$cntyrid' AND event_status='Y' ORDER BY id ASC";
+                                $resu=$this->db->query($sql);
+                                $res=$resu->result();
+                                foreach ($res as $value) { ?>
+                                <option value="<?php echo $value->id; ?>"><?php echo $value->city_name; ?></option>
+                                <?php } ?>
                                 </select>
+                                <script language="JavaScript">document.eventform.city.value="<?php echo $rows->event_city; ?>";</script>
                                  <div id="cmsg"></div>
-                               </div>
+                             
                             </div>
                         </div>
                         <div class="form-group row">
                            
                             <label for="Venue" class="col-sm-2 col-form-label">Venue</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" value="<?php echo $rows->event_venue; ?>" name="venue"  >
+                                <input class="form-control" type="text" value="<?php echo $rows->event_venue; ?>" required="" name="venue"  >
                             </div>
                              <label for="Address" class="col-sm-2 col-form-label">Address</label>
                             <div class="col-sm-4">
-                               <textarea id="textarea" name="address" class="form-control" maxlength="240" rows="3" placeholder=""><?php echo $rows->event_address; ?></textarea>
+                               <textarea id="textarea" name="address" required="" class="form-control" maxlength="240" rows="3" placeholder=""><?php echo $rows->event_address; ?></textarea>
                             </div>
 
                         </div>
@@ -195,12 +120,12 @@
                            
                             <label for="Description" class="col-sm-2 col-form-label">Description</label>
                             <div class="col-sm-4">
-                                <textarea  id="textarea" name="description" class="form-control" maxlength="30000" rows="3" placeholder=""><?php echo $rows->description; ?></textarea>
+                                <textarea  id="textarea" required="" name="description" class="form-control" maxlength="30000" rows="3" placeholder=""><?php echo $rows->description; ?></textarea>
                             </div>
 
                              <label for="ecost" class="col-sm-2 col-form-label">Event Type</label>
                             <div class="col-sm-4">
-                                 <select class="form-control" name="eventcost">
+                                 <select class="form-control" required="" name="eventcost">
                                     <option value="Free">Free</option>
                                     <option value="Paid">Paid</option>
                                     <option value="Invite">Invite</option>
@@ -213,7 +138,7 @@
                             <label for="sdate" class="col-sm-2 col-form-label">Start Date</label>
                             <div class="col-sm-4">
                               <div class="input-group">
-                                <input type="text" class="form-control" value="<?php echo $rows->start_date; ?>" name="start_date" id="datepicker-autoclose">
+                                <input type="text" class="form-control" value="<?php $date=date_create($rows->start_date);echo date_format($date,"m/d/Y");  ?>" name="start_date" id="datepicker-autoclose">
                                 <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
                             </div>
                             </div>
@@ -221,7 +146,7 @@
                              <label for="edate" class="col-sm-2 col-form-label">End Date</label>
                             <div class="col-sm-4">
                                <div class="input-group">
-                                <input type="text" class="form-control" value="<?php echo $rows->end_date; ?>" name="end_date" id="datepicker">
+                                <input type="text" class="form-control" required="" value="<?php $date=date_create($rows->end_date);echo date_format($date,"m/d/Y");  ?>" name="end_date" id="datepicker">
                                 <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
                             </div>
                             </div>
@@ -230,41 +155,46 @@
                            
                             <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
                             <div class="col-sm-4">
-                                <select name="start_time" class="form-control" >
+                                <select name="start_time" required="" class="form-control" id="stime" >
                                      <option value="">Select Start Time</option>
-									                   <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
-								                </select>
+                                     <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
+                                </select>
                                 <script language="JavaScript">document.eventform.start_time.value="<?php echo $rows->start_time; ?>";</script>
 
                             </div>
 
                              <label for="etime" class="col-sm-2 col-form-label">End Time</label>
                             <div class="col-sm-4">
-                                <select name="end_time" class="form-control" >
+                                <select name="end_time" required="" class="form-control" id="etime">
                                      <option value="">Select End Time</option>
-									                   <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
-								                </select>
+                                     <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
+                                </select>
                                  <script language="JavaScript">document.eventform.end_time.value="<?php echo $rows->end_time; ?>";</script>
                             </div>
 
                         </div>
                         <div class="form-group row">
+                             <label for="latitude" class="col-sm-2 col-form-label">Select</label>
+                            <div id="dvMap" style="width:300px; height:250px"> </div>
+
+                          </div>
+                        <div class="form-group row">
                            
                             <label for="latitude" class="col-sm-2 col-form-label">Event Latitude</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" name="txtLatitude" value="<?php echo $rows->event_latitude; ?>" id="lat" >
+                                <input class="form-control" type="text" name="txtLatitude" value="<?php echo $rows->event_latitude; ?>" id="latu" >
                                 <div id="ermsg"></div> <div id="ermsg2"></div>
                             </div>
                               <label for="longitude" class="col-sm-2 col-form-label">Event Longitude</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" value="<?php echo $rows->event_longitude; ?>" name="txtLongitude" id="lng">
+                                <input class="form-control" type="text" value="<?php echo $rows->event_longitude; ?>" name="txtLongitude" id="lon">
                                  <div id="ermsg1"></div> <div id="ermsg3"></div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="primarycell" class="col-sm-2 col-form-label">primary Contact Phone</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" value="<?php echo $rows->primary_contact_no; ?>" name="pcontact_cell" maxlength="10" value="">
+                                <input class="form-control" type="text" required="" value="<?php echo $rows->primary_contact_no; ?>" name="pcontact_cell" maxlength="10" value="">
                             </div>
                             <label for="seccell" class="col-sm-2 col-form-label">secondary Contact Phone</label>
                             <div class="col-sm-4">
@@ -274,11 +204,11 @@
                        <div class="form-group row">
                             <label for="Person" class="col-sm-2 col-form-label">Contact Person</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" value="<?php echo $rows->contact_person; ?>" name="contact_person" value="">
+                                <input class="form-control" type="text" required="" value="<?php echo $rows->contact_person; ?>" name="contact_person" value="">
                             </div>
                             <label for="Email" class="col-sm-2 col-form-label">Contact Email</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" value="<?php echo $rows->contact_email; ?>" name="email" value="" >
+                                <input class="form-control" type="text" value="<?php echo $rows->contact_email; ?>" required="" name="email" value="" >
                             </div>
                         </div>
 
@@ -337,7 +267,7 @@
                             
                             <label for="Status" class="col-sm-2 col-form-label">Event Display</label>
                             <div class="col-sm-4">
-                               <select class="form-control" name="event_status">
+                               <select class="form-control" required="" name="event_status">
                                     <option value="">Select Status</option>
                                     <option value="Y">Yes</option>
                                     <option value="N">No</option>
@@ -357,7 +287,6 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label"></label>
                             <div class="col-sm-2">
-                            
                               <button type="submit" class="btn btn-primary waves-effect waves-light">
                               Update </button></div>
                               <div class="col-sm-2">
@@ -381,32 +310,82 @@
       </div><!--/row-->
  </div>
 
-        <!-- Footer -->
-        <footer class="footer-bg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <p class="fnt-footer">Powerded By Happysanz Tech</p>
-                    </div>
-                    <div class="col-md-6">
-                        <ul class="list-inline fnt-footer ">
-                            <li class="list-inline-item"><a href="">Privacy Policy</a></li>
-                            <li class="list-inline-item"><a href="">Payment Policy</a></li>
-                            <li class="list-inline-item"><a href="">Terms & Conditions</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-            <!-- /.container -->
-        </footer>
+      
 
 
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByz7sU142AeFwpK3KiFilK0IOoa2GU9tw"></script>
 
-    </body>
-<script type="text/javascript">  
+<script type="text/javascript">
+     window.onload = function () {
+    var mapOptions = {
+                center: new google.maps.LatLng(20.5937, 78.9629),
+                zoom:4,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var infoWindow = new google.maps.InfoWindow();
+            var latlngbounds = new google.maps.LatLngBounds();
+            var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+            google.maps.event.addListener(map, 'click', function (e) 
+            {
+             var la=e.latLng.lat();
+             var lo=e.latLng.lng();
+             document.getElementById("latu").value=la;
+             document.getElementById("lon").value=lo;
+             //alert(la); alert(lo);
+            //alert("Latitude: " + e.latLng.lat() + "\r\nLongitude: " + e.latLng.lng());
+            });
+ }
 
-  
+$(document).ready(function () {
+    $('#eventform').validate({ // initialize the plugin
+       rules: {
+         category:{required:true },
+         event_name:{required:true },
+         country:{required:true },
+         city:{required:true },
+         venue:{required:true },
+         address:{required:true },
+         description:{required:true },
+         eventcost:{required:true },
+         start_date:{required:true },
+         end_date:{required:true },
+         start_time:{required:true },
+         end_time:{required:true },
+         pcontact_cell:{required:true },
+         contact_person:{required:true },
+         email:{required:true },
+         eadv_status:{required:true},
+         hotspot_sts:{required:true},
+         event_status:{required:true },
+         txtLatitude:{required:true },
+         txtLongitude:{required:true }
+        },
+
+        messages: {
+        category:"Select Category Name",
+        event_name:"Enter Event Name",
+        country:"Select Country Name",
+        city:"Select City Name",
+        venue:"Enter Venue",
+        address:"Enter Address",
+        description:"Enter Description",
+        eventcost:"Select Event Type",
+        start_date:"Select Start Date",
+        end_date:"Select End Date",
+        start_time:"Select Start Time",
+        end_time:"Select End Time",
+        pcontact_cell:"Enter Cell Number",
+        contact_person:"Enter Name",
+         eadv_status:"Select Advertisement Status ",
+        hotspot_sts:"Select Hotspot Display Status ",
+        email:"Enter Email",
+        event_status:"Select Status",
+        txtLatitude:"Enter Latitude",
+        txtLongitude:"Enter Longitude",
+        
+               },
+         }); 
+   });
  function getcityname(cid) {
            //alert(cid);
             $.ajax({
@@ -446,6 +425,7 @@
 
 function check()
 {
+
   if(document.eventform.txtLatitude.value=="")
     {
             //alert("Please enter Latitude.");
@@ -494,41 +474,70 @@ function check()
                  $("#ermsg3").hide();
             }
     }
+      
+      var objFromDate = document.getElementById("datepicker-autoclose").value;
+      var objToDate = document.getElementById("datepicker").value;
+     
+      var date1 = new Date(objFromDate);
+      var date2 = new Date(objToDate);
+       
+      var date3 = new Date();
+      var date4 = date3.getMonth() + "/" + date3.getDay() + "/" + date3.getYear();
+      var currentDate = new Date(date4);
+       
+      if(date1 > date2)
+      {
+        alert("Startdate should be less than Enddate");
+        return false; 
+      }
 
-    // if(document.eventform.txtLatitude.value!="")
 
-    // {
-    //     var latitude = document.eventform.txtLatitude.value;
-    //     var longitude = document.eventform.txtLongitude.value;
-        
-    //     var reg = new RegExp("^[-+]?[0-9]{1,3}(?:\.[0-9]{1,10})?$");
-        
-    //     if( reg.exec(latitude) ) {
-    //      //do nothing
-    //     } else {
-    //          $("#ermsg2").html('<p style="color: red;">Please enter valid Latitude.</p>').show();
-    //          $("#ermsg").hide();
-    //         //alert("Please enter valid Latitude.");
-    //         document.eventform.txtLatitude.focus();
-    //         return false;
-    //     }
-        
-    //     if( reg.exec(longitude) ) {
-    //      //do nothing
-    //     } else {
-    //         //alert("Please enter valid Longitude.");
-    //         $("#ermsg3").html('<p style="color: red;">Please enter valid Longitude.</p>').show();
-    //         $("#ermsg1").hide();
-    //         document.eventform.txtLongitude.focus();
-    //         return false;
-    //     }
-    // }
-    
+      var strStartTime = document.getElementById("stime").value;
+      var strEndTime = document.getElementById("etime").value;
+
+      var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+      var endTime = new Date(startTime);
+      endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+      
+      var a=objFromDate + '' + startTime;
+      var b=objToDate + '' + endTime;
+     //alert(a);alert(b);
+      if (a == b || a > b) {
+      alert("Start Date & Time is greater than end Date & Time");
+      return false;
+      }
+
+      // if (startTime > endTime) {
+      //  alert("Start Time is greater than end time");
+      //  return false;
+      // }
+      // if (startTime == endTime) {
+      // alert("Start Time equals end time");
+      // return false;
+      // }
+      // if (startTime < endTime) {
+      // alert("Start Time is less than end time");
+      // return false;
+      // }
+      
+      function GetHours(d) 
+      {
+        var h = parseInt(d.split(':')[0]);
+        if (d.split(':')[1].split(' ')[1] == "PM") {
+        h = h + 12;
+      }
+      return h;
+      }
+      function GetMinutes(d) 
+      {
+       return parseInt(d.split(':')[1].split(' ')[0]);
+      }
+
 }
+
 
 </script>
 
-    </html>
-
+ 
 
 
