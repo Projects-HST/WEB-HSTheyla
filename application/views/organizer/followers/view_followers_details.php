@@ -20,7 +20,9 @@
         <div class="container">
          
           <div class="row">
-             <?php foreach ($fdetails as $res) { ?>
+             <?php if(empty($fdetails)){ 
+              echo "No Followers";
+             }else{ foreach ($fdetails as $res) { ?>
             <div class="col-lg-4">
                 <div class="card m-b-20 card-block">
                     <h4 class="card-title font-20 mt-0">Name : <?php echo $res->name;?></h4>
@@ -28,7 +30,7 @@
                     <a href="#" class="btn btn-primary waves-effect waves-light">Mobile No : <?php echo $res->mobile_no;?></a>
                 </div>
             </div>
-            <?php } ?> 
+            <?php } } ?> 
         </div>
         <!-- end row --> 
        
