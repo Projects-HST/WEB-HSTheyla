@@ -204,39 +204,47 @@ Class Loginmodel extends CI_Model
     if(empty($name)){
       echo "failed";
     }else{
-      $create="INSERT INTO user_master (user_name,mobile_no,email_id,password,user_role,email_verify,mobile_verify,status) VALUES('$name','$mobile','$email','$pwd','3','N','N','Y')";
-      $res=$this->db->query($create);
-      $last_id=$this->db->insert_id();
-      $user_details="INSERT INTO user_details (user_id,newsletter_status) VALUES('$last_id','Y')";
-       $result=$this->db->query($user_details);
+      $check_username="SELECT * FROM user_master WHERE email_id='$email'";
+     $res=$this->db->query($check_username);
+     if($res->num_rows()==1)
+     {
+       echo "Already Registered";
+     }else{
+       $create="INSERT INTO user_master (user_name,mobile_no,email_id,password,user_role,email_verify,mobile_verify,status) VALUES('$name','$mobile','$email','$pwd','3','N','N','Y')";
+       $res=$this->db->query($create);
+       $last_id=$this->db->insert_id();
+       $user_details="INSERT INTO user_details (user_id,newsletter_status) VALUES('$last_id','Y')";
+        $result=$this->db->query($user_details);
 
-       if($result){
-         $to=$email;
-         $subject="Welcome to Heyla App";
-         $htmlContent = '
-           <html>
-           <head>
-           <title></title>
-              </head>
-              <body>
-              <p>Dear '.$name.'</p>
-              <p style="font-size:20px;">Welcome to Heyla.</p>
-              <p style="margin-left:50px;">Thanking for Registering with Heyla App <br>
-              To allow us to confirm the validity of your email address,click this verification link.   <A href="'. base_url().'home/emailverfiy/'.$email.'/'.$pwd.'" target="_blank">Verfiy  Here</a> </p>
-              <p style="font-size:20px;">Thank you and enjoy, <br>
-                The Heyla Team
-                </p>
-              </body>
-           </html>';
-       $headers = "MIME-Version: 1.0" . "\r\n";
-       $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-       // Additional headers
-       $headers .= 'From: heylapp<info@heylapp.com>' . "\r\n";
-       $sent= mail($to,$subject,$htmlContent,$headers);
-         echo "verify";
-       }else{
-         echo "failed";
-       }
+        if($result){
+          $to=$email;
+          $subject="Welcome to Heyla App";
+          $htmlContent = '
+            <html>
+            <head>
+            <title></title>
+               </head>
+               <body>
+               <p>Dear '.$name.'</p>
+               <p style="font-size:20px;">Welcome to Heyla.</p>
+               <p style="margin-left:50px;">Thanking for Registering with Heyla App <br>
+               To allow us to confirm the validity of your email address,click this verification link.   <A href="'. base_url().'home/emailverfiy/'.$email.'/'.$pwd.'" target="_blank">Verfiy  Here</a> </p>
+               <p style="font-size:20px;">Thank you and enjoy, <br>
+                 The Heyla Team
+                 </p>
+               </body>
+            </html>';
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        // Additional headers
+        $headers .= 'From: heylapp<info@heylapp.com>' . "\r\n";
+        $sent= mail($to,$subject,$htmlContent,$headers);
+          echo "verify";
+        }else{
+          echo "failed";
+        }
+     }
+
     }
 
    }
