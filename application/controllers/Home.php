@@ -197,7 +197,7 @@ class Home extends CI_Controller {
 		public function emailverfiy(){
   	 $email = $this->uri->segment(3);
   	 $has = $this->uri->segment(4);
-		$data['res']=$this->loginmodel->email_verify($email,$has);
+		$data['res']=$this->loginmodel->email_verify($email);
 		if($data['res']['msg']=='verify'){
 					$this->load->view('email_verification',$data);
 		}else{

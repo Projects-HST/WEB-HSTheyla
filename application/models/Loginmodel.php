@@ -178,8 +178,9 @@ Class Loginmodel extends CI_Model
        echo "failed";
      }
    }
-   function email_verify($email,$has){
-      $check_username="SELECT * FROM user_master WHERE email_id='$email' AND password='$has'";
+   function email_verify($email){
+     $decrpty_email = base64_decode($email);
+     $check_username="SELECT * FROM user_master WHERE email_id='$decrpty_email'";
      $res=$this->db->query($check_username);
      if($res->num_rows()==1){
        foreach($res->result() as $rows){}
@@ -215,20 +216,24 @@ Class Loginmodel extends CI_Model
        $last_id=$this->db->insert_id();
        $user_details="INSERT INTO user_details (user_id,newsletter_status) VALUES('$last_id','Y')";
         $result=$this->db->query($user_details);
+        $s=$email;
+    		$encrypt_email= base64_encode($s);
 
         if($result){
           $to=$email;
           $subject="Welcome to Heyla App";
           $htmlContent = '
-            <html>
-            <head>
-            <title></title>
-               </head>
-               <body>
-               <p>Dear '.$name.'</p>
-               <p style="font-size:20px;">Welcome to Heyla.</p>
+          <html>
+          <head>
+          <title></title>
+             </head>
+             <body style="background-color:#E4F1F7;"><div style="background-image: url('.base_url().'assets/front/images/email_1.png);height:700px;margin: auto;width: 50%;background-repeat: no-repeat;">
+                <div  style="padding:50px;width:400px;"><p>Dear '.$name.'</p>
+               <p style="font-size:20px;">Welcome to
+                <center><img src="'.base_url().'assets/front/images/heyla_b.png" style="width:120px;"></center>
+               </p>
                <p style="margin-left:50px;">Thanking for Registering with Heyla App <br>
-               To allow us to confirm the validity of your email address,click this verification link.   <A href="'. base_url().'home/emailverfiy/'.$email.'/'.$pwd.'" target="_blank">Verfiy  Here</a> </p>
+               To allow us to confirm the validity of your email address,click this verification link. <center>   <a href="'. base_url().'home/emailverfiy/'.$encrypt_email.'" target="_blank"style="background-color: blue;    padding: 12px;    text-decoration: none;    color: #fff;    border-radius: 20px;">Verfiy  Here</a></center>  </p>
                <p style="font-size:20px;">Thank you and enjoy, <br>
                  The Heyla Team
                  </p>
