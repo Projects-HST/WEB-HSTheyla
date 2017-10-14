@@ -23,8 +23,8 @@ return $output;
 <a href="<?php echo base_url(); ?>organizer/viewevents/" class="list-group-item">View Events</a>
 <a href="<?php echo base_url(); ?>organizerbooking/view_booking/" class="list-group-item">Bookings</a>
 <a href="<?php echo base_url(); ?>organizerbooking/messageboard/" class="list-group-item">Messages</a>
-<a href="organizer/reviews/" class="list-group-item">Reviews</a>
-<a href="organizer/followers/" class="list-group-item">Followers</a>
+<a href="<?php echo base_url(); ?>organizerbooking/reviews/" class="list-group-item">Reviews</a>
+<a href="<?php echo base_url();?>organizerbooking/view_followers/" class="list-group-item">Followers</a>
 </div>
 </div><!--/span-->
 

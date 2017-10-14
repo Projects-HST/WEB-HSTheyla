@@ -5,12 +5,12 @@
       <div class="row row-offcanvas row-offcanvas-right">
         <div class="col-6 col-md-3 sidebar-offcanvas" id="sidebar">
           <div class="list-group">
-            <a href="<?php echo base_url(); ?>home" class="list-group-item">Dashboard</a>
-            <a href="<?php echo base_url(); ?>organizer/createevents/" class="list-group-item">Create Events</a>
-            <a href="<?php echo base_url(); ?>organizer/viewevents/" class="list-group-item active">View Events</a>
-            <a href="<?php echo base_url(); ?>organizerbooking/view_booking/" class="list-group-item">Bookings</a>
-            <a href="<?php echo base_url(); ?>organizerbooking/messageboard/" class="list-group-item">Messages</a>
-            <a href="<?php echo base_url(); ?>organizerbooking/reviews/" class="list-group-item">Reviews</a>
+            <a href="<?php echo base_url();?>home" class="list-group-item">Dashboard</a>
+            <a href="<?php echo base_url();?>organizer/createevents/" class="list-group-item">Create Events</a>
+            <a href="<?php echo base_url();?>organizer/viewevents/" class="list-group-item">View Events</a>
+            <a href="<?php echo base_url();?>organizerbooking/view_booking/" class="list-group-item">Bookings</a>
+            <a href="<?php echo base_url();?>organizerbooking/messageboard/" class="list-group-item">Messages</a>
+            <a href="<?php echo base_url();?>organizerbooking/reviews/" class="list-group-item active">Reviews</a>
             <a href="<?php echo base_url();?>organizerbooking/view_followers/" class="list-group-item">Followers</a>
           </div>
         </div><!--/span-->
@@ -65,7 +65,7 @@
                             <td><?php echo $rows->event_name ; ?></td>
                             <td><?php echo $rows->category_name ; ?></td>
                             <td><?php echo $rows->city_name ; ?></td>
-                            <td><a href="<?php echo base_url();?>organizer/updateevents/<?php echo $rows->id;?>"><i class="fa fa-pencil-square-o"></a></td>
+                            <td><a href="<?php echo base_url();?>organizerbooking/view_reviews/<?php echo $rows->id;?>"><img title="View Reviews" src="<?php echo base_url();?>assets/icons/customerreviews.png"/></a></td>
                         </tr>
                        <?php } } ?>
                         </tbody>
@@ -90,7 +90,7 @@
                             <td><?php echo $rows->event_name ; ?></td>
                             <td><?php echo $rows->category_name ; ?></td>
                             <td><?php echo $rows->city_name ; ?></td>
-                            <td><a href="<?php echo base_url();?>organizer/updateevents/<?php echo $rows->id;?>"><i class="fa fa-pencil-square-o"></a></td>
+                            <td><a href="<?php echo base_url();?>organizerbooking/view_reviews/<?php echo $rows->id;?>"><img title="View Reviews" src="<?php echo base_url();?>assets/icons/customerreviews.png"/></a></td>
                         </tr>
                        <?php } }  ?>
                         </tbody>
@@ -117,7 +117,11 @@
                             <td><?php echo $rows->event_name ; ?></td>
                             <td><?php echo $rows->category_name ; ?></td>
                             <td><?php echo $rows->city_name ; ?></td>
-                            <td><a href="<?php echo base_url();?>organizer/updateevents/<?php echo $rows->id;?>"><i class="fa fa-pencil-square-o"></a></td>
+                            <td>
+                          <a href="<?php echo base_url();?>organizerbooking/view_reviews/<?php echo $rows->id;?>">
+                          <img title="View Reviews" src="<?php echo base_url();?>assets/icons/customerreviews.png"/>
+                            </a>
+                          </td>
                         </tr>
                        <?php } }  ?>
                         </tbody>

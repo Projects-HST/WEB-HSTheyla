@@ -15,7 +15,27 @@ Class Organizerbookingmodel extends CI_Model
      return $res;
 
 	}
+
+	//-----------------------------Reviews---------------------------------------
   
+   function view_all_reviews($id)
+   {
+     $sql="SELECT r.*,p.photo,e.event_name FROM event_reviews AS r LEFT JOIN event_review_photos AS p ON r.id = p.review_id LEFT JOIN events AS e On r.event_id=e.id WHERE  r.event_id='$id' ORDER BY r.id DESC";
+    $resu=$this->db->query($sql);
+    $res=$resu->result();
+    return $res;
+   }
+
+   //-----------------------------Followers---------------------------------------
+  
+   function view_followers_details($user_id)
+   {
+    $vfollowers="SELECT f.*,ud.name,um.mobile_no,um.email_id FROM user_followers AS f,user_details AS ud,user_master AS um WHERE ud.user_id IN(f.follower_id) AND f.user_id='$user_id' AND ud.user_id=um.id";
+    	$vfollowers1=$this->db->query($vfollowers);
+        $folres=$vfollowers1->result();
+        return $folres;
+   }
+
 
 }
 ?>
