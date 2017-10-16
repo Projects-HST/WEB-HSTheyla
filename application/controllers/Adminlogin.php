@@ -164,7 +164,7 @@ public function dashboard()
 				 if($user_role==3){
 				 	redirect('profile');
 				 }else if($user_role==2){
-						redirect('home');
+						redirect('dashboard');
 				 }else{
 					 redirect('/');
 				 }

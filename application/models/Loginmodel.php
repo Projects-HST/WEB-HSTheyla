@@ -15,7 +15,7 @@ Class Loginmodel extends CI_Model
     $resultset=$this->db->query($query);
     if($resultset->num_rows()==1)
       {
-          $pwdcheck="SELECT * FROM user_master WHERE password='$password' AND user_name='$username' OR mobile_no='$username' OR email_id='$username'";
+        $pwdcheck="SELECT * FROM user_master WHERE password='$password' AND (user_name='$username' OR mobile_no='$username' OR email_id='$username')";
           $res=$this->db->query($pwdcheck);
           if($res->num_rows()==1)
 	        {
@@ -227,7 +227,7 @@ Class Loginmodel extends CI_Model
           <head>
           <title></title>
              </head>
-             <body style="background-color:#E4F1F7;"><div style="background-image: url('.base_url().'assets/front/images/email_1.png);height:700px;margin: auto;width: 50%;background-repeat: no-repeat;">
+             <body style="background-color:#E4F1F7;"><div style="background-image: url('.base_url().'assets/front/images/email_1.png);height:700px;margin: auto;width: 100%;background-repeat: no-repeat;">
                 <div  style="padding:50px;width:400px;"><p>Dear '.$name.'</p>
                <p style="font-size:20px;">Welcome to
                 <center><img src="'.base_url().'assets/front/images/heyla_b.png" style="width:120px;"></center>

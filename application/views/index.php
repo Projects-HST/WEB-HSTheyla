@@ -4,10 +4,10 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta name="theme-color" content="#999999" />
+    <meta name="theme-color" content="#478ECC" />
     <title>HEYLA</title>
 
     <!-- Bootstrap core CSS -->
@@ -57,6 +57,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
                     </li>
+
                     <?php
                     	 $user_id=$this->session->userdata('user_role');
                        if(empty($user_id)){ ?>
@@ -251,7 +252,7 @@
             </a>
         </div>
     </header>
-  <div id="loader"><img src="<?php echo base_url(); ?>assets/front/images/126.gif"></div>
+
     <!-- Page Content -->
     <section class="about" style="" id="about">
         <div class="container">
@@ -348,12 +349,12 @@
 
                 <div id="wrap">
                     <div id="showcase" class="noselect">
-                        <img class="cloud9-item" src="<?php echo base_url(); ?>assets/front/images/1.png" alt="Heyla">
-                        <img class="cloud9-item" src="<?php echo base_url(); ?>assets/front/images/2.png" alt="Heyla">
-                        <img class="cloud9-item" src="<?php echo base_url(); ?>assets/front/images/3.png" alt="Heyla">
-                        <img class="cloud9-item" src="<?php echo base_url(); ?>assets/front/images/4.png" alt="Heyla">
-                        <img class="cloud9-item" src="<?php echo base_url(); ?>assets/front/images/5.png" alt="Heyla">
-                        <img class="cloud9-item" src="<?php echo base_url(); ?>assets/front/images/6.png" alt="Heyla">
+                        <img class="cloud9-item img-fluid" src="<?php echo base_url(); ?>assets/front/images/1.png" alt="Heyla">
+                        <img class="cloud9-item img-fluid" src="<?php echo base_url(); ?>assets/front/images/2.png" alt="Heyla">
+                        <img class="cloud9-item img-fluid" src="<?php echo base_url(); ?>assets/front/images/3.png" alt="Heyla">
+                        <img class="cloud9-item img-fluid" src="<?php echo base_url(); ?>assets/front/images/4.png" alt="Heyla">
+                        <img class="cloud9-item img-fluid" src="<?php echo base_url(); ?>assets/front/images/5.png" alt="Heyla">
+                        <img class="cloud9-item img-fluid" src="<?php echo base_url(); ?>assets/front/images/6.png" alt="Heyla">
 
                     </div>
                     <p id="item-title">&nbsp;</p>
@@ -576,17 +577,17 @@
         },
         submitHandler: function(form) {
             //alert("hi");
-            $('#loader').show();
+
             $.ajax({
                 url: "<?php echo base_url(); ?>home/create_profile",
                 type: 'POST',
                 data: $('#formsignup').serialize(),
                 success: function(response) {
-                    $('#loader').hide();
+
                     if (response == "verify") {
                         swal({
                             title: "Success",
-                            text: "Thanking Your Registering With us.",
+                            text: "You have Registered Successfully.",
                             type: "success"
                         }).then(function() {
                             location.href = '<?php echo base_url(); ?>verify';
@@ -664,7 +665,7 @@
             }
         });
     }
-        $('#loader').hide();
+
 </script>
 
 </html>

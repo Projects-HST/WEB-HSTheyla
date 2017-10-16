@@ -21,7 +21,7 @@ class Home extends CI_Controller {
 			if($user_role==1){
 				redirect('adminlogin/dashboard');
 			}else if($user_role==2){
-		            redirect('home');
+		            redirect('dashboard');
 			}else if($user_role==3){
                 redirect('profile');
 				//$this->load->view('index');
@@ -72,7 +72,7 @@ class Home extends CI_Controller {
 			 if($user_role==3){
 					 redirect('profile');
 			 }else if($user_role==2){
-			     redirect('home');
+			     redirect('dashboard');
 				//$this->load->view('profile', $datas);
 			 }else{
 				 redirect('/');
@@ -115,7 +115,7 @@ class Home extends CI_Controller {
 						if($user_role==3){
 							redirect('profile');
 						}else if($user_role==2){
-							redirect('home');
+							redirect('dashboard');
 						}else{
 							redirect('/');
 						}

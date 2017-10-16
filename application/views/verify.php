@@ -4,10 +4,10 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta name="theme-color" content="#999999" />
+    <meta name="theme-color" content="#478ECC" />
 
     <title>HEYLA</title>
 
@@ -76,13 +76,13 @@
                         <a class="nav-link" href="<?php echo base_url(); ?>">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Create Event</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>">Create Event</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>">Contact</a>
                     </li>
                     <?php
                        $user_id=$this->session->userdata('user_role');
