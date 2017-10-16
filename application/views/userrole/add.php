@@ -117,8 +117,8 @@
 								                  <td>
                                     <a href="<?php echo base_url();?>userrole/edit_users/<?php echo $rows->id;?>"><img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
                                     <?php if($uid!=1){ ?>
-                                 <a href="<?php echo base_url();?>userrole/delete_users/<?php echo $rows->id;?>">   
-                                <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
+                         <a onclick="confirmGetMessage(<?php echo $uid;?>)" >   
+                           <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
                                 <?php } ?>
                                   </td>
                               </tr>
@@ -140,7 +140,37 @@
 </div>
 <!-- content -->
 <script type="text/javascript">
+  function confirmGetMessage(uid)
+  {
+     var r=confirm("Do you want to delete this?")
+    if (r==true) {
+   //alert(uid);
+    $.ajax({
+      url: "<?php echo base_url(); ?>userrole/delete_users",
+      type: 'POST',
+      data: { userid: uid },
+      success: function(response) {
+      //alert(response);exit;
+          if (response == "success") {
+              swal({
+                  title: "Success",
+                  text: "Deleted Successfully",
+                  type: "success"
+              }).then(function() { 
+                  location.href = '<?php echo base_url(); ?>userrole/home';
+              });
+          } else {
+              sweetAlert("Oops...", response, "error");
+          }
+      }
+    });
+    }else{
+           swal("Cancelled", "Process Cancel :)", "error");
+       }
+  }
+
  $(document).ready(function () {
+
     $('#usersform').validate({ // initialize the plugin
        rules: {
          username:{required:true },

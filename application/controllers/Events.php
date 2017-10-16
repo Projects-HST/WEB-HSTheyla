@@ -277,19 +277,24 @@ class Events extends CI_Controller
 	 		 }
      }
 
-    public function delete_events($id)
+    public function delete_events()
     {
         $datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
+
+	    $id=$this->input->post('eventid');
+
         $datas=$this->eventsmodel->delete_single_events_plans($id);
         $sta=$datas['status'];
         if($sta=="success"){
-	       $this->session->set_flashdata('msg','Deleted Successfully');
-		   redirect('events/view_events');
+	       //$this->session->set_flashdata('msg','Deleted Successfully');
+		   //redirect('events/view_events');
+        	echo "success";
 	     }else{
-	     	 $this->session->set_flashdata('msg','Faild To Delete');
-		     redirect('events/view_events');
+	     	 //$this->session->set_flashdata('msg','Faild To Delete');
+		     //redirect('events/view_events');
+	     	echo "Faild";
 	     }
     }
 

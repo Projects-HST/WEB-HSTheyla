@@ -42,8 +42,7 @@
 
     <div class="page-content-wrapper ">
         <div class="container">
-            <div class="row">
-      
+        <div class="row">
         <div class="col-lg-12">
             <div class="card m-b-20">
                 <div class="card-block">
@@ -89,6 +88,7 @@
                            $eid=$rows->id;
                            $adv_sts=$rows->adv_status;
                            $etype=$rows->event_type;
+                           $eid=$rows->id;
                           if($adv_sts=='Y'){ 
                              ?>
                         <tr>
@@ -104,7 +104,7 @@
                              <a href="<?php echo base_url();?>events/view_single_events/<?php echo $rows->id;?>">
                               <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a>
 
-                              <a href="<?php echo base_url();?>events/delete_events/<?php echo $rows->id;?>">   
+                              <a onclick="confirmGetMessage(<?php echo $eid;?>)" >   
                               <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
 
                               <?php if($etype=='Paid'){?>
@@ -139,8 +139,9 @@
                         <tbody>
                         <?php foreach($result as $rows){ 
                             $eid=$rows->id;
-                           $hotspot_sts=$rows->hotspot_status;
-                           $etype=$rows->event_type;
+                            $hotspot_sts=$rows->hotspot_status;
+                            $etype=$rows->event_type;
+                           
                           if($hotspot_sts=='Y'){ 
                               ?>
                         <tr>
@@ -155,8 +156,8 @@
 
                              <a href="<?php echo base_url();?>events/view_single_events/<?php echo $rows->id;?>">
                               <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a>
-
-                              <a href="<?php echo base_url();?>events/delete_events/<?php echo $rows->id;?>">   
+                             <!--href="<?php echo base_url();?>events/delete_events/<?php echo $rows->id;?>" -->
+                              <a onclick="confirmGetMessage(<?php echo $eid;?>)">   
                               <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
                               
                               <?php if($etype=='Paid'){?>
@@ -182,7 +183,7 @@
                         <thead>
                         <tr>
                             <th>Event Name</th>
-                             <!--th>Event Category</th-->
+                            <!--th>Event Category</th-->
                             <th>Event City</th>
                             <th>Event popularity</th>
                             <th>Action</th>
@@ -190,7 +191,7 @@
                         </thead>
                         <tbody>
                         <?php foreach($result as $rows){
-                            $eid=$rows->id; 
+                           $eid=$rows->id; 
                            $adv_sts=$rows->adv_status;
                            $hotspot_sts=$rows->hotspot_status;
                            $etype=$rows->event_type;
@@ -210,40 +211,65 @@
                              <a href="<?php echo base_url();?>events/view_single_events/<?php echo $rows->id;?>">
                               <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a>
 
-                              <a href="<?php echo base_url();?>events/delete_events/<?php echo $rows->id;?>">   
+                              <a onclick="confirmGetMessage(<?php echo $eid;?>)">   
                               <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
                               
-                              <?php if($etype=='Paid'){?>
+                              <?php if($etype=='Paid'){ ?>
                               <a href="<?php echo base_url();?>booking/home/<?php echo $rows->id;?>">
-                              <img title="Booking Events" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
+                                <img title="Booking Events" src="<?php echo base_url();?>assets/icons/booking.png"/>
+                             </a>
                               <?php } ?>
-
                               <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo $rows->id;?>">   
-                              <img title="Add Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/></a>
-                              
-                              <a href="<?php echo base_url();?>events/view_events_reviews/<?php echo $rows->id;?>">   
-                              <img title="View Reviews" src="<?php echo base_url();?>assets/icons/review.png"/></a>
+                              <img title="Add Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/>
+                            </a>
+                            <a href="<?php echo base_url();?>events/view_events_reviews/<?php echo $rows->id;?>">   
+                              <img title="View Reviews" src="<?php echo base_url();?>assets/icons/review.png"/>
+                            </a>
                               
                             </td>
                         </tr>
                        <?php } }  ?>
                         </tbody>
                     </table>                       
-                        </div>
-                       
+                      </div>
                     </div>
-
+                  </div>
                 </div>
-            </div>
-        </div>
-      </div> <!-- end row -->
+              </div>
+            </div> <!-- end row -->
+          </div><!-- container -->
+        </div> <!-- Page content Wrapper -->
+      </div> <!-- content -->
 
-     </div><!-- container -->
-    </div> <!-- Page content Wrapper -->
-
-
-</div> <!-- content -->
 <script type="text/javascript">
+  function confirmGetMessage(eid)
+  {
+    var r=confirm("Do you want to delete this?")
+    if (r==true) {
+    $.ajax({
+      url: "<?php echo base_url(); ?>events/delete_events",
+      type: 'POST',
+      data: { eventid: eid },
+      success: function(response) {
+      //alert(response);exit;
+          if (response == "success") {
+              swal({
+                  title: "Success",
+                  text: "Deleted Successfully",
+                  type: "success"
+              }).then(function() { 
+                  location.href = '<?php echo base_url(); ?>events/view_events';
+              });
+          } else {
+              sweetAlert("Oops...", response, "error");
+          }
+      }
+    });
+    }else{
+        swal("Cancelled", "Process Cancel :)", "error");
+       }
+  }
+
   $(document).ready(function() {
     $('table.display').DataTable();
 } );

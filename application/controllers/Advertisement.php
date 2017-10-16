@@ -102,22 +102,26 @@ class Advertisement extends CI_Controller
 	     }
     }
 
-    public function delete_plans($id)
+    public function delete_plans()
     {
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
+        
+        $id=$this->input->post('planid');
 
         $datas = $this->advertisementmodel->delete_advertisement_plan_details($id);
         
         $sta=$datas['status'];
       
         if($sta=="success"){
-	       $this->session->set_flashdata('msg','Deleted Successfully');
-		   redirect('advertisement/home');
+        	echo "success";
+	       //$this->session->set_flashdata('msg','Deleted Successfully');
+		   //redirect('advertisement/home');
 	     }else{
-	     	 $this->session->set_flashdata('msg','Faild To Delete');
-		     redirect('advertisement/home');
+	     	echo "Faild";
+	     	//$this->session->set_flashdata('msg','Faild To Delete');
+		    //redirect('advertisement/home');
 	     }
     }
 

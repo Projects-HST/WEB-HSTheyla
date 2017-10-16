@@ -160,7 +160,7 @@
                             <label for="sdate" class="col-sm-2 col-form-label">Start Date</label>
                             <div class="col-sm-4">
                               <div class="input-group">
-                                <input type="text" class="form-control" value="<?php $date=date_create($rows->start_date);echo date_format($date,"m/d/Y");  ?>" name="start_date" id="datepicker-autoclose">
+                                <input type="text" class="form-control datepicker" value="<?php $date=date_create($rows->start_date);echo date_format($date,"d-m-Y");  ?>" name="start_date" id="datepicker-autoclose">
                                 <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
                             </div>
                             </div>
@@ -168,7 +168,7 @@
                              <label for="edate" class="col-sm-2 col-form-label">End Date</label>
                             <div class="col-sm-4">
                                <div class="input-group">
-                                <input type="text" class="form-control" required="" value="<?php $date=date_create($rows->end_date);echo date_format($date,"m/d/Y");  ?>" name="end_date" id="datepicker">
+                                <input type="text" class="form-control datepicker"  value="<?php $date=date_create($rows->end_date);echo date_format($date,"d-m-Y");  ?>" name="end_date" id="datepicker">
                                 <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
                             </div>
                             </div>
@@ -349,6 +349,12 @@
  }
 
 $(document).ready(function () {
+
+  $( ".datepicker" ).datepicker({
+        format: 'dd-mm-yyyy'
+      });
+ 
+
     $('#eventform').validate({ // initialize the plugin
        rules: {
          category:{required:true },

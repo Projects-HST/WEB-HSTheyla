@@ -98,22 +98,25 @@ class Userrole extends CI_Controller
 	     }
 	 }
 
-	 public  function delete_users($id)
+	 public  function delete_users()
 	 {
 	 	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
+	    
+	    $id=$this->input->post('userid');
 
 	    $datas= $this->userrolemodel->delete_users_details($id);
-
 	    $sta=$datas['status'];
         //print_r($sta); exit;
 	    if($sta=="success"){
-	       $this->session->set_flashdata('msg','Deleted Successfully');
-		   redirect('userrole/home');
+	    	echo "success";
+	       //$this->session->set_flashdata('msg','Deleted Successfully');
+		   //redirect('userrole/home');
 	     }else{
-	     	 $this->session->set_flashdata('msg','Faild To Delete');
-		     redirect('userrole/home');
+	     	 //$this->session->set_flashdata('msg','Faild To Delete');
+		     //redirect('userrole/home');
+	     	echo "Faild To Delete";
 	     }
 
 	 }

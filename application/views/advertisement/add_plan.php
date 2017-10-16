@@ -13,11 +13,11 @@
       <nav class="navbar-custom">
          <ul class="list-inline float-right mb-0">
             <li class="list-inline-item dropdown notification-list">
-               <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
+              <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
                   aria-haspopup="false" aria-expanded="false">
                <i class="ion-ios7-bell noti-icon"></i>
                <span class="badge badge-success noti-icon-badge">3</span>
-               </a>
+              </a>
          
             </li>
             <li class="list-inline-item dropdown notification-list">
@@ -99,27 +99,29 @@
                         <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
-							     <th>S.NO</th>
-                                 <th>Plan Name</th>
-                                 <th>Plan Rate</th>
-                                 <th>Action</th>
+							                  <th>S.NO</th>
+                                <th>Plan Name</th>
+                                <th>Plan Rate</th>
+                                <th>Action</th>
                               </tr>
                            </thead>
                            <tbody>
 						            <?php
                                 $i=1;
                                 foreach($all_plan as $rows) {
+                                  $pid=$rows->id;
                                 ?>
+                                 <!-- href="<?php echo base_url();?>advertisement/delete_plans/<?php echo $rows->id;?>" -->
                               <tr>
                                  <td><?php  echo $i; ?></td>
                                  <td><?php  echo $rows->plan_name; ?></td>
                                  <td> <?php echo $rows->plan_rate; ?></td>
-                                 <td>
-                                  <a href="<?php echo base_url();?>advertisement/edit_plans/<?php echo $rows->id;?>">
-                                  <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
-                                 <a href="<?php echo base_url();?>advertisement/delete_plans/<?php echo $rows->id;?>">   
-                                 <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
-                           </td>
+                                <td>
+                                   <a href="<?php echo base_url();?>advertisement/edit_plans/<?php echo $rows->id;?>">
+                                   <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
+                                   <a onclick="confirmGetMessage(<?php echo $pid;?>)">   
+                                  <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
+                                </td>
                               </tr>
                              <?php $i++;  }  ?>
                            </tbody>
@@ -139,6 +141,35 @@
 </div>
 <!-- content -->
 <script type="text/javascript">
+
+  function confirmGetMessage(pid)
+  {
+    var r=confirm("Do you want to delete this?")
+    if (r==true) {
+      $.ajax({
+        url: "<?php echo base_url(); ?>advertisement/delete_plans",
+        type: 'POST',
+        data: { planid: pid },
+        success: function(response) {
+        //alert(response);exit;
+            if (response == "success") {
+                swal({
+                    title: "Success",
+                    text: "Deleted Successfully",
+                    type: "success"
+                }).then(function() { 
+                    location.href = '<?php echo base_url(); ?>advertisement/home';
+                });
+            }else {
+              sweetAlert("Oops...", response, "error");
+            }
+        }
+      });
+    }else{
+        swal("Cancelled", "Process Cancel :)", "error");
+       }
+  }
+
  $(document).ready(function () {
     $('#advertisementform').validate({ // initialize the plugin
        rules: {

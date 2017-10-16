@@ -76,7 +76,7 @@
                             <label for="sdate" class="col-sm-2 col-form-label">Start Date</label>
                             <div class="col-sm-4">
                               <div class="input-group">
-                                <input type="text" class="form-control"  name="start_date" id="datepicker-autoclose">
+                                <input type="text" class="form-control datepicker"  name="start_date" id="datepicker-autoclose" >
                                 <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
 
                            <input type="hidden" class="form-control"  name="event_id" value=" <?php echo $event_id;   ?>">
@@ -87,7 +87,7 @@
                              <label for="edate" class="col-sm-2 col-form-label">End Date</label>
                             <div class="col-sm-4">
                                <div class="input-group">
-                                <input type="text" class="form-control"  name="end_date" id="datepicker">
+                                <input type="text" class="form-control datepicker"  name="end_date" id="datepicker">
                                 <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
                             </div>
                             </div>
@@ -217,8 +217,13 @@
 </div>
 <!-- content -->
 <script type="text/javascript">
+
  $(document).ready(function () 
  {
+    $( ".datepicker" ).datepicker({
+   format: 'dd-mm-yyyy'
+});
+
     $('#aform').validate({ // initialize the plugin
        rules: {
          start_date:{required:true },
