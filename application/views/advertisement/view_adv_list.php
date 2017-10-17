@@ -90,7 +90,7 @@
                              <a href="<?php echo base_url();?>events/view_single_events/<?php echo $rows->id;?>">
                               <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a>
 
-                              <a href="<?php echo base_url();?>events/delete_events/<?php echo $rows->id;?>">   
+                              <a onclick="confirmGetMessage(<?php echo $eid;?>)" >   
                               <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
 
                               <?php if($etype=='Paid'){?>
@@ -117,10 +117,39 @@
       </div> <!-- end row -->
 
      </div><!-- container -->
-    </div> <!-- Page content Wrapper -->
+    </div> <!-- Page content Wrapper href="<?php echo base_url();?>events/delete_events/<?php echo $rows->id;?>" -->
 
 </div> <!-- content -->
 <script type="text/javascript">
+
+  function confirmGetMessage(eid)
+  {
+    var r=confirm("Do you want to delete this?")
+    if (r==true) {
+    $.ajax({
+      url: "<?php echo base_url(); ?>events/delete_events",
+      type: 'POST',
+      data: { eid: eid },
+      success: function(response) {
+      //alert(response);exit;
+          if (response == "success") {
+              swal({
+                  title: "Success",
+                  text: "Deleted Successfully",
+                  type: "success"
+              }).then(function() { 
+                  location.href = '<?php echo base_url(); ?>advertisement/view_adv_plan';
+              });
+          } else {
+              sweetAlert("Oops...", response, "error");
+          }
+      }
+    });
+    }else{
+        swal("Cancelled", "Process Cancel :)", "error");
+       }
+ }
+
   $(document).ready(function() {
    
 } );

@@ -1,3 +1,11 @@
+<?php  foreach($plan_time as $rows) { }
+$begin=$rows->start_date;
+$end=$rows->end_date;
+ //echo $begin; echo'<br>';echo $end;
+//$daterange = new DatePeriod($begin, new DateInterval('P1D'), $end);
+
+   ?>
+
 <script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
 <link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
 
@@ -50,6 +58,19 @@
                      <div class="card-block">
                         <h4 class="mt-0 header-title"></h4>
                         <form  method="post"  enctype="multipart/form-data" action="<?php echo base_url();?>booking/add_show_times_details" name="plantimeform" id="plantimeform">
+
+                            <div class="form-group row">
+                              <label class="col-sm-4 col-form-label">Show Date</label>
+                              <div class="col-sm-6">
+                                 <select>
+                                   <?php  foreach($datePeriod as $date) { ?>
+                                    <option> <?php  echo $date->format('d/m/Y'); echo'<br>';?></option>
+ 
+                                   <?php } ?>
+                                 </select>
+
+                              </div>
+                           </div>
                            <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Show Time</label>
                               <div class="col-sm-6">
@@ -136,10 +157,9 @@
    
 </div>
 <!-- content -->
+
 <script type="text/javascript">
-
    $('#timepicker1').timepicki();
-
    $(document).ready(function () {
    $('#plantimeform').validate({ // initialize the plugin
       rules: {

@@ -213,39 +213,47 @@ class Advertisement extends CI_Controller
 
     }
 
-    public function delete_history($id)
+    public function delete_history()
     {
         $datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
+
+	    $id=$this->input->post('advid');
 	   
 	    $datas = $this->advertisementmodel->delete_adv_history($id);
 	    $sta=$datas['status'];
       
         if($sta=="success"){
-	       $this->session->set_flashdata('msg','Deleted Successfully');
-		   redirect('advertisement/view_adv_plan',$datas);
+	       //$this->session->set_flashdata('msg','Deleted Successfully');
+		   //redirect('advertisement/view_adv_plan',$datas);
+        	echo "success";
 	     }else{
-	     	 $this->session->set_flashdata('msg','Faild To Delete');
-		     redirect('advertisement/view_adv_plan',$datas);
+	     	//$this->session->set_flashdata('msg','Faild To Delete');
+		    //redirect('advertisement/view_adv_plan',$datas);
+		    echo "Faild";
 	     }
     }
 
-    public function delete_history_all($id)
+    public function delete_history_all()
     {
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
+
+	    $id=$this->input->post('advid');
 	   
 	    $datas = $this->advertisementmodel->delete_adv_history($id);
 	    $sta=$datas['status'];
       
         if($sta=="success"){
-	       $this->session->set_flashdata('msg','Deleted Successfully');
-		   redirect('advertisement/view_adv_history',$datas);
+	        //$this->session->set_flashdata('msg','Deleted Successfully');
+		   //redirect('advertisement/view_adv_history',$datas);
+        echo "success";
 	     }else{
-	     	 $this->session->set_flashdata('msg','Faild To Delete');
-		     redirect('advertisement/view_adv_history',$datas);
+	       //$this->session->set_flashdata('msg','Faild To Delete');
+		  //redirect('advertisement/view_adv_history',$datas);
+		   echo "Faild";
 	     }
     }
 

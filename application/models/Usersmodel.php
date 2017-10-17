@@ -99,7 +99,8 @@ Class Usersmodel extends CI_Model
 
     	$usdel="DELETE FROM user_details WHERE id='$id'";
     	$usdetail=$this->db->query($usdel);
-        $data= array("status"=>"success");
+      
+      $data= array("status"=>"success");
   		return $data;
     }
 

@@ -73,6 +73,7 @@
                         <?php 
                            $i=1;
                            foreach($list as $rows){ 
+                            $guid=$rows->user_id;
                               ?>
                         <tr>
                             <td><?php echo $i; ?></td>
@@ -83,7 +84,7 @@
                              <a href="<?php echo base_url();?>guestuser/view_all_details/<?php echo $rows->user_id;?>">
                               <img  title="View Followers Details" src="<?php echo base_url();?>assets/icons/view.png"/>
                             </a>
-                              <a href="<?php echo base_url();?>guestuser/delete/<?php echo $rows->user_id;?>"> 
+                              <a onclick="confirmGetMessage(<?php echo $guid;?>)" > 
                               <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
                             </td>
                         </tr>
@@ -98,10 +99,37 @@
       </div> <!-- end row -->
 
      </div><!-- container -->
-    </div> <!-- Page content Wrapper -->
+    </div> <!-- Page content Wrapper href="<?php echo base_url();?>guestuser/delete/<?php echo $rows->user_id;?>"-->
 
 </div> <!-- content -->
 <script type="text/javascript">
+  function confirmGetMessage(guid)
+  {
+    var r=confirm("Do you want to delete this?")
+    if (r==true) {
+    $.ajax({
+      url: "<?php echo base_url(); ?>guestuser/delete",
+      type: 'POST',
+      data: { guserid: guid },
+      success: function(response) {
+      //alert(response);exit;
+          if (response == "success") {
+              swal({
+                  title: "Success",
+                  text: "Deleted Successfully",
+                  type: "success"
+              }).then(function() { 
+                  location.href = '<?php echo base_url(); ?>guestuser/home';
+              });
+          } else {
+              sweetAlert("Oops...", response, "error");
+          }
+      }
+    });
+    }else{
+        swal("Cancelled", "Process Cancel :)", "error");
+       }
+ }
   $(document).ready(function() {
    
 } );

@@ -32,7 +32,7 @@ class Guestuser extends CI_Controller
 	 		 }
 	}
 
-	 public function delete($users_id)
+	 public function delete()
     {    //echo $users_id; exit;
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
@@ -40,14 +40,17 @@ class Guestuser extends CI_Controller
 	    
 	    if($user_role==1)
 		{
+		 $users_id=$this->input->post('guserid');
 	     $datas= $this->guestusermodel->delete($users_id);
          $sta=$datas['status'];
 		 if($sta=="success"){
-		 $this->session->set_flashdata('msg','Deleted Successfully');
-	     redirect('guestuser/home');
+		 //$this->session->set_flashdata('msg','Deleted Successfully');
+	     //redirect('guestuser/home');
+		 	echo "success";
 		 }else{
-		     $this->session->set_flashdata('msg','Faild To Delete');
-			 redirect('guestuser/home');
+		     //$this->session->set_flashdata('msg','Faild To Delete');
+			// redirect('guestuser/home');
+			echo "Faild";
 		     }
 	 	}else{
 	 			redirect('/');

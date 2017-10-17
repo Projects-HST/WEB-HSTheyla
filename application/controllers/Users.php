@@ -236,7 +236,7 @@ class Users extends CI_Controller
 	 		 }
     }
 
-    public function delete($id,$users_id)
+    public function delete()
     {   
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
@@ -244,14 +244,21 @@ class Users extends CI_Controller
 	    
 	    if($user_role==1)
 		{
+		   $id=$this->input->post('uaid');
+	       $users_id=$this->input->post('userid');
+
+	       //echo $id; echo $users_id; exit;
+
 	     $datas= $this->usersmodel->delete($id,$users_id);
-        $sta=$datas['status'];
+         $sta=$datas['status'];
 		  if($sta=="success"){
-		   $this->session->set_flashdata('msg','Deleted Successfully');
-			redirect('users/view');
-		    }else{
-		      $this->session->set_flashdata('msg','Faild To Delete');
-			   redirect('users/view');
+		   //$this->session->set_flashdata('msg','Deleted Successfully');
+		  //redirect('users/view');
+		  	echo "success";
+		   }else{
+		     //$this->session->set_flashdata('msg','Faild To Delete');
+			 //redirect('users/view');
+		   	echo "Faild";
 		     }
 	 	}else{
 	 			redirect('/');

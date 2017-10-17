@@ -78,7 +78,8 @@
                            $i=1;
                            foreach($users_view as $rows){ 
                            $sts=$rows->status; 
-                           $uid=$rows->user_id;  
+                           $uid=$rows->user_id; 
+                           $usid=$rows->id; 
                               ?>
                         <tr>
                             <td><?php echo $i; ?></td>
@@ -95,7 +96,7 @@
                              <!--a href="<?php echo base_url();?>users/view_single_events/<?php echo $rows->id;?>">
                               <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a-->
 
-                              <a href="<?php echo base_url();?>users/delete/<?php echo $rows->id;?>/<?php echo $rows->user_id; ?>">   
+                              <a onclick="confirmGetMessage(<?php echo $usid;?>,<?php echo $uid;?>)">   
                               <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
 
                             </td>
@@ -114,10 +115,40 @@
       </div> <!-- end row -->
 
      </div><!-- container -->
-    </div> <!-- Page content Wrapper -->
+    </div> <!-- Page content Wrapper href="<?php echo base_url();?>users/delete/<?php echo $rows->id;?>/<?php echo $rows->user_id; ?>"-->
 
 </div> <!-- content -->
 <script type="text/javascript">
+
+  function confirmGetMessage(usid,uid)
+  {
+    var r=confirm("Do you want to delete this?")
+    if (r==true) {
+    $.ajax({
+      url: "<?php echo base_url(); ?>users/delete",
+      type: 'POST',
+      data: { uaid: usid, userid: uid },
+      success: function(response) {
+      alert(response);exit;
+          if (response == "success") {
+              swal({
+                  title: "Success",
+                  text: "Deleted Successfully",
+                  type: "success"
+              }).then(function() { 
+                  location.href = '<?php echo base_url(); ?>users/view';
+              });
+          } else {
+              sweetAlert("Oops...", response, "error");
+          }
+      }
+    });
+    }else{
+        swal("Cancelled", "Process Cancel :)", "error");
+       }
+ }
+
+
   $(document).ready(function() {
    
 } );

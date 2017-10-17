@@ -155,6 +155,7 @@ class Events extends CI_Controller
 
      public function edit_events($id)
      {
+     	$id=base64_decode($id);
         $datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
@@ -262,6 +263,7 @@ class Events extends CI_Controller
 
      public function view_single_events($id)
       {
+      	$id=base64_decode($id);
         $datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
@@ -299,7 +301,8 @@ class Events extends CI_Controller
     }
 
     public function add_events_gallery($id)
-    {
+    {   
+    	$id=base64_decode($id);
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
@@ -390,7 +393,9 @@ class Events extends CI_Controller
     }
 
     public function view_events_reviews($id)
-    {
+    { 
+    	$id=base64_decode($id);
+    	
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');

@@ -17,7 +17,8 @@ class Booking extends CI_Controller
      
 	public  function home($id)
 	{
-     
+        $id=base64_decode($id);
+
         $datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
@@ -47,6 +48,7 @@ class Booking extends CI_Controller
 	    $eventid=$this->input->post('event_id');
 
 	    $datas = $this->bookingmodel->add_events_details($eventid,$planname,$amount,$user_id);
+	    $eventid=base64_encode($eventid);
         $sta=$datas['status'];
         //print_r($sta);exit;
         if($sta=="success"){
@@ -92,6 +94,7 @@ class Booking extends CI_Controller
 
 	    $datas = $this->bookingmodel->update_events_details($eventid,$planid,$planname,$amount,$user_id);
         $sta=$datas['status'];
+        $eventid=base64_encode($eventid);
         //print_r($sta);exit;
         if($sta=="success"){
 	       $this->session->set_flashdata('msg','updated Successfully');
@@ -111,6 +114,7 @@ class Booking extends CI_Controller
         if($user_role==1){ 
 	    $datas = $this->bookingmodel->delete_plan_details($plaid);
         $sta=$datas['status'];
+        $eveid=base64_encode($eveid);
         //print_r($sta);exit;
         if($sta=="success"){
 	       $this->session->set_flashdata('msg','Deleted Successfully');
@@ -135,7 +139,7 @@ class Booking extends CI_Controller
         $datas['plan_time'] = $this->bookingmodel->view_plan_time_details($plaid,$eveid);
         $datas['planid']=$plaid;
         $datas['eventid']=$eveid;
-
+        //echo '<pre>';print_r($datas['plan_time'] );exit;
 		if($user_role==1)
 		{
 		  $this->load->view('header');

@@ -61,7 +61,7 @@ function update_events_details($eventid,$planid,$planname,$amount,$user_id)
 
 function view_plan_time_details($plaid,$eveid)
 {
-  $tim="SELECT bt.*,e.event_name,b.plan_name,b.seat_rate FROM booking_plan_timing AS bt,events AS e,booking_plan AS b WHERE bt.plan_id ='$plaid' AND bt.event_id='$eveid' AND bt.plan_id=b.id AND bt.event_id=e.id  ORDER BY bt.id DESC";
+ $tim="SELECT bt.*,e.event_name,e.start_date,e.end_date,b.plan_name,b.seat_rate FROM booking_plan_timing AS bt,events AS e,booking_plan AS b WHERE bt.plan_id ='$plaid' AND bt.event_id='$eveid' AND bt.plan_id=b.id AND bt.event_id=e.id  ORDER BY bt.id DESC";
   $tim12=$this->db->query($tim);
   $tim123=$tim12->result();
   return $tim123;
