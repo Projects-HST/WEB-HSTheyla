@@ -99,9 +99,9 @@ function edit_plans_time($id)
   return $tim1;
 }
 
-function update_shows_times_details($time_id,$plan_id,$eventid,$showtime,$seats,$user_id)
+function update_shows_times_details($time_id,$plan_id,$eventid,$show_date,$showtime,$seats,$user_id)
 {
-  $updatetime="UPDATE booking_plan_timing SET show_time='$showtime',seat_available='$seats',updated_by='$user_id',updated_at=NOW() WHERE id='$time_id' AND event_id='$eventid' AND plan_id='$plan_id'";
+  $updatetime="UPDATE booking_plan_timing SET show_date='$show_date',show_time='$showtime',seat_available='$seats',updated_by='$user_id',updated_at=NOW() WHERE id='$time_id' AND event_id='$eventid' AND plan_id='$plan_id'";
   $updatetime1=$this->db->query($updatetime);
   $data= array("status"=>"success");
   return $data;
