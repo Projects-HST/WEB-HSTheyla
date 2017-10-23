@@ -51,6 +51,37 @@
                         <form  method="post"  enctype="multipart/form-data" action="<?php echo base_url();?>booking/update_show_times_details" name="plantimeform" id="plantimeform">
 
                            <?php foreach ($edit as $res){ }?>
+                            
+                             <div class="form-group row">
+                              <label class="col-sm-4 col-form-label">Show Date</label>
+                              <div class="col-sm-6">
+
+                                <input id="sdate" type="hidden" class="form-control" name="showdate" value="<?php echo $newDate = date("d-m-Y",strtotime($res->show_date)); ?>" >
+
+                                <!--div style="display: none;"-->
+                                 <select class="form-control" name="showdate">
+                                   <?php  
+                                   //foreach($dates as $rows1) { }
+                                    $start_date=$res->start_date;
+                                    $end_date=$res->end_date;
+                                    $start_date = date('Y-m-d', strtotime($start_date));
+                                    $end_date =  date('Y-m-d', strtotime($end_date));
+                                    $day = 86400; // Day in seconds  
+                                    $format = 'd-m-Y'; // Output format (see PHP date funciton)  
+                                    $sTime = strtotime($start_date); // Start as time  
+                                    $eTime = strtotime($end_date); // End as time  
+                                    $numDays = round(($eTime - $sTime) / $day) + 1;  
+                                    $days = array();  
+                                    for ($d = 0; $d < $numDays; $d++)
+                                    {  ?>
+                                    <option> 
+                                    <?php echo $days[] = date($format, ($sTime + ($d * $day))); echo'<br>';?></option>
+                                   <?php } ?>
+                                 </select>
+                    <script language="JavaScript">document.plantimeform.showdate.value="<?php echo $days[] = $res->show_date; ?>";</script>
+                           
+                              </div>
+                           </div>
 
                            <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Show Time</label>

@@ -1,10 +1,3 @@
-<?php  foreach($plan_time as $rows) { }
-$begin=$rows->start_date;
-$end=$rows->end_date;
- //echo $begin; echo'<br>';echo $end;
-//$daterange = new DatePeriod($begin, new DateInterval('P1D'), $end);
-
-   ?>
 
 <script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
 <link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
@@ -62,10 +55,23 @@ $end=$rows->end_date;
                             <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Show Date</label>
                               <div class="col-sm-6">
-                                 <select>
-                                   <?php  foreach($datePeriod as $date) { ?>
-                                    <option> <?php  echo $date->format('d/m/Y'); echo'<br>';?></option>
- 
+                                 <select class="form-control" name="showdate">
+                                   <?php  
+                                   foreach($dates as $rows1) { }
+                                    $start_date=$rows1->start_date;
+                                    $end_date=$rows1->end_date;
+                                    $start_date = date('Y-m-d', strtotime($start_date));
+                                    $end_date =  date('Y-m-d', strtotime($end_date));
+                                    $day = 86400; // Day in seconds  
+                                    $format = 'd-m-Y'; // Output format (see PHP date funciton)  
+                                    $sTime = strtotime($start_date); // Start as time  
+                                    $eTime = strtotime($end_date); // End as time  
+                                    $numDays = round(($eTime - $sTime) / $day) + 1;  
+                                    $days = array();  
+                                    for ($d = 0; $d < $numDays; $d++)
+                                    {  ?>
+                                    <option> 
+                                    <?php echo $days[] = date($format, ($sTime + ($d * $day))); echo'<br>';?></option>
                                    <?php } ?>
                                  </select>
 
@@ -118,6 +124,7 @@ $end=$rows->end_date;
                                  <th>S.NO</th>
                                  <th>Event Name</th>
                                  <th>Plan Name</th>
+                                 <th>Show Date</th>
                                  <th>Show Time</th>
                                  <th>Available Seats</th>
                                  <th>Amount</th>
@@ -133,6 +140,7 @@ $end=$rows->end_date;
                                  <td><?php  echo $i; ?></td>
                                  <td><?php  echo $rows->event_name; ?></td>
                                  <td><?php  echo $rows->plan_name; ?></td>
+                                 <td><?php  echo $newDate = date("d-m-Y",strtotime($rows->show_date));?></td>
                                  <td><?php  echo $rows->show_time; ?></td>
                                  <td><?php  echo $rows->seat_available; ?></td>
                                  <td><?php  echo $rows->seat_rate; ?></td>
@@ -149,12 +157,10 @@ $end=$rows->end_date;
                <!-- end col -->
             </div>
             <!-- end row -->
-         
          </div>
          <!-- container -->
       </div>
       <!-- Page content Wrapper -->
-   
 </div>
 <!-- content -->
 
@@ -165,16 +171,12 @@ $end=$rows->end_date;
       rules: {
         showtime:{required:true },
         seats:{required:true }
-              
        },
-   
        messages: {
        showtime:"Enter Show Times",
        seats:"Enter  Seats"
-       
-              },
+            },
         }); 
    });
-   
 </script>
 

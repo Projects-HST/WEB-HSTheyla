@@ -198,13 +198,13 @@ class Advertisement extends CI_Controller
 	     //$category_id=$datas['cid'];
 	      $id = str_replace(' ','',$datas['eid']);
 	      $category_id = str_replace(' ','',$datas['cid']);
-	     
+	     //print_r($sta);exit;
         if($sta=="success"){
 	       $this->session->set_flashdata('msg','Added Successfully');
 	       //redirect('examinationresult/exam_mark_details?var1='.$clsmastid.'&var2='.$exam_id.'',$datas);
 		      redirect('advertisement/add_advertisement_details/'.$id.'/'.$category_id.'',$datas);
-	     }else if($sta=="Already Exist"){
-	     	 $this->session->set_flashdata('msg','Already Exist');
+	     }else if($sta=="AE"){
+	     	 $this->session->set_flashdata('msg','Already Plans Running On That Betwen Dates Kindly Check It ');
 		    redirect('advertisement/add_advertisement_details/'.$id.'/'.$category_id.'',$datas);
 	     }else{
 	     	 $this->session->set_flashdata('msg','Faild To Add');

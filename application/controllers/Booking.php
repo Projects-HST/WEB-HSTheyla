@@ -137,9 +137,10 @@ class Booking extends CI_Controller
 	    $user_role=$this->session->userdata('user_role');
 
         $datas['plan_time'] = $this->bookingmodel->view_plan_time_details($plaid,$eveid);
+        $datas['dates'] = $this->bookingmodel->view_events_dates($eveid);
         $datas['planid']=$plaid;
         $datas['eventid']=$eveid;
-        //echo '<pre>';print_r($datas['plan_time'] );exit;
+        //echo '<pre>';print_r($datas['dates'] );exit;
 		if($user_role==1)
 		{
 		  $this->load->view('header');
@@ -161,7 +162,12 @@ class Booking extends CI_Controller
 	    $showtime=$this->input->post('showtime');
 	    $seats=$this->input->post('seats');
 
-	    $datas = $this->bookingmodel->add_shows_times_details($plan_id,$eventid,$showtime,$seats,$user_id);
+	    //$showdate=$this->input->post('showdate');
+	    $sdate=$this->input->post('showdate');
+		$dateTime = new DateTime($sdate);
+		$show_date=date_format($dateTime,'Y-m-d');
+
+	    $datas = $this->bookingmodel->add_shows_times_details($plan_id,$eventid,$showtime,$show_date,$seats,$user_id);
         $sta=$datas['status'];
         //print_r($sta);exit;
         if($sta=="success"){
@@ -182,7 +188,7 @@ class Booking extends CI_Controller
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
         $datas['edit']=$this->bookingmodel->edit_plans_time($id);
-        //print_r($datas['edit']);exit;
+        //echo '<pre>'; print_r($datas['edit']);exit;
         if($user_role==1)
 		{
 		  $this->load->view('header');

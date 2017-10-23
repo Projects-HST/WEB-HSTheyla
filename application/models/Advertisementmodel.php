@@ -83,16 +83,16 @@ function getall_adv_plans()
 
 function add_advertisement_plan_history($event_id,$category_id,$start_date,$end_date,$start_time,$end_time,$adv_plan,$status,$user_id)
 {   
-	 $check="SELECT * FROM adv_event_history WHERE event_id='$event_id' AND date_to='$end_date' AND time_from='$start_time' AND time_to='$end_time' AND adv_plan_id='$adv_plan' ";
+	   $check="SELECT * FROM adv_event_history WHERE DATEDIFF(date_from,'$start_date') <= 0 AND DATEDIFF(date_to,'$end_date') >= 0 AND event_id='$event_id' AND status='$status'";
     $result=$this->db->query($check);
     if($result->num_rows()==0)
     {
-		$hsql="INSERT INTO adv_event_history(event_id,category_id,date_from,date_to,time_from,time_to,adv_plan_id,status, created_by,created_at) VALUES ('$event_id','$category_id','$start_date','$end_date','$start_time','$end_time','$adv_plan','$status','$user_id',NOW())";
+		$hsql="INSERT INTO adv_event_history(event_id,category_id,date_from,date_to,time_from,time_to,adv_plan_id,status,created_by,created_at) VALUES ('$event_id','$category_id','$start_date','$end_date','$start_time','$end_time','$adv_plan','$status','$user_id',NOW())";
 		$hsql1=$this->db->query($hsql);
 		$data= array("status"=>"success","eid"=>"$event_id","cid"=>"$category_id");
 	    return $data;
 	}else{
-	   $data= array("status"=>"Already Exist");
+	   $data= array("status"=>"AE","eid"=>"$event_id","cid"=>"$category_id");
        return $data;	
 	}
 }

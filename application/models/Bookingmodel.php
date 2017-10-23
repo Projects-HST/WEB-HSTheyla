@@ -61,19 +61,27 @@ function update_events_details($eventid,$planid,$planname,$amount,$user_id)
 
 function view_plan_time_details($plaid,$eveid)
 {
- $tim="SELECT bt.*,e.event_name,e.start_date,e.end_date,b.plan_name,b.seat_rate FROM booking_plan_timing AS bt,events AS e,booking_plan AS b WHERE bt.plan_id ='$plaid' AND bt.event_id='$eveid' AND bt.plan_id=b.id AND bt.event_id=e.id  ORDER BY bt.id DESC";
+  $tim="SELECT bt.*,e.event_name,e.start_date,e.end_date,b.plan_name,b.seat_rate FROM booking_plan_timing AS bt,events AS e,booking_plan AS b WHERE bt.plan_id ='$plaid' AND bt.event_id='$eveid' AND bt.plan_id=b.id AND bt.event_id=e.id  ORDER BY bt.id DESC";
   $tim12=$this->db->query($tim);
   $tim123=$tim12->result();
   return $tim123;
 } 
 
-function add_shows_times_details($plan_id,$eventid,$showtime,$seats,$user_id)
+function view_events_dates($eveid)
 {
-  $check_time="SELECT * FROM booking_plan_timing WHERE event_id='$eventid' AND plan_id='$plan_id' AND show_time='$showtime'";
+   $date="SELECT event_name,start_date,end_date FROM events  WHERE id='$eveid'";
+  $date1=$this->db->query($date);
+  $date2=$date1->result();
+  return $date2;
+}
+
+function add_shows_times_details($plan_id,$eventid,$showtime,$show_date,$seats,$user_id)
+{
+  $check_time="SELECT * FROM booking_plan_timing WHERE event_id='$eventid' AND plan_id='$plan_id' AND show_time='$showtime' AND show_date='$show_date'";
   $result=$this->db->query($check_time);
   if($result->num_rows()==0)
    {  
-    $timinsert="INSERT INTO booking_plan_timing(event_id,plan_id,show_time,seat_available,created_by,created_at) VALUES ('$eventid','$plan_id','$showtime','$seats','$user_id',NOW())";
+    $timinsert="INSERT INTO booking_plan_timing(event_id,plan_id,show_date,show_time,seat_available,created_by,created_at) VALUES ('$eventid','$plan_id','$show_date','$showtime','$seats','$user_id',NOW())";
      $timinsert1=$this->db->query($timinsert);
      $data= array("status"=>"success");
      return $data;
@@ -85,7 +93,7 @@ function add_shows_times_details($plan_id,$eventid,$showtime,$seats,$user_id)
 
 function edit_plans_time($id)
 {
-  $edittime="SELECT * FROM booking_plan_timing WHERE id='$id' ";
+  $edittime="SELECT bt.*,e.event_name,e.start_date,e.end_date FROM booking_plan_timing AS bt,events AS e WHERE bt.id='$id' AND bt.event_id=e.id ";
   $tim=$this->db->query($edittime);
   $tim1=$tim->result();
   return $tim1;
