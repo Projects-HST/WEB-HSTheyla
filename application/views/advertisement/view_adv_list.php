@@ -84,10 +84,10 @@
                             <td><?php echo $rows->category_name ; ?></td>
                             <td><?php echo $rows->city_name ; ?></td>
                             <td>
-                             <a href="<?php echo base_url();?>events/edit_events/<?php echo $rows->id;?>">
+                             <a href="<?php echo base_url();?>events/edit_events/<?php echo base64_encode($rows->id);?>">
                               <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
 
-                             <a href="<?php echo base_url();?>events/view_single_events/<?php echo $rows->id;?>">
+                             <a href="<?php echo base_url();?>events/view_single_events/<?php echo base64_encode($rows->id);?>">
                               <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a>
 
                               <a onclick="confirmGetMessage(<?php echo $eid;?>)" >   

@@ -134,21 +134,14 @@
                            
                             <label for="stime" class="col-sm-2 col-form-label">Start Time : </label>
                             <div class="col-sm-4">
-                                <select name="start_time" readonly class="form-control" >
-                                     <option value="">Select Start Time</option>
-									                   <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
-								                </select>
-                                <script language="JavaScript">document.eventform.start_time.value="<?php echo $rows->start_time; ?>";</script>
+
+                              <h4 class="header-title"> <?php echo date("g:i a",strtotime(" $rows->start_time")); ?> </h4>
 
                             </div>
 
                              <label for="etime" class="col-sm-2 col-form-label">End Time : </label>
                             <div class="col-sm-4">
-                                <select name="end_time" readonly class="form-control" >
-                                     <option value="">Select End Time</option>
-									                   <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
-								                </select>
-                                 <script language="JavaScript">document.eventform.end_time.value="<?php echo $rows->end_time; ?>";</script>
+                               <h4 class="header-title"> <?php echo date("g:i a",strtotime(" $rows->end_time")); ?> </h4>
                             </div>
 
                         </div>
