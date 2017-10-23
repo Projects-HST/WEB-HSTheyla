@@ -206,6 +206,20 @@ class Home extends CI_Controller {
 
 		}
 
+		public function reset(){
+			  $email_token = $this->uri->segment(3);
+				$datas['res']=$email_token;
+			  $this->load->view('reset',$datas);
+
+		}
+
+		public function update_password(){
+			$email_token=$this->input->post('email_token');
+			$new_password=$this->input->post('new_password');
+			$retype_password=$this->input->post('retype_password');
+			$data=$this->loginmodel->update_password($email_token,$new_password,$retype_password);
+		}
+
 		public function checkemail(){
 			$email=$this->input->post('email');
 			$data=$this->loginmodel->check_email($email);

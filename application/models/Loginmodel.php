@@ -233,7 +233,7 @@ Class Loginmodel extends CI_Model
                 <center><img src="'.base_url().'assets/front/images/heyla_b.png" style="width:120px;"></center>
                </p>
                <p style="margin-left:50px;">Thanking for Registering with Heyla App <br>
-               To allow us to confirm the validity of your email address,click this verification link. <center>   <a href="'. base_url().'home/emailverfiy/'.$encrypt_email.'" target="_blank"style="background-color: blue;    padding: 12px;    text-decoration: none;    color: #fff;    border-radius: 20px;">Verfiy  Here</a></center>  </p>
+               To allow us to confirm the validity of your email address,click this verification link. <center>   <a href="'. base_url().'home/emailverfiy/'.$encrypt_email.'" target="_blank"style="background-color: #478ECC;    padding: 12px;    text-decoration: none;    color: #fff;    border-radius: 20px;">Verfiy  Here</a></center>  </p>
                <p style="font-size:20px;">Thank you and enjoy, <br>
                  The Heyla Team
                  </p>
@@ -276,27 +276,18 @@ Class Loginmodel extends CI_Model
        $result=$res->result();
        foreach($result as $rows){}
        $email=$rows->email_id;
-      $length = 8;
-      $genpassword = "";
-      $possible = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      $i = 0;
-      while ($i < $length) {
-       $char = substr($possible, mt_rand(0, strlen($possible)-1), 1);
-       if (!strstr($genpassword, $char)) {
-         $genpassword .= $char;
-         $i++;
-       }
-      }
-      $to=$email;
-      $subject="Reset Password";
-      $htmlContent = '
+       $encrypt_email= base64_encode($email);
+       $to=$email;
+       $subject="Reset Password";
+       $htmlContent = '
         <html>
         <head>
         <title>Reset Password</title>
            </head>
            <body>
+           <p style="margin-left:50px;">To Reset Password.Click the below Link <br>
+         <br>   <a href="'. base_url().'home/reset/'.$encrypt_email.'" target="_blank"style="background-color: #478ECC;    padding: 12px;    text-decoration: none;    color: #fff;    border-radius: 20px;">Click Here To Reset</a></br>  </p>
 
-           <p style="margin-left:50px;">Your Account Password has been Reset Successfully.to Login Use the New Password '.$genpassword.'</p>
            </body>
         </html>';
     $headers = "MIME-Version: 1.0" . "\r\n";
@@ -304,17 +295,31 @@ Class Loginmodel extends CI_Model
     // Additional headers
     $headers .= 'From: heylapp<info@heylapp.com>' . "\r\n";
     $sent= mail($to,$subject,$htmlContent,$headers);
-
-      $newpassword=md5($genpassword);
-      $update_pwd="UPDATE user_master SET password='$newpassword' WHERE email_id='$email'";
-      $update_new_pwd=$this->db->query($update_pwd);
-      if($update_new_pwd){
+      if($sent){
           echo "success";
 
       }else{
         echo "Something Went Wrong";
       }
      }
+   }
+
+   function update_password($email_token,$new_password,$retype_password){
+      $email_decrypt=base64_decode($email_token);
+      $check_email="SELECT * FROM user_master WHERE email_id='$email_decrypt'";
+     $res=$this->db->query($check_email);
+      if($res->num_rows()==0){
+        echo "Something Went Wrong";
+      }else{
+        $pwd=md5($new_password);
+        $update_user_master="UPDATE user_master SET password='$pwd' WHERE email_id='$email_decrypt'";
+        $result=$this->db->query($update_user_master);
+        if($result){
+            echo "success";
+        }else{
+            echo "Something Went Wrong";
+        }
+    }
    }
 
    function getuserfb($firstname,$email){
