@@ -130,7 +130,7 @@
                            
                             <label for="Venue" class="col-sm-2 col-form-label">Venue</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" value="<?php echo $rows->event_venue; ?>" required="" name="venue"  >
+                                <input class="form-control" type="text" value="<?php echo $rows->event_venue; ?>" required="" name="venue">
                             </div>
                              <label for="Address" class="col-sm-2 col-form-label">Address</label>
                             <div class="col-sm-4">

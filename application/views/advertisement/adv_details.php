@@ -167,8 +167,8 @@
                                  <th>Category Rate</th>
                                  <th>From Date</th>
                                  <th>To Date</th>
-                                 <!--th>From Time</th>
-                                 <th>To Time</th-->
+                                 <th>From Time</th>
+                                 <th>To Time</th>
                                  <th>Plan Name</th>
                                 <th>Status</th>
                                  <th>Action</th>
@@ -189,15 +189,14 @@
                                        echo date_format($date,"d-m-Y");  ?></td>
                                  <td> <?php $date=date_create($rows->date_to);
                                        echo date_format($date,"d-m-Y");  ?></td>
-                                 <!--td><?php  echo $rows->time_from; ?></td>
-                                 <td> <?php echo $rows->time_to; ?></td-->
+                                 <td><?php echo date("g:i a",strtotime("$rows->time_from")); ?></td>
+                                 <td> <?php echo date("g:i a",strtotime("$rows->time_to")); ?></td>
                                  <td><?php  echo $rows->plan_name; ?></td>
                                  <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
                                  <td> <a href="<?php echo base_url();?>advertisement/edit_history/<?php echo $rows->id;?>">
                                   <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
                                  <a onclick="confirmGetMessage(<?php echo $adid;?>)">   
                                  <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a></td>
-                                  
                              </td>
                               </tr>
                              <?php $i++;  }  ?>
