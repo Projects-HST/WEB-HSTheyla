@@ -12,6 +12,7 @@
    justify-content: center;
    align-items: center;
    font-size: 17px;
+   padding-top: 100px;
 }
 .verify-page{
   background-color: #F6F6F6;
@@ -102,8 +103,8 @@
   height: 520px;
   background-color: #fff;
   border-radius: 3px;
-  
-  
+
+
 }
 .cover{
   background: url("../images/cover.png")no-repeat;

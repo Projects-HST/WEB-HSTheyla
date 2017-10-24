@@ -245,6 +245,7 @@
     $("#edit-btn").click(function() {
         $("#form").toggle();
         $('#per-info').hide();
+        
     });
 
 
@@ -278,7 +279,7 @@
 
                 success: function(response) {
                     if (response == "success") {
-                        //  swal("Success!", "Thanks for Your Note!", "success");
+
                         swal({
                                 title: "Profile",
                                 text: "Saved",

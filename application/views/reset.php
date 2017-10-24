@@ -35,6 +35,11 @@
 .form-control{
   width: 270px;
 }
+input[type=password] {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+}
 
 </style>
 
@@ -66,17 +71,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url(); ?>">Contact</a>
                     </li>
-                    <?php
-                       $user_id=$this->session->userdata('user_role');
-                       if(empty($user_id)){ ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url(); ?>" data-toggle="modal" data-target="#myModal">Login / Sign in</a>
-                        </li>
-                        <?php }else{ ?>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url(); ?>logout">Logout</a>
-                            </li>
-                            <?php } ?>
+
                 </ul>
             </div>
         </div>

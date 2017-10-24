@@ -28,31 +28,7 @@
     <script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/additional-methods.min.js"></script>
 </head>
-<style>
-.carousel-fade .carousel-inner .carousel-item {
-  opacity: 0;
-  -webkit-transition-property: opacity;
-  -moz-transition-property: opacity;
-  -o-transition-property: opacity;
-  transition-property: opacity;
-}
-.carousel-fade .carousel-inner .active {
-  opacity: 1;
-}
-.carousel-fade .carousel-inner .active.left,
-.carousel-fade .carousel-inner .active.right {
-  left: 0;
-  opacity: 0;
-  z-index: 1;
-}
-.carousel-fade .carousel-inner .next.left,
-.carousel-fade .carousel-inner .prev.right {
-  opacity: 1;
-}
-.carousel-fade .carousel-control {
-  z-index: 2;
-}
-</style>
+
 <body>
 
     <!-- Navigation -->
@@ -172,24 +148,7 @@
                                     </div>
                                     <center>
                                         <div class="social-login">
-                                            <?php
-                    //  $this->load->library('googleplus');
-                    //  $CLIENT_ID = '56118066242-ndqa7sis300o0ce5otglegn629ktmjj5.apps.googleusercontent.com';
-                    //  $CLIENT_SECRET = 'QBjwPGP5PE6tzJt3bDekC4a1';
-                    //  $APPLICATION_NAME = "Heyla";
-                    //  $client = new Google_Client();
-                    //  $client->setApplicationName($APPLICATION_NAME);
-                    //  $client->setClientId($CLIENT_ID);
-                    //  $client->setClientSecret($CLIENT_SECRET);
-                    //  $client->setAccessType("offline");
-                    //  $client->setRedirectUri('http://heylaapp.com/heyla/google_login');
-                    //  $client->setScopes('email');
-                    //  $objOAuthService = new Google_Service_Plus($client);
-                     //
-                    //  $client->setScopes(array('https://www.googleapis.com/auth/userinfo.email','https://www.googleapis.com/auth/userinfo.profile'));
-                    //  $authUrl=$client->createAuthUrl();
-                    //  echo '<a class="loginBtn loginBtn--google" href="'.$authUrl.'">Login with Google</a>';
-                     ?>
+                                        
                      <a href="<?php echo base_url(); ?>google_login" class="loginBtn loginBtn--google">Login With google</a>
                                                 <a href="<?php echo base_url(); ?>facebook_login" class="loginBtn loginBtn--facebook">
                        Login with Facebook
@@ -253,7 +212,7 @@
                 <!-- Slide Two - Set the background image for this slide in the line below -->
                 <div class="carousel-item" style="background-image: url('<?php echo base_url(); ?>assets/front/images/slider2.jpg')">
                     <div class="carousel-caption d-none d-md-block">
-                      
+
                     </div>
                 </div>
                 <!-- Slide Three - Set the background image for this slide in the line below -->
