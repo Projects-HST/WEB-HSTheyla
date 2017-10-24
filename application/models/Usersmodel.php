@@ -20,7 +20,7 @@ Class Usersmodel extends CI_Model
 
     function getall_users_details()
     {
-       $query="SELECT ud.*,um.user_name,um.mobile_no,um.email_id,um.password,um.user_role,um.status,ci.city_name,up.total_count FROM user_details AS ud LEFT JOIN user_master AS um ON ud.user_id=um.id LEFT JOIN city_master AS ci ON ci.id=ud.city_id LEFT JOIN user_points_count AS up ON up.user_id=ud.user_id";
+       $query="SELECT ud.*,um.user_name,um.mobile_no,um.email_id,um.password,um.user_role,um.status,ci.city_name,up.total_count FROM user_details AS ud LEFT JOIN user_master AS um ON ud.user_id=um.id LEFT JOIN city_master AS ci ON ci.id=ud.city_id LEFT JOIN user_points_count AS up ON up.user_id=ud.user_id ORDER BY ud.id  DESC";
 	  $udresu=$this->db->query($query);
 	  $udres=$udresu->result();
 	  return $udres;
@@ -68,22 +68,32 @@ Class Usersmodel extends CI_Model
 
     function add_user_details($name,$username,$cell,$email,$pwd,$dob,$gender,$address1,$address2,$address3,$occupation,$country,$statename,$city,$zip,$user_pic1,$status,$userrole,$user_id,$display_status)
     {    $pwd1=md5($pwd);
-
-    	$uinsert="INSERT INTO user_master(user_name,mobile_no,email_id,password,user_role,status,created_by,created_at) VALUES ('$username','$cell','$email','$pwd1','$userrole','$display_status','$user_id',NOW())";
-    	$uresu=$this->db->query($uinsert);
+ 
+    $check_user="SELECT * FROM user_master WHERE user_name='$username' AND mobile_no='$cell' AND email_id='$email'";
+    $result=$this->db->query($check_user);
+    if($result->num_rows()==0)
+    {
+    	 $uinsert="INSERT INTO user_master(user_name,mobile_no,email_id,password,user_role,status,created_by,created_at) VALUES ('$username','$cell','$email','$pwd1','$userrole','$display_status','$user_id',NOW())";
+    	  $uresu=$this->db->query($uinsert);
         $insert_id = $this->db->insert_id();
-
         $userdetails="INSERT INTO user_details(user_id,name,birthdate,gender,occupation,address_line1,address_line2,address_line3,country_id,state_id,city_id,zip,user_picture,newsletter_status) VALUES ('$insert_id','$name','$dob','$gender','$occupation','$address1','$address2','$address3','$country','$statename','$city','$zip','$user_pic1','$status')";
         $udetails=$this->db->query($userdetails);
         $data= array("status"=>"success");
   		return $data;
+    }else{
+       $data= array("status"=>"AE");
+       return $data;
+    }
+
     }
 
     function update_user_details($uid,$umid,$username,$name,$cell,$email,$pwd,$dob,$gender,$address1,$address2,$address3,$occupation,$country,$statename,$city,$zip,$user_pic1,$status,$userrole,$user_id,$display_status)
     {   
+
     	$pwd1=md5($pwd);
+
     	 $umupdate="UPDATE user_master SET user_name='$username',mobile_no='$cell',email_id='$email',password='$pwd1',user_role='$userrole',status='$display_status',updated_by='$user_id',updated_at=NOW() WHERE  id='$umid' ";
-    	$umdetails=$this->db->query($umupdate);
+    	   $umdetails=$this->db->query($umupdate);
         
         $usupdate="UPDATE user_details SET name='$name',birthdate='$dob',gender='$gender',occupation='$occupation',address_line1='$address1',address_line2='$address2',address_line3='$address3',country_id='$country',state_id='$statename',city_id='$city',zip='$zip',user_picture='$user_pic1',newsletter_status='$status' WHERE id='$uid' AND user_id='$umid'";
         $usdetails=$this->db->query($usupdate);
@@ -110,6 +120,27 @@ Class Usersmodel extends CI_Model
     	$vfollowers1=$this->db->query($vfollowers);
         $folres=$vfollowers1->result();
         return $folres;
+    }
+
+    function getemail($email)
+    {
+      $query = "SELECT * FROM user_master WHERE email_id='".$email."'";
+      $resultset = $this->db->query($query);
+      return count($resultset->result());
+    }
+
+    function check_mobile_num($cell)
+    {
+      $query1 = "SELECT * FROM user_master WHERE mobile_no='".$cell."'";
+      $resultset1 = $this->db->query($query1);
+      return count($resultset1->result());
+    }
+
+    function check_user_name($uname)
+    {
+      $query1 = "SELECT * FROM user_master WHERE user_name='".$uname."'";
+      $resultset1 = $this->db->query($query1);
+      return count($resultset1->result());
     }
    
 }?>
