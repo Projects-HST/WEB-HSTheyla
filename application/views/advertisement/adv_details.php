@@ -293,50 +293,35 @@ function confirmGetMessage(adid)
        return false;
       }
       
-      // var objFromDate = document.getElementById("datepicker-autoclose").value;
-      // var objToDate = document.getElementById("datepicker").value;
+      var date1 = new Date(fdate);
+      var date2 = new Date(tdate);
        
-      // var date1 = new Date(objFromDate);
-      // var date2 = new Date(objToDate);
-       
-      // var date3 = new Date();
-      // var date4 = date3.getMonth() + "/" + date3.getDay() + "/" + date3.getYear();
-      // var currentDate = new Date(date4);
-       
-      // if(date1 > date2 )
-      // {
-      //   alert("Startdate should be less than Enddate");
-      //   return false; 
-      // }
-   
+      var strStartTime = document.getElementById("stime").value;
+      var strEndTime = document.getElementById("etime").value;
 
-      // var strStartTime = document.getElementById("stime").value;
-      // var strEndTime = document.getElementById("etime").value;
-
-      // var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
-      // var endTime = new Date(startTime);
-      // endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
-      // //alert(startTime); alert(endTime);
-
-      //  var a=objFromDate + '' + startTime;
-      //  var b=objToDate + '' + endTime;
-      //  //alert(a);alert(b);
-      //  if (a == b || a > b) {
-      //   alert("Start Date & Time is greater than end Date & Time");
-      //   return false;
-      //   }
+      var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+      var endTime = new Date(startTime);
+      endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
       
-      // function GetHours(d) 
-      // {
-      //   var h = parseInt(d.split(':')[0]);
-      //   if (d.split(':')[1].split(' ')[1] == "PM") 
-      //   {
-      //    h = h + 12;
-      //   }
-      //    return h;
-      // }
-      // function GetMinutes(d) {
-      // return parseInt(d.split(':')[1].split(' ')[0]);
-      // }
+      var a=formattedDate + '' + startTime;
+      var b=formattedDate1 + '' + endTime;
+     //alert(a);alert(b);
+      if (a == b || a > b) {
+      alert("Start Date & Time is greater than end Date & Time");
+      return false;
+      }
+
+      function GetHours(d) 
+      {
+        var h = parseInt(d.split(':')[0]);
+        if (d.split(':')[1].split(' ')[1] == "PM") {
+        h = h + 12;
+      }
+      return h;
+      }
+      function GetMinutes(d) 
+      {
+       return parseInt(d.split(':')[1].split(' ')[0]);
+      }
 }
 </script>

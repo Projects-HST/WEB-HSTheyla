@@ -13,7 +13,8 @@
 		return $output;
     }
 ?>
-
+<script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
+<link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
 <div class="content-page">
 <!-- Footer Close-->
 <!-- Start content -->
@@ -160,20 +161,30 @@
                         </div>
 
                         <div class="form-group row">
+                           
                             <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
                             <div class="col-sm-4">
-                            <select name="start_time"  class="form-control" id="stime" >
-                                <option value="">Select Start Time</option>
-									             <option value=""><?php echo get_times(); ?></option>
-								            </select>
+
+                               <input  type="text" class="form-control" id="stime" name="start_time">
+
+                                <!-- select name="start_time" required="" class="form-control"  >
+                                     <option value="">Select Start Time</option>
+                                     <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
+                                </select>
+                                <script language="JavaScript">document.eventform.start_time.value="<?php echo $rows->start_time; ?>";</script-->
+
                             </div>
+
                              <label for="etime" class="col-sm-2 col-form-label">End Time</label>
                             <div class="col-sm-4">
-                              <select name="end_time" class="form-control" id="etime" >
-                                <option value="">Select End Time</option>
-									              <option value=""><?php echo get_times(); ?></option>
-								              </select>
+                              <input  type="text" class="form-control" id="etime" name="end_time" >
+                                <!--select name="end_time" required="" class="form-control" id="etime">
+                                     <option value="">Select End Time</option>
+                                     <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
+                                </select>
+                                 <script language="JavaScript">document.eventform.end_time.value="<?php echo $rows->end_time; ?>";</script-->
                             </div>
+
                         </div>
                           <div class="form-group row">
                              <label for="latitude" class="col-sm-2 col-form-label">Select</label>
@@ -299,6 +310,8 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByz7sU142AeFwpK3KiFilK0IOoa2GU9tw"></script>
 
 <script type="text/javascript">
+  $('#stime').timepicki();
+  $('#etime').timepicki();
      window.onload = function () {
     var mapOptions = {
                 center: new google.maps.LatLng(20.5937, 78.9629),
@@ -327,54 +340,54 @@
       });
  
 
-    $('#eventform').validate({ // initialize the plugin
-       rules: {
-         category:{required:true },
-         event_name:{required:true },
-         country:{required:true },
-         city:{required:true },
-         venue:{required:true },
-         address:{required:true },
-         description:{required:true },
-         eventcost:{required:true },
-         start_date:{required:true },
-         end_date:{ required:true },
-         start_time:{required:true },
-         end_time:{required:true },
-         eadv_status:{required:true},
-         hotspot_sts:{required:true},
-         pcontact_cell:{required:true },
-         contact_person:{required:true },
-         email:{required:true },
-         event_status:{required:true },
-         txtLatitude:{required:true },
-         txtLongitude:{required:true }
+    // $('#eventform').validate({ // initialize the plugin
+    //    rules: {
+    //      category:{required:true },
+    //      event_name:{required:true },
+    //      country:{required:true },
+    //      city:{required:true },
+    //      venue:{required:true },
+    //      address:{required:true },
+    //      description:{required:true },
+    //      eventcost:{required:true },
+    //      start_date:{required:true },
+    //      end_date:{ required:true },
+    //      start_time:{required:true },
+    //      end_time:{required:true },
+    //      eadv_status:{required:true},
+    //      hotspot_sts:{required:true},
+    //      pcontact_cell:{required:true },
+    //      contact_person:{required:true },
+    //      email:{required:true },
+    //      event_status:{required:true },
+    //      txtLatitude:{required:true },
+    //      txtLongitude:{required:true }
          
-        },
+    //     },
 
-        messages: {
-        category:"Select Category Name",
-        event_name:"Enter Event Name",
-        country:"Select Country Name",
-        city:"Select City Name",
-        venue:"Enter Venue",
-        address:"Enter Address",
-        description:"Enter Description",
-        eventcost:"Select Event Type",
-        start_date:"Select Start Date",
-        end_date:"Select End Date",
-        start_time:"Select Start Time",
-        end_time:"Select End Time",
-        eadv_status:"Select Advertisement Status ",
-        hotspot_sts:"Select Hotspot Display Status ",
-        pcontact_cell:"Enter Cell Number",
-        contact_person:"Enter Name",
-        email:"Enter Email",
-        event_status:"Select Status",
-        txtLatitude:"Enter Latitude",
-        txtLongitude:"Enter Longitude",
-       },
-         }); 
+    //     messages: {
+    //     category:"Select Category Name",
+    //     event_name:"Enter Event Name",
+    //     country:"Select Country Name",
+    //     city:"Select City Name",
+    //     venue:"Enter Venue",
+    //     address:"Enter Address",
+    //     description:"Enter Description",
+    //     eventcost:"Select Event Type",
+    //     start_date:"Select Start Date",
+    //     end_date:"Select End Date",
+    //     start_time:"Select Start Time",
+    //     end_time:"Select End Time",
+    //     eadv_status:"Select Advertisement Status ",
+    //     hotspot_sts:"Select Hotspot Display Status ",
+    //     pcontact_cell:"Enter Cell Number",
+    //     contact_person:"Enter Name",
+    //     email:"Enter Email",
+    //     event_status:"Select Status",
+    //     txtLatitude:"Enter Latitude",
+    //     txtLongitude:"Enter Longitude",
+    //    },
+    //      }); 
    });
   
  function getcityname(cid) {
@@ -421,16 +434,49 @@ function check()
        //alert(formattedDate);
       var chunks1 = tdate.split('-');
       var formattedDate1 = chunks1[1]+'/'+chunks1[0]+'/'+chunks1[2];
-
       //alert(formattedDate1);
       //alert( Date.parse(formattedDate));
       //alert( Date.parse(formattedDate1));
-
       if(Date.parse(formattedDate) > Date.parse(formattedDate1) )
       {
        alert("Startdate should be less than Enddate");
        return false;
       }
+
+      var date1 = new Date(fdate);
+      var date2 = new Date(tdate);
+       
+      var strStartTime = document.getElementById("stime").value;
+      var strEndTime = document.getElementById("etime").value;
+    
+       var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+       var endTime = new Date(startTime);
+       endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+      
+      var a=formattedDate + '' + strStartTime;
+      var b=formattedDate1 + '' + strEndTime;
+       
+       alert(startTime);alert(endTime);
+       alert(a);alert(b); 
+
+      if (a == b || a > b) {
+      alert("Start Date & Time is greater than end Date & Time");
+      return false;
+      }
+
+      function GetHours(d) 
+      {
+        var h = parseInt(d.split(':')[0]);
+        if (d.split(':')[1].split(' ')[1] == "PM") {
+        h = h + 12;
+      }
+      return h;
+      }
+      function GetMinutes(d) 
+      {
+       return parseInt(d.split(':')[1].split(' ')[0]);
+      }
+
 
   if(document.eventform.txtLatitude.value!="")
     {
