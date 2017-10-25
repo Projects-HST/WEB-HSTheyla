@@ -63,8 +63,9 @@
 
                           <label for="Category" class="col-sm-2 col-form-label">User Name</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" name="username" value="<?php echo $res->user_name; ?>">
-                                <input class="form-control" type="hidden" name="umid" value="<?php echo $res->user_id; ?>">
+                            <input class="form-control" type="text" name="username" value="<?php echo $res->user_name; ?>" onkeyup="checkusernamefun(this.value)">
+                            <input class="form-control" type="hidden" name="umid" value="<?php echo $res->user_id; ?>">
+                                <p id="msg2" style="color:red;"> </p>
                             </div>
                       </div>
                            <div class="form-group row"> 
@@ -77,14 +78,16 @@
 
                             <label for="Name" class="col-sm-2 col-form-label">Mobile Number</label>
                             <div class="col-sm-4">
-                            <input class="form-control" type="text" name="mobile" value="<?php echo $res->mobile_no;?>">
+                            <input class="form-control" type="text" name="mobile" value="<?php echo $res->mobile_no;?>" onkeyup="checkmobilefun(this.value)">
+                              <p id="msg1" style="color:red;"> </p>
                             </div>
 
                         </div>
                        <div class="form-group row">
                           <label for="Name" class="col-sm-2 col-form-label">Email Id</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" name="email" value="<?php echo $res->email_id;?>">
+                                <input class="form-control" type="text" name="email" value="<?php echo $res->email_id;?>" onkeyup="checkemailfun(this.value)" >
+                                  <p id="msg" style="color:red;"> </p>
                             </div>
                               <label for="Name" class="col-sm-2 col-form-label">New Password</label>
                             <div class="col-sm-4">
@@ -247,10 +250,10 @@
                             </div>
                             <label class="col-sm-2 col-form-label"></label>
                             <div class="col-sm-2">
-                              <button type="submit" class="btn btn-primary waves-effect waves-light">
+                              <button type="submit" id="save" class="btn btn-primary waves-effect waves-light">
                               Submit </button></div>
                               <div class="col-sm-2">
-                              <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                              <button type="reset" id="save1" class="btn btn-secondary waves-effect m-l-5">
                               Reset
                               </button></div>
                         </div>
@@ -399,7 +402,69 @@
             }
           }); 
        }
+ function checkemailfun(val)
+  {
+   $.ajax({
+     type:'post',
+     url:'<?php echo base_url(); ?>/users/mail_checker',
+     data:'email='+val,
+     success:function(test)
+      {
+       if(test=="Email Id already Exit")
+         {
+           $("#msg").html(test);
+           $("#save").hide();
+           $("#save1").hide();
+          }else{
+             $("#msg").html(test);
+             $("#save").show();
+            }
+      }
+   });
+  }
 
+   function checkmobilefun(val)
+  {
+    $.ajax({
+     type:'post',
+     url:'<?php echo base_url(); ?>/users/mobile_checker',
+     data:'cell='+val,
+     success:function(test)
+      {
+       if(test=="Mobile Number already Exit")
+         {
+           $("#msg1").html(test);
+            $("#save").hide();
+           $("#save1").hide();
+          }else{
+             $("#msg1").html(test);
+             $("#save").show();
+            }
+      }
+   });
+  }
+
+function checkusernamefun(val)
+  {
+   $.ajax({
+     type:'post',
+     url:'<?php echo base_url(); ?>/users/username_checker',
+     data:'uname='+val,
+     success:function(test)
+      {
+       if(test=="UserName already Exit")
+         {
+           $("#msg2").html(test);
+           $("#save").hide();
+           $("#save1").hide();
+          }else{
+             $("#msg2").html(test);
+             $("#save").show();
+             $("#save1").show();
+            }
+      }
+   });
+  }
 
 </script>
 
