@@ -166,6 +166,7 @@
 
 <script type="text/javascript">
    $('#timepicker1').timepicki();
+   
    $(document).ready(function () {
    $('#plantimeform').validate({ // initialize the plugin
       rules: {
