@@ -80,6 +80,70 @@ class Apimainmodel extends CI_Model {
 //#################### Notification End ####################//
 
 
+
+//#################### SMS ####################//
+
+	public function sendSMS($Phoneno,$Message)
+	{
+        //Your authentication key
+        $authKey = "180660Az2FsJQSXGJ259f02b66";
+        
+        //Multiple mobiles numbers separated by comma
+        $mobileNumber = "$Phoneno";
+        
+        //Sender ID,While using route4 sender id should be 6 characters long.
+        $senderId = "HEYLAA";
+        
+        //Your message to send, Add URL encoding here.
+        $message = urlencode($Message);
+        
+        //Define route 
+        $route = "transactional";
+        
+        //Prepare you post parameters
+        $postData = array(
+            'authkey' => $authKey,
+            'mobiles' => $mobileNumber,
+            'message' => $message,
+            'sender' => $senderId,
+            'route' => $route
+        );
+        
+        //API URL
+        $url="https://control.msg91.com/api/sendhttp.php";
+        
+        // init the resource
+        $ch = curl_init();
+        curl_setopt_array($ch, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => $postData
+            //,CURLOPT_FOLLOWLOCATION => true
+        ));
+        
+        
+        //Ignore SSL certificate verification
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        
+        
+        //get response
+        $output = curl_exec($ch);
+        
+        //Print error if any
+        if(curl_errno($ch))
+        {
+            echo 'error:' . curl_error($ch);
+        }
+        
+        curl_close($ch);
+	}
+
+//#################### SMS End ####################//
+
+
+/*
 //#################### SMS ####################//
 
 	public function sendSMS($Phoneno,$Message)
@@ -100,10 +164,11 @@ class Apimainmodel extends CI_Model {
 	}
 
 //#################### SMS End ####################//
-
+*/
 
 //#################### Main Login ####################//
-	public function Login($username,$password,$gcm_key,$mobile_type,$login_type)
+	//public function Login($username,$password,$gcm_key,$mobile_type,$login_type)
+	public function Login($username,$password,$gcm_key,$login_type)
 	{
 	    $user_id = "";
 	    
@@ -148,10 +213,10 @@ class Apimainmodel extends CI_Model {
 
 		if ( $user_id != "") {
 			
-			$sql = "SELECT A.id as user_id, A.user_name, A.mobile_no, A.email_id, A.email_verify, A.login_count, A.user_role, B.name, B.birthdate, B.gender, B.occupation, B.address_line1, B.address_line2, B.address_line3, B.country_id, B. state_id, B.city_id, B.zip, B.user_picture, B.newsletter_status, B.referal_code, C.user_role_name FROM user_master A, user_details B, user_role_master C WHERE A.id=B.user_id AND A.user_role = C.id AND A.id ='".$user_id."'";
+		    $sql = "SELECT A.id as user_id, A.user_name, A.mobile_no, A.email_id, A.email_verify, A.login_count, A.user_role, B.name, B.birthdate, B.gender, B.occupation, B.address_line1, B.address_line2, B.address_line3, B.country_id, B. state_id, B.city_id, B.zip, B.user_picture, B.newsletter_status, B.referal_code, C.user_role_name FROM user_master A, user_details B, user_role_master C WHERE A.id=B.user_id AND A.user_role = C.id AND A.id ='".$user_id."'";
 			$user_result = $this->db->query($sql);
 			$ress = $user_result->result();
-			
+			/*
 			if($user_result->num_rows()>0)
 			{
 				$userData  = array(
@@ -178,7 +243,7 @@ class Apimainmodel extends CI_Model {
 							"referal_code" => $ress[0]->referal_code	
 				);
 			}
-	
+	*/
 			$update_sql = "UPDATE user_master SET last_login=NOW(),login_count='$login_count' WHERE id='$user_id'";
 			$update_result = $this->db->query($update_sql);
 			
@@ -192,7 +257,8 @@ class Apimainmodel extends CI_Model {
 						$update_gcm = $this->db->query($sQuery);
 					}
 			
-					$response = array("status" => "Success", "msg" => "Login Successfully", "userData" => $userData);
+					//$response = array("status" => "Success", "msg" => "Login Successfully", "userData" => $userData);
+					$response = array("status" => "Success", "msg" => "Login Successfully");
 					return $response;
 		} else {
 			
@@ -349,7 +415,8 @@ class Apimainmodel extends CI_Model {
 	public function User_signup($email_id,$mobile_no,$password,$gcm_key,$signup_type,$mobile_type)
 	{
 	    $user_id = "";
-
+        //$sURL = base_url();
+        
 	    $sql = "SELECT * FROM user_master WHERE email_id ='".$email_id."' OR mobile_no = '".$mobile_no."'";
 		$user_result = $this->db->query($sql);
 		$ress = $user_result->result();
@@ -358,6 +425,7 @@ class Apimainmodel extends CI_Model {
 		{
 		    $digits = 4;
 			$OTP = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT);
+		    $encrypt_email = base64_encode($email_id);
 		    
 			$sQuery = "INSERT INTO user_master (email_id,mobile_no,password,user_role,email_verify,mobile_otp,mobile_verify,status,created_at) VALUES ('". $email_id . "','". $mobile_no . "','". md5($password) . "','3','N','". $OTP . "','N','Y',now())";
 			$insert_user = $this->db->query($sQuery);
@@ -377,9 +445,9 @@ class Apimainmodel extends CI_Model {
 			$mobile_message = 'Verify OTP :'. $OTP;
             
             $subject = "Heyla App - Email Verification";
-            $email_message = "<a href='#'> Email Verfication URL </a>";
-            
-            //$this->sendSMS($mobile_no,$mobile_message);
+            $email_message = 'Thanking for Registering with Heyla App <br>To allow us to confirm the validity of your email address, <a href="'. base_url().'home/emailverfiy/'.$encrypt_email.'" target="_blank" style="background-color: #478ECC; font-size:15px; font-weight: bold; padding: 10px; text-decoration: none; color: #fff; border-radius: 5px;">Click this verification link.</a><br><br><br>';
+
+            $this->sendSMS($mobile_no,$mobile_message);
             $this->sendMail($email_id,$subject,$email_message);
             
 			$response = array("status" => "Success", "msg" => "Signup Successfully");
@@ -419,7 +487,7 @@ class Apimainmodel extends CI_Model {
 	    return $response;
 	}
 	
-	
+
 //#################### Mobile Verification End ####################//
 
 
@@ -441,7 +509,7 @@ class Apimainmodel extends CI_Model {
 			}
 			
 			$mobile_message = 'Verify OTP :'. $OTP;
-            //$this->sendSMS($mobile_no,$mobile_message);
+            $this->sendSMS($mobile_no,$mobile_message);
             
 			$response = array("status" => "Success", "msg" => "OTP Send Successfully");
 		} else {
@@ -478,7 +546,7 @@ class Apimainmodel extends CI_Model {
 			
 		
 			$mobile_message = 'Verify OTP :'. $OTP;
-            //$this->sendSMS($mobile_no,$mobile_message);
+            $this->sendSMS($mobile_no,$mobile_message);
             
 			$response = array("status" => "Success", "msg" => "Mobile Updated Successfully");
 		} else {
@@ -537,13 +605,15 @@ class Apimainmodel extends CI_Model {
     				  $user_id = $rows->id;
     				  $email_id = $rows->email_id;
     			}
+                $encrypt_email = base64_encode($email_id);
 
-        		$subject = "Heyla App - Forgot Password";
-                $email_message = "<a href='#'> Email Verfication URL </a>";
+        		$subject = "Heyla App - Forgot Password URL";
+        		$email_message = 'Please Click the Forgot Password link. <a href="'. base_url().'home/reset/'.$encrypt_email.'" target="_blank" style="background-color: #478ECC; font-size:15px; font-weight: bold; padding: 10px; text-decoration: none; color: #fff; border-radius: 5px;">Forgot Password</a><br><br><br>';
+                //$email_message = "<a href='#'> Email Verfication URL </a>";
                 $this->sendMail($email_id,$subject,$email_message);
 
     		} 
-    		
+
     		$sql = "SELECT * FROM user_master WHERE mobile_no ='".$user_name."' AND mobile_verify ='Y' AND status='Y'";
     		$user_result = $this->db->query($sql);
     		$ress = $user_result->result();
@@ -559,7 +629,7 @@ class Apimainmodel extends CI_Model {
 			    $update_result = $this->db->query($update_sql);
 			    
         		$mobile_message = 'Verify OTP :'. $OTP;
-                //$this->sendSMS($mobile_no,$mobile_message);
+                $this->sendSMS($mobile_no,$mobile_message);
     		} 
 
 	        if ( $user_id != "") {
@@ -570,6 +640,32 @@ class Apimainmodel extends CI_Model {
 			return $response;
 	}
 //#################### Forgot Password End ####################//
+
+
+//#################### Forgot Password OTP Check ####################//
+	public function Forgot_password_otp($mobile_no,$OTP)
+	{
+	    $user_id = "";
+
+	    $sql = "SELECT * FROM user_master WHERE mobile_no = '".$mobile_no."' AND mobile_otp = '".$OTP."'";
+		$user_result = $this->db->query($sql);
+		$ress = $user_result->result();
+		
+		if($user_result->num_rows() != 0)
+		{
+            foreach ($user_result->result() as $rows)
+			{
+				  $user_id = $rows->id;
+			}
+	
+			$response = array("status" => "Success", "msg" => "Verification Successfully","User_id"=>$user_id);
+		} else {
+		    $response = array("status" => "Error", "msg" => "Verification Code or Mobile Number Error");
+		}
+	    return $response;
+	}
+	
+//#################### Forgot Password OTP Check End ####################//
 
 
 //#################### Reset Password ####################//
@@ -658,38 +754,42 @@ class Apimainmodel extends CI_Model {
 //#################### View Category End ####################//
 
 //#################### Add User Category ####################//
-	public function Add_preferrence($user_id,$category_id)
+	public function Add_preferrence($user_id,$category_ids)
 	{
-	        $category_query = "SELECT A.id,A.category_name,B.user_id,B.category_id from category_master A, user_preference B WHERE A.id=B.category_id AND B.user_id ='$user_id' AND status ='Y' ORDER BY order_by";
-			$category_res = $this->db->query($category_query);
+        $category_ids = explode(',' , $category_ids);
+        foreach($category_ids as $key) {
+    	    $sQuery = "INSERT INTO user_preference (user_id,category_id) VALUES ('". $user_id . "','". $key . "')";
+			$ins_Query = $this->db->query($sQuery);
+        }
+        $response = array("status" => "success", "msg" => "Preferences Added");
 
-			 if($category_res->num_rows()>0){
-			     	$category_result= $category_res->result();
-			     	$response = array("status" => "success", "msg" => "View Categories","Categories"=>$category_result);
-				 
-			}else{
-			        $response = array("status" => "error", "msg" => "Categories not found");
-			}  
-						
-			return $response;
+		return $response;
 	}
 //#################### User Category End ####################//
 
 //#################### Add User Category ####################//
-	public function Update_preferrence($user_id,$category_id)
+	public function Update_preferrence($user_id,$category_ids)
 	{
-	        $category_query = "SELECT A.id,A.category_name,B.user_id,B.category_id from category_master A, user_preference B WHERE A.id=B.category_id AND B.user_id ='$user_id' AND status ='Y' ORDER BY order_by";
-			$category_res = $this->db->query($category_query);
-
-			 if($category_res->num_rows()>0){
-			     	$category_result= $category_res->result();
-			     	$response = array("status" => "success", "msg" => "View Categories","Categories"=>$category_result);
-				 
-			}else{
-			        $response = array("status" => "error", "msg" => "Categories not found");
-			}  
-						
-			return $response;
+        $category_ids = explode(',' , $category_ids);
+        
+        $prefQuery = "SELECT * FROM user_preference WHERE user_id = '$user_id' LIMIT 1";
+		$pref_result = $this->db->query($prefQuery);
+		$pref_ress = $pref_result->result();
+		
+			if($pref_result->num_rows()>0)
+			{
+			    $sQuery = "DELETE FROM user_preference WHERE user_id = '" .$user_id. "'";
+    			$del_Query = $this->db->query($sQuery);
+    			
+    			foreach($category_ids as $key) {
+            	    $sQuery = "INSERT INTO user_preference (user_id,category_id) VALUES ('". $user_id . "','". $key . "')";
+        			$ins_Query = $this->db->query($sQuery);
+                }
+			}
+			
+		$response = array("status" => "success", "msg" => "Preference Updated");	
+		
+		return $response;
 	}
 //#################### User Category End ####################//
 
@@ -830,6 +930,96 @@ class Apimainmodel extends CI_Model {
 	}
 //#################### Delete Wishlist ####################//
 
+//#################### View Events ####################//
+	public function View_events($event_type,$city,$user_id,$preferrence)
+	{
+	    $current_date = date("Y-m-d");
+	    
+        $city_query = "SELECT * FROM city_master WHERE city_name like '%" .$city. "%' LIMIT 1";
+		$city_res = $this->db->query($city_query);
+		 if($city_res->num_rows()>0){
+		    foreach ($city_res->result() as $rows)
+			{
+				  $city_id  = $rows->id ;
+			}
+		 }
+	    if ($event_type == 'General'){
+	            $event_query = "SELECT * FROM events WHERE hotspot_status = 'N' AND end_date>= '$current_date' AND category_id IN ($preferrence) AND event_city = '$city_id'";
+	    } 
+	    if ($event_type == 'Hotspot'){
+	            $event_query = "SELECT * FROM events WHERE hotspot_status = 'Y' AND end_date>= '$current_date' AND category_id IN ($preferrence) AND event_city = '$city_id'";
+	    } 
+	    if ($event_type == 'Popularity'){
+	            $event_query = "SELECT COUNT(`event_id`) as popularity,ep.event_id,ev.* FROM event_popularity ep
+	                            INNER JOIN events AS ev ON ep.event_id = ev.id 
+	                            WHERE ev.hotspot_status = 'N' AND ev.end_date>= '$current_date' AND ev.category_id IN ($preferrence) AND ev.event_city = '$city_id'
+                                GROUP by ep.event_id ORDER by popularity DESC";
+	    } 
+	    //echo $event_query;
+		$event_res = $this->db->query($event_query);
+
+			 if($event_res->num_rows()>0){
+			     	$event_result= $event_res->result();
+			     	$response = array("status" => "success", "msg" => "View Events","Eventdetails"=>$event_result);
+				 
+			}else{
+			        $response = array("status" => "error", "msg" => "Events not found");
+			}  
+						
+			return $response;
+	}
+//#################### View Events End ###############//
+
+//#################### View Adv Events ####################//
+	public function View_adv_events($city,$user_id,$preferrence)
+	{
+	    $current_date = date("Y-m-d");
+	    
+        $city_query = "SELECT * FROM city_master WHERE city_name like '%" .$city. "%' LIMIT 1";
+		$city_res = $this->db->query($city_query);
+		 if($city_res->num_rows()>0){
+		    foreach ($city_res->result() as $rows)
+			{
+				  $city_id  = $rows->id ;
+			}
+		 }
+		    $event_query = "SELECT aeh.event_id,aeh.date_from,aeh.date_to,ev.* from adv_event_history aeh
+		                    INNER JOIN events AS ev ON aeh.event_id = ev.id 
+		                    WHERE aeh.date_to >= '$current_date' AND aeh.category_id IN ($preferrence) AND ev.event_city = '$city_id' AND aeh.status ='Y' 
+		                    GROUP by aeh.event_id";
+    	    //echo $event_query;
+		    $event_res = $this->db->query($event_query);
+
+			 if($event_res->num_rows()>0){
+			     	$event_result= $event_res->result();
+			     	$response = array("status" => "success", "msg" => "View Adv Events","Eventdetails"=>$event_result);
+				 
+			}else{
+			        $response = array("status" => "error", "msg" => "Adv Events not found");
+			}  
+						
+			return $response;
+	}
+//#################### Adv Events End ###############//
+
+//#################### View Event Images ####################//
+	public function View_eventimages($event_id)
+	{
+	    $event_query = "SELECT event_image FROM event_images WHERE event_id = '$event_id'";
+		$event_res = $this->db->query($event_query);
+
+			 if($event_res->num_rows()>0){
+			     	$event_result= $event_res->result();
+			     	$response = array("status" => "success", "msg" => "View Event Images","Eventgallery"=>$event_result);
+				 
+			}else{
+			        $response = array("status" => "error", "msg" => "Gallery not found");
+			}  
+						
+			return $response;
+	}
+//#################### View Event Images End ###############//
+
 //#################### Booking history ####################//
 	public function Booking_history($user_id)
 	{
@@ -875,6 +1065,104 @@ class Apimainmodel extends CI_Model {
 			return $response;
 	}
 //#################### Booking details End ###############//
+
+//#################### Booking Plan Dates###############//
+	public function Booking_plandates($event_id)
+	{
+    		$date_query = "SELECT show_date FROM booking_plan_timing WHERE event_id  = '$event_id' GROUP BY show_date";
+			$date_res = $this->db->query($date_query);
+			$date_result= $date_res->result();
+    			
+    		if($date_res->num_rows()>0){
+			     	$response = array("status" => "success", "msg" => "View Booking Dates","Eventdates"=>$date_result);
+				 
+			}else{
+			        $response = array("status" => "error", "msg" => "Booking Timings not found");
+			}  
+						
+			return $response;
+	}
+//#################### Booking Plan Dates End ###############//
+
+//#################### Booking Plan Times ###############//
+	public function Booking_plantimes($event_id,$show_date)
+	{
+    		$time_query = "SELECT show_time FROM booking_plan_timing WHERE event_id  = '$event_id' AND show_date='$show_date' GROUP BY show_time";
+			$time_res = $this->db->query($time_query);
+			$time_result= $time_res->result();
+    			
+    		if($time_res->num_rows()>0){
+			     	$response = array("status" => "success", "msg" => "View Booking Timings","Eventtiming"=>$time_result);
+				 
+			}else{
+			        $response = array("status" => "error", "msg" => "Booking Timings not found");
+			}  
+						
+			return $response;
+	}
+//#################### Booking Plan Times End ###############//
+
+//#################### Booking details###############//
+	public function Booking_plans($event_id)
+	{
+	        $booking_query = "SELECT * FROM booking_history A,events B WHERE A.id  = '$booking_id' AND A.event_id = B.id";
+			$booking_res = $this->db->query($booking_query);
+			$booking_result= $booking_res->result();
+
+			 if($booking_res->num_rows()>0){
+
+			    foreach ($booking_res->result() as $rows)
+    			{
+    				  $order_id  = $rows->order_id ;
+    			}
+    			
+    			$attendees_query = "SELECT * FROM booking_event_attendees WHERE  order_id  ='$order_id'";
+			    $attendees_res = $this->db->query($attendees_query);
+			    $attendees_result= $attendees_res->result();
+    			
+			     	$response = array("status" => "success", "msg" => "View Booking History","Bookingdetails"=>$booking_result,"Bookingattendees"=>$attendees_result);
+				 
+			}else{
+			        $response = array("status" => "error", "msg" => "Booking not found");
+			}  
+						
+			return $response;
+	}
+//#################### Booking details End ###############//
+
+//#################### Event review ###############//
+	public function Event_review($event_id)
+	{
+	        $review_query = "SELECT A.*,B.user_name FROM event_reviews A, user_master B WHERE A.event_id = '$event_id' AND A.status='Y' AND A.user_id=B.id ORDER by A.review_positive DESC";
+			$review_res = $this->db->query($review_query);
+			$review_result= $review_res->result();
+
+			 if($review_res->num_rows()>0){
+			     	$response = array("status" => "success", "msg" => "View Reviews","Reviewdetails"=>$review_result);
+			}else{
+			        $response = array("status" => "error", "msg" => "Reviews not found");
+			}  
+						
+			return $response;
+	}
+//#################### Event review End ###############//
+
+//#################### Event review photo ###############//
+	public function Review_images($event_id,$review_id)
+	{
+	        $review_query = "SELECT photo FROM event_review_photos WHERE review_id = '$review_id'";
+			$review_res = $this->db->query($review_query);
+			$review_result= $review_res->result();
+
+			 if($review_res->num_rows()>0){
+			     	$response = array("status" => "success", "msg" => "View Review Images","Reviewphotos"=>$review_result);
+			}else{
+			        $response = array("status" => "error", "msg" => "Reviews Images not found");
+			}  
+						
+			return $response;
+	}
+//#################### Event review photo End ###############//
 }
 
 ?>
