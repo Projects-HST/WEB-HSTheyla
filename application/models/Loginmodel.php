@@ -184,16 +184,22 @@ Class Loginmodel extends CI_Model
      $res=$this->db->query($check_username);
      if($res->num_rows()==1){
        foreach($res->result() as $rows){}
-         $user_id=$rows->id;
-         $update="UPDATE user_master SET email_verify='Y' WHERE id='$user_id'";
-         $result=$this->db->query($update);
-         if($result){
-          $data=array("msg"=>"verify");
-          return $data;
-         }else{
-           $data=array("msg"=>"Some Thing Went Wrong Please Contact Us");
+         if($rows->email_verify=='Y'){
+           $data=array("msg"=>"Email  has been Verified Already Thank You.");
              return $data;
+         }else{
+           $user_id=$rows->id;
+           $update="UPDATE user_master SET email_verify='Y' WHERE id='$user_id'";
+           $result=$this->db->query($update);
+           if($result){
+            $data=array("msg"=>"verify");
+            return $data;
+           }else{
+             $data=array("msg"=>"Some Thing Went Wrong Please Contact Us");
+               return $data;
+           }
          }
+
      }else{
        $data=array("msg"=>"Some Thing Went Wrong Please Contact Us");
          return $data;

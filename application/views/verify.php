@@ -110,8 +110,8 @@
                       <div class="modal-body">
                         <center>
                           <img src="<?php echo base_url(); ?>assets/front/images/email.png" class="img-fluid">
-                          <p class="verify-text">Thanking for Registering.</p>
-                          <p class="verify-text">
+                          <p class="verify-text1">Thanking for Registering.</p>
+                          <p class="verify-text1">
 
               Check Your Inbox for  the verification email We’ve sent you a message to your registered email ID. Click on the verification link to confirm your email ID.
                           </p>

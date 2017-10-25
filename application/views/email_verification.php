@@ -27,13 +27,11 @@
     <script src="<?php echo base_url(); ?>assets/js/additional-methods.min.js"></script>
 </head>
 <style>
-.verified{
-  margin-top: 20%;
-}
-.verified-text{
+
+.email-verify{
   font-size: 33px;
   text-align: center;
-  margin-top: 20%;
+  padding-top: 15%;
 }
 </style>
 
@@ -82,11 +80,11 @@
     </nav>
     <section class="verify-page ">
       <div class="container">
-        <div class="row">
+        <div class="">
           <div class="verified">
 
 
-            <p class="verified-text">
+            <p class="email-verify">
               <?php
                 if($res['msg']=="verify"){ ?>
                   Thank Your  Email Has been Verified Successfully .Click here to<a href="<?php echo base_url(); ?>"> Login</a>
