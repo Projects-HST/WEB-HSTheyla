@@ -134,7 +134,7 @@ Class Loginmodel extends CI_Model
      $check_email="SELECT * FROM user_master WHERE mobile_no='$mobile'";
      $res=$this->db->query($check_email);
      if($res->num_rows()>=1){
-       echo "already";
+       echo "Mobile Number Already Exists";
      }else{
        echo "success";
      }
@@ -169,8 +169,28 @@ Class Loginmodel extends CI_Model
      }
    }
 
+   function check_otp($mobileotp,$user_id){
+      $check_otp="SELECT * FROM user_master WHERE mobile_otp='$mobileotp' and id='$user_id'";
+     $res=$this->db->query($check_otp);
+     if($res->num_rows()==0){
+       echo "You have Enter Wrong OTP";
+     }else{
+       echo "success";
+     }
+   }
+
    function changeprofileimage($user_id,$userFileName){
      $update="UPDATE user_details SET user_picture='$userFileName' WHERE user_id='$user_id'";
+     $res=$this->db->query($update);
+     if($res){
+       echo "success";
+     }else{
+       echo "failed";
+     }
+   }
+
+   function save_mobile_number($mobile,$user_id){
+     $update="UPDATE user_master SET mobile_no='$mobile' WHERE id='$user_id'";
      $res=$this->db->query($update);
      if($res){
        echo "success";
@@ -260,8 +280,8 @@ Class Loginmodel extends CI_Model
 
    }
 
-   function save_profile_info($user_id,$name,$mobile,$email,$address){
-      $update="UPDATE user_master SET mobile_no='$mobile',email_id='$email' WHERE id='$user_id'";
+   function save_profile_info($user_id,$name,$email,$address){
+      $update="UPDATE user_master SET email_id='$email' WHERE id='$user_id'";
      $res=$this->db->query($update);
      $update_user_master="UPDATE user_details SET name='$name',address_line1='$address' WHERE user_id='$user_id'";
      $result=$this->db->query($update_user_master);
@@ -271,6 +291,23 @@ Class Loginmodel extends CI_Model
           echo "already";
      }
    }
+
+   function sendOTPmobilechange($user_id){
+     $get_info="SELECT * FROM user_master WHERE id='$user_id'";
+     $res=$this->db->query($get_info);
+     $result=$res->result();
+     foreach($result as $rows){}
+       $mob=$rows->mobile_no;
+       $digits = 4;
+      $OTP = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT);
+      $update_user_otp="UPDATE user_master SET mobile_otp='$OTP' WHERE id='$user_id'";
+      $result=$this->db->query($update_user_otp);
+      $mobile_message = 'Verify OTP To Change Mobile Number:'. $OTP;
+      $this->load->model('smsmodel');
+      $response=$this->smsmodel->sendOTPtomobile($mob,$mobile_message);
+
+   }
+
 
    function reset_password($email){
       $check_email="SELECT * FROM user_master WHERE email_id='$email'";

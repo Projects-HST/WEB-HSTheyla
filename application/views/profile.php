@@ -153,13 +153,22 @@
                                             <?php echo $rows->address_line1; ?>
                                         </div>
                                     </div>
+                                    <?php   if(empty($rows->mobile_no)){ ?>
+
+                                  <?php  }else{ ?>
                                     <div class="form-group row">
                                         <label for="staticEmail" class="col-sm-2 col-form-label">Mobile </label>
                                         <div class="col-sm-5">
-                                            <?php echo $rows->mobile_no; ?>
+                                            <?php echo $rows->mobile_no; ?><br>
+                                          <?php   if(empty($rows->mobile_no)){ ?>
+
+                                        <?php  }else{ ?>
+                                            <a href="<?php echo  base_url(); ?>mobilenumber">Change the Number</a>
+                                        <?php  } ?>
+
                                         </div>
                                     </div>
-
+                                  <?php } ?>
 
                                 </div>
                                 <form method="post" enctype="multipart/form-data" id="form">
@@ -182,12 +191,13 @@
                                             <input type="text" class="form-control" id="address" name="address" value="<?php echo $rows->address_line1; ?>">
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+
+                                    <!-- <div class="form-group row">
                                         <label for="staticEmail" class="col-sm-2 col-form-label">Mobile </label>
                                         <div class="col-sm-5">
                                             <input type="text" class="form-control" id="mobile" name="mobile" value="<?php echo $rows->mobile_no; ?>" onblur="check_mobile()">
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="form-group row">
                                         <label for="inputPassword" class="col-sm-2 col-form-label"></label>
@@ -245,7 +255,7 @@
     $("#edit-btn").click(function() {
         $("#form").toggle();
         $('#per-info').hide();
-        
+
     });
 
 
@@ -316,25 +326,7 @@
         });
     }
 
-    function check_mobile() {
-        var mobile = $('#mobile').val();
 
-        $.ajax({
-            method: "post",
-            data: {
-                mobile: mobile
-            },
-            url: 'home/checkmobile',
-            success: function(data) {
-                console.log(data);
-                if ((data) == "success") {
-                    $("#submit").removeAttr("disabled");
-                } else {
-                    $('#submit').prop('disabled', true);
-                }
-            }
-        });
-    }
 
     var readURL = function(input) {
         if (input.files && input.files[0]) {
