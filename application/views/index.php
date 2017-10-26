@@ -21,6 +21,9 @@
     <link href="<?php echo base_url(); ?>assets/front/css/carousel.css" rel="stylesheet">
     <script src="<?php echo base_url(); ?>assets/front/js/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/front/js/popper.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+  crossorigin="anonymous"></script> -->
     <script src="<?php echo base_url(); ?>assets/front/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/pages/sweet-alert.init.js"></script>
@@ -28,7 +31,23 @@
     <script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/additional-methods.min.js"></script>
 </head>
+<style>
+.carousel-fade .carousel-item {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transition: opacity 100ms ease;
+}
+.carousel-fade .carousel-item.active {
+  opacity: 1;
+}
 
+
+
+</style>
 <body>
 
     <!-- Navigation -->
@@ -148,24 +167,7 @@
                                     </div>
                                     <center>
                                         <div class="social-login">
-                                            <?php
-                    //  $this->load->library('googleplus');
-                    //  $CLIENT_ID = '56118066242-ndqa7sis300o0ce5otglegn629ktmjj5.apps.googleusercontent.com';
-                    //  $CLIENT_SECRET = 'QBjwPGP5PE6tzJt3bDekC4a1';
-                    //  $APPLICATION_NAME = "Heyla";
-                    //  $client = new Google_Client();
-                    //  $client->setApplicationName($APPLICATION_NAME);
-                    //  $client->setClientId($CLIENT_ID);
-                    //  $client->setClientSecret($CLIENT_SECRET);
-                    //  $client->setAccessType("offline");
-                    //  $client->setRedirectUri('http://heylaapp.com/heyla/google_login');
-                    //  $client->setScopes('email');
-                    //  $objOAuthService = new Google_Service_Plus($client);
-                     //
-                    //  $client->setScopes(array('https://www.googleapis.com/auth/userinfo.email','https://www.googleapis.com/auth/userinfo.profile'));
-                    //  $authUrl=$client->createAuthUrl();
-                    //  echo '<a class="loginBtn loginBtn--google" href="'.$authUrl.'">Login with Google</a>';
-                     ?>
+
                      <a href="<?php echo base_url(); ?>google_login" class="loginBtn loginBtn--google">Login With google</a>
                                                 <a href="<?php echo base_url(); ?>facebook_login" class="loginBtn loginBtn--facebook">
                        Login with Facebook
@@ -210,18 +212,13 @@
         </div>
     </div>
 
-    <header>
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            </ol>
 
-            <div class="carousel-inner carousel-fade" role="listbox">
+        <div class="slider">
+            <div class="carousel carousel-fade" data-ride="carousel" data-interval="3000">
+            <!-- <div class="carousel-inner carousel-fade" role="listbox"> -->
                 <!-- Slide One - Set the background image for this slide in the line below -->
                 <div class="carousel-item active" style="background-image: url('<?php echo base_url(); ?>assets/front/images/slider1.jpg')">
-                    <div class="carousel-caption d-none d-md-block">
+                    <div class="carousel-caption  d-md-block">
                         <img src="<?php echo base_url(); ?>assets/front/images/play.png" class=""> <img src="<?php echo base_url(); ?>assets/front/images/app.png" class="">
 
                     </div>
@@ -229,29 +226,19 @@
                 <!-- Slide Two - Set the background image for this slide in the line below -->
                 <div class="carousel-item" style="background-image: url('<?php echo base_url(); ?>assets/front/images/slider2.jpg')">
                     <div class="carousel-caption d-none d-md-block">
-                        <h3>Second Slide</h3>
-                        <p>This is a description for the second slide.</p>
+
                     </div>
                 </div>
                 <!-- Slide Three - Set the background image for this slide in the line below -->
                 <div class="carousel-item" style="background-image: url('<?php echo base_url(); ?>assets/front/images/slider3.jpg')">
                     <div class="carousel-caption d-none d-md-block">
-                        <h3>Third Slide</h3>
-                        <p>This is a description for the third slide.</p>
                     </div>
                 </div>
             </div>
 
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
+
         </div>
-    </header>
+
 
     <!-- Page Content -->
     <section class="about" style="" id="about">
@@ -470,7 +457,6 @@
 </body>
 <script src="<?php echo base_url(); ?>assets/front/js/jquery.reflection.js"></script>
 <script src="<?php echo base_url(); ?>assets/front/js/jquery.cloud9carousel.js"></script>
-
 <script>
     $(function() {
         var showcase = $("#showcase")
@@ -528,6 +514,7 @@
         })
     })
 </script>
+
 <script type="text/javascript">
     $('.topmenu .nav-item a').click(function() {
         $('.topmenu .nav-item a').removeClass("menuactive");

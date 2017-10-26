@@ -84,55 +84,36 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url(); ?>">Contact</a>
                     </li>
-                    <?php
-                       $user_id=$this->session->userdata('user_role');
-                       if(empty($user_id)){ ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal">Login / Sign in</a>
-                        </li>
-                        <?php }else{ ?>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url(); ?>logout">Logout</a>
-                            </li>
-                            <?php } ?>
+
                 </ul>
             </div>
         </div>
     </nav>
     <section class="verify-page">
       <div class="container">
-        <div class="row">
+        <div class="">
           <div class="verify-text">
+            <center>
+                <img src="<?php echo base_url(); ?>assets/front/images/email.png" class="img-fluid">
+              <form action="" method="post" id="resetform">
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Enter the Registered Email to Reset. </label>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Registered Email Id.">
+                </div>
+                <div class="form-group">
 
-          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" data-keyboard="false" data-backdrop="static">
-              <div class="modal-dialog">
-                  <div class="modal-content">
-                      <div class="modal-body">
-                        <center>
-                            <img src="<?php echo base_url(); ?>assets/front/images/email.png" class="img-fluid">
-                          <form action="" method="post" id="resetform">
-                            <div class="form-group">
-                              <label for="exampleInputPassword1">Enter the Registered Email to Reset. </label>
-                              <input type="email" class="form-control" id="email" name="email" placeholder="Registered Email Id.">
-                            </div>
-                            <div class="form-group">
+                  <input type="submit" class="form-control btn-event" id="" value="Reset Now">
+                </div>
+              </form>
+            </center>
 
-                              <input type="submit" class="form-control btn-event" id="" value="Reset Now">
-                            </div>
-                          </form>
-                        </center>
-                      </div>
-
-                  </div>
-              </div>
-          </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer-bg">
+    <footer class="footer-bg fixed-bottom">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -156,11 +137,7 @@
 <script src="<?php echo base_url(); ?>assets/pages/sweet-alert.init.js"></script>
 <script type="text/javascript">
     $("#myModal").modal('show');
-    $('#myModall').modal({
-                         backdrop: 'static',
-                         keyboard: true,
-                         show: true
-                 });
+
     $("#loginbtn").click(function() {
         $(this).toggleClass("menuactive");
     });

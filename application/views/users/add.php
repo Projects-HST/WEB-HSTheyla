@@ -62,7 +62,8 @@
                         <div class="form-group row">
                             <label for="Category" class="col-sm-2 col-form-label">User Name</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" name="username">
+                                <input class="form-control" type="text" name="username" onkeyup="checkusernamefun(this.value)">
+                                <p id="msg2" style="color:red;"> </p>
                             </div>
                         
                         <label for="Category" class="col-sm-2 col-form-label">Name</label>
@@ -74,11 +75,13 @@
                         <div class="form-group row">
                             <label for="Name" class="col-sm-2 col-form-label">Mobile Number</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text"  name="mobile">
+                <input class="form-control" type="text"  name="mobile" onkeyup="checkmobilefun(this.value)">
+                  <p id="msg1" style="color:red;"> </p>
                             </div>
                              <label for="Name" class="col-sm-2 col-form-label">Email Id</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text"  name="email">
+                <input class="form-control" type="text"  name="email" onkeyup="checkemailfun(this.value)" >
+                                 <p id="msg" style="color:red;"> </p>
                             </div>
                
                         </div>
@@ -210,10 +213,10 @@
                             
                             <label class="col-sm-2 col-form-label"></label>
                             <div class="col-sm-2">
-                              <button type="submit" class="btn btn-primary waves-effect waves-light">
+                              <button type="submit" id="save" class="btn btn-primary waves-effect waves-light">
                               Submit </button></div>
                               <div class="col-sm-2">
-                              <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                              <button type="reset" id="save1" class="btn btn-secondary waves-effect m-l-5">
                               Reset
                               </button></div>
                         </div>
@@ -290,6 +293,8 @@
               },
          }); 
    });
+
+
   function getstatename(cuid)
   {
     //alert(cuid);
@@ -299,21 +304,21 @@
                data: {
                    country_id:cuid
                },
-             dataType: "JSON",
-             cache: false,
+            dataType: "JSON",
+            cache: false,
             success:function(test)
             {
-              // alert(test);
+              //alert(test);
                var len = test.length;
                //alert(len);
-                var statename='';
-                var title='<option>Select State</option>';
-                if(test!='')
-                 {    //alert(len);
-                   for(var i=0; i<len; i++)
-                   {
-                     var staid = test[i].id;
-                     var state_name = test[i].state_name;
+               var statename='';
+               var title='<option>Select State</option>';
+               if(test!='')
+                {    //alert(len);
+                  for(var i=0; i<len; i++)
+                  {
+                   var staid = test[i].id;
+                    var state_name = test[i].state_name;
                      //alert(city_name);
                      statename +='<option value=' + staid + '> ' + state_name + ' </option>';
                   }
@@ -368,6 +373,73 @@
             }
           }); 
        }
+
+
+function checkusernamefun(val)
+  {
+   $.ajax({
+     type:'post',
+     url:'<?php echo base_url(); ?>/users/username_checker',
+     data:'uname='+val,
+     success:function(test)
+      {
+       if(test=="UserName already Exit")
+         {
+           $("#msg2").html(test);
+           $("#save").hide();
+           $("#save1").hide();
+          }else{
+             $("#msg2").html(test);
+             $("#save").show();
+             $("#save1").show();
+            }
+      }
+   });
+  }
+
+  function checkemailfun(val)
+  {
+   $.ajax({
+     type:'post',
+     url:'<?php echo base_url(); ?>/users/mail_checker',
+     data:'email='+val,
+     success:function(test)
+      {
+       if(test=="Email Id already Exit")
+         {
+           $("#msg").html(test);
+           $("#save").hide();
+           $("#save1").hide();
+          }else{
+             $("#msg").html(test);
+             $("#save").show();
+             $("#save1").show();
+            }
+      }
+   });
+  }
+
+   function checkmobilefun(val)
+  {
+    $.ajax({
+     type:'post',
+     url:'<?php echo base_url(); ?>/users/mobile_checker',
+     data:'cell='+val,
+     success:function(test)
+      {
+       if(test=="Mobile Number already Exit")
+         {
+           $("#msg1").html(test);
+           $("#save").hide();
+           $("#save1").hide();
+          }else{
+             $("#msg1").html(test);
+             $("#save").show();
+             $("#save1").show();
+            }
+      }
+   });
+  }
 </script>
 
 

@@ -91,7 +91,7 @@ class Users extends CI_Controller
 		     if($sta=="success"){
 		       $this->session->set_flashdata('msg','Added Successfully');
 			   redirect('users/view');
-		     }else if($sta=="Already Exist"){
+		     }else if($sta=="AE"){
 	             $this->session->set_flashdata('msg','Already Exist');
 			     redirect('users/view');
 		     }
@@ -281,7 +281,42 @@ class Users extends CI_Controller
 	 			redirect('/');
 	 		 }
     }
+    
+    public function mail_checker()
+    {
+       $email = $this->input->post('email');
+	   $numrows = $this->usersmodel->getemail($email);
+		if ($numrows > 0)
+		{
+		 echo "Email Id already Exit";
+		}else{
+			 echo "Email Id Available";
+			 }
+    }
 
+    public function mobile_checker()
+    {
+      $cell = $this->input->post('cell');
+	  $numrows1 = $this->usersmodel->check_mobile_num($cell);
+	  if ($numrows1 > 0)
+	  {
+		 echo "Mobile Number already Exit";
+		}else{
+			 echo "Mobile Number Available";
+			 }
+    }
+
+    public function username_checker()
+    {
+      $uname = $this->input->post('uname');
+	  $numrows2 = $this->usersmodel->check_user_name($uname);
+	  if ($numrows2 > 0)
+	  {
+		echo "UserName already Exit";
+	  }else{
+		echo "UserName Available";
+		}
+    }
 
 
 	} ?>

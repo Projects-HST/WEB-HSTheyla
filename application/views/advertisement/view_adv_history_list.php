@@ -107,9 +107,9 @@
                                  <td><?php  $date=date_create($rows->date_from);
                                        echo date_format($date,"d-m-Y");  ?></td>
                                  <td> <?php $date=date_create($rows->date_to);
-                                       echo date_format($date,"d-m-Y");  ?></td>
-                                 <td><?php  echo $rows->time_from; ?></td>
-                                 <td> <?php echo $rows->time_to; ?></td>
+                                       echo date_format($date,"d-m-Y"); ?></td>
+                                 <td><?php  echo date("g:i a",strtotime("$rows->time_from")); ?></td>
+                                 <td> <?php echo date("g:i a",strtotime("$rows->time_to")); ?></td>
                                  <td><?php  echo $rows->plan_name; ?></td>
                                     <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
                                  <td>

@@ -27,31 +27,18 @@
     <script src="<?php echo base_url(); ?>assets/js/additional-methods.min.js"></script>
 </head>
 <style>
+.reset{
 
-.modal {
-  text-align: center;
-  padding: 0!important;
+  align-items: center;
+  margin-top: 5%;
 }
-
-.modal:before {
-  content: '';
-  display: inline-block;
-  height: 100%;
-  vertical-align: middle;
-  margin-right: -4px;
+.form-control{
+  width: 270px;
 }
-.modal-body{
-  padding-top:30px;
-  padding-bottom:30px;
-  padding-left: 20px;
-  padding-right: 20px;
-  border: 2px solid #6D6E71;
-  border-radius: 20px;
-}
-.modal-dialog {
-  display: inline-block;
-  text-align: left;
-  vertical-align: middle;
+input[type=password] {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
 }
 
 </style>
@@ -84,44 +71,38 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url(); ?>">Contact</a>
                     </li>
-                    <?php
-                       $user_id=$this->session->userdata('user_role');
-                       if(empty($user_id)){ ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal">Login / Sign in</a>
-                        </li>
-                        <?php }else{ ?>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url(); ?>logout">Logout</a>
-                            </li>
-                            <?php } ?>
+
                 </ul>
             </div>
         </div>
     </nav>
-    <section class="verify-page profile">
+    <section class="">
       <div class="container">
-        <div class="row">
-          <div class="verify-text">
+        <div class="">
+<center>
 
-          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" >
-              <div class="modal-dialog">
-                  <div class="modal-content">
-                      <div class="modal-body">
-                        <center>
-                          <img src="<?php echo base_url(); ?>assets/front/images/email.png" class="img-fluid">
-                          <p class="verify-text1">Thanking for Registering.</p>
-                          <p class="verify-text1">
 
-              Check Your Inbox for  the verification email We’ve sent you a message to your registered email ID. Click on the verification link to confirm your email ID.
-                          </p>
-                        </center>
-                      </div>
+  <p style="margin-top:5%;font-size:22px;">We wanted to let you know that your Heyla password was changed.</p>
+        <div class="reset">
 
-                  </div>
-              </div>
-          </div>
-          </div>
+  <div class="">
+    <form class="form" role="form" autocomplete="off" id="update_pass" method="post" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <input type="password" class="form-control" id="new_password" name="new_password" required="" placeholder="New Password">
+        </div>
+        <div class="form-group">
+            <input type="hidden" class="form-control" id="email_token" name="email_token" value="<?php echo $res; ?>">
+        </div>
+
+        <div class="form-group">
+            <input type="password" class="form-control" id="retype_password" name="retype_password" required="" placeholder="Re-Type Password">
+        </div>
+        <button type="submit" id="submit" class="btn btn-event btn-lg">Reset</button>
+    </form>
+  </div>
+</div>
+</center>
         </div>
       </div>
     </section>
@@ -150,31 +131,49 @@
 <script src="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/pages/sweet-alert.init.js"></script>
 <script type="text/javascript">
-    $("#myModal").modal('show');
-    $('#myModall').modal({
-                         backdrop: 'static',
-                         keyboard: true,
-                         show: true
-                 });
-    $("#loginbtn").click(function() {
-        $(this).toggleClass("menuactive");
-    });
-    $('ul li a').click(function() {
-        $('li a').removeClass("menuactive");
-        $(this).addClass("menuactive");
-    });
-
-    $("#setting").click(function() {
-        $("#edit-btn").toggle();
-    });
-
-    $("#edit-btn").click(function() {
-        $("#form").toggle();
-        $('#per-info').hide();
-    });
-
    $('.verify-page').height($(window).height());
+   $('#update_pass').validate({ // initialize the plugin
+       rules: {
+         new_password : {
+              minlength : 6
+          },
+          retype_password : {
+              minlength : 6,
+              equalTo : '[name="new_password"]'
+          }
+       },
+       messages: {
+           new_password: {   required: "Enter  Password",minlength: "Min is 6", maxlength: "Max is 10"},
+           retype_password: {
+               required: "Enter New Password",
+               notEqualTo: "Password Should Match"
+           }
 
+
+       },
+       submitHandler: function(form) {
+           //alert("hi");
+           $.ajax({
+               url: "<?php echo base_url(); ?>home/update_password",
+               type: 'POST',
+               data: $('#update_pass').serialize(),
+               success: function(response) {
+
+                   if (response == "success") {
+                     swal({
+                title: "Success",
+                text: " Password Has been Changed Successfully Login Now",
+                type: "success"
+            }).then(function() {
+                location.href = '<?php echo base_url(); ?>';
+            });
+                   } else {
+                       sweetAlert("Oops...", response, "error");
+                   }
+               }
+           });
+       }
+   });
 </script>
 
 </html>
