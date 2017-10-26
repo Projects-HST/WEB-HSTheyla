@@ -213,14 +213,14 @@ class Apimainmodel extends CI_Model {
 
 		if ( $user_id != "") {
 			
-		    $sql = "SELECT A.id as user_id, A.user_name, A.mobile_no, A.email_id, A.email_verify, A.login_count, A.user_role, B.name, B.birthdate, B.gender, B.occupation, B.address_line1, B.address_line2, B.address_line3, B.country_id, B. state_id, B.city_id, B.zip, B.user_picture, B.newsletter_status, B.referal_code, C.user_role_name FROM user_master A, user_details B, user_role_master C WHERE A.id=B.user_id AND A.user_role = C.id AND A.id ='".$user_id."'";
+		    $sql = "SELECT A.id as userid, A.user_name, A.mobile_no, A.email_id, A.email_verify, A.login_count, A.user_role, B.name, B.birthdate, B.gender, B.occupation, B.address_line1, B.address_line2, B.address_line3, B.country_id, B. state_id, B.city_id, B.zip, B.user_picture, B.newsletter_status, B.referal_code, C.user_role_name FROM user_master A, user_details B, user_role_master C WHERE A.id=B.user_id AND A.user_role = C.id AND A.id ='".$user_id."'";
 			$user_result = $this->db->query($sql);
 			$ress = $user_result->result();
 			/*
 			if($user_result->num_rows()>0)
 			{
 				$userData  = array(
-							"user_id" => $ress[0]->user_id,
+							"user_id" => $ress[0]->userid,
 							"user_name" => $ress[0]->user_name,
 							"mobile_no" => $ress[0]->mobile_no,
 							"email_id" => $ress[0]->email_id,
@@ -273,7 +273,8 @@ class Apimainmodel extends CI_Model {
 
 
 //#################### Facebook and Gmail Login ####################//
-	public function Fb_gm_login($email_id,$name,$gcm_key,$mobile_type,$login_type)
+	//public function Fb_gm_login($email_id,$name,$gcm_key,$mobile_type,$login_type)
+	public function Fb_gm_login($name,$email_id,$gcm_key,$login_type)
 	{
 
         $user_id ="";
@@ -303,14 +304,14 @@ class Apimainmodel extends CI_Model {
 		
 		if ( $user_id != "") {
 		    
-		    $sql = "SELECT A.id as user_id, A.user_name, A.mobile_no, A.email_id, A.email_verify, A.login_count, A.user_role, B.name, B.birthdate, B.gender, B.occupation, B.address_line1, B.address_line2, B.address_line3, B.country_id, B. state_id, B.city_id, B.zip, B.user_picture, B.newsletter_status, B.referal_code, C.user_role_name FROM user_master A, user_details B, user_role_master C WHERE A.id=B.user_id AND A.user_role = C.id AND A.id ='".$user_id."'";
+		    $sql = "SELECT A.id as userid, A.user_name, A.mobile_no, A.email_id, A.email_verify, A.login_count, A.user_role, B.name, B.birthdate, B.gender, B.occupation, B.address_line1, B.address_line2, B.address_line3, B.country_id, B. state_id, B.city_id, B.zip, B.user_picture, B.newsletter_status, B.referal_code, C.user_role_name FROM user_master A, user_details B, user_role_master C WHERE A.id=B.user_id AND A.user_role = C.id AND A.id ='".$user_id."'";
 			$user_result = $this->db->query($sql);
 			$ress = $user_result->result();
 			
 			if($user_result->num_rows()>0)
 			{
 				$userData  = array(
-							"user_id" => $ress[0]->user_id,
+							"user_id" => $ress[0]->userid,
 							"user_name" => $ress[0]->user_name,
 							"mobile_no" => $ress[0]->mobile_no,
 							"email_id" => $ress[0]->email_id,
@@ -333,7 +334,7 @@ class Apimainmodel extends CI_Model {
 							"referal_code" => $ress[0]->referal_code	
 				);
 			}
-
+            
 				$update_sql = "UPDATE user_master SET last_login=NOW(),login_count='$login_count' WHERE id='$user_id'";
 				$update_result = $this->db->query($update_sql);
 				
@@ -346,7 +347,7 @@ class Apimainmodel extends CI_Model {
 							$sQuery = "INSERT INTO push_notification_master (user_id,gcm_key,mobile_type) VALUES ('". $user_id . "','". $gcm_key . "','". $mobile_type . "')";
 							$update_gcm = $this->db->query($sQuery);
 						}
-					
+					//$response = array("status" => "Success", "msg" => "Login Successfully");
 					$response = array("status" => "Success", "msg" => "Login Successfully", "userData" => $userData);
 					return $response;
 		} else {
@@ -735,6 +736,25 @@ class Apimainmodel extends CI_Model {
 	}
 //#################### Select State End ####################//
 
+
+//#################### Select City ####################//
+	public function Select_allcity($user_id)
+	{
+	        $city_query = "SELECT id,city_name,city_latitude,city_longitude from city_master WHERE event_status = 'Y'";
+			$city_res = $this->db->query($city_query);
+
+			 if($city_res->num_rows()>0){
+			     	$city_result= $city_res->result();
+			     	$response = array("status" => "success", "msg" => "View Cities","Cities"=>$city_result);
+				 
+			}else{
+			        $response = array("status" => "error", "msg" => "Cities not found");
+			}  
+
+			return $response;
+	}
+//#################### Select State End ####################//
+
 //#################### View Category ####################//
 	public function View_preferrence($user_id)
 	{
@@ -1103,27 +1123,16 @@ class Apimainmodel extends CI_Model {
 //#################### Booking Plan Times End ###############//
 
 //#################### Booking details###############//
-	public function Booking_plans($event_id)
+	public function Booking_plans($event_id,$show_date,$show_time)
 	{
-	        $booking_query = "SELECT * FROM booking_history A,events B WHERE A.id  = '$booking_id' AND A.event_id = B.id";
-			$booking_res = $this->db->query($booking_query);
-			$booking_result= $booking_res->result();
+	        $plan_query = "SELECT B.plan_name,B.seat_rate,A.event_id,A.plan_id,A.show_date,A.show_time,A.seat_available FROM booking_plan_timing A,booking_plan B WHERE A.event_id  = '$event_id' AND show_date = '$show_date' AND show_time = '$show_time' AND A.seat_available>0 AND A.plan_id = B.id";
+			$plan_res = $this->db->query($plan_query);
+			$plan_result= $plan_res->result();
 
-			 if($booking_res->num_rows()>0){
-
-			    foreach ($booking_res->result() as $rows)
-    			{
-    				  $order_id  = $rows->order_id ;
-    			}
-    			
-    			$attendees_query = "SELECT * FROM booking_event_attendees WHERE  order_id  ='$order_id'";
-			    $attendees_res = $this->db->query($attendees_query);
-			    $attendees_result= $attendees_res->result();
-    			
-			     	$response = array("status" => "success", "msg" => "View Booking History","Bookingdetails"=>$booking_result,"Bookingattendees"=>$attendees_result);
-				 
+			 if($plan_res->num_rows()>0){
+			     	$response = array("status" => "success", "msg" => "Booking Plans","Plandetails"=>$plan_result);
 			}else{
-			        $response = array("status" => "error", "msg" => "Booking not found");
+			        $response = array("status" => "error", "msg" => "Plans not found");
 			}  
 						
 			return $response;

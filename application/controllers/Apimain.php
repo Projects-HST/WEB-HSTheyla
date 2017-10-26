@@ -92,7 +92,7 @@ class Apimain extends CI_Controller {
 
 	public function fbgmlogin()
 	{
-	   //$_POST = json_decode(file_get_contents("php://input"), TRUE);
+	   $_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
@@ -116,13 +116,14 @@ class Apimain extends CI_Controller {
 		$mobiletype ='';
 		$login_type ='';
 
-		$username = $this->input->post("username");
 		$name = $this->input->post("name");
+		$email_id = $this->input->post("email_id");
 		$gcm_key = $this->input->post("gcm_key");
-		$mobile_type = $this->input->post("mobile_type");
+		//$mobile_type = $this->input->post("mobile_type");
 		$login_type = $this->input->post("login_type");
 
-		$data['result']=$this->apimainmodel->Fb_gm_login($username,$name,$gcm_key,$mobile_type,$login_type);
+		//$data['result']=$this->apimainmodel->Fb_gm_login($username,$name,$gcm_key,$mobile_type,$login_type);
+		$data['result']=$this->apimainmodel->Fb_gm_login($name,$email_id,$gcm_key,$login_type);
 		$response = $data['result'];
 		echo json_encode($response);
 	}
@@ -132,7 +133,7 @@ class Apimain extends CI_Controller {
 
 	public function guestlogin()
 	{
-	   //$_POST = json_decode(file_get_contents("php://input"), TRUE);
+	   $_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
@@ -283,7 +284,7 @@ class Apimain extends CI_Controller {
 
 	public function updatemobile()
 	{
-	   $_POST = json_decode(file_get_contents("php://input"), TRUE);
+	   //$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
@@ -591,6 +592,38 @@ public function profile_picupload($user_id)
 		$state_id = $this->input->post("state_id");
 
 		$data['result']=$this->apimainmodel->Select_city($country_id,$state_id);
+		$response = $data['result'];
+		echo json_encode($response);
+	}
+
+//-----------------------------------------------//
+
+//-----------------------------------------------//
+
+	public function selectallcity()
+	{
+		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+
+		if(!$this->checkMethod())
+		{
+			return FALSE;
+		}
+
+		if($_POST == FALSE)
+		{
+			$res = array();
+			$res["opn"] = "Select All City";
+			$res["scode"] = 204;
+			$res["message"] = "Input error";
+
+			echo json_encode($res);
+			return;
+		}
+
+		$user_id = '';
+		$user_id = $this->input->post("user_id");
+
+		$data['result']=$this->apimainmodel->Select_allcity($user_id);
 		$response = $data['result'];
 		echo json_encode($response);
 	}
@@ -1240,10 +1273,14 @@ public function profile_picupload($user_id)
 			return;
 		}
 
+		$show_date = '';
+		$show_time = '';
 		$event_id = '';
 		$event_id = $this->input->post("event_id");
+		$show_date = $this->input->post("show_date");
+		$show_time = $this->input->post("show_time");
 		
-		$data['result']=$this->apimainmodel->Booking_plans($event_id);
+		$data['result']=$this->apimainmodel->Booking_plans($event_id,$show_date,$show_time);
 		$response = $data['result'];
 		echo json_encode($response);
 	}
