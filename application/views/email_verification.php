@@ -67,7 +67,7 @@
                        $user_id=$this->session->userdata('user_role');
                        if(empty($user_id)){ ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url(); ?>" data-toggle="modal" data-target="#myModal">Login / Sign in</a>
+                            <a class="nav-link" href="<?php echo base_url(); ?>">Login / Sign in</a>
                         </li>
                         <?php }else{ ?>
                             <li class="nav-item">

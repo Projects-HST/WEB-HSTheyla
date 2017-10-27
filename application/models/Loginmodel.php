@@ -258,7 +258,7 @@ Class Loginmodel extends CI_Model
                <p style="font-size:20px;">Welcome to
                 <center><img src="'.base_url().'assets/front/images/heyla_b.png" style="width:120px;"></center>
                </p>
-               <p style="margin-left:50px;">Thanking for Registering with Heyla App <br>
+               <p style="margin-left:50px;"> <br>
                To allow us to confirm the validity of your email address,click this verification link. <center>   <a href="'. base_url().'home/emailverfiy/'.$encrypt_email.'" target="_blank"style="background-color: #478ECC;    padding: 12px;    text-decoration: none;    color: #fff;    border-radius: 20px;">Verfiy  Here</a></center>  </p>
                <p style="font-size:20px;">Thank you and enjoy, <br>
                  The Heyla Team
@@ -292,12 +292,9 @@ Class Loginmodel extends CI_Model
      }
    }
 
-   function sendOTPmobilechange($user_id){
-     $get_info="SELECT * FROM user_master WHERE id='$user_id'";
-     $res=$this->db->query($get_info);
-     $result=$res->result();
-     foreach($result as $rows){}
-       $mob=$rows->mobile_no;
+   function sendOTPmobilechange($mobile,$user_id){
+      $mob=$mobile;
+
        $digits = 4;
       $OTP = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT);
       $update_user_otp="UPDATE user_master SET mobile_otp='$OTP' WHERE id='$user_id'";
@@ -308,6 +305,10 @@ Class Loginmodel extends CI_Model
 
    }
 
+   function emptyOTP($user_id){
+      $empty_otp="UPDATE  user_master SET mobile_otp=' ' WHERE id='$user_id'";
+      $res=$this->db->query($empty_otp);
+   }
 
    function reset_password($email){
       $check_email="SELECT * FROM user_master WHERE email_id='$email'";

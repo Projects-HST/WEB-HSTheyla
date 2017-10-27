@@ -164,9 +164,10 @@ class Home extends CI_Controller {
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
 			$user_role=$this->session->userdata('user_role');
+			$datas=$this->loginmodel->emptyOTP($user_id);
 			$datas['res']=$this->loginmodel->getuserinfo($user_id);
-			if($user_role==3){
 
+			if($user_role==3){
 				$this->load->view('mobilenumber', $datas);
 			}else{
 				redirect('/');
@@ -319,8 +320,9 @@ class Home extends CI_Controller {
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
 			$user_role=$this->session->userdata('user_role');
+			$mobile=$this->input->post('mobile');
 			if($user_role=='3'){
-				$datas['res']=$this->loginmodel->sendOTPmobilechange($user_id);
+				$datas['res']=$this->loginmodel->sendOTPmobilechange($mobile,$user_id);
 			}
 		}
 
