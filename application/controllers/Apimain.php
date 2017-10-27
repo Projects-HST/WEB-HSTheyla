@@ -78,11 +78,11 @@ class Apimain extends CI_Controller {
 		$username = $this->input->post("username");
 		$password = $this->input->post("password");
 		$gcm_key = $this->input->post("gcm_key");
-		//$mobile_type = $this->input->post("mobile_type");
+		$mobile_type = $this->input->post("mobile_type");
 		$login_type = $this->input->post("login_type");
 
-		//$data['result']=$this->apimainmodel->Login($username,$password,$gcm_key,$mobile_type,$login_type);
-		$data['result']=$this->apimainmodel->Login($username,$password,$gcm_key,$login_type);
+		$data['result']=$this->apimainmodel->Login($username,$password,$gcm_key,$mobile_type,$login_type);
+		
 		$response = $data['result'];
 		echo json_encode($response);
 	}
@@ -119,11 +119,11 @@ class Apimain extends CI_Controller {
 		$name = $this->input->post("name");
 		$email_id = $this->input->post("email_id");
 		$gcm_key = $this->input->post("gcm_key");
-		//$mobile_type = $this->input->post("mobile_type");
+		$mobile_type = $this->input->post("mobile_type");
 		$login_type = $this->input->post("login_type");
 
-		//$data['result']=$this->apimainmodel->Fb_gm_login($username,$name,$gcm_key,$mobile_type,$login_type);
-		$data['result']=$this->apimainmodel->Fb_gm_login($name,$email_id,$gcm_key,$login_type);
+		$data['result']=$this->apimainmodel->Fb_gm_login($username,$name,$gcm_key,$mobile_type,$login_type);
+		
 		$response = $data['result'];
 		echo json_encode($response);
 	}
@@ -157,9 +157,9 @@ class Apimain extends CI_Controller {
 
 		$unique_id = $this->input->post("unique_id");
 		$gcm_key = $this->input->post("gcm_key");
-		$login_type = $this->input->post("login_type");
+		$mobile_type = $this->input->post("mobile_type");
 
-		$data['result']=$this->apimainmodel->Guest_login($unique_id,$gcm_key,$login_type);
+		$data['result']=$this->apimainmodel->Guest_login($unique_id,$gcm_key,$mobile_type);
 		$response = $data['result'];
 		echo json_encode($response);
 	}
@@ -238,9 +238,9 @@ class Apimain extends CI_Controller {
 
 		$mobile_no = $this->input->post("mobile_no");
 		$OTP = $this->input->post("OTP");
-		$request_mode = $this->input->post("request_mode");
+		//$request_mode = $this->input->post("request_mode");
 		
-		$data['result']=$this->apimainmodel->Mobile_verify($mobile_no,$OTP,$request_mode);
+		$data['result']=$this->apimainmodel->Mobile_verify($mobile_no,$OTP);
 		$response = $data['result'];
 		echo json_encode($response);
 	}
@@ -284,7 +284,7 @@ class Apimain extends CI_Controller {
 
 	public function updatemobile()
 	{
-	   //$_POST = json_decode(file_get_contents("php://input"), TRUE);
+	   $_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
