@@ -190,6 +190,7 @@ input[type=text] {
    });
 
    function sendOTP(){
+
      var mobile=$('#mobile').val();
 
      $.ajax({
@@ -219,10 +220,12 @@ input[type=text] {
              if ((data) == "success") {
                  $("#submit").removeAttr("disabled");
                      $('#mobilemsg').html(' ');
+
                  // $('#mobilemsg').html('Username Available');
              } else {
                  $('#submit').prop('disabled', true);
                  $('#mobilemsg').html(data);
+
              }
          }
      });
@@ -241,9 +244,12 @@ input[type=text] {
                if ((data) == "success") {
                    $("#submit").removeAttr("disabled");
                     $('#mobilenum').html(' ');
+                    //  $("#sendbtn").removeAttr("disabled");
+                       $('#sendbtn').how();
                } else {
                    $('#submit').prop('disabled', true);
                     $('#mobilenum').html(data);
+                      $('#sendbtn').hide();
                }
            }
        });
