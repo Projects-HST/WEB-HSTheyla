@@ -58,6 +58,7 @@ $route['facebook_login'] = 'home/facebook_login';
 $route['profile'] = 'home/profile';
 $route['verify'] = 'home/verify';
 $route['reset'] = 'home/resetpassword';
+$route['mobilenumber'] = 'home/mobilenumberchange';
 $route['dashboard'] = 'home/organiser';
 $route['home'] = 'home/index';
 // $route['emailverfiy'] = 'home/emailverfiy';

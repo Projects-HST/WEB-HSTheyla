@@ -160,6 +160,19 @@ class Home extends CI_Controller {
 			}
 		}
 
+		public function mobilenumberchange(){
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			$datas['res']=$this->loginmodel->getuserinfo($user_id);
+			if($user_role==3){
+
+				$this->load->view('mobilenumber', $datas);
+			}else{
+				redirect('/');
+			}
+		}
+
 		public function organiser(){
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
@@ -247,6 +260,23 @@ class Home extends CI_Controller {
 			$data=$this->loginmodel->exist_username($username);
 
 		}
+		public function checkotp(){
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$mobileotp=$this->input->post('mobileotp');
+			$data=$this->loginmodel->check_otp($mobileotp,$user_id);
+		}
+		public function save_mobile_number(){
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			if($user_role=='3'){
+				$mobile=$this->input->post('mobile');
+				$data=$this->loginmodel->save_mobile_number($mobile,$user_id);
+			}else{
+				redirect('/');
+			}
+		}
 
 		public function change_pic(){
 			$datas=$this->session->userdata();
@@ -277,12 +307,20 @@ class Home extends CI_Controller {
 
 			if($user_id){
 				$name=$this->input->post('name');
-				$mobile=$this->input->post('mobile');
 				$email=$this->input->post('email');
 				$address=$this->input->post('address');
-				$datas['res']=$this->loginmodel->save_profile_info($user_id,$name,$mobile,$email,$address);
+				$datas['res']=$this->loginmodel->save_profile_info($user_id,$name,$email,$address);
 			}else{
+				redirect('/');
+			}
+		}
 
+		public function sendOTP(){
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			if($user_role=='3'){
+				$datas['res']=$this->loginmodel->sendOTPmobilechange($user_id);
 			}
 		}
 
