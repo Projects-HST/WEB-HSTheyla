@@ -167,10 +167,11 @@ class Apimainmodel extends CI_Model {
 */
 
 //#################### Main Login ####################//
-	//public function Login($username,$password,$gcm_key,$mobile_type,$login_type)
-	public function Login($username,$password,$gcm_key,$login_type)
+	public function Login($username,$password,$gcm_key,$mobile_type)
+	
 	{
 	    $user_id = "";
+	    $login_type = "normal_login";
 	    
 		$sql = "SELECT * FROM user_master WHERE user_name ='".$username."' AND password = md5('".$password."') AND status='Y'";
 		$user_result = $this->db->query($sql);
@@ -247,6 +248,9 @@ class Apimainmodel extends CI_Model {
 			$update_sql = "UPDATE user_master SET last_login=NOW(),login_count='$login_count' WHERE id='$user_id'";
 			$update_result = $this->db->query($update_sql);
 			
+			$activity_sql = "INSERT INTO user_activity (date,user_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $login_type . "')";
+			$insert_activity = $this->db->query($activity_sql);
+			
 			$gcmQuery = "SELECT * FROM push_notification_master WHERE gcm_key like '%" .$gcm_key. "%' LIMIT 1";
 			$gcm_result = $this->db->query($gcmQuery);
 			$gcm_ress = $gcm_result->result();
@@ -273,11 +277,19 @@ class Apimainmodel extends CI_Model {
 
 
 //#################### Facebook and Gmail Login ####################//
-	//public function Fb_gm_login($email_id,$name,$gcm_key,$mobile_type,$login_type)
-	public function Fb_gm_login($name,$email_id,$gcm_key,$login_type)
+	public function Fb_gm_login($email_id,$name,$gcm_key,$mobile_type,$login_type)
+	
 	{
 
         $user_id ="";
+        if ($login_type = "1") {
+            $login_mode = "fb_login";
+            $signup_type = "Fb_signup";
+        } else {
+            $login_mode = "gplus_login";
+            $signup_type = "gplus_signup";
+        }
+        
         
 		$sql = "SELECT * FROM user_master WHERE email_id ='".$email_id."' AND status='Y'";
 		$user_result = $this->db->query($sql);
@@ -289,18 +301,40 @@ class Apimainmodel extends CI_Model {
 				  $user_id = $rows->id;
 				  $login_count = $rows->login_count+1;
 			}
+			
+				$update_sql = "UPDATE user_master SET last_login=NOW(),login_count='$login_count' WHERE id='$user_id'";
+				$update_result = $this->db->query($update_sql);
+				
+				$activity_sql = "INSERT INTO user_activity (date,user_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $login_mode . "')";
+    			$insert_activity = $this->db->query($activity_sql);
+				
+				$gcmQuery = "SELECT * FROM push_notification_master WHERE gcm_key like '%" .$gcm_key. "%' LIMIT 1";
+				$gcm_result = $this->db->query($gcmQuery);
+				$gcm_ress = $gcm_result->result();
+				
+						if($gcm_result->num_rows()==0)
+						{
+							$sQuery = "INSERT INTO push_notification_master (user_id,gcm_key,mobile_type) VALUES ('". $user_id . "','". $gcm_key . "','". $mobile_type . "')";
+							$update_gcm = $this->db->query($sQuery);
+						}
+						
 		} else {
 				
 				$sQuery = "INSERT INTO user_master (email_id,user_role,email_verify,status) VALUES ('". $email_id . "','3','Y','Y')";
 				$insert_user = $this->db->query($sQuery);
 				$user_id = $this->db->insert_id(); 
 				
-				$suserQuery = "INSERT INTO user_details (user_id,name,newsletter_status,referal_code) VALUES ('". $user_id . "','". $name . "','Y','HEYLA123')";
+				$suserQuery = "INSERT INTO user_details (user_id,name,newsletter_status,referal_code) VALUES ('". $user_id . "','". $name . "','N','HEYLA123')";
 				$insert_user_details = $this->db->query($suserQuery);
 				
-				$login_count = '0';
+    			$activity_sql = "INSERT INTO user_activity (date,user_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $signup_type . "')";
+    			$insert_activity = $this->db->query($activity_sql);
+    			
+    			$sQuery = "INSERT INTO push_notification_master (user_id,gcm_key,mobile_type) VALUES ('". $user_id . "','". $gcm_key . "','". $mobile_type . "')";
+				$update_gcm = $this->db->query($sQuery);
+							
+    			//$login_count = '0';
 		}
-		
 		
 		if ( $user_id != "") {
 		    
@@ -334,20 +368,6 @@ class Apimainmodel extends CI_Model {
 							"referal_code" => $ress[0]->referal_code	
 				);
 			}
-            
-				$update_sql = "UPDATE user_master SET last_login=NOW(),login_count='$login_count' WHERE id='$user_id'";
-				$update_result = $this->db->query($update_sql);
-				
-				$gcmQuery = "SELECT * FROM push_notification_master WHERE gcm_key like '%" .$gcm_key. "%' LIMIT 1";
-				$gcm_result = $this->db->query($gcmQuery);
-				$gcm_ress = $gcm_result->result();
-				
-						if($gcm_result->num_rows()==0)
-						{
-							$sQuery = "INSERT INTO push_notification_master (user_id,gcm_key,mobile_type) VALUES ('". $user_id . "','". $gcm_key . "','". $mobile_type . "')";
-							$update_gcm = $this->db->query($sQuery);
-						}
-					//$response = array("status" => "Success", "msg" => "Login Successfully");
 					$response = array("status" => "Success", "msg" => "Login Successfully", "userData" => $userData);
 					return $response;
 		} else {
@@ -362,7 +382,7 @@ class Apimainmodel extends CI_Model {
 
 
 //#################### Guest Login ####################//
-	public function Guest_login($unique_id,$gcm_key,$login_type)
+	public function Guest_login($unique_id,$gcm_key,$mobile_type)
 	{
 	    $user_id = "";
 
@@ -388,7 +408,7 @@ class Apimainmodel extends CI_Model {
     			
     		} 
 		
-			$sQuery = "INSERT INTO guest_user_master (unique_id,gcm_key,login_type) VALUES ('". $unique_id . "','". $gcm_key . "','". $login_type . "')";
+			$sQuery = "INSERT INTO guest_user_master (unique_id,gcm_key,login_type) VALUES ('". $unique_id . "','". $gcm_key . "','". $mobile_type . "')";
 			$insert_user = $this->db->query($sQuery);
 			$nuser_id = $this->db->insert_id(); 
 			
@@ -413,10 +433,10 @@ class Apimainmodel extends CI_Model {
 
 
 //#################### User Signup ####################//
-	public function User_signup($email_id,$mobile_no,$password,$gcm_key,$signup_type,$mobile_type)
+	public function User_signup($email_id,$mobile_no,$password,$gcm_key,$mobile_type)
 	{
 	    $user_id = "";
-        //$sURL = base_url();
+        $login_type = "normal_signup";
         
 	    $sql = "SELECT * FROM user_master WHERE email_id ='".$email_id."' OR mobile_no = '".$mobile_no."'";
 		$user_result = $this->db->query($sql);
@@ -432,6 +452,9 @@ class Apimainmodel extends CI_Model {
 			$insert_user = $this->db->query($sQuery);
 			$user_id = $this->db->insert_id(); 
 
+            $activity_sql = "INSERT INTO user_activity (date,user_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $login_type . "')";
+			$insert_activity = $this->db->query($activity_sql);
+    			
             $gcmQuery = "SELECT * FROM push_notification_master WHERE gcm_key like '%" .$gcm_key. "%' LIMIT 1";
 			$gcm_result = $this->db->query($gcmQuery);
 			$gcm_ress = $gcm_result->result();
@@ -463,7 +486,7 @@ class Apimainmodel extends CI_Model {
 
 
 //#################### Mobile Verification ####################//
-	public function Mobile_verify($mobile_no,$OTP,$request_mode)
+	public function Mobile_verify($mobile_no,$OTP)
 	{
 	    $user_id = "";
 
@@ -547,7 +570,7 @@ class Apimainmodel extends CI_Model {
 			
 		
 			$mobile_message = 'Verify OTP :'. $OTP;
-            $this->sendSMS($mobile_no,$mobile_message);
+            $this->sendSMS($new_mobile_no,$mobile_message);
             
 			$response = array("status" => "Success", "msg" => "Mobile Updated Successfully");
 		} else {
