@@ -86,7 +86,7 @@
                        $user_id=$this->session->userdata('user_role');
                        if(empty($user_id)){ ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal">Login / Sign in</a>
+                            <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal">Sign In / Sign Up</a>
                         </li>
                         <?php }else{ ?>
                             <li class="nav-item">
@@ -221,7 +221,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <p class="fnt-footer">Powerded By Happysanz Tech</p>
+                    <p class="fnt-footer">Powered By Happysanz Tech</p>
                 </div>
                 <div class="col-md-6">
                     <ul class="list-inline fnt-footer ">

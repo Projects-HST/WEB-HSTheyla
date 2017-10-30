@@ -104,7 +104,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <p class="fnt-footer">Powerded By Happysanz Tech</p>
+                    <p class="fnt-footer">Powered By Happysanz Tech</p>
                 </div>
                 <div class="col-md-6">
                     <ul class="list-inline fnt-footer ">

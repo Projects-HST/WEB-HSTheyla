@@ -45,8 +45,6 @@
   opacity: 1;
 }
 
-
-
 </style>
 <body>
 
@@ -81,7 +79,7 @@
                     	 $user_id=$this->session->userdata('user_role');
                        if(empty($user_id)){ ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal">Login / Sign in</a>
+                            <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal">Sign In / Sign Up</a>
                         </li>
                         <?php }else{ ?>
                             <li class="nav-item">
@@ -117,7 +115,7 @@
                  <center>
 
 
-                   <p class="verify-text">
+                   <p class="modal-msg">
                      <?php echo $this->session->flashdata('msg'); ?>
 
                  </p>
@@ -168,9 +166,9 @@
                                     <center>
                                         <div class="social-login">
 
-                     <a href="<?php echo base_url(); ?>google_login" class="loginBtn loginBtn--google">Login With google</a>
-                                                <a href="<?php echo base_url(); ?>facebook_login" class="loginBtn loginBtn--facebook">
-                       Login with Facebook
+                     <a href="<?php echo base_url(); ?>google_login" class="btn btn-lg  btn-google"><i class="fa fa-google-plus"></i>Login With Google</a>
+                                                <a href="<?php echo base_url(); ?>facebook_login" class="btn btn-facebook btn-lg">
+                      <i class="fa fa-facebook"></i> Login with Facebook
                      </a>
                                         </div>
                                     </center>
@@ -442,7 +440,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <p class="fnt-footer">Powerded By Happysanz Tech</p>
+                    <p class="fnt-footer">Powered By Happysanz Tech</p>
                 </div>
                 <div class="col-md-6">
                     <ul class="list-inline fnt-footer ">
