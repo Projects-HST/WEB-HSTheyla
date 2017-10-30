@@ -49,7 +49,7 @@
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark  fixed-top" data-spy="affix" data-offset-top="(scroll value)">
+    <nav class="navbar navbar-expand-lg navbar-dark  fixed-top hidden-sm" data-spy="affix" data-offset-top="(scroll value)">
         <div class="container">
             <a class="navbar-brand" href="#"><img src="<?php echo base_url(); ?>assets/front/images/logo.png" class="imglogo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -133,7 +133,7 @@
                     <div role="tabpanel">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs modalmenu" role="tablist">
-                            <li role="presentation" class="tabmenu"><a href="#uploadTab" aria-controls="uploadTab" role="tab" data-toggle="tab" class="" id="loginbtn">Login</a>
+                            <li role="presentation" class="tabmenu"><a href="#uploadTab" aria-controls="uploadTab" role="tab" data-toggle="tab" class="" id="loginbtn">Sign In</a>
 
                             </li>
                             <li role="presentation" class="loginbtn"><a href="#browseTab" aria-controls="browseTab" role="tab" data-toggle="tab">Sign Up</a>
@@ -347,8 +347,10 @@
                     </div>
                     <p id="item-title">&nbsp;</p>
                     <div class="nav1" class="noselect">
-                        <button class="left"> ← </button>
-                        <button class="right"> → </button>
+                        <span class="left"><i class="fa fa-chevron-left" aria-hidden="true"></i>
+</span>
+                        <span class="right"><i class="fa fa-chevron-right" aria-hidden="true"></i>
+ </span>
                     </div>
                 </div>
 
@@ -423,7 +425,7 @@
                                 <textarea class="form-control" placeholder="Write Message"></textarea>
                             </div>
                             <div class="col-md-3 col-sm-6">
-                                <input type="submit" class="form-control submitbtn" value="SUBMIT FORM">
+                                <input type="submit" class="form-control submitbtn btn-primary" value="SUBMIT FORM">
                             </div>
                         </div>
                     </form>
