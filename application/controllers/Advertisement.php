@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Advertisement extends CI_Controller 
+class Advertisement extends CI_Controller
 {
 
 
-	function __construct() 
+	function __construct()
 	   {
 		  parent::__construct();
 		  $this->load->model('advertisementmodel');
@@ -14,7 +14,7 @@ class Advertisement extends CI_Controller
        }
 
     //------------------------- Advertisement Add / Update---------------------------------
-     
+
     public function home()
     {
     	$datas=$this->session->userdata();
@@ -22,7 +22,7 @@ class Advertisement extends CI_Controller
 	    $user_role=$this->session->userdata('user_role');
 
         $datas['all_plan'] = $this->advertisementmodel->view_advertisement_plan_details();
-       
+
 		if($user_role==1)
 		{
 		  $this->load->view('header');
@@ -36,19 +36,15 @@ class Advertisement extends CI_Controller
     public function add_plans()
     {
         $datas=$this->session->userdata();
-	    $user_id=$this->session->userdata('id');
-	    $user_role=$this->session->userdata('user_role');
-         
+	    	$user_id=$this->session->userdata('id');
+	    	$user_role=$this->session->userdata('user_role');
         $planname=$this->input->post('planname');
         $planrate=$this->input->post('plan_rate');
-
         $datas = $this->advertisementmodel->add_advertisement_plan_details($user_id,$planname,$planrate);
-        
         $sta=$datas['status'];
-      
         if($sta=="success"){
 	       $this->session->set_flashdata('msg','Added Successfully');
-		   redirect('advertisement/home');
+		   		redirect('advertisement/home');
 	     }else if($sta=="Already Exist"){
              $this->session->set_flashdata('msg','Already Exist');
 		     redirect('advertisement/home');
@@ -81,15 +77,15 @@ class Advertisement extends CI_Controller
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-         
-        $planid=$this->input->post('planid'); 
+
+        $planid=$this->input->post('planid');
         $planname=$this->input->post('planname');
         $planrate=$this->input->post('plan_rate');
 
         $datas = $this->advertisementmodel->update_advertisement_plan_details($planid,$planname,$planrate,$user_id);
-        
+
         $sta=$datas['status'];
-      
+
         if($sta=="success"){
 	       $this->session->set_flashdata('msg','Updated Successfully');
 		   redirect('advertisement/home');
@@ -107,13 +103,13 @@ class Advertisement extends CI_Controller
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-        
+
         $id=$this->input->post('planid');
 
         $datas = $this->advertisementmodel->delete_advertisement_plan_details($id);
-        
+
         $sta=$datas['status'];
-      
+
         if($sta=="success"){
         	echo "success";
 	       //$this->session->set_flashdata('msg','Deleted Successfully');
@@ -130,7 +126,7 @@ class Advertisement extends CI_Controller
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-	   
+
 	    $datas['result'] = $this->advertisementmodel->getall_events_details();
 
 	    if($user_role==1)
@@ -150,7 +146,7 @@ class Advertisement extends CI_Controller
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-	   
+
 	    $datas['result'] = $this->advertisementmodel->getall_adv_history_details($id,$category_id);
 	    $datas['plans'] = $this->advertisementmodel->getall_adv_plans();
 	    $datas['event_id'] =$id;
@@ -220,10 +216,10 @@ class Advertisement extends CI_Controller
 	    $user_role=$this->session->userdata('user_role');
 
 	    $id=$this->input->post('advid');
-	   
+
 	    $datas = $this->advertisementmodel->delete_adv_history($id);
 	    $sta=$datas['status'];
-      
+
         if($sta=="success"){
 	       //$this->session->set_flashdata('msg','Deleted Successfully');
 		   //redirect('advertisement/view_adv_plan',$datas);
@@ -242,10 +238,10 @@ class Advertisement extends CI_Controller
 	    $user_role=$this->session->userdata('user_role');
 
 	    $id=$this->input->post('advid');
-	   
+
 	    $datas = $this->advertisementmodel->delete_adv_history($id);
 	    $sta=$datas['status'];
-      
+
         if($sta=="success"){
 	        //$this->session->set_flashdata('msg','Deleted Successfully');
 		   //redirect('advertisement/view_adv_history',$datas);
@@ -263,7 +259,7 @@ class Advertisement extends CI_Controller
         $datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-	   
+
 	    $datas['edit'] = $this->advertisementmodel->getall_adv_history($id);
 	    $datas['plans'] = $this->advertisementmodel->getall_adv_plans();
 
@@ -282,7 +278,7 @@ class Advertisement extends CI_Controller
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-	   
+
 	    $datas['edit'] = $this->advertisementmodel->getall_adv_history($id);
 	    $datas['plans'] = $this->advertisementmodel->getall_adv_plans();
 
@@ -294,7 +290,7 @@ class Advertisement extends CI_Controller
 	 	}else{
 	 			redirect('/');
 	 		 }
-    
+
     }
 
     public function update_adv_history()
@@ -323,13 +319,13 @@ class Advertisement extends CI_Controller
 	    $end_time=$this->input->post('end_time');
 	    $adv_plan=$this->input->post('adv_plan');
 	    $status=$this->input->post('status');
-           
+
         // echo $start_time;
          //echo $end_time; exit;
 
 	     $datas = $this->advertisementmodel->aupdate_advertisement_plan_history($id,$event_id,$category_id,$start_date,$end_date,$start_time,$end_time,$adv_plan,$status,$user_id);
 	     $sta=$datas['status'];
-         
+
          $eid = str_replace(' ','',$event_id);
 	     $ecategory_id = str_replace(' ','',$category_id);
 
@@ -347,7 +343,7 @@ class Advertisement extends CI_Controller
 	     }
 
     }
-    
+
 
     public function update_adv_history_all()
     {
@@ -375,11 +371,11 @@ class Advertisement extends CI_Controller
 	    $end_time=$this->input->post('end_time');
 	    $adv_plan=$this->input->post('adv_plan');
 	    $status=$this->input->post('status');
-          
-           
+
+
 	     $datas = $this->advertisementmodel->aupdate_advertisement_plan_history($id,$event_id,$category_id,$start_date,$end_date,$start_time,$end_time,$adv_plan,$status,$user_id);
 	     $sta=$datas['status'];
-      
+
         if($sta=="success"){
 	       $this->session->set_flashdata('msg','Updated Successfully');
 		   redirect('advertisement/view_adv_history',$datas);
@@ -399,7 +395,7 @@ class Advertisement extends CI_Controller
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-	   
+
 	    $datas['adv_view'] = $this->advertisementmodel->view_adv_history_details();
 	   // print_r($datas['adv_view'] );exit;
 	    if($user_role==1)

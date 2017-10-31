@@ -1,13 +1,13 @@
 <?php
 
 Class Usersmodel extends CI_Model
-{ 
+{
 
    public function __construct()
    {
       parent::__construct();
    }
-  
+
 //--------------------------------Bookingmodel Query-------------------------------------
 
     function getall_users_role_list()
@@ -25,7 +25,7 @@ Class Usersmodel extends CI_Model
 	  $udres=$udresu->result();
 	  return $udres;
     }
-    
+
     function getall_users_Followers_details()
     {
         $foler="SELECT u.name,ci.city_name,f.user_id,COUNT(f.follower_id) as followers FROM user_details AS u,user_followers AS f,city_master AS ci  WHERE u.user_id=f.user_id AND u.city_id=ci.id GROUP BY f.user_id";
@@ -49,7 +49,7 @@ Class Usersmodel extends CI_Model
       $res=$resu->result();
       return $res;
     }
-    
+
     function getall_state_list($country_id)
     {
       $sql="SELECT id,state_name,event_status FROM state_master WHERE event_status='Y' AND country_id='$country_id' ORDER BY id ASC";
@@ -68,8 +68,8 @@ Class Usersmodel extends CI_Model
 
     function add_user_details($name,$username,$cell,$email,$pwd,$dob,$gender,$address1,$address2,$address3,$occupation,$country,$statename,$city,$zip,$user_pic1,$status,$userrole,$user_id,$display_status)
     {    $pwd1=md5($pwd);
- 
-    $check_user="SELECT * FROM user_master WHERE user_name='$username' AND mobile_no='$cell' AND email_id='$email'";
+
+    $check_user="SELECT * FROM user_master WHERE user_name='$username' OR mobile_no='$cell' OR email_id='$email'";
     $result=$this->db->query($check_user);
     if($result->num_rows()==0)
     {
@@ -88,18 +88,22 @@ Class Usersmodel extends CI_Model
     }
 
     function update_user_details($uid,$umid,$username,$name,$cell,$email,$pwd,$dob,$gender,$address1,$address2,$address3,$occupation,$country,$statename,$city,$zip,$user_pic1,$status,$userrole,$user_id,$display_status)
-    {   
-
-    	$pwd1=md5($pwd);
-
+    {
+      $check_user="SELECT * FROM user_master WHERE user_name='$username' OR mobile_no='$cell' OR email_id='$email'";
+      $result=$this->db->query($check_user);
+      if($result->num_rows()==0)
+      {
+    	 $pwd1=md5($pwd);
     	 $umupdate="UPDATE user_master SET user_name='$username',mobile_no='$cell',email_id='$email',password='$pwd1',user_role='$userrole',status='$display_status',updated_by='$user_id',updated_at=NOW() WHERE  id='$umid' ";
-    	   $umdetails=$this->db->query($umupdate);
-        
+    	 $umdetails=$this->db->query($umupdate);
         $usupdate="UPDATE user_details SET name='$name',birthdate='$dob',gender='$gender',occupation='$occupation',address_line1='$address1',address_line2='$address2',address_line3='$address3',country_id='$country',state_id='$statename',city_id='$city',zip='$zip',user_picture='$user_pic1',newsletter_status='$status' WHERE id='$uid' AND user_id='$umid'";
         $usdetails=$this->db->query($usupdate);
         $data= array("status"=>"success");
-  		return $data;
-
+  		  return $data;
+      }else{
+        $data= array("status"=>"Already Exist");
+        return $data;
+      }
     }
 
     function delete($id,$users_id)
@@ -109,7 +113,7 @@ Class Usersmodel extends CI_Model
 
     	$usdel="DELETE FROM user_details WHERE id='$id'";
     	$usdetail=$this->db->query($usdel);
-      
+
       $data= array("status"=>"success");
   		return $data;
     }
@@ -124,7 +128,7 @@ Class Usersmodel extends CI_Model
 
     function getemail($email)
     {
-      $query = "SELECT * FROM user_master WHERE email_id='".$email."'";
+       $query = "SELECT * FROM user_master WHERE email_id='".$email."'";
       $resultset = $this->db->query($query);
       return count($resultset->result());
     }
@@ -142,5 +146,5 @@ Class Usersmodel extends CI_Model
       $resultset1 = $this->db->query($query1);
       return count($resultset1->result());
     }
-   
+
 }?>

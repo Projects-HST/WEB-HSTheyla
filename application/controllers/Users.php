@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Users extends CI_Controller 
+class Users extends CI_Controller
 {
-	function __construct() 
+	function __construct()
 	   {
 		  parent::__construct();
 		  $this->load->model('usersmodel');
@@ -38,7 +38,7 @@ class Users extends CI_Controller
 		 $data['res']=$this->usersmodel->getall_state_list($country_id);
 		 echo json_encode( $data['res']);
 	}
-     
+
     public function get_city_name()
     {
 	   	 $state_id = $this->input->post('sta_id');
@@ -79,7 +79,7 @@ class Users extends CI_Controller
             $userrole=$this->input->post('userrole');
             $display_status=$this->input->post('display_status');
 
-            $user_pic=$_FILES['user_picture']['name']; 
+            $user_pic=$_FILES['user_picture']['name'];
             $file_name = time().rand(1,5).rand(6,10);
 			$user_pic1=$file_name.$user_pic;
 			$uploaddir='assets/users/';
@@ -104,7 +104,7 @@ class Users extends CI_Controller
 	 			redirect('/');
 	 		 }
     }
-    
+
 
     public function view()
     {
@@ -123,7 +123,7 @@ class Users extends CI_Controller
 	 	}else{
 	 			redirect('/');
 	 		 }
-    } 
+    }
 
     public function view_followers()
     {
@@ -140,7 +140,7 @@ class Users extends CI_Controller
 	 	}else{
 	 			redirect('/');
 	 		 }
-    } 
+    }
 
     public function edit($id)
     {
@@ -168,7 +168,7 @@ class Users extends CI_Controller
 	    $user_role=$this->session->userdata('user_role');
 
 		if($user_role==1)
-		{   
+		{
 			$uid=$this->input->post('uid');
 			$umid=$this->input->post('umid');
 
@@ -206,13 +206,13 @@ class Users extends CI_Controller
 
             $old_picture=$this->input->post('old_picture');
 
-            $user_pic=$_FILES['user_picture']['name']; 
+            $user_pic=$_FILES['user_picture']['name'];
             $file_name = time().rand(1,5).rand(6,10);
 			$user_pic1=$file_name.$user_pic;
 			$uploaddir='assets/users/';
 			$profilepic=$uploaddir.$user_pic1;
 			move_uploaded_file($_FILES['user_picture']['tmp_name'],$profilepic);
-          
+
 			if(empty($user_pic=$_FILES['user_picture']['name'])){
 				$user_pic1=$old_picture;
 			}else{ $user_pic1=$user_pic1; }
@@ -237,11 +237,11 @@ class Users extends CI_Controller
     }
 
     public function delete()
-    {   
+    {
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-	    
+
 	    if($user_role==1)
 		{
 		   $id=$this->input->post('uaid');
@@ -281,7 +281,7 @@ class Users extends CI_Controller
 	 			redirect('/');
 	 		 }
     }
-    
+
     public function mail_checker()
     {
        $email = $this->input->post('email');

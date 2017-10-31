@@ -238,7 +238,7 @@
 
 </body>
 <script src="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/pages/sweet-alert.init.js"></script>
+<!-- <script src="<?php echo base_url(); ?>assets/pages/sweet-alert.init.js"></script> -->
 <script type="text/javascript">
     $("#loginbtn").click(function() {
         $(this).toggleClass("menuactive");
@@ -290,13 +290,14 @@
                 success: function(response) {
                     if (response == "success") {
 
+                       window.setTimeout(function(){location.reload()},3000);
                         swal({
                                 title: "Profile",
                                 text: "Saved",
                                 type: "success"
                             },
                             function() {
-                                location.reload();
+                                window.location.reload();
                             }
                         );
                     } else {
