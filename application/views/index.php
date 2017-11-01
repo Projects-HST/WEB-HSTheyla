@@ -591,23 +591,23 @@
     $('#contact_form').validate({ // initialize the plugin
         rules: {
             name: {
-                required: true
+                required: true,maxlength:20
             },
             email: {
                 required: true,email:true
             },
             subject: {
-                required: true
+                required: true,maxlength:70
             },
             message: {
                 required: true
             },
         },
         messages: {
-            name: { required:"Enter the Username" },
+            name: { required:"Enter the name" },
             email: "Enter Valid Email ",
-            subject: { required:"Enter the Subject" },
-            message: { required:"Enter the Password"}
+            subject: { required:"Enter the Subject" ,maxlength:"Enter Below 70 Characters"},
+            message: { required:"Enter the Message"}
         },
         submitHandler: function(form) {
             //alert("hi");

@@ -218,10 +218,10 @@ class Home extends CI_Controller {
 			$data=$this->loginmodel->reset_password($email);
 		}
 		public function mail(){
-			$name=$this->input->post('name');
-			$email=$this->input->post('email');
-			$subject=$this->input->post('subject');
-			$msg=$this->input->post('message');
+			$name=$this->db->escape_str($this->input->post('name'));
+			$email=$this->db->escape_str($this->input->post('email'));
+			$subject=$this->db->escape_str($this->input->post('subject'));
+			$msg=$this->db->escape_str($this->input->post('message'));
 			$data=$this->loginmodel->mail_contact_form($name,$email,$subject,$msg);
 		}
 
