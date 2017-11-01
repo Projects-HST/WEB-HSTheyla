@@ -133,9 +133,9 @@ input[type=text] {
                 </div>
                 <div class="col-md-6">
                     <ul class="list-inline fnt-footer ">
-                        <li class="list-inline-item"><a href="">Privacy Policy</a></li>
-                        <li class="list-inline-item"><a href="">Payment Policy</a></li>
-                        <li class="list-inline-item"><a href="">Terms & Conditions</a></li>
+                      <li class="list-inline-item"><a href="<?php echo base_url(); ?>privacy">Privacy Policy</a></li>
+                      <li class="list-inline-item"><a href="<?php echo base_url(); ?>payment">Payment Policy</a></li>
+                      <li class="list-inline-item"><a href="<?php echo base_url(); ?>terms">Terms & Conditions</a></li>
                     </ul>
                 </div>
             </div>

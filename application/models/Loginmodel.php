@@ -416,5 +416,37 @@ Class Loginmodel extends CI_Model
     }
 
 
+    function mail_contact_form($name,$email,$subject,$msg){
+      $query="INSERT INTO contact_form (name,email,subject,message,created_at,updated_by) VALUES('$name','$email','$subject','$msg',NOW(),NOW())";
+      $resultset=$this->db->query($query);
+      $to="hello@heylaapp.com";
+      $subject="Contact Form Enquiry";
+      $htmlContent = '
+       <html>
+       <head>
+       <title>Contact Form</title>
+          </head>
+          <body>
+            <div class="mail-content">
+              <p>Name - '.$name.'</p>
+              <p>Email - '.$email.'</p>
+              <p>Subject - '.$subject.'</p>
+              <p>Message - '.$msg.'</p>
+            </div>
+          </body>
+       </html>';
+   $headers = "MIME-Version: 1.0" . "\r\n";
+   $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+   // Additional headers
+   $headers .= 'From: heylapp<info@heylapp.com>' . "\r\n";
+   $sent= mail($to,$subject,$htmlContent,$headers);
+   if($sent){
+     echo "success";
+   }else{
+      echo "failed";
+   }
+    }
+
+
 
 }

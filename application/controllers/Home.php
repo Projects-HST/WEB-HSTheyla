@@ -193,6 +193,16 @@ class Home extends CI_Controller {
 		public function verify(){
 			$this->load->view('verify');
 		}
+		public function privacy(){
+			$this->load->view('privacy');
+		}
+		public function payment(){
+			$this->load->view('payment');
+		}
+		public function terms(){
+			$this->load->view('terms');
+		}
+
 		public function resetpassword(){
 			$this->load->view('resetpassword');
 		}
@@ -206,6 +216,13 @@ class Home extends CI_Controller {
 		public function reset_password(){
 			$email=$this->input->post('email');
 			$data=$this->loginmodel->reset_password($email);
+		}
+		public function mail(){
+			$name=$this->input->post('name');
+			$email=$this->input->post('email');
+			$subject=$this->input->post('subject');
+			$msg=$this->input->post('message');
+			$data=$this->loginmodel->mail_contact_form($name,$email,$subject,$msg);
 		}
 
 		public function emailverfiy(){

@@ -66,7 +66,7 @@
 }
 .mobileslider{
   padding-top: 80px;
-  padding-bottom: 200px;
+  padding-bottom: 80px;
   background-color: #e8e8e8;
 }
 .active{
@@ -321,8 +321,15 @@
   padding-bottom: 14px;
 
 }
+.fixed-top{
+      background-color: #478ecc;
+}
 @media (max-width: 982px) {
 .fixed-top{
   position: absolute;
 }
+}
+.privacy{
+  margin-top: 20px;
+  margin-bottom: 20px;
 }

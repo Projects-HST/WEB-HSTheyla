@@ -225,9 +225,9 @@
                 </div>
                 <div class="col-md-6">
                     <ul class="list-inline fnt-footer ">
-                        <li class="list-inline-item"><a href="">Privacy Policy</a></li>
-                        <li class="list-inline-item"><a href="">Payment Policy</a></li>
-                        <li class="list-inline-item"><a href="">Terms & Conditions</a></li>
+                      <li class="list-inline-item"><a href="<?php echo base_url(); ?>privacy">Privacy Policy</a></li>
+                      <li class="list-inline-item"><a href="<?php echo base_url(); ?>payment">Payment Policy</a></li>
+                      <li class="list-inline-item"><a href="<?php echo base_url(); ?>terms">Terms & Conditions</a></li>
                     </ul>
                 </div>
             </div>
@@ -290,16 +290,16 @@
                 success: function(response) {
                     if (response == "success") {
 
-                       window.setTimeout(function(){location.reload()},3000);
+
+
+
                         swal({
-                                title: "Profile",
-                                text: "Saved",
-                                type: "success"
-                            },
-                            function() {
-                                window.location.reload();
-                            }
-                        );
+                            title: "success",
+                            text: " Profile Saved.",
+                            type: "success"
+                        }).then(function() {
+                           location.reload();
+                        });
                     } else {
                         sweetAlert("Oops...", response, "error");
                     }
