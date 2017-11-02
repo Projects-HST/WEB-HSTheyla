@@ -47,6 +47,7 @@ class Apimain extends CI_Controller {
 		return TRUE;
 	}
 
+
 //-----------------------------------------------//
 
 	public function login()
@@ -79,9 +80,8 @@ class Apimain extends CI_Controller {
 		$password = $this->input->post("password");
 		$gcm_key = $this->input->post("gcm_key");
 		$mobile_type = $this->input->post("mobile_type");
-		$login_type = $this->input->post("login_type");
-
-		$data['result']=$this->apimainmodel->Login($username,$password,$gcm_key,$mobile_type,$login_type);
+		
+		$data['result']=$this->apimainmodel->Login($username,$password,$gcm_key,$mobile_type);
 		
 		$response = $data['result'];
 		echo json_encode($response);
@@ -122,7 +122,7 @@ class Apimain extends CI_Controller {
 		$mobile_type = $this->input->post("mobile_type");
 		$login_type = $this->input->post("login_type");
 
-		$data['result']=$this->apimainmodel->Fb_gm_login($username,$name,$gcm_key,$mobile_type,$login_type);
+		$data['result']=$this->apimainmodel->Fb_gm_login($email_id,$name,$gcm_key,$mobile_type,$login_type);
 		
 		$response = $data['result'];
 		echo json_encode($response);
@@ -198,10 +198,9 @@ class Apimain extends CI_Controller {
 		$mobile_no = $this->input->post("mobile_no");
 		$password = $this->input->post("password");
 		$gcm_key = $this->input->post("gcm_key");
-		$signup_type = $this->input->post("signup_type");
 		$mobile_type = $this->input->post("mobile_type");
 
-		$data['result']=$this->apimainmodel->User_signup($email_id,$mobile_no,$password,$gcm_key,$signup_type,$mobile_type);
+		$data['result']=$this->apimainmodel->User_signup($email_id,$mobile_no,$password,$gcm_key,$mobile_type);
 		$response = $data['result'];
 		echo json_encode($response);
 	}
@@ -238,8 +237,7 @@ class Apimain extends CI_Controller {
 
 		$mobile_no = $this->input->post("mobile_no");
 		$OTP = $this->input->post("OTP");
-		//$request_mode = $this->input->post("request_mode");
-		
+
 		$data['result']=$this->apimainmodel->Mobile_verify($mobile_no,$OTP);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -316,23 +314,92 @@ class Apimain extends CI_Controller {
 
 //-----------------------------------------------//
 
-public function profile_picupload($user_id)
-	{
-	    $_POST = json_decode(file_get_contents("php://input"), TRUE);
+//-----------------------------------------------//
 
-		$user_id = $user_id;
-     	$user_type = $user_type;
+	public function updateemail()
+	{
+	   $_POST = json_decode(file_get_contents("php://input"), TRUE);
+
+		if(!$this->checkMethod())
+		{
+			return FALSE;
+		}
+
+		if($_POST == FALSE)
+		{
+			$res = array();
+			$res["opn"] = "Update Email";
+			$res["scode"] = 204;
+			$res["message"] = "Input error";
+
+			echo json_encode($res);
+			return;
+		}
+
+
+		$old_email_id ='';
+		$new_email_id ='';
+
+		$old_email_id = $this->input->post("old_email_id");
+		$new_email_id = $this->input->post("new_email_id");
+
+		$data['result']=$this->apimainmodel->Update_email($old_email_id,$new_email_id);
+		$response = $data['result'];
+		echo json_encode($response);
+	}
+
+//-----------------------------------------------//
+
+//-----------------------------------------------//
+
+	public function updateusername()
+	{
+	   $_POST = json_decode(file_get_contents("php://input"), TRUE);
+
+		if(!$this->checkMethod())
+		{
+			return FALSE;
+		}
+
+		if($_POST == FALSE)
+		{
+			$res = array();
+			$res["opn"] = "Update Username";
+			$res["scode"] = 204;
+			$res["message"] = "Input error";
+
+			echo json_encode($res);
+			return;
+		}
+
+
+		$old_user_name ='';
+		$new_user_name ='';
+
+		$old_user_name = $this->input->post("old_user_name");
+		$new_user_name = $this->input->post("new_user_name");
+
+		$data['result']=$this->apimainmodel->Update_username($old_user_name,$new_user_name);
+		$response = $data['result'];
+		echo json_encode($response);
+	}
+
+//-----------------------------------------------//
+
+public function profile_picupload()
+	{
+	  	$_POST = json_decode(file_get_contents("php://input"), TRUE);
+		
+		$user_id = $this->uri->segment(3);		
 		$profile = $_FILES["user_pic"]["name"];
 		$userFileName = time().'-'.$profile;
-		$uploadPicdir = 'assets/users/profile/';
-		
+		$uploadPicdir = './assets/users/profile/';		
 		$profilepic = $uploadPicdir.$userFileName;
 		move_uploaded_file($_FILES['user_pic']['tmp_name'], $profilepic);
 		
 		$data['result']=$this->apimainmodel->Update_profilepic($user_id,$userFileName);
 		$response = $data['result'];
 		echo json_encode($response);
-		
 	}
 	
 //-----------------------------------------------//
@@ -341,7 +408,7 @@ public function profile_picupload($user_id)
 
 	public function profileupdate()
 	{
-		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
@@ -361,7 +428,7 @@ public function profile_picupload($user_id)
         
         $user_id = '';
         $full_name = '';
-        $user_name = '';
+        $username = '';
         $date_of_birth = '';
         $gender = '';
         $occupation = '';
@@ -376,7 +443,7 @@ public function profile_picupload($user_id)
         
         $user_id = $this->input->post("user_id");
         $full_name = $this->input->post("full_name");
-        $user_name = $this->input->post("user_name");
+        $username = $this->input->post("username");
         $date_of_birth = $this->input->post("date_of_birth");
         $gender = $this->input->post("gender");
         $occupation = $this->input->post("occupation");
@@ -389,7 +456,7 @@ public function profile_picupload($user_id)
         $zip_code = $this->input->post("zip_code");
         $news_letter = $this->input->post("news_letter");
 
-		$data['result']=$this->apimainmodel->Profile_update($user_id,$full_name,$user_name,$date_of_birth,$gender,$occupation,$address_line_1,$address_line_2,$address_line_3,$country_id,$state_id,$city_id,$zip_code,$news_letter);
+		$data['result']=$this->apimainmodel->Profile_update($user_id,$full_name,$username,$date_of_birth,$gender,$occupation,$address_line_1,$address_line_2,$address_line_3,$country_id,$state_id,$city_id,$zip_code,$news_letter);
 		$response = $data['result'];
 		echo json_encode($response);
 	}
@@ -502,7 +569,7 @@ public function profile_picupload($user_id)
 
 	public function selectcountry()
 	{
-		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
@@ -535,7 +602,7 @@ public function profile_picupload($user_id)
 
 	public function selectstate()
 	{
-		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
@@ -568,7 +635,7 @@ public function profile_picupload($user_id)
 
 	public function selectcity()
 	{
-		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
@@ -602,7 +669,7 @@ public function profile_picupload($user_id)
 
 	public function selectallcity()
 	{
-		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
@@ -1354,4 +1421,45 @@ public function profile_picupload($user_id)
 
 //-----------------------------------------------//
 
+//-----------------------------------------------//
+
+
+	public function notofication()
+	{
+	   //$_POST = json_decode(file_get_contents("php://input"), TRUE);
+
+		if(!$this->checkMethod())
+		{
+			return FALSE;
+		}
+
+		if($_POST == FALSE)
+		{
+			$res = array();
+			$res["opn"] = "Facebook Login";
+			$res["scode"] = 204;
+			$res["message"] = "Input error";
+
+			echo json_encode($res);
+			return;
+		}
+
+		$gcm_key = '';
+		$Title = '';
+		$Message ='';
+		$mobiletype ='';
+
+
+		$gcm_key = $this->input->post("gcm_key");
+		$Title = $this->input->post("Title");
+		$Message = $this->input->post("Message");
+		$mobile_type = $this->input->post("mobile_type");
+
+		$data['result']=$this->apimainmodel->sendNotification($gcm_key,$Title,$Message,$mobile_type);
+		
+		//$response = $data['result'];
+		//echo json_encode($response);
+	}
+
+//-----------------------------------------------//
 }

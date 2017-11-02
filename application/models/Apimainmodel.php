@@ -23,58 +23,78 @@ class Apimainmodel extends CI_Model {
 //#################### Email End ####################//
 
 
-//#################### Email ####################//
+//#################### Notification ####################//
 
-	public function sendNotification($gcm_key,$Title,$Message)
+	public function sendNotification($gcm_key,$Title,$Message,$mobiletype)
 	{
-	        $gcm_key = array($gcm_key);
-			$data = array
-			(
-				'message' 	=> $Message,
-				'title'		=> $Title,
-				'vibrate'	=> 1,
-				'sound'		=> 1
-		//		'largeIcon'	=> 'http://happysanz.net/testing/assets/students/profile/236832.png'
-		//		'smallIcon'	=> 'small_icon'
-			);
+		if ($mobiletype =='1'){
+
+		    require_once 'assets/notification/Firebase.php';
+            require_once 'assets/notification/Push.php'; 
+            
+            $device_token = explode(",", $gcm_key);
+            $push = null; 
+        
+//        //first check if the push has an image with it
+		    $push = new Push(
+					$Title,
+					$Message,
+					'http://heylaapp.com/notification/images/events.jpg'
+				);
+
+// 			//if the push don't have an image give null in place of image
+ 			// $push = new Push(
+ 			// 		'HEYLA',
+ 			// 		'Hi Testing from maran',
+ 			// 		null
+ 			// 	);
+
+    		//getting the push from push object
+    		$mPushNotification = $push->getPush(); 
+    
+    		//creating firebase class object 
+    		$firebase = new Firebase(); 
+
+    	foreach($device_token as $token) {
+    		 $firebase->send(array($token),$mPushNotification);
+    	}
+
+		} else {
+            
+			$device_token = explode(",", $gcm_key);
+			$passphrase = 'hs123';
+		    $loction ='assets/notification/heylaapp.pem';
+		   
+			$ctx = stream_context_create();
+			stream_context_set_option($ctx, 'ssl', 'local_cert', $loction);
+			stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);
 			
-			// Insert real GCM API key from the Google APIs Console   
-			$apiKey = 'AAAADRDlvEI:APA91bFi-gSDCTCnCRv1kfRd8AmWu0jUkeBQ0UfILrUq1-asMkBSMlwamN6iGtEQs72no-g6Nw0lO5h4bpN0q7JCQkuTYsdPnM1yfilwxYcKerhsThCwt10cQUMKrBrQM2B3U3QaYbWQ';
-			// Set POST request body
-			$post = array(
-						'registration_ids'  => $gcm_key,
-						'data'              => $data,
-						 );
-			// Set CURL request headers 
-			$headers = array( 
-						'Authorization: key=' . $apiKey,
-						'Content-Type: application/json'
-							);
-			// Initialize curl handle       
-			$ch = curl_init();
-			// Set URL to GCM push endpoint     
-			curl_setopt($ch, CURLOPT_URL, 'https://gcm-http.googleapis.com/gcm/send');
-			// Set request method to POST       
-			curl_setopt($ch, CURLOPT_POST, true);
-			// Set custom request headers       
-			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-			// Get the response back as string instead of printing it       
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			// Set JSON post data
-			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post));
-			// Actually send the request    
-			$result = curl_exec($ch);
-		
-		
-			// Handle errors
-			if (curl_errno($ch)) {
-				//echo 'GCM error: ' . curl_error($ch);
+			// Open a connection to the APNS server
+			$fp = stream_socket_client('ssl://gateway.sandbox.push.apple.com:2195', $err, $errstr, 60, STREAM_CLIENT_CONNECT|STREAM_CLIENT_PERSISTENT, $ctx);
+			
+			if (!$fp)
+				exit("Failed to connect: $err $errstr" . PHP_EOL);
+
+			$body['aps'] = array(
+				'alert' => array(
+					'body' => $Message,
+					'action-loc-key' => 'Heyla App',
+				),
+				'badge' => 2,
+				'sound' => 'assets/notification/oven.caf',
+				);
+			
+			$payload = json_encode($body);
+
+			foreach($device_token as $token) {
+			
+				// Build the binary notification
+    			$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $token)) . pack("n", strlen($payload)) . $payload;
+        		$result = fwrite($fp, $msg, strlen($msg));
 			}
-			// Close curl handle
-			curl_close($ch);
-			
-			// Debug GCM response       
-			//echo $result;	
+							
+				fclose($fp);
+		}
 	}
 
 //#################### Notification End ####################//
@@ -86,7 +106,7 @@ class Apimainmodel extends CI_Model {
 	public function sendSMS($Phoneno,$Message)
 	{
         //Your authentication key
-        $authKey = "180660Az2FsJQSXGJ259f02b66";
+        $authKey = "181620ALl9WDEru59f871db";
         
         //Multiple mobiles numbers separated by comma
         $mobileNumber = "$Phoneno";
@@ -143,35 +163,14 @@ class Apimainmodel extends CI_Model {
 //#################### SMS End ####################//
 
 
-/*
-//#################### SMS ####################//
-
-	public function sendSMS($Phoneno,$Message)
-	{
-		$textmsg = urlencode($Message);
-		$smsGatewayUrl = 'http://173.45.76.227/send.aspx?';
-		$api_element = 'username=kvmhss&pass=kvmhss123&route=trans1&senderid=KVMHSS';
-		$api_params = $api_element.'&numbers='.$Phoneno.'&message='.$textmsg;
-		$smsgatewaydata = $smsGatewayUrl.$api_params;
-		$url = $smsgatewaydata;
-	
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_POST, false);
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		$output = curl_exec($ch);
-		curl_close($ch);
-	}
-
-//#################### SMS End ####################//
-*/
-
 //#################### Main Login ####################//
 	public function Login($username,$password,$gcm_key,$mobile_type)
-	
 	{
-	    $user_id = "";
+	    $user_id = '';
 	    $login_type = "normal_login";
+	    $country_name = '';
+	    $state_name = '';
+	    $city_name = '';
 	    
 		$sql = "SELECT * FROM user_master WHERE user_name ='".$username."' AND password = md5('".$password."') AND status='Y'";
 		$user_result = $this->db->query($sql);
@@ -215,11 +214,63 @@ class Apimainmodel extends CI_Model {
 		if ( $user_id != "") {
 			
 		    $sql = "SELECT A.id as userid, A.user_name, A.mobile_no, A.email_id, A.email_verify, A.login_count, A.user_role, B.name, B.birthdate, B.gender, B.occupation, B.address_line1, B.address_line2, B.address_line3, B.country_id, B. state_id, B.city_id, B.zip, B.user_picture, B.newsletter_status, B.referal_code, C.user_role_name FROM user_master A, user_details B, user_role_master C WHERE A.id=B.user_id AND A.user_role = C.id AND A.id ='".$user_id."'";
+		    
 			$user_result = $this->db->query($sql);
 			$ress = $user_result->result();
-			/*
+			
 			if($user_result->num_rows()>0)
 			{
+			    
+			    foreach ($user_result->result() as $rows)
+    			{
+    				  $user_picture = $rows->user_picture;
+    				  $country_id = $rows->country_id;
+    				  $state_id = $rows->state_id;
+    				  $city_id = $rows->city_id;
+    			}
+			  
+			    if ($user_picture != ''){
+			        $picture_url = base_url().'assets/users/profile/'.$user_picture;
+			    }else {
+			         $picture_url = '';
+			    }
+
+                $country_sql = "SELECT * FROM country_master WHERE id ='".$country_id."'";
+        		$country_result = $this->db->query($country_sql);
+        		if($country_result->num_rows()>0)
+        		{
+        			foreach ($country_result->result() as $rows)
+        			{
+        				  $country_name = $rows->country_name;
+        			}
+        		} else {
+        		          $country_name ='';
+        		}
+             
+                $state_sql = "SELECT * FROM state_master WHERE id ='".$state_id."'";
+        		$state_result = $this->db->query($state_sql);
+        		if($state_result->num_rows()>0)
+        		{
+        			foreach ($state_result->result() as $rows)
+        			{
+        				  $state_name = $rows->state_name;
+        			}
+        		} else {
+        		          $state_name ='';
+        		}
+        		
+        		$city_sql = "SELECT * FROM city_master WHERE id ='".$city_id."'";
+        		$city_result = $this->db->query($city_sql);
+        		if($city_result->num_rows()>0)
+        		{
+        			foreach ($city_result->result() as $rows)
+        			{
+        				  $city_name = $rows->city_name;
+        			}
+        		} else {
+        		          $city_name ='';
+        		}
+                		
 				$userData  = array(
 							"user_id" => $ress[0]->userid,
 							"user_name" => $ress[0]->user_name,
@@ -233,18 +284,21 @@ class Apimainmodel extends CI_Model {
 							"address_line_2" => $ress[0]->address_line2,
 							"address_line_3" => $ress[0]->address_line3,
 							"country_id" => $ress[0]->country_id,
+							"country_name" => $country_name,
 							"state_id" => $ress[0]->state_id,
+							"state_name" => $state_name,
 							"city_id" => $ress[0]->city_id,
+							"city_name" => $city_name,
 							"zip" => $ress[0]->zip,
-							"user_picture" => $ress[0]->user_picture,
-							"newsletter_status" => $ress[0]->newsletter_status,				
+							"picture_url" => $picture_url,
+							"newsletter_status" => $ress[0]->newsletter_status,
 							"email_verify_status" => $ress[0]->email_verify,
 							"user_role" => $ress[0]->user_role,
 							"user_role_name" => $ress[0]->user_role_name,
 							"referal_code" => $ress[0]->referal_code	
 				);
 			}
-	*/
+			
 			$update_sql = "UPDATE user_master SET last_login=NOW(),login_count='$login_count' WHERE id='$user_id'";
 			$update_result = $this->db->query($update_sql);
 			
@@ -261,8 +315,7 @@ class Apimainmodel extends CI_Model {
 						$update_gcm = $this->db->query($sQuery);
 					}
 			
-					//$response = array("status" => "Success", "msg" => "Login Successfully", "userData" => $userData);
-					$response = array("status" => "Success", "msg" => "Login Successfully");
+					$response = array("status" => "Success", "msg" => "Login Successfully", "userData" => $userData);
 					return $response;
 		} else {
 			
@@ -344,6 +397,56 @@ class Apimainmodel extends CI_Model {
 			
 			if($user_result->num_rows()>0)
 			{
+			    foreach ($user_result->result() as $rows)
+    			{
+    				  $user_picture = $rows->user_picture;
+    				  $country_id = $rows->country_id;
+    				  $state_id = $rows->state_id;
+    				  $city_id = $rows->city_id;
+    			}
+			  
+			    if ($user_picture != ''){
+			        $picture_url = base_url().'assets/users/profile/'.$user_picture;
+			    }else {
+			         $picture_url = '';
+			    }
+
+                $country_sql = "SELECT * FROM country_master WHERE id ='".$country_id."'";
+        		$country_result = $this->db->query($country_sql);
+        		if($country_result->num_rows()>0)
+        		{
+        			foreach ($country_result->result() as $rows)
+        			{
+        				  $country_name = $rows->country_name;
+        			}
+        		} else {
+        		          $country_name ='';
+        		}
+             
+                $state_sql = "SELECT * FROM state_master WHERE id ='".$state_id."'";
+        		$state_result = $this->db->query($state_sql);
+        		if($state_result->num_rows()>0)
+        		{
+        			foreach ($state_result->result() as $rows)
+        			{
+        				  $state_name = $rows->state_name;
+        			}
+        		} else {
+        		          $state_name ='';
+        		}
+        		
+        		$city_sql = "SELECT * FROM city_master WHERE id ='".$city_id."'";
+        		$city_result = $this->db->query($city_sql);
+        		if($city_result->num_rows()>0)
+        		{
+        			foreach ($city_result->result() as $rows)
+        			{
+        				  $city_name = $rows->city_name;
+        			}
+        		} else {
+        		          $city_name ='';
+        		}
+        		
 				$userData  = array(
 							"user_id" => $ress[0]->userid,
 							"user_name" => $ress[0]->user_name,
@@ -357,15 +460,18 @@ class Apimainmodel extends CI_Model {
 							"address_line_2" => $ress[0]->address_line2,
 							"address_line_3" => $ress[0]->address_line3,
 							"country_id" => $ress[0]->country_id,
+							"country_name" => $country_name,
 							"state_id" => $ress[0]->state_id,
+							"state_name" => $state_name,
 							"city_id" => $ress[0]->city_id,
+							"city_name" => $city_name,
 							"zip" => $ress[0]->zip,
-							"user_picture" => $ress[0]->user_picture,
-							"newsletter_status" => $ress[0]->newsletter_status,				
+							"picture_url" => $picture_url,
+							"newsletter_status" => $ress[0]->newsletter_status,
 							"email_verify_status" => $ress[0]->email_verify,
 							"user_role" => $ress[0]->user_role,
 							"user_role_name" => $ress[0]->user_role_name,
-							"referal_code" => $ress[0]->referal_code	
+							"referal_code" => $ress[0]->referal_code
 				);
 			}
 					$response = array("status" => "Success", "msg" => "Login Successfully", "userData" => $userData);
@@ -452,6 +558,9 @@ class Apimainmodel extends CI_Model {
 			$insert_user = $this->db->query($sQuery);
 			$user_id = $this->db->insert_id(); 
 
+			$suserQuery = "INSERT INTO user_details (user_id,newsletter_status,referal_code) VALUES ('". $user_id . "','N','HEYLA123')";
+			$insert_user_details = $this->db->query($suserQuery);
+				
             $activity_sql = "INSERT INTO user_activity (date,user_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $login_type . "')";
 			$insert_activity = $this->db->query($activity_sql);
     			
@@ -504,7 +613,7 @@ class Apimainmodel extends CI_Model {
 			$update_sql = "UPDATE user_master SET mobile_verify = 'Y' WHERE id='$user_id'";
 			$update_result = $this->db->query($update_sql);
 						
-			$response = array("status" => "Success", "msg" => "Verification Successfully");
+			$response = array("status" => "Success", "msg" => "Verification Successfully","user_id"=>$user_id);
 		} else {
 		    $response = array("status" => "Error", "msg" => "Verification Code or Mobile Number Error");
 		}
@@ -546,65 +655,166 @@ class Apimainmodel extends CI_Model {
 //#################### Resend OTP End ####################//
 
 
-//#################### Resend OTP ####################//
+//#################### Update Mobile ####################//
 	public function Update_mobile($old_mobile_no,$new_mobile_no)
 	{
 	    $user_id = "";
 
-	    $sql = "SELECT * FROM user_master WHERE mobile_no = '".$old_mobile_no."'";
-		$user_result = $this->db->query($sql);
-		$ress = $user_result->result();
+        $mobile_sql = "SELECT * FROM user_master WHERE mobile_no = '".$new_mobile_no."'";
+		$mobile_result = $this->db->query($mobile_sql);
 		
-		if($user_result->num_rows() != 0)
+		if($mobile_result->num_rows() == 0)
 		{
-            foreach ($user_result->result() as $rows)
-			{
-				  $user_id = $rows->id;
-			}
-			
-			$digits = 4;
-			$OTP = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT);
-			
-			$update_sql = "UPDATE user_master SET mobile_no = '$new_mobile_no',mobile_otp='$OTP',mobile_verify='N' WHERE id='$user_id'";
-			$update_result = $this->db->query($update_sql);
-			
-		
-			$mobile_message = 'Verify OTP :'. $OTP;
-            $this->sendSMS($new_mobile_no,$mobile_message);
-            
-			$response = array("status" => "Success", "msg" => "Mobile Updated Successfully");
+    	    $sql = "SELECT * FROM user_master WHERE mobile_no = '".$old_mobile_no."'";
+    		$user_result = $this->db->query($sql);
+    		$ress = $user_result->result();
+    		
+    		if($user_result->num_rows() != 0)
+    		{
+                foreach ($user_result->result() as $rows)
+    			{
+    				  $user_id = $rows->id;
+    			}
+    			
+    			$digits = 4;
+    			$OTP = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT);
+    			
+    			$update_sql = "UPDATE user_master SET mobile_no = '$new_mobile_no',mobile_otp='$OTP',mobile_verify='N' WHERE id='$user_id'";
+    			$update_result = $this->db->query($update_sql);
+    			
+    		
+    			$mobile_message = 'Verify OTP :'. $OTP;
+                $this->sendSMS($new_mobile_no,$mobile_message);
+                
+    			$response = array("status" => "Success", "msg" => "Mobile Updated Successfully");
+    		} else {
+    		    $response = array("status" => "Error", "msg" => "Old Mobile Number Error");
+    		}
 		} else {
-		    $response = array("status" => "Error", "msg" => "Old Mobile Number Error");
+		    $response = array("status" => "Error", "msg" => "Mobile Number Already Exist");
 		}
 	    return $response;
 	}
 	
 	
-//#################### Mobile Verification End ####################//
+//#################### Update Mobile End ####################//
+
+//#################### Update Email ####################//
+	public function Update_email($old_email_id ,$new_email_id )
+	{
+	    $user_id = "";
+		$encrypt_email = base64_encode($new_email_id);
+
+        $mobile_sql = "SELECT * FROM user_master WHERE email_id  = '".$new_email_id."'";
+		$mobile_result = $this->db->query($mobile_sql);
+		
+		if($mobile_result->num_rows() == 0)
+		{
+    	    $sql = "SELECT * FROM user_master WHERE email_id = '".$old_email_id."'";
+    		$user_result = $this->db->query($sql);
+    		$ress = $user_result->result();
+    		
+    		if($user_result->num_rows() != 0)
+    		{
+                foreach ($user_result->result() as $rows)
+    			{
+    				  $user_id = $rows->id;
+    			}
+
+    			$update_sql = "UPDATE user_master SET email_id = '$new_email_id',email_verify ='N' WHERE id='$user_id'";
+    			$update_result = $this->db->query($update_sql);
+    			
+				 $subject = "Heyla App - Email Verification";
+            	$email_message = 'Thanking for Registering with Heyla App <br>To allow us to confirm the validity of your email address, <a href="'. base_url().'home/emailverfiy/'.$encrypt_email.'" target="_blank" style="background-color: #478ECC; font-size:15px; font-weight: bold; padding: 10px; text-decoration: none; color: #fff; border-radius: 5px;">Click this verification link.</a><br><br><br>';
+
+	            $this->sendMail($email_id,$subject,$email_message);
+
+                
+    			$response = array("status" => "Success", "msg" => "Email Updated Successfully");
+    		} else {
+    		    $response = array("status" => "Error", "msg" => "Old Email id Error");
+    		}
+		} else {
+		    $response = array("status" => "Error", "msg" => "Email id Already Exist");
+		}
+	    return $response;
+	}
+	
+	
+//#################### Update Email End ####################//
+
+
+
+//#################### Update Username ####################//
+	public function Update_username($old_user_name,$new_user_name  )
+	{
+	    $user_id = "";
+
+        $mobile_sql = "SELECT * FROM user_master WHERE user_name   = '".$new_user_name."'";
+		$mobile_result = $this->db->query($mobile_sql);
+		
+		if($mobile_result->num_rows() == 0)
+		{
+    	    $sql = "SELECT * FROM user_master WHERE user_name = '".$old_user_name."'";
+    		$user_result = $this->db->query($sql);
+    		$ress = $user_result->result();
+    		
+    		if($user_result->num_rows() != 0)
+    		{
+                foreach ($user_result->result() as $rows)
+    			{
+    				  $user_id = $rows->id;
+    			}
+
+    			$update_sql = "UPDATE user_master SET user_name = '$new_user_name' WHERE id='$user_id'";
+    			$update_result = $this->db->query($update_sql);
+    			
+    			$response = array("status" => "Success", "msg" => "Username Updated Successfully");
+    		} else {
+    		    $response = array("status" => "Error", "msg" => "Old Username Error");
+    		}
+		} else {
+		    $response = array("status" => "Error", "msg" => "Username Already Exist");
+		}
+	    return $response;
+	}
+	
+	
+//#################### Update Username End ####################//
+
 
 //#################### Profile Pic Update ####################//
-	public function updateProfilepic($user_id,$userFileName)
+	public function Update_profilepic($user_id,$userFileName)
 	{
             $update_sql= "UPDATE user_details SET user_picture='$userFileName' WHERE user_id='$user_id'";
 			$update_result = $this->db->query($update_sql);
+			$picture_url = base_url().'assets/users/profile/'.$userFileName;
 			
-			$response = array("status" => "success", "msg" => "Profile Picture Updated");
+			$response = array("status" => "success", "msg" => "Profile Picture Updated","picture_url" =>$picture_url);
 			return $response;
 	}
 //#################### Profile Pic Update End ####################//
 
 
 //#################### Profile Update ####################//
-	public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$gender,$occupation,$address_line_1,$address_line_2,$address_line_3,$country_id,$state_id,$city_id,$zip_code,$news_letter)
+public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$gender,$occupation,$address_line_1,$address_line_2,$address_line_3,$country_id,$state_id,$city_id,$zip_code,$news_letter)
 	{
-	    
-	        $update_query= "UPDATE user_master SET `user_name` ='$user_name' WHERE id='$user_id'";
-			$update_query_result = $this->db->query($update_query);
-			
-            $update_sql= "UPDATE user_details SET `name` ='$full_name', `birthdate` ='$date_of_birth', `gender` ='$gender', `occupation` ='$occupation', `address_line1` ='$address_line_1', `address_line2` ='$address_line_2', `address_line3` ='$address_line_3', `country_id` ='$country_id', `state_id` ='$state_id', `city_id` ='$city_id', `zip` ='$zip_code', `newsletter_status` ='$news_letter' WHERE user_id='$user_id'";
-			$update_result = $this->db->query($update_sql);
-			
-			$response = array("status" => "success", "msg" => "Profile Updated");
+ 			$sql = "SELECT * FROM user_master WHERE user_name = '".$user_name."'";
+    		$user_result = $this->db->query($sql);
+    		$ress = $user_result->result();
+    		
+    		if($user_result->num_rows() == 0)
+    		{
+				$update_query= "UPDATE user_master SET `user_name` ='$user_name' WHERE id='$user_id'";
+				$update_query_result = $this->db->query($update_query);
+				
+				$update_sql= "UPDATE user_details SET `name` ='$full_name', `birthdate` ='$date_of_birth', `gender` ='$gender', `occupation` ='$occupation', `address_line1` ='$address_line_1', `address_line2` ='$address_line_2', `address_line3` ='$address_line_3', `country_id` ='$country_id', `state_id` ='$state_id', `city_id` ='$city_id', `zip` ='$zip_code', `newsletter_status` ='$news_letter' WHERE user_id='$user_id'";
+				$update_result = $this->db->query($update_sql);
+				
+				$response = array("status" => "success", "msg" => "Profile Updated");
+			} else {
+				$response = array("status" => "error", "msg" => "Username Already Exist");
+			}
 			return $response;
 	}
 //#################### Profile Update End ####################//
@@ -635,7 +845,7 @@ class Apimainmodel extends CI_Model {
         		$email_message = 'Please Click the Forgot Password link. <a href="'. base_url().'home/reset/'.$encrypt_email.'" target="_blank" style="background-color: #478ECC; font-size:15px; font-weight: bold; padding: 10px; text-decoration: none; color: #fff; border-radius: 5px;">Forgot Password</a><br><br><br>';
                 //$email_message = "<a href='#'> Email Verfication URL </a>";
                 $this->sendMail($email_id,$subject,$email_message);
-
+                $sType = "Email";
     		} 
 
     		$sql = "SELECT * FROM user_master WHERE mobile_no ='".$user_name."' AND mobile_verify ='Y' AND status='Y'";
@@ -654,10 +864,11 @@ class Apimainmodel extends CI_Model {
 			    
         		$mobile_message = 'Verify OTP :'. $OTP;
                 $this->sendSMS($mobile_no,$mobile_message);
+                $sType = "Mobile";
     		} 
 
 	        if ( $user_id != "") {
-                $response = array("status" => "success", "msg" => "Forgot Password");
+                $response = array("status" => "success", "msg" => "Forgot Password", "type"=>$sType);
 			} else {
 				$response = array("status" => "error", "msg" => "User Not Found");
 			}
@@ -744,7 +955,7 @@ class Apimainmodel extends CI_Model {
 //#################### Select City ####################//
 	public function Select_city($country_id,$state_id)
 	{
-	        $city_query = "SELECT id,city_name,city_latitude,city_longitude from city_master WHERE country_id ='$country_id' AND state_id = '$state_id'";
+	        $city_query = "SELECT id,city_name from city_master WHERE country_id ='$country_id' AND state_id = '$state_id'";
 			$city_res = $this->db->query($city_query);
 
 			 if($city_res->num_rows()>0){
