@@ -146,7 +146,7 @@
                                             <?php echo $rows->email_id; ?> <?php if($rows->email_verify=='N'){ ?> <span style="color:red;" title="Verify Your Email"><i class="fa fa-times" aria-hidden="true"></i></span><br>
 
 
-                                          <?php  } ?>
+                                          <?php  } ?><br>
                                         <a href="<?php echo  base_url(); ?>changemail">Change the Email</a>
                                         </div>
                                     </div>
@@ -182,17 +182,12 @@
                                             <input type="text" class="form-control" id="name" name="name" value="<?php echo $rows->name; ?>">
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <label for="" class="col-sm-2 col-form-label">Email</label>
-                                        <div class="col-sm-5">
-                                            <input type="email" class="form-control" id="email" name="email" value="<?php echo $rows->email_id; ?>" onkeyup="check_email()">
-                                        </div>
-                                    </div>
+
 
                                     <div class="form-group row">
                                         <label for="staticEmail" class="col-sm-2 col-form-label">Address</label>
                                         <div class="col-sm-5">
-                                            <input type="text" class="form-control" id="address" name="address" value="<?php echo $rows->address_line1; ?>">
+                                            <textarea type="text" class="form-control" id="address" name="address"><?php echo $rows->address_line1; ?></textarea>
                                         </div>
                                     </div>
 
