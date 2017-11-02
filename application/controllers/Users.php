@@ -62,8 +62,8 @@ class Users extends CI_Controller
 	        $pwd=$this->db->escape_str($this->input->post('pwd'));
             //echo $name;exit;
 	        $sdate=$this->input->post('dob');
-			$dateTime = new DateTime($sdate);
-			$dob=date_format($dateTime,'Y-m-d');
+					$dateTime = new DateTime($sdate);
+					$dob=date_format($dateTime,'Y-m-d');
 
 	        $gender=$this->input->post('gender');
 

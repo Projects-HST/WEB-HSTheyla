@@ -59,6 +59,7 @@ $route['profile'] = 'home/profile';
 $route['verify'] = 'home/verify';
 $route['reset'] = 'home/resetpassword';
 $route['mobilenumber'] = 'home/mobilenumberchange';
+$route['changemail'] = 'home/changeemail';
 $route['dashboard'] = 'home/organiser';
 $route['home'] = 'home/index';
 $route['privacy'] = 'home/privacy';

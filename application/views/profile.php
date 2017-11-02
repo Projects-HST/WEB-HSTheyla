@@ -143,7 +143,11 @@
                                     <div class="form-group row">
                                         <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
                                         <div class="col-sm-5">
-                                            <?php echo $rows->email_id; ?>
+                                            <?php echo $rows->email_id; ?> <?php if($rows->email_verify=='N'){ ?> <span style="color:red;" title="Verify Your Email"><i class="fa fa-times" aria-hidden="true"></i></span><br>
+
+
+                                          <?php  } ?>
+                                        <a href="<?php echo  base_url(); ?>changemail">Change the Email</a>
                                         </div>
                                     </div>
 
