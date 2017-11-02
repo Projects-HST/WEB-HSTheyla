@@ -199,40 +199,45 @@ Class Loginmodel extends CI_Model
      }
    }
    function save_email_id($email,$user_id){
-        $update="UPDATE user_master SET email_id='$email',email_verify='N' WHERE id='$user_id'";
-        $res=$this->db->query($update);
-        $encrypt_email= base64_encode($email);
-
-
-       $to=$email;
-       $subject="Changing of Email";
-       $htmlContent = '
-       <html>
-       <head>
-       <title></title>
-          </head>
-          <body style="background-color:#E4F1F7;"><div style="background-image: url('.base_url().'assets/front/images/email_1.png);height:700px;margin: auto;width: 100%;background-repeat: no-repeat;">
-             <div  style="padding:50px;width:400px;"><p>Dear '.$email.'</p>
-            <p style="font-size:20px;">Welcome to
-             <center><img src="'.base_url().'assets/front/images/heyla_b.png" style="width:120px;"></center>
-            </p>
-            <p style="margin-left:50px;"> <br>
-            To allow us to confirm the validity of your email address,click this verification link. <center>   <a href="'. base_url().'home/emailverfiy/'.$encrypt_email.'" target="_blank"style="background-color: #478ECC;    padding: 12px;    text-decoration: none;    color: #fff;    border-radius: 20px;">Verfiy  Here</a></center>  </p>
-            <p style="font-size:20px;">Thank you and enjoy, <br>
-              The Heyla Team
-              </p>
-            </body>
-         </html>';
-     $headers = "MIME-Version: 1.0" . "\r\n";
-     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-     // Additional headers
-     $headers .= 'From: heylapp<info@heylapp.com>' . "\r\n";
-     $sent= mail($to,$subject,$htmlContent,$headers);
-     if($res){
-       echo "success";
+     $check_email="SELECT * FROM user_master WHERE email_id='$email'";
+     $res=$this->db->query($check_email);
+     if($res->num_rows()==0){
+       $update="UPDATE user_master SET email_id='$email',email_verify='N' WHERE id='$user_id'";
+       $res=$this->db->query($update);
+       $encrypt_email= base64_encode($email);
+      $to=$email;
+      $subject="Changing of Email";
+      $htmlContent = '
+      <html>
+      <head>
+      <title></title>
+         </head>
+         <body style="background-color:#E4F1F7;"><div style="background-image: url('.base_url().'assets/front/images/email_1.png);height:700px;margin: auto;width: 100%;background-repeat: no-repeat;">
+            <div  style="padding:50px;width:400px;"><p>Dear '.$email.'</p>
+           <p style="font-size:20px;">Welcome to
+            <center><img src="'.base_url().'assets/front/images/heyla_b.png" style="width:120px;"></center>
+           </p>
+           <p style="margin-left:50px;"> <br>
+           To allow us to confirm the validity of your email address,click this verification link. <center>   <a href="'. base_url().'home/emailverfiy/'.$encrypt_email.'" target="_blank"style="background-color: #478ECC;    padding: 12px;    text-decoration: none;    color: #fff;    border-radius: 20px;">Verfiy  Here</a></center>  </p>
+           <p style="font-size:20px;">Thank you and enjoy, <br>
+             The Heyla Team
+             </p>
+           </body>
+        </html>';
+    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+    // Additional headers
+    $headers .= 'From: heylapp<info@heylapp.com>' . "\r\n";
+    $sent= mail($to,$subject,$htmlContent,$headers);
+    if($res){
+      echo "success";
+    }else{
+      echo "failed";
+    }
      }else{
-       echo "failed";
+       echo "Email Already Exist";
      }
+
    }
    function email_verify($email){
      $decrpty_email=base64_decode($email);

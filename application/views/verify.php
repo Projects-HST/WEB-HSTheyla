@@ -84,17 +84,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url(); ?>home#contact">Contact</a>
                     </li>
-                    <?php
-                       $user_id=$this->session->userdata('user_role');
-                       if(empty($user_id)){ ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal">Login / Sign in</a>
-                        </li>
-                        <?php }else{ ?>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url(); ?>logout">Logout</a>
-                            </li>
-                            <?php } ?>
+                  
                 </ul>
             </div>
         </div>

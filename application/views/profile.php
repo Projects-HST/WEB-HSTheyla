@@ -117,7 +117,7 @@
                               <?php if(empty($rows->user_picture)){ ?>
                                   <img src="<?php echo base_url(); ?>assets/images/profile/noimage.png" class="img-circle  profile-pic">
                             <?php  }else{ ?>
-                                <img src="<?php echo base_url(); ?>assets/images/profile/<?php echo $rows->user_picture; ?>" class="img-circle  profile-pic">
+                                <img src="<?php echo base_url(); ?>assets/users/profile/<?php echo $rows->user_picture; ?>" class="img-circle  profile-pic">
                             <?php  } ?>
 
                                 <form id="image_upload_form" action="<?php echo base_url(); ?>home/change_pic" method="post" enctype="multipart/form-data" action='image_upload.php' autocomplete="off">

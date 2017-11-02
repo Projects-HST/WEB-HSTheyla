@@ -237,7 +237,6 @@ class Home extends CI_Controller {
 
 		public function emailverfiy(){
   	  $email = $this->uri->segment(3);
-  	
 			$data['res']=$this->loginmodel->email_verify($email);
 			if($data['res']['msg']=='verify'){
 					$this->load->view('email_verification',$data);
@@ -323,7 +322,7 @@ class Home extends CI_Controller {
 			 $user_role=$this->session->userdata('user_role');
 			$profilepic = $_FILES['profilepic']['name'];
 			$userFileName =time().$profilepic;
-			$uploaddir = 'assets/images/profile/';
+			$uploaddir = 'assets/users/profile/';
 			$profilepic = $uploaddir.$userFileName;
 			move_uploaded_file($_FILES['profilepic']['tmp_name'], $profilepic);
 			$data['res']=$this->loginmodel->changeprofileimage($user_id,$userFileName);
