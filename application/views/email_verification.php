@@ -5,9 +5,9 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  
     <meta name="theme-color" content="#478ECC" />
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
     <title>HEYLA</title>
 
@@ -67,7 +67,7 @@
                        $user_id=$this->session->userdata('user_role');
                        if(empty($user_id)){ ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url(); ?>" data-toggle="modal" data-target="#myModal">Login / Sign in</a>
+                            <a class="nav-link" href="<?php echo base_url(); ?>">Login / Sign in</a>
                         </li>
                         <?php }else{ ?>
                             <li class="nav-item">
@@ -104,7 +104,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <p class="fnt-footer">Powerded By Happysanz Tech</p>
+                    <p class="fnt-footer">Powered By Happysanz Tech</p>
                 </div>
                 <div class="col-md-6">
                     <ul class="list-inline fnt-footer ">

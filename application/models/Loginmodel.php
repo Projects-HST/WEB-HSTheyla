@@ -124,10 +124,10 @@ Class Loginmodel extends CI_Model
    function check_email($email){
      $check_email="SELECT * FROM user_master WHERE email_id='$email'";
      $res=$this->db->query($check_email);
-     if($res->num_rows()>=1){
-       echo "already";
-     }else{
+     if($res->num_rows()>0){
        echo "success";
+     }else{
+       echo "already";
      }
    }
    function check_mobile($mobile){
@@ -141,12 +141,12 @@ Class Loginmodel extends CI_Model
    }
 
    function exist_email($email){
-     $check_email="SELECT * FROM user_master WHERE email_id='$email'";
+      $check_email="SELECT * FROM user_master WHERE email_id='$email'";
      $res=$this->db->query($check_email);
      if($res->num_rows()==0){
        echo "success";
      }else{
-       echo "already";
+       echo "Already Exist";
      }
    }
    function exist_mobile($mobile){
@@ -198,8 +198,44 @@ Class Loginmodel extends CI_Model
        echo "failed";
      }
    }
+   function save_email_id($email,$user_id){
+        $update="UPDATE user_master SET email_id='$email',email_verify='N' WHERE id='$user_id'";
+        $res=$this->db->query($update);
+        $encrypt_email= base64_encode($email);
+
+
+       $to=$email;
+       $subject="Changing of Email";
+       $htmlContent = '
+       <html>
+       <head>
+       <title></title>
+          </head>
+          <body style="background-color:#E4F1F7;"><div style="background-image: url('.base_url().'assets/front/images/email_1.png);height:700px;margin: auto;width: 100%;background-repeat: no-repeat;">
+             <div  style="padding:50px;width:400px;"><p>Dear '.$email.'</p>
+            <p style="font-size:20px;">Welcome to
+             <center><img src="'.base_url().'assets/front/images/heyla_b.png" style="width:120px;"></center>
+            </p>
+            <p style="margin-left:50px;"> <br>
+            To allow us to confirm the validity of your email address,click this verification link. <center>   <a href="'. base_url().'home/emailverfiy/'.$encrypt_email.'" target="_blank"style="background-color: #478ECC;    padding: 12px;    text-decoration: none;    color: #fff;    border-radius: 20px;">Verfiy  Here</a></center>  </p>
+            <p style="font-size:20px;">Thank you and enjoy, <br>
+              The Heyla Team
+              </p>
+            </body>
+         </html>';
+     $headers = "MIME-Version: 1.0" . "\r\n";
+     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+     // Additional headers
+     $headers .= 'From: heylapp<info@heylapp.com>' . "\r\n";
+     $sent= mail($to,$subject,$htmlContent,$headers);
+     if($res){
+       echo "success";
+     }else{
+       echo "failed";
+     }
+   }
    function email_verify($email){
-     $decrpty_email = base64_decode($email);
+     $decrpty_email=base64_decode($email);
      $check_username="SELECT * FROM user_master WHERE email_id='$decrpty_email'";
      $res=$this->db->query($check_username);
      if($res->num_rows()==1){
@@ -258,7 +294,7 @@ Class Loginmodel extends CI_Model
                <p style="font-size:20px;">Welcome to
                 <center><img src="'.base_url().'assets/front/images/heyla_b.png" style="width:120px;"></center>
                </p>
-               <p style="margin-left:50px;">Thanking for Registering with Heyla App <br>
+               <p style="margin-left:50px;"> <br>
                To allow us to confirm the validity of your email address,click this verification link. <center>   <a href="'. base_url().'home/emailverfiy/'.$encrypt_email.'" target="_blank"style="background-color: #478ECC;    padding: 12px;    text-decoration: none;    color: #fff;    border-radius: 20px;">Verfiy  Here</a></center>  </p>
                <p style="font-size:20px;">Thank you and enjoy, <br>
                  The Heyla Team
@@ -280,24 +316,19 @@ Class Loginmodel extends CI_Model
 
    }
 
-   function save_profile_info($user_id,$name,$email,$address){
-      $update="UPDATE user_master SET email_id='$email' WHERE id='$user_id'";
-     $res=$this->db->query($update);
-     $update_user_master="UPDATE user_details SET name='$name',address_line1='$address' WHERE user_id='$user_id'";
-     $result=$this->db->query($update_user_master);
-     if($result){
-          echo "success";
-     }else{
-          echo "already";
-     }
+   function save_profile_info($user_id,$name,$address){
+				 $update_user_master="UPDATE user_details SET name='$name',address_line1='$address' WHERE user_id='$user_id'";
+				 $result=$this->db->query($update_user_master);
+				 if($result){
+					  echo "success";
+				 }else{
+					  echo "failed";
+				 }
    }
 
-   function sendOTPmobilechange($user_id){
-     $get_info="SELECT * FROM user_master WHERE id='$user_id'";
-     $res=$this->db->query($get_info);
-     $result=$res->result();
-     foreach($result as $rows){}
-       $mob=$rows->mobile_no;
+   function sendOTPmobilechange($mobile,$user_id){
+      $mob=$mobile;
+
        $digits = 4;
       $OTP = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT);
       $update_user_otp="UPDATE user_master SET mobile_otp='$OTP' WHERE id='$user_id'";
@@ -308,6 +339,10 @@ Class Loginmodel extends CI_Model
 
    }
 
+   function emptyOTP($user_id){
+      $empty_otp="UPDATE  user_master SET mobile_otp=' ' WHERE id='$user_id'";
+      $res=$this->db->query($empty_otp);
+   }
 
    function reset_password($email){
       $check_email="SELECT * FROM user_master WHERE email_id='$email'";
@@ -412,6 +447,38 @@ Class Loginmodel extends CI_Model
         return $data;
       }
 
+    }
+
+
+    function mail_contact_form($name,$email,$subject,$msg){
+      $query="INSERT INTO contact_form (name,email,subject,message,created_at,updated_by) VALUES('$name','$email','$subject','$msg',NOW(),NOW())";
+      $resultset=$this->db->query($query);
+      $to="hello@heylaapp.com,kamal.happysanz@gmail.com";
+      $subject="Contact Form Enquiry";
+      $htmlContent = '
+       <html>
+       <head>
+       <title>Contact Form</title>
+          </head>
+          <body>
+            <div class="mail-content">
+              <p>Name - '.$name.'</p>
+              <p>Email - '.$email.'</p>
+              <p>Subject - '.$subject.'</p>
+              <p>Message - '.$msg.'</p>
+            </div>
+          </body>
+       </html>';
+   $headers = "MIME-Version: 1.0" . "\r\n";
+   $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+   // Additional headers
+   $headers .= 'From: heylapp<info@heylapp.com>' . "\r\n";
+   $sent= mail($to,$subject,$htmlContent,$headers);
+   if($sent){
+     echo "success";
+   }else{
+      echo "failed";
+   }
     }
 
 

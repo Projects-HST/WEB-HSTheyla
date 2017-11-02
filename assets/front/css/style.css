@@ -61,10 +61,12 @@
 .nav1{
   margin-top: 210px;
   text-align: center;
+  color: #629ed5;
+
 }
 .mobileslider{
   padding-top: 80px;
-  padding-bottom: 200px;
+  padding-bottom: 80px;
   background-color: #e8e8e8;
 }
 .active{
@@ -212,6 +214,7 @@
 .submitbtn{
   background-color: #478ECC;
   color:#fff;
+  padding-left: 0px;
 }
 .normal-txt{
   font-size: 18px;
@@ -317,4 +320,16 @@
   border-bottom: 1px solid #dededd;
   padding-bottom: 14px;
 
+}
+.fixed-top{
+      background-color: #478ecc;
+}
+@media (max-width: 982px) {
+.fixed-top{
+  position: absolute;
+}
+}
+.privacy{
+  margin-top: 20px;
+  margin-bottom: 20px;
 }

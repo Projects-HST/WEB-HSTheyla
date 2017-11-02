@@ -46,7 +46,7 @@
             <div class="col-12">
                 <div class="card m-b-20">
                     <div class="card-block">
-                     
+
                  <h4 class="mt-0 header-title"></h4>
 
                   <?php if($this->session->flashdata('msg')): ?>
@@ -68,12 +68,12 @@
                                 <p id="msg2" style="color:red;"> </p>
                             </div>
                       </div>
-                           <div class="form-group row"> 
+                           <div class="form-group row">
                             <label for="Category" class="col-sm-2 col-form-label">Name</label>
                             <div class="col-sm-4">
                           <input class="form-control" type="text" name="name" value="<?php echo $res->name; ?>">
                           <input class="form-control" type="hidden" name="uid" value="<?php echo $res->id; ?>">
-                           
+
                             </div>
 
                             <label for="Name" class="col-sm-2 col-form-label">Mobile Number</label>
@@ -86,7 +86,7 @@
                        <div class="form-group row">
                           <label for="Name" class="col-sm-2 col-form-label">Email Id</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" name="email" value="<?php echo $res->email_id;?>" onkeyup="checkemailfun(this.value)" >
+                                <input class="form-control" type="text" id="email" name="email" value="<?php echo $res->email_id;?>" onchange="checkemailfun()" >
                                   <p id="msg" style="color:red;"> </p>
                             </div>
                               <label for="Name" class="col-sm-2 col-form-label">New Password</label>
@@ -96,7 +96,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                           
+
                             <label for="Venue" class="col-sm-2 col-form-label">DOB</label>
                             <div class="col-sm-4">
                               <div class="input-group">
@@ -117,7 +117,7 @@
 
                         </div>
                         <div class="form-group row">
-                           
+
                             <label for="Description" class="col-sm-2 col-form-label">Occupation</label>
                             <div class="col-sm-4">
                                <input class="form-control" type="text" name="occupation" value="<?php echo $res->occupation;?>">
@@ -129,7 +129,7 @@
                             </div>
                         </div>
                        <div class="form-group row">
-                           
+
                             <label for="ecost" class="col-sm-2 col-form-label">Address2</label>
                             <div class="col-sm-4">
                                  <textarea id="textarea" name="address2"  class="form-control" maxlength="100" rows="3"><?php echo $res->address_line2;?></textarea>
@@ -138,11 +138,11 @@
                             <div class="col-sm-4">
                                  <textarea id="textarea" name="address3"  class="form-control" maxlength="100" rows="3"><?php echo $res->address_line3;?></textarea>
                             </div>
-                            
+
                         </div>
-                        
+
                         <div class="form-group row">
-                           
+
                              <label for="country" class="col-sm-2 col-form-label">Select Country</label>
                             <div class="col-sm-4">
                               <select class="form-control" name="country" onchange="getstatename(this.value)">
@@ -153,13 +153,13 @@
                                 </select>
                                  <script type="text/javascript">document.usersform.country.value="<?php echo $res->country_id; ?>";</script>
                             </div>
-                        
+
                         <label for="city" class="col-sm-2 col-form-label">Select State Name</label>
                             <div class="col-sm-4">
                                <select class="form-control" name="statename" id="staname" onchange="getcityname(this.value)">
                                 <?php $coid=$res->country_id;
                                  $sql="SELECT id,state_name,event_status FROM state_master WHERE event_status='Y' AND country_id='$coid' ORDER BY id ASC";
-                                   $resu=$this->db->query($sql); 
+                                   $resu=$this->db->query($sql);
                                    $res1=$resu->result();
                                    foreach($res1 AS $res2){?>
                                  <option value="<?php echo $res2->id;?>"><?php echo $res2->state_name;?></option>
@@ -173,18 +173,18 @@
                        </div>
 
                         <div class="form-group row">
-                            
+
                            <label for="city" class="col-sm-2 col-form-label">Select City</label>
                             <div class="col-sm-4">
                                <select class="form-control" name="city" id="ctname">
                                 <?php $stid=$res->state_id;
                                  $sql="SELECT id,city_name FROM city_master WHERE event_status='Y' AND state_id='$stid' ORDER BY id ASC";
-                                   $resu=$this->db->query($sql); 
+                                   $resu=$this->db->query($sql);
                                    $res1=$resu->result();
                                    foreach($res1 AS $res2){?>
                                  <option value="<?php echo $res2->id;?>"><?php echo $res2->city_name;?></option>
                                  <?php } ?>
-                                
+
                                 </select>
                                  <script type="text/javascript">document.usersform.city.value="<?php echo $res->city_id; ?>";</script>
                                 <div id="cmsg"></div>
@@ -203,7 +203,7 @@
                               <div class="col-sm-4">
                                  <input type="file" name="user_picture" class="form-control" accept="image/*" >
                                  <input type="hidden" name="old_picture" class="form-control" value="<?php echo $res->user_picture; ?>" >
-                              </div> 
+                              </div>
 
                               <label for="Status" class="col-sm-2 col-form-label">User Role</label>
                             <div class="col-sm-4">
@@ -252,10 +252,7 @@
                             <div class="col-sm-2">
                               <button type="submit" id="save" class="btn btn-primary waves-effect waves-light">
                               Submit </button></div>
-                              <div class="col-sm-2">
-                              <button type="reset" id="save1" class="btn btn-secondary waves-effect m-l-5">
-                              Reset
-                              </button></div>
+
                         </div>
                      </form>
                     </div>
@@ -268,16 +265,16 @@
 </div>
 <!-- content -->
 
-<script type="text/javascript">  
+<script type="text/javascript">
   function check(){
           var sname = document.getElementById("staname").value;
 
           if(sname=="Select State")
           {
-            //$("#st").html('<p style="color:red;">Select State</p>').show(); 
+            //$("#st").html('<p style="color:red;">Select State</p>').show();
             alert("Select State");
           }else{
-           // $("#st").html('<p style="color:red;">Select State</p>').hide(); 
+           // $("#st").html('<p style="color:red;">Select State</p>').hide();
           }
        }
    $(document).ready(function () {
@@ -286,7 +283,18 @@
          username:{required:true },
          name:{required:true},
          mobile:{required:true },
-         email:{required:true },
+         email:{required:true,
+           remote: {
+           url: "<?php echo base_url(); ?>users/mail_checker",
+           type: "post",
+           data: {
+             email: function() {
+               return $( "#email" ).val();
+             }
+           }
+         }
+
+          },
          pwd:{required:true },
          dob:{required:true },
          gender:{required:true },
@@ -306,8 +314,12 @@
         messages: {
         username:"Enter UserName",
         name:"Enter Name",
+        email: {
+          required: "Email required"
+
+        },
         mobile:"Enter Mobile Number",
-        email:"Enter Email Id",
+        // email:"Enter Email Id",
         pwd:"Enter Password",
         dob:"Select DOB",
         gender:"Select Gender",
@@ -324,7 +336,7 @@
         userrole:"Select User Role",
         display_status:"Select Display Status"
               },
-         }); 
+         });
    });
   function getstatename(cuid)
   {
@@ -364,7 +376,7 @@
                   $("#ctname").hide("");
                  }
             }
-          });  
+          });
   }
 
  function getcityname(cid) {
@@ -400,7 +412,7 @@
                   $("#ctname").hide();
                 }
             }
-          }); 
+          });
        }
  function checkemailfun(val)
   {
@@ -409,6 +421,7 @@
      url:'<?php echo base_url(); ?>/users/mail_checker',
      data:'email='+val,
      success:function(test)
+
       {
        if(test=="Email Id already Exit")
          {
@@ -434,7 +447,7 @@
        if(test=="Mobile Number already Exit")
          {
            $("#msg1").html(test);
-            $("#save").hide();
+           $("#save").hide();
            $("#save1").hide();
           }else{
              $("#msg1").html(test);
@@ -467,5 +480,3 @@ function checkusernamefun(val)
   }
 
 </script>
-
-

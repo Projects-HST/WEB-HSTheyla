@@ -35,7 +35,7 @@
 .form-control{
   width: 270px;
 }
-input[type=password] {
+input[type=text] {
     background: transparent;
     border: none;
     border-bottom: 1px solid #000000;
@@ -71,6 +71,17 @@ input[type=password] {
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url(); ?>home#contact">Contact</a>
                     </li>
+                    <?php
+                       $user_id=$this->session->userdata('user_role');
+                       if(empty($user_id)){ ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal">Login / Sign in</a>
+                        </li>
+                        <?php }else{ ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?php echo base_url(); ?>logout">Logout</a>
+                            </li>
+                            <?php } ?>
 
                 </ul>
             </div>
@@ -82,23 +93,26 @@ input[type=password] {
 <center>
 
 
-  <p style="margin-top:5%;font-size:22px;">We wanted to let you know that your Heyla password was changed.</p>
+  <p style="margin-top:5%;font-size:22px;">If email has changed the verification link has sent to the new email you have entered.</p>
         <div class="reset">
 
   <div class="">
-    <form class="form" role="form" autocomplete="off" id="update_pass" method="post" enctype="multipart/form-data">
+    <form class="form" role="form" autocomplete="off" id="update_email_id" method="post" enctype="multipart/form-data">
+      <?php foreach($res as $rows){} ?>
+        <div class="form-group">
+            <input type="text" class="form-control" id="old_email" name="old_email" readonly required="" value="<?php echo $rows->email_id; ?>">
 
-        <div class="form-group">
-            <input type="password" class="form-control" id="new_password" name="new_password" required="" placeholder="New Password">
-        </div>
-        <div class="form-group">
-            <input type="hidden" class="form-control" id="email_token" name="email_token" value="<?php echo $res; ?>">
         </div>
 
+
+
         <div class="form-group">
-            <input type="password" class="form-control" id="retype_password" name="retype_password" required="" placeholder="Re-Type Password">
+            <input type="text" class="form-control" id="email" name="email" required="" placeholder="Enter New Email_id " onkeyup="check_email()">
+
+            <p id="emailmsg"></p>
         </div>
-        <button type="submit" id="submit" class="btn btn-event btn-lg">Reset</button>
+
+        <button type="submit" id="submit" class="btn btn-event btn-lg">save</button>
     </form>
   </div>
 </div>
@@ -131,41 +145,43 @@ input[type=password] {
 <script src="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/pages/sweet-alert.init.js"></script>
 <script type="text/javascript">
+$.validator.addMethod("user_email_not_same", function(value, element) {
+   return $('#old_email').val() != $('#email').val()
+}, "* old mail and Email should not match");
+
    $('.verify-page').height($(window).height());
-   $('#update_pass').validate({ // initialize the plugin
+   $('#update_email_id').validate({ // initialize the plugin
        rules: {
-         new_password : {
-              minlength : 6
-          },
-          retype_password : {
-              minlength : 6,
-              equalTo : '[name="new_password"]'
+         old_mail :{required:true,user_email_not_same:true},
+          email : {
+              email : true,
+              user_email_not_same : true
           }
+
        },
        messages: {
-           new_password: {   required: "Enter  Password",minlength: "Min is 6", maxlength: "Max is 10"},
-           retype_password: {
-               required: "Enter New Password",
-               notEqualTo: "Password Should Match"
-           }
+
+            email: {   required: "Enter New Mail",
+
+          }
 
 
        },
        submitHandler: function(form) {
            //alert("hi");
            $.ajax({
-               url: "<?php echo base_url(); ?>home/update_password",
+               url: "<?php echo base_url(); ?>home/save_email_id",
                type: 'POST',
-               data: $('#update_pass').serialize(),
+               data: $('#update_email_id').serialize(),
                success: function(response) {
 
                    if (response == "success") {
                      swal({
                 title: "Success",
-                text: " Password Has been Changed Successfully Login Now",
+                text: " Email Has been Changed Successfully",
                 type: "success"
             }).then(function() {
-                location.href = '<?php echo base_url(); ?>';
+                location.href = '<?php echo base_url(); ?>profile';
             });
                    } else {
                        sweetAlert("Oops...", response, "error");
@@ -174,6 +190,33 @@ input[type=password] {
            });
        }
    });
+
+
+
+   function check_email() {
+       var email = $('#email').val();
+
+       $.ajax({
+           method: "post",
+           data: {
+               email: email
+           },
+           url: 'home/existemail',
+           success: function(data) {
+
+               if ((data) == "success") {
+                   $("#submit").removeAttr("disabled");
+                    $('#emailmsg').html(' ');
+                    //  $("#sendbtn").removeAttr("disabled");
+                       $('#sendbtn').show();
+               } else {
+                   $('#submit').prop('disabled', true);
+                    $('#emailmsg').html(data);
+                      $('#sendbtn').hide();
+               }
+           }
+       });
+   }
 </script>
 
 </html>

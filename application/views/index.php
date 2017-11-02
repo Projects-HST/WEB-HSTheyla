@@ -21,9 +21,7 @@
     <link href="<?php echo base_url(); ?>assets/front/css/carousel.css" rel="stylesheet">
     <script src="<?php echo base_url(); ?>assets/front/js/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/front/js/popper.min.js"></script>
-    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
-  crossorigin="anonymous"></script> -->
+
     <script src="<?php echo base_url(); ?>assets/front/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/pages/sweet-alert.init.js"></script>
@@ -45,13 +43,11 @@
   opacity: 1;
 }
 
-
-
 </style>
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark  fixed-top" data-spy="affix" data-offset-top="(scroll value)">
+    <nav class="navbar navbar-expand-lg navbar-dark  fixed-top " data-spy="affix" data-offset-top="(scroll value)">
         <div class="container">
             <a class="navbar-brand" href="#"><img src="<?php echo base_url(); ?>assets/front/images/logo.png" class="imglogo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,7 +77,7 @@
                     	 $user_id=$this->session->userdata('user_role');
                        if(empty($user_id)){ ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal">Login / Sign in</a>
+                            <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal">Sign In / Sign Up</a>
                         </li>
                         <?php }else{ ?>
                             <li class="nav-item">
@@ -117,7 +113,7 @@
                  <center>
 
 
-                   <p class="verify-text">
+                   <p class="modal-msg">
                      <?php echo $this->session->flashdata('msg'); ?>
 
                  </p>
@@ -135,7 +131,7 @@
                     <div role="tabpanel">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs modalmenu" role="tablist">
-                            <li role="presentation" class="tabmenu"><a href="#uploadTab" aria-controls="uploadTab" role="tab" data-toggle="tab" class="" id="loginbtn">Login</a>
+                            <li role="presentation" class="tabmenu"><a href="#uploadTab" aria-controls="uploadTab" role="tab" data-toggle="tab" class="" id="loginbtn">Sign In</a>
 
                             </li>
                             <li role="presentation" class="loginbtn"><a href="#browseTab" aria-controls="browseTab" role="tab" data-toggle="tab">Sign Up</a>
@@ -168,9 +164,9 @@
                                     <center>
                                         <div class="social-login">
 
-                     <a href="<?php echo base_url(); ?>google_login" class="loginBtn loginBtn--google">Login With google</a>
-                                                <a href="<?php echo base_url(); ?>facebook_login" class="loginBtn loginBtn--facebook">
-                       Login with Facebook
+                     <a href="<?php echo base_url(); ?>google_login" class="btn btn-lg  btn-google"><i class="fa fa-google-plus"></i>Login With Google</a>
+                                                <a href="<?php echo base_url(); ?>facebook_login" class="btn btn-facebook btn-lg">
+                      <i class="fa fa-facebook"></i> Login with Facebook
                      </a>
                                         </div>
                                     </center>
@@ -226,12 +222,15 @@
                 <!-- Slide Two - Set the background image for this slide in the line below -->
                 <div class="carousel-item" style="background-image: url('<?php echo base_url(); ?>assets/front/images/slider2.jpg')">
                     <div class="carousel-caption d-none d-md-block">
+                      <img src="<?php echo base_url(); ?>assets/front/images/play.png" class=""> <img src="<?php echo base_url(); ?>assets/front/images/app.png" class="">
 
                     </div>
                 </div>
                 <!-- Slide Three - Set the background image for this slide in the line below -->
                 <div class="carousel-item" style="background-image: url('<?php echo base_url(); ?>assets/front/images/slider3.jpg')">
                     <div class="carousel-caption d-none d-md-block">
+                      <img src="<?php echo base_url(); ?>assets/front/images/play.png" class=""> <img src="<?php echo base_url(); ?>assets/front/images/app.png" class="">
+
                     </div>
                 </div>
             </div>
@@ -279,7 +278,7 @@
                             <div class="media mediaobj">
                                 <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/refer.png" alt="Generic placeholder image">
                                 <div class="media-body">
-                                    <h5 class="mt-0">Media heading</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. </div>
+                                    <h5 class="mt-0">Refer & Earn</h5> Refer, refer and refer - Redemption for paid events is always exciting </div>
                             </div>
 
                         </div>
@@ -287,7 +286,7 @@
                             <div class="media mediaobj">
                                 <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/Popular.png" alt="Generic placeholder image">
                                 <div class="media-body">
-                                    <h5 class="mt-0">Media heading</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. </div>
+                                    <h5 class="mt-0">Popular</h5>The trending events happening in your city . </div>
                             </div>
                         </div>
                     </div>
@@ -296,14 +295,14 @@
                             <div class="media mediaobj">
                                 <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/preminum.png" alt="Generic placeholder image">
                                 <div class="media-body">
-                                    <h5 class="mt-0">Media heading</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. </div>
+                                    <h5 class="mt-0">Hotspot</h5> You can't leave the city without checking in here  </div>
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-6 featurebox">
                             <div class="media mediaobj">
                                 <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/Rewards.png" alt="Generic placeholder image">
                                 <div class="media-body">
-                                    <h5 class="mt-0">Media heading</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. </div>
+                                    <h5 class="mt-0">Rewards</h5> Let's add to the overall fun by competing with other Heyla App Users. </div>
                             </div>
                         </div>
                     </div>
@@ -312,14 +311,14 @@
                             <div class="media mediaobj">
                                 <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/hotspot.png" alt="Generic placeholder image">
                                 <div class="media-body">
-                                    <h5 class="mt-0">Media heading</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. </div>
+                                    <h5 class="mt-0">Premium</h5> Become our Premium member and have access to the hidden treasures.</div>
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-6 featurebox">
                             <div class="media mediaobj">
                                 <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/favourite.png" alt="Generic placeholder image">
                                 <div class="media-body">
-                                    <h5 class="mt-0">Media heading</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. </div>
+                                    <h5 class="mt-0">Favourite</h5> Tailor fit events for you.<br></div>
                             </div>
                         </div>
                     </div>
@@ -346,8 +345,10 @@
                     </div>
                     <p id="item-title">&nbsp;</p>
                     <div class="nav1" class="noselect">
-                        <button class="left"> ← </button>
-                        <button class="right"> → </button>
+                        <span class="left"><i class="fa fa-chevron-left" aria-hidden="true"></i>
+</span>
+                        <span class="right"><i class="fa fa-chevron-right" aria-hidden="true"></i>
+ </span>
                     </div>
                 </div>
 
@@ -360,7 +361,7 @@
             <div class="heading">
                 Promote & Sell Tickets
             </div>
-            <p class="normal-txt white-color">The background images for the slider are set directly in the HTML using inline CSS. The rest of the styles for this template are contained within the
+            <p class="normal-txt white-color">Promote and sell your ticket with our ticketing service, we’ll ensure you gain momentum the whole way through; right from tickets Avaliable to Sold Out!.
             </p>
             <p class="text-center">
                 <a href="" class="btn btn-event">CREATE EVENT</a>
@@ -407,22 +408,22 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-9">
-                    <form action="" method="post">
+                    <form action="" method="post" id="contact_form">
                         <div class="row">
                             <div class="col-6">
-                                <input type="text" class="form-control" placeholder="Enter the Name">
+                                <input type="text" class="form-control" name="name" placeholder="Enter the Name" required>
                             </div>
                             <div class="col-6">
-                                <input type="text" class="form-control" placeholder="Enter the Email">
+                                <input type="text" class="form-control" name="email" placeholder="Enter the Email" required>
                             </div>
                             <div class="col-12">
-                                <input type="text" class="form-control" placeholder="Enter the Subject">
+                                <input type="text" class="form-control" name="subject" placeholder="Enter the Subject" required>
                             </div>
                             <div class="col-12">
-                                <textarea class="form-control" placeholder="Write Message"></textarea>
+                                <textarea class="form-control" name="message" placeholder="Write Message" required></textarea>
                             </div>
                             <div class="col-md-3 col-sm-6">
-                                <input type="submit" class="form-control submitbtn" value="SUBMIT FORM">
+                                <input type="submit" class="form-control submitbtn btn-primary" value="SUBMIT FORM">
                             </div>
                         </div>
                     </form>
@@ -439,13 +440,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <p class="fnt-footer">Powerded By Happysanz Tech</p>
+                    <p class="fnt-footer">Powered By Happysanz Tech</p>
                 </div>
                 <div class="col-md-6">
                     <ul class="list-inline fnt-footer ">
-                        <li class="list-inline-item"><a href="">Privacy Policy</a></li>
-                        <li class="list-inline-item"><a href="">Payment Policy</a></li>
-                        <li class="list-inline-item"><a href="">Terms & Conditions</a></li>
+                      <li class="list-inline-item"><a href="<?php echo base_url(); ?>privacy">Privacy Policy</a></li>
+                      <li class="list-inline-item"><a href="<?php echo base_url(); ?>payment">Payment Policy</a></li>
+                      <li class="list-inline-item"><a href="<?php echo base_url(); ?>terms">Terms & Conditions</a></li>
                     </ul>
                 </div>
             </div>
@@ -586,6 +587,53 @@
             });
         }
     });
+
+    $('#contact_form').validate({ // initialize the plugin
+        rules: {
+            name: {
+                required: true,maxlength:20
+            },
+            email: {
+                required: true,email:true
+            },
+            subject: {
+                required: true,maxlength:70
+            },
+            message: {
+                required: true
+            },
+        },
+        messages: {
+            name: { required:"Enter the name" },
+            email: "Enter Valid Email ",
+            subject: { required:"Enter the Subject" ,maxlength:"Enter Below 70 Characters"},
+            message: { required:"Enter the Message"}
+        },
+        submitHandler: function(form) {
+            //alert("hi");
+
+            $.ajax({
+                url: "<?php echo base_url(); ?>home/mail",
+                type: 'POST',
+                data: $('#contact_form').serialize(),
+                success: function(response) {
+
+                    if (response == "success") {
+                        swal({
+                            title: "Thank You For Contacting Us",
+                            text: " We Get Back To You Soon.",
+                            type: "success"
+                        }).then(function() {
+                           location.reload();
+                        });
+                    } else {
+                        sweetAlert("Oops...", response, "error");
+                    }
+                }
+            });
+        }
+    });
+
 
     function check_email() {
         var email = $('#email').val();

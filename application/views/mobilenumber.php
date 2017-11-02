@@ -60,16 +60,16 @@ input[type=text] {
               </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url(); ?>">About</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>home#about">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url(); ?>">Services</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>home#services">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url(); ?>">Create Event</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>home#create">Create Event</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url(); ?>">Contact</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>home#contact">Contact</a>
                     </li>
                     <?php
                        $user_id=$this->session->userdata('user_role');
@@ -101,17 +101,19 @@ input[type=text] {
       <?php foreach($res as $rows){} ?>
         <div class="form-group">
             <input type="text" class="form-control" id="new_password" name="new_password" readonly required="" value="<?php echo $rows->mobile_no; ?>">
-            <span><button onclick="sendOTP()" id="sendbtn">Send  OTP</button></span>
+
         </div>
 
 
+
         <div class="form-group">
-            <input type="text" class="form-control" id="mobileotp" name="mobileotp" required="" placeholder="Enter OTP" onblur="checkOTP()">
-            <p id="mobilemsg"></p>
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" id="mobile" name="mobile" required="" placeholder="Enter New Mobile Number " onblur="check_mobile()">
+            <input type="text" class="form-control" id="mobile" name="mobile" required="" placeholder="Enter New Mobile Number " onkeyup="check_mobile()">
+              <span><button onclick="sendOTP()" id="sendbtn">Send  OTP</button></span>
             <p id="mobilenum"></p>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="mobileotp" name="mobileotp"  placeholder="Enter OTP" onkeyup="checkOTP()">
+            <p id="mobilemsg"></p>
         </div>
         <button type="submit" id="submit" class="btn btn-event btn-lg">save</button>
     </form>
@@ -127,13 +129,13 @@ input[type=text] {
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <p class="fnt-footer">Powerded By Happysanz Tech</p>
+                    <p class="fnt-footer">Powered By Happysanz Tech</p>
                 </div>
                 <div class="col-md-6">
                     <ul class="list-inline fnt-footer ">
-                        <li class="list-inline-item"><a href="">Privacy Policy</a></li>
-                        <li class="list-inline-item"><a href="">Payment Policy</a></li>
-                        <li class="list-inline-item"><a href="">Terms & Conditions</a></li>
+                      <li class="list-inline-item"><a href="<?php echo base_url(); ?>privacy">Privacy Policy</a></li>
+                      <li class="list-inline-item"><a href="<?php echo base_url(); ?>payment">Payment Policy</a></li>
+                      <li class="list-inline-item"><a href="<?php echo base_url(); ?>terms">Terms & Conditions</a></li>
                     </ul>
                 </div>
             </div>
@@ -188,11 +190,19 @@ input[type=text] {
    });
 
    function sendOTP(){
+
+     var mobile=$('#mobile').val();
+
      $.ajax({
+         method: "post",
        url: "<?php echo base_url(); ?>home/sendOTP",
+       data: {
+           mobile: mobile
+       },
        cache: false,
        success: function(response){
            $('#sendbtn').prop('disabled', true);
+
        }
      });
    }
@@ -210,10 +220,12 @@ input[type=text] {
              if ((data) == "success") {
                  $("#submit").removeAttr("disabled");
                      $('#mobilemsg').html(' ');
+
                  // $('#mobilemsg').html('Username Available');
              } else {
                  $('#submit').prop('disabled', true);
                  $('#mobilemsg').html(data);
+
              }
          }
      });
@@ -232,9 +244,12 @@ input[type=text] {
                if ((data) == "success") {
                    $("#submit").removeAttr("disabled");
                     $('#mobilenum').html(' ');
+                    //  $("#sendbtn").removeAttr("disabled");
+                       $('#sendbtn').show();
                } else {
                    $('#submit').prop('disabled', true);
                     $('#mobilenum').html(data);
+                      $('#sendbtn').hide();
                }
            }
        });

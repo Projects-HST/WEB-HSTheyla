@@ -71,22 +71,22 @@
               </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url(); ?>">About</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>home#about">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url(); ?>">Services</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>home#services">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url(); ?>">Create Event</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>home#create">Create Event</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url(); ?>">Contact</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>home#contact">Contact</a>
                     </li>
                     <?php
                        $user_id=$this->session->userdata('user_role');
                        if(empty($user_id)){ ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal">Login / Sign in</a>
+                            <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal">Sign In / Sign Up</a>
                         </li>
                         <?php }else{ ?>
                             <li class="nav-item">
@@ -143,7 +143,11 @@
                                     <div class="form-group row">
                                         <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
                                         <div class="col-sm-5">
-                                            <?php echo $rows->email_id; ?>
+                                            <?php echo $rows->email_id; ?> <?php if($rows->email_verify=='N'){ ?> <span style="color:red;" title="Verify Your Email"><i class="fa fa-times" aria-hidden="true"></i></span><br>
+
+
+                                          <?php  } ?>
+                                        <a href="<?php echo  base_url(); ?>changemail">Change the Email</a>
                                         </div>
                                     </div>
 
@@ -221,13 +225,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <p class="fnt-footer">Powerded By Happysanz Tech</p>
+                    <p class="fnt-footer">Powered By Happysanz Tech</p>
                 </div>
                 <div class="col-md-6">
                     <ul class="list-inline fnt-footer ">
-                        <li class="list-inline-item"><a href="">Privacy Policy</a></li>
-                        <li class="list-inline-item"><a href="">Payment Policy</a></li>
-                        <li class="list-inline-item"><a href="">Terms & Conditions</a></li>
+                      <li class="list-inline-item"><a href="<?php echo base_url(); ?>privacy">Privacy Policy</a></li>
+                      <li class="list-inline-item"><a href="<?php echo base_url(); ?>payment">Payment Policy</a></li>
+                      <li class="list-inline-item"><a href="<?php echo base_url(); ?>terms">Terms & Conditions</a></li>
                     </ul>
                 </div>
             </div>
@@ -238,7 +242,7 @@
 
 </body>
 <script src="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/pages/sweet-alert.init.js"></script>
+<!-- <script src="<?php echo base_url(); ?>assets/pages/sweet-alert.init.js"></script> -->
 <script type="text/javascript">
     $("#loginbtn").click(function() {
         $(this).toggleClass("menuactive");
@@ -290,15 +294,16 @@
                 success: function(response) {
                     if (response == "success") {
 
+
+
+
                         swal({
-                                title: "Profile",
-                                text: "Saved",
-                                type: "success"
-                            },
-                            function() {
-                                location.reload();
-                            }
-                        );
+                            title: "success",
+                            text: " Profile Saved.",
+                            type: "success"
+                        }).then(function() {
+                           location.reload();
+                        });
                     } else {
                         sweetAlert("Oops...", response, "error");
                     }

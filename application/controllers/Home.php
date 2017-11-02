@@ -109,7 +109,7 @@ class Home extends CI_Controller {
 					$email=$data['user']['email'];
 
 					$datas['result'] = $this->loginmodel->getuserfb($firstname,$email);
-					 $user_role=$datas['result']['user_role'];
+					$user_role=$datas['result']['user_role'];
 					$status=$datas['result']['status'];
 					if($status=='Y'){
 						if($user_role==3){
@@ -166,8 +166,19 @@ class Home extends CI_Controller {
 			$user_role=$this->session->userdata('user_role');
 			$datas['res']=$this->loginmodel->getuserinfo($user_id);
 			if($user_role==3){
-
 				$this->load->view('mobilenumber', $datas);
+			}else{
+				redirect('/');
+			}
+		}
+
+		public function changeemail(){
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			$datas['res']=$this->loginmodel->getuserinfo($user_id);
+			if($user_role==3){
+				$this->load->view('changeemail', $datas);
 			}else{
 				redirect('/');
 			}
@@ -192,6 +203,16 @@ class Home extends CI_Controller {
 		public function verify(){
 			$this->load->view('verify');
 		}
+		public function privacy(){
+			$this->load->view('privacy');
+		}
+		public function payment(){
+			$this->load->view('payment');
+		}
+		public function terms(){
+			$this->load->view('terms');
+		}
+
 		public function resetpassword(){
 			$this->load->view('resetpassword');
 		}
@@ -206,16 +227,23 @@ class Home extends CI_Controller {
 			$email=$this->input->post('email');
 			$data=$this->loginmodel->reset_password($email);
 		}
+		public function mail(){
+			$name=$this->db->escape_str($this->input->post('name'));
+			$email=$this->db->escape_str($this->input->post('email'));
+			$subject=$this->db->escape_str($this->input->post('subject'));
+			$msg=$this->db->escape_str($this->input->post('message'));
+			$data=$this->loginmodel->mail_contact_form($name,$email,$subject,$msg);
+		}
 
 		public function emailverfiy(){
-  	 $email = $this->uri->segment(3);
-  	 $has = $this->uri->segment(4);
-		$data['res']=$this->loginmodel->email_verify($email);
-		if($data['res']['msg']=='verify'){
+  	  $email = $this->uri->segment(3);
+  	
+			$data['res']=$this->loginmodel->email_verify($email);
+			if($data['res']['msg']=='verify'){
 					$this->load->view('email_verification',$data);
-		}else{
+				}else{
 				$this->load->view('email_verification',$data);
-		}
+			}
 
 		}
 
@@ -278,6 +306,17 @@ class Home extends CI_Controller {
 			}
 		}
 
+		public function save_email_id(){
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			if($user_role=='3'){
+				$email=$this->input->post('email');
+				$data=$this->loginmodel->save_email_id($email,$user_id);
+			}else{
+				redirect('/');
+			}
+		}
 		public function change_pic(){
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
@@ -304,12 +343,10 @@ class Home extends CI_Controller {
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
 			 $user_role=$this->session->userdata('user_role');
-
 			if($user_id){
 				$name=$this->input->post('name');
-				$email=$this->input->post('email');
 				$address=$this->input->post('address');
-				$datas['res']=$this->loginmodel->save_profile_info($user_id,$name,$email,$address);
+				$datas['res']=$this->loginmodel->save_profile_info($user_id,$name,$address);
 			}else{
 				redirect('/');
 			}
@@ -319,8 +356,9 @@ class Home extends CI_Controller {
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
 			$user_role=$this->session->userdata('user_role');
+			$mobile=$this->input->post('mobile');
 			if($user_role=='3'){
-				$datas['res']=$this->loginmodel->sendOTPmobilechange($user_id);
+				$datas['res']=$this->loginmodel->sendOTPmobilechange($mobile,$user_id);
 			}
 		}
 
