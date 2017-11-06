@@ -8,9 +8,9 @@ public function __construct()
       parent::__construct();
 
  }
-  
+
 //--------------------------------City Query-------------------------------------
-    
+
     function getall_category_details()
     {
       $sql="SELECT * FROM category_master ORDER BY id DESC";
@@ -44,25 +44,34 @@ public function __construct()
        return $res;
     }
 
-    function update_category_details($category_id,$categoryname,$categorypic1,$status,$user_id,$user_role)
+    function update_category_details($category_id,$categorypic1,$status,$user_id,$user_role)
     {
 
-       $check_category="SELECT * FROM category_master WHERE category_name='$categoryname' AND status='$status' ";
-       $result=$this->db->query($check_category);
-       if($result->num_rows()==0)
-       {
-         $uquery="UPDATE category_master SET category_name='$categoryname',category_image='$categorypic1',status='$status',updated_by='$user_id',updated_at=NOW() WHERE id='$category_id'";
+         $uquery="UPDATE category_master SET category_image='$categorypic1',status='$status',updated_by='$user_id',updated_at=NOW() WHERE id='$category_id'";
          $uresultset=$this->db->query($uquery);
          $data= array("status"=>"success");
          return $data;
-        }else{
-            $data= array("status"=>"Already Exist");
-            return $data;
-           }
+
     }
-	
-	          
-	
+
+    function save_category_name($user_id,$categoryname,$ct_id){
+     $check_category="SELECT * FROM category_master WHERE category_name='$categoryname'";
+      $result=$this->db->query($check_category);
+      if($result->num_rows()==0)
+      {
+         $query="UPDATE category_master SET category_name='$categoryname',created_by='$user_id',created_at=NOW() WHERE id='$ct_id'";
+        $resultset=$this->db->query($query);
+      if($resultset){
+          echo "success";
+      }else{
+          echo "Something Went Wrong";
+      }
+      }else{
+          echo "Already Exist";
+         }
+    }
+
+
 
 
 

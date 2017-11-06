@@ -24,7 +24,7 @@ function add_advertisement_plan_details($user_id,$planname,$planrate)
     $result=$this->db->query($check_plan);
     if($result->num_rows()==0)
     {
-      
+
         $query="INSERT INTO advertisement_plan(plan_name,plan_rate,created_by,created_at) VALUES ('$planname','$planrate','$user_id',NOW()) ";
          $resultset=$this->db->query($query);
 	        $data= array("status"=>"success");
@@ -84,7 +84,7 @@ function getall_adv_plans()
 
 function add_advertisement_plan_history($event_id,$category_id,$start_date,$end_date,$start_time,$end_time,$adv_plan,$status,$user_id)
 {
-	   $check="SELECT * FROM adv_event_history WHERE DATEDIFF(date_from,'$start_date') <= 0 AND DATEDIFF(date_to,'$end_date') >= 0 AND event_id='$event_id' AND status='$status'";
+    $check="SELECT * FROM adv_event_history WHERE DATEDIFF(date_to,'$end_date') >= 0 AND event_id='$event_id'";
     $result=$this->db->query($check);
     if($result->num_rows()==0)
     {
@@ -94,7 +94,7 @@ function add_advertisement_plan_history($event_id,$category_id,$start_date,$end_
 	    return $data;
 	}else{
 	   $data= array("status"=>"AE","eid"=>"$event_id","cid"=>"$category_id");
-       return $data;
+     return $data;
 	}
 }
 
@@ -116,10 +116,20 @@ function getall_adv_history($id)
 
 function aupdate_advertisement_plan_history($id,$event_id,$category_id,$start_date,$end_date,$start_time,$end_time,$adv_plan,$status,$user_id)
 {
+  $check="SELECT * FROM adv_event_history WHERE DATEDIFF(date_to,'$end_date') >= 0 AND event_id='$event_id'";
+  $result=$this->db->query($check);
+  $update="UPDATE adv_event_history SET adv_plan_id='$adv_plan',status='$status',updated_by='$user_id',updated_at=NOW() WHERE id='$id'";
+  $usql_plan=$this->db->query($update);
+  if($result->num_rows()==0)
+  {
 	$usql="UPDATE adv_event_history SET event_id='$event_id',category_id='$category_id',date_from='$start_date',date_to='$end_date',time_from='$start_time',time_to='$end_time',adv_plan_id='$adv_plan',status='$status',updated_by='$user_id',updated_at=NOW() WHERE id='$id'";
 	$usql1=$this->db->query($usql);
-		$data= array("status"=>"success");
-	    return $data;
+	$data= array("status"=>"success");
+	return $data;
+}else{
+  $data= array("status"=>"AE","eid"=>"$event_id","cid"=>"$category_id");
+  return $data;
+}
 }
 
 function view_adv_history_details()

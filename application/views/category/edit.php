@@ -18,7 +18,7 @@
                <i class="ion-ios7-bell noti-icon"></i>
                <span class="badge badge-success noti-icon-badge">3</span>
                </a>
-            
+
             </li>
             <li class="list-inline-item dropdown notification-list">
             <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
@@ -45,7 +45,7 @@
          </ul>
          <div class="clearfix"></div>
       </nav>
-	  
+
       </div>
       <!-- Top Bar End -->
       <div class="page-content-wrapper">
@@ -60,7 +60,7 @@
                            <div class="form-group row">
                               <label for="example-text-input" class="col-sm-4 col-form-label">Category Name</label>
                               <div class="col-sm-6">
-                                 <input class="form-control" type="text" name="categoryname" value="<?php echo $res->category_name; ?>" id="example-text-input">
+                                 <input class="form-control" type="text" name="categoryname" value="<?php echo $res->category_name; ?>" readonly>
                               </div>
                            </div>
                            <div class="form-group row">
@@ -89,7 +89,7 @@
                               <label class="col-sm-4 col-form-label"></label>
                               <button type="submit" class="btn btn-primary waves-effect waves-light">
                               Update </button>
-                             
+
                            </div>
                      </div>
                      </form>
@@ -97,7 +97,7 @@
                   </div>
                </div>
             </div>
-       
+
          </div>
 		   <!-- container -->
       </div>
@@ -113,13 +113,13 @@
          categoryname:{required:true },
          //categorypic:{required:true },
          eventsts:{required:true }
-        
+
         },
         messages: {
         categoryname:"Enter Category Name",
         //categorypic:"Select Category Picture",
         eventsts:"Select Status"
                },
-         }); 
+         });
    });
  </script>
