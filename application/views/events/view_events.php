@@ -84,12 +84,12 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach($result as $rows){ 
+                        <?php foreach($result as $rows){
                            $eid=$rows->id;
                            $adv_sts=$rows->adv_status;
                            $etype=$rows->event_type;
                            $eid=$rows->id;
-                          if($adv_sts=='Y'){ 
+                          if($adv_sts=='Y'){
                              ?>
                         <tr>
                             <td><?php echo $rows->event_name ; ?></td>
@@ -104,7 +104,7 @@
                              <a href="<?php echo base_url();?>events/view_single_events/<?php echo base64_encode($rows->id);?>">
                               <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a>
 
-                              <a onclick="confirmGetMessage(<?php echo $eid;?>)" >   
+                              <a onclick="confirmGetMessage(<?php echo $eid;?>)" >
                               <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
 
                               <?php if($etype=='Paid'){?>
@@ -112,10 +112,10 @@
                               <img title="Booking Events" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
                               <?php } ?>
 
-                              <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo base64_encode($rows->id);?>">   
+                              <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo $rows->id;?>">   
                               <img title="Add Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/></a>
 
-                              <a href="<?php echo base_url();?>events/view_events_reviews/<?php echo base64_encode($rows->id);?>">   
+                              <a href="<?php echo base_url();?>events/view_events_reviews/<?php echo base64_encode($rows->id);?>">
                               <img title="View Reviews" src="<?php echo base_url();?>assets/icons/review.png"/></a>
 
                             </td>
@@ -137,12 +137,12 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach($result as $rows){ 
+                        <?php foreach($result as $rows){
                             $eid=$rows->id;
                             $hotspot_sts=$rows->hotspot_status;
                             $etype=$rows->event_type;
-                           
-                          if($hotspot_sts=='Y'){ 
+
+                          if($hotspot_sts=='Y'){
                               ?>
                         <tr>
                             <td><?php echo $rows->event_name ; ?></td>
@@ -157,18 +157,18 @@
                              <a href="<?php echo base_url();?>events/view_single_events/<?php echo base64_encode($rows->id);?>">
                               <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a>
                              <!--href="<?php echo base_url();?>events/delete_events/<?php echo $rows->id;?>" -->
-                              <a onclick="confirmGetMessage(<?php echo $eid;?>)">   
+                              <a onclick="confirmGetMessage(<?php echo $eid;?>)">
                               <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
-                              
+
                               <?php if($etype=='Paid'){?>
                               <a href="<?php echo base_url();?>booking/home/<?php echo base64_encode($rows->id);?>">
                               <img title="Booking Events" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
                               <?php } ?>
 
-                              <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo base64_encode($rows->id);?>">   
+                              <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo base64_encode($rows->id);?>">
                               <img title="Add Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/></a>
-                               
-                              <a href="<?php echo base_url();?>events/view_events_reviews/<?php echo base64_encode($rows->id);?>">   
+
+                              <a href="<?php echo base_url();?>events/view_events_reviews/<?php echo base64_encode($rows->id);?>">
                               <img title="View Reviews" src="<?php echo base_url();?>assets/icons/review.png"/></a>
 
                             </td>
@@ -191,12 +191,12 @@
                         </thead>
                         <tbody>
                         <?php foreach($result as $rows){
-                           $eid=$rows->id; 
+                           $eid=$rows->id;
                            $adv_sts=$rows->adv_status;
                            $hotspot_sts=$rows->hotspot_status;
                            $etype=$rows->event_type;
                           if($hotspot_sts=='N' && $adv_sts=='N')
-                          {   
+                          {
                            ?>
                         <tr>
                             <td><?php echo $rows->event_name ; ?></td>
@@ -211,26 +211,26 @@
                              <a href="<?php echo base_url();?>events/view_single_events/<?php echo base64_encode($rows->id);?>">
                               <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a>
 
-                              <a onclick="confirmGetMessage(<?php echo $eid;?>)">   
+                              <a onclick="confirmGetMessage(<?php echo $eid;?>)">
                               <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
-                              
+
                               <?php if($etype=='Paid'){ ?>
                               <a href="<?php echo base_url();?>booking/home/<?php echo base64_encode($rows->id);?>">
                                 <img title="Booking Events" src="<?php echo base_url();?>assets/icons/booking.png"/>
                              </a>
                               <?php } ?>
-                              <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo base64_encode($rows->id);?>">   
+                              <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo base64_encode($rows->id);?>">
                               <img title="Add Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/>
                             </a>
-                            <a href="<?php echo base_url();?>events/view_events_reviews/<?php echo base64_encode($rows->id);?>">   
+                            <a href="<?php echo base_url();?>events/view_events_reviews/<?php echo base64_encode($rows->id);?>">
                               <img title="View Reviews" src="<?php echo base_url();?>assets/icons/review.png"/>
                             </a>
-                              
+
                             </td>
                         </tr>
                        <?php } }  ?>
                         </tbody>
-                    </table>                       
+                    </table>
                       </div>
                     </div>
                   </div>
@@ -257,7 +257,7 @@
                   title: "Success",
                   text: "Deleted Successfully",
                   type: "success"
-              }).then(function() { 
+              }).then(function() {
                   location.href = '<?php echo base_url(); ?>events/view_events';
               });
           } else {

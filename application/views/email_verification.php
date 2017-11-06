@@ -5,7 +5,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-  
+
     <meta name="theme-color" content="#478ECC" />
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
@@ -63,17 +63,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url(); ?>">Contact</a>
                     </li>
-                    <?php
-                       $user_id=$this->session->userdata('user_role');
-                       if(empty($user_id)){ ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url(); ?>">Login / Sign in</a>
-                        </li>
-                        <?php }else{ ?>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url(); ?>logout">Logout</a>
-                            </li>
-                            <?php } ?>
+
                 </ul>
             </div>
         </div>

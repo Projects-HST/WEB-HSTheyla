@@ -95,8 +95,8 @@
                            <thead>
                               <tr>
                                  <th>S.NO</th>
-                                 <th>Event Name</th>
                                  <th>Plan Name</th>
+                                 <th>Event  Name</th>
                                  <th>Amount</th>
                                  <th>Action</th>
                               </tr>
@@ -130,12 +130,12 @@
                <!-- end col -->
             </div>
             <!-- end row -->
-         
+
          </div>
          <!-- container -->
       </div>
       <!-- Page content Wrapper -->
-   
+
 </div>
 <!-- content -->
 <script type="text/javascript">
@@ -144,16 +144,15 @@
       rules: {
         planname:{required:true },
         seats:{required:true },
-        amount:{required:true }        
+        amount:{required:true }
        },
-   
+
        messages: {
        planname:"Enter Plan Name",
        seats:"Enter  Seats",
        amount:"Enter Amount"
               },
-        }); 
+        });
    });
-   
-</script>
 
+</script>
