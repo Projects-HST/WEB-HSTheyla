@@ -112,7 +112,7 @@
                               <img title="Booking Events" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
                               <?php } ?>
 
-                              <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo $rows->id;?>">   
+                              <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo $rows->id;?>">
                               <img title="Add Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/></a>
 
                               <a href="<?php echo base_url();?>events/view_events_reviews/<?php echo base64_encode($rows->id);?>">
@@ -165,7 +165,7 @@
                               <img title="Booking Events" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
                               <?php } ?>
 
-                              <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo base64_encode($rows->id);?>">
+                              <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo $rows->id;?>">
                               <img title="Add Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/></a>
 
                               <a href="<?php echo base_url();?>events/view_events_reviews/<?php echo base64_encode($rows->id);?>">
@@ -219,7 +219,7 @@
                                 <img title="Booking Events" src="<?php echo base_url();?>assets/icons/booking.png"/>
                              </a>
                               <?php } ?>
-                              <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo base64_encode($rows->id);?>">
+                              <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo $rows->id;?>">
                               <img title="Add Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/>
                             </a>
                             <a href="<?php echo base_url();?>events/view_events_reviews/<?php echo base64_encode($rows->id);?>">
