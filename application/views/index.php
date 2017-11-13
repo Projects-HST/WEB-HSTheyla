@@ -557,11 +557,11 @@
             },
         },
         messages: {
-            name: { required:"Enter the Username", minlength: "Min is 6", maxlength: "Max is 10" },
+            name: { required:"Enter the Username", minlength: "Min is 6", maxlength: "Max is 12" },
             email: "Enter Valid Email ",
               mobile: { required:"Enter the Mobile number", minlength: "Min is 10", maxlength: "Max is 10" },
 
-            new_password: { required:"Enter the Password", minlength: "Min is 6", maxlength: "Max is 10" }
+            new_password: { required:"Enter the Password", minlength: "Min is 6", maxlength: "Max is 12" }
         },
         submitHandler: function(form) {
             //alert("hi");
