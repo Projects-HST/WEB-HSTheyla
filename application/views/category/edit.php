@@ -72,7 +72,19 @@
                                <img src="<?php echo base_url(); ?>assets/category/<?php echo $res->category_image; ?>" class="img-circle">
                               </div>
                            </div>
-
+                            <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Display Order</label>
+                            <div class="col-sm-6">
+                             <input type="hidden" name="old_disp_order" class="form-control" value="<?php echo $res->order_by; ?>">
+                                <select class="form-control" name="disp_order">
+                                    <option value="">Select Display Order</option>
+                                    <?php foreach($result as $rows) { ?>
+                                    <option value="<?php echo $rows->order_by; ?>"><?php echo $rows->order_by; ?></option>
+                                    <?php } ?>
+                                </select>
+                                 <script language="JavaScript">document.categoryform.disp_order.value="<?php echo $res->order_by; ?>";</script>
+                                  </div>
+                                    </div>
                             <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Event Status</label>
                               <div class="col-sm-6">
