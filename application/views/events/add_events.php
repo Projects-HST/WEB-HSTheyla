@@ -453,6 +453,7 @@ function check()
         var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
         var endTime = new Date(startTime)
         endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+        
         if (startTime > endTime) {
         alert("Start Time is greater than end time");
          return false; }

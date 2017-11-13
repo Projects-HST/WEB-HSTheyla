@@ -71,14 +71,16 @@
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Display Order</label>
                                         <div class="col-sm-6">
-                                            <?php if(!empty($result)){?>
                                             <select class="form-control" name="disp_order">
-                                                <option value="">Select Display Order</option>
-                                                <?php foreach($result as $rows) { ?>
-                                                <option value="<?php echo $rows->order_by; ?>"><?php echo $rows->order_by; ?></option>
-                                                <?php } }else{ ?>
-                             <input type="text" name="disp_order" class="form-control" placeholder="Enter Display Order">
-                                               <?php } ?>
+                                                <option>Select Display Order</option>
+                                                <?php if(!empty($result)){
+                                                    foreach($result as $rows) { $lastInc=$rows->order_by; ?>
+                                            <option value="<?php echo $rows->order_by;?>"><?php echo $rows->order_by; ?></option>
+                                                <?php } ?>
+                                            <option value="<?php echo $lastInc+1;?>">
+                                                <?php echo $lastInc+1; ?></option> <?php }else{ ?>
+                                            <option value="1">1</option>
+                                               <?php  } ?>
                                             </select>
                                         </div>
                                     </div>

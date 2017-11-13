@@ -59,7 +59,7 @@ public function __construct()
         $uQuery = "update category_master set order_by=order_by+1 where order_by >= '$disp_order' and order_by <'$old_disp_order' and id!='$category_id'";
        $uQuery1=$this->db->query($uQuery);
       }else{
-        $uQuery = "update category_master set order_by=order_by-1 where order_by >'$old_disp_order' and order_by<='$disp_order' and id!='$category_id' ";
+        $uQuery = "update category_master set order_by=order_by-1 where order_by >'$old_disp_order' and order_by<='$disp_order' and id!='$category_id' "; 
         $uQuery1=$this->db->query($uQuery);
       }
       
