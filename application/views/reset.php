@@ -82,7 +82,7 @@ input[type=password] {
 <center>
 
 
-  <p style="margin-top:5%;font-size:22px;">We wanted to let you know that your Heyla password was changed.</p>
+  <p style="margin-top:5%;font-size:22px;">Your password has been reset successfully.</p>
         <div class="reset">
 
   <div class="">
@@ -135,17 +135,17 @@ input[type=password] {
    $('#update_pass').validate({ // initialize the plugin
        rules: {
          new_password : {
-              minlength : 6
+              minlength : 6,maxlength:12,
           },
           retype_password : {
-              minlength : 6,
-              equalTo : '[name="new_password"]'
+
+              equalTo : '[name="new_password"]',
           }
        },
        messages: {
-           new_password: {   required: "Enter  Password",minlength: "Min is 6", maxlength: "Max is 10"},
+           new_password: {   required: "Enter  New Password",minlength: "Min is 6", maxlength: "Max is 12"},
            retype_password: {
-               required: "Enter New Password",
+               required: "Enter Confirm Password",
                notEqualTo: "Password Should Match"
            }
 

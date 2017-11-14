@@ -183,7 +183,7 @@ Class Loginmodel extends CI_Model
      $update="UPDATE user_details SET user_picture='$userFileName' WHERE user_id='$user_id'";
      $res=$this->db->query($update);
      if($res){
-       echo "success";
+       echo "";
      }else{
        echo "failed";
      }

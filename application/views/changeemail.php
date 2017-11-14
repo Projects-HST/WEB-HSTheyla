@@ -161,7 +161,7 @@ $.validator.addMethod("user_email_not_same", function(value, element) {
        },
        messages: {
 
-            email: {   required: "Enter New Mail",
+            email: {   required: "Enter New Mail",user_email_not_same:" ",
 
           }
 
