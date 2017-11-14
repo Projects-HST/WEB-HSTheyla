@@ -88,8 +88,8 @@
                              <!--a href="<?php echo base_url();?>users/view_single_events/<?php echo $rows->id;?>">
                               <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a-->
 
-                              <a href="<?php echo base_url();?>users/delete/<?php echo $rows->user_id;?>> 
-                              <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
+                              <!--a href="<?php echo base_url();?>users/delete/<?php echo $rows->user_id;?>> 
+                              <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
 
                             </td>
                         </tr>

@@ -90,8 +90,8 @@
                              <a href="<?php echo base_url();?>events/view_single_events/<?php echo base64_encode($rows->id);?>">
                               <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a>
 
-                              <a onclick="confirmGetMessage(<?php echo $eid;?>)" >   
-                              <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
+                              <!--a onclick="confirmGetMessage(<?php echo $eid;?>)" >   
+                              <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
 
                               <?php if($etype=='Paid'){?>
                               <a href="<?php echo base_url();?>advertisement/add_advertisement_details/<?php echo $rows->id;?>/<?php echo $rows->category_id;?>">

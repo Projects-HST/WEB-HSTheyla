@@ -104,8 +104,8 @@
                              <a href="<?php echo base_url();?>events/view_single_events/<?php echo base64_encode($rows->id);?>">
                               <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a>
 
-                              <a onclick="confirmGetMessage(<?php echo $eid;?>)" >
-                              <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
+                              <!--a onclick="confirmGetMessage(<?php echo $eid;?>)" >
+                              <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
 
                               <?php if($etype=='Paid'){?>
                               <a href="<?php echo base_url();?>booking/home/<?php echo base64_encode($rows->id);?>">
@@ -157,8 +157,8 @@
                              <a href="<?php echo base_url();?>events/view_single_events/<?php echo base64_encode($rows->id);?>">
                               <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a>
                              <!--href="<?php echo base_url();?>events/delete_events/<?php echo $rows->id;?>" -->
-                              <a onclick="confirmGetMessage(<?php echo $eid;?>)">
-                              <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
+                              <!--a onclick="confirmGetMessage(<?php echo $eid;?>)">
+                              <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
 
                               <?php if($etype=='Paid'){?>
                               <a href="<?php echo base_url();?>booking/home/<?php echo base64_encode($rows->id);?>">
@@ -211,8 +211,8 @@
                              <a href="<?php echo base_url();?>events/view_single_events/<?php echo base64_encode($rows->id);?>">
                               <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a>
 
-                              <a onclick="confirmGetMessage(<?php echo $eid;?>)">
-                              <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
+                              <!--a onclick="confirmGetMessage(<?php echo $eid;?>)">
+                              <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
 
                               <?php if($etype=='Paid'){ ?>
                               <a href="<?php echo base_url();?>booking/home/<?php echo base64_encode($rows->id);?>">

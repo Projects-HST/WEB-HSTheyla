@@ -117,8 +117,8 @@
 								                  <td>
                                     <a href="<?php echo base_url();?>userrole/edit_users/<?php echo $rows->id;?>"><img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
                                     <?php if($uid!=1){ ?>
-                         <a onclick="confirmGetMessage(<?php echo $uid;?>)" >   
-                           <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
+                         <!--a onclick="confirmGetMessage(<?php echo $uid;?>)" >   
+                           <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
                                 <?php } ?>
                                   </td>
                               </tr>
