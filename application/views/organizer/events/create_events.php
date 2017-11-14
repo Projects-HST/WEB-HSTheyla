@@ -380,90 +380,132 @@ success:function(test)
 
 function check()
 {
-var objFromDate = document.getElementById("datepicker-autoclose").value;
-var objToDate = document.getElementById("datepicker").value;
-var date1 = new Date(objFromDate);
-var date2 = new Date(objToDate);
+      var fdate = document.getElementById("datepicker-autoclose").value;
+      var tdate = document.getElementById("datepicker").value;
 
-var date3 = new Date();
-var date4 = date3.getMonth() + "/" + date3.getDay() + "/" + date3.getYear();
-var currentDate = new Date(date4);
+       //alert(fdate);alert(tdate);
+      var chunks = fdate.split('-');
+      var formattedDate = chunks[1]+'/'+chunks[0]+'/'+chunks[2];
+       //alert(formattedDate);
+      var chunks1 = tdate.split('-');
+      var formattedDate1 = chunks1[1]+'/'+chunks1[0]+'/'+chunks1[2];
+      //alert(formattedDate1);
+      //alert( Date.parse(formattedDate));
+      //alert( Date.parse(formattedDate1));
+      if(Date.parse(formattedDate) > Date.parse(formattedDate1) )
+      {
+       alert("Startdate should be less than Enddate");
+       return false;
+      }
 
-//----------------Time------------------
+      if(Date.parse(formattedDate)==Date.parse(formattedDate1) )
+      {
+       
+       var strStartTime = document.getElementById("stime").value;
+       var strEndTime = document.getElementById("etime").value;
 
-var strStartTime = document.getElementById("stime").value;
-var strEndTime = document.getElementById("etime").value;
+        var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+        var endTime = new Date(startTime)
+        endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+        
+        if (startTime > endTime) {
+        alert("Start Time is greater than end time");
+         return false; }
+  
+    }else{
+        var date1 = new Date(fdate);
+      var date2 = new Date(tdate);
+      var strStartTime = document.getElementById("stime").value;
+      var strEndTime = document.getElementById("etime").value;
+       var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+       var endTime = new Date(startTime);
+       endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+      var a=formattedDate + '' + strStartTime;
+      var b=formattedDate1 + '' + strEndTime;
+      //alert(startTime);alert(endTime); alert(a);alert(b); 
+      if (a == b || a > b) {
+      alert("Start Date & Time is greater than end Date & Time");
+      return false;
+      }
+    }
+      function GetHours(d) 
+      {
+        var h = parseInt(d.split(':')[0]);
+        if (d.split(':')[1].split(' ')[1] == "PM") {
+        h = h + 12;
+      }
+      return h;
+      }
+      function GetMinutes(d) 
+      {
+       return parseInt(d.split(':')[1].split(' ')[0]);
+      }
 
-var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
-var endTime = new Date(startTime);
-endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
 
-//var a= date1.startTime;
-//alert(a);
-if(date1 > date2)
-{
-alert("Startdate should be less than Enddate");
-return false; 
+  if(document.eventform.txtLatitude.value!="")
+    {
+            sLatitude = document.eventform.txtLatitude.value
+            if(isNaN(sLatitude) || sLatitude.indexOf(".")<0)
+            {
+                $("#ermsg2").html('<p style="color:red;">Please enter valid Latitude.</p>').show();
+                $("#ermsg").hide();
+                //alert ("Please enter valid Latitude.")
+                document.eventform.txtLatitude.focus();
+                return false;
+            }else{
+                 $("#ermsg").hide();
+                 $("#ermsg2").hide();
+            }
+    }
+
+    if(document.eventform.txtLongitude.value!="")
+    {
+            sLongitude = document.eventform.txtLongitude.value
+            
+            if(isNaN(sLongitude) || sLongitude.indexOf(".")<0)
+            {
+                //alert ("Please enter valid Longitude.")
+                 $("#ermsg3").html('<p style="color: red;">Please enter valid Longitude.</p>').show();
+                 $("#ermsg1").hide();
+                document.eventform.txtLongitude.focus();
+                return false;
+            }else{
+                 $("#ermsg1").hide();
+                 $("#ermsg3").hide();
+            }
+    }
+
+    // if(document.eventform.txtLatitude.value!="")
+
+    // {
+    //     var latitude = document.eventform.txtLatitude.value;
+    //     var longitude = document.eventform.txtLongitude.value;
+        
+    //     var reg = new RegExp("^[-+]?[0-9]{1,3}(?:\.[0-9]{1,10})?$");
+        
+    //     if( reg.exec(latitude) ) {
+    //      //do nothing
+    //     } else {
+    //          $("#ermsg2").html('<p style="color: red;">Please enter valid Latitude.</p>').show();
+    //          $("#ermsg").hide();
+    //         //alert("Please enter valid Latitude.");
+    //         document.eventform.txtLatitude.focus();
+    //         return false;
+    //     }
+        
+    //     if( reg.exec(longitude) ) {
+    //      //do nothing
+    //     } else {
+    //         //alert("Please enter valid Longitude.");
+    //         $("#ermsg3").html('<p style="color: red;">Please enter valid Longitude.</p>').show();
+    //         $("#ermsg1").hide();
+    //         document.eventform.txtLongitude.focus();
+    //         return false;
+    //     }
+    // }
+    
 }
 
-var a=objFromDate + '' + startTime;
-var b=objToDate + '' + endTime;
-//alert(a);alert(b);
-if (a == b || a > b) {
-alert("Start Date & Time is greater than end Date & Time");
-return false;
-}
-
-
-function GetHours(d)
-{
-var h = parseInt(d.split(':')[0]);
-if (d.split(':')[1].split(' ')[1] == "PM") 
-{
-h = h + 12;
-}
-return h;
-}
-
-function GetMinutes(d) 
-{
-return parseInt(d.split(':')[1].split(' ')[0]);
-}
-
-if(document.eventform.txtLatitude.value!="")
-{
-sLatitude = document.eventform.txtLatitude.value
-if(isNaN(sLatitude) || sLatitude.indexOf(".")<0)
-{
-    $("#ermsg2").html('<p style="color:red;">Please enter valid Latitude.</p>').show();
-    $("#ermsg").hide();
-    //alert ("Please enter valid Latitude.")
-    document.eventform.txtLatitude.focus();
-    return false;
-}else{
-     $("#ermsg").hide();
-     $("#ermsg2").hide();
-}
-}
-
-if(document.eventform.txtLongitude.value!="")
-{
-sLongitude = document.eventform.txtLongitude.value;
-
-if(isNaN(sLongitude) || sLongitude.indexOf(".")<0)
-{
-    //alert ("Please enter valid Longitude.")
-     $("#ermsg3").html('<p style="color: red;">Please enter valid Longitude.</p>').show();
-     $("#ermsg1").hide();
-    document.eventform.txtLongitude.focus();
-    return false;
-}else{
-     $("#ermsg1").hide();
-     $("#ermsg3").hide();
-}
-}
-
-}
 </script>
 
 

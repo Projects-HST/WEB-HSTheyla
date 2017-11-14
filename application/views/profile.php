@@ -290,10 +290,6 @@
 
                 success: function(response) {
                     if (response == "success") {
-
-
-
-
                         swal({
                             title: "success",
                             text: " Profile Saved.",

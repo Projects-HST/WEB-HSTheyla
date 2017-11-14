@@ -60,27 +60,29 @@
 							            <th>S.NO</th>
                                  <th>Event Name</th>
                                  <th>Plan</th>
+                                 <th>Show Date & Time</th>
                                  <th>Seats</th>
                                  <th>Booking Date</th>
+                                 
                                  <th>Amount</th>
                                  <!--th>Status</th-->
                                  <th>Action</th>
                               </tr>
                            </thead>
                            <tbody>
-						    <?php
+						                <?php
                                 $i=1;
                                 foreach($view as $rows) {
                                 ?>
-                              <tr>
+                               <tr>
                                  <td><?php echo $i; ?></td>
                                  <td><?php echo $rows->event_name; ?></td>
                                  <td><?php echo $rows->plan_name; ?></td>
+                                 <td><?php echo $rows->show_date; ?> ( <?php echo $rows->show_time; ?> ) </td>
                                  <td><?php echo $rows->number_of_seats; ?></td>
                                  <td><?php echo $rows->booking_date; ?></td>
                                  <td><?php echo $rows->total_amount; ?></td>
                                  <!--td><?php // echo $rows->country_name; ?></td-->
-                                 
 								 <td><a href="<?php echo base_url();?>bookinghistory/view_attendees/<?php echo $rows->order_id;?>"><img title="View Attendees" src="<?php echo base_url();?>assets/icons/view.png" /></a></td>
                               </tr>
                              <?php $i++;  }  ?>

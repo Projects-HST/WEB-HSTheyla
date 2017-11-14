@@ -66,7 +66,8 @@
                            <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Picture</label>
                            <div class="col-sm-6">
-                              <input type="file" name="categorypic" class="form-control" accept="image/*" >
+                              <input type="file" name="categorypic" id="file_upload" class="form-control" accept="image/x-png,image/jpeg">
+                                 <div id="preview" style="color: red;"></div>
                               <input type="hidden" name="currentcpic" class="form-control" value="<?php echo $res->category_image; ?>" >
                               <input type="hidden" name="id" class="form-control" value="<?php echo $res->id; ?>" >
                                <img src="<?php echo base_url(); ?>assets/category/<?php echo $res->category_image; ?>" class="img-circle">
@@ -115,7 +116,40 @@
 </div>
 <!-- content -->
 <script type="text/javascript">
+
+//   function validate()
+//  {
+//    var size=1000000;
+//    var file_size=document.getElementById('file_upload').files[0].size;
+//    //alert(file_size);
+//    if(file_size>=size)
+//    {
+//     alert('Upload image 1MB or Less Than 1MB');
+//     return false;
+//    }
+// }
+
  $(document).ready(function () {
+
+  $('#file_upload').on('change', function()
+        {
+          var f=this.files[0]
+          var actual=f.size||f.fileSize;
+          var orgi=actual/1024;
+            if(orgi<1024){
+              $("#preview").html('');
+              //$("#preview").html('<img src="<?php echo base_url(); ?>assets/loader.gif" alt="Uploading...."/>');
+              $("#categoryform").ajaxForm({
+                  target: '#preview'
+              }).submit();
+            }else{
+              $("#preview").html('File Size Must be  Lesser than 1 MB');
+              //alert("File Size Must be  Lesser than 1 MB");
+              //$("#file_upload").empty();
+              return false;
+            }
+        });
+
     $('#categoryform').validate({ // initialize the plugin
        rules: {
          categoryname:{required:true },

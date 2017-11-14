@@ -60,6 +60,7 @@
 							            <th>S.NO</th>
                                  <th>Event Name</th>
                                  <th>Plan</th>
+                                  <th>Show Date & Time</th>
                                  <th>Seats</th>
                                  <th>Amount</th>
                               </tr>
@@ -73,6 +74,7 @@
                                  <td><?php echo $i; ?></td>
                                  <td><?php echo $rows->event_name; ?></td>
                                  <td><?php echo $rows->plan_name; ?></td>
+                                 <td><?php echo $rows->show_date; ?> ( <?php echo $rows->show_time; ?> ) </td>
                                  <td><?php echo $rows->number_of_seats; ?></td>
                                  <td><?php echo $rows->total_amount; ?></td>
                               </tr>

@@ -67,6 +67,14 @@ function view_plan_time_details($plaid,$eveid)
   return $tim123;
 } 
 
+function booking_seats_details($plaid,$eveid)
+{
+  $seats="SELECT * FROM booking_history WHERE event_id='$eveid' AND plan_id='$plaid'";
+  $seats1=$this->db->query($seats);
+  $seats2=$seats1->result();
+  return $seats2;
+}
+
 function view_events_dates($eveid)
 {
    $date="SELECT event_name,start_date,end_date FROM events  WHERE id='$eveid'";

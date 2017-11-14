@@ -105,11 +105,9 @@
                               <tr>
                                  <td><?php  echo $i; ?></td>
                                  <td><?php  echo $rows->template_name; ?></td>
-								         <td>
+								                 <td>
                                     <a href="<?php echo base_url();?>emailtemplate/edit_template/<?php echo $rows->id;?>"><img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
-
                                      <!--a href="<?php echo base_url();?>emailtemplate/delete_template/<?php echo $rows->id;?>"><img title="Edit" src="<?php echo base_url();?>assets/icons/delete.png" /></a-->
-
                                  </td>
                               </tr>
                              <?php $i++;  }  ?>

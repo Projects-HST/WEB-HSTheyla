@@ -62,7 +62,7 @@
                         <div class="form-group row">
                             <label for="Category" class="col-sm-2 col-form-label">User Name</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" name="username" onkeyup="checkusernamefun(this.value)">
+                                <input class="form-control" type="text" id="ufun" name="username" onkeyup="checkusernamefun(this.value)">
                                 <p id="msg2" style="color:red;"> </p>
                             </div>
                         
@@ -411,14 +411,14 @@ function checkusernamefun(val)
            $("#msg2").html(test);
            $("#save").hide();
            $("#save1").hide();
-           $("#mfun").hide();
-           $("#efun").hide();
+           //$("#mfun").hide();
+           //$("#efun").hide();
           }else{
             $("#msg2").html(test);
             $("#save").show();
             $("#save1").show();
-            $("#mfun").show();
-           $("#efun").show();
+           //$ ("#mfun").show();
+           //$("#efun").show();
           }
       }
    });
@@ -437,10 +437,14 @@ function checkusernamefun(val)
             $("#msg").html(test);
             $("#save").hide();
             $("#save1").hide();
+            //$("#mfun").hide();
+            //$("#ufun").hide();
           }else{
             $("#msg").html(test);
             $("#save").show();
             $("#save1").show();
+            //$("#mfun").show();
+            //$("#ufun").show();
           }
       }
    });
@@ -459,12 +463,14 @@ function checkusernamefun(val)
           $("#msg1").html(test);
           $("#save").hide();
           $("#save1").hide();
-          $("#efun").hide();
+          //$("#efun").hide();
+          //$("#ufun").hide();
           }else{
              $("#msg1").html(test);
              $("#save").show();
              $("#save1").show();
-             $("#efun").show();
+             //$("#efun").show();
+            // $("#ufun").show();
           }
       }
    });
