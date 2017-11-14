@@ -285,23 +285,36 @@ function confirmGetMessage(adid)
        return false;
       }
 
-      var date1 = new Date(fdate);
-      var date2 = new Date(tdate);
+       if(Date.parse(formattedDate)==Date.parse(formattedDate1) )
+      {
+       
+       var strStartTime = document.getElementById("stime").value;
+       var strEndTime = document.getElementById("etime").value;
 
+        var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+        var endTime = new Date(startTime)
+        endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+        
+        if (startTime > endTime) {
+        alert("Start Time is greater than end time");
+         return false; }
+  
+    }else{
+        var date1 = new Date(fdate);
+      var date2 = new Date(tdate);
       var strStartTime = document.getElementById("stime").value;
       var strEndTime = document.getElementById("etime").value;
-
-      var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
-      var endTime = new Date(startTime);
-      endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
-
-      var a=formattedDate + '' + startTime;
-      var b=formattedDate1 + '' + endTime;
-     //alert(a);alert(b);
+       var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+       var endTime = new Date(startTime);
+       endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+      var a=formattedDate + '' + strStartTime;
+      var b=formattedDate1 + '' + strEndTime;
+      //alert(startTime);alert(endTime); alert(a);alert(b); 
       if (a == b || a > b) {
       alert("Start Date & Time is greater than end Date & Time");
       return false;
       }
+    }
 
       function GetHours(d)
       {

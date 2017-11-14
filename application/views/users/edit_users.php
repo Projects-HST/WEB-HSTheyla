@@ -414,67 +414,80 @@
             }
           });
        }
- function checkemailfun(val)
-  {
-   $.ajax({
-     type:'post',
-     url:'<?php echo base_url(); ?>/users/mail_checker',
-     data:'email='+val,
-     success:function(test)
-
-      {
-       if(test=="Email Id already Exit")
-         {
-           $("#msg").html(test);
-           $("#save").hide();
-           $("#save1").hide();
-          }else{
-             $("#msg").html(test);
-             $("#save").show();
-            }
-      }
-   });
-  }
-
-   function checkmobilefun(val)
-  {
-    $.ajax({
-     type:'post',
-     url:'<?php echo base_url(); ?>/users/mobile_checker',
-     data:'cell='+val,
-     success:function(test)
-      {
-       if(test=="Mobile Number already Exit")
-         {
-           $("#msg1").html(test);
-           $("#save").hide();
-           $("#save1").hide();
-          }else{
-             $("#msg1").html(test);
-             $("#save").show();
-            }
-      }
-   });
-  }
-
-function checkusernamefun(val)
+ function checkusernamefun(val)
   {
    $.ajax({
      type:'post',
      url:'<?php echo base_url(); ?>/users/username_checker',
      data:'uname='+val,
      success:function(test)
-      {
+     {
        if(test=="UserName already Exit")
          {
-           $("#msg2").html(test);
+           $("#msg2").html('<p style="color:red;"><b>UserName already Exit</b></p>');
            $("#save").hide();
            $("#save1").hide();
+           //$("#mfun").hide();
+           //$("#efun").hide();
           }else{
-             $("#msg2").html(test);
+            $("#msg2").html('<p style="color:green;"><b>UserName Available</b></p>');
+            $("#save").show();
+            $("#save1").show();
+           //$ ("#mfun").show();
+           //$("#efun").show();
+          }
+      }
+   });
+  }
+
+  function checkemailfun(val)
+  {
+   $.ajax({
+     type:'post',
+     url:'<?php echo base_url(); ?>/users/mail_checker',
+     data:'email='+val,
+     success:function(test)
+      {
+       if(test=="Email Id already Exit")
+         {
+            $("#msg").html('<p style="color:red;"><b>Email Id already Exit</b></p>');
+            $("#save").hide();
+            $("#save1").hide();
+            //$("#mfun").hide();
+            //$("#ufun").hide();
+          }else{
+            $("#msg").html('<p style="color:green;"><b>Email Id Available</b></p>');
+            $("#save").show();
+            $("#save1").show();
+            //$("#mfun").show();
+            //$("#ufun").show();
+          }
+      }
+   });
+  }
+
+   function checkmobilefun(val)
+   {
+    $.ajax({
+    type:'post',
+    url:'<?php echo base_url(); ?>/users/mobile_checker',
+    data:'cell='+val,
+    success:function(test)
+    {
+      if(test=="Mobile Number already Exit")
+        {
+          $("#msg1").html('<p style="color:red;"><b>Mobile Number already Exit</b></p>');
+          $("#save").hide();
+          $("#save1").hide();
+          //$("#efun").hide();
+          //$("#ufun").hide();
+          }else{
+             $("#msg1").html('<p style="color:green;"><b>Mobile Number Available</b></p>');
              $("#save").show();
              $("#save1").show();
-            }
+             //$("#efun").show();
+            // $("#ufun").show();
+          }
       }
    });
   }

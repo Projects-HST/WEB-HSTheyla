@@ -138,10 +138,10 @@ class Booking extends CI_Controller
 
         $datas['plan_time'] = $this->bookingmodel->view_plan_time_details($plaid,$eveid);
         $datas['dates'] = $this->bookingmodel->view_events_dates($eveid);
-        $datas['seats'] = $this->bookingmodel->booking_seats_details($plaid,$eveid);
+        //$datas['seats'] = $this->bookingmodel->booking_seats_details($plaid,$eveid);
         $datas['planid']=$plaid;
         $datas['eventid']=$eveid;
-        //echo '<pre>';print_r($datas['seats'] );exit;
+        //echo '<pre>';print_r($datas['plan_time'] );exit;
 		if($user_role==1)
 		{
 		  $this->load->view('header');

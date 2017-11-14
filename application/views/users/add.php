@@ -63,7 +63,7 @@
                             <label for="Category" class="col-sm-2 col-form-label">User Name</label>
                             <div class="col-sm-4">
                                 <input class="form-control" type="text" id="ufun" name="username" onkeyup="checkusernamefun(this.value)">
-                                <p id="msg2" style="color:red;"> </p>
+                                <p id="msg2"> </p>
                             </div>
                         
                         <label for="Category" class="col-sm-2 col-form-label">Name</label>
@@ -373,8 +373,6 @@
           }); 
        }
 
-
-
 // function checkfun(val)
 //   {
 //    $.ajax({
@@ -408,13 +406,13 @@ function checkusernamefun(val)
      {
        if(test=="UserName already Exit")
          {
-           $("#msg2").html(test);
+           $("#msg2").html('<p style="color:red;"><b>UserName already Exit</b></p>');
            $("#save").hide();
            $("#save1").hide();
            //$("#mfun").hide();
            //$("#efun").hide();
           }else{
-            $("#msg2").html(test);
+            $("#msg2").html('<p style="color:green;"><b>UserName Available</b></p>');
             $("#save").show();
             $("#save1").show();
            //$ ("#mfun").show();
@@ -434,13 +432,13 @@ function checkusernamefun(val)
       {
        if(test=="Email Id already Exit")
          {
-            $("#msg").html(test);
+            $("#msg").html('<p style="color:red;"><b>Email Id already Exit</b></p>');
             $("#save").hide();
             $("#save1").hide();
             //$("#mfun").hide();
             //$("#ufun").hide();
           }else{
-            $("#msg").html(test);
+            $("#msg").html('<p style="color:green;"><b>Email Id Available</b></p>');
             $("#save").show();
             $("#save1").show();
             //$("#mfun").show();
@@ -460,13 +458,13 @@ function checkusernamefun(val)
     {
       if(test=="Mobile Number already Exit")
         {
-          $("#msg1").html(test);
+          $("#msg1").html('<p style="color:red;"><b>Mobile Number already Exit</b></p>');
           $("#save").hide();
           $("#save1").hide();
           //$("#efun").hide();
           //$("#ufun").hide();
           }else{
-             $("#msg1").html(test);
+             $("#msg1").html('<p style="color:green;"><b>Mobile Number Available</b></p>');
              $("#save").show();
              $("#save1").show();
              //$("#efun").show();

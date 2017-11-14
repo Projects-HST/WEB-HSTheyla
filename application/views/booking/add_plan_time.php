@@ -135,6 +135,8 @@
                               <?php
                                  $i=1;
                                  foreach($plan_time as $rows) {
+                                    $tlt=$rows->total_seats;
+                                    $ave=$rows->seat_available;
                                  ?>
                               <tr>
                                  <td><?php  echo $i; ?></td>
@@ -142,7 +144,7 @@
                                  <td><?php  echo $rows->plan_name; ?></td>
                                  <td><?php  echo $newDate = date("d-m-Y",strtotime($rows->show_date));?></td>
                                  <td><?php  echo $rows->show_time; ?></td>
-                                 <td><?php  echo $rows->seat_available; ?></td>
+                                 <td><?php  if(empty($tlt)){ echo $ave; }else{ echo $tlt; } ?></td>
                                  <td><?php  echo $rows->seat_rate; ?></td>
                                  <td>
                                     <a href="<?php echo base_url();?>booking/edit_plan_time/<?php echo $rows->id;?>"><img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>

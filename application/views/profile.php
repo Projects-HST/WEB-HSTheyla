@@ -125,7 +125,7 @@
                                 <form id="image_upload_form" action="<?php echo base_url(); ?>home/change_pic" method="post" enctype="multipart/form-data" action='image_upload.php' autocomplete="off">
                                     <div class="upload-button">Change Picture</div>
 
-                                    <input class="file-upload" name="profilepic" id="profilepic" type="file"accept="image/x-png,image/jpeg" />
+                                    <input class="file-upload" name="profilepic" id="profilepic" type="file" accept="image/x-png,image/jpeg" />
                                     <div id="preview"></div>
                                 </form>
 
