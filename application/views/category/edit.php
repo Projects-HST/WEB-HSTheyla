@@ -72,7 +72,18 @@
                                <img src="<?php echo base_url(); ?>assets/category/<?php echo $res->category_image; ?>" class="img-circle">
                               </div>
                            </div>
-
+                            <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Display Order</label>
+                            <div class="col-sm-6">
+                             <input type="hidden" name="old_disp_order" class="form-control" value="<?php echo $res->order_by; ?>">
+                                <select class="form-control" name="disp_order">
+                                    <?php foreach($result as $rows) { ?>
+                                    <option value="<?php echo $rows->order_by; ?>"><?php echo $rows->order_by; ?></option>
+                                    <?php } ?>
+                                </select>
+                                 <script language="JavaScript">document.categoryform.disp_order.value="<?php echo $res->order_by; ?>";</script>
+                                  </div>
+                                    </div>
                             <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Event Status</label>
                               <div class="col-sm-6">
@@ -84,16 +95,13 @@
                                   <script language="JavaScript">document.categoryform.eventsts.value="<?php echo $res->status; ?>";</script>
                               </div>
                            </div>
-
                            <div class="form-group">
                               <label class="col-sm-4 col-form-label"></label>
                               <button type="submit" class="btn btn-primary waves-effect waves-light">
                               Update </button>
-
                            </div>
                      </div>
                      </form>
-
                   </div>
                </div>
             </div>
@@ -112,13 +120,15 @@
        rules: {
          categoryname:{required:true },
          //categorypic:{required:true },
-         eventsts:{required:true }
+         eventsts:{required:true },
+        disp_order: { required: true }
 
         },
         messages: {
         categoryname:"Enter Category Name",
         //categorypic:"Select Category Picture",
-        eventsts:"Select Status"
+        eventsts:"Select Status",
+        disp_order:"Select Display Order"
                },
          });
    });

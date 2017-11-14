@@ -84,8 +84,8 @@
                              <a href="<?php echo base_url();?>guestuser/view_all_details/<?php echo $rows->user_id;?>">
                               <img  title="View Followers Details" src="<?php echo base_url();?>assets/icons/view.png"/>
                             </a>
-                              <a onclick="confirmGetMessage(<?php echo $guid;?>)" > 
-                              <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
+                              <!--a onclick="confirmGetMessage(<?php echo $guid;?>)" > 
+                              <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
                             </td>
                         </tr>
                        <?php $i++; }  ?>

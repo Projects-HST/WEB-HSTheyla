@@ -32,6 +32,7 @@ class Category extends CI_Controller
         $user_role    = $this->session->userdata('user_role');
         $categoryname = $this->input->post('categoryname');
         $status       = $this->input->post('eventsts');
+        $disp_order = $this->input->post('disp_order');
         //echo $categoryname; echo $status;
         $category_pic = $_FILES['categorypic']['name'];
         $file_name    = time() . rand(1, 5) . rand(6, 10);
@@ -39,7 +40,7 @@ class Category extends CI_Controller
         $uploaddir    = 'assets/category/';
         $profilepic   = $uploaddir . $categorypic1;
         move_uploaded_file($_FILES['categorypic']['tmp_name'], $profilepic);
-        $datas = $this->categorymodel->insert_category($categoryname, $categorypic1, $status, $user_id, $user_role);
+        $datas = $this->categorymodel->insert_category($categoryname, $categorypic1, $disp_order, $status, $user_id, $user_role);
         $sta   = $datas['status'];
         //print_r($sta);exit;
         if ($sta == "success") {
@@ -59,6 +60,7 @@ class Category extends CI_Controller
         $user_id       = $this->session->userdata('id');
         $user_role     = $this->session->userdata('user_role');
         $datas['edit'] = $this->categorymodel->edit_category($id, $user_id, $user_role);
+         $datas['result'] = $this->categorymodel->getall_category_details();
         if ($user_role == 1) {
             $this->load->view('header');
             $this->load->view('category/edit', $datas);
@@ -76,6 +78,10 @@ class Category extends CI_Controller
         $status       = $this->input->post('eventsts');
         $currentpic   = $this->input->post('currentcpic');
         $category_id  = $this->input->post('id');
+
+        $old_disp_order=$this->input->post('old_disp_order');
+        $disp_order=$this->input->post('disp_order');
+
         $category_pic = $_FILES['categorypic']['name'];
         $file_name    = time() . rand(1, 5) . rand(6, 10);
         $categorypic1 = $file_name . $category_pic;
@@ -85,8 +91,7 @@ class Category extends CI_Controller
         if (empty($category_pic)) {
             $categorypic1 = $currentpic;
         }
-
-        $datas = $this->categorymodel->update_category_details($category_id, $categorypic1, $status, $user_id, $user_role);
+        $datas = $this->categorymodel->update_category_details($category_id,$categorypic1,$disp_order,$old_disp_order,$status,$user_id,$user_role);
         $sta   = $datas['status'];
         //print_r($sta);exit;
         if ($sta == "success") {

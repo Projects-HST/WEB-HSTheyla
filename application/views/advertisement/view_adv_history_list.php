@@ -115,8 +115,9 @@
                                  <td>
                                   <a href="<?php echo base_url();?>advertisement/edit_history_all/<?php echo $rows->id;?>">
                                   <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
-                                 <a onclick="confirmGetMessage(<?php echo $ahid;?>)" >
-                                 <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a></td>
+                                 <!--a onclick="confirmGetMessage(<?php echo $ahid;?>)" >
+                                 <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
+                               </td>
                                   
                            </td>
                               </tr>

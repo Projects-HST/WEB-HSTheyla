@@ -96,8 +96,8 @@
                              <!--a href="<?php echo base_url();?>users/view_single_events/<?php echo $rows->id;?>">
                               <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a-->
 
-                              <a onclick="confirmGetMessage(<?php echo $usid;?>,<?php echo $uid;?>)">   
-                              <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
+                              <!--a onclick="confirmGetMessage(<?php echo $usid;?>,<?php echo $uid;?>)">   
+                              <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
 
                             </td>
                         </tr>

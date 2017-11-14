@@ -10,19 +10,7 @@ class Events extends CI_Controller
         $this->load->library('session');
     }
     //-------------------------Events Add / Update---------------------------------
-    function get_times($default = '10:00', $interval = '+15 minutes')
-    {
-        $output  = '';
-        $current = strtotime('00:00:00');
-        $end     = strtotime('23:59:00');
-        while ($current <= $end) {
-            $time = date('H:i:s', $current);
-            $sel  = ($time == $default) ? ' selected' : '';
-            $output .= "<option value=\"{$time}\">" . date('h.i A', $current) . '</option>';
-            $current = strtotime($interval, $current);
-        }
-        return $output;
-    }
+    
     public function home()
     {
         $datas                  = $this->session->userdata();

@@ -204,7 +204,7 @@
                         <option value="<?php echo $temp->id; ?>"><?php echo $temp->template_name; ?></option>
                      <?php } ?>
                   </select>
-                <input type="text" id="emails_id" name="usersemailid" class="form-control"/>
+                <input type="hidden" id="emails_id" name="usersemailid" class="form-control"/>
                
                   <div class="col-md-6 col-lg-6 col-xl-3">
                   <!--div class="mini-stat clearfix bg-primary"-->

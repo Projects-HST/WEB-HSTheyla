@@ -186,8 +186,9 @@
                                  <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
                                  <td> <a href="<?php echo base_url();?>advertisement/edit_history/<?php echo $rows->id;?>">
                                   <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
-                                 <a onclick="confirmGetMessage(<?php echo $adid;?>)">
-                                 <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a></td>
+                                 <!--a onclick="confirmGetMessage(<?php echo $adid;?>)">
+                                 <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
+                               </td>
                              </td>
                               </tr>
                              <?php $i++;  }  ?>

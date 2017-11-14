@@ -119,8 +119,8 @@
                                 <td>
                                    <a href="<?php echo base_url();?>advertisement/edit_plans/<?php echo $rows->id;?>">
                                    <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
-                                   <a onclick="confirmGetMessage(<?php echo $pid;?>)">   
-                                  <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
+                                   <!--a onclick="confirmGetMessage(<?php echo $pid;?>)">   
+                                  <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
                                 </td>
                               </tr>
                              <?php $i++;  }  ?>
