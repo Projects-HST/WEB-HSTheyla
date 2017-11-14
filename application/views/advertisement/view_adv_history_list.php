@@ -33,7 +33,6 @@
                <i class="ion-ios7-bell noti-icon"></i>
                <span class="badge badge-success noti-icon-badge">3</span>
                </a>
-         
             </li>
             <li class="list-inline-item dropdown notification-list">
             <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
@@ -70,18 +69,16 @@
                   <div class="card m-b-20">
                      <div class="card-block">
                         <h4 class="mt-0 header-title"></h4>
-                        
-                           <?php if($this->session->flashdata('msg')): ?>
+                        <?php if($this->session->flashdata('msg')): ?>
                         <div class="alert alert-success">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                            ×</button> <?php echo $this->session->flashdata('msg'); ?>
                         </div>
                         <?php endif; ?>
-
                         <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
-							     <th>S.NO</th>
+							                   <th>S.NO</th>
                                  <th>Event Name</th>
                                  <th>Category Rate</th>
                                  <th>From Date</th>

@@ -8,7 +8,6 @@ Class Bookinghistorymodel extends CI_Model
       parent::__construct();
    }
 
-
 //--------------------------------Bookingmodel Query-------------------------------------
 
 function view_booking_history_details()
