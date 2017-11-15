@@ -355,7 +355,7 @@
            var orgi=actual/1024;
             if(orgi<1024){
               $("#preview").html('');
-              $("#preview").html('<img src="<?php echo base_url(); ?>assets/loader.gif" alt="Uploading...."/>');
+              $("#preview").html('<img src="<?php echo base_url(); ?>assets/loader.gif" alt="Uploading...." style="width:100%;"/>');
               $("#image_upload_form").ajaxForm({
                   target: '#preview'
               }).submit();
