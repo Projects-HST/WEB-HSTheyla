@@ -35,8 +35,9 @@ class Category extends CI_Controller
         $disp_order = $this->input->post('disp_order');
         //echo $categoryname; echo $status;
         $category_pic = $_FILES['categorypic']['name'];
-        $file_name    = time() . rand(1, 5) . rand(6, 10);
-        $categorypic1 = $file_name . $category_pic;
+        $temp = pathinfo($category_pic, PATHINFO_EXTENSION);
+        $file_name    = time() . rand(1,5) . rand(6,10);
+        $categorypic1 = $file_name . '.' .$temp;
         $uploaddir    = 'assets/category/';
         $profilepic   = $uploaddir . $categorypic1;
         move_uploaded_file($_FILES['categorypic']['tmp_name'], $profilepic);
@@ -83,8 +84,10 @@ class Category extends CI_Controller
         $disp_order=$this->input->post('disp_order');
 
         $category_pic = $_FILES['categorypic']['name'];
+        $temp = pathinfo($category_pic, PATHINFO_EXTENSION);
         $file_name    = time() . rand(1, 5) . rand(6, 10);
-        $categorypic1 = $file_name . $category_pic;
+       // $categorypic1 = $file_name . $category_pic;
+        $categorypic1 = $file_name . '.' .$temp;
         $uploaddir    = 'assets/category/';
         $profilepic   = $uploaddir . $categorypic1;
         move_uploaded_file($_FILES['categorypic']['tmp_name'], $profilepic);

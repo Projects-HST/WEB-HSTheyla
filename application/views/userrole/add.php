@@ -11,7 +11,7 @@
                <i class="ion-ios7-bell noti-icon"></i>
                <span class="badge badge-success noti-icon-badge">3</span>
                </a>
-            </li-->
+            </li!-->
             <li class="list-inline-item dropdown notification-list">
             <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
                aria-haspopup="false" aria-expanded="false">
@@ -20,7 +20,7 @@
             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
             <!--a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
             <a class="dropdown-item" href="#"><span class="badge badge-success pull-right">5</span><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
-            <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a-->
+            <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a!-->
             <a class="dropdown-item" href="<?php echo base_url(); ?>adminlogin/logout"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
             </div>
             </li>
@@ -32,7 +32,7 @@
          </button>
          </li>
          <li class="hide-phone list-inline-item app-search">
-         <h3 class="page-title">Add Country</h3>
+         <h3 class="page-title">Add Users</h3>
          </li>
          </ul>
          <div class="clearfix"></div>

@@ -23,7 +23,7 @@
 <!-- Start content -->
 <div class="content-page">
 <div class="content">
-  <!-- Top Bar Start -->
+   <!-- Top Bar Start -->
    <div class="topbar">
       <nav class="navbar-custom">
          <ul class="list-inline float-right mb-0">
@@ -33,6 +33,7 @@
                <i class="ion-ios7-bell noti-icon"></i>
                <span class="badge badge-success noti-icon-badge">3</span>
                </a>
+         
             </li-->
             <li class="list-inline-item dropdown notification-list">
             <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
@@ -54,7 +55,7 @@
          </button>
          </li>
          <li class="hide-phone list-inline-item app-search">
-         <h3 class="page-title">Add Country</h3>
+         <h3 class="page-title">Edit  Advertisement Details</h3>
          </li>
          </ul>
          <div class="clearfix"></div>

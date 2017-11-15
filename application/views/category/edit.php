@@ -8,7 +8,7 @@
 <!-- Start content -->
 <div class="content-page">
 <div class="content">
-  <!-- Top Bar Start -->
+   <!-- Top Bar Start -->
    <div class="topbar">
       <nav class="navbar-custom">
          <ul class="list-inline float-right mb-0">
@@ -18,7 +18,8 @@
                <i class="ion-ios7-bell noti-icon"></i>
                <span class="badge badge-success noti-icon-badge">3</span>
                </a>
-            </li-->
+
+            </li!-->
             <li class="list-inline-item dropdown notification-list">
             <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
                aria-haspopup="false" aria-expanded="false">
@@ -27,7 +28,7 @@
             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
             <!--a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
             <a class="dropdown-item" href="#"><span class="badge badge-success pull-right">5</span><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
-            <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a-->
+            <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a!-->
             <a class="dropdown-item" href="<?php echo base_url(); ?>adminlogin/logout"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
             </div>
             </li>
@@ -39,11 +40,12 @@
          </button>
          </li>
          <li class="hide-phone list-inline-item app-search">
-         <h3 class="page-title">Add Country</h3>
+         <h3 class="page-title">Edit Category</h3>
          </li>
          </ul>
          <div class="clearfix"></div>
       </nav>
+
       </div>
       <!-- Top Bar End -->
       <div class="page-content-wrapper">
@@ -64,7 +66,7 @@
                            <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Picture</label>
                            <div class="col-sm-6">
-                              <input type="file" name="categorypic" id="file_upload" class="form-control" accept="image/x-png,image/jpeg">
+                              <input type="file" name="categorypic" id="file_upload" class="form-control" accept="image/*">
                                  <div id="preview" style="color: red;"></div>
                               <input type="hidden" name="currentcpic" class="form-control" value="<?php echo $res->category_image; ?>" >
                               <input type="hidden" name="id" class="form-control" value="<?php echo $res->id; ?>" >

@@ -1,5 +1,5 @@
 <?php
-  function get_times( $default = '10:00', $interval = '+15 minutes' ) 
+    function get_times( $default = '10:00', $interval = '+15 minutes' ) 
 	{
 		$output = '';
 		$current = strtotime( '00:00:00' );
@@ -13,15 +13,7 @@
 		return $output;
     }
 ?>
-<script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
-<link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-   .img-circle{
-          width: 90px;
-         border-radius: 30px;
-         margin-top: 10px;
-       }
-</style>
+
 <div class="content-page">
 <!-- Footer Close-->
 <!-- Start content -->
@@ -30,22 +22,22 @@
    <div class="topbar">
       <nav class="navbar-custom">
          <ul class="list-inline float-right mb-0">
-            <!--li class="list-inline-item dropdown notification-list">
+            <li class="list-inline-item dropdown notification-list">
                <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
                   aria-haspopup="false" aria-expanded="false">
                <i class="ion-ios7-bell noti-icon"></i>
                <span class="badge badge-success noti-icon-badge">3</span>
                </a>
-            </li!-->
+            </li>
             <li class="list-inline-item dropdown notification-list">
                <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
                   aria-haspopup="false" aria-expanded="false">
                <img src="<?php echo base_url(); ?>assets/images/admin/admin.png" alt="user" class="rounded-circle">
                </a>
                <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                  <!--a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
+                  <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
                   <a class="dropdown-item" href="#"><span class="badge badge-success pull-right">5</span><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
-                  <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a!-->
+                  <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a>
                   <a class="dropdown-item" href="<?php echo base_url(); ?>adminlogin/logout"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
                </div>
             </li>
@@ -57,7 +49,7 @@
                </button>
             </li>
             <li class="hide-phone list-inline-item app-search">
-               <h3 class="page-title">Edit Events</h3>
+               <h3 class="page-title">Add Events</h3>
             </li>
          </ul>
          <div class="clearfix"></div>
@@ -80,9 +72,10 @@
                         </div>
                         <?php endif; ?>
 
-                <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>events/update_events" name="eventform" id="eventform" onSubmit='return check();'>
-                  <?php foreach($edit as $rows){}?>
+
+                <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>events/add_events" name="eventform" onSubmit='return check();'>
                         <div class="form-group row">
+                            
                             <label for="Category" class="col-sm-2 col-form-label">Select Category</label>
                             <div class="col-sm-4">
                                 <select class="form-control" name="category" required="">
@@ -91,52 +84,40 @@
                                         <option value="<?php echo $res->id; ?>"><?php echo $res->category_name; ?></option>
                                      <?php } ?>
                                 </select>
-                              <script language="JavaScript">document.eventform.category.value="<?php echo $rows->category_id; ?>";</script>
                             </div>
 
                             <label for="Name" class="col-sm-2 col-form-label">Event Name</label>
                             <div class="col-sm-4">
-                              <input class="form-control" type="text" required="" name="event_name" value="<?php echo $rows->event_name; ?>">
+                                <input class="form-control" type="text" required="" name="event_name">
                             </div>
 
                         </div>
                        <div class="form-group row">
                             <label for="country" class="col-sm-2 col-form-label">Select Country</label>
                             <div class="col-sm-4">
-                              <select class="form-control" name="country" required="" onchange="getcityname(this.value)">
+                              <select class="form-control" name="country" required="" onchange="get_cityname(this.value)">
                               <option value="">Select Country Name</option>
                                      <?php foreach($country_list as $cntry){ ?>
                                         <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
                                      <?php } ?>
                                 </select>
-                                <script language="JavaScript">document.eventform.country.value="<?php echo $rows->event_country; ?>";</script>
                             </div>
                              <label for="city" class="col-sm-2 col-form-label">Select City</label>
                             <div class="col-sm-4">
-                              <select class="form-control" name="city" id="ctname">
-                              <?php 
-                                $cntyrid=$rows->event_country;
-                                $sql="SELECT id,city_name FROM city_master WHERE country_id='$cntyrid' AND event_status='Y' ORDER BY id ASC";
-                                $resu=$this->db->query($sql);
-                                $res=$resu->result();
-                                foreach ($res as $value) { ?>
-                                <option value="<?php echo $value->id; ?>"><?php echo $value->city_name; ?></option>
-                                <?php } ?>
+                               <select class="form-control" name="city" required="" id="ctname">
                                 </select>
-                                <script language="JavaScript">document.eventform.city.value="<?php echo $rows->event_city; ?>";</script>
-                                 <div id="cmsg"></div>
-                             
+                                <div id="cmsg"></div>
                             </div>
                         </div>
                         <div class="form-group row">
                            
                             <label for="Venue" class="col-sm-2 col-form-label">Venue</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" value="<?php echo $rows->event_venue; ?>" required="" name="venue">
+                                <input class="form-control" type="text" required="" name="venue"  >
                             </div>
                              <label for="Address" class="col-sm-2 col-form-label">Address</label>
                             <div class="col-sm-4">
-                               <textarea id="textarea" name="address" required="" class="form-control" maxlength="240" rows="3" placeholder=""><?php echo $rows->event_address; ?></textarea>
+                               <textarea id="textarea" name="address" required="" class="form-control" maxlength="240" rows="3" placeholder=""></textarea>
                             </div>
 
                         </div>
@@ -144,7 +125,7 @@
                            
                             <label for="Description" class="col-sm-2 col-form-label">Description</label>
                             <div class="col-sm-4">
-                                <textarea  id="textarea" required="" name="description" class="form-control" maxlength="30000" rows="3" placeholder=""><?php echo $rows->description; ?></textarea>
+                                <textarea  id="textarea" required="" name="description" class="form-control" maxlength="30000" rows="3" placeholder=""></textarea>
                             </div>
 
                              <label for="ecost" class="col-sm-2 col-form-label">Event Type</label>
@@ -154,7 +135,6 @@
                                     <option value="Paid">Paid</option>
                                     <option value="Invite">Invite</option>
                                 </select>
-                                <script language="JavaScript">document.eventform.eventcost.value="<?php echo $rows->event_type; ?>";</script>
                             </div>
                         </div>
                        <div class="form-group row">
@@ -162,7 +142,7 @@
                             <label for="sdate" class="col-sm-2 col-form-label">Start Date</label>
                             <div class="col-sm-4">
                               <div class="input-group">
-                                <input type="text" class="form-control datepicker" value="<?php $date=date_create($rows->start_date);echo date_format($date,"d-m-Y");  ?>" name="start_date" id="datepicker-autoclose">
+                                <input type="text" class="form-control" required="" name="start_date" id="datepicker-autoclose">
                                 <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
                             </div>
                             </div>
@@ -170,7 +150,7 @@
                              <label for="edate" class="col-sm-2 col-form-label">End Date</label>
                             <div class="col-sm-4">
                                <div class="input-group">
-                                <input type="text" class="form-control datepicker"  value="<?php $date=date_create($rows->end_date);echo date_format($date,"d-m-Y");  ?>" name="end_date" id="datepicker">
+                                <input type="text" class="form-control" required="" name="end_date" id="datepicker">
                                 <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
                             </div>
                             </div>
@@ -179,64 +159,54 @@
                            
                             <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
                             <div class="col-sm-4">
-
-                               <input  type="text" class="form-control" id="stime" name="start_time" value="<?php echo $rows->start_time; ?>">
-
-                                <!-- select name="start_time" required="" class="form-control"  >
+                                <select name="start_time" required="" class="form-control" >
                                      <option value="">Select Start Time</option>
-									                   <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
-								                </select>
-                                <script language="JavaScript">document.eventform.start_time.value="<?php echo $rows->start_time; ?>";</script-->
+									 <option value=""><?php echo get_times(); ?></option>
+								</select>
 
                             </div>
 
                              <label for="etime" class="col-sm-2 col-form-label">End Time</label>
                             <div class="col-sm-4">
-                              <input  type="text" class="form-control" id="etime" name="end_time" value="<?php echo $rows->end_time; ?>">
-                                <!--select name="end_time" required="" class="form-control" id="etime">
+                                <select name="end_time" required="" class="form-control" >
                                      <option value="">Select End Time</option>
-									                   <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
-								                </select>
-                                 <script language="JavaScript">document.eventform.end_time.value="<?php echo $rows->end_time; ?>";</script-->
+
+									 <option value=""><?php echo get_times(); ?></option>
+								</select>
                             </div>
 
                         </div>
                         <div class="form-group row">
-                             <label for="latitude" class="col-sm-2 col-form-label">Select</label>
-                            <div id="dvMap" style="width:500px; height:350px"> </div>
-
-                          </div>
-                        <div class="form-group row">
                            
                             <label for="latitude" class="col-sm-2 col-form-label">Event Latitude</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" name="txtLatitude" value="<?php echo $rows->event_latitude; ?>" id="latu" >
+                                <input class="form-control" type="text" name="txtLatitude"  id="lat" >
                                 <div id="ermsg"></div> <div id="ermsg2"></div>
                             </div>
                               <label for="longitude" class="col-sm-2 col-form-label">Event Longitude</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" value="<?php echo $rows->event_longitude; ?>" name="txtLongitude" id="lon">
+                                <input class="form-control" type="text" name="txtLongitude" id="lng">
                                  <div id="ermsg1"></div> <div id="ermsg3"></div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="primarycell" class="col-sm-2 col-form-label">primary Contact Phone</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" required="" value="<?php echo $rows->primary_contact_no; ?>" name="pcontact_cell" maxlength="10" value="">
+                                <input class="form-control" type="text" required="" name="pcontact_cell" maxlength="10" value="">
                             </div>
                             <label for="seccell" class="col-sm-2 col-form-label">secondary Contact Phone</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" value="<?php echo $rows->secondary_contact_no; ?>" name="scontact_cell" value="" >
+                                <input class="form-control" type="text" name="scontact_cell" value="" >
                             </div>
                         </div>
                        <div class="form-group row">
                             <label for="Person" class="col-sm-2 col-form-label">Contact Person</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" required="" value="<?php echo $rows->contact_person; ?>" name="contact_person" value="">
+                                <input class="form-control" type="text" required="" name="contact_person" value="">
                             </div>
                             <label for="Email" class="col-sm-2 col-form-label">Contact Email</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" value="<?php echo $rows->contact_email; ?>" required="" name="email" value="" >
+                                <input class="form-control" type="text" required="" name="email" value="" >
                             </div>
                         </div>
 
@@ -249,7 +219,6 @@
                                     <option value="Y">Yes</option>
                                     <option value="N">No</option>
                                 </select>
-                                <script language="JavaScript">document.eventform.eadv_status.value="<?php echo $rows->adv_status; ?>";</script>
                             </div>
                         
                         <label for="Colour" class="col-sm-2 col-form-label">Booking Display</label>
@@ -259,7 +228,6 @@
                                     <option value="Y">Yes</option>
                                     <option value="N">No</option>
                                 </select>
-                                <script language="JavaScript">document.eventform.booking_sts.value="<?php echo $rows->booking_status; ?>";</script>
                             </div>
                        </div>
 
@@ -272,7 +240,6 @@
                                     <option value="Y">Yes</option>
                                     <option value="N">No</option>
                                 </select>
-                                <script language="JavaScript">document.eventform.hotspot_sts.value="<?php echo $rows->hotspot_status; ?>";</script>
                             </div>
 
                             <label for="Colour" class="col-sm-2 col-form-label">Colour</label>
@@ -284,7 +251,6 @@
                                     <option value="blue">Blue</option>
                                     <option value="red">Red</option>
                                 </select>
-                                <script language="JavaScript">document.eventform.colour_scheme.value="<?php echo $rows->event_colour_scheme; ?>";</script>
 
                             </div>
 
@@ -300,25 +266,25 @@
                                     <option value="Y">Yes</option>
                                     <option value="N">No</option>
                                 </select>
-                                <script language="JavaScript">document.eventform.event_status.value="<?php echo $rows->event_status; ?>";</script>
                             </div>
 
                             <label class="col-sm-2 col-form-label">Event Banner</label>
                               <div class="col-sm-4">
                                  <input type="file" name="eventbanner" class="form-control" accept="image/*" >
-                               <input type="hidden" name="currentcpic" class="form-control" value="<?php echo $rows->event_banner;?>" >
-                              <input type="hidden" name="eventid" class="form-control" value="<?php echo $rows->id; ?>" >
-                               <img src="<?php echo base_url(); ?>assets/events/banner/<?php echo $rows->event_banner; ?>" class="img-circle">
                               </div>                            
                         </div>
 
+
                         <div class="form-group row">
+                            
                             <label class="col-sm-2 col-form-label"></label>
                             <div class="col-sm-2">
                               <button type="submit" class="btn btn-primary waves-effect waves-light">
-                              Update </button></div>
+                              Submit </button></div>
                               <div class="col-sm-2">
-                              </div>
+                              <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                              Reset
+                              </button></div>
                         </div>
                      </form>
                     </div>
@@ -326,97 +292,20 @@
             </div> <!-- end col -->
         </div> <!-- end row -->
 
-   </div><!-- container -->
+                        </div><!-- container -->
    </div>
    <!-- Page content Wrapper -->
 </div>
 <!-- content -->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByz7sU142AeFwpK3KiFilK0IOoa2GU9tw"></script>
 
-<script type="text/javascript">
-  $('#stime').timepicki();
-  $('#etime').timepicki();
+<script type="text/javascript">  
 
-     window.onload = function () {
-    var mapOptions = {
-                center: new google.maps.LatLng(20.5937, 78.9629),
-                zoom:4,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-            var infoWindow = new google.maps.InfoWindow();
-            var latlngbounds = new google.maps.LatLngBounds();
-            var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
-            google.maps.event.addListener(map, 'click', function (e) 
-            {
-             var la=e.latLng.lat();
-             var lo=e.latLng.lng();
-             document.getElementById("latu").value=la;
-             document.getElementById("lon").value=lo;
-             //alert(la); alert(lo);
-            //alert("Latitude: " + e.latLng.lat() + "\r\nLongitude: " + e.latLng.lng());
-            });
- }
-
-$(document).ready(function () {
-  $( ".datepicker" ).datepicker({
-        format: 'dd-mm-yyyy',
-      });
   
-    $('#eventform').validate({ // initialize the plugin
-       rules: {
-         category:{required:true },
-         event_name:{required:true },
-         country:{required:true },
-         city:{required:true },
-         venue:{required:true },
-         address:{required:true },
-         description:{required:true },
-         eventcost:{required:true },
-         start_date:{required:true },
-         end_date:{required:true },
-         start_time:{required:true },
-         end_time:{required:true },
-         pcontact_cell:{required:true },
-         contact_person:{required:true },
-         email:{required:true },
-         eadv_status:{required:true},
-         hotspot_sts:{required:true},
-         event_status:{required:true },
-         txtLatitude:{required:true },
-         txtLongitude:{required:true }
-        },
-
-        messages: {
-        category:"Select Category Name",
-        event_name:"Enter Event Name",
-        country:"Select Country Name",
-        city:"Select City Name",
-        venue:"Enter Venue",
-        address:"Enter Address",
-        description:"Enter Description",
-        eventcost:"Select Event Type",
-        start_date:"Select Start Date",
-        end_date:"Select End Date",
-        start_time:"Select Start Time",
-        end_time:"Select End Time",
-        pcontact_cell:"Enter Cell Number",
-        contact_person:"Enter Name",
-         eadv_status:"Select Advertisement Status ",
-        hotspot_sts:"Select Hotspot Display Status ",
-        email:"Enter Email",
-        event_status:"Select Status",
-        txtLatitude:"Enter Latitude",
-        txtLongitude:"Enter Longitude",
-        
-               },
-         }); 
-   });
-  
- function getcityname(cid) {
+ function get_cityname(cid) {
            //alert(cid);
             $.ajax({
                type: 'post',
-               url: '<?php echo base_url(); ?>events/get_city_name',
+               url: '<?php echo base_url(); ?>organizer/get_city_name',
                data: {
                    country_id:cid
                },
@@ -449,7 +338,6 @@ $(document).ready(function () {
 
 function check()
 {
-
   if(document.eventform.txtLatitude.value=="")
     {
             //alert("Please enter Latitude.");
@@ -498,70 +386,7 @@ function check()
                  $("#ermsg3").hide();
             }
     }
-      
-      var fdate = document.getElementById("datepicker-autoclose").value;
-      var tdate = document.getElementById("datepicker").value;
-
-
-
-       //alert(fdate);alert(tdate);
-      var chunks = fdate.split('-');
-      var formattedDate = chunks[1]+'/'+chunks[0]+'/'+chunks[2];
-       //alert(formattedDate);
-      var chunks1 = tdate.split('-');
-      var formattedDate1 = chunks1[1]+'/'+chunks1[0]+'/'+chunks1[2];
-      //alert(formattedDate1);
-      //alert( Date.parse(formattedDate));
-      //alert( Date.parse(formattedDate1));
-      if(Date.parse(formattedDate) > Date.parse(formattedDate1) )
-      {
-       alert("Startdate should be less than Enddate");
-       return false;
-      }
-
-      if(Date.parse(formattedDate)==Date.parse(formattedDate1) )
-      {
-       
-       var strStartTime = document.getElementById("stime").value;
-       var strEndTime = document.getElementById("etime").value;
-
-        var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
-        var endTime = new Date(startTime)
-        endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
-        if (startTime > endTime) {
-        alert("Start Time is greater than end time");
-         return false; }
-  
-    }else{
-        var date1 = new Date(fdate);
-      var date2 = new Date(tdate);
-      var strStartTime = document.getElementById("stime").value;
-      var strEndTime = document.getElementById("etime").value;
-       var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
-       var endTime = new Date(startTime);
-       endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
-      var a=formattedDate + '' + strStartTime;
-      var b=formattedDate1 + '' + strEndTime;
-      //alert(startTime);alert(endTime); alert(a);alert(b); 
-      if (a == b || a > b) {
-      alert("Start Date & Time is greater than end Date & Time");
-      return false;
-      }
-    }
-      function GetHours(d) 
-      {
-        var h = parseInt(d.split(':')[0]);
-        if (d.split(':')[1].split(' ')[1] == "PM") {
-        h = h + 12;
-      }
-      return h;
-      }
-      function GetMinutes(d) 
-      {
-       return parseInt(d.split(':')[1].split(' ')[0]);
-      }
-
+    
 }
 
 </script>
-
