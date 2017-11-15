@@ -16,7 +16,7 @@
     <link href="<?php echo base_url(); ?>assets/front/css/main.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/css/button.css" rel="stylesheet" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
+<link href="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url(); ?>assets/front/css/carousel.css" rel="stylesheet">
     <script src="<?php echo base_url(); ?>assets/front/js/jquery.min.js"></script>
