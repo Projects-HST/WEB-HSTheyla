@@ -24,13 +24,9 @@ class Home extends CI_Controller {
 		            redirect('dashboard');
 			}else if($user_role==3){
                 redirect('profile');
-				//$this->load->view('index');
 			}else{
-			     //redirect('/');
-				$this->load->view('index');
+			  $this->load->view('index');
 			}
-
-
 
 	}
 
@@ -145,18 +141,19 @@ class Home extends CI_Controller {
 		}
 
 		public function profile(){
+
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
 			$user_role=$this->session->userdata('user_role');
-
-			$datas['res']=$this->loginmodel->getuserinfo($user_id);
-
 			if($user_id){
 				if($user_role==3){
+					$datas['res']=$this->loginmodel->getuserinfo($user_id);
 					$this->load->view('profile', $datas);
 				}else{
-					redirect('/');
+
 				}
+			}else{
+				redirect('/');
 			}
 		}
 
@@ -321,10 +318,12 @@ class Home extends CI_Controller {
 			$user_id=$this->session->userdata('id');
 			 $user_role=$this->session->userdata('user_role');
 			$profilepic = $_FILES['profilepic']['name'];
-			$userFileName =time().$profilepic;
+			$temp = pathinfo($profilepic, PATHINFO_EXTENSION);
+			$userFileName = round(microtime(true)) . '.' . $temp;
 			$uploaddir = 'assets/users/profile/';
 			$profilepic = $uploaddir.$userFileName;
 			move_uploaded_file($_FILES['profilepic']['tmp_name'], $profilepic);
+
 			$data['res']=$this->loginmodel->changeprofileimage($user_id,$userFileName);
 		}
 
