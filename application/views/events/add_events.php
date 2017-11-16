@@ -23,22 +23,22 @@
    <div class="topbar">
       <nav class="navbar-custom">
          <ul class="list-inline float-right mb-0">
-            <li class="list-inline-item dropdown notification-list">
+            <!--li class="list-inline-item dropdown notification-list">
                <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
                   aria-haspopup="false" aria-expanded="false">
                <i class="ion-ios7-bell noti-icon"></i>
                <span class="badge badge-success noti-icon-badge">3</span>
                </a>
-            </li>
+            </li!-->
             <li class="list-inline-item dropdown notification-list">
                <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
                   aria-haspopup="false" aria-expanded="false">
                <img src="<?php echo base_url(); ?>assets/images/admin/admin.png" alt="user" class="rounded-circle">
                </a>
                <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                  <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
+                  <!--a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
                   <a class="dropdown-item" href="#"><span class="badge badge-success pull-right">5</span><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
-                  <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a>
+                  <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a!-->
                   <a class="dropdown-item" href="<?php echo base_url(); ?>adminlogin/logout"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
                </div>
             </li>
@@ -340,54 +340,54 @@
       });
  
 
-    // $('#eventform').validate({ // initialize the plugin
-    //    rules: {
-    //      category:{required:true },
-    //      event_name:{required:true },
-    //      country:{required:true },
-    //      city:{required:true },
-    //      venue:{required:true },
-    //      address:{required:true },
-    //      description:{required:true },
-    //      eventcost:{required:true },
-    //      start_date:{required:true },
-    //      end_date:{ required:true },
-    //      start_time:{required:true },
-    //      end_time:{required:true },
-    //      eadv_status:{required:true},
-    //      hotspot_sts:{required:true},
-    //      pcontact_cell:{required:true },
-    //      contact_person:{required:true },
-    //      email:{required:true },
-    //      event_status:{required:true },
-    //      txtLatitude:{required:true },
-    //      txtLongitude:{required:true }
+    $('#eventform').validate({ // initialize the plugin
+       rules: {
+         category:{required:true },
+         event_name:{required:true },
+         country:{required:true },
+         city:{required:true },
+         venue:{required:true },
+         address:{required:true },
+         description:{required:true },
+         eventcost:{required:true },
+         start_date:{required:true },
+         end_date:{ required:true },
+         start_time:{required:true },
+         end_time:{required:true },
+         eadv_status:{required:true},
+         hotspot_sts:{required:true},
+         pcontact_cell:{required:true },
+         contact_person:{required:true },
+         email:{required:true },
+         event_status:{required:true },
+         txtLatitude:{required:true },
+         txtLongitude:{required:true }
          
-    //     },
+        },
 
-    //     messages: {
-    //     category:"Select Category Name",
-    //     event_name:"Enter Event Name",
-    //     country:"Select Country Name",
-    //     city:"Select City Name",
-    //     venue:"Enter Venue",
-    //     address:"Enter Address",
-    //     description:"Enter Description",
-    //     eventcost:"Select Event Type",
-    //     start_date:"Select Start Date",
-    //     end_date:"Select End Date",
-    //     start_time:"Select Start Time",
-    //     end_time:"Select End Time",
-    //     eadv_status:"Select Advertisement Status ",
-    //     hotspot_sts:"Select Hotspot Display Status ",
-    //     pcontact_cell:"Enter Cell Number",
-    //     contact_person:"Enter Name",
-    //     email:"Enter Email",
-    //     event_status:"Select Status",
-    //     txtLatitude:"Enter Latitude",
-    //     txtLongitude:"Enter Longitude",
-    //    },
-    //      }); 
+        messages: {
+        category:"Select Category Name",
+        event_name:"Enter Event Name",
+        country:"Select Country Name",
+        city:"Select City Name",
+        venue:"Enter Venue",
+        address:"Enter Address",
+        description:"Enter Description",
+        eventcost:"Select Event Type",
+        start_date:"Select Start Date",
+        end_date:"Select End Date",
+        start_time:"Select Start Time",
+        end_time:"Select End Time",
+        eadv_status:"Select Advertisement Status ",
+        hotspot_sts:"Select Hotspot Display Status ",
+        pcontact_cell:"Enter Cell Number",
+        contact_person:"Enter Name",
+        email:"Enter Email",
+        event_status:"Select Status",
+        txtLatitude:"Enter Latitude",
+        txtLongitude:"Enter Longitude",
+       },
+         }); 
    });
   
  function getcityname(cid) {
@@ -428,6 +428,7 @@ function check()
 {
       var fdate = document.getElementById("datepicker-autoclose").value;
       var tdate = document.getElementById("datepicker").value;
+
        //alert(fdate);alert(tdate);
       var chunks = fdate.split('-');
       var formattedDate = chunks[1]+'/'+chunks[0]+'/'+chunks[2];
@@ -443,27 +444,35 @@ function check()
        return false;
       }
 
-      var date1 = new Date(fdate);
-      var date2 = new Date(tdate);
+      if(Date.parse(formattedDate)==Date.parse(formattedDate1) )
+      {
        
+       var strStartTime = document.getElementById("stime").value;
+       var strEndTime = document.getElementById("etime").value;
+
+        var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+        var endTime = new Date(startTime)
+        endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+        if (startTime > endTime) {
+        alert("Start Time is greater than end time");
+         return false; }
+  
+    }else{
+        var date1 = new Date(fdate);
+      var date2 = new Date(tdate);
       var strStartTime = document.getElementById("stime").value;
       var strEndTime = document.getElementById("etime").value;
-    
        var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
        var endTime = new Date(startTime);
        endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
-      
       var a=formattedDate + '' + strStartTime;
       var b=formattedDate1 + '' + strEndTime;
-       
-       alert(startTime);alert(endTime);
-       alert(a);alert(b); 
-
+      //alert(startTime);alert(endTime); alert(a);alert(b); 
       if (a == b || a > b) {
       alert("Start Date & Time is greater than end Date & Time");
       return false;
       }
-
+    }
       function GetHours(d) 
       {
         var h = parseInt(d.split(':')[0]);

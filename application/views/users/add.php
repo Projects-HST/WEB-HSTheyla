@@ -6,22 +6,22 @@
    <div class="topbar">
       <nav class="navbar-custom">
          <ul class="list-inline float-right mb-0">
-            <li class="list-inline-item dropdown notification-list">
+            <!--li class="list-inline-item dropdown notification-list">
                <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
                   aria-haspopup="false" aria-expanded="false">
                <i class="ion-ios7-bell noti-icon"></i>
                <span class="badge badge-success noti-icon-badge">3</span>
                </a>
-            </li>
+            </li-->
             <li class="list-inline-item dropdown notification-list">
                <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
                   aria-haspopup="false" aria-expanded="false">
                <img src="<?php echo base_url(); ?>assets/images/admin/admin.png" alt="user" class="rounded-circle">
                </a>
                <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                  <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
+                  <!--a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
                   <a class="dropdown-item" href="#"><span class="badge badge-success pull-right">5</span><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
-                  <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a>
+                  <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a!-->
                   <a class="dropdown-item" href="<?php echo base_url(); ?>adminlogin/logout"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
                </div>
             </li>
@@ -58,12 +58,12 @@
 
 
                 <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>users/add_user_details" name="usersform" id="usersform" onSubmit='return check();'>
-
+                       
                         <div class="form-group row">
                             <label for="Category" class="col-sm-2 col-form-label">User Name</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" name="username" onkeyup="checkusernamefun(this.value)">
-                                <p id="msg2" style="color:red;"> </p>
+                                <input class="form-control" type="text" id="ufun" name="username" onkeyup="checkusernamefun(this.value)">
+                                <p id="msg2"> </p>
                             </div>
                         
                         <label for="Category" class="col-sm-2 col-form-label">Name</label>
@@ -75,15 +75,15 @@
                         <div class="form-group row">
                             <label for="Name" class="col-sm-2 col-form-label">Mobile Number</label>
                             <div class="col-sm-4">
-                <input class="form-control" type="text"  name="mobile" onkeyup="checkmobilefun(this.value)">
+                <input class="form-control" type="text"  name="mobile" id="mfun" onkeyup="checkmobilefun(this.value)">
                   <p id="msg1" style="color:red;"> </p>
                             </div>
                              <label for="Name" class="col-sm-2 col-form-label">Email Id</label>
                             <div class="col-sm-4">
-                <input class="form-control" type="text"  name="email" onkeyup="checkemailfun(this.value)" >
+                <input class="form-control" type="text" id="efun" name="email" onkeyup="checkemailfun(this.value)" >
                                  <p id="msg" style="color:red;"> </p>
                             </div>
-               
+               <!-- onkeyup="checkemailfun(this.value)" -->
                         </div>
                        <div class="form-group row">
                          
@@ -225,8 +225,8 @@
                 </div>
             </div> <!-- end col -->
         </div> <!-- end row -->
-
-                        </div><!-- container -->
+ 
+   </div><!-- container -->
    </div>
    <!-- Page content Wrapper -->
 </div>
@@ -348,13 +348,13 @@
              cache: false,
             success:function(test)
             {
-                 var len = test.length;
+                var len = test.length;
                //alert(len);
                 var cityname='';
                 var ctitle='<option>Select City</option>';
                 if(test!='')
-               // alert(test);
-              {    //alert(len);
+                 // alert(test);
+                {   //alert(len);
                    for(var i=0; i<len; i++)
                    {
                      var cityid = test[i].id;
@@ -364,7 +364,6 @@
                   }
                   $("#ctname").html(ctitle+cityname).show();
                   $("#cmsg").hide();
-                  
                   }else{
                   //$("#ctname").val("");
                   $("#cmsg").html('<p style="color: red;">City Not Found</p>').show();
@@ -374,6 +373,28 @@
           }); 
        }
 
+// function checkfun(val)
+//   {
+//    $.ajax({
+//      type:'post',
+//      url:'<?php echo base_url(); ?>/users/checker',
+//      data:'valtext='+val,
+//      success:function(test)
+//      {
+//        if(test=="Already Exit")
+//          {
+//            $("#msg3").html(test);
+//            $("#save").hide();
+//            $("#save1").hide();
+//           }else{
+//             $("#msg3").html(test);
+//             $("#save").show();
+//             $("#save1").show();
+//           }
+//       }
+//    });
+//   }
+
 
 function checkusernamefun(val)
   {
@@ -382,17 +403,21 @@ function checkusernamefun(val)
      url:'<?php echo base_url(); ?>/users/username_checker',
      data:'uname='+val,
      success:function(test)
-      {
+     {
        if(test=="UserName already Exit")
          {
-           $("#msg2").html(test);
+           $("#msg2").html('<p style="color:red;"><b>UserName already Exit</b></p>');
            $("#save").hide();
            $("#save1").hide();
+           //$("#mfun").hide();
+           //$("#efun").hide();
           }else{
-             $("#msg2").html(test);
-             $("#save").show();
-             $("#save1").show();
-            }
+            $("#msg2").html('<p style="color:green;"><b>UserName Available</b></p>');
+            $("#save").show();
+            $("#save1").show();
+           //$ ("#mfun").show();
+           //$("#efun").show();
+          }
       }
    });
   }
@@ -407,36 +432,44 @@ function checkusernamefun(val)
       {
        if(test=="Email Id already Exit")
          {
-           $("#msg").html(test);
-           $("#save").hide();
-           $("#save1").hide();
+            $("#msg").html('<p style="color:red;"><b>Email Id already Exit</b></p>');
+            $("#save").hide();
+            $("#save1").hide();
+            //$("#mfun").hide();
+            //$("#ufun").hide();
           }else{
-             $("#msg").html(test);
-             $("#save").show();
-             $("#save1").show();
-            }
+            $("#msg").html('<p style="color:green;"><b>Email Id Available</b></p>');
+            $("#save").show();
+            $("#save1").show();
+            //$("#mfun").show();
+            //$("#ufun").show();
+          }
       }
    });
   }
 
    function checkmobilefun(val)
-  {
+   {
     $.ajax({
-     type:'post',
-     url:'<?php echo base_url(); ?>/users/mobile_checker',
-     data:'cell='+val,
-     success:function(test)
-      {
-       if(test=="Mobile Number already Exit")
-         {
-           $("#msg1").html(test);
-           $("#save").hide();
-           $("#save1").hide();
+    type:'post',
+    url:'<?php echo base_url(); ?>/users/mobile_checker',
+    data:'cell='+val,
+    success:function(test)
+    {
+      if(test=="Mobile Number already Exit")
+        {
+          $("#msg1").html('<p style="color:red;"><b>Mobile Number already Exit</b></p>');
+          $("#save").hide();
+          $("#save1").hide();
+          //$("#efun").hide();
+          //$("#ufun").hide();
           }else{
-             $("#msg1").html(test);
+             $("#msg1").html('<p style="color:green;"><b>Mobile Number Available</b></p>');
              $("#save").show();
              $("#save1").show();
-            }
+             //$("#efun").show();
+            // $("#ufun").show();
+          }
       }
    });
   }

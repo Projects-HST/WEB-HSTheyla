@@ -5,22 +5,22 @@
       <div class="topbar">
          <nav class="navbar-custom">
             <ul class="list-inline float-right mb-0">
-               <li class="list-inline-item dropdown notification-list">
+               <!--li class="list-inline-item dropdown notification-list">
                   <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
                      aria-haspopup="false" aria-expanded="false">
                   <i class="ion-ios7-bell noti-icon"></i>
                   <span class="badge badge-success noti-icon-badge">3</span>
                   </a>
-               </li>
+               </li!-->
                <li class="list-inline-item dropdown notification-list">
                   <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
                      aria-haspopup="false" aria-expanded="false">
                   <img src="<?php echo base_url(); ?>assets/images/admin/admin.png" alt="user" class="rounded-circle">
                   </a>
                   <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                     <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
+                     <!--a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
                      <a class="dropdown-item" href="#"><span class="badge badge-success pull-right">5</span><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
-                     <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a>
+                     <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a!-->
                      <a class="dropdown-item" href="<?php echo base_url(); ?>adminlogin/logout"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
                   </div>
                </li>
@@ -95,8 +95,8 @@
                            <thead>
                               <tr>
                                  <th>S.NO</th>
-                                 <th>Event Name</th>
                                  <th>Plan Name</th>
+                                 <th>Event  Name</th>
                                  <th>Amount</th>
                                  <th>Action</th>
                               </tr>
@@ -117,8 +117,8 @@
                                     <a href="<?php echo base_url();?>booking/edit_plan/<?php echo $rows->id;?>"><img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
                                     <a href="<?php echo base_url();?>booking/add_show_time/<?php echo $plaid;?>/<?php echo $eveid;?>">
                               <img title="Show Times" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
-                               <a href="<?php echo base_url();?>booking/delete_plan/<?php echo $plaid;?>/<?php echo $eveid;?>">
-                              <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
+                               <!--a href="<?php echo base_url();?>booking/delete_plan/<?php echo $plaid;?>/<?php echo $eveid;?>">
+                              <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
                                  </td>
                               </tr>
                               <?php $i++;  }  ?>
@@ -130,12 +130,12 @@
                <!-- end col -->
             </div>
             <!-- end row -->
-         
+
          </div>
          <!-- container -->
       </div>
       <!-- Page content Wrapper -->
-   
+
 </div>
 <!-- content -->
 <script type="text/javascript">
@@ -144,16 +144,15 @@
       rules: {
         planname:{required:true },
         seats:{required:true },
-        amount:{required:true }        
+        amount:{required:true }
        },
-   
+
        messages: {
        planname:"Enter Plan Name",
        seats:"Enter  Seats",
        amount:"Enter Amount"
               },
-        }); 
+        });
    });
-   
-</script>
 
+</script>

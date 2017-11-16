@@ -61,7 +61,8 @@ $route['reset'] = 'home/resetpassword';
 $route['mobilenumber'] = 'home/mobilenumberchange';
 $route['changemail'] = 'home/changeemail';
 $route['dashboard'] = 'home/organiser';
-$route['home'] = 'home/index';
+
+$route['home'] = 'home/home';
 $route['privacy'] = 'home/privacy';
 $route['payment'] = 'home/payment';
 $route['terms'] = 'home/terms';

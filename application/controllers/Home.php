@@ -24,13 +24,27 @@ class Home extends CI_Controller {
 		            redirect('dashboard');
 			}else if($user_role==3){
                 redirect('profile');
-				//$this->load->view('index');
 			}else{
-			     //redirect('/');
-				$this->load->view('index');
+			  $this->load->view('index');
 			}
 
+	}
+	public function home()
+	{
+		$this->load->library('facebook');
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
+	 	$user_role=$this->session->userdata('user_role');
 
+			if($user_role==1){
+				redirect('adminlogin/dashboard');
+			}else if($user_role==2){
+								redirect('dashboard');
+			}else if($user_role==3){
+							$this->load->view('index');
+			}else{
+				$this->load->view('index');
+			}
 
 	}
 
@@ -145,18 +159,19 @@ class Home extends CI_Controller {
 		}
 
 		public function profile(){
+
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
 			$user_role=$this->session->userdata('user_role');
-
-			$datas['res']=$this->loginmodel->getuserinfo($user_id);
-
 			if($user_id){
 				if($user_role==3){
+					$datas['res']=$this->loginmodel->getuserinfo($user_id);
 					$this->load->view('profile', $datas);
 				}else{
-					redirect('/');
+
 				}
+			}else{
+				redirect('/');
 			}
 		}
 
@@ -237,7 +252,6 @@ class Home extends CI_Controller {
 
 		public function emailverfiy(){
   	  $email = $this->uri->segment(3);
-  	
 			$data['res']=$this->loginmodel->email_verify($email);
 			if($data['res']['msg']=='verify'){
 					$this->load->view('email_verification',$data);
@@ -322,10 +336,12 @@ class Home extends CI_Controller {
 			$user_id=$this->session->userdata('id');
 			 $user_role=$this->session->userdata('user_role');
 			$profilepic = $_FILES['profilepic']['name'];
-			$userFileName =time().$profilepic;
-			$uploaddir = 'assets/images/profile/';
+			$temp = pathinfo($profilepic, PATHINFO_EXTENSION);
+			$userFileName = round(microtime(true)) . '.' . $temp;
+			$uploaddir = 'assets/users/profile/';
 			$profilepic = $uploaddir.$userFileName;
 			move_uploaded_file($_FILES['profilepic']['tmp_name'], $profilepic);
+
 			$data['res']=$this->loginmodel->changeprofileimage($user_id,$userFileName);
 		}
 

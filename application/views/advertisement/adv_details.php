@@ -1,5 +1,5 @@
 <?php
-    function get_times( $default = '10:00', $interval = '+15 minutes' ) 
+    function get_times( $default = '10:00', $interval = '+15 minutes' )
    {
       $output = '';
       $current = strtotime( '00:00:00' );
@@ -28,22 +28,12 @@
       <nav class="navbar-custom">
          <ul class="list-inline float-right mb-0">
             <li class="list-inline-item dropdown notification-list">
-               <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
-                  aria-haspopup="false" aria-expanded="false">
-               <i class="ion-ios7-bell noti-icon"></i>
-               <span class="badge badge-success noti-icon-badge">3</span>
-               </a>
-         
-            </li>
-            <li class="list-inline-item dropdown notification-list">
             <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
                aria-haspopup="false" aria-expanded="false">
             <img src="<?php echo base_url(); ?>assets/images/admin/admin.png" alt="user" class="rounded-circle">
             </a>
             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-            <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
-            <a class="dropdown-item" href="#"><span class="badge badge-success pull-right">5</span><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
-            <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a>
+
             <a class="dropdown-item" href="<?php echo base_url(); ?>adminlogin/logout"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
             </div>
             </li>
@@ -64,7 +54,7 @@
       <!-- Top Bar End -->
       <div class="page-content-wrapper">
          <div class="container">
-            
+
             <div class="row">
                <div class="col-lg-12">
                   <div class="card m-b-20">
@@ -93,7 +83,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                           
+
                              <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
                             <div class="col-sm-4">
                                 <select name="start_time"  id="stime" class="form-control" >
@@ -117,10 +107,10 @@
                             <div class="col-sm-4">
                                  <select name="adv_plan" class="form-control">
                                     <?php foreach ($plans as $values) { ?>
-                                    <option value="<?php echo $values->id; ?>"> <?php  echo $values->plan_name; ?> 
+                                    <option value="<?php echo $values->id; ?>"> <?php  echo $values->plan_name; ?>
                                     </option>
                                    <?php  } ?>
-                                  
+
                                 </select>
                             </div>
                             <label for="Status" class="col-sm-2 col-form-label">Status</label>
@@ -151,7 +141,7 @@
                   <div class="card m-b-20">
                      <div class="card-block">
                         <h4 class="mt-0 header-title">View Advertisement Plans</h4>
-                        
+
                            <?php if($this->session->flashdata('msg')): ?>
                         <div class="alert alert-success">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
@@ -164,7 +154,7 @@
                               <tr>
 							                   <th>S.NO</th>
                                  <th>Event Name</th>
-                                 <th>Category Rate</th>
+                                 <th>Category Name</th>
                                  <th>From Date</th>
                                  <th>To Date</th>
                                  <th>From Time</th>
@@ -195,8 +185,9 @@
                                  <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
                                  <td> <a href="<?php echo base_url();?>advertisement/edit_history/<?php echo $rows->id;?>">
                                   <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
-                                 <a onclick="confirmGetMessage(<?php echo $adid;?>)">   
-                                 <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a></td>
+                                 <!--a onclick="confirmGetMessage(<?php echo $adid;?>)">
+                                 <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
+                               </td>
                              </td>
                               </tr>
                              <?php $i++;  }  ?>
@@ -233,7 +224,7 @@ function confirmGetMessage(adid)
                   title: "Success",
                   text: "Deleted Successfully",
                   type: "success"
-              }).then(function() { 
+              }).then(function() {
                   location.href = '<?php echo base_url(); ?>advertisement/view_adv_plan';
               });
           } else {
@@ -246,7 +237,7 @@ function confirmGetMessage(adid)
        }
  }
 
- $(document).ready(function () 
+ $(document).ready(function ()
  {
     $( ".datepicker" ).datepicker({
    format: 'dd-mm-yyyy'
@@ -269,7 +260,7 @@ function confirmGetMessage(adid)
         adv_plan:"Select Plan ",
         status:"Select Status",
                },
-         }); 
+         });
    });
    function check()
     {
@@ -292,26 +283,39 @@ function confirmGetMessage(adid)
        alert("Startdate should be less than Enddate");
        return false;
       }
-      
-      var date1 = new Date(fdate);
-      var date2 = new Date(tdate);
+
+       if(Date.parse(formattedDate)==Date.parse(formattedDate1) )
+      {
        
+       var strStartTime = document.getElementById("stime").value;
+       var strEndTime = document.getElementById("etime").value;
+
+        var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+        var endTime = new Date(startTime)
+        endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+        
+        if (startTime > endTime) {
+        alert("Start Time is greater than end time");
+         return false; }
+  
+    }else{
+        var date1 = new Date(fdate);
+      var date2 = new Date(tdate);
       var strStartTime = document.getElementById("stime").value;
       var strEndTime = document.getElementById("etime").value;
-
-      var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
-      var endTime = new Date(startTime);
-      endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
-      
-      var a=formattedDate + '' + startTime;
-      var b=formattedDate1 + '' + endTime;
-     //alert(a);alert(b);
+       var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+       var endTime = new Date(startTime);
+       endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+      var a=formattedDate + '' + strStartTime;
+      var b=formattedDate1 + '' + strEndTime;
+      //alert(startTime);alert(endTime); alert(a);alert(b); 
       if (a == b || a > b) {
       alert("Start Date & Time is greater than end Date & Time");
       return false;
       }
+    }
 
-      function GetHours(d) 
+      function GetHours(d)
       {
         var h = parseInt(d.split(':')[0]);
         if (d.split(':')[1].split(' ')[1] == "PM") {
@@ -319,7 +323,7 @@ function confirmGetMessage(adid)
       }
       return h;
       }
-      function GetMinutes(d) 
+      function GetMinutes(d)
       {
        return parseInt(d.split(':')[1].split(' ')[0]);
       }

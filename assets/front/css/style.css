@@ -321,9 +321,9 @@
   padding-bottom: 14px;
 
 }
-.fixed-top{
+/*.fixed-top{
       background-color: #478ecc;
-}
+}*/
 @media (max-width: 982px) {
 .fixed-top{
   position: absolute;

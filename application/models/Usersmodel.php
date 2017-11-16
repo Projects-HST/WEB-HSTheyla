@@ -67,19 +67,27 @@ Class Usersmodel extends CI_Model
     }
 
     function add_user_details($name,$username,$cell,$email,$pwd,$dob,$gender,$address1,$address2,$address3,$occupation,$country,$statename,$city,$zip,$user_pic1,$status,$userrole,$user_id,$display_status)
-    {    $pwd1=md5($pwd);
-
-    $check_user="SELECT * FROM user_master WHERE user_name='$username' OR mobile_no='$cell' OR email_id='$email'";
+    {
+    $pwd1=md5($pwd);
+    $check_user="SELECT * FROM user_master WHERE user_name='$username'";
     $result=$this->db->query($check_user);
     if($result->num_rows()==0)
     {
-    	 $uinsert="INSERT INTO user_master(user_name,mobile_no,email_id,password,user_role,status,created_by,created_at) VALUES ('$username','$cell','$email','$pwd1','$userrole','$display_status','$user_id',NOW())";
+      $check_user="SELECT * FROM user_master WHERE  mobile_no='$cell' OR email_id='$email'";
+      $result=$this->db->query($check_user);
+      if($result->num_rows()==0)
+      {
+        $uinsert="INSERT INTO user_master(user_name,mobile_no,email_id,password,user_role,status,created_by,created_at) VALUES ('$username','$cell','$email','$pwd1','$userrole','$display_status','$user_id',NOW())";
     	  $uresu=$this->db->query($uinsert);
         $insert_id = $this->db->insert_id();
         $userdetails="INSERT INTO user_details(user_id,name,birthdate,gender,occupation,address_line1,address_line2,address_line3,country_id,state_id,city_id,zip,user_picture,newsletter_status) VALUES ('$insert_id','$name','$dob','$gender','$occupation','$address1','$address2','$address3','$country','$statename','$city','$zip','$user_pic1','$status')";
         $udetails=$this->db->query($userdetails);
         $data= array("status"=>"success");
-  		return $data;
+  		  return $data;
+      }else{
+        $data= array("status"=>"AE");
+        return $data;
+      }
     }else{
        $data= array("status"=>"AE");
        return $data;

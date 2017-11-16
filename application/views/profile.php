@@ -47,6 +47,8 @@
         max-height: 100px;
         border-radius: 25px;
         margin-top: 10px;
+        margin-left: 20px;
+
     }
 
     .file-upload {
@@ -117,14 +119,14 @@
                               <?php if(empty($rows->user_picture)){ ?>
                                   <img src="<?php echo base_url(); ?>assets/images/profile/noimage.png" class="img-circle  profile-pic">
                             <?php  }else{ ?>
-                                <img src="<?php echo base_url(); ?>assets/images/profile/<?php echo $rows->user_picture; ?>" class="img-circle  profile-pic">
+                                <img src="<?php echo base_url(); ?>assets/users/profile/<?php echo $rows->user_picture; ?>" class="img-circle  profile-pic">
                             <?php  } ?>
 
                                 <form id="image_upload_form" action="<?php echo base_url(); ?>home/change_pic" method="post" enctype="multipart/form-data" action='image_upload.php' autocomplete="off">
                                     <div class="upload-button">Change Picture</div>
 
-                                    <input class="file-upload" name="profilepic" id="profilepic" type="file" accept="image/*" />
-
+                                    <input class="file-upload" name="profilepic" id="profilepic" type="file"accept="image/x-png,image/jpeg" />
+                                    <div id="preview"></div>
                                 </form>
 
                             </div>
@@ -146,7 +148,7 @@
                                             <?php echo $rows->email_id; ?> <?php if($rows->email_verify=='N'){ ?> <span style="color:red;" title="Verify Your Email"><i class="fa fa-times" aria-hidden="true"></i></span><br>
 
 
-                                          <?php  } ?>
+                                          <?php  } ?><br>
                                         <a href="<?php echo  base_url(); ?>changemail">Change the Email</a>
                                         </div>
                                     </div>
@@ -182,17 +184,12 @@
                                             <input type="text" class="form-control" id="name" name="name" value="<?php echo $rows->name; ?>">
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <label for="" class="col-sm-2 col-form-label">Email</label>
-                                        <div class="col-sm-5">
-                                            <input type="email" class="form-control" id="email" name="email" value="<?php echo $rows->email_id; ?>" onkeyup="check_email()">
-                                        </div>
-                                    </div>
+
 
                                     <div class="form-group row">
                                         <label for="staticEmail" class="col-sm-2 col-form-label">Address</label>
                                         <div class="col-sm-5">
-                                            <input type="text" class="form-control" id="address" name="address" value="<?php echo $rows->address_line1; ?>">
+                                            <textarea type="text" class="form-control" id="address" name="address"><?php echo $rows->address_line1; ?></textarea>
                                         </div>
                                     </div>
 
@@ -293,10 +290,6 @@
 
                 success: function(response) {
                     if (response == "success") {
-
-
-
-
                         swal({
                             title: "success",
                             text: " Profile Saved.",
@@ -356,14 +349,24 @@
     $(document).ready(function() {
 
         $('#profilepic').on('change', function() {
-            $("#preview").html('');
-            $("#preview").html('<img src="loader.gif" alt="Uploading...."/>');
-            $("#image_upload_form").ajaxForm({
-                target: '#preview'
-            }).submit();
+
+          var f=this.files[0]
+			     var actual=f.size||f.fileSize;
+           var orgi=actual/1024;
+            if(orgi<1024){
+              $("#preview").html('');
+              $("#preview").html('<img src="<?php echo base_url(); ?>assets/loader.gif" alt="Uploading...." style="width:100%;"/>');
+              $("#image_upload_form").ajaxForm({
+                  target: '#preview'
+              }).submit();
+            }else{
+              alert("File Size Must be  Lesser than 1 MB");
+            }
+
 
         });
     });
+
 </script>
 
 </html>

@@ -13,6 +13,8 @@
 		return $output;
     }
 ?>
+<script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
+<link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
 <style type="text/css">
    .img-circle{
           width: 90px;
@@ -28,22 +30,22 @@
    <div class="topbar">
       <nav class="navbar-custom">
          <ul class="list-inline float-right mb-0">
-            <li class="list-inline-item dropdown notification-list">
+            <!--li class="list-inline-item dropdown notification-list">
                <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
                   aria-haspopup="false" aria-expanded="false">
                <i class="ion-ios7-bell noti-icon"></i>
                <span class="badge badge-success noti-icon-badge">3</span>
                </a>
-            </li>
+            </li!-->
             <li class="list-inline-item dropdown notification-list">
                <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
                   aria-haspopup="false" aria-expanded="false">
                <img src="<?php echo base_url(); ?>assets/images/admin/admin.png" alt="user" class="rounded-circle">
                </a>
                <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                  <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
+                  <!--a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
                   <a class="dropdown-item" href="#"><span class="badge badge-success pull-right">5</span><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
-                  <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a>
+                  <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a!-->
                   <a class="dropdown-item" href="<?php echo base_url(); ?>adminlogin/logout"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
                </div>
             </li>
@@ -177,21 +179,25 @@
                            
                             <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
                             <div class="col-sm-4">
-                                <select name="start_time" required="" class="form-control" id="stime" >
+
+                               <input  type="text" class="form-control" id="stime" name="start_time" value="<?php echo $rows->start_time; ?>">
+
+                                <!-- select name="start_time" required="" class="form-control"  >
                                      <option value="">Select Start Time</option>
 									                   <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
 								                </select>
-                                <script language="JavaScript">document.eventform.start_time.value="<?php echo $rows->start_time; ?>";</script>
+                                <script language="JavaScript">document.eventform.start_time.value="<?php echo $rows->start_time; ?>";</script-->
 
                             </div>
 
                              <label for="etime" class="col-sm-2 col-form-label">End Time</label>
                             <div class="col-sm-4">
-                                <select name="end_time" required="" class="form-control" id="etime">
+                              <input  type="text" class="form-control" id="etime" name="end_time" value="<?php echo $rows->end_time; ?>">
+                                <!--select name="end_time" required="" class="form-control" id="etime">
                                      <option value="">Select End Time</option>
 									                   <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
 								                </select>
-                                 <script language="JavaScript">document.eventform.end_time.value="<?php echo $rows->end_time; ?>";</script>
+                                 <script language="JavaScript">document.eventform.end_time.value="<?php echo $rows->end_time; ?>";</script-->
                             </div>
 
                         </div>
@@ -328,6 +334,9 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByz7sU142AeFwpK3KiFilK0IOoa2GU9tw"></script>
 
 <script type="text/javascript">
+  $('#stime').timepicki();
+  $('#etime').timepicki();
+
      window.onload = function () {
     var mapOptions = {
                 center: new google.maps.LatLng(20.5937, 78.9629),
@@ -349,7 +358,6 @@
  }
 
 $(document).ready(function () {
-
   $( ".datepicker" ).datepicker({
         format: 'dd-mm-yyyy',
       });
@@ -493,22 +501,66 @@ function check()
       
       var fdate = document.getElementById("datepicker-autoclose").value;
       var tdate = document.getElementById("datepicker").value;
+
+
+
        //alert(fdate);alert(tdate);
       var chunks = fdate.split('-');
       var formattedDate = chunks[1]+'/'+chunks[0]+'/'+chunks[2];
        //alert(formattedDate);
       var chunks1 = tdate.split('-');
       var formattedDate1 = chunks1[1]+'/'+chunks1[0]+'/'+chunks1[2];
-
       //alert(formattedDate1);
       //alert( Date.parse(formattedDate));
       //alert( Date.parse(formattedDate1));
-
       if(Date.parse(formattedDate) > Date.parse(formattedDate1) )
       {
        alert("Startdate should be less than Enddate");
        return false;
       }
+
+      if(Date.parse(formattedDate)==Date.parse(formattedDate1) )
+      {
+       
+       var strStartTime = document.getElementById("stime").value;
+       var strEndTime = document.getElementById("etime").value;
+
+        var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+        var endTime = new Date(startTime)
+        endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+        if (startTime > endTime) {
+        alert("Start Time is greater than end time");
+         return false; }
+  
+    }else{
+        var date1 = new Date(fdate);
+      var date2 = new Date(tdate);
+      var strStartTime = document.getElementById("stime").value;
+      var strEndTime = document.getElementById("etime").value;
+       var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+       var endTime = new Date(startTime);
+       endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+      var a=formattedDate + '' + strStartTime;
+      var b=formattedDate1 + '' + strEndTime;
+      //alert(startTime);alert(endTime); alert(a);alert(b); 
+      if (a == b || a > b) {
+      alert("Start Date & Time is greater than end Date & Time");
+      return false;
+      }
+    }
+      function GetHours(d) 
+      {
+        var h = parseInt(d.split(':')[0]);
+        if (d.split(':')[1].split(' ')[1] == "PM") {
+        h = h + 12;
+      }
+      return h;
+      }
+      function GetMinutes(d) 
+      {
+       return parseInt(d.split(':')[1].split(' ')[0]);
+      }
+
 }
 
 </script>

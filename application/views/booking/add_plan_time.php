@@ -9,22 +9,22 @@
       <div class="topbar">
          <nav class="navbar-custom">
             <ul class="list-inline float-right mb-0">
-               <li class="list-inline-item dropdown notification-list">
+               <!--li class="list-inline-item dropdown notification-list">
                   <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
                      aria-haspopup="false" aria-expanded="false">
                   <i class="ion-ios7-bell noti-icon"></i>
                   <span class="badge badge-success noti-icon-badge">3</span>
                   </a>
-               </li>
+               </li!-->
                <li class="list-inline-item dropdown notification-list">
                   <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
                      aria-haspopup="false" aria-expanded="false">
                   <img src="<?php echo base_url(); ?>assets/images/admin/admin.png" alt="user" class="rounded-circle">
                   </a>
                   <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                     <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
+                     <!--a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
                      <a class="dropdown-item" href="#"><span class="badge badge-success pull-right">5</span><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
-                     <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a>
+                     <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a!-->
                      <a class="dropdown-item" href="<?php echo base_url(); ?>adminlogin/logout"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
                   </div>
                </li>
@@ -135,6 +135,8 @@
                               <?php
                                  $i=1;
                                  foreach($plan_time as $rows) {
+                                    $tlt=$rows->total_seats;
+                                    $ave=$rows->seat_available;
                                  ?>
                               <tr>
                                  <td><?php  echo $i; ?></td>
@@ -142,7 +144,7 @@
                                  <td><?php  echo $rows->plan_name; ?></td>
                                  <td><?php  echo $newDate = date("d-m-Y",strtotime($rows->show_date));?></td>
                                  <td><?php  echo $rows->show_time; ?></td>
-                                 <td><?php  echo $rows->seat_available; ?></td>
+                                 <td><?php  if(empty($tlt)){ echo $ave; }else{ echo $tlt; } ?></td>
                                  <td><?php  echo $rows->seat_rate; ?></td>
                                  <td>
                                     <a href="<?php echo base_url();?>booking/edit_plan_time/<?php echo $rows->id;?>"><img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>

@@ -8,22 +8,22 @@
    <div class="topbar">
       <nav class="navbar-custom">
          <ul class="list-inline float-right mb-0">
-            <li class="list-inline-item dropdown notification-list">
+            <!--li class="list-inline-item dropdown notification-list">
                <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
                   aria-haspopup="false" aria-expanded="false">
                <i class="ion-ios7-bell noti-icon"></i>
                <span class="badge badge-success noti-icon-badge">3</span>
                </a>
-            </li>
+            </li!-->
             <li class="list-inline-item dropdown notification-list">
             <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
                aria-haspopup="false" aria-expanded="false">
             <img src="<?php echo base_url(); ?>assets/images/admin/admin.png" alt="user" class="rounded-circle">
             </a>
             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-            <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
+            <!--a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
             <a class="dropdown-item" href="#"><span class="badge badge-success pull-right">5</span><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
-            <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a>
+            <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a!-->
             <a class="dropdown-item" href="<?php echo base_url(); ?>adminlogin/logout"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
             </div>
             </li>
@@ -204,7 +204,7 @@
                         <option value="<?php echo $temp->id; ?>"><?php echo $temp->template_name; ?></option>
                      <?php } ?>
                   </select>
-                <input type="text" id="emails_id" name="usersemailid" class="form-control"/>
+                <input type="hidden" id="emails_id" name="usersemailid" class="form-control"/>
                
                   <div class="col-md-6 col-lg-6 col-xl-3">
                   <!--div class="mini-stat clearfix bg-primary"-->

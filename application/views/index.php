@@ -74,15 +74,26 @@
                     </li>
 
                     <?php
-                    	 $user_id=$this->session->userdata('user_role');
-                       if(empty($user_id)){ ?>
+                    	 $user_role=$this->session->userdata('user_role');
+                       if(empty($user_role)){ ?>
                         <li class="nav-item">
                             <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal">Sign In / Sign Up</a>
                         </li>
-                        <?php }else{ ?>
+
+
+
+                    <?php
+                       }else{ ?>
+                         <?php  if($user_role='3'){ ?>
+                       <li class="nav-item">
+                           <a class="nav-link" href="<?php echo base_url(); ?>profile">Profile</a>
+                       </li>
+                     <?php  } ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo base_url(); ?>logout">Logout</a>
                             </li>
+
+
                             <?php } ?>
                 </ul>
             </div>
@@ -544,7 +555,7 @@
     $('#formsignup').validate({ // initialize the plugin
         rules: {
             name: {
-                required: true,minlength: 6, maxlength: 10
+                required: true,minlength: 6, maxlength: 12
             },
             email: {
                 required: true
@@ -553,15 +564,15 @@
                 required: true,minlength: 10, maxlength: 10, digits: true
             },
             new_password: {
-                required: true,minlength: 6, maxlength: 10
+                required: true,minlength: 6, maxlength: 12
             },
         },
         messages: {
-            name: { required:"Enter the Username", minlength: "Min is 6", maxlength: "Max is 10" },
+            name: { required:"Enter the Username", minlength: "Min is 6", maxlength: "Max is 12" },
             email: "Enter Valid Email ",
-              mobile: { required:"Enter the Mobile number", minlength: "Min is 10", maxlength: "Max is 10" },
+              mobile: { required:"Enter the Mobile number", minlength: "Min is 6", maxlength: "Max is 10" },
 
-            new_password: { required:"Enter the Password", minlength: "Min is 6", maxlength: "Max is 10" }
+            new_password: { required:"Enter the Password", minlength: "Min is 6", maxlength: "Max is 12" }
         },
         submitHandler: function(form) {
             //alert("hi");
