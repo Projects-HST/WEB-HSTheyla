@@ -9,7 +9,7 @@
     <title>HEYLA</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="<?php echo base_url(); ?>assets/front/css/bootstrap.min.css" rel="stylesheet">
+   <link href="<?php echo base_url(); ?>assets/front/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/front/css/style.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
@@ -19,9 +19,9 @@
     <!--script src="<?php echo base_url(); ?>assets/front/js/bootstrap.min.js"></script-->
 
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/morris/morris.css">
-<link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<!--link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"-->
 <link href="<?php echo base_url(); ?>assets/css/icons.css" rel="stylesheet" type="text/css">
-<link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet" type="text/css">
+<!--link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet" type="text/css"-->
 
 <link href="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
 

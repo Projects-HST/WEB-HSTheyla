@@ -23,7 +23,7 @@ class Organizerbooking extends CI_Controller
 
 	   //echo $user_id; echo $user_role; exit;
       $datas['view'] = $this->organizerbookingmodel->get_all_booking_details($user_id);
-      //print_r($datas['view']);exit;
+      //echo'<pre>';print_r($datas['view']);exit;
 	   if($user_role==2)
 		{
 		  $this->load->view('organizer/header');

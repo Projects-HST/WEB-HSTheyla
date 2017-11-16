@@ -106,7 +106,10 @@ class Organizer extends CI_Controller
         $email = $this->input->post('email');
         
         $event_pic = $_FILES['eventbanner']['name']; 
-		$event_banner = trim($event_pic);
+        $temp = pathinfo($event_pic, PATHINFO_EXTENSION);
+        $file_name      = time() . rand(1, 5) . rand(6, 10);
+        $event_banner   = $file_name. '.' .$temp;
+		//$event_banner = trim($event_pic);
 		$uploaddir = 'assets/events/banners/';
 		$profilepic = $uploaddir.$event_banner;
 		move_uploaded_file($_FILES['eventbanner']['tmp_name'],$profilepic);
@@ -144,7 +147,8 @@ class Organizer extends CI_Controller
 	    $user_role = $this->session->userdata('user_role');
 
 		$datas['result'] = $this->organizermodel->list_events($user_id);
-		
+
+		//echo'<pre>'; print_r($datas['result']);exit;
 		if($user_role==2)
 		{
 		  $this->load->view('organizer/header');	
@@ -223,8 +227,10 @@ class Organizer extends CI_Controller
         $currentcpic=$this->input->post('currentcpic');
         $eventid=$this->input->post('eventid');
 
-        $event_pic=$_FILES['eventbanner']['name']; 
-		$event_banner=trim($event_pic);
+        $event_pic = $_FILES['eventbanner']['name']; 
+        $temp = pathinfo($event_pic, PATHINFO_EXTENSION);
+        $file_name      = time() . rand(1, 5) . rand(6, 10);
+        $event_banner   = $file_name. '.' .$temp;
 		$uploaddir='assets/events/banner/';
 		$profilepic=$uploaddir.$event_banner;
 		move_uploaded_file($_FILES['eventbanner']['tmp_name'],$profilepic);

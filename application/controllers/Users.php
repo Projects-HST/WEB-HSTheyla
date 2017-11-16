@@ -318,5 +318,17 @@ class Users extends CI_Controller
 		}
     }
 
+  //   public function checker()
+  //   {
+  //     $valtext = $this->input->post('valtext');
+	 //  $numrows2 = $this->usersmodel->checker_fun($valtext);
+	 //  if ($numrows2 > 0)
+	 //  {
+		// echo "Already Exit";
+	 //  }else{
+		// echo "Available";
+		// }
+  //   }
+
 
 	} ?>
