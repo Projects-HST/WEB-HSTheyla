@@ -29,6 +29,24 @@ class Home extends CI_Controller {
 			}
 
 	}
+	public function home()
+	{
+		$this->load->library('facebook');
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
+	 	$user_role=$this->session->userdata('user_role');
+
+			if($user_role==1){
+				redirect('adminlogin/dashboard');
+			}else if($user_role==2){
+								redirect('dashboard');
+			}else if($user_role==3){
+							$this->load->view('index');
+			}else{
+				$this->load->view('index');
+			}
+
+	}
 
 
 	public function gmaillogin(){

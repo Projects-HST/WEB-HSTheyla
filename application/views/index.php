@@ -74,15 +74,26 @@
                     </li>
 
                     <?php
-                    	 $user_id=$this->session->userdata('user_role');
-                       if(empty($user_id)){ ?>
+                    	 $user_role=$this->session->userdata('user_role');
+                       if(empty($user_role)){ ?>
                         <li class="nav-item">
                             <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal">Sign In / Sign Up</a>
                         </li>
-                        <?php }else{ ?>
+
+
+
+                    <?php
+                       }else{ ?>
+                         <?php  if($user_role='3'){ ?>
+                       <li class="nav-item">
+                           <a class="nav-link" href="<?php echo base_url(); ?>profile">Profile</a>
+                       </li>
+                     <?php  } ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo base_url(); ?>logout">Logout</a>
                             </li>
+
+
                             <?php } ?>
                 </ul>
             </div>
