@@ -6,6 +6,7 @@
 	  border-width: 1px;
 	  border-style: solid;
 	  border-color: #263961;
+		padding: 10px 39px 12px 20px;
 	}
 	.btn-facebook:link, .btn-facebook:visited {
 	  color: #fff;

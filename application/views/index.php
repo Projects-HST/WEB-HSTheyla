@@ -175,7 +175,7 @@
                                     <center>
                                         <div class="social-login">
 
-                     <a href="<?php echo base_url(); ?>google_login" class="btn btn-lg  btn-google"><i class="fa fa-google-plus"></i>Login With Google</a>
+                     <a href="<?php echo base_url(); ?>google_login" class="btn btn-lg  btn-google"><i class="fa fa-google-plus"></i> Login With Google + </a>
                                                 <a href="<?php echo base_url(); ?>facebook_login" class="btn btn-facebook btn-lg">
                       <i class="fa fa-facebook"></i> Login with Facebook
                      </a>
@@ -232,14 +232,14 @@
                 </div>
                 <!-- Slide Two - Set the background image for this slide in the line below -->
                 <div class="carousel-item" style="background-image: url('<?php echo base_url(); ?>assets/front/images/slider2.jpg')">
-                    <div class="carousel-caption d-none d-md-block">
+                    <div class="carousel-caption  d-md-block">
                       <img src="<?php echo base_url(); ?>assets/front/images/play.png" class=""> <img src="<?php echo base_url(); ?>assets/front/images/app.png" class="">
 
                     </div>
                 </div>
                 <!-- Slide Three - Set the background image for this slide in the line below -->
                 <div class="carousel-item" style="background-image: url('<?php echo base_url(); ?>assets/front/images/slider3.jpg')">
-                    <div class="carousel-caption d-none d-md-block">
+                    <div class="carousel-caption  d-md-block">
                       <img src="<?php echo base_url(); ?>assets/front/images/play.png" class=""> <img src="<?php echo base_url(); ?>assets/front/images/app.png" class="">
 
                     </div>
