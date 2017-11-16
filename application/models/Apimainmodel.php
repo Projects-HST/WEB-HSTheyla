@@ -220,7 +220,6 @@ class Apimainmodel extends CI_Model {
 			
 			if($user_result->num_rows()>0)
 			{
-			    
 			    foreach ($user_result->result() as $rows)
     			{
     				  $user_picture = $rows->user_picture;
@@ -228,7 +227,7 @@ class Apimainmodel extends CI_Model {
     				  $state_id = $rows->state_id;
     				  $city_id = $rows->city_id;
     			}
-			  
+
 			    if ($user_picture != ''){
 			        $picture_url = base_url().'assets/users/profile/'.$user_picture;
 			    }else {
@@ -331,7 +330,6 @@ class Apimainmodel extends CI_Model {
 
 //#################### Facebook and Gmail Login ####################//
 	public function Fb_gm_login($email_id,$name,$gcm_key,$mobile_type,$login_type)
-	
 	{
 
         $user_id ="";
@@ -825,11 +823,12 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	public function Forgot_password($user_name)
 	{
 	        $user_id = "";
+	        $Message = "User Not Found";
 	        
 			$digits = 4;
 			$OTP = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT);
 
-    		$sql = "SELECT * FROM user_master WHERE email_id ='".$user_name."' AND email_verify = 'Y' AND status='Y'";
+    		$sql = "SELECT * FROM user_master WHERE email_id ='".$user_name."' AND status='Y'";
     		$user_result = $this->db->query($sql);
     		$ress = $user_result->result();
     		if($user_result->num_rows()>0)
@@ -838,17 +837,25 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
     			{
     				  $user_id = $rows->id;
     				  $email_id = $rows->email_id;
+    				  $email_verify = $rows->email_verify;
     			}
-                $encrypt_email = base64_encode($email_id);
+                    if ($email_verify=='N') {
+                        $Message = 'Please verify your email id';
+                        $sType = "Email";
+                        $user_id = '';
+                    } else {
+                    
+                    $encrypt_email = base64_encode($email_id);
 
-        		$subject = "Heyla App - Forgot Password URL";
-        		$email_message = 'Please Click the Forgot Password link. <a href="'. base_url().'home/reset/'.$encrypt_email.'" target="_blank" style="background-color: #478ECC; font-size:15px; font-weight: bold; padding: 10px; text-decoration: none; color: #fff; border-radius: 5px;">Forgot Password</a><br><br><br>';
-                //$email_message = "<a href='#'> Email Verfication URL </a>";
-                $this->sendMail($email_id,$subject,$email_message);
-                $sType = "Email";
+            		$subject = "Heyla App - Forgot Password URL";
+            		$email_message = 'Please Click the Forgot Password link. <a href="'. base_url().'home/reset/'.$encrypt_email.'" target="_blank" style="background-color: #478ECC; font-size:15px; font-weight: bold; padding: 10px; text-decoration: none; color: #fff; border-radius: 5px;">Forgot Password</a><br><br><br>';
+                    //$email_message = "<a href='#'> Email Verfication URL </a>";
+                    $this->sendMail($email_id,$subject,$email_message);
+                    $sType = "Email";
+                }
     		} 
 
-    		$sql = "SELECT * FROM user_master WHERE mobile_no ='".$user_name."' AND mobile_verify ='Y' AND status='Y'";
+    		$sql = "SELECT * FROM user_master WHERE mobile_no ='".$user_name."'AND status='Y'";
     		$user_result = $this->db->query($sql);
     		$ress = $user_result->result();
     		if($user_result->num_rows()>0)
@@ -857,20 +864,27 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
     			{
     				  $user_id = $rows->id;
     				  $mobile_no = $rows->mobile_no;
+    				  $mobile_verify = $rows->mobile_verify;
     			}
     			
-    			$update_sql = "UPDATE user_master SET mobile_otp = '$OTP', updated_by = '$user_id', updated_at =NOW() WHERE id='$user_id'";
-			    $update_result = $this->db->query($update_sql);
-			    
-        		$mobile_message = 'Verify OTP :'. $OTP;
-                $this->sendSMS($mobile_no,$mobile_message);
-                $sType = "Mobile";
+    			if ($mobile_verify=='N') {
+                    $Message = 'Please verify your Mobile';
+                    $sType = "Mobile";
+                    $user_id = '';
+                } else {
+        			$update_sql = "UPDATE user_master SET mobile_otp = '$OTP', updated_by = '$user_id', updated_at =NOW() WHERE id='$user_id'";
+    			    $update_result = $this->db->query($update_sql);
+    			    
+            		$mobile_message = 'Verify OTP :'. $OTP;
+                    $this->sendSMS($mobile_no,$mobile_message);
+                    $sType = "Mobile";
+                }
     		} 
 
 	        if ( $user_id != "") {
                 $response = array("status" => "success", "msg" => "Forgot Password", "type"=>$sType);
 			} else {
-				$response = array("status" => "error", "msg" => "User Not Found");
+				$response = array("status" => "error", "msg" => $Message);
 			}
 			return $response;
 	}
@@ -989,58 +1003,78 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	}
 //#################### Select State End ####################//
 
-//#################### View Category ####################//
-	public function View_preferrence($user_id)
-	{
-	        $category_query = "SELECT id,category_name,category_image from category_master WHERE status ='Y' ORDER BY order_by";
-			$category_res = $this->db->query($category_query);
+// //#################### View Category ####################//
+// 	public function View_preferrence($user_id)
+// 	{
+// 	        $category_query = "SELECT id,category_name,category_image from category_master WHERE status ='Y' ORDER BY order_by";
+// 			$category_res = $this->db->query($category_query);
 
-			 if($category_res->num_rows()>0){
-			     	$category_result= $category_res->result();
-			     	$response = array("status" => "success", "msg" => "View Categories","Categories"=>$category_result);
+// 			 if($category_res->num_rows()>0){
+// 			     	//$category_result= $category_res->result();
+// 			    foreach ($category_res->result() as $rows)
+// 			    {
+// 				     $preferences[]  = array(
+// 							"category_id" => $rows->id,
+// 							"category_name" => $rows->category_name,
+// 							"category_pic" => base_url().'assets/category/'.$rows->category_image ,
+// 				    );
+// 			    }
+			     	
+// 			     	$response = array("status" => "success", "msg" => "View Categories","Categories"=>$preferences);
 				 
-			}else{
-			        $response = array("status" => "error", "msg" => "Categories not found");
-			}  
-						
-			return $response;
-	}
-//#################### View Category End ####################//
+// 			}else{
+// 			        $response = array("status" => "error", "msg" => "Categories not found");
+// 			}  
+			
+// 			return $response;
+// 	}
+// //#################### View Category End ####################//
+
+// //#################### Add User Category ####################//
+// 	public function Add_preferrence($user_id,$category_ids)
+// 	{
+//         $category_ids = explode(',' , $category_ids);
+//         foreach($category_ids as $key) {
+//     	    $sQuery = "INSERT INTO user_preference (user_id,category_id) VALUES ('". $user_id . "','". $key . "')";
+// 			$ins_Query = $this->db->query($sQuery);
+//         }
+//         $response = array("status" => "success", "msg" => "Preferences Added");
+
+// 		return $response;
+// 	}
+// //#################### User Category End ####################//
 
 //#################### Add User Category ####################//
-	public function Add_preferrence($user_id,$category_ids)
-	{
-        $category_ids = explode(',' , $category_ids);
-        foreach($category_ids as $key) {
-    	    $sQuery = "INSERT INTO user_preference (user_id,category_id) VALUES ('". $user_id . "','". $key . "')";
-			$ins_Query = $this->db->query($sQuery);
-        }
-        $response = array("status" => "success", "msg" => "Preferences Added");
-
-		return $response;
-	}
-//#################### User Category End ####################//
-
-//#################### Add User Category ####################//
-	public function Update_preferrence($user_id,$category_ids)
+	public function Update_preferrence($user_id,$category_ids,$user_type)
 	{
         $category_ids = explode(',' , $category_ids);
         
-        $prefQuery = "SELECT * FROM user_preference WHERE user_id = '$user_id' LIMIT 1";
+        if ($user_type =='1') {
+            $prefQuery = "SELECT * FROM user_preference WHERE user_id = '$user_id' LIMIT 1";
+        } else {
+            $prefQuery = "SELECT * FROM guest_user_preference WHERE user_id = '$user_id' LIMIT 1";
+        }
 		$pref_result = $this->db->query($prefQuery);
 		$pref_ress = $pref_result->result();
 		
-			if($pref_result->num_rows()>0)
-			{
-			    $sQuery = "DELETE FROM user_preference WHERE user_id = '" .$user_id. "'";
-    			$del_Query = $this->db->query($sQuery);
-    			
-    			foreach($category_ids as $key) {
-            	    $sQuery = "INSERT INTO user_preference (user_id,category_id) VALUES ('". $user_id . "','". $key . "')";
-        			$ins_Query = $this->db->query($sQuery);
+			if($pref_result->num_rows()>0) {
+			    if ($user_type =='1') {
+                     $sQuery = "DELETE FROM user_preference WHERE user_id = '" .$user_id. "'";
+                } else {
+                    $sQuery = "DELETE FROM guest_user_preference WHERE user_id = '" .$user_id. "'";
                 }
+    			$del_Query = $this->db->query($sQuery);
 			}
 			
+			foreach($category_ids as $key) {
+			    
+			    if ($user_type =='1') {
+                     $sQuery = "INSERT INTO user_preference (user_id,category_id) VALUES ('". $user_id . "','". $key . "')";
+                } else {
+                    $sQuery = "INSERT INTO guest_user_preference (user_id,category_id) VALUES ('". $user_id . "','". $key . "')";
+                }
+    			$ins_Query = $this->db->query($sQuery);
+            }
 		$response = array("status" => "success", "msg" => "Preference Updated");	
 		
 		return $response;
@@ -1048,19 +1082,46 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 //#################### User Category End ####################//
 
 //#################### View User Category ####################//
-	public function User_preferrence($user_id)
+	public function User_preferrence($user_id,$user_type)
 	{
-	        $category_query = "SELECT A.id,A.category_name,B.user_id,B.category_id from category_master A, user_preference B WHERE A.id=B.category_id AND B.user_id ='$user_id' AND status ='Y' ORDER BY order_by";
+	        $category_query = "SELECT id,category_name,category_image from category_master WHERE status ='Y' ORDER BY order_by";
 			$category_res = $this->db->query($category_query);
-
+            $user_preference ='';
+            
 			 if($category_res->num_rows()>0){
-			     	$category_result= $category_res->result();
-			     	$response = array("status" => "success", "msg" => "View Categories","Categories"=>$category_result);
+			     
+			    foreach ($category_res->result() as $rows)
+			    {
+			        $category_id = $rows->id;
+			        
+			         if ($user_type =='1') {
+                        $user_query = "SELECT * from user_preference WHERE category_id ='$category_id' AND user_id ='$user_id'";
+                    } else {
+                        $user_query = "SELECT * from guest_user_preference WHERE category_id ='$category_id' AND user_id ='$user_id'";
+                    }
+                
+			          $user_res = $this->db->query($user_query);
+
+			            if($user_res->num_rows()>0){
+			                $user_preference = 'Y';
+			            } else {
+			                $user_preference = 'N';
+			            }
+			        
+				     $preferences[] = array(
+							"category_id" => $rows->id,
+							"category_name" => $rows->category_name,
+							"category_pic" => base_url().'assets/category/'.$rows->category_image,
+							"user_preference" => $user_preference
+				    );
+			    }
+
+			    	$response = array("status" => "success", "msg" => "View Categories","Categories"=>$preferences);
 				 
 			}else{
 			        $response = array("status" => "error", "msg" => "Categories not found");
 			}  
-						
+	
 			return $response;
 	}
 //#################### User Category End ####################//
@@ -1183,7 +1244,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			return $response;
 	}
 //#################### Delete Wishlist ####################//
-
+/*
 //#################### View Events ####################//
 	public function View_events($event_type,$city,$user_id,$preferrence)
 	{
@@ -1223,6 +1284,167 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			return $response;
 	}
 //#################### View Events End ###############//
+*/
+//#################### View Events ####################//
+	public function View_events($event_type,$city_id,$user_id,$user_type)
+	{
+	    $current_date = date("Y-m-d");
+/*	    
+        $city_query = "SELECT * FROM city_master WHERE city_name like '%" .$city. "%' LIMIT 1";
+		$city_res = $this->db->query($city_query);
+		 if($city_res->num_rows()>0){
+		    foreach ($city_res->result() as $rows)
+			{
+				  $city_id  = $rows->id ;
+			}
+		 }
+*/
+        if ($user_type ==1){
+            $pre_query = "SELECT * FROM user_preference WHERE user_id = '$user_id'";
+        } else {
+            $pre_query = "SELECT * FROM guest_user_preference WHERE user_id = '$user_id'";
+        }
+		$pre_res = $this->db->query($pre_query);
+      
+		 if($pre_res->num_rows()>0){
+		    foreach ($pre_res->result() as $rows)
+			{	
+				   $pref_ids[]  = $rows->category_id;
+			}
+			$preferrence = implode (",", $pref_ids);
+		 }
+
+            $adv_event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
+                        from events as ev
+                        left join event_popularity as ep on ep.event_id = ev.id
+                        LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+                        LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+                        LEFT JOIN adv_event_history AS aeh ON aeh.event_id = ev.id
+                        WHERE ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y' AND aeh.date_to >= '$current_date' group by ev.id, aeh.event_id";
+    	    //echo $event_query;
+		    $adv_event_res = $this->db->query($adv_event_query);
+
+			if($adv_event_res->num_rows()>0){
+                $adv_event_result= $adv_event_res->result();
+
+                foreach ($adv_event_res->result() as $rows)
+			    {
+				     $adv_eventData[]  = array(
+							"event_id" => $rows->id,
+							"popularity" => $rows->popularity,
+							"category_id" => $rows->category_id,
+							"event_name" => $rows->event_name,
+							"event_venue" => $rows->event_venue,
+							"event_address" => $rows->event_address,
+							"description" => $rows->description,
+							"start_date" => $rows->start_date,
+							"end_date" => $rows->end_date,
+							"event_banner" => base_url().'assets/events/banner/'.$rows->event_banner,
+							"event_latitude" => $rows->event_latitude,
+							"event_longitude" => $rows->event_longitude,
+							"event_country" => $rows->event_country,
+							"country_name" => $rows->country_name,
+							"event_city" => $rows->event_city,
+							"city_name" => $rows->city_name,
+							"primary_contact_no" => $rows->primary_contact_no,
+							"secondary_contact_no" => $rows->secondary_contact_no,
+							"contact_person" => $rows->contact_person,
+							"contact_email" => $rows->contact_email,
+							"event_type" => $rows->event_type,
+							"adv_status" => $rows->adv_status,
+							"booking_status" => $rows->booking_status,
+							"hotspot_status" => $rows->hotspot_status,
+							"event_colour_scheme" => $rows->event_colour_scheme,
+							"event_status" => $rows->event_status,
+							"advertisement" => 'y'
+				    );
+			    }
+			} else {
+			    
+			    $adv_eventData = array();
+			}
+
+
+	    if ($event_type == 'General'){
+	        $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
+                            from events as ev
+                            left join event_popularity as ep on ep.event_id = ev.id
+                            LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+                            LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+                            WHERE ev.hotspot_status = 'N' AND ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
+                            group by ev.id";
+	    } 
+	    if ($event_type == 'Hotspot'){
+	            $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
+                            from events as ev
+                            left join event_popularity as ep on ep.event_id = ev.id
+                            LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+                            LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+                            WHERE ev.hotspot_status = 'Y' AND ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
+                            group by ev.id";
+	    } 
+	    if ($event_type == 'Popularity'){
+	            $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
+                            from events as ev
+                            left join event_popularity as ep on ep.event_id = ev.id
+                            LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+                            LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+                            WHERE ev.hotspot_status = 'N' AND ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
+                            group by ev.id ORDER by popularity DESC";
+	    } 
+		//echo $event_query;
+		$event_res = $this->db->query($event_query);
+
+		 if($event_res->num_rows()>0){
+                $event_result= $event_res->result();
+
+                foreach ($event_res->result() as $rows)
+			    {
+				     $eventData[]  = array(
+							"event_id" => $rows->id,
+							"popularity" => $rows->popularity,
+							"category_id" => $rows->category_id,
+							"event_name" => $rows->event_name,
+							"event_venue" => $rows->event_venue,
+							"event_address" => $rows->event_address,
+							"description" => $rows->description,
+							"start_date" => $rows->start_date,
+							"end_date" => $rows->end_date,
+							"event_banner" => base_url().'assets/events/banner/'.$rows->event_banner,
+							"event_latitude" => $rows->event_latitude,
+							"event_longitude" => $rows->event_longitude,
+							"event_country" => $rows->event_country,
+							"country_name" => $rows->country_name,
+							"event_city" => $rows->event_city,
+							"city_name" => $rows->city_name,
+							"primary_contact_no" => $rows->primary_contact_no,
+							"secondary_contact_no" => $rows->secondary_contact_no,
+							"contact_person" => $rows->contact_person,
+							"contact_email" => $rows->contact_email,
+							"event_type" => $rows->event_type,
+							"adv_status" => $rows->adv_status,
+							"booking_status" => $rows->booking_status,
+							"hotspot_status" => $rows->hotspot_status,
+							"event_colour_scheme" => $rows->event_colour_scheme,
+							"event_status" => $rows->event_status,
+							"advertisement" => ''
+				    );
+			    }
+			     
+
+			     if (!empty($adv_eventData)) {
+			            $output = array_merge($adv_eventData, $eventData);
+		            } else {
+		                $output = $eventData;
+		            }
+			     	$response = array("status" => "success", "msg" => "View Events","Eventdetails"=>$output);
+			}else{
+			        $response = array("status" => "error", "msg" => "Events not found");
+			}  
+						
+			return $response;
+	}
+//#################### View Events End ###############//
 
 //#################### View Adv Events ####################//
 	public function View_adv_events($city,$user_id,$preferrence)
@@ -1237,34 +1459,134 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 				  $city_id  = $rows->id ;
 			}
 		 }
-		    $event_query = "SELECT aeh.event_id,aeh.date_from,aeh.date_to,ev.* from adv_event_history aeh
-		                    INNER JOIN events AS ev ON aeh.event_id = ev.id 
-		                    WHERE aeh.date_to >= '$current_date' AND aeh.category_id IN ($preferrence) AND ev.event_city = '$city_id' AND aeh.status ='Y' 
-		                    GROUP by aeh.event_id";
+		 
+		 $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
+                        from events as ev
+                        left join event_popularity as ep on ep.event_id = ev.id
+                        LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+                        LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+                        LEFT JOIN adv_event_history AS aeh ON aeh.event_id = ev.id
+                        WHERE ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y' AND aeh.date_to >= '$current_date' group by ev.id, aeh.event_id";
     	    //echo $event_query;
 		    $event_res = $this->db->query($event_query);
 
-			 if($event_res->num_rows()>0){
-			     	$event_result= $event_res->result();
-			     	$response = array("status" => "success", "msg" => "View Adv Events","Eventdetails"=>$event_result);
-				 
+			if($event_res->num_rows()>0){
+                $event_result= $event_res->result();
+
+                foreach ($event_res->result() as $rows)
+			    {
+				     $eventData[]  = array(
+							"event_id" => $rows->id,
+							"popularity" => $rows->popularity,
+							"category_id" => $rows->category_id,
+							"event_name" => $rows->event_name,
+							"event_venue" => $rows->event_venue,
+							"event_address" => $rows->event_address,
+							"description" => $rows->description,
+							"start_date" => $rows->start_date,
+							"end_date" => $rows->end_date,
+							"event_banner" => base_url().'assets/events/banner/'.$rows->event_banner,
+							"event_latitude" => $rows->event_latitude,
+							"event_longitude" => $rows->event_longitude,
+							"event_country" => $rows->event_country,
+							"country_name" => $rows->country_name,
+							"event_city" => $rows->event_city,
+							"city_name" => $rows->city_name,
+							"primary_contact_no" => $rows->primary_contact_no,
+							"secondary_contact_no" => $rows->secondary_contact_no,
+							"contact_person" => $rows->contact_person,
+							"contact_email" => $rows->contact_email,
+							"event_type" => $rows->event_type,
+							"adv_status" => $rows->adv_status,
+							"booking_status" => $rows->booking_status,
+							"hotspot_status" => $rows->hotspot_status,
+							"event_colour_scheme" => $rows->event_colour_scheme,
+							"event_status" => $rows->event_status,
+				    );
+			    }
+			     	$response = array("status" => "success", "msg" => "View Events","Eventdetails"=>$eventData);
 			}else{
-			        $response = array("status" => "error", "msg" => "Adv Events not found");
+			        $response = array("status" => "error", "msg" => "Events not found");
 			}  
 						
 			return $response;
 	}
 //#################### Adv Events End ###############//
 
+//#################### View Events ####################//
+	public function View_eventdetails($event_id,$user_id)
+	{
+        $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
+                        from events as ev
+                        left join event_popularity as ep on ep.event_id = ev.id
+                        LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+                        LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+                        WHERE ev.id = '$event_id'AND ev.event_status  ='Y'
+                        group by ev.id";
+	   
+		//echo $event_query;
+		$event_res = $this->db->query($event_query);
+
+		 if($event_res->num_rows()>0){
+                $event_result= $event_res->result();
+
+                foreach ($event_res->result() as $rows)
+			    {
+				     $eventData[]  = array(
+							"event_id" => $rows->id,
+							"popularity" => $rows->popularity,
+							"category_id" => $rows->category_id,
+							"event_name" => $rows->event_name,
+							"event_venue" => $rows->event_venue,
+							"event_address" => $rows->event_address,
+							"description" => $rows->description,
+							"start_date" => $rows->start_date,
+							"end_date" => $rows->end_date,
+							"event_banner" => base_url().'assets/events/banner/'.$rows->event_banner,
+							"event_latitude" => $rows->event_latitude,
+							"event_longitude" => $rows->event_longitude,
+							"event_country" => $rows->event_country,
+							"country_name" => $rows->country_name,
+							"event_city" => $rows->event_city,
+							"city_name" => $rows->city_name,
+							"primary_contact_no" => $rows->primary_contact_no,
+							"secondary_contact_no" => $rows->secondary_contact_no,
+							"contact_person" => $rows->contact_person,
+							"contact_email" => $rows->contact_email,
+							"event_type" => $rows->event_type,
+							"adv_status" => $rows->adv_status,
+							"booking_status" => $rows->booking_status,
+							"hotspot_status" => $rows->hotspot_status,
+							"event_colour_scheme" => $rows->event_colour_scheme,
+							"event_status" => $rows->event_status,
+				    );
+			    }
+			     	$response = array("status" => "success", "msg" => "View Events","Eventdetails"=>$eventData);
+			}else{
+			        $response = array("status" => "error", "msg" => "Events not found");
+			}  
+						
+			return $response;
+	}
+//#################### View Events End ###############//
+
 //#################### View Event Images ####################//
 	public function View_eventimages($event_id)
 	{
-	    $event_query = "SELECT event_image FROM event_images WHERE event_id = '$event_id'";
+	    $event_query = "SELECT * FROM event_images WHERE event_id = '$event_id'";
 		$event_res = $this->db->query($event_query);
 
 			 if($event_res->num_rows()>0){
-			     	$event_result= $event_res->result();
-			     	$response = array("status" => "success", "msg" => "View Event Images","Eventgallery"=>$event_result);
+			    //$event_result= $event_res->result();
+                foreach ($event_res->result() as $rows)
+			    {
+				     $eventImages[]  = array(
+							"gallery_id" => $rows->id,
+							"event_id" => $rows->event_id,
+							"event_banner" => base_url().'assets/events/gallery/'.$rows->event_image,
+				    );
+			    }
+			     	$response = array("status" => "success", "msg" => "View Event Images","Eventgallery"=>$eventImages);
 				 
 			}else{
 			        $response = array("status" => "error", "msg" => "Gallery not found");
@@ -1274,51 +1596,157 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	}
 //#################### View Event Images End ###############//
 
-//#################### Booking history ####################//
-	public function Booking_history($user_id)
+//#################### Event review ###############//
+	public function Event_review($event_id)
 	{
-	        $booking_query = "SELECT * FROM booking_history A,events B WHERE A.user_id  = '$user_id' AND A.event_id = B.id";
-			$booking_res = $this->db->query($booking_query);
+	        $review_query = "SELECT A.*,B.user_name FROM event_reviews A, user_master B WHERE A.event_id = '$event_id' AND A.status='Y' AND A.user_id=B.id ORDER by A.review_positive DESC";
+			$review_res = $this->db->query($review_query);
+			$review_result= $review_res->result();
 
-			 if($booking_res->num_rows()>0){
-			     	$booking_result= $booking_res->result();
-			     	$response = array("status" => "success", "msg" => "View Booking History","Bookinghistory"=>$booking_result);
-				 
+			 if($review_res->num_rows()>0){
+			     	$response = array("status" => "success", "msg" => "View Reviews","Reviewdetails"=>$review_result);
 			}else{
-			        $response = array("status" => "error", "msg" => "Booking not found");
+			        $response = array("status" => "error", "msg" => "Reviews not found");
 			}  
 						
 			return $response;
 	}
-//#################### Booking history End ###############//
+//#################### Event review End ###############//
 
-//#################### Booking details###############//
-	public function Booking_details($booking_id)
+//#################### Event review photo ###############//
+	public function Review_images($event_id,$review_id)
 	{
-	        $booking_query = "SELECT * FROM booking_history A,events B WHERE A.id  = '$booking_id' AND A.event_id = B.id";
-			$booking_res = $this->db->query($booking_query);
-			$booking_result= $booking_res->result();
+	        $review_query = "SELECT photo FROM event_review_photos WHERE review_id = '$review_id'";
+			$review_res = $this->db->query($review_query);
+			//$review_result= $review_res->result();
 
-			 if($booking_res->num_rows()>0){
-
-			    foreach ($booking_res->result() as $rows)
-    			{
-    				  $order_id  = $rows->order_id ;
-    			}
-    			
-    			$attendees_query = "SELECT * FROM booking_event_attendees WHERE  order_id  ='$order_id'";
-			    $attendees_res = $this->db->query($attendees_query);
-			    $attendees_result= $attendees_res->result();
-    			
-			     	$response = array("status" => "success", "msg" => "View Booking History","Bookingdetails"=>$booking_result,"Bookingattendees"=>$attendees_result);
-				 
+			 if($review_res->num_rows()>0){
+    		     foreach ($review_res->result() as $rows)
+			        {
+				     $reviewImages[]  = array(
+							"gallery_id" => $rows->id,
+							"event_id" => $rows->event_id,
+							"event_banner" => base_url().'assets/events/gallery/'.$rows->event_image,
+				    );
+			    }
+			    
+			     	$response = array("status" => "success", "msg" => "View Review Images","Reviewphotos"=>$reviewImages);
 			}else{
-			        $response = array("status" => "error", "msg" => "Booking not found");
+			        $response = array("status" => "error", "msg" => "Reviews Images not found");
 			}  
 						
 			return $response;
 	}
-//#################### Booking details End ###############//
+//#################### Event review photo End ###############//
+
+
+//#################### Advanced Events Search ####################//
+	public function Advance_search($today_date,$tomorrow_date,$single_date,$from_date,$to_date,$event_type,$event_type_category,$selected_category,$selected_city)
+	{
+	    $current_date = date("Y-m-d");
+	    
+	    $event_popularity = '';
+	    
+        $city_query = "SELECT * FROM city_master WHERE city_name like '%" .$selected_city. "%' LIMIT 1";
+		$city_res = $this->db->query($city_query);
+		 if($city_res->num_rows()>0){
+		    foreach ($city_res->result() as $rows)
+			{
+				  $city_id  = $rows->id ;
+			}
+		 }
+    
+        if ($event_type == 'General'){
+            $event_type_query = "ev.hotspot_status = 'N'";
+        }
+        if ($event_type == 'Hotspot'){
+            $event_type_query = "ev.hotspot_status = 'Y'";
+        }
+        if ($event_type == 'Popularity'){
+            $event_type_query = "ev.hotspot_status = 'N'";
+            $event_popularity = "ORDER by popularity DESC";
+        }
+        if ($event_type_category =='Paid'){
+            $event_type_cat_query = "ev.event_type = 'Paid'";
+        }
+        if ($event_type_category =='Free'){
+            $event_type_cat_query = "ev.event_type = 'Free'";
+        }
+        if ($event_type_category =='Invite'){
+            $event_type_cat_query = "ev.event_type = 'Invite'";
+        }
+        
+        $today_query = '';
+        if ($today_date !=''){
+            $today_query = "SUBSTRING(ev.end_date, 1, 10)  = '" . $today_date . "' or  SUBSTRING(ev.start_date, 1, 10) = '" . $today_date . "' AND";
+        }
+        $tomorrow_query ='';
+         if ($tomorrow_date !=''){
+            $tomorrow_query = "SUBSTRING(ev.end_date, 1, 10)  = '" . $tomorrow_date . "' or  SUBSTRING(ev.start_date, 1, 10) = '" . $tomorrow_date . "' AND";
+        }
+	   $single_date_query ='';
+         if ($single_date !=''){
+            $single_date_query = "SUBSTRING(ev.end_date, 1, 10)  = '" . $single_date . "' or  SUBSTRING(ev.start_date, 1, 10) = '" . $single_date . "' AND";
+        }
+	   $fromto_date_query ='';
+	    if ($from_date !='' &&  $to_date !=''){
+	        $fromto_date_query = "ev.start_date  >= STR_TO_DATE('" . $from_date . "','%Y-%m-%d') and  ev.end_date <= STR_TO_DATE('" . $to_date . "','%Y-%m-%d') AND";
+	   }
+	   
+	    $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
+                            from events as ev
+                            left join event_popularity as ep on ep.event_id = ev.id
+                            LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+                            LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+                            WHERE $event_type_query AND $event_type_cat_query AND $today_query $tomorrow_query $single_date_query $fromto_date_query ev.end_date>='$current_date' AND ev.category_id IN ($selected_category) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
+                            group by ev.id $event_popularity";
+
+	//	echo $event_query;
+		$event_res = $this->db->query($event_query);
+
+		 if($event_res->num_rows()>0){
+                $event_result= $event_res->result();
+
+                foreach ($event_res->result() as $rows)
+			    {
+				     $eventData[]  = array(
+							"event_id" => $rows->id,
+							"popularity" => $rows->popularity,
+							"category_id" => $rows->category_id,
+							"event_name" => $rows->event_name,
+							"event_venue" => $rows->event_venue,
+							"event_address" => $rows->event_address,
+							"description" => $rows->description,
+							"start_date" => $rows->start_date,
+							"end_date" => $rows->end_date,
+							"event_banner" => base_url().'assets/events/banner/'.$rows->event_banner,
+							"event_latitude" => $rows->event_latitude,
+							"event_longitude" => $rows->event_longitude,
+							"event_country" => $rows->event_country,
+							"country_name" => $rows->country_name,
+							"event_city" => $rows->event_city,
+							"city_name" => $rows->city_name,
+							"primary_contact_no" => $rows->primary_contact_no,
+							"secondary_contact_no" => $rows->secondary_contact_no,
+							"contact_person" => $rows->contact_person,
+							"contact_email" => $rows->contact_email,
+							"event_type" => $rows->event_type,
+							"adv_status" => $rows->adv_status,
+							"booking_status" => $rows->booking_status,
+							"hotspot_status" => $rows->hotspot_status,
+							"event_colour_scheme" => $rows->event_colour_scheme,
+							"event_status" => $rows->event_status,
+				    );
+			    }
+			     	$response = array("status" => "success", "msg" => "View Events","Eventdetails"=>$eventData);
+			}else{
+			        $response = array("status" => "error", "msg" => "Events not found");
+			}  
+						
+			return $response;
+	}
+//#################### Advanced Events Search End ###############//
+
 
 //#################### Booking Plan Dates###############//
 	public function Booking_plandates($event_id)
@@ -1356,7 +1784,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	}
 //#################### Booking Plan Times End ###############//
 
-//#################### Booking details###############//
+//#################### Booking Plan details###############//
 	public function Booking_plans($event_id,$show_date,$show_time)
 	{
 	        $plan_query = "SELECT B.plan_name,B.seat_rate,A.event_id,A.plan_id,A.show_date,A.show_time,A.seat_available FROM booking_plan_timing A,booking_plan B WHERE A.event_id  = '$event_id' AND show_date = '$show_date' AND show_time = '$show_time' AND A.seat_available>0 AND A.plan_id = B.id";
@@ -1371,41 +1799,66 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 						
 			return $response;
 	}
+//#################### Booking Plan End ###############//
+
+//#################### Booking Plan details###############//
+	public function Booking($order_id,$event_id,$plan_id,$plan_time_id,$user_id,$number_of_seats,$total_amount,$booking_date)
+	{
+	        $sQuery = "INSERT INTO booking_process (order_id,event_id,plan_id,plan_time_id,user_id,number_of_seats,total_amount,booking_date) VALUES ('". $order_id . "','". $event_id . "','". $plan_id . "','". $plan_time_id . "','". $user_id . "','". $number_of_seats . "','". $total_amount . "','". $booking_date . "')";
+			$booking_insert = $this->db->query($sQuery);
+			
+			$response = array("status" => "success", "msg" => "Booking");		
+			return $response;
+	}
+//#################### Booking Plan End ###############//
+
+
+//#################### Booking history ####################//
+	public function Booking_history($user_id)
+	{
+	        $booking_query = "SELECT * FROM booking_history A,events B WHERE A.user_id  = '$user_id' AND A.event_id = B.id";
+			$booking_res = $this->db->query($booking_query);
+
+			 if($booking_res->num_rows()>0){
+			     	$booking_result= $booking_res->result();
+			     	
+			     	$response = array("status" => "success", "msg" => "View Booking History","Bookinghistory"=>$booking_result);
+				 
+			}else{
+			        $response = array("status" => "error", "msg" => "Booking not found");
+			}  
+						
+			return $response;
+	}
+//#################### Booking history End ###############//
+
+//#################### Booking details###############//
+	public function Booking_details($booking_id)
+	{
+	        $booking_query = "SELECT * FROM booking_history A,events B WHERE A.id  = '$booking_id' AND A.event_id = B.id";
+			$booking_res = $this->db->query($booking_query);
+			$booking_result= $booking_res->result();
+
+			 if($booking_res->num_rows()>0){
+
+			    foreach ($booking_res->result() as $rows)
+    			{
+    				  $order_id  = $rows->order_id ;
+    			}
+    			
+    			$attendees_query = "SELECT * FROM booking_event_attendees WHERE  order_id  ='$order_id'";
+			    $attendees_res = $this->db->query($attendees_query);
+			    $attendees_result= $attendees_res->result();
+    			
+			     	$response = array("status" => "success", "msg" => "View Booking History","Bookingdetails"=>$booking_result,"Bookingattendees"=>$attendees_result);
+				 
+			}else{
+			        $response = array("status" => "error", "msg" => "Booking not found");
+			}  
+						
+			return $response;
+	}
 //#################### Booking details End ###############//
-
-//#################### Event review ###############//
-	public function Event_review($event_id)
-	{
-	        $review_query = "SELECT A.*,B.user_name FROM event_reviews A, user_master B WHERE A.event_id = '$event_id' AND A.status='Y' AND A.user_id=B.id ORDER by A.review_positive DESC";
-			$review_res = $this->db->query($review_query);
-			$review_result= $review_res->result();
-
-			 if($review_res->num_rows()>0){
-			     	$response = array("status" => "success", "msg" => "View Reviews","Reviewdetails"=>$review_result);
-			}else{
-			        $response = array("status" => "error", "msg" => "Reviews not found");
-			}  
-						
-			return $response;
-	}
-//#################### Event review End ###############//
-
-//#################### Event review photo ###############//
-	public function Review_images($event_id,$review_id)
-	{
-	        $review_query = "SELECT photo FROM event_review_photos WHERE review_id = '$review_id'";
-			$review_res = $this->db->query($review_query);
-			$review_result= $review_res->result();
-
-			 if($review_res->num_rows()>0){
-			     	$response = array("status" => "success", "msg" => "View Review Images","Reviewphotos"=>$review_result);
-			}else{
-			        $response = array("status" => "error", "msg" => "Reviews Images not found");
-			}  
-						
-			return $response;
-	}
-//#################### Event review photo End ###############//
 }
 
 ?>

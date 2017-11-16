@@ -391,7 +391,8 @@ public function profile_picupload()
 	  	$_POST = json_decode(file_get_contents("php://input"), TRUE);
 		
 		$user_id = $this->uri->segment(3);		
-		$profile = $_FILES["user_pic"]["name"];
+		echo $profile = $_FILES["user_pic"]["name"];
+		exit;
 		$userFileName = time().'-'.$profile;
 		$uploadPicdir = './assets/users/profile/';		
 		$profilepic = $uploadPicdir.$userFileName;
@@ -697,79 +698,79 @@ public function profile_picupload()
 
 //-----------------------------------------------//
 
-//-----------------------------------------------//
+// //-----------------------------------------------//
 
-	public function viewpreferrence()
-	{
-		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+// 	public function viewpreferrence()
+// 	{
+// 		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
-		if(!$this->checkMethod())
-		{
-			return FALSE;
-		}
+// 		if(!$this->checkMethod())
+// 		{
+// 			return FALSE;
+// 		}
 
-		if($_POST == FALSE)
-		{
-			$res = array();
-			$res["opn"] = "View Preferrence";
-			$res["scode"] = 204;
-			$res["message"] = "Input error";
+// 		if($_POST == FALSE)
+// 		{
+// 			$res = array();
+// 			$res["opn"] = "View Preferrence";
+// 			$res["scode"] = 204;
+// 			$res["message"] = "Input error";
 
-			echo json_encode($res);
-			return;
-		}
+// 			echo json_encode($res);
+// 			return;
+// 		}
 
-		$user_id = '';
-		$user_id = $this->input->post("user_id");
+// 		$user_id = '';
+// 		$user_id = $this->input->post("user_id");
 
-		$data['result']=$this->apimainmodel->View_preferrence($user_id);
-		$response = $data['result'];
-		echo json_encode($response);
-	}
+// 		$data['result']=$this->apimainmodel->View_preferrence($user_id);
+// 		$response = $data['result'];
+// 		echo json_encode($response);
+// 	}
 
-//-----------------------------------------------//
+// //-----------------------------------------------//
 
 
 
-//-----------------------------------------------//
+// //-----------------------------------------------//
 
-	public function addpreferrence()
-	{
-		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+// 	public function addpreferrence()
+// 	{
+// 		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
-		if(!$this->checkMethod())
-		{
-			return FALSE;
-		}
+// 		if(!$this->checkMethod())
+// 		{
+// 			return FALSE;
+// 		}
 
-		if($_POST == FALSE)
-		{
-			$res = array();
-			$res["opn"] = "Add User Preferrence";
-			$res["scode"] = 204;
-			$res["message"] = "Input error";
+// 		if($_POST == FALSE)
+// 		{
+// 			$res = array();
+// 			$res["opn"] = "Add User Preferrence";
+// 			$res["scode"] = 204;
+// 			$res["message"] = "Input error";
 
-			echo json_encode($res);
-			return;
-		}
+// 			echo json_encode($res);
+// 			return;
+// 		}
 
-		$user_id = '';
-		$category_ids = '';
-		$user_id = $this->input->post("user_id");
-		$category_ids = $this->input->post("category_ids");
+// 		$user_id = '';
+// 		$category_ids = '';
+// 		$user_id = $this->input->post("user_id");
+// 		$category_ids = $this->input->post("category_ids");
 
-		$data['result']=$this->apimainmodel->Add_preferrence($user_id,$category_ids);
-		$response = $data['result'];
-		echo json_encode($response);
-	}
+// 		$data['result']=$this->apimainmodel->Add_preferrence($user_id,$category_ids);
+// 		$response = $data['result'];
+// 		echo json_encode($response);
+// 	}
 
-//-----------------------------------------------//
+// //-----------------------------------------------//
 
 //-----------------------------------------------//
 
 	public function updatepreferrence()
 	{
-		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
@@ -789,10 +790,13 @@ public function profile_picupload()
 
 		$user_id = '';
 		$category_ids = '';
+		$user_type ='';
+		
 		$user_id = $this->input->post("user_id");
 		$category_ids = $this->input->post("category_ids");
+        $user_type = $this->input->post("user_type");
 
-		$data['result']=$this->apimainmodel->Update_preferrence($user_id,$category_ids);
+		$data['result']=$this->apimainmodel->Update_preferrence($user_id,$category_ids,$user_type);
 		$response = $data['result'];
 		echo json_encode($response);
 	}
@@ -803,7 +807,7 @@ public function profile_picupload()
 
 	public function userpreferrence()
 	{
-		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
@@ -822,9 +826,12 @@ public function profile_picupload()
 		}
 
 		$user_id = '';
+		$user_type ='';
+		
 		$user_id = $this->input->post("user_id");
+        $user_type = $this->input->post("user_type");
 
-		$data['result']=$this->apimainmodel->User_preferrence($user_id);
+		$data['result']=$this->apimainmodel->User_preferrence($user_id,$user_type);
 		$response = $data['result'];
 		echo json_encode($response);
 	}
@@ -1082,7 +1089,7 @@ public function profile_picupload()
 
 	public function viewevents()
 	{
-		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
@@ -1103,25 +1110,26 @@ public function profile_picupload()
 		$event_type = '';
 		$city = '';
 		$user_id = '';
-		$preferrence ='';
+		$user_type ='';
 		
 		$event_type = $this->input->post("event_type");
-		$city = $this->input->post("city");
+		$city_id = $this->input->post("event_city_id");
 		$user_id = $this->input->post("user_id");
-		$preferrence = $this->input->post("preferrence");
+		$user_type = $this->input->post("user_type");
 		
-		$data['result']=$this->apimainmodel->View_events($event_type,$city,$user_id,$preferrence);
+		$data['result']=$this->apimainmodel->View_events($event_type,$city_id,$user_id,$user_type);
 		$response = $data['result'];
 		echo json_encode($response);
 	}
 
 //-----------------------------------------------//
 
+
 //-----------------------------------------------//
 
 	public function advevents()
 	{
-		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
@@ -1154,11 +1162,48 @@ public function profile_picupload()
 
 //-----------------------------------------------//
 
+
+//-----------------------------------------------//
+
+	public function vieweventdetails()
+	{
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
+
+		if(!$this->checkMethod())
+		{
+			return FALSE;
+		}
+
+		if($_POST == FALSE)
+		{
+			$res = array();
+			$res["opn"] = "View Event Details";
+			$res["scode"] = 204;
+			$res["message"] = "Input error";
+
+			echo json_encode($res);
+			return;
+		}
+
+		$event_id = '';
+		$user_id = '';
+
+		$event_id = $this->input->post("event_id");
+		$user_id = $this->input->post("user_id");
+
+		$data['result']=$this->apimainmodel->View_eventdetails($event_id,$user_id);
+		$response = $data['result'];
+		echo json_encode($response);
+	}
+
+//-----------------------------------------------//
+
+
 //-----------------------------------------------//
 
 	public function eventimages()
 	{
-		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
@@ -1186,11 +1231,12 @@ public function profile_picupload()
 
 //-----------------------------------------------//
 
+
 //-----------------------------------------------//
 
-	public function bookinghistory()
+	public function eventreview()
 	{
-		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
@@ -1200,7 +1246,7 @@ public function profile_picupload()
 		if($_POST == FALSE)
 		{
 			$res = array();
-			$res["opn"] = "Booking History";
+			$res["opn"] = "Event Reviews";
 			$res["scode"] = 204;
 			$res["message"] = "Input error";
 
@@ -1208,12 +1254,10 @@ public function profile_picupload()
 			return;
 		}
 
-		$user_id = '';
-		$wishlist_id ='';
+		$event_id = '';
+		$event_id = $this->input->post("event_id");
 		
-		$user_id = $this->input->post("user_id");
-		
-		$data['result']=$this->apimainmodel->Booking_history($user_id);
+		$data['result']=$this->apimainmodel->Event_review($event_id);
 		$response = $data['result'];
 		echo json_encode($response);
 	}
@@ -1222,9 +1266,9 @@ public function profile_picupload()
 
 //-----------------------------------------------//
 
-	public function bookingdetails()
+	public function reviewimages()
 	{
-		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
@@ -1234,18 +1278,71 @@ public function profile_picupload()
 		if($_POST == FALSE)
 		{
 			$res = array();
-			$res["opn"] = "Booking Details";
+			$res["opn"] = "Event Review Images";
 			$res["scode"] = 204;
 			$res["message"] = "Input error";
 
 			echo json_encode($res);
 			return;
 		}
-
-		$booking_id = '';
-		$booking_id = $this->input->post("booking_id");
 		
-		$data['result']=$this->apimainmodel->Booking_details($booking_id);
+        $event_id = '';
+		$review_id = '';
+		$event_id = $this->input->post("event_id");
+		$review_id = $this->input->post("review_id");
+		
+		
+		$data['result']=$this->apimainmodel->Review_images($event_id,$review_id);
+		$response = $data['result'];
+		echo json_encode($response);
+	}
+
+//-----------------------------------------------//
+
+//-----------------------------------------------//
+
+	public function advancesearch()
+	{
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
+
+		if(!$this->checkMethod())
+		{
+			return FALSE;
+		}
+
+		if($_POST == FALSE)
+		{
+			$res = array();
+			$res["opn"] = "Advanced Search";
+			$res["scode"] = 204;
+			$res["message"] = "Input error";
+
+			echo json_encode($res);
+			return;
+		}
+		
+        $event_type = '';
+        $event_type_category = '';
+        $selected_category = '';
+        $selected_city = '';
+        $today_date = '';
+        $tomorrow_date ='';
+        $single_date = '';
+        $from_date ='';
+        $to_date = '';
+        
+
+        $event_type = $this->input->post("event_type");
+        $event_type_category = $this->input->post("event_type_category");
+        $selected_category = $this->input->post("selected_category");
+        $selected_city = $this->input->post("selected_city");
+        $today_date = $this->input->post("today_date");
+        $tomorrow_date = $this->input->post("tomorrow_date");
+        $single_date = $this->input->post("single_date");
+        $from_date = $this->input->post("from_date");
+        $to_date = $this->input->post("to_date");
+
+		$data['result']=$this->apimainmodel->Advance_search($today_date,$tomorrow_date,$single_date,$from_date,$to_date,$event_type,$event_type_category,$selected_category,$selected_city);
 		$response = $data['result'];
 		echo json_encode($response);
 	}
@@ -1354,9 +1451,10 @@ public function profile_picupload()
 
 //-----------------------------------------------//
 
+
 //-----------------------------------------------//
 
-	public function eventreview()
+	public function booking()
 	{
 		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
@@ -1368,7 +1466,7 @@ public function profile_picupload()
 		if($_POST == FALSE)
 		{
 			$res = array();
-			$res["opn"] = "Event Reviews";
+			$res["opn"] = "Booking";
 			$res["scode"] = 204;
 			$res["message"] = "Input error";
 
@@ -1376,50 +1474,112 @@ public function profile_picupload()
 			return;
 		}
 
-		$event_id = '';
-		$event_id = $this->input->post("event_id");
-		
-		$data['result']=$this->apimainmodel->Event_review($event_id);
-		$response = $data['result'];
-		echo json_encode($response);
-	}
-
-//-----------------------------------------------//
-
-//-----------------------------------------------//
-
-	public function reviewimages()
-	{
-		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
-
-		if(!$this->checkMethod())
-		{
-			return FALSE;
-		}
-
-		if($_POST == FALSE)
-		{
-			$res = array();
-			$res["opn"] = "Event Review Images";
-			$res["scode"] = 204;
-			$res["message"] = "Input error";
-
-			echo json_encode($res);
-			return;
-		}
-		
+        $order_id = '';
         $event_id = '';
-		$review_id = '';
+        $plan_id = '';
+        $plan_time_id = '';
+        $user_id = '';
+        $number_of_seats = '';
+        $total_amount = '';
+        $booking_date = '';
+        
+		$order_id = $this->input->post("order_id");
 		$event_id = $this->input->post("event_id");
-		$review_id = $this->input->post("review_id");
+        $plan_id = $this->input->post("plan_id");
+        $plan_time_id = $this->input->post("plan_time_id");
+        $user_id = $this->input->post("user_id");
+        $number_of_seats = $this->input->post("number_of_seats");
+        $total_amount = $this->input->post("total_amount");
+        $booking_date = $this->input->post("booking_date");
 		
-		
-		$data['result']=$this->apimainmodel->Review_images($event_id,$review_id);
+		$data['result']=$this->apimainmodel->Booking($order_id,$event_id,$plan_id,$plan_time_id,$user_id,$number_of_seats,$total_amount,$booking_date);
 		$response = $data['result'];
 		echo json_encode($response);
 	}
 
 //-----------------------------------------------//
+
+//-----------------------------------------------//
+
+	public function bookinghistory()
+	{
+		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+
+		if(!$this->checkMethod())
+		{
+			return FALSE;
+		}
+
+		if($_POST == FALSE)
+		{
+			$res = array();
+			$res["opn"] = "Booking History";
+			$res["scode"] = 204;
+			$res["message"] = "Input error";
+
+			echo json_encode($res);
+			return;
+		}
+
+		$user_id = '';
+		$wishlist_id ='';
+		
+		$user_id = $this->input->post("user_id");
+		
+		$data['result']=$this->apimainmodel->Booking_history($user_id);
+		$response = $data['result'];
+		echo json_encode($response);
+	}
+
+//-----------------------------------------------//
+
+//-----------------------------------------------//
+
+	public function bookingdetails()
+	{
+		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+
+		if(!$this->checkMethod())
+		{
+			return FALSE;
+		}
+
+		if($_POST == FALSE)
+		{
+			$res = array();
+			$res["opn"] = "Booking Details";
+			$res["scode"] = 204;
+			$res["message"] = "Input error";
+
+			echo json_encode($res);
+			return;
+		}
+
+		$booking_id = '';
+		$booking_id = $this->input->post("booking_id");
+		
+		$data['result']=$this->apimainmodel->Booking_details($booking_id);
+		$response = $data['result'];
+		echo json_encode($response);
+	}
+
+//-----------------------------------------------//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //-----------------------------------------------//
 
@@ -1459,6 +1619,24 @@ public function profile_picupload()
 		
 		//$response = $data['result'];
 		//echo json_encode($response);
+	}
+
+//-----------------------------------------------//
+//-----------------------------------------------//
+
+	public function viewevents_test()
+	{
+		$event_query = "SELECT * FROM events";
+		$event_res = $this->db->query($event_query);
+
+			 if($event_res->num_rows()>0){
+			     	$event_result= $event_res->result();
+			     	$response = array("status" => "success", "msg" => "View Events","Eventdetails"=>$event_result);
+				 
+			}else{
+			        $response = array("status" => "error", "msg" => "Events not found");
+			}  
+		echo json_encode($response);
 	}
 
 //-----------------------------------------------//
