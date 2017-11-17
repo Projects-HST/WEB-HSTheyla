@@ -38,7 +38,7 @@
          </button>
          </li>
          <li class="hide-phone list-inline-item app-search">
-         <h3 class="page-title">Add Photos</h3>
+         <h3 class="page-title">Add Photos ( <span style="color: #28c2dc;">  <?php foreach($eventname as $rows){ echo $rows->event_name;}?>  </span> ) </h3>
          </li>
          </ul>
          <div class="clearfix"></div>

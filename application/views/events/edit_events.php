@@ -1,18 +1,4 @@
-<?php
-  function get_times( $default = '10:00', $interval = '+15 minutes' ) 
-	{
-		$output = '';
-		$current = strtotime( '00:00:00' );
-		$end = strtotime( '23:59:00' );
-		while( $current <= $end ) {
-			$time = date( 'H:i:s', $current );
-			$sel = ( $time == $default ) ? ' selected' : '';
-			$output .= "<option value=\"{$time}\">" . date( 'h.i A', $current ) .'</option>';
-			$current = strtotime( $interval, $current );
-		}
-		return $output;
-    }
-?>
+
 <script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
 <link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
 <style type="text/css">
@@ -176,7 +162,6 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                           
                             <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
                             <div class="col-sm-4">
 
@@ -220,11 +205,11 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="primarycell" class="col-sm-2 col-form-label">primary Contact Phone</label>
+                            <label for="primarycell" class="col-sm-2 col-form-label">Primary Contact Phone</label>
                             <div class="col-sm-4">
                                 <input class="form-control" type="text" required="" value="<?php echo $rows->primary_contact_no; ?>" name="pcontact_cell" maxlength="10" value="">
                             </div>
-                            <label for="seccell" class="col-sm-2 col-form-label">secondary Contact Phone</label>
+                            <label for="seccell" class="col-sm-2 col-form-label">Secondary Contact Phone</label>
                             <div class="col-sm-4">
                                 <input class="form-control" type="text" value="<?php echo $rows->secondary_contact_no; ?>" name="scontact_cell" value="" >
                             </div>
@@ -251,21 +236,7 @@
                                 </select>
                                 <script language="JavaScript">document.eventform.eadv_status.value="<?php echo $rows->adv_status; ?>";</script>
                             </div>
-                        
-                        <label for="Colour" class="col-sm-2 col-form-label">Booking Display</label>
-                            <div class="col-sm-4">
-                                 <select class="form-control" name="booking_sts">
-                                    <option value="">Select Status</option>
-                                    <option value="Y">Yes</option>
-                                    <option value="N">No</option>
-                                </select>
-                                <script language="JavaScript">document.eventform.booking_sts.value="<?php echo $rows->booking_status; ?>";</script>
-                            </div>
-                       </div>
-
-                        <div class="form-group row">
-                            
-                            <label for="Status" class="col-sm-2 col-form-label">Hotspot Display</label>
+                         <label for="Status" class="col-sm-2 col-form-label">Hotspot Display</label>
                             <div class="col-sm-4">
                                <select class="form-control" name="hotspot_sts">
                                     <option value="">Select Status</option>
@@ -274,7 +245,19 @@
                                 </select>
                                 <script language="JavaScript">document.eventform.hotspot_sts.value="<?php echo $rows->hotspot_status; ?>";</script>
                             </div>
+                        <!--label for="Colour" class="col-sm-2 col-form-label">Booking Display</label>
+                            <div class="col-sm-4">
+                                 <select class="form-control" name="booking_sts">
+                                    <option value="">Select Status</option>
+                                    <option value="Y">Yes</option>
+                                    <option value="N">No</option>
+                                </select>
+                                <script language="JavaScript">document.eventform.booking_sts.value="<?php echo $rows->booking_status; ?>";</script>
+                            </div-->
+                       </div>
 
+                        <div class="form-group row">
+                          
                             <label for="Colour" class="col-sm-2 col-form-label">Colour</label>
                             <div class="col-sm-4">
                                 <!--input class="form-control" type="text" name="colour_scheme" value=""-->
@@ -285,15 +268,9 @@
                                     <option value="red">Red</option>
                                 </select>
                                 <script language="JavaScript">document.eventform.colour_scheme.value="<?php echo $rows->event_colour_scheme; ?>";</script>
-
                             </div>
 
-                        </div>
-
-
-                        <div class="form-group row">
-                            
-                            <label for="Status" class="col-sm-2 col-form-label">Event Display</label>
+                             <label for="Status" class="col-sm-2 col-form-label">Event Approval</label>
                             <div class="col-sm-4">
                                <select class="form-control" required="" name="event_status">
                                     <option value="">Select Status</option>
@@ -302,7 +279,9 @@
                                 </select>
                                 <script language="JavaScript">document.eventform.event_status.value="<?php echo $rows->event_status; ?>";</script>
                             </div>
+                        </div>
 
+                        <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Event Banner</label>
                               <div class="col-sm-4">
                                  <input type="file" name="eventbanner" class="form-control" accept="image/*" >
@@ -502,8 +481,6 @@ function check()
       var fdate = document.getElementById("datepicker-autoclose").value;
       var tdate = document.getElementById("datepicker").value;
 
-
-
        //alert(fdate);alert(tdate);
       var chunks = fdate.split('-');
       var formattedDate = chunks[1]+'/'+chunks[0]+'/'+chunks[2];
@@ -522,19 +499,30 @@ function check()
       if(Date.parse(formattedDate)==Date.parse(formattedDate1) )
       {
        
-       var strStartTime = document.getElementById("stime").value;
-       var strEndTime = document.getElementById("etime").value;
+        var strStartTime = document.getElementById("stime").value;
+        var strEndTime = document.getElementById("etime").value;
 
         var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
         var endTime = new Date(startTime)
         endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
-        if (startTime > endTime) {
-        alert("Start Time is greater than end time");
-         return false; }
+         
+       
+         temp =strStartTime.split(":");
+         var a = temp[0];
+         var b = temp[1];
+         temp1 =b.split(" ");
+         var c = temp1[1]
+       
+        if(a==12 && c=='AM'){   }else if (startTime > endTime){
+          alert("Start Time is greater than end time");
+          return false;
+        }
   
     }else{
-        var date1 = new Date(fdate);
+      
+      var date1 = new Date(fdate);
       var date2 = new Date(tdate);
+
       var strStartTime = document.getElementById("stime").value;
       var strEndTime = document.getElementById("etime").value;
        var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);

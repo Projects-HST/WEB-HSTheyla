@@ -14,11 +14,11 @@
 <link href="<?php echo base_url(); ?>assets/css/icons.css" rel="stylesheet" type="text/css">
 <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet" type="text/css">
 
- <link href="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
+<link href="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
 
-<!-- Datatables-->
- <link href="<?php echo base_url(); ?>assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
- <link href="<?php echo base_url(); ?>assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<!--Datatables-->
+<link href="<?php echo base_url(); ?>assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url(); ?>assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 <!-- Responsive datatable examples -->
 <link href="<?php echo base_url(); ?>assets/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
@@ -31,8 +31,8 @@
 <script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
 
  <!--  Forms Validations Plugin -->
-      <script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
-      <script src="<?php echo base_url(); ?>assets/js/additional-methods.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/js/additional-methods.min.js"></script>
 
 </head>
 
@@ -90,42 +90,43 @@
                     <ul class="list-unstyled">
                         <li><a href="<?php echo base_url();?>events/home">Add Events</a></li>
                         <li><a href="<?php echo base_url();?>events/view_events">View Events</a></li>
+                        <li><a href="<?php echo base_url();?>events/organizer_events">Organizer Events</a></li>
                     </ul>
                 </li>
 
                 <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-album"></i> <span> Advertisement Events</span> </a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-album"></i> <span> Event Advertisement</span> </a>
                     <ul class="list-unstyled">
-                        <li><a href="<?php echo base_url();?>advertisement/home "> Plans</a></li>
-                        <li><a href="<?php echo base_url();?>advertisement/view_adv_plan">List of Advertisement Events</a></li>
-                        <li><a href="<?php echo base_url();?>advertisement/view_adv_history ">History of Advertisement Events</a></li>
+                        <li><a href="<?php echo base_url();?>advertisement/home"> Add Event ads</a></li>
+                        <li><a href="<?php echo base_url();?>advertisement/view_adv_plan">Review ads</a></li>
+                        <li><a href="<?php echo base_url();?>advertisement/view_adv_history ">History</a></li>
                     </ul>
                 </li>
 
                 <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-clipboard-outline"></i><span> Reviews   </span></a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-clipboard-outline"></i><span> Event Reviews   </span></a>
                     <ul class="list-unstyled">
-                        <li><a href="<?php echo base_url();?>reviews/view_reviews">Event Pending Reviews</a></li>
-                        <li><a href="<?php echo base_url();?>reviews/archive_reviews">Archive Reviews</a></li>
+                        <li><a href="<?php echo base_url();?>reviews/view_reviews">Unread </a></li>
+                        <li><a href="<?php echo base_url();?>reviews/archive_reviews">Archived </a></li>
                     </ul>
                 </li>
 
                 <li class="has_sub">
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-chart-line"></i><span> Booking </span></a>
                     <ul class="list-unstyled">
-                        <li><a href="<?php echo base_url();?>bookinghistory/home">History</a></li>
                         <li><a href="<?php echo base_url();?>bookinghistory/process_details">Process</a></li>
                         <li><a href="<?php echo base_url();?>bookinghistory/status_details">Status</a></li>
+                        <li><a href="<?php echo base_url();?>bookinghistory/home">History</a></li>
                     </ul>
                 </li>
 
                 <li class="has_sub">
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-format-list-bulleted-type"></i><span> User Management</span></a>
                     <ul class="list-unstyled">
-                        <li><a href="<?php echo base_url();?>users/home">User Creation</a></li>
-                        <li><a href="<?php echo base_url();?>users/view">View Users Details</a></li>
-                        <li><a href="<?php echo base_url();?>users/view_followers">View Users Followers Details</a></li>
-                        <li><a href="<?php echo base_url();?>guestuser/home">Guest user Details</a></li>
+                        <li><a href="<?php echo base_url();?>users/home">New User</a></li>
+                        <li><a href="<?php echo base_url();?>users/view">View User Information</a></li>
+                        <li><a href="<?php echo base_url();?>users/view_followers">View User Followers</a></li>
+                        <li><a href="<?php echo base_url();?>guestuser/home">Guest User</a></li>
 
                     </ul>
                 </li>

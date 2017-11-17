@@ -58,7 +58,7 @@
 
 
                     <!-- Nav tabs -->
-                    <ul class="nav nav-pills nav-justified" role="tablist" style="width:60%;margin-left:3%;">
+                    <ul class="nav nav-pills nav-justified" role="tablist" style="width:70%;margin-left:3%;">
                         <li class="nav-item waves-effect waves-light">
                             <a class="nav-link active" data-toggle="tab" href="#home-1" role="tab">Advertisement</a>
                         </li>
@@ -66,7 +66,10 @@
                             <a class="nav-link" data-toggle="tab" href="#profile-1" role="tab">Hotspot </a>
                         </li>
                          <li class="nav-item waves-effect waves-light">
-                            <a class="nav-link" data-toggle="tab" href="#messages-1" role="tab">Normal Events</a>
+                            <a class="nav-link" data-toggle="tab" href="#messages-1" role="tab">General Events</a>
+                        </li>
+                         <li class="nav-item waves-effect waves-light">
+                            <a class="nav-link" data-toggle="tab" href="#archived-1" role="tab">Archived Events</a>
                         </li>
                     </ul>
 
@@ -125,7 +128,7 @@
                     </table>
                         </div>
 
-                        <div class="tab-pane p-3" id="profile-1" role="tabpanel">
+                    <div class="tab-pane p-3" id="profile-1" role="tabpanel">
                       <table class="table table-striped table-bordered display" cellspacing="0" width="100%">
                         <thead>
                         <tr>
@@ -178,7 +181,7 @@
                     </table>
                         </div>
 
-                        <div class="tab-pane p-3" id="messages-1" role="tabpanel">
+                      <div class="tab-pane p-3" id="messages-1" role="tabpanel">
                       <table class="table table-striped table-bordered display" cellspacing="0" width="100%">
                         <thead>
                         <tr>
@@ -207,13 +210,10 @@
                            <td>
                              <a href="<?php echo base_url();?>events/edit_events/<?php echo base64_encode($rows->id);?>">
                               <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
-
                              <a href="<?php echo base_url();?>events/view_single_events/<?php echo base64_encode($rows->id);?>">
                               <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a>
-
                               <!--a onclick="confirmGetMessage(<?php echo $eid;?>)">
                               <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
-
                               <?php if($etype=='Paid'){ ?>
                               <a href="<?php echo base_url();?>booking/home/<?php echo base64_encode($rows->id);?>">
                                 <img title="Booking Events" src="<?php echo base_url();?>assets/icons/booking.png"/>
@@ -225,13 +225,61 @@
                             <a href="<?php echo base_url();?>events/view_events_reviews/<?php echo base64_encode($rows->id);?>">
                               <img title="View Reviews" src="<?php echo base_url();?>assets/icons/review.png"/>
                             </a>
-
                             </td>
                         </tr>
                        <?php } }  ?>
                         </tbody>
                     </table>
-                      </div>
+                  </div>
+                    <div class="tab-pane p-3" id="archived-1" role="tabpanel">
+                      <table class="table table-striped table-bordered display" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>Event Name</th>
+                            <!--th>Event Category</th-->
+                            <th>Event City</th>
+                            <th>Event popularity</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach($sts as $rows){
+                           $eid=$rows->id;
+                           $evn_sts=$rows->event_status;
+                           //$hotspot_sts=$rows->hotspot_status;
+                           //$etype=$rows->event_type;
+                           ?>
+                        <tr>
+                          <td><?php echo $rows->event_name ; ?></td>
+                          <!--td><?php // echo $rows->category_name ; ?></td-->
+                          <td><?php echo $rows->city_name ; ?></td>
+                          <td><?php foreach($popular as $values){
+                            $evid=$values->event_id; if($eid==$evid){ echo $values->popular; } }?></td>
+                          <td>
+                           <a href="<?php echo base_url();?>events/edit_events/<?php echo base64_encode($rows->id);?>">
+                            <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
+
+                           <a href="<?php echo base_url();?>events/view_single_events/<?php echo base64_encode($rows->id);?>">
+                            <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a>
+                            <!--a onclick="confirmGetMessage(<?php echo $eid;?>)">
+                            <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
+                            <?php if($etype=='Paid'){ ?>
+                            <a href="<?php echo base_url();?>booking/home/<?php echo base64_encode($rows->id);?>">
+                              <img title="Booking Events" src="<?php echo base_url();?>assets/icons/booking.png"/>
+                           </a>
+                            <?php } ?>
+                            <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo $rows->id;?>">
+                            <img title="Add Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/>
+                          </a>
+                          <a href="<?php echo base_url();?>events/view_events_reviews/<?php echo base64_encode($rows->id);?>">
+                            <img title="View Reviews" src="<?php echo base_url();?>assets/icons/review.png"/>
+                          </a>
+                          </td>
+                        </tr>
+                       <?php }  ?>
+                        </tbody>
+                    </table>
+                  </div>
                     </div>
                   </div>
                 </div>

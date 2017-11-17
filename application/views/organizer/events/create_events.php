@@ -13,7 +13,8 @@ $current = strtotime( $interval, $current );
 return $output;
 }
 ?>
-
+<script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
+<link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
 <div class="container" style="margin-top:30px;margin-bottom:50px;max-width:100%;">
 <div class="row row-offcanvas row-offcanvas-right">
 <div class="col-12 col-md-3 sidebar-offcanvas" id="sidebar">
@@ -129,8 +130,37 @@ return $output;
                 </div>
                 </div>
             </div>
+            
 
             <div class="form-group row">
+                           
+                            <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
+                            <div class="col-sm-4">
+
+                               <input  type="text" class="form-control" id="stime" name="start_time">
+
+                                <!-- select name="start_time" required="" class="form-control"  >
+                                     <option value="">Select Start Time</option>
+                                     <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
+                                </select>
+                                <script language="JavaScript">document.eventform.start_time.value="<?php echo $rows->start_time; ?>";</script-->
+
+                            </div>
+
+                             <label for="etime" class="col-sm-2 col-form-label">End Time</label>
+                            <div class="col-sm-4">
+                              <input  type="text" class="form-control" id="etime" name="end_time" >
+                                <!--select name="end_time" required="" class="form-control" id="etime">
+                                     <option value="">Select End Time</option>
+                                     <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
+                                </select>
+                                 <script language="JavaScript">document.eventform.end_time.value="<?php echo $rows->end_time; ?>";</script-->
+                            </div>
+
+                        </div>
+
+
+            <!--div class="form-group row">
                 <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
                 <div class="col-sm-4">
                 <select name="start_time"  class="form-control" id="stime" >
@@ -145,7 +175,8 @@ return $output;
                     <option value=""><?php echo get_times(); ?></option>
                   </select>
                 </div>
-            </div>
+            </div-->
+
               <div class="form-group row">
                  <label for="latitude" class="col-sm-2 col-form-label">Select</label>
                 <div id="dvMap" style="width:300px; height:250px"> </div>
@@ -165,11 +196,11 @@ return $output;
             </div>
 
             <div class="form-group row">
-                <label for="primarycell" class="col-sm-2 col-form-label">primary Contact Phone</label>
+                <label for="primarycell" class="col-sm-2 col-form-label">Primary Contact Phone</label>
                 <div class="col-sm-4">
                     <input class="form-control" type="text"  name="pcontact_cell" maxlength="10" value="">
                 </div>
-                <label for="seccell" class="col-sm-2 col-form-label">secondary Contact Phone</label>
+                <label for="seccell" class="col-sm-2 col-form-label">Secondary Contact Phone</label>
                 <div class="col-sm-4">
                     <input class="form-control" type="text" name="scontact_cell" value="" >
                 </div>
@@ -195,18 +226,8 @@ return $output;
                         <option value="N">No</option>
                     </select>
                 </div>
-            <label for="Colour" class="col-sm-2 col-form-label">Booking Display</label>
-                <div class="col-sm-4">
-                     <select class="form-control" name="booking_sts">
-                        <option value="">Select Status</option>
-                        <option value="Y">Yes</option>
-                        <option value="N">No</option>
-                    </select>
-                </div>
-           </div>
 
-            <div class="form-group row">
-                <label for="Status" class="col-sm-2 col-form-label">Hotspot Display</label>
+                 <label for="Status" class="col-sm-2 col-form-label">Hotspot Display</label>
                 <div class="col-sm-4">
                    <select class="form-control" name="hotspot_sts">
                         <option value="">Select Status</option>
@@ -214,7 +235,18 @@ return $output;
                         <option value="N">No</option>
                     </select>
                 </div>
+            <!--label for="Colour" class="col-sm-2 col-form-label">Booking Display</label>
+                <div class="col-sm-4">
+                     <select class="form-control" name="booking_sts">
+                        <option value="">Select Status</option>
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                    </select>
+                </div-->
+           </div>
 
+            <div class="form-group row">
+              
                 <label for="Colour" class="col-sm-2 col-form-label">Colour</label>
                 <div class="col-sm-4">
                     <!--input class="form-control" type="text" name="colour_scheme" value=""-->
@@ -225,23 +257,23 @@ return $output;
                         <option value="red">Red</option>
                     </select>
                 </div>
+
+                 <label class="col-sm-2 col-form-label">Event Banner</label>
+                  <div class="col-sm-4">
+                     <input type="file" name="eventbanner" class="form-control" accept="image/*" >
+                  </div> 
             </div>
 
 
             <div class="form-group row">
-                <label for="Status" class="col-sm-2 col-form-label">Event Display</label>
+                <!--label for="Status" class="col-sm-2 col-form-label">Event Display</label>
                 <div class="col-sm-4">
                    <select class="form-control"  name="event_status">
                         <option value="">Select Status</option>
                         <option value="Y">Yes</option>
                         <option value="N">No</option>
                     </select>
-                </div>
-
-                <label class="col-sm-2 col-form-label">Event Banner</label>
-                  <div class="col-sm-4">
-                     <input type="file" name="eventbanner" class="form-control" accept="image/*" >
-                  </div>                            
+                </div-->                    
             </div>
 
 
@@ -271,6 +303,9 @@ return $output;
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByz7sU142AeFwpK3KiFilK0IOoa2GU9tw"></script>
 
 <script type="text/javascript">
+
+   $('#stime').timepicki();
+   $('#etime').timepicki();
 window.onload = function () {
 var mapOptions = {
     center: new google.maps.LatLng(20.5937, 78.9629),
@@ -400,18 +435,27 @@ function check()
 
       if(Date.parse(formattedDate)==Date.parse(formattedDate1) )
       {
-       
-       var strStartTime = document.getElementById("stime").value;
-       var strEndTime = document.getElementById("etime").value;
+      
+        var strStartTime = document.getElementById("stime").value;
+        var strEndTime = document.getElementById("etime").value;
 
         var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
         var endTime = new Date(startTime)
         endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+         
+        //var timefrom = date1;
+         temp =strStartTime.split(":");
+         var a = temp[0];
+         var b = temp[1];
+         temp1 =b.split(" ");
+         var c = temp1[1]
+       
+        if(a==12 && c=='AM'){
         
-        if (startTime > endTime) {
-        alert("Start Time is greater than end time");
-         return false; }
-  
+        }else if (startTime > endTime){
+          alert("Start Time is greater than end time");
+          return false;
+        }
     }else{
         var date1 = new Date(fdate);
       var date2 = new Date(tdate);
@@ -432,7 +476,7 @@ function check()
       {
         var h = parseInt(d.split(':')[0]);
         if (d.split(':')[1].split(' ')[1] == "PM") {
-        h = h + 12;
+        h = h + 24;
       }
       return h;
       }

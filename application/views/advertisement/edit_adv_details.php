@@ -1,25 +1,12 @@
-<?php
-    function get_times( $default = '10:00', $interval = '+15 minutes' ) 
-   {
-      $output = '';
-      $current = strtotime( '00:00:00' );
-      $end = strtotime( '23:59:00' );
-      while( $current <= $end ) {
-         $time = date( 'H:i:s', $current );
-         $sel = ( $time == $default ) ? ' selected' : '';
-         $output .= "<option value=\"{$time}\">" . date( 'h.i A', $current ) .'</option>';
-         $current = strtotime( $interval, $current );
-      }
-      return $output;
-    }
-?>
+
 <style type="text/css">
    .img-circle{
           width: 90px;
          border-radius: 30px;
        }
 </style>
-
+<script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
+<link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
 <!-- Start content -->
 <div class="content-page">
 <div class="content">
@@ -107,8 +94,7 @@
                             </div>
                             </div>
                         </div>
-                        <div class="form-group row">
-                           
+                        <!--div class="form-group row">
                              <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
                             <div class="col-sm-4">
                                 <select name="start_time"  id="stime" class="form-control" >
@@ -126,8 +112,20 @@
                         </select>
                         <script language="JavaScript">document.advertisementform.end_time.value="<?php echo $res->time_to; ?>";</script>
                             </div>
-
+                        </div-->
+                         
+                         <div class="form-group row">
+                            <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
+                            <div class="col-sm-4">
+                               <input  type="text" class="form-control" id="stime" name="start_time" value="<?php echo $res->time_from; ?>">
+                            </div>
+                             <label for="etime" class="col-sm-2 col-form-label">End Time</label>
+                            <div class="col-sm-4">
+                              <input  type="text" class="form-control" id="etime" name="end_time" value="<?php echo $res->time_to; ?>">
+                            </div>
                         </div>
+
+
                         <div class="form-group row">
                              <label for="ecost" class="col-sm-2 col-form-label">Plans</label>
                             <div class="col-sm-4">
@@ -172,8 +170,11 @@
 </div>
 <!-- content -->
 <script type="text/javascript">
- $(document).ready(function () {
 
+  $('#stime').timepicki();
+  $('#etime').timepicki();
+
+ $(document).ready(function () {
   $( ".datepicker" ).datepicker({
         format: 'dd-mm-yyyy'
       });
@@ -201,43 +202,64 @@
   function check()
     {
 
-      var fdate = document.getElementById("datepicker-autoclose").value;
+       var fdate = document.getElementById("datepicker-autoclose").value;
       var tdate = document.getElementById("datepicker").value;
+
        //alert(fdate);alert(tdate);
       var chunks = fdate.split('-');
       var formattedDate = chunks[1]+'/'+chunks[0]+'/'+chunks[2];
        //alert(formattedDate);
       var chunks1 = tdate.split('-');
       var formattedDate1 = chunks1[1]+'/'+chunks1[0]+'/'+chunks1[2];
-
       //alert(formattedDate1);
       //alert( Date.parse(formattedDate));
       //alert( Date.parse(formattedDate1));
-
       if(Date.parse(formattedDate) > Date.parse(formattedDate1) )
       {
        alert("Startdate should be less than Enddate");
        return false;
       }
+
+      if(Date.parse(formattedDate)==Date.parse(formattedDate1) )
+      {
       
-      var date1 = new Date(fdate);
-      var date2 = new Date(tdate);
+        var strStartTime = document.getElementById("stime").value;
+        var strEndTime = document.getElementById("etime").value;
+
+        var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+        var endTime = new Date(startTime)
+        endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+         
+        //var timefrom = date1;
+         temp =strStartTime.split(":");
+         var a = temp[0];
+         var b = temp[1];
+         temp1 =b.split(" ");
+         var c = temp1[1]
        
+        if(a==12 && c=='AM'){
+        
+        }else if (startTime > endTime){
+          alert("Start Time is greater than end time");
+          return false;
+        }
+    }else{
+      var date1 = new Date(formattedDate);
+      var date2 = new Date(formattedDate1);
+
       var strStartTime = document.getElementById("stime").value;
       var strEndTime = document.getElementById("etime").value;
-
       var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
       var endTime = new Date(startTime);
-      endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
-      
-      var a=formattedDate + '' + startTime;
-      var b=formattedDate1 + '' + endTime;
-      //alert(a);alert(b);
+       endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+      var a=formattedDate + '' + strStartTime;
+      var b=formattedDate1 + '' + strEndTime;
+      //alert(startTime);alert(endTime); alert(a);alert(b); 
       if (a == b || a > b) {
       alert("Start Date & Time is greater than end Date & Time");
       return false;
       }
-
+    }
       function GetHours(d) 
       {
         var h = parseInt(d.split(':')[0]);

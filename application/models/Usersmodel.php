@@ -85,11 +85,11 @@ Class Usersmodel extends CI_Model
         $data= array("status"=>"success");
   		  return $data;
       }else{
-        $data= array("status"=>"AE");
+        $data= array("status"=>"ME");
         return $data;
       }
     }else{
-       $data= array("status"=>"AE");
+       $data= array("status"=>"UA");
        return $data;
     }
 
@@ -97,10 +97,10 @@ Class Usersmodel extends CI_Model
 
     function update_user_details($uid,$umid,$username,$name,$cell,$email,$pwd,$dob,$gender,$address1,$address2,$address3,$occupation,$country,$statename,$city,$zip,$user_pic1,$status,$userrole,$user_id,$display_status)
     {
-      $check_user="SELECT * FROM user_master WHERE user_name='$username' OR mobile_no='$cell' OR email_id='$email'";
-      $result=$this->db->query($check_user);
-      if($result->num_rows()==0)
-      {
+      //$check_user="SELECT * FROM user_master WHERE user_name='$username' OR mobile_no='$cell' OR email_id='$email'";
+      //$result=$this->db->query($check_user);
+      //if($result->num_rows()==0)
+      //{
     	 $pwd1=md5($pwd);
     	 $umupdate="UPDATE user_master SET user_name='$username',mobile_no='$cell',email_id='$email',password='$pwd1',user_role='$userrole',status='$display_status',updated_by='$user_id',updated_at=NOW() WHERE  id='$umid' ";
     	 $umdetails=$this->db->query($umupdate);
@@ -108,10 +108,10 @@ Class Usersmodel extends CI_Model
         $usdetails=$this->db->query($usupdate);
         $data= array("status"=>"success");
   		  return $data;
-      }else{
-        $data= array("status"=>"Already Exist");
-        return $data;
-      }
+      //}else{
+       // $data= array("status"=>"Already Exist");
+       // return $data;
+      //}
     }
 
     function delete($id,$users_id)

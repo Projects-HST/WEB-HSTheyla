@@ -106,7 +106,7 @@
                             </div>
                         </div>
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Event Status</label>
+                              <label class="col-sm-4 col-form-label">Status</label>
                               <div class="col-sm-6">
                                  <select class="form-control"  name="eventsts">
                                     <option value="Y">Yes</option>
@@ -125,9 +125,9 @@
                      </form>
                   </div>
                </div>
-                <div class="col-lg-4">
+                <!--div class="col-lg-4">
     <div id="dvMap" style="width:300px; height:300px"> </div>
-               </div>
+               </div-->
             </div>
        
          </div>

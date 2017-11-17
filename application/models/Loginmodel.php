@@ -56,7 +56,36 @@ Class Loginmodel extends CI_Model
             return $data;
          }
    }
+       //----------------Total Num OF Users,Events,Booking-----------------------
+         function get_tlt_no_user()
+         {
+           $query="SELECT COUNT(*) as users FROM user_master WHERE user_role='3'";
+           $resultset=$this->db->query($query);
+           return $resultset->result();
+         }
 
+         function get_tlt_no_events()
+         {
+           $query="SELECT COUNT(*) as events FROM events WHERE event_status='Y'";
+           $resultset=$this->db->query($query);
+           return $resultset->result();
+         }
+
+         function get_tlt_no_orgevents()
+         {
+           $query="SELECT COUNT(e.event_name) AS org FROM user_master AS um,events AS e WHERE um.user_role='2' AND um.id=e.created_by AND e.event_status='N'";
+           $resultset=$this->db->query($query);
+           return $resultset->result();
+         }
+
+         function get_tlt_no_booking()
+         {
+          $query="SELECT COUNT(*) AS booking FROM booking_history";
+           $resultset=$this->db->query($query);
+           return $resultset->result();
+         }
+
+     //--------------------------------------------------------------------------
 
    function getuser($user_id){
          $query="SELECT * FROM user_master WHERE id='$user_id'";

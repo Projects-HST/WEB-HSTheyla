@@ -56,6 +56,7 @@ class Events extends CI_Controller
         $contact_person = $this->input->post('contact_person');
         $email          = $this->input->post('email');
         //echo $city; exit;
+
         $event_pic      = $_FILES['eventbanner']['name'];
         $temp = pathinfo($event_pic, PATHINFO_EXTENSION);
         $file_name      = time() . rand(1, 5) . rand(6, 10);
@@ -63,6 +64,7 @@ class Events extends CI_Controller
         $uploaddir      = 'assets/events/banner/';
         $profilepic     = $uploaddir . $event_banner;
         move_uploaded_file($_FILES['eventbanner']['tmp_name'], $profilepic);
+
         $eadv_status   = $this->input->post('eadv_status');
         $booking_sts   = $this->input->post('booking_sts');
         $hotspot_sts   = $this->input->post('hotspot_sts');
@@ -89,12 +91,15 @@ class Events extends CI_Controller
         $data['res'] = $this->eventsmodel->getcityname($country_id);
         echo json_encode($data['res']);
     }
+
+
     public function view_events()
     {
         $datas            = $this->session->userdata();
         $user_id          = $this->session->userdata('id');
         $user_role        = $this->session->userdata('user_role');
         $datas['result']  = $this->eventsmodel->getall_events_details();
+        $datas['sts']  = $this->eventsmodel->getall_archived_events_details();
         $datas['popular'] = $this->eventsmodel->events_popularity();
         //echo '<pre>'; print_r($datas['result']); exit;
         if ($user_role == 1) {
@@ -105,6 +110,25 @@ class Events extends CI_Controller
             redirect('/');
         }
     }
+
+    public function organizer_events()
+    {
+        $datas            = $this->session->userdata();
+        $user_id          = $this->session->userdata('id');
+        $user_role        = $this->session->userdata('user_role');
+        $datas['org']  = $this->eventsmodel->getall_organizer_events_details();
+        $datas['popular'] = $this->eventsmodel->events_popularity();
+        //echo '<pre>'; print_r($datas['org']); exit;
+        if ($user_role == 1) {
+            $this->load->view('header');
+            $this->load->view('events/organizer_events', $datas);
+            $this->load->view('footer');
+        } else {
+            redirect('/');
+        }
+    }
+
+
     public function edit_events($id)
     {
         $id                     = base64_decode($id);
@@ -228,6 +252,8 @@ class Events extends CI_Controller
         $user_role         = $this->session->userdata('user_role');
         $datas['evnid']    = $id;
         $datas['view_pic'] = $this->eventsmodel->view_upload_events_pic($id);
+        $datas['eventname'] = $this->eventsmodel->get_event_name($id);
+
         if ($user_role == 1) {
             $this->load->view('header');
             $this->load->view('events/add_gallery', $datas);
@@ -253,14 +279,14 @@ class Events extends CI_Controller
             $total_uploads = array();
             $upload_path   = 'assets/events/gallery/';
             foreach ($_FILES['eventpicture']['name'] as $key => $value) {
-                $temp = pathinfo($_FILES['eventpicture']['name'][$key], PATHINFO_EXTENSION);
-               // $temp      = explode(".", $_FILES['eventpicture']['name'][$key]);
+                $temp1 = pathinfo($_FILES['eventpicture']['name'][$key], PATHINFO_EXTENSION);
+                $temp      = explode(".", $_FILES['eventpicture']['name'][$key]);
                 $extension = end($temp);
                 if ($_FILES["eventpicture"]["type"][$key] != "image/gif" && $_FILES["eventpicture"]["type"][$key] != "image/jpeg" && $_FILES["eventpicture"]["type"][$key] != "image/jpg" && $_FILES["eventpicture"]["type"][$key] != "image/pjpeg" && $_FILES["eventpicture"]["type"][$key] != "image/x-png" && $_FILES["eventpicture"]["type"][$key] != "image/png" && !in_array($extension, $allowedExts)) {
                     $error_uploads++;
                     continue;
                 }
-                $file_name = time() . rand(1, 5) . rand(6, 10) . '.' .$temp;
+                $file_name = time() . rand(1, 5) . rand(6, 10) . '.' .$temp1;
                 if (move_uploaded_file($_FILES["eventpicture"]['tmp_name'][$key], $upload_path . $file_name)) {
                     $total_uploads[] = $file_name;
                 } else {

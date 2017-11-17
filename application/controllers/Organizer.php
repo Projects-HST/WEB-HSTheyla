@@ -105,22 +105,31 @@ class Organizer extends CI_Controller
         $contact_person = $this->input->post('contact_person');
         $email = $this->input->post('email');
         
-        $event_pic = $_FILES['eventbanner']['name']; 
+     //       $event_pic = $_FILES['eventbanner']['name']; 
+  //       $temp = pathinfo($event_pic, PATHINFO_EXTENSION);
+  //       $file_name      = time() . rand(1, 5) . rand(6, 10);
+  //       $event_banner   = $file_name. '.' .$temp;
+		// //$event_banner = trim($event_pic);
+		// $uploaddir = 'assets/events/banners/';
+		// $profilepic = $uploaddir.$event_banner;
+		// move_uploaded_file($_FILES['eventbanner']['tmp_name'],$profilepic);
+
+
+		$event_pic      = $_FILES['eventbanner']['name'];
         $temp = pathinfo($event_pic, PATHINFO_EXTENSION);
         $file_name      = time() . rand(1, 5) . rand(6, 10);
         $event_banner   = $file_name. '.' .$temp;
-		//$event_banner = trim($event_pic);
-		$uploaddir = 'assets/events/banners/';
-		$profilepic = $uploaddir.$event_banner;
-		move_uploaded_file($_FILES['eventbanner']['tmp_name'],$profilepic);
+        $uploaddir      = 'assets/events/banner/';
+        $profilepic     = $uploaddir . $event_banner;
+        move_uploaded_file($_FILES['eventbanner']['tmp_name'], $profilepic);
 
         $eadv_status = $this->input->post('eadv_status');
-		$booking_sts = $this->input->post('booking_sts');
+		//$booking_sts = $this->input->post('booking_sts');
 		$hotspot_sts = $this->input->post('hotspot_sts');
         $colour_scheme = $this->input->post('colour_scheme');
-		$event_status = $this->input->post('event_status');
+		//$event_status = $this->input->post('event_status');
 
-        $datas = $this->organizermodel->create_events($event_name,$category,$country,$city,$venue,$address,$description,$eventcost,$start_date,$end_date,$start_time,$end_time,$txtLatitude,$txtLongitude,$pcontact_cell,$scontact_cell,$contact_person,$email,$event_banner,$colour_scheme,$event_status,$eadv_status,$booking_sts,$hotspot_sts,$user_id,$user_role);
+        $datas = $this->organizermodel->create_events($event_name,$category,$country,$city,$venue,$address,$description,$eventcost,$start_date,$end_date,$start_time,$end_time,$txtLatitude,$txtLongitude,$pcontact_cell,$scontact_cell,$contact_person,$email,$event_banner,$colour_scheme,$eadv_status,$hotspot_sts,$user_id,$user_role);
         
 		$sta = $datas['status'];
 
@@ -227,13 +236,21 @@ class Organizer extends CI_Controller
         $currentcpic=$this->input->post('currentcpic');
         $eventid=$this->input->post('eventid');
 
-        $event_pic = $_FILES['eventbanner']['name']; 
+  //       $event_pic = $_FILES['eventbanner']['name']; 
+  //       $temp = pathinfo($event_pic, PATHINFO_EXTENSION);
+  //       $file_name      = time() . rand(1, 5) . rand(6, 10);
+  //       $event_banner   = $file_name. '.' .$temp;
+		// $uploaddir='assets/events/banner/';
+		// $profilepic=$uploaddir.$event_banner;
+		// move_uploaded_file($_FILES['eventbanner']['tmp_name'],$profilepic);
+
+		$event_pic      = $_FILES['eventbanner']['name'];
         $temp = pathinfo($event_pic, PATHINFO_EXTENSION);
         $file_name      = time() . rand(1, 5) . rand(6, 10);
         $event_banner   = $file_name. '.' .$temp;
-		$uploaddir='assets/events/banner/';
-		$profilepic=$uploaddir.$event_banner;
-		move_uploaded_file($_FILES['eventbanner']['tmp_name'],$profilepic);
+        $uploaddir      = 'assets/events/banner/';
+        $profilepic     = $uploaddir . $event_banner;
+        move_uploaded_file($_FILES['eventbanner']['tmp_name'], $profilepic);
 
         $eadv_status=$this->input->post('eadv_status');
 		$booking_sts=$this->input->post('booking_sts');
