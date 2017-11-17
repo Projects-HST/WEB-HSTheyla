@@ -61,3 +61,8 @@
 
 
 </div> <!-- content -->
+<script type="text/javascript">
+  $('#followers').addClass("active");
+  $('#users').addClass("has_sub active nav-active");
+
+</script>

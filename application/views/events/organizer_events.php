@@ -122,6 +122,9 @@
       </div> <!-- content -->
 
 <script type="text/javascript">
+
+  
+
   function confirmGetMessage(eid)
   {
     var r=confirm("Do you want to delete this?")

@@ -116,6 +116,9 @@
 <!-- content -->
 <script type="text/javascript">
 
+  $('#category').addClass("active");
+  $('#master').addClass("has_sub active nav-active");
+
 //   function validate()
 //  {
 //    var size=1000000;

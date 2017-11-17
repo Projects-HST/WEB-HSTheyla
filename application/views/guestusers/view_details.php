@@ -84,3 +84,7 @@
    <!-- Page content Wrapper -->
 </div>
 <!-- content -->
+<script type="text/javascript">
+  $('#guestuser').addClass("active");
+  $('#users').addClass("has_sub active nav-active");
+</script>

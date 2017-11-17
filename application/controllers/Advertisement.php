@@ -227,7 +227,7 @@ class Advertisement extends CI_Controller
         $datas['plans'] = $this->advertisementmodel->getall_adv_plans();
         if ($user_role == 1) {
             $this->load->view('header');
-            $this->load->view('advertisement/edit_adv_details1', $datas);
+            $this->load->view('advertisement/edit_adv_history', $datas);
             $this->load->view('footer');
         } else {
             redirect('/');

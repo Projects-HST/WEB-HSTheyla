@@ -229,6 +229,10 @@
 </div>
 <!-- content -->
 <script type="text/javascript">
+
+  $('#list').addClass("active");
+  $('#advertisement').addClass("has_sub active nav-active");
+  
   $('#stime').timepicki();
   $('#etime').timepicki();
 function confirmGetMessage(adid)

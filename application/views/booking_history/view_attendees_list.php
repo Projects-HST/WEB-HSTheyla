@@ -61,3 +61,7 @@
 
 
 </div> <!-- content -->
+<script type="text/javascript">
+  $('#booking_history').addClass("active");
+  $('#booking').addClass("has_sub active nav-active");
+</script>

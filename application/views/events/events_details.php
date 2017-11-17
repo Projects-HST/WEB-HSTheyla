@@ -255,7 +255,8 @@
 <!-- content -->
 
 <script type="text/javascript">  
-
+$('#vieweve').addClass("active");
+  $('#events').addClass("has_sub active nav-active");
   
  function getcityname(cid) {
            //alert(cid);

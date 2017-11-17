@@ -1,12 +1,28 @@
-
+<?php
+    function get_times( $default = '10:00', $interval = '+15 minutes' )
+   {
+      $output = '';
+      $current = strtotime( '00:00:00' );
+      $end = strtotime( '23:59:00' );
+      while( $current <= $end ) {
+         $time = date( 'H:i:s', $current );
+         $sel = ( $time == $default ) ? ' selected' : '';
+         $output .= "<option value=\"{$time}\">" . date( 'h.i A', $current ) .'</option>';
+         $current = strtotime( $interval, $current );
+      }
+      return $output;
+    }
+?>
 <style type="text/css">
    .img-circle{
           width: 90px;
          border-radius: 30px;
        }
 </style>
+
 <script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
 <link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
+
 <!-- Start content -->
 <div class="content-page">
 <div class="content">
@@ -61,7 +77,6 @@
                          <?php foreach($edit AS $res){}?>
 
                          <div class="form-group row">
-                           
                             <label for="stime" class="col-sm-2 col-form-label">Event Name</label>
                             <div class="col-sm-4">
                               <input type="text" class="form-control" readonly="" value="<?php echo $res->event_name;   ?>">
@@ -94,6 +109,7 @@
                             </div>
                             </div>
                         </div>
+
                         <!--div class="form-group row">
                              <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
                             <div class="col-sm-4">
@@ -171,6 +187,9 @@
 <!-- content -->
 <script type="text/javascript">
 
+  $('#list').addClass("active");
+  $('#advertisement').addClass("has_sub active nav-active");
+
   $('#stime').timepicki();
   $('#etime').timepicki();
 
@@ -202,7 +221,7 @@
   function check()
     {
 
-       var fdate = document.getElementById("datepicker-autoclose").value;
+      var fdate = document.getElementById("datepicker-autoclose").value;
       var tdate = document.getElementById("datepicker").value;
 
        //alert(fdate);alert(tdate);

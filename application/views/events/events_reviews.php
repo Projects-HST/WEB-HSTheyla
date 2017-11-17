@@ -76,6 +76,8 @@
 
 </div> <!-- content -->
 <script type="text/javascript">
+  $('#vieweve').addClass("active");
+  $('#events').addClass("has_sub active nav-active");
 // $(document).ready(function () {
 //  $('#myformsection').validate({ //
 //   submitHandler: function(formdisplay) {

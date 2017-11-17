@@ -85,6 +85,8 @@
 </div>
 <!-- content -->
 <script type="text/javascript">
+  $('#newsletter').addClass("active");
+  $('#email').addClass("has_sub active nav-active");
  $(document).ready(function () {
     $('#templateform').validate({ // initialize the plugin
        rules: {

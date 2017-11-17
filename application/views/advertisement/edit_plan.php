@@ -92,6 +92,10 @@
 </div>
 <!-- content -->
 <script type="text/javascript">
+
+  $('#plan').addClass("active");
+  $('#advertisement').addClass("has_sub active nav-active");
+
  $(document).ready(function () {
     $('#advertisementform').validate({ // initialize the plugin
        rules: {

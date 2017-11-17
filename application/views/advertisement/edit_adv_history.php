@@ -20,6 +20,9 @@
        }
 </style>
 
+<script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
+<link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
+
 <!-- Start content -->
 <div class="content-page">
 <div class="content">
@@ -70,7 +73,7 @@
                   <div class="card m-b-20">
                      <div class="card-block">
                         <h4 class="mt-0 header-title"></h4>
-                        <form  method="post" action="<?php echo base_url();?>advertisement/update_adv_history_all" name="advertisementform" enctype="multipart/form-data">
+                        <form  method="post" action="<?php echo base_url();?>advertisement/update_adv_history_all" name="advertisementform" enctype="multipart/form-data" onSubmit='return check();'>
                          <?php foreach($edit AS $res){}?>
 
                          <div class="form-group row">
@@ -94,7 +97,7 @@
                             <label for="sdate" class="col-sm-2 col-form-label">Start Date</label>
                             <div class="col-sm-4">
                               <div class="input-group">
-                                <input type="text" class="form-control"  name="start_date"  value="<?php $date=date_create($res->date_from);echo date_format($date,"m/d/Y");  ?>" id="datepicker-autoclose">
+                                <input type="text" class="form-control"  name="start_date"  value="<?php $date=date_create($res->date_from);echo date_format($date,"m-d-Y");  ?>" id="datepicker-autoclose">
                                 <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
                             </div>
                             </div>
@@ -102,13 +105,12 @@
                              <label for="edate" class="col-sm-2 col-form-label">End Date</label>
                             <div class="col-sm-4">
                                <div class="input-group">
-                                <input type="text" class="form-control" required="" name="end_date" value="<?php $date=date_create($res->date_to);echo date_format($date,"m/d/Y");  ?>" id="datepicker">
+                                <input type="text" class="form-control" required="" name="end_date" value="<?php $date=date_create($res->date_to);echo date_format($date,"m-d-Y");  ?>" id="datepicker">
                                 <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
                             </div>
                             </div>
                         </div>
-                        <div class="form-group row">
-                           
+                        <!--div class="form-group row">
                              <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
                             <div class="col-sm-4">
                                 <select name="start_time" required="" class="form-control" >
@@ -127,7 +129,20 @@
                         <script language="JavaScript">document.advertisementform.end_time.value="<?php echo $res->time_to; ?>";</script>
                             </div>
 
+                        </div-->
+
+                        <div class="form-group row">
+                            <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
+                            <div class="col-sm-4">
+                               <input  type="text" class="form-control" id="stime" name="start_time" value="<?php echo $res->time_from; ?>">
+                            </div>
+                             <label for="etime" class="col-sm-2 col-form-label">End Time</label>
+                            <div class="col-sm-4">
+                              <input  type="text" class="form-control" id="etime" name="end_time" value="<?php echo $res->time_to; ?>">
+                            </div>
                         </div>
+
+
                         <div class="form-group row">
                              <label for="ecost" class="col-sm-2 col-form-label">Plans</label>
                             <div class="col-sm-4">
@@ -171,4 +186,86 @@
     <!-- Top Bar Start -->
 </div>
 <!-- content -->
+<script type="text/javascript">
+  $('#history').addClass("active");
+  $('#advertisement').addClass("has_sub active nav-active");
 
+  $('#stime').timepicki();
+  $('#etime').timepicki();
+
+
+  function check()
+    {
+
+      var fdate = document.getElementById("datepicker-autoclose").value;
+      var tdate = document.getElementById("datepicker").value;
+
+       //alert(fdate);alert(tdate);
+      var chunks = fdate.split('-');
+      var formattedDate = chunks[1]+'/'+chunks[0]+'/'+chunks[2];
+       //alert(formattedDate);
+      var chunks1 = tdate.split('-');
+      var formattedDate1 = chunks1[1]+'/'+chunks1[0]+'/'+chunks1[2];
+      //alert(formattedDate1);
+      //alert( Date.parse(formattedDate));
+      //alert( Date.parse(formattedDate1));
+      if(Date.parse(formattedDate) > Date.parse(formattedDate1) )
+      {
+       alert("Startdate should be less than Enddate");
+       return false;
+      }
+
+      if(Date.parse(formattedDate)==Date.parse(formattedDate1) )
+      {
+      
+        var strStartTime = document.getElementById("stime").value;
+        var strEndTime = document.getElementById("etime").value;
+
+        var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+        var endTime = new Date(startTime)
+        endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+         
+        //var timefrom = date1;
+         temp =strStartTime.split(":");
+         var a = temp[0];
+         var b = temp[1];
+         temp1 =b.split(" ");
+         var c = temp1[1]
+       
+        if(a==12 && c=='AM'){
+        
+        }else if (startTime > endTime){
+          alert("Start Time is greater than end time");
+          return false;
+        }
+    }else{
+      var date1 = new Date(formattedDate);
+      var date2 = new Date(formattedDate1);
+
+      var strStartTime = document.getElementById("stime").value;
+      var strEndTime = document.getElementById("etime").value;
+      var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+      var endTime = new Date(startTime);
+       endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+      var a=formattedDate + '' + strStartTime;
+      var b=formattedDate1 + '' + strEndTime;
+      //alert(startTime);alert(endTime); alert(a);alert(b); 
+      if (a == b || a > b) {
+      alert("Start Date & Time is greater than end Date & Time");
+      return false;
+      }
+    }
+      function GetHours(d) 
+      {
+        var h = parseInt(d.split(':')[0]);
+        if (d.split(':')[1].split(' ')[1] == "PM") {
+        h = h + 12;
+      }
+      return h;
+      }
+      function GetMinutes(d) 
+      {
+       return parseInt(d.split(':')[1].split(' ')[0]);
+      }
+}
+</script>

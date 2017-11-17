@@ -181,27 +181,27 @@
     <!-- Top Bar Start -->
 </div>
 <!-- content -->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByz7sU142AeFwpK3KiFilK0IOoa2GU9tw"></script>
+<!--script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByz7sU142AeFwpK3KiFilK0IOoa2GU9tw"></script-->
 <script type="text/javascript">
-     window.onload = function () {
-    var mapOptions = {
-                center: new google.maps.LatLng(20.5937, 78.9629),
-                zoom:4,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-            var infoWindow = new google.maps.InfoWindow();
-            var latlngbounds = new google.maps.LatLngBounds();
-            var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
-            google.maps.event.addListener(map, 'click', function (e) 
-            {
-             var la=e.latLng.lat();
-             var lo=e.latLng.lng();
-             document.getElementById("latu").value=la;
-             document.getElementById("lon").value=lo;
-             //alert(la); alert(lo);
-            //alert("Latitude: " + e.latLng.lat() + "\r\nLongitude: " + e.latLng.lng());
-            });
- }
+ //     window.onload = function () {
+ //    var mapOptions = {
+ //                center: new google.maps.LatLng(20.5937, 78.9629),
+ //                zoom:4,
+ //                mapTypeId: google.maps.MapTypeId.ROADMAP
+ //            };
+ //            var infoWindow = new google.maps.InfoWindow();
+ //            var latlngbounds = new google.maps.LatLngBounds();
+ //            var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+ //            google.maps.event.addListener(map, 'click', function (e) 
+ //            {
+ //             var la=e.latLng.lat();
+ //             var lo=e.latLng.lng();
+ //             document.getElementById("latu").value=la;
+ //             document.getElementById("lon").value=lo;
+ //             //alert(la); alert(lo);
+ //            //alert("Latitude: " + e.latLng.lat() + "\r\nLongitude: " + e.latLng.lng());
+ //            });
+ // }
 
    $(document).ready(function () {
 

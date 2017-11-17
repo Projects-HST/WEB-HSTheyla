@@ -102,6 +102,10 @@
 </div>
 <!-- content -->
 <script type="text/javascript"> 
+
+  $('#state').addClass("active");
+  $('#master').addClass("has_sub active nav-active");
+
    $(document).ready(function () {
     $('#stateform').validate({ // initialize the plugin
        rules: {

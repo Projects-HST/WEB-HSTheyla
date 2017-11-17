@@ -128,6 +128,10 @@
 
 </div> <!-- content -->
 <script type="text/javascript">
+
+  $('#vieweve').addClass("active");
+  $('#events').addClass("has_sub active nav-active");
+  
  $(document).ready(function () {
     $('#eventpicform').validate({ // initialize the plugin
        rules: {

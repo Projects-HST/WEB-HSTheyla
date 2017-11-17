@@ -88,6 +88,10 @@
 </div>
 <!-- content -->
 <script type="text/javascript">
+
+  $('#userrole').addClass("active");
+  $('#master').addClass("has_sub active nav-active");
+
  $(document).ready(function () {
     $('#usersform').validate({ // initialize the plugin
        rules: {

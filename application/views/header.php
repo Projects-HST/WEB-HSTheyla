@@ -78,32 +78,32 @@
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-buffer"></i> <span> Masters </span> </a>
                     <ul class="list-unstyled">
                         <li id="country"><a href="<?php echo base_url();?>country/home">Country</a></li>
-                        <li><a href="<?php echo base_url();?>state/home">State</a></li>
-                        <li><a href="<?php echo base_url();?>city/home">City</a></li>
-                        <li><a href="<?php echo base_url();?>category/home">Category</a></li>
-                        <li><a href="<?php echo base_url();?>userrole/home">User Role</a></li>
+                        <li id="state"><a href="<?php echo base_url();?>state/home">State</a></li>
+                        <li id="city"><a href="<?php echo base_url();?>city/home">City</a></li>
+                        <li id="category"><a href="<?php echo base_url();?>category/home">Category</a></li>
+                        <li id="userrole"><a href="<?php echo base_url();?>userrole/home">User Role</a></li>
                     </ul>
                 </li>
 
-                <li class="has_sub">
+                <li class="has_sub" id="events">
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-cube-outline"></i> <span>Events</span> </a>
                     <ul class="list-unstyled">
-                        <li><a href="<?php echo base_url();?>events/home">Add Events</a></li>
-                        <li><a href="<?php echo base_url();?>events/view_events">View Events</a></li>
-                        <li><a href="<?php echo base_url();?>events/organizer_events">Organizer Events</a></li>
+                        <li id="adevents"><a href="<?php echo base_url();?>events/home">Add Events</a></li>
+                        <li id="vieweve"><a href="<?php echo base_url();?>events/view_events">View Events</a></li>
+                        <li id="orgeve"><a href="<?php echo base_url();?>events/organizer_events">Organizer Events</a></li>
                     </ul>
                 </li>
 
-                <li class="has_sub">
+                <li class="has_sub" id="advertisement">
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-album"></i> <span> Event Advertisement</span> </a>
                     <ul class="list-unstyled">
-                        <li><a href="<?php echo base_url();?>advertisement/home"> Add Event ads</a></li>
-                        <li><a href="<?php echo base_url();?>advertisement/view_adv_plan">Review ads</a></li>
-                        <li><a href="<?php echo base_url();?>advertisement/view_adv_history ">History</a></li>
+                        <li id="plan"><a href="<?php echo base_url();?>advertisement/home"> Add Plan</a></li>
+                        <li id="list"><a href="<?php echo base_url();?>advertisement/view_adv_plan">Review</a></li>
+                        <li id="history"><a href="<?php echo base_url();?>advertisement/view_adv_history ">History</a></li>
                     </ul>
                 </li>
 
-                <li class="has_sub">
+                <li class="has_sub" id="event_revies">
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-clipboard-outline"></i><span> Event Reviews   </span></a>
                     <ul class="list-unstyled">
                         <li><a href="<?php echo base_url();?>reviews/view_reviews">Unread </a></li>
@@ -111,31 +111,31 @@
                     </ul>
                 </li>
 
-                <li class="has_sub">
+                <li class="has_sub" id="booking">
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-chart-line"></i><span> Booking </span></a>
                     <ul class="list-unstyled">
                         <li><a href="<?php echo base_url();?>bookinghistory/process_details">Process</a></li>
                         <li><a href="<?php echo base_url();?>bookinghistory/status_details">Status</a></li>
-                        <li><a href="<?php echo base_url();?>bookinghistory/home">History</a></li>
+                        <li id="booking_history"><a href="<?php echo base_url();?>bookinghistory/home">History</a></li>
                     </ul>
                 </li>
 
-                <li class="has_sub">
+                <li class="has_sub" id="users">
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-format-list-bulleted-type"></i><span> User Management</span></a>
                     <ul class="list-unstyled">
-                        <li><a href="<?php echo base_url();?>users/home">New User</a></li>
-                        <li><a href="<?php echo base_url();?>users/view">View User Information</a></li>
-                        <li><a href="<?php echo base_url();?>users/view_followers">View User Followers</a></li>
-                        <li><a href="<?php echo base_url();?>guestuser/home">Guest User</a></li>
+                        <li id="createuser"><a href="<?php echo base_url();?>users/home">New User</a></li>
+                        <li id="viewuser"><a href="<?php echo base_url();?>users/view">View User Information</a></li>
+                        <li id="followers"><a href="<?php echo base_url();?>users/view_followers">View User Followers</a></li>
+                        <li id="guestuser"><a href="<?php echo base_url();?>guestuser/home">Guest User</a></li>
 
                     </ul>
                 </li>
 
-                <li class="has_sub">
+                <li class="has_sub" id="email">
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-google-maps"></i><span> Newsletter </span></a>
                     <ul class="list-unstyled">
-                        <li><a href="<?php echo base_url();?>emailtemplate/home"> Newsletter Template</a></li>
-                        <li><a href="<?php echo base_url();?>emailtemplate/select_users"> Send Newsletter </a></li>
+                        <li id="newsletter"><a href="<?php echo base_url();?>emailtemplate/home"> Newsletter Template</a></li>
+                        <li id="sendemail"><a href="<?php echo base_url();?>emailtemplate/select_users"> Send Newsletter </a></li>
                     </ul>
                 </li>
 

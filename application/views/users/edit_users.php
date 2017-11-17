@@ -265,6 +265,11 @@
 <!-- content -->
 
 <script type="text/javascript">
+
+  $('#viewuser').addClass("active");
+  $('#users').addClass("has_sub active nav-active");
+
+
   function check(){
           var sname = document.getElementById("staname").value;
           if(sname=="Select State")
