@@ -35,6 +35,11 @@
   color:red;
 
 }
+.caption-head{
+  padding-top: 330px;
+  text-align: center;
+  color: #fff;
+}
 .card{
   padding: 50px;
   border: none;

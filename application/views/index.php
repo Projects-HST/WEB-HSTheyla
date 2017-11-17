@@ -221,11 +221,13 @@
 
 
         <div class="slider">
-            <div class="carousel carousel-fade" data-ride="carousel" data-interval="3000">
+            <div class="carousel carousel-fade" data-ride="carousel" data-interval="2500">
             <!-- <div class="carousel-inner carousel-fade" role="listbox"> -->
                 <!-- Slide One - Set the background image for this slide in the line below -->
                 <div class="carousel-item active" style="background-image: url('<?php echo base_url(); ?>assets/front/images/slider1.jpg')">
+                    <!-- <h1 class="caption-head">Explore the World Around You</h1> -->
                     <div class="carousel-caption  d-md-block">
+
                         <img src="<?php echo base_url(); ?>assets/front/images/play.png" class=""> <img src="<?php echo base_url(); ?>assets/front/images/app.png" class="">
 
                     </div>

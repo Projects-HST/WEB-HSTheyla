@@ -37,7 +37,7 @@
          </ul>
          <div class="clearfix"></div>
       </nav>
-	  
+
       </div>
       <!-- Top Bar End -->
       <div class="page-content-wrapper">
@@ -77,7 +77,7 @@
                   </div>
                </div>
             </div>
-       
+
          </div>
 		   <!-- container -->
       </div>
@@ -87,7 +87,12 @@
 </div>
 <!-- content -->
 <script type="text/javascript">
+
  $(document).ready(function () {
+
+   $('#country').addClass("active");
+   $('#master').addClass("has_sub active nav-active");
+   
     $('#countryform').validate({ // initialize the plugin
        rules: {
          countryname:{required:true },
@@ -97,7 +102,7 @@
         countryname:"Enter Country Name",
         eventsts:"Select Status"
                },
-         }); 
+         });
    });
-  
+
 </script>

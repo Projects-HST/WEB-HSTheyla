@@ -29,7 +29,7 @@
 
 <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
- 
+
  <!--  Forms Validations Plugin -->
       <script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
       <script src="<?php echo base_url(); ?>assets/js/additional-methods.min.js"></script>
@@ -74,10 +74,10 @@
                     </a>
                 </li>
 
-                <li class="has_sub">
+                <li class="has_sub" id="master">
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-buffer"></i> <span> Masters </span> </a>
                     <ul class="list-unstyled">
-                        <li><a href="<?php echo base_url();?>country/home">Country</a></li>
+                        <li id="country"><a href="<?php echo base_url();?>country/home">Country</a></li>
                         <li><a href="<?php echo base_url();?>state/home">State</a></li>
                         <li><a href="<?php echo base_url();?>city/home">City</a></li>
                         <li><a href="<?php echo base_url();?>category/home">Category</a></li>

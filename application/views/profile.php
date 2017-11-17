@@ -40,15 +40,16 @@
         color: #fff;
         border-color: #fff;
         margin-top: 5px;
+        margin-left: 5px;
     }
 
     .profile-pic {
         max-width: 100px;
         max-height: 100px;
-        border-radius: 25px;
+        border-radius: 50px;
         margin-top: 10px;
         margin-left: 20px;
-
+        height: 100px;
     }
 
     .file-upload {
@@ -68,7 +69,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="<?php echo base_url(); ?>">Home
+                        <a class="nav-link" href="<?php echo base_url(); ?>home">Home
                 <span class="sr-only"></span>
               </a>
                     </li>
