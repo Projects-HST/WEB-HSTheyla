@@ -91,11 +91,13 @@ class Users extends CI_Controller
 		     if($sta=="success"){
 		       $this->session->set_flashdata('msg','Added Successfully');
 			   redirect('users/view');
-		     }else if($sta=="AE"){
-	             $this->session->set_flashdata('msg','Already Exist');
+		     }else if($sta=="UA"){
+	             $this->session->set_flashdata('msg','Username Already Exist');
 			     redirect('users/view');
-		     }
-		     else{
+		     }else if($sta=="ME"){
+                   $this->session->set_flashdata('msg','Mobile OR Email Id Already Exist');
+			       redirect('users/view');
+		     }else{
 		     	 $this->session->set_flashdata('msg','Faild To Add');
 			      redirect('users/view');
 		     }

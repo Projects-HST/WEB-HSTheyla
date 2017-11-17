@@ -85,11 +85,11 @@ Class Usersmodel extends CI_Model
         $data= array("status"=>"success");
   		  return $data;
       }else{
-        $data= array("status"=>"AE");
+        $data= array("status"=>"ME");
         return $data;
       }
     }else{
-       $data= array("status"=>"AE");
+       $data= array("status"=>"UA");
        return $data;
     }
 

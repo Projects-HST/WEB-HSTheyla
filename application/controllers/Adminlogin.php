@@ -115,6 +115,12 @@ public function dashboard()
 	 $user_id=$this->session->userdata('id');
 	 $user_role=$this->session->userdata('user_role');
 	 $datas['result'] = $this->loginmodel->getuser($user_id);
+
+	 $datas['users'] = $this->loginmodel->get_tlt_no_user($user_id);
+	 $datas['events'] = $this->loginmodel->get_tlt_no_events();
+	 $datas['org_events'] = $this->loginmodel->get_tlt_no_orgevents();
+	 $datas['booking'] = $this->loginmodel->get_tlt_no_booking();
+
 	 if($user_role==1){
 		$this->load->view('header',$datas);
 		$this->load->view('home',$datas);

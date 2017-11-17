@@ -125,9 +125,9 @@
                      </form>
                   </div>
                </div>
-                <div class="col-lg-4">
+                <!--div class="col-lg-4">
     <div id="dvMap" style="width:300px; height:300px"> </div>
-               </div>
+               </div-->
             </div>
        
          </div>

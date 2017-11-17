@@ -13,10 +13,25 @@ public function __construct()
     
     function getall_events_details()
     {
-    $sql="SELECT ev.*,ci.city_name,ca.category_name FROM city_master AS ci,category_master AS ca,events AS ev WHERE ev.category_id=ca.id AND ev.event_city=ci.id ORDER BY ev.id DESC";
+      $sql="SELECT ev.*,ci.city_name,ca.category_name FROM city_master AS ci,category_master AS ca,events AS ev WHERE ev.category_id=ca.id AND ev.event_city=ci.id AND ev.event_status='Y' ORDER BY ev.id DESC";
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
 	  	return $res;
+    }
+
+    function getall_archived_events_details()
+    {
+      $sql="SELECT ev.*,um.user_name,ci.city_name,ca.category_name FROM city_master AS ci,category_master AS ca,user_master AS um,events AS ev WHERE um.user_role NOT IN (2) AND um.id=ev.created_by AND ev.category_id=ca.id AND ev.event_city=ci.id AND ev.event_status='N' ORDER BY ev.id DESC";
+      $resu=$this->db->query($sql);
+      $res=$resu->result();
+      return $res;
+    }
+
+    function getall_organizer_events_details()
+    {
+      $query="SELECT ev.*,um.user_name,ci.city_name,ca.category_name FROM city_master AS ci,category_master AS ca,user_master AS um,events AS ev WHERE um.user_role='2' AND um.id=ev.created_by AND ev.category_id=ca.id AND ev.event_city=ci.id AND ev.event_status='N' ORDER BY ev.id DESC";
+      $resultset=$this->db->query($query);
+      return $resultset->result();
     }
 
     function events_popularity()
@@ -53,7 +68,7 @@ public function __construct()
 
 
     function insert_events_details($event_name,$category,$country,$city,$venue,$address,$description,$eventcost,$start_date,$end_date,$start_time,$end_time,$txtLatitude,$txtLongitude,$pcontact_cell,$scontact_cell,$contact_person,$email,$event_banner,$colour_scheme,$event_status,$eadv_status,$booking_sts,$hotspot_sts,$user_id,$user_role)
-    {
+    {    
           $check_eve="SELECT * FROM events WHERE event_name='$event_name' AND category_id='$category'";
           $result=$this->db->query($check_eve);
           if($result->num_rows()==0)
@@ -66,7 +81,6 @@ public function __construct()
               $data= array("status"=>"Already Exist");
                return $data;
             }
-
     }
 
     
@@ -86,9 +100,11 @@ public function __construct()
         return $row;
     }
 
+    
+
     function update_events_details($eventid,$event_name,$category,$country,$city,$venue,$address,$description,$eventcost,$start_date,$end_date,$start_time,$end_time,$txtLatitude,$txtLongitude,$pcontact_cell,$scontact_cell,$contact_person,$email,$event_banner,$colour_scheme,$event_status,$eadv_status,$booking_sts,$hotspot_sts,$user_id,$user_role)
       {
-      $sql="UPDATE events SET category_id='$category',event_name='$event_name',event_venue='$venue',event_address='$address',description='$description',start_date='$start_date',end_date='$end_date',start_time='$start_time',end_time='$end_time',event_banner='$event_banner',event_latitude='$txtLatitude',event_longitude='$txtLongitude',event_country='$country',event_city='$city',primary_contact_no='$pcontact_cell',secondary_contact_no='$scontact_cell',contact_person='$contact_person',contact_email='$email',event_type='$eventcost',adv_status='$eadv_status',booking_status='$booking_sts',hotspot_status='$hotspot_sts',event_colour_scheme='$colour_scheme',event_status='$event_status',updated_by='$user_id',updated_at=NOW() WHERE id='$eventid'";
+      $sql="UPDATE events SET category_id='$category',event_name='$event_name',event_venue='$venue',event_address='$address',description='$description',start_date='$start_date',end_date='$end_date',start_time='$start_time',end_time='$end_time',event_banner='$event_banner',event_latitude='$txtLatitude',event_longitude='$txtLongitude',event_country='$country',event_city='$city',primary_contact_no='$pcontact_cell',secondary_contact_no='$scontact_cell',contact_person='$contact_person',contact_email='$email',event_type='$eventcost',adv_status='$eadv_status',booking_status='N',hotspot_status='$hotspot_sts',event_colour_scheme='$colour_scheme',event_status='$event_status',updated_by='$user_id',updated_at=NOW() WHERE id='$eventid'";
         $eresultset=$this->db->query($sql);
         $data= array("status"=>"success");
         return $data;
@@ -120,6 +136,14 @@ public function __construct()
     $resu=$this->db->query($msql);
     $res=$resu->result();
     return $res;
+  }
+
+  function get_event_name($id)
+  {
+    $ename="SELECT event_name FROM events WHERE id='$id'";
+    $ename1=$this->db->query($ename);
+    $ename2=$ename1->result();
+    return $ename2;
   }
 
   function upload_events_pic($eventid,$total_uploads)

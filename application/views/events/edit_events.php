@@ -220,11 +220,11 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="primarycell" class="col-sm-2 col-form-label">primary Contact Phone</label>
+                            <label for="primarycell" class="col-sm-2 col-form-label">Primary Contact Phone</label>
                             <div class="col-sm-4">
                                 <input class="form-control" type="text" required="" value="<?php echo $rows->primary_contact_no; ?>" name="pcontact_cell" maxlength="10" value="">
                             </div>
-                            <label for="seccell" class="col-sm-2 col-form-label">secondary Contact Phone</label>
+                            <label for="seccell" class="col-sm-2 col-form-label">Secondary Contact Phone</label>
                             <div class="col-sm-4">
                                 <input class="form-control" type="text" value="<?php echo $rows->secondary_contact_no; ?>" name="scontact_cell" value="" >
                             </div>
@@ -251,21 +251,7 @@
                                 </select>
                                 <script language="JavaScript">document.eventform.eadv_status.value="<?php echo $rows->adv_status; ?>";</script>
                             </div>
-                        
-                        <label for="Colour" class="col-sm-2 col-form-label">Booking Display</label>
-                            <div class="col-sm-4">
-                                 <select class="form-control" name="booking_sts">
-                                    <option value="">Select Status</option>
-                                    <option value="Y">Yes</option>
-                                    <option value="N">No</option>
-                                </select>
-                                <script language="JavaScript">document.eventform.booking_sts.value="<?php echo $rows->booking_status; ?>";</script>
-                            </div>
-                       </div>
-
-                        <div class="form-group row">
-                            
-                            <label for="Status" class="col-sm-2 col-form-label">Hotspot Display</label>
+                         <label for="Status" class="col-sm-2 col-form-label">Hotspot Display</label>
                             <div class="col-sm-4">
                                <select class="form-control" name="hotspot_sts">
                                     <option value="">Select Status</option>
@@ -274,7 +260,19 @@
                                 </select>
                                 <script language="JavaScript">document.eventform.hotspot_sts.value="<?php echo $rows->hotspot_status; ?>";</script>
                             </div>
+                        <!--label for="Colour" class="col-sm-2 col-form-label">Booking Display</label>
+                            <div class="col-sm-4">
+                                 <select class="form-control" name="booking_sts">
+                                    <option value="">Select Status</option>
+                                    <option value="Y">Yes</option>
+                                    <option value="N">No</option>
+                                </select>
+                                <script language="JavaScript">document.eventform.booking_sts.value="<?php echo $rows->booking_status; ?>";</script>
+                            </div-->
+                       </div>
 
+                        <div class="form-group row">
+                          
                             <label for="Colour" class="col-sm-2 col-form-label">Colour</label>
                             <div class="col-sm-4">
                                 <!--input class="form-control" type="text" name="colour_scheme" value=""-->
@@ -285,15 +283,9 @@
                                     <option value="red">Red</option>
                                 </select>
                                 <script language="JavaScript">document.eventform.colour_scheme.value="<?php echo $rows->event_colour_scheme; ?>";</script>
-
                             </div>
 
-                        </div>
-
-
-                        <div class="form-group row">
-                            
-                            <label for="Status" class="col-sm-2 col-form-label">Event Display</label>
+                             <label for="Status" class="col-sm-2 col-form-label">Event Display</label>
                             <div class="col-sm-4">
                                <select class="form-control" required="" name="event_status">
                                     <option value="">Select Status</option>
@@ -302,7 +294,9 @@
                                 </select>
                                 <script language="JavaScript">document.eventform.event_status.value="<?php echo $rows->event_status; ?>";</script>
                             </div>
+                        </div>
 
+                        <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Event Banner</label>
                               <div class="col-sm-4">
                                  <input type="file" name="eventbanner" class="form-control" accept="image/*" >

@@ -89,12 +89,15 @@ class Events extends CI_Controller
         $data['res'] = $this->eventsmodel->getcityname($country_id);
         echo json_encode($data['res']);
     }
+
+
     public function view_events()
     {
         $datas            = $this->session->userdata();
         $user_id          = $this->session->userdata('id');
         $user_role        = $this->session->userdata('user_role');
         $datas['result']  = $this->eventsmodel->getall_events_details();
+        $datas['sts']  = $this->eventsmodel->getall_archived_events_details();
         $datas['popular'] = $this->eventsmodel->events_popularity();
         //echo '<pre>'; print_r($datas['result']); exit;
         if ($user_role == 1) {
@@ -105,6 +108,25 @@ class Events extends CI_Controller
             redirect('/');
         }
     }
+
+    public function organizer_events()
+    {
+        $datas            = $this->session->userdata();
+        $user_id          = $this->session->userdata('id');
+        $user_role        = $this->session->userdata('user_role');
+        $datas['org']  = $this->eventsmodel->getall_organizer_events_details();
+        $datas['popular'] = $this->eventsmodel->events_popularity();
+        //echo '<pre>'; print_r($datas['org']); exit;
+        if ($user_role == 1) {
+            $this->load->view('header');
+            $this->load->view('events/organizer_events', $datas);
+            $this->load->view('footer');
+        } else {
+            redirect('/');
+        }
+    }
+
+
     public function edit_events($id)
     {
         $id                     = base64_decode($id);
@@ -228,6 +250,8 @@ class Events extends CI_Controller
         $user_role         = $this->session->userdata('user_role');
         $datas['evnid']    = $id;
         $datas['view_pic'] = $this->eventsmodel->view_upload_events_pic($id);
+        $datas['eventname'] = $this->eventsmodel->get_event_name($id);
+
         if ($user_role == 1) {
             $this->load->view('header');
             $this->load->view('events/add_gallery', $datas);

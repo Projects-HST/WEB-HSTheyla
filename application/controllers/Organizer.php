@@ -115,12 +115,12 @@ class Organizer extends CI_Controller
 		move_uploaded_file($_FILES['eventbanner']['tmp_name'],$profilepic);
 
         $eadv_status = $this->input->post('eadv_status');
-		$booking_sts = $this->input->post('booking_sts');
+		//$booking_sts = $this->input->post('booking_sts');
 		$hotspot_sts = $this->input->post('hotspot_sts');
         $colour_scheme = $this->input->post('colour_scheme');
-		$event_status = $this->input->post('event_status');
+		//$event_status = $this->input->post('event_status');
 
-        $datas = $this->organizermodel->create_events($event_name,$category,$country,$city,$venue,$address,$description,$eventcost,$start_date,$end_date,$start_time,$end_time,$txtLatitude,$txtLongitude,$pcontact_cell,$scontact_cell,$contact_person,$email,$event_banner,$colour_scheme,$event_status,$eadv_status,$booking_sts,$hotspot_sts,$user_id,$user_role);
+        $datas = $this->organizermodel->create_events($event_name,$category,$country,$city,$venue,$address,$description,$eventcost,$start_date,$end_date,$start_time,$end_time,$txtLatitude,$txtLongitude,$pcontact_cell,$scontact_cell,$contact_person,$email,$event_banner,$colour_scheme,$eadv_status,$hotspot_sts,$user_id,$user_role);
         
 		$sta = $datas['status'];
 

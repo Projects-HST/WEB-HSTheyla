@@ -14,11 +14,11 @@
 <link href="<?php echo base_url(); ?>assets/css/icons.css" rel="stylesheet" type="text/css">
 <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet" type="text/css">
 
- <link href="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
+<link href="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
 
-<!-- Datatables-->
- <link href="<?php echo base_url(); ?>assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
- <link href="<?php echo base_url(); ?>assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<!--Datatables-->
+<link href="<?php echo base_url(); ?>assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url(); ?>assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 <!-- Responsive datatable examples -->
 <link href="<?php echo base_url(); ?>assets/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
@@ -31,8 +31,8 @@
 <script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
  
  <!--  Forms Validations Plugin -->
-      <script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
-      <script src="<?php echo base_url(); ?>assets/js/additional-methods.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/js/additional-methods.min.js"></script>
 
 </head>
 
@@ -90,11 +90,12 @@
                     <ul class="list-unstyled">
                         <li><a href="<?php echo base_url();?>events/home">Add Events</a></li>
                         <li><a href="<?php echo base_url();?>events/view_events">View Events</a></li>
+                        <li><a href="<?php echo base_url();?>events/organizer_events">Organizer Events</a></li>
                     </ul>
                 </li>
 
                 <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-album"></i> <span> Advertisement Events</span> </a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-album"></i> <span> Event Advertisement</span> </a>
                     <ul class="list-unstyled">
                         <li><a href="<?php echo base_url();?>advertisement/home "> Plans</a></li>
                         <li><a href="<?php echo base_url();?>advertisement/view_adv_plan">List of Advertisement Events</a></li>

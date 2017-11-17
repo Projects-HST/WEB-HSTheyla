@@ -165,11 +165,11 @@ return $output;
             </div>
 
             <div class="form-group row">
-                <label for="primarycell" class="col-sm-2 col-form-label">primary Contact Phone</label>
+                <label for="primarycell" class="col-sm-2 col-form-label">Primary Contact Phone</label>
                 <div class="col-sm-4">
                     <input class="form-control" type="text"  name="pcontact_cell" maxlength="10" value="">
                 </div>
-                <label for="seccell" class="col-sm-2 col-form-label">secondary Contact Phone</label>
+                <label for="seccell" class="col-sm-2 col-form-label">Secondary Contact Phone</label>
                 <div class="col-sm-4">
                     <input class="form-control" type="text" name="scontact_cell" value="" >
                 </div>
@@ -195,18 +195,8 @@ return $output;
                         <option value="N">No</option>
                     </select>
                 </div>
-            <label for="Colour" class="col-sm-2 col-form-label">Booking Display</label>
-                <div class="col-sm-4">
-                     <select class="form-control" name="booking_sts">
-                        <option value="">Select Status</option>
-                        <option value="Y">Yes</option>
-                        <option value="N">No</option>
-                    </select>
-                </div>
-           </div>
 
-            <div class="form-group row">
-                <label for="Status" class="col-sm-2 col-form-label">Hotspot Display</label>
+                 <label for="Status" class="col-sm-2 col-form-label">Hotspot Display</label>
                 <div class="col-sm-4">
                    <select class="form-control" name="hotspot_sts">
                         <option value="">Select Status</option>
@@ -214,7 +204,18 @@ return $output;
                         <option value="N">No</option>
                     </select>
                 </div>
+            <!--label for="Colour" class="col-sm-2 col-form-label">Booking Display</label>
+                <div class="col-sm-4">
+                     <select class="form-control" name="booking_sts">
+                        <option value="">Select Status</option>
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                    </select>
+                </div-->
+           </div>
 
+            <div class="form-group row">
+              
                 <label for="Colour" class="col-sm-2 col-form-label">Colour</label>
                 <div class="col-sm-4">
                     <!--input class="form-control" type="text" name="colour_scheme" value=""-->
@@ -225,23 +226,23 @@ return $output;
                         <option value="red">Red</option>
                     </select>
                 </div>
+
+                 <label class="col-sm-2 col-form-label">Event Banner</label>
+                  <div class="col-sm-4">
+                     <input type="file" name="eventbanner" class="form-control" accept="image/*" >
+                  </div> 
             </div>
 
 
             <div class="form-group row">
-                <label for="Status" class="col-sm-2 col-form-label">Event Display</label>
+                <!--label for="Status" class="col-sm-2 col-form-label">Event Display</label>
                 <div class="col-sm-4">
                    <select class="form-control"  name="event_status">
                         <option value="">Select Status</option>
                         <option value="Y">Yes</option>
                         <option value="N">No</option>
                     </select>
-                </div>
-
-                <label class="col-sm-2 col-form-label">Event Banner</label>
-                  <div class="col-sm-4">
-                     <input type="file" name="eventbanner" class="form-control" accept="image/*" >
-                  </div>                            
+                </div-->                    
             </div>
 
 
@@ -400,15 +401,26 @@ function check()
 
       if(Date.parse(formattedDate)==Date.parse(formattedDate1) )
       {
-       
-       var strStartTime = document.getElementById("stime").value;
-       var strEndTime = document.getElementById("etime").value;
+      
+        var strStartTime = document.getElementById("stime").value;
+        var strEndTime = document.getElementById("etime").value;
+
+        // var timefrom = date1;
+        // temp = $('#stime').val();.split(":");
+        // timefrom.setHours((parseInt(temp[0]) - 1 + 24) % 24);
+        // timefrom.setMinutes(parseInt(temp[1]));
+
+        // var timeto = date2;
+        // temp = $('#etime').val().split(":");
+        // timeto.setHours((parseInt(temp[0]) - 1 + 24) % 24);
+        // timeto.setMinutes(parseInt(temp[1]));
+
 
         var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
         var endTime = new Date(startTime)
         endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
-        
-        if (startTime > endTime) {
+        //alert(startTime); alert(endTime);
+        if (startTime > endTime ) {
         alert("Start Time is greater than end time");
          return false; }
   
@@ -432,7 +444,7 @@ function check()
       {
         var h = parseInt(d.split(':')[0]);
         if (d.split(':')[1].split(' ')[1] == "PM") {
-        h = h + 12;
+        h = h + 24;
       }
       return h;
       }
