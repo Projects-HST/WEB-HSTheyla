@@ -13,7 +13,8 @@ $current = strtotime( $interval, $current );
 return $output;
 }
 ?>
-
+<script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
+<link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
 <div class="container" style="margin-top:30px;margin-bottom:50px;max-width:100%;">
 <div class="row row-offcanvas row-offcanvas-right">
 <div class="col-12 col-md-3 sidebar-offcanvas" id="sidebar">
@@ -129,8 +130,37 @@ return $output;
                 </div>
                 </div>
             </div>
+            
 
             <div class="form-group row">
+                           
+                            <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
+                            <div class="col-sm-4">
+
+                               <input  type="text" class="form-control" id="stime" name="start_time">
+
+                                <!-- select name="start_time" required="" class="form-control"  >
+                                     <option value="">Select Start Time</option>
+                                     <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
+                                </select>
+                                <script language="JavaScript">document.eventform.start_time.value="<?php echo $rows->start_time; ?>";</script-->
+
+                            </div>
+
+                             <label for="etime" class="col-sm-2 col-form-label">End Time</label>
+                            <div class="col-sm-4">
+                              <input  type="text" class="form-control" id="etime" name="end_time" >
+                                <!--select name="end_time" required="" class="form-control" id="etime">
+                                     <option value="">Select End Time</option>
+                                     <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
+                                </select>
+                                 <script language="JavaScript">document.eventform.end_time.value="<?php echo $rows->end_time; ?>";</script-->
+                            </div>
+
+                        </div>
+
+
+            <!--div class="form-group row">
                 <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
                 <div class="col-sm-4">
                 <select name="start_time"  class="form-control" id="stime" >
@@ -145,7 +175,8 @@ return $output;
                     <option value=""><?php echo get_times(); ?></option>
                   </select>
                 </div>
-            </div>
+            </div-->
+
               <div class="form-group row">
                  <label for="latitude" class="col-sm-2 col-form-label">Select</label>
                 <div id="dvMap" style="width:300px; height:250px"> </div>
@@ -272,6 +303,9 @@ return $output;
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByz7sU142AeFwpK3KiFilK0IOoa2GU9tw"></script>
 
 <script type="text/javascript">
+
+   $('#stime').timepicki();
+   $('#etime').timepicki();
 window.onload = function () {
 var mapOptions = {
     center: new google.maps.LatLng(20.5937, 78.9629),
@@ -405,25 +439,23 @@ function check()
         var strStartTime = document.getElementById("stime").value;
         var strEndTime = document.getElementById("etime").value;
 
-        // var timefrom = date1;
-        // temp = $('#stime').val();.split(":");
-        // timefrom.setHours((parseInt(temp[0]) - 1 + 24) % 24);
-        // timefrom.setMinutes(parseInt(temp[1]));
-
-        // var timeto = date2;
-        // temp = $('#etime').val().split(":");
-        // timeto.setHours((parseInt(temp[0]) - 1 + 24) % 24);
-        // timeto.setMinutes(parseInt(temp[1]));
-
-
         var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
         var endTime = new Date(startTime)
         endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
-        //alert(startTime); alert(endTime);
-        if (startTime > endTime ) {
-        alert("Start Time is greater than end time");
-         return false; }
-  
+         
+        //var timefrom = date1;
+         temp =strStartTime.split(":");
+         var a = temp[0];
+         var b = temp[1];
+         temp1 =b.split(" ");
+         var c = temp1[1]
+       
+        if(a==12 && c=='AM'){
+        
+        }else if (startTime > endTime){
+          alert("Start Time is greater than end time");
+          return false;
+        }
     }else{
         var date1 = new Date(fdate);
       var date2 = new Date(tdate);
