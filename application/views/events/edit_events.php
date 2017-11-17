@@ -496,8 +496,6 @@ function check()
       var fdate = document.getElementById("datepicker-autoclose").value;
       var tdate = document.getElementById("datepicker").value;
 
-
-
        //alert(fdate);alert(tdate);
       var chunks = fdate.split('-');
       var formattedDate = chunks[1]+'/'+chunks[0]+'/'+chunks[2];
@@ -516,19 +514,30 @@ function check()
       if(Date.parse(formattedDate)==Date.parse(formattedDate1) )
       {
        
-       var strStartTime = document.getElementById("stime").value;
-       var strEndTime = document.getElementById("etime").value;
+        var strStartTime = document.getElementById("stime").value;
+        var strEndTime = document.getElementById("etime").value;
 
         var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
         var endTime = new Date(startTime)
         endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
-        if (startTime > endTime) {
-        alert("Start Time is greater than end time");
-         return false; }
+         
+       
+         temp =strStartTime.split(":");
+         var a = temp[0];
+         var b = temp[1];
+         temp1 =b.split(" ");
+         var c = temp1[1]
+       
+        if(a==12 && c=='AM'){   }else if (startTime > endTime){
+          alert("Start Time is greater than end time");
+          return false;
+        }
   
     }else{
-        var date1 = new Date(fdate);
+      
+      var date1 = new Date(fdate);
       var date2 = new Date(tdate);
+
       var strStartTime = document.getElementById("stime").value;
       var strEndTime = document.getElementById("etime").value;
        var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);

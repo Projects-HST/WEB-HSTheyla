@@ -284,15 +284,15 @@
          name:{required:true},
          mobile:{required:true },
          email:{required:true,
-           remote: {
-           url: "<?php echo base_url(); ?>users/mail_checker",
-           type: "post",
-           data: {
-             email: function() {
-               return $( "#email" ).val();
-             }
-           }
-         }
+         //   remote: {
+         //   url: "<?php echo base_url(); ?>users/mail_checker",
+         //   type: "post",
+         //   data: {
+         //     email: function() {
+         //       return $( "#email" ).val();
+         //     }
+         //   }
+         // }
 
           },
          pwd:{required:true },

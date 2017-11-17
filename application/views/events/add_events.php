@@ -445,9 +445,7 @@ function check()
 
       if(Date.parse(formattedDate)==Date.parse(formattedDate1) )
       {
-        var date1 = new Date(formattedDate);
-        var date2 = new Date(formattedDate1);
-
+      
         var strStartTime = document.getElementById("stime").value;
         var strEndTime = document.getElementById("etime").value;
 
@@ -455,33 +453,19 @@ function check()
         var endTime = new Date(startTime)
         endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
          
-        // var timefrom = date1;
+        //var timefrom = date1;
          temp =strStartTime.split(":");
          var a = temp[0];
          var b = temp[1];
-         temp1 =b.split('');
-         var a1 = temp[0];
-         var b1 = temp[1];
-         var c1 = temp[2];
-         var d = temp[3];
-         var d1=c1 + " " + d;
-        // timefrom.setHours((parseInt(temp[0])  + 24) % 24);
-        // timefrom.setMinutes(parseInt(temp[1]));
-
-        // var timeto = date2;
-        // temp = $('#etime').val().split(":");
-        // timeto.setHours((parseInt(temp[0])  + 24) % 24);
-        // timeto.setMinutes(parseInt(temp[1]));
+         temp1 =b.split(" ");
+         var c = temp1[1]
+       
+        if(a==12 && c=='AM'){
         
-        alert(temp); alert(a); alert(b); alert(temp1);alert(c1);
-        alert(strStartTime);alert(strEndTime);
-
-        //alert(timefrom);alert(timeto);
-
-        if (startTime > endTime) {
-        alert("Start Time is greater than end time");
-         return false; }
-  
+        }else if (startTime > endTime){
+          alert("Start Time is greater than end time");
+          return false;
+        }
     }else{
       var date1 = new Date(formattedDate);
       var date2 = new Date(formattedDate1);

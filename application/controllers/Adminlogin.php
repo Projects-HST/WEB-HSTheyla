@@ -19,6 +19,10 @@ public function home()
 
 
 	$result = $this->loginmodel->login($username,$password);
+     $datas['users'] = $this->loginmodel->get_tlt_no_user();
+	 $datas['events'] = $this->loginmodel->get_tlt_no_events();
+	 $datas['org_events'] = $this->loginmodel->get_tlt_no_orgevents();
+	 $datas['booking'] = $this->loginmodel->get_tlt_no_booking();
 	$msg=$result['msg'];
 
 	if($result['status']=='Deactive')
@@ -54,7 +58,10 @@ public function home()
 					$datas= array("user_name"=>$user_name, "msg"=>$msg,"mobile_no"=>$mobile_no,"email_id"=>$email_id,"status"=>$status,"id"=>$id,"user_role"=>$user_role,);
 					//$this->session->userdata($user_name);
 					$session_data=$this->session->set_userdata($datas);
-
+                       $datas['users'] = $this->loginmodel->get_tlt_no_user();
+						 $datas['events'] = $this->loginmodel->get_tlt_no_events();
+						 $datas['org_events'] = $this->loginmodel->get_tlt_no_orgevents();
+						 $datas['booking'] = $this->loginmodel->get_tlt_no_booking();
 					$this->load->view('header',$datas);
 					$this->load->view('home',$datas);
 					$this->load->view('footer');
@@ -116,11 +123,11 @@ public function dashboard()
 	 $user_role=$this->session->userdata('user_role');
 	 $datas['result'] = $this->loginmodel->getuser($user_id);
 
-	 $datas['users'] = $this->loginmodel->get_tlt_no_user($user_id);
+	 $datas['users'] = $this->loginmodel->get_tlt_no_user();
 	 $datas['events'] = $this->loginmodel->get_tlt_no_events();
 	 $datas['org_events'] = $this->loginmodel->get_tlt_no_orgevents();
 	 $datas['booking'] = $this->loginmodel->get_tlt_no_booking();
-
+        //print_r( $datas['users']);exit;
 	 if($user_role==1){
 		$this->load->view('header',$datas);
 		$this->load->view('home',$datas);
