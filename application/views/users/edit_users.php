@@ -96,12 +96,11 @@
                             </div>
                         </div>
                         <div class="form-group row">
-
                             <label for="Venue" class="col-sm-2 col-form-label">DOB</label>
                             <div class="col-sm-4">
                               <div class="input-group">
-                                <input type="text" class="form-control" name="dob" id="datepicker-autoclose" value="<?php $date=date_create($res->birthdate);
-                                   echo date_format($date,"m/d/Y");  ?>">
+                          <input type="text" class="form-control" name="dob" id="datepicker-autoclose" value="<?php $date=date_create($res->birthdate);
+                                   echo date_format($date,"m-d-Y");  ?>">
                                 <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
                             </div>
                             </div>
@@ -268,7 +267,6 @@
 <script type="text/javascript">
   function check(){
           var sname = document.getElementById("staname").value;
-
           if(sname=="Select State")
           {
             //$("#st").html('<p style="color:red;">Select State</p>').show();

@@ -1,18 +1,4 @@
-<?php
-  function get_times( $default = '10:00', $interval = '+15 minutes' ) 
-	{
-		$output = '';
-		$current = strtotime( '00:00:00' );
-		$end = strtotime( '23:59:00' );
-		while( $current <= $end ) {
-			$time = date( 'H:i:s', $current );
-			$sel = ( $time == $default ) ? ' selected' : '';
-			$output .= "<option value=\"{$time}\">" . date( 'h.i A', $current ) .'</option>';
-			$current = strtotime( $interval, $current );
-		}
-		return $output;
-    }
-?>
+
 <script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
 <link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
 <style type="text/css">
@@ -176,7 +162,6 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                           
                             <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
                             <div class="col-sm-4">
 
@@ -285,7 +270,7 @@
                                 <script language="JavaScript">document.eventform.colour_scheme.value="<?php echo $rows->event_colour_scheme; ?>";</script>
                             </div>
 
-                             <label for="Status" class="col-sm-2 col-form-label">Event Display</label>
+                             <label for="Status" class="col-sm-2 col-form-label">Event Approval</label>
                             <div class="col-sm-4">
                                <select class="form-control" required="" name="event_status">
                                     <option value="">Select Status</option>

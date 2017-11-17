@@ -161,20 +161,15 @@
                         </div>
 
                         <div class="form-group row">
-                           
                             <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
                             <div class="col-sm-4">
-
                                <input  type="text" class="form-control" id="stime" name="start_time">
-
                                 <!-- select name="start_time" required="" class="form-control"  >
                                      <option value="">Select Start Time</option>
                                      <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
                                 </select>
                                 <script language="JavaScript">document.eventform.start_time.value="<?php echo $rows->start_time; ?>";</script-->
-
                             </div>
-
                              <label for="etime" class="col-sm-2 col-form-label">End Time</label>
                             <div class="col-sm-4">
                               <input  type="text" class="form-control" id="etime" name="end_time" >
@@ -184,8 +179,8 @@
                                 </select>
                                  <script language="JavaScript">document.eventform.end_time.value="<?php echo $rows->end_time; ?>";</script-->
                             </div>
-
                         </div>
+
                           <div class="form-group row">
                              <label for="latitude" class="col-sm-2 col-form-label">Select</label>
                             <div id="dvMap" style="width:500px; height:350px"> </div>
@@ -274,7 +269,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="Status" class="col-sm-2 col-form-label">Event Display</label>
+                            <label for="Status" class="col-sm-2 col-form-label">Event Approval</label>
                             <div class="col-sm-4">
                                <select class="form-control"  name="event_status">
                                     <option value="">Select Status</option>

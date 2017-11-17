@@ -19,7 +19,8 @@
          border-radius: 30px;
        }
 </style>
-
+<script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
+<link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
 <!-- Start content -->
 <div class="content-page">
 <div class="content">
@@ -82,26 +83,46 @@
                             </div>
                             </div>
                         </div>
-                        <div class="form-group row">
+                          
+                          <div class="form-group row">
+                            <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
+                            <div class="col-sm-4">
+                               <input  type="text" class="form-control" id="stime" name="start_time">
+                                <!-- select name="start_time" required="" class="form-control"  >
+                                     <option value="">Select Start Time</option>
+                                     <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
+                                </select>
+                                <script language="JavaScript">document.eventform.start_time.value="<?php echo $rows->start_time; ?>";</script-->
+                            </div>
+                             <label for="etime" class="col-sm-2 col-form-label">End Time</label>
+                            <div class="col-sm-4">
+                              <input  type="text" class="form-control" id="etime" name="end_time" >
+                                <!--select name="end_time" required="" class="form-control" id="etime">
+                                     <option value="">Select End Time</option>
+                                     <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
+                                </select>
+                                 <script language="JavaScript">document.eventform.end_time.value="<?php echo $rows->end_time; ?>";</script-->
+                            </div>
+                        </div>
 
+                        <!--div class="form-group row">
                              <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
                             <div class="col-sm-4">
                                 <select name="start_time"  id="stime" class="form-control" >
                                      <option value="">Select Start Time</option>
                             <option value=""><?php echo get_times(); ?></option>
                         </select>
-
                             </div>
-
                              <label for="etime" class="col-sm-2 col-form-label">End Time</label>
                             <div class="col-sm-4">
-                                <select name="end_time" id="etime" class="form-control" >
-                                     <option value="">Select End Time</option>
-                            <option value=""><?php echo get_times(); ?></option>
-                        </select>
+                                  <select name="end_time" id="etime" class="form-control" >
+                                    <option value="">Select End Time</option>
+                                    <option value=""><?php echo get_times(); ?></option>
+                                  </select>
                             </div>
+                        </div-->
 
-                        </div>
+
                         <div class="form-group row">
                              <label for="ecost" class="col-sm-2 col-form-label">Plans</label>
                             <div class="col-sm-4">
@@ -208,7 +229,8 @@
 </div>
 <!-- content -->
 <script type="text/javascript">
-
+  $('#stime').timepicki();
+  $('#etime').timepicki();
 function confirmGetMessage(adid)
   {
     var r=confirm("Do you want to delete this?")
@@ -267,44 +289,53 @@ function confirmGetMessage(adid)
 
       var fdate = document.getElementById("datepicker-autoclose").value;
       var tdate = document.getElementById("datepicker").value;
+
        //alert(fdate);alert(tdate);
       var chunks = fdate.split('-');
       var formattedDate = chunks[1]+'/'+chunks[0]+'/'+chunks[2];
        //alert(formattedDate);
       var chunks1 = tdate.split('-');
       var formattedDate1 = chunks1[1]+'/'+chunks1[0]+'/'+chunks1[2];
-
       //alert(formattedDate1);
       //alert( Date.parse(formattedDate));
       //alert( Date.parse(formattedDate1));
-
       if(Date.parse(formattedDate) > Date.parse(formattedDate1) )
       {
        alert("Startdate should be less than Enddate");
        return false;
       }
 
-       if(Date.parse(formattedDate)==Date.parse(formattedDate1) )
+      if(Date.parse(formattedDate)==Date.parse(formattedDate1) )
       {
-       
-       var strStartTime = document.getElementById("stime").value;
-       var strEndTime = document.getElementById("etime").value;
+      
+        var strStartTime = document.getElementById("stime").value;
+        var strEndTime = document.getElementById("etime").value;
 
         var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
         var endTime = new Date(startTime)
         endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+         
+        //var timefrom = date1;
+         temp =strStartTime.split(":");
+         var a = temp[0];
+         var b = temp[1];
+         temp1 =b.split(" ");
+         var c = temp1[1]
+       
+        if(a==12 && c=='AM'){
         
-        if (startTime > endTime) {
-        alert("Start Time is greater than end time");
-         return false; }
-  
+        }else if (startTime > endTime){
+          alert("Start Time is greater than end time");
+          return false;
+        }
     }else{
-        var date1 = new Date(fdate);
-      var date2 = new Date(tdate);
+      var date1 = new Date(formattedDate);
+      var date2 = new Date(formattedDate1);
+
       var strStartTime = document.getElementById("stime").value;
       var strEndTime = document.getElementById("etime").value;
-       var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
-       var endTime = new Date(startTime);
+      var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+      var endTime = new Date(startTime);
        endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
       var a=formattedDate + '' + strStartTime;
       var b=formattedDate1 + '' + strEndTime;
@@ -314,8 +345,7 @@ function confirmGetMessage(adid)
       return false;
       }
     }
-
-      function GetHours(d)
+      function GetHours(d) 
       {
         var h = parseInt(d.split(':')[0]);
         if (d.split(':')[1].split(' ')[1] == "PM") {
@@ -323,7 +353,7 @@ function confirmGetMessage(adid)
       }
       return h;
       }
-      function GetMinutes(d)
+      function GetMinutes(d) 
       {
        return parseInt(d.split(':')[1].split(' ')[0]);
       }

@@ -217,7 +217,7 @@
 
                         <div class="form-group row">
                             
-                            <label for="Status" class="col-sm-2 col-form-label">Event Display : </label>
+                            <label for="Status" class="col-sm-2 col-form-label">Event Approval : </label>
                             <div class="col-sm-4">
                                  <h4 class="header-title"> <?php $es=$rows->event_status ; if($es=='Y'){ echo "Yes";}else{ echo "No"; } ?> </h4>
                             </div>
