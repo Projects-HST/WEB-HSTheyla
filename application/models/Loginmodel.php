@@ -80,11 +80,17 @@ Class Loginmodel extends CI_Model
 
          function get_tlt_no_booking()
          {
-          $query="SELECT COUNT(*) AS booking FROM booking_history";
+           $query="SELECT COUNT(*) AS booking FROM booking_history";
            $resultset=$this->db->query($query);
            return $resultset->result();
          }
-
+        
+        function get_tlt_no_reviews()
+        {
+          $rev="SELECT COUNT(*) AS reviews FROM event_reviews WHERE status='N'";
+          $rev1=$this->db->query($rev);
+          return $rev1->result();
+        }
      //--------------------------------------------------------------------------
 
    function getuser($user_id){

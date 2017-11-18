@@ -126,6 +126,18 @@
                       </div>
                   </div></a>
               </div>
+              <div class="col-md-6 col-lg-6 col-xl-3">
+                 <a href="<?php echo base_url();?>reviews/view_reviews" class="test">
+                  <div class="mini-stat clearfix bg-primary">
+                      <span class="mini-stat-icon"><i class="mdi mdi-currency-btc"></i></span>
+                      <div class="mini-stat-info text-right text-white">
+                          <span class="counter"><?php foreach ($reviews as $res) {
+                            echo $res->reviews;
+                          } ?></span>
+                          Pending Reviews
+                      </div>
+                  </div></a>
+              </div>
           </div>
       </div><!-- container -->
 

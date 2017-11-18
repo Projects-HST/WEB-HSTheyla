@@ -1,4 +1,10 @@
-<div class="container" style="margin-top:30px;margin-bottom:50px;max-width:100%;">
+<style type="text/css">
+  .btn btn-secondary buttons-copy buttons-html5
+  {
+    display: none;
+  }
+</style>
+    <div class="container" style="margin-top:30px;margin-bottom:50px;max-width:100%;">
       <div class="row row-offcanvas row-offcanvas-right">
         <div class="col-12 col-md-3 sidebar-offcanvas" id="sidebar">
           <div class="list-group">

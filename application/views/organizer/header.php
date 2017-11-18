@@ -7,9 +7,9 @@
     <meta name="author" content="">
     <meta name="theme-color" content="#999999" />
     <title>HEYLA</title>
-
+    
     <!-- Bootstrap core CSS -->
-   <link href="<?php echo base_url(); ?>assets/front/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/front/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/front/css/style.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
