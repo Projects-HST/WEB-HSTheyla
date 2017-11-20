@@ -58,7 +58,7 @@
          </button>
          </li>
          <li class="hide-phone list-inline-item app-search">
-         <h3 class="page-title">Edit  Advertisement Details</h3>
+         <h3 class="page-title">Edit Advertisement Details</h3>
          </li>
          </ul>
          <div class="clearfix"></div>

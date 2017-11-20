@@ -79,6 +79,7 @@
                             <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
                         <thead>
                         <tr>
+                         
                             <th>Event Name</th>
                             <!--th>Event Category</th-->
                             <th>Event City</th>
@@ -95,6 +96,7 @@
                           if($adv_sts=='Y'){
                              ?>
                         <tr>
+                         
                             <td><?php echo $rows->event_name ; ?></td>
                             <!--td><?php //echo $rows->category_name ; ?></td-->
                             <td><?php echo $rows->city_name ; ?></td>
@@ -123,7 +125,7 @@
 
                             </td>
                         </tr>
-                       <?php } } ?>
+                       <?php }  } ?>
                         </tbody>
                     </table>
                         </div>

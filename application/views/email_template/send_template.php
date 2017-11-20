@@ -137,7 +137,7 @@
                         <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                       <thead>
                         <tr>
-                          <th>S.NO</th>
+                          <th>S.No</th>
                           <th>#</th>
                           <th>Email</th>
                         </tr>

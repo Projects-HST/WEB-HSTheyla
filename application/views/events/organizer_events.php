@@ -77,7 +77,7 @@
                         <div class="tab-pane active p-3" id="home-1" role="tabpanel"-->
                             <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
                         <thead>
-                        <tr>
+                        <tr> <th>S.No</th>
                             <th>Event Name</th>
                             <!--th>Event Category</th-->
                             <th>Event City</th>
@@ -86,12 +86,15 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach($org as $rows){
+                        <?php 
+                        $i=1;
+                         foreach($org as $rows){
                            $eid=$rows->id;
                            $etype=$rows->event_type;
                            $eid=$rows->id;
                              ?>
                         <tr>
+                          <td><?php  echo $i; ?></td>
                             <td><?php echo $rows->event_name ; ?></td>
                             <!--td><?php //echo $rows->category_name ; ?></td-->
                             <td><?php echo $rows->city_name ; ?></td>
@@ -109,7 +112,7 @@
 
                             </td>
                         </tr>
-                       <?php }  ?>
+                       <?php  $i++; }  ?>
                         </tbody>
                     </table>
                  

@@ -60,13 +60,13 @@
                 <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>users/add_user_details" name="usersform" id="usersform" onSubmit='return check();'>
                        
                         <div class="form-group row">
-                            <label for="Category" class="col-sm-2 col-form-label">User Name</label>
+                            <label for="Category" class="col-sm-2 col-form-label">User Id / Name</label>
                             <div class="col-sm-4">
                                 <input class="form-control" type="text" id="ufun" name="username" onkeyup="checkusernamefun(this.value)">
                                 <p id="msg2"> </p>
                             </div>
                         
-                        <label for="Category" class="col-sm-2 col-form-label">Name</label>
+                        <label for="Category" class="col-sm-2 col-form-label">Full Name</label>
                             <div class="col-sm-4">
                                 <input class="form-control" type="text" name="name">
                             </div>

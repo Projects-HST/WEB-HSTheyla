@@ -141,11 +141,11 @@
                         <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
-							     <th>S.NO</th>
+							                   <th>S.No</th>
                                  <th>Country Name</th>
                                  <th>State Name</th>
                                  <th>City Name</th>
-                                 <th>Event Status</th>
+                                 <th>Status</th>
                                  <th>Action</th>
                               </tr>
                            </thead>
@@ -153,14 +153,13 @@
 						        <?php
                                 $i=1;
                                 foreach($result as $rows) {
-								  $status=$rows->event_status;
+								                $status=$rows->event_status;
                                 ?>
                               <tr>
                                  <td><?php  echo $i; ?></td>
                                  <td><?php  echo $rows->country_name; ?></td>
                                  <td><?php  echo $rows->state_name; ?></td>
                                  <td><?php  echo $rows->city_name; ?></td>
-                               
                                  <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
 								         <td><a href="<?php echo base_url();?>city/edit_city/<?php echo $rows->id;?>"><img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a></td>
                               </tr>

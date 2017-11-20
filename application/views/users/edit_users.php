@@ -61,7 +61,7 @@
                   <?php foreach($users_view AS $res){ }?>
                         <div class="form-group row">
 
-                          <label for="Category" class="col-sm-2 col-form-label">User Name</label>
+                          <label for="Category" class="col-sm-2 col-form-label">User Id / Name</label>
                             <div class="col-sm-4">
                             <input class="form-control" type="text" name="username" value="<?php echo $res->user_name; ?>" onkeyup="checkusernamefun(this.value)">
                             <input class="form-control" type="hidden" name="umid" value="<?php echo $res->user_id; ?>">
@@ -69,7 +69,7 @@
                             </div>
                       </div>
                            <div class="form-group row">
-                            <label for="Category" class="col-sm-2 col-form-label">Name</label>
+                            <label for="Category" class="col-sm-2 col-form-label">Full Name</label>
                             <div class="col-sm-4">
                           <input class="form-control" type="text" name="name" value="<?php echo $res->name; ?>">
                           <input class="form-control" type="hidden" name="uid" value="<?php echo $res->id; ?>">

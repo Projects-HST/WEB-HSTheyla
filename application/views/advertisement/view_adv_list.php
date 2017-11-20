@@ -63,7 +63,7 @@
                             <table  id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                         <tr>
-                           <th>S.NO</th>
+                            <th>S.No</th>
                             <th>Event Name</th>
                             <th>Event Category</th>
                             <th>Event City</th>
@@ -71,7 +71,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php $i=1;
+                        <?php 
+                          $i=1;
                            foreach($result as $rows){ 
                            $eid=$rows->id;
                            $adv_sts=$rows->adv_status;
@@ -89,21 +90,13 @@
 
                              <a href="<?php echo base_url();?>events/view_single_events/<?php echo base64_encode($rows->id);?>">
                               <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a>
-
-                              <!--a onclick="confirmGetMessage(<?php echo $eid;?>)" >   
-                              <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
-
                               <?php if($etype=='Paid'){?>
                               <a href="<?php echo base_url();?>advertisement/add_advertisement_details/<?php echo $rows->id;?>/<?php echo $rows->category_id;?>">
                               <img title="Add Advertisement Details" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
-                              <?php $i++; } ?>
-
-                              <!--a href="<?php echo base_url();?>events/add_events_gallery/<?php echo $rows->id;?>">   
-                              <img title="Add Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/></a-->
-
+                              <?php  } ?>
                             </td>
                         </tr>
-                       <?php } } ?>
+                       <?php $i++; }   } ?>
                         </tbody>
                     </table>
                         </div>

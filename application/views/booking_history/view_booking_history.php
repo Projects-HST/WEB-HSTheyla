@@ -57,13 +57,12 @@
                         <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
-							            <th>S.NO</th>
+							                   <th>S.No</th>
                                  <th>Event Name</th>
                                  <th>Plan</th>
                                  <th>Show Date & Time</th>
                                  <th>Seats</th>
                                  <th>Booking Date</th>
-                                 
                                  <th>Amount</th>
                                  <!--th>Status</th-->
                                  <th>Action</th>

@@ -58,7 +58,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach($result as $rows){ 
+                        <?php
+                        foreach($result as $rows){ 
                            $adv_sts=$rows->adv_status;
                           if($adv_sts=='Y'){ ?>
                         <tr>

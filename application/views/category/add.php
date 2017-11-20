@@ -85,7 +85,7 @@
                               <label class="col-sm-4 col-form-label">Status</label>
                               <div class="col-sm-6">
                                  <select class="form-control" name="eventsts">
-                                    <option value="">Event Status</option>
+                                    <option value="">Select Status</option>
                                     <option value="Y">Yes</option>
                                     <option value="N">No</option>
                                  </select>
@@ -151,10 +151,10 @@
                         <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
-                                 <th>S.NO</th>
+                                 <th>S.No</th>
                                  <th>Category Name</th>
                                  <th>Category Picture</th>
-                                 <th>Event Status</th>
+                                 <th>Status</th>
                                  <th>Action</th>
                               </tr>
                            </thead>

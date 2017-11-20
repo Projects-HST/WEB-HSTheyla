@@ -173,7 +173,7 @@
                         <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
-							                   <th>S.NO</th>
+							                   <th>S.No</th>
                                  <th>Event Name</th>
                                  <th>Category Name</th>
                                  <th>From Date</th>
@@ -181,7 +181,7 @@
                                  <th>From Time</th>
                                  <th>To Time</th>
                                  <th>Plan Name</th>
-                                <th>Status</th>
+                                 <th>Status</th>
                                  <th>Action</th>
                               </tr>
                            </thead>

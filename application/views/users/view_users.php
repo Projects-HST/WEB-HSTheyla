@@ -63,9 +63,9 @@
                             <table  id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                         <tr>
-                            <th>S.NO</th>
-                            <th>UserName</th>
-                            <th>Name</th>
+                            <th>S.No</th>
+                            <th>User Id / Name</th>
+                            <th>Full Name</th>
                             <th>City</th>
                             <th>Points</th>
                             <th>Promo</th>
