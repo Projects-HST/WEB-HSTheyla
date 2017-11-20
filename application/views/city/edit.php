@@ -1,7 +1,7 @@
-<!-- Start content -->
+<!-- Start content ->
 <div class="content-page">
 <div class="content">
-   <!-- Top Bar Start -->
+   <!-- Top Bar Start ->
    <div class="topbar">
       <nav class="navbar-custom">
          <ul class="list-inline float-right mb-0">
@@ -12,7 +12,7 @@
                <span class="badge badge-success noti-icon-badge">3</span>
                </a>
           
-            </li!-->
+            </li!->
             <li class="list-inline-item dropdown notification-list">
             <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
                aria-haspopup="false" aria-expanded="false">
@@ -21,7 +21,7 @@
             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
             <!--a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
             <a class="dropdown-item" href="#"><span class="badge badge-success pull-right">5</span><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
-            <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a!-->
+            <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a!->
             <a class="dropdown-item" href="<?php echo base_url(); ?>adminlogin/logout"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
             </div>
             </li>
@@ -38,16 +38,15 @@
          </ul>
          <div class="clearfix"></div>
       </nav>
-	  
       </div>
-      <!-- Top Bar End -->
+      < Top Bar End -->
       <div class="page-content-wrapper">
          <div class="container">
             <div class="row">
                <div class="col-lg-8">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title"></h4>
+                        <h4 class="mt-0 header-title"> Edit City </h4>
                         <?php foreach($edit as $res){ }?>
                         <form class="" method="post" action="<?php echo base_url();?>city/update_city" id="cityform" name="cityform" onSubmit='return check();'>
                            

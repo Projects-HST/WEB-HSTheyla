@@ -172,7 +172,7 @@ class Organizer extends CI_Controller
 	 
 	 public function updateevents($id)
 	 {
-		
+		$id = base64_decode($id);
 	 	$datas = $this->session->userdata();
 	    $user_id = $this->session->userdata('id');
 	    $user_role = $this->session->userdata('user_role');

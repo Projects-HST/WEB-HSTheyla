@@ -4,10 +4,10 @@
    border-radius: 30px;
    }
 </style>
-<!-- Start content -->
+<!-- Start content >
 <div class="content-page">
    <div class="content">
-      <!-- Top Bar Start -->
+      <!-- Top Bar Start >
       <div class="topbar">
          <nav class="navbar-custom">
             <ul class="list-inline float-right mb-0">
@@ -16,7 +16,7 @@
                   <i class="ion-ios7-bell noti-icon"></i>
                   <span class="badge badge-success noti-icon-badge">3</span>
                   </a>
-               </li!-->
+               </li!->
                <li class="list-inline-item dropdown notification-list">
                   <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                   <img src="<?php echo base_url(); ?>assets/images/admin/admin.png" alt="user" class="rounded-circle">
@@ -24,7 +24,7 @@
                   <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                      <!--a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
                      <a class="dropdown-item" href="#"><span class="badge badge-success pull-right">5</span><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
-                     <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a!-->
+                     <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a!->
                      <a class="dropdown-item" href="<?php echo base_url(); ?>adminlogin/logout"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
                   </div>
                </li>
@@ -49,7 +49,7 @@
                <div class="col-lg-8">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title"></h4>
+                        <h4 class="mt-0 header-title"> Add Category </h4>
                         <form method="post" action="<?php echo base_url();?>category/add_category" name="categoryform" enctype="multipart/form-data" id="categoryform">
                            <div class="form-group row">
                               <label for="example-text-input" class="col-sm-4 col-form-label">Category Name</label>

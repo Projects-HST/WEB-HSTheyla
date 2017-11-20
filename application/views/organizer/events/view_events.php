@@ -54,18 +54,21 @@
                             <th>Event Name</th>
                             <th>Event Category</th>
                             <th>Event City</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         <?php foreach($result as $rows){ 
                            $adv_sts=$rows->adv_status;
+                           $status=$rows->event_status;
                           if($adv_sts=='Y'){ ?>
                         <tr>
                             <td><?php echo $rows->event_name ; ?></td>
                             <td><?php echo $rows->category_name ; ?></td>
                             <td><?php echo $rows->city_name ; ?></td>
-                            <td><a href="<?php echo base_url();?>organizer/updateevents/<?php echo $rows->id;?>"><i class="fa fa-pencil-square-o"></a></td>
+                             <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
+                            <td><a href="<?php echo base_url();?>organizer/updateevents/<?php echo base64_encode($rows->id);?>"><img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a></td>
                         </tr>
                        <?php } } ?>
                         </tbody>
@@ -79,18 +82,21 @@
                             <th>Event Name</th>
                             <th>Event Category</th>
                             <th>Event City</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         <?php foreach($result as $rows){ 
                            $hotspot_sts=$rows->hotspot_status;
+                           $status=$rows->event_status;
                           if($hotspot_sts=='Y'){ ?>
                         <tr>
                             <td><?php echo $rows->event_name ; ?></td>
                             <td><?php echo $rows->category_name ; ?></td>
                             <td><?php echo $rows->city_name ; ?></td>
-                            <td><a href="<?php echo base_url();?>organizer/updateevents/<?php echo $rows->id;?>"><i class="fa fa-pencil-square-o"></a></td>
+                             <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
+                            <td><a href="<?php echo base_url();?>organizer/updateevents/<?php echo base64_encode($rows->id);?>"><img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a></td>
                         </tr>
                        <?php } }  ?>
                         </tbody>
@@ -104,6 +110,7 @@
                             <th>Event Name</th>
                             <th>Event Category</th>
                             <th>Event City</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -111,13 +118,15 @@
                         <?php foreach($result as $rows){
                            $adv_sts=$rows->adv_status;
                            $hotspot_sts=$rows->hotspot_status;
+                           $status=$rows->event_status;
                           if($hotspot_sts=='N' && $adv_sts=='N'){ 
                            ?>
                         <tr>
                             <td><?php echo $rows->event_name ; ?></td>
                             <td><?php echo $rows->category_name ; ?></td>
                             <td><?php echo $rows->city_name ; ?></td>
-                            <td><a href="<?php echo base_url();?>organizer/updateevents/<?php echo $rows->id;?>"><i class="fa fa-pencil-square-o"></a></td>
+                             <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
+                            <td><a href="<?php echo base_url();?>organizer/updateevents/<?php echo base64_encode($rows->id);?>"><img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a></td>
                         </tr>
                        <?php } }  ?>
                         </tbody>

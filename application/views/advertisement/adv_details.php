@@ -21,10 +21,10 @@
 </style>
 <script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
 <link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
-<!-- Start content -->
+<!-- Start content ->
 <div class="content-page">
 <div class="content">
-   <!-- Top Bar Start -->
+   <!- Top Bar Start ->
    <div class="topbar">
       <nav class="navbar-custom">
          <ul class="list-inline float-right mb-0">
@@ -52,7 +52,7 @@
          <div class="clearfix"></div>
       </nav>
       </div>
-      <!-- Top Bar End -->
+      <!- Top Bar End -->
       <div class="page-content-wrapper">
          <div class="container">
 
@@ -60,7 +60,7 @@
                <div class="col-lg-12">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title"></h4>
+                        <h4 class="mt-0 header-title"> Add  Advertisement Details </h4>
                         <form  method="post" action="<?php echo base_url();?>advertisement/add_adv_history" name="advertisementform" id="aform" enctype="multipart/form-data" onSubmit='return check();'>
                          <?php //echo $event_id;   echo $category_id;?>
                        <div class="form-group row">

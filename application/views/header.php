@@ -55,15 +55,15 @@
     </div>
 
     <div class="sidebar-inner slimscrollleft">
-        <div class="user-details">
-            <div class="text-center">
+        <!--div class="user-details">
+            <!--div class="text-center">
                 <img src="<?php echo base_url(); ?>assets/images/admin/admin.png" alt="" class="rounded-circle">
-            </div>
-            <div class="user-info">
+            </div-->
+            <!--div class="user-info">
                 <h4 class="font-16">Admin</h4>
-                <!--span class="text-muted user-status"><i class="fa fa-dot-circle-o text-success"></i> Online</span-->
-            </div>
-        </div>
+                <!--span class="text-muted user-status"><i class="fa fa-dot-circle-o text-success"></i> Online</span->
+            </div->
+        </div-->
 
         <div id="sidebar-menu">
             <ul>
@@ -75,7 +75,7 @@
                 </li>
 
                 <li class="has_sub" id="master">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-buffer"></i> <span> Masters </span> </a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-apps"></i> <span> Masters </span> </a>
                     <ul class="list-unstyled">
                         <li id="country"><a href="<?php echo base_url();?>country/home">Country</a></li>
                         <li id="state"><a href="<?php echo base_url();?>state/home">State</a></li>
@@ -86,7 +86,8 @@
                 </li>
 
                 <li class="has_sub" id="events">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-cube-outline"></i> <span>Events</span> </a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-star" aria-hidden="true"></i>
+                    <span>Events</span> </a>
                     <ul class="list-unstyled">
                         <li id="adevents"><a href="<?php echo base_url();?>events/home">Add Events</a></li>
                         <li id="vieweve"><a href="<?php echo base_url();?>events/view_events">View Events</a></li>
@@ -95,7 +96,7 @@
                 </li>
 
                 <li class="has_sub" id="advertisement">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-album"></i> <span> Event Advertisement</span> </a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-calendar-clock"></i> <span> Event Advertisement</span> </a>
                     <ul class="list-unstyled">
                         <li id="plan"><a href="<?php echo base_url();?>advertisement/home"> Add Plan</a></li>
                         <li id="list"><a href="<?php echo base_url();?>advertisement/view_adv_plan">Review</a></li>
@@ -104,7 +105,7 @@
                 </li>
 
                 <li class="has_sub" id="event_revies">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-clipboard-outline"></i><span> Event Reviews   </span></a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="ti-write"></i><span> Event Reviews   </span></a>
                     <ul class="list-unstyled">
                         <li><a href="<?php echo base_url();?>reviews/view_reviews">Unread </a></li>
                         <li><a href="<?php echo base_url();?>reviews/archive_reviews">Archived </a></li>
@@ -112,7 +113,7 @@
                 </li>
 
                 <li class="has_sub" id="booking">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-chart-line"></i><span> Booking </span></a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-calendar-check-o" aria-hidden="true"></i><span> Booking </span></a>
                     <ul class="list-unstyled">
                         <li><a href="<?php echo base_url();?>bookinghistory/process_details">Process</a></li>
                         <li><a href="<?php echo base_url();?>bookinghistory/status_details">Status</a></li>
@@ -121,7 +122,8 @@
                 </li>
 
                 <li class="has_sub" id="users">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-format-list-bulleted-type"></i><span> User Management</span></a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-users" aria-hidden="true"></i>
+                <span> User Management</span></a>
                     <ul class="list-unstyled">
                         <li id="createuser"><a href="<?php echo base_url();?>users/home">New User</a></li>
                         <li id="viewuser"><a href="<?php echo base_url();?>users/view">View User Information</a></li>
@@ -132,7 +134,8 @@
                 </li>
 
                 <li class="has_sub" id="email">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-google-maps"></i><span> Newsletter </span></a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-envelope" aria-hidden="true"></i>
+<span> Newsletter </span></a>
                     <ul class="list-unstyled">
                         <li id="newsletter"><a href="<?php echo base_url();?>emailtemplate/home"> Newsletter Template</a></li>
                         <li id="sendemail"><a href="<?php echo base_url();?>emailtemplate/select_users"> Send Newsletter </a></li>
@@ -145,3 +148,68 @@
     </div> <!-- end sidebarinner -->
 </div>
 <!-- Left Sidebar End -->
+
+<!-- Start right Content here -->
+<div class="content-page">
+<!-- Start content -->
+<div class="content">
+
+  <!-- Top Bar Start -->
+  <div class="topbar">
+<nav class="navbar-custom">
+  <ul class="list-inline float-right mb-0">
+  <!--li class="list-inline-item dropdown notification-list">
+      <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
+         aria-haspopup="false" aria-expanded="false">
+          <i class="ion-ios7-bell noti-icon"></i>
+          <span class="badge badge-success noti-icon-badge">3</span>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-menu-lg">
+          <div class="dropdown-item noti-title">
+              <h5><span class="badge badge-danger float-right">87</span>Notification</h5>
+          </div>
+          <a href="javascript:void(0);" class="dropdown-item notify-item">
+              <div class="notify-icon bg-primary"><i class="mdi mdi-cart-outline"></i></div>
+              <p class="notify-details"><b>Your order is placed</b><small class="text-muted">Dummy text of the printing and typesetting industry.</small></p>
+          </a>
+          <a href="javascript:void(0);" class="dropdown-item notify-item">
+              <div class="notify-icon bg-primary"><i class="mdi mdi-message"></i></div>
+              <p class="notify-details"><b>New Message received</b><small class="text-muted">You have 87 unread messages</small></p>
+          </a>
+          <a href="javascript:void(0);" class="dropdown-item notify-item">
+              <div class="notify-icon bg-primary"><i class="mdi mdi-martini"></i></div>
+              <p class="notify-details"><b>Your item is shipped</b><small class="text-muted">It is a long established fact that a reader will</small></p>
+          </a>
+          <a href="javascript:void(0);" class="dropdown-item notify-item">
+              View All
+          </a>
+      </div>
+   </li!-->
+              <li class="list-inline-item dropdown notification-list">
+                  <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" href="<?php echo base_url(); ?>adminlogin/logout">
+                     Logout
+                  </a>
+                  <!--div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                      <!-a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
+                      <a class="dropdown-item" href="#"><span class="badge badge-success pull-right">5</span><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
+                      <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a!->
+                      <a class="dropdown-item" href="<?php echo base_url(); ?>adminlogin/logout"><i class="fa fa-cogs "></i>Logout</a>
+                  </div-->
+              </li>
+          </ul>
+
+          <ul class="list-inline menu-left mb-0">
+            <li class="list-inline-item">
+              <button type="button" class="button-menu-mobile open-left waves-effect">
+                <i class="ion-navicon"></i>
+              </button>
+            </li>
+            <li class="hide-phone list-inline-item app-search">
+                <h3 class="page-title"> Welcome To Admin</h3>
+            </li>
+          </ul>
+
+          <div class="clearfix"></div>
+      </nav>
+  </div>
+  <!-- Top Bar End -->

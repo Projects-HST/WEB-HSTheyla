@@ -306,6 +306,7 @@ return $output;
 
    $('#stime').timepicki();
    $('#etime').timepicki();
+   
 window.onload = function () {
 var mapOptions = {
     center: new google.maps.LatLng(20.5937, 78.9629),

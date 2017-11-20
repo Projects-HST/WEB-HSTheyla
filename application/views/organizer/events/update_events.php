@@ -140,7 +140,7 @@
                             <label for="sdate" class="col-sm-2 col-form-label">Start Date</label>
                             <div class="col-sm-4">
                               <div class="input-group">
-                                <input type="text" class="form-control" value="<?php $date=date_create($rows->start_date);echo date_format($date,"m/d/Y");  ?>" name="start_date" id="datepicker-autoclose">
+                                <input type="text" class="form-control" value="<?php $date=date_create($rows->start_date);echo date_format($date,"d-m-Y");  ?>" name="start_date" id="datepicker-autoclose">
                                 <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
                             </div>
                             </div>
@@ -148,7 +148,7 @@
                              <label for="edate" class="col-sm-2 col-form-label">End Date</label>
                             <div class="col-sm-4">
                                <div class="input-group">
-                                <input type="text" class="form-control" required="" value="<?php $date=date_create($rows->end_date);echo date_format($date,"m/d/Y");  ?>" name="end_date" id="datepicker">
+                                <input type="text" class="form-control" required="" value="<?php $date=date_create($rows->end_date);echo date_format($date,"d-m-Y");  ?>" name="end_date" id="datepicker">
                                 <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
                             </div>
                             </div>
@@ -204,10 +204,10 @@
 
 
                         <div class="form-group row">
-                             <label for="latitude" class="col-sm-2 col-form-label">Select</label>
-                            <div id="dvMap" style="width:300px; height:250px"> </div>
+                 <label for="latitude" class="col-sm-2 col-form-label">Select</label>
+                <div id="dvMap" style="width:300px; height:250px"> </div>
 
-                          </div>
+              </div>
                         <div class="form-group row">
                            
                             <label for="latitude" class="col-sm-2 col-form-label">Event Latitude</label>
@@ -295,7 +295,7 @@
 
                         <div class="form-group row">
                             
-                            <label for="Status" class="col-sm-2 col-form-label">Event Display</label>
+                            <!--label for="Status" class="col-sm-2 col-form-label">Event Display</label>
                             <div class="col-sm-4">
                                <select class="form-control" required="" name="event_status">
                                     <option value="">Select Status</option>
@@ -303,7 +303,7 @@
                                     <option value="N">No</option>
                                 </select>
                                 <script language="JavaScript">document.eventform.event_status.value="<?php echo $rows->event_status; ?>";</script>
-                            </div>
+                            </div-->
 
                             <label class="col-sm-2 col-form-label">Event Banner</label>
                               <div class="col-sm-4">
@@ -340,35 +340,42 @@
       </div><!--/row-->
  </div>
 
-      
-
-
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByz7sU142AeFwpK3KiFilK0IOoa2GU9tw"></script>
 
+
 <script type="text/javascript">
+
    $('#stime').timepicki();
    $('#etime').timepicki();
-     window.onload = function () {
-    var mapOptions = {
-                center: new google.maps.LatLng(20.5937, 78.9629),
-                zoom:4,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-            var infoWindow = new google.maps.InfoWindow();
-            var latlngbounds = new google.maps.LatLngBounds();
-            var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
-            google.maps.event.addListener(map, 'click', function (e) 
-            {
-             var la=e.latLng.lat();
-             var lo=e.latLng.lng();
-             document.getElementById("latu").value=la;
-             document.getElementById("lon").value=lo;
-             //alert(la); alert(lo);
-            //alert("Latitude: " + e.latLng.lat() + "\r\nLongitude: " + e.latLng.lng());
-            });
- }
+
+   
+    window.onload = function () {
+var mapOptions = {
+    center: new google.maps.LatLng(20.5937, 78.9629),
+    zoom:4,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+};
+var infoWindow = new google.maps.InfoWindow();
+var latlngbounds = new google.maps.LatLngBounds();
+var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+google.maps.event.addListener(map, 'click', function (e) 
+{
+ var la=e.latLng.lat();
+ var lo=e.latLng.lng();
+ document.getElementById("latu").value=la;
+ document.getElementById("lon").value=lo;
+ //alert(la); alert(lo);
+//alert("Latitude: " + e.latLng.lat() + "\r\nLongitude: " + e.latLng.lng());
+});
+}
 
 $(document).ready(function () {
+
+  $( ".datepicker" ).datepicker({
+        format: 'dd-mm-yyyy'
+      });
+
+
     $('#eventform').validate({ // initialize the plugin
        rules: {
          category:{required:true },
@@ -527,7 +534,6 @@ function check()
 
       if(Date.parse(formattedDate)==Date.parse(formattedDate1) )
       {
-      
         var strStartTime = document.getElementById("stime").value;
         var strEndTime = document.getElementById("etime").value;
 
@@ -541,20 +547,21 @@ function check()
          var b = temp[1];
          temp1 =b.split(" ");
          var c = temp1[1]
-       
+      // alert(a); alert(c);
         if(a==12 && c=='AM'){
+
         }else if (startTime > endTime){
           alert("Start Time is greater than end time");
           return false;
         }
     }else{
-        var date1 = new Date(fdate);
+      var date1 = new Date(fdate);
       var date2 = new Date(tdate);
       var strStartTime = document.getElementById("stime").value;
       var strEndTime = document.getElementById("etime").value;
-       var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
-       var endTime = new Date(startTime);
-       endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+      var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+      var endTime = new Date(startTime);
+      endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
       var a=formattedDate + '' + strStartTime;
       var b=formattedDate1 + '' + strEndTime;
       //alert(startTime);alert(endTime); alert(a);alert(b); 
