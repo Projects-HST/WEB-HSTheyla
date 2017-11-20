@@ -82,6 +82,7 @@
                             <!--th>Event Category</th-->
                             <th>Event City</th>
                             <th>Event popularity</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -92,6 +93,7 @@
                            $eid=$rows->id;
                            $etype=$rows->event_type;
                            $eid=$rows->id;
+                           $status=$rows->event_status;
                              ?>
                         <tr>
                           <td><?php  echo $i; ?></td>
@@ -100,6 +102,7 @@
                             <td><?php echo $rows->city_name ; ?></td>
                             <td><?php foreach($popular as $values){  $evid=$values->event_id;
                              if($eid==$evid){ echo $values->popular; } }?></td>
+                             <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
                             <td>
                              <a href="<?php echo base_url();?>events/edit_events/<?php echo base64_encode($rows->id);?>">
                               <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>

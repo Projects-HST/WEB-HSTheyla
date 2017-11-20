@@ -50,7 +50,7 @@
     <div class="topbar-left">
         <div class="text-center">
             <!--<a href="index.html" class="logo">Admiry</a>-->
-            <a href="#" class="logo"><img src="<?php echo base_url(); ?>assets/images/logo.png" height="" alt="logo"></a>
+            <a href="#" class="logo"><img src="<?php echo base_url(); ?>assets/images/heyla.png" height="" alt="logo"></a>
         </div>
     </div>
 
