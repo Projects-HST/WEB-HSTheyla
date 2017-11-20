@@ -83,7 +83,7 @@
             <a href="<?php echo base_url(); ?>organizer/createevents/" class="list-group-item">Create Events</a>
             <a href="<?php echo base_url(); ?>organizer/viewevents/" class="list-group-item">View Events</a>
             <a href="<?php echo base_url(); ?>organizerbooking/view_booking/" class="list-group-item">Bookings</a>
-            <a href="<?php echo base_url(); ?>organizerbooking/messageboard/" class="list-group-item">Messages</a>
+            <!-- a href="<?php echo base_url(); ?>organizerbooking/messageboard/" class="list-group-item">Messages</a-->
             <a href="<?php echo base_url(); ?>organizerbooking/reviews/" class="list-group-item">Reviews</a>
             <a href="<?php echo base_url();?>organizerbooking/view_followers/" class="list-group-item">Followers</a>
           </div>

@@ -1,7 +1,7 @@
 <style type="text/css">
-  .btn btn-secondary buttons-copy buttons-html5
+  .buttons-copy
   {
-    display: none;
+       display: none;
   }
 </style>
     <div class="container" style="margin-top:30px;margin-bottom:50px;max-width:100%;">
@@ -12,7 +12,7 @@
             <a href="<?php echo base_url(); ?>organizer/createevents/" class="list-group-item">Create Events</a>
             <a href="<?php echo base_url(); ?>organizer/viewevents/" class="list-group-item ">View Events</a>
             <a href="<?php echo base_url(); ?>organizerbooking/view_booking/" class="list-group-item active">Bookings</a>
-            <a href="<?php echo base_url(); ?>organizerbooking/messageboard/" class="list-group-item">Messages</a>
+            <!--a href="<?php echo base_url(); ?>organizerbooking/messageboard/" class="list-group-item">Messages</a-->
             <a href="<?php echo base_url(); ?>organizerbooking/reviews/" class="list-group-item">Reviews</a>
             <a href="<?php echo base_url();?>organizerbooking/view_followers/" class="list-group-item">Followers</a>
           </div>
