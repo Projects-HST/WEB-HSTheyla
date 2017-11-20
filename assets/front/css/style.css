@@ -36,9 +36,10 @@
 
 }
 .caption-head{
-  padding-top: 330px;
+  padding-top: 200px;
   text-align: center;
   color: #fff;
+  font-size: 70px;
 }
 .card{
   padding: 50px;

@@ -225,7 +225,7 @@
             <!-- <div class="carousel-inner carousel-fade" role="listbox"> -->
                 <!-- Slide One - Set the background image for this slide in the line below -->
                 <div class="carousel-item active" style="background-image: url('<?php echo base_url(); ?>assets/front/images/slider1.jpg')">
-                    <!-- <h1 class="caption-head">Explore the World Around You</h1> -->
+                    <h1 class="caption-head"> Click. Explore. Connect.</h1>
                     <div class="carousel-caption  d-md-block">
 
                         <img src="<?php echo base_url(); ?>assets/front/images/play.png" class=""> <img src="<?php echo base_url(); ?>assets/front/images/app.png" class="">
@@ -234,6 +234,7 @@
                 </div>
                 <!-- Slide Two - Set the background image for this slide in the line below -->
                 <div class="carousel-item" style="background-image: url('<?php echo base_url(); ?>assets/front/images/slider2.jpg')">
+                      <h1 class="caption-head">Your Event Search Ends Here.</h1>
                     <div class="carousel-caption  d-md-block">
                       <img src="<?php echo base_url(); ?>assets/front/images/play.png" class=""> <img src="<?php echo base_url(); ?>assets/front/images/app.png" class="">
 
@@ -241,6 +242,7 @@
                 </div>
                 <!-- Slide Three - Set the background image for this slide in the line below -->
                 <div class="carousel-item" style="background-image: url('<?php echo base_url(); ?>assets/front/images/slider3.jpg')">
+                      <h1 class="caption-head">Encyclopedia of  <br>Events.</h1>
                     <div class="carousel-caption  d-md-block">
                       <img src="<?php echo base_url(); ?>assets/front/images/play.png" class=""> <img src="<?php echo base_url(); ?>assets/front/images/app.png" class="">
 
