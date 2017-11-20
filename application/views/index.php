@@ -377,7 +377,14 @@
             <p class="normal-txt white-color">Promote and sell your ticket with our ticketing service, we’ll ensure you gain momentum the whole way through; right from tickets Avaliable to Sold Out!.
             </p>
             <p class="text-center">
-                <a href="" class="btn btn-event">CREATE EVENT</a>
+              <?php
+              $user_role=$this->session->userdata('user_role');
+              if($user_role=="2"){ ?>
+                  <a href="<?php echo base_url(); ?>organizer/createevents" class="btn btn-event">CREATE EVENT</a>
+            <?php   }else{  ?>
+                <a  data-toggle="modal" data-target="#myModal" class="btn btn-event white">CREATE EVENT</a>
+              <?php }    ?>
+
             </p>
         </div>
     </section>
