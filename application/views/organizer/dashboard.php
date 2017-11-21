@@ -40,6 +40,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url(); ?>organizer/createevents">Create Event</a>
                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url(); ?>profile">Profile</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url(); ?>home#contact">Contact</a>
                     </li>
