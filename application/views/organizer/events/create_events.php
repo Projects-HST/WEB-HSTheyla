@@ -28,7 +28,12 @@ return $output;
 <a href="<?php echo base_url();?>organizerbooking/view_followers/" class="list-group-item">Followers</a>
 </div>
 </div><!--/span-->
-
+<style type="text/css">
+  .error
+  {
+    color: red;
+  }
+</style>
 <div class="col-12 col-md-9">
 
 <div class="page-content-wrapper ">
@@ -416,10 +421,12 @@ success:function(test)
 
 function check()
 {
+
       var fdate = document.getElementById("datepicker-autoclose").value;
       var tdate = document.getElementById("datepicker").value;
 
        //alert(fdate);alert(tdate);
+    
       var chunks = fdate.split('-');
       var formattedDate = chunks[1]+'/'+chunks[0]+'/'+chunks[2];
        //alert(formattedDate);

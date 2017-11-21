@@ -391,10 +391,9 @@ public function profile_picupload()
 	  	$_POST = json_decode(file_get_contents("php://input"), TRUE);
 		
 		$user_id = $this->uri->segment(3);		
-		echo $profile = $_FILES["user_pic"]["name"];
-		exit;
+		$profile = $_FILES["user_pic"]["name"];
 		$userFileName = time().'-'.$profile;
-		$uploadPicdir = './assets/users/profile/';		
+		$uploadPicdir = './assets/users/profile/';
 		$profilepic = $uploadPicdir.$userFileName;
 		move_uploaded_file($_FILES['user_pic']['tmp_name'], $profilepic);
 		
