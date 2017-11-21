@@ -59,7 +59,7 @@
 
                
                  <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>organizer/updateeventsdetails" name="eventform" id="eventform" onSubmit='return check();'>
-                  <?php foreach($edit as $rows){}?>
+                  <?php foreach($edit as $rows){} $sts=$rows->event_status;?>
                         <div class="form-group row">
                             <label for="Category" class="col-sm-2 col-form-label">Select Category</label>
                             <div class="col-sm-4">
@@ -317,8 +317,11 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label"></label>
                             <div class="col-sm-2">
+                              <?php if($sts!='Y'){?>
                               <button type="submit" class="btn btn-primary waves-effect waves-light">
-                              Update </button></div>
+                              Update </button>
+                              <?php } ?>
+                            </div>
                               <div class="col-sm-2">
                               </div>
                         </div>
