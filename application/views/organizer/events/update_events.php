@@ -330,17 +330,13 @@
                 </div>
             </div> <!-- end col -->
         </div> <!-- end row -->
-
    </div><!-- container -->
    </div>
    <!-- Page content Wrapper -->
 </div>
 <!-- content -->
-         
-        </div><!--/span-->
-
-        
-      </div><!--/row-->
+ </div><!--/span-->
+</div><!--/row-->
  </div>
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByz7sU142AeFwpK3KiFilK0IOoa2GU9tw"></script>
