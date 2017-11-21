@@ -79,5 +79,5 @@
   </div> <!-- Page content Wrapper -->
 </div> <!-- content -->
 <script>
-    $('[data-toggle="tooltip"]').tooltip();
+   // $('[data-toggle="tooltip"]').tooltip();
 </script>

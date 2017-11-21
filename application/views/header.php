@@ -184,8 +184,14 @@
               View All
           </a>
       </div>
-   </li!-->
+   </li!--><?php 
+                    $id=$this->session->userdata('id');
+                    //echo $id;
+                    ?>
               <li class="list-inline-item dropdown notification-list">
+                  <a class="nav-link  arrow-none waves-effect nav-user" data-toggle="tooltip" data-placement="bottom" title="Edit Profile" href="<?php echo base_url(); ?>users/edit/<?php echo $id;?>">
+                     Profile
+                  </a>
                   <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" href="<?php echo base_url(); ?>adminlogin/logout">
                      Logout
                   </a>
