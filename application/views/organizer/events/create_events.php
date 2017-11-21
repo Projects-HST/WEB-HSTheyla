@@ -139,30 +139,30 @@ return $output;
 
             <div class="form-group row">
                            
-                            <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
-                            <div class="col-sm-4">
+            <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
+            <div class="col-sm-4">
 
-                               <input  type="text" class="form-control" id="stime" name="start_time">
+               <input  type="text" class="form-control" id="stime" name="start_time">
 
-                                <!-- select name="start_time" required="" class="form-control"  >
-                                     <option value="">Select Start Time</option>
-                                     <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
-                                </select>
-                                <script language="JavaScript">document.eventform.start_time.value="<?php echo $rows->start_time; ?>";</script-->
+                <!-- select name="start_time" required="" class="form-control"  >
+                     <option value="">Select Start Time</option>
+                     <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
+                </select>
+                <script language="JavaScript">document.eventform.start_time.value="<?php echo $rows->start_time; ?>";</script-->
 
-                            </div>
+            </div>
 
-                             <label for="etime" class="col-sm-2 col-form-label">End Time</label>
-                            <div class="col-sm-4">
-                              <input  type="text" class="form-control" id="etime" name="end_time" >
-                                <!--select name="end_time" required="" class="form-control" id="etime">
-                                     <option value="">Select End Time</option>
-                                     <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
-                                </select>
-                                 <script language="JavaScript">document.eventform.end_time.value="<?php echo $rows->end_time; ?>";</script-->
-                            </div>
+             <label for="etime" class="col-sm-2 col-form-label">End Time</label>
+            <div class="col-sm-4">
+              <input  type="text" class="form-control" id="etime" name="end_time" >
+                <!--select name="end_time" required="" class="form-control" id="etime">
+                     <option value="">Select End Time</option>
+                     <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
+                </select>
+                 <script language="JavaScript">document.eventform.end_time.value="<?php echo $rows->end_time; ?>";</script-->
+            </div>
 
-                        </div>
+        </div>
 
 
             <!--div class="form-group row">
@@ -265,7 +265,8 @@ return $output;
 
                  <label class="col-sm-2 col-form-label">Event Banner</label>
                   <div class="col-sm-4">
-                     <input type="file" name="eventbanner" class="form-control" accept="image/*" >
+                     <input type="file" name="eventbanner" id="file_upload" class="form-control" accept="image/*" >
+                      <div id="preview" style="color: red;"></div>
                   </div> 
             </div>
 
@@ -305,6 +306,7 @@ return $output;
 </div><!--/span-->
 </div><!--/row-->
 </div>
+
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByz7sU142AeFwpK3KiFilK0IOoa2GU9tw"></script>
 
 <script type="text/javascript">
@@ -332,8 +334,25 @@ google.maps.event.addListener(map, 'click', function (e)
 });
 }
 
-
 $(document).ready(function () {
+
+  $('#file_upload').on('change', function()
+        {
+          var f=this.files[0]
+          var actual=f.size||f.fileSize;
+          var orgi=actual/1024;
+            if(orgi<1024){
+              $("#preview").html('');
+              //$("#preview").html('<img src="<?php echo base_url(); ?>assets/loader.gif" alt="Uploading...."/>');
+              // $("#eventform").ajaxForm({
+              //     target: '#preview'
+              // }).submit();
+            }else{
+              $("#preview").html('File Size Must be  Lesser than 1 MB');
+              //alert("File Size Must be  Lesser than 1 MB");
+              return false;
+            }
+        });
 
 $('#eventform').validate({ // initialize the plugin
 rules: {
@@ -421,6 +440,8 @@ success:function(test)
 
 function check()
 {
+        
+   
 
       var fdate = document.getElementById("datepicker-autoclose").value;
       var tdate = document.getElementById("datepicker").value;

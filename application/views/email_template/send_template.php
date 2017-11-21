@@ -46,7 +46,7 @@
          <div class="container">
            <h4 class="mt-0 header-title"> Send Email</h4>
            
-          <form method="post" action="<?php echo base_url();?>emailtemplate/select_users" name="emailform" id="emailform" style="margin-bottom: 20px;">
+          <form method="post" action="<?php echo base_url();?>emailtemplate/select_users" name="emailform" id="emailform" style="margin-bottom:20px;">
          <?php  if(empty($search_view)) { ?>
             <div class="row">
               <div class="col-md-6 col-lg-6 col-xl-3">
@@ -66,7 +66,7 @@
                  <div id="msg"></div>
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
-                     <input class="form-control"  type="text" name="username" id="example-text-input">
+                     <input class="form-control"  type="text" name="username" placeholder="Type User Name" id="example-text-input">
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
                   <!--div class="mini-stat clearfix bg-primary"-->

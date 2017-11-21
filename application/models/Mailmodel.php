@@ -10,7 +10,7 @@ Class Mailmodel extends CI_Model
   }
 
   function send_mail_to_users($mailids,$email_temp_id)
-  {  echo $mailids; echo $email_temp_id;exit;
+  {  //echo $mailids; echo $email_temp_id;exit;
   	 $tsql="SELECT id,template_name,template_content FROM email_template WHERE id='$email_temp_id'";
 	 $res=$this->db->query($tsql);
 	 $result1=$res->result();
@@ -18,9 +18,7 @@ Class Mailmodel extends CI_Model
      { } 
          $tem_name=$rows->template_name;
          $tem_content=$rows->template_content;
-
 		 $to=$mailids;
-
 		 $subject=$tem_name;
 		 $cnotes=$tem_content;
 		 $htmlContent = '
@@ -38,7 +36,7 @@ Class Mailmodel extends CI_Model
 	 //$sent= mail($to,$subject,$htmlContent,$headers);
 	 if(mail($to,$subject,$htmlContent,$headers))
 	 {
-        $data= array("status"=>"success");
+        $data= array("status"=>"Y");
         return $data;
      }
 

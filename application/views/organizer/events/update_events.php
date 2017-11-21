@@ -307,10 +307,12 @@
 
                             <label class="col-sm-2 col-form-label">Event Banner</label>
                               <div class="col-sm-4">
-                               <input type="file" name="eventbanner" class="form-control" accept="image/*" >
+                               <input type="file" name="eventbanner" id="file_upload" class="form-control" accept="image/*" >
+                                 <div id="preview" style="color: red;"></div>
                                <input type="hidden" name="currentcpic" class="form-control" value="<?php echo $rows->event_banner;?>" >
                               <input type="hidden" name="eventid" class="form-control" value="<?php echo $rows->id; ?>" >
                                <img src="<?php echo base_url(); ?>assets/events/banner/<?php echo $rows->event_banner; ?>" class="img-circle">
+
                               </div>                            
                         </div>
 
@@ -374,6 +376,23 @@ $(document).ready(function () {
         format: 'dd-mm-yyyy'
       });
 
+$('#file_upload').on('change', function()
+        {
+          var f=this.files[0]
+          var actual=f.size||f.fileSize;
+          var orgi=actual/1024;
+            if(orgi<1024){
+              $("#preview").html('');
+              //$("#preview").html('<img src="<?php echo base_url(); ?>assets/loader.gif" alt="Uploading...."/>');
+              // $("#eventform").ajaxForm({
+              //     target: '#preview'
+              // }).submit();
+            }else{
+              $("#preview").html('File Size Must be  Lesser than 1 MB');
+              //alert("File Size Must be  Lesser than 1 MB");
+              return false;
+            }
+        });
 
     $('#eventform').validate({ // initialize the plugin
        rules: {
