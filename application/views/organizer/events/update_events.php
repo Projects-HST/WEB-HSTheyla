@@ -28,7 +28,7 @@
 
         <div class="col-12 col-md-3 sidebar-offcanvas" id="sidebar">
           <div class="list-group">
-            <a href="<?php echo base_url(); ?>home" class="list-group-item">Dashboard</a>
+            <a href="#" class="list-group-item">Dashboard</a>
             <a href="<?php echo base_url(); ?>organizer/createevents/" class="list-group-item">Create Events</a>
             <a href="<?php echo base_url(); ?>organizer/viewevents/" class="list-group-item active">View Events</a>
             <a href="<?php echo base_url(); ?>organizerbooking/view_booking/" class="list-group-item">Bookings</a>

@@ -35,13 +35,12 @@ class Home extends CI_Controller {
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 	 	$user_role=$this->session->userdata('user_role');
-
 			if($user_role==1){
 				redirect('adminlogin/dashboard');
 			}else if($user_role==2){
-								redirect('dashboard');
+				$this->load->view('index');
 			}else if($user_role==3){
-							$this->load->view('index');
+				$this->load->view('index');
 			}else{
 				$this->load->view('index');
 			}
@@ -167,8 +166,11 @@ class Home extends CI_Controller {
 				if($user_role==3){
 					$datas['res']=$this->loginmodel->getuserinfo($user_id);
 					$this->load->view('profile', $datas);
+				}else if($user_role==2){
+                    $datas['res']=$this->loginmodel->getuserinfo($user_id);
+					$this->load->view('profile', $datas);
 				}else{
-
+				 redirect('/');	
 				}
 			}else{
 				redirect('/');
@@ -182,6 +184,8 @@ class Home extends CI_Controller {
 			$datas['res']=$this->loginmodel->getuserinfo($user_id);
 			if($user_role==3){
 				$this->load->view('mobilenumber', $datas);
+			}else if($user_role==2){ 
+                  $this->load->view('mobilenumber', $datas);
 			}else{
 				redirect('/');
 			}
@@ -194,9 +198,12 @@ class Home extends CI_Controller {
 			$datas['res']=$this->loginmodel->getuserinfo($user_id);
 			if($user_role==3){
 				$this->load->view('changeemail', $datas);
+			}else if($user_role==2){
+				  $this->load->view('changeemail', $datas);
 			}else{
 				redirect('/');
 			}
+			
 		}
 
 		public function organiser(){

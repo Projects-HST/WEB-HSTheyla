@@ -66,25 +66,30 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#services">Services</a>
                     </li>
+                     <?php
+                        $user_role=$this->session->userdata('user_role');
+                     if($user_role=='2'){ ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo  base_url(); ?>dashboard">Create Event</a>
+                    </li>
+                    <?php }else{ ?>
                     <li class="nav-item">
                         <a class="nav-link" href="#create">Create Event</a>
                     </li>
+                    <?php } ?>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
                     </li>
 
                     <?php
-                    	 $user_role=$this->session->userdata('user_role');
+                    	// $user_role=$this->session->userdata('user_role');
                        if(empty($user_role)){ ?>
                         <li class="nav-item">
                             <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal">Sign In / Sign Up</a>
                         </li>
-
-
-
                     <?php
                        }else{ ?>
-                         <?php  if($user_role='3'){ ?>
+                         <?php  if($user_role=='3' || $user_role=='2'){ ?>
                        <li class="nav-item">
                            <a class="nav-link" href="<?php echo base_url(); ?>profile">Profile</a>
                        </li>
@@ -92,8 +97,6 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo base_url(); ?>logout">Logout</a>
                             </li>
-
-
                             <?php } ?>
                 </ul>
             </div>

@@ -79,9 +79,18 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url(); ?>home#services">Services</a>
                     </li>
+                     <?php
+                        $user_role=$this->session->userdata('user_role');
+                       
+                     if($user_role=='2'){ ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url(); ?>home#create">Create Event</a>
+                        <a class="nav-link" href="<?php echo  base_url(); ?>dashboard">Create Event</a>
                     </li>
+                    <?php }else{ ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="home#create">Create Event</a>
+                    </li>
+                    <?php } ?>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url(); ?>home#contact">Contact</a>
                     </li>

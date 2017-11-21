@@ -56,12 +56,12 @@
 
     <div class="sidebar-inner slimscrollleft">
         <!--div class="user-details">
-            <!--div class="text-center">
+            <!-div class="text-center">
                 <img src="<?php echo base_url(); ?>assets/images/admin/admin.png" alt="" class="rounded-circle">
             </div-->
             <!--div class="user-info">
                 <h4 class="font-16">Admin</h4>
-                <!--span class="text-muted user-status"><i class="fa fa-dot-circle-o text-success"></i> Online</span->
+                <!-span class="text-muted user-status"><i class="fa fa-dot-circle-o text-success"></i> Online</span->
             </div->
         </div-->
 

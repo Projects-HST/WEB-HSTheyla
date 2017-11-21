@@ -55,21 +55,22 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home
-                <span class="sr-only"></span>
-              </a>
+                    <a class="nav-link" href="<?php echo base_url(); ?>home">Home <span class="sr-only"></span> </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>home#about">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>home#services">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Create Event</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>organizer/createevents">Create Event</a>
+                    </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url(); ?>profile">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>home#contact">Contact</a>
                     </li>
                     <?php
                        $user_id=$this->session->userdata('user_role');
