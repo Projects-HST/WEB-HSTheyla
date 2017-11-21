@@ -178,6 +178,7 @@ class Events extends CI_Controller
         $email          = $this->input->post('email');
         $currentcpic    = $this->input->post('currentcpic');
         $eventid        = $this->input->post('eventid');
+
         $event_pic      = $_FILES['eventbanner']['name'];
         $temp = pathinfo($event_pic, PATHINFO_EXTENSION);
         $file_name      = time() . rand(1, 5) . rand(6, 10);
@@ -185,11 +186,13 @@ class Events extends CI_Controller
         $uploaddir      = 'assets/events/banner/';
         $profilepic     = $uploaddir . $event_banner;
         move_uploaded_file($_FILES['eventbanner']['tmp_name'], $profilepic);
+
         $eadv_status   = $this->input->post('eadv_status');
         $booking_sts   = $this->input->post('booking_sts');
         $hotspot_sts   = $this->input->post('hotspot_sts');
         $colour_scheme = $this->input->post('colour_scheme');
         $event_status  = $this->input->post('event_status');
+        
         if (empty($event_pic)) {
             $event_banner = $currentcpic;
         } else {

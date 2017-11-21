@@ -259,7 +259,7 @@ class Organizer extends CI_Controller
         $colour_scheme=$this->input->post('colour_scheme');
 		$event_status=$this->input->post('event_status');
           
-         if(empty($event_banner)){
+         if(empty($event_pic)){
             $event_banner=$currentcpic;
          }else{
          	$event_banner=$event_banner;
