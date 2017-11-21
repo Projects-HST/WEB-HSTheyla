@@ -67,23 +67,51 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="<?php echo base_url(); ?>">Home
-                <span class="sr-only"></span>
-              </a>
-                    </li>
+                  <li class="nav-item active">
+                      <a class="nav-link" href="<?php echo base_url(); ?>home">Home
+                        <span class="sr-only"></span>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="<?php echo base_url(); ?>home#about">About</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="<?php echo base_url(); ?>home#services">Services</a>
+                  </li>
+                   <?php
+                      $user_role=$this->session->userdata('user_role');
+
+                   if($user_role=='2'){ ?>
+                  <li class="nav-item">
+                      <a class="nav-link" href="<?php echo  base_url(); ?>dashboard">Create Event</a>
+                  </li>
+                  <?php }else{ ?>
+                  <li class="nav-item">
+                      <a class="nav-link" href="home#create">Create Event</a>
+                  </li>
+                  <?php } ?>
+                  <li class="nav-item">
+                      <a class="nav-link" href="<?php echo base_url(); ?>home#contact">Contact</a>
+                  </li>
+
+            <?php
+              // $user_role=$this->session->userdata('user_role');
+               if(empty($user_role)){ ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal">Sign In / Sign Up</a>
+                </li>
+            <?php
+               }else{ ?>
+                 <?php  if($user_role=='3' || $user_role=='2'){ ?>
+               <li class="nav-item">
+                   <a class="nav-link" href="<?php echo base_url(); ?>profile">Profile</a>
+               </li>
+             <?php  } ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url(); ?>home#about">About</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>logout">Logout</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url(); ?>home#services">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url(); ?>home#create">Create Event</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url(); ?>home#contact">Contact</a>
-                    </li>
+                    <?php } ?>
+
 
                 </ul>
             </div>

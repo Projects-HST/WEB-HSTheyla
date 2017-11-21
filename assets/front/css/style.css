@@ -217,7 +217,7 @@
   padding-bottom: 15px;
 }
 .fnt-footer a{
-  font-size: 18px;
+  font-size: 16px;
   color: #fff;
   text-decoration: none;
   margin-left: 30px;
@@ -351,4 +351,7 @@
 .privacy{
   margin-top: 20px;
   margin-bottom: 20px;
+}
+.list-inline{
+  text-align: right;
 }
