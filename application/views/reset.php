@@ -84,9 +84,7 @@ input[type=password] {
             <?php
               // $user_role=$this->session->userdata('user_role');
                if(empty($user_role)){ ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal">Sign In / Sign Up</a>
-                </li>
+              
             <?php
                }else{ ?>
                  <?php  if($user_role=='3' || $user_role=='2'){ ?>
