@@ -225,7 +225,7 @@
             <!-- <div class="carousel-inner carousel-fade" role="listbox"> -->
                 <!-- Slide One - Set the background image for this slide in the line below -->
                 <div class="carousel-item active" style="background-image: url('<?php echo base_url(); ?>assets/front/images/slider1.jpg')">
-                    <!-- <h1 class="caption-head">Explore the World Around You</h1> -->
+                    <h1 class="caption-head"> Click. Explore. Connect.</h1>
                     <div class="carousel-caption  d-md-block">
 
                         <img src="<?php echo base_url(); ?>assets/front/images/play.png" class=""> <img src="<?php echo base_url(); ?>assets/front/images/app.png" class="">
@@ -234,6 +234,7 @@
                 </div>
                 <!-- Slide Two - Set the background image for this slide in the line below -->
                 <div class="carousel-item" style="background-image: url('<?php echo base_url(); ?>assets/front/images/slider2.jpg')">
+                      <h1 class="caption-head">Your Event Search Ends Here.</h1>
                     <div class="carousel-caption  d-md-block">
                       <img src="<?php echo base_url(); ?>assets/front/images/play.png" class=""> <img src="<?php echo base_url(); ?>assets/front/images/app.png" class="">
 
@@ -241,6 +242,7 @@
                 </div>
                 <!-- Slide Three - Set the background image for this slide in the line below -->
                 <div class="carousel-item" style="background-image: url('<?php echo base_url(); ?>assets/front/images/slider3.jpg')">
+                      <h1 class="caption-head">Encyclopedia of  <br>Events.</h1>
                     <div class="carousel-caption  d-md-block">
                       <img src="<?php echo base_url(); ?>assets/front/images/play.png" class=""> <img src="<?php echo base_url(); ?>assets/front/images/app.png" class="">
 
@@ -377,7 +379,14 @@
             <p class="normal-txt white-color">Promote and sell your ticket with our ticketing service, we’ll ensure you gain momentum the whole way through; right from tickets Avaliable to Sold Out!.
             </p>
             <p class="text-center">
-                <a href="" class="btn btn-event">CREATE EVENT</a>
+              <?php
+              $user_role=$this->session->userdata('user_role');
+              if($user_role=="2"){ ?>
+                  <a href="<?php echo base_url(); ?>organizer/createevents" class="btn btn-event">CREATE EVENT</a>
+            <?php   }else{  ?>
+                <a  data-toggle="modal" data-target="#myModal" class="btn btn-event white">CREATE EVENT</a>
+              <?php }    ?>
+
             </p>
         </div>
     </section>

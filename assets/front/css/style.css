@@ -36,9 +36,10 @@
 
 }
 .caption-head{
-  padding-top: 330px;
+  padding-top: 200px;
   text-align: center;
   color: #fff;
+  font-size: 70px;
 }
 .card{
   padding: 50px;
@@ -98,13 +99,16 @@
   border-bottom: 2px solid  #478ECC;
 }
 .features{
-  padding-top: 40px;
+  padding-top: 100px;
   padding-bottom:40px;
   border-bottom: 4px solid #DCDBD9;
-  background: url(<?php echo base_url(); ?>/contact.jpg);
+  background: url('<?php echo base_url(); ?>assets/'/contact.jpg);
 }
 .featuretext{
   font-size: 30px;
+}
+.white{
+  color:#fff !important;
 }
 .center-div
 {
@@ -181,7 +185,9 @@
      -webkit-background-size: cover;
      -moz-background-size: cover;
      -o-background-size: cover;
-     height: 300px;
+     height: 400px;
+     padding-top: 85px;
+     padding-bottom: 60px;
 
 }
 .organiserbox{
