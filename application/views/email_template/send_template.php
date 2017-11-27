@@ -102,7 +102,7 @@
                  <div id="msg"></div>
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
-                     <input class="form-control"  type="text" name="username" id="example-text-input" value="<?php //echo $res->user_name; ?>">
+                     <input class="form-control"  type="text" name="username" placeholder="Type User Name" id="example-text-input" value="<?php //echo $res->user_name; ?>">
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
                   <!--div class="mini-stat clearfix bg-primary"-->
@@ -118,21 +118,20 @@
          <?php } ?>
            </form>
                <?php if($this->session->flashdata('msg')): ?>
-                        <div class="alert alert-success">
-                           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-                           ×</button> <?php echo $this->session->flashdata('msg'); ?>
-                        </div>
-                        <?php endif; ?>
+                <div class="alert alert-success">
+                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                   ×</button> <?php echo $this->session->flashdata('msg'); ?>
+                </div>
+          <?php endif; ?>
             <div class="row">
                <div class="col-12">
                   <div class="card m-b-20">
                      <div class="card-block">
+                        <label id="user" style="width: 100%;"><input type="checkbox" class="checkbox" id="checkAll" style="display: inline;" />&nbsp;Select Current Page
 
-                        <label id="user" style="width: 100%;"><input type="checkbox" class="checkbox" id="checkAll" style="display: inline;" />&nbsp;Check All
                          <!--div class="text-center">
                             < Large modal-->
                              <button type="button" id="sendSelectedBtn" data-toggle="modal" data-target="#addmodel" class="btn btn-primary waves-effect waves-light" >Send To Selected</button>
-
                              <button type="button" style="float: right;" data-toggle="modal" id="sendAll" data-target="#addmodel" class="btn btn-primary waves-effect waves-light" >Send To All</button>
                         <!--/div-->
                       </label>
@@ -149,7 +148,7 @@
                           $i=1;
                           if(empty($search_view))
                           {
-                            $pro_id = [];
+                           $pro_id = [];
                            foreach($view as $rows) { $pro_id[] = $rows->email_id; $a=implode(',',$pro_id);?>
                             <tr>
                                <td><?php  echo $i; ?></td>
@@ -249,7 +248,7 @@
 
    }else{
          alert('Please select any one user');
-         return false;
+          $('#addmodel').modal('hide');
          }
    });
 

@@ -63,7 +63,7 @@
                            <img src="<?php echo base_url();?>assets/review/images/<?php echo $value->photo; ?>" style="width:80%;border-radius:100px;float: right;">
                         </div>
                       <div class="col-sm-2">
-                          <a href="<?php echo base_url(); ?>reviews/display/<?php echo $value->id; ?>/Y" class="btn btn-primary waves-effect waves-light">
+                          <a href="<?php echo base_url(); ?>reviews/display/<?php echo $value->id; ?>/Y/<?php echo $value->event_id; ?>/<?php echo $value->user_id; ?>" class="btn btn-primary waves-effect waves-light">
                           Display </a>
                         </div>
                           <div class="col-sm-2">
