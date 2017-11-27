@@ -67,7 +67,7 @@
                           Display </a>
                         </div>
                           <div class="col-sm-2">
-                            <a href="<?php echo base_url(); ?>reviews/archive/<?php echo $value->id; ?>/A" class="btn btn-primary waves-effect waves-light">
+                            <a href="<?php echo base_url(); ?>reviews/archive/<?php echo $value->id; ?>/A/<?php echo $value->event_id; ?>/<?php echo $value->user_id; ?>" class="btn btn-primary waves-effect waves-light">
                           Archive</a>
                          </div>
                         </div>
