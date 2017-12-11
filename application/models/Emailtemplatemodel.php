@@ -83,14 +83,13 @@ Class Emailtemplatemodel extends CI_Model
    }
 
    function getall_search_users_details($countryid,$cityid,$username)
-   { 
-    if(empty($username)){
+   { if(empty($username)){
      $search="SELECT ud.user_id,ud.name,ud.country_id,ud.city_id,um.id,um.email_id,um.mobile_no,ci.city_name FROM user_details AS ud, user_master AS um,city_master AS ci WHERE um.id=ud.user_id AND ud.country_id='$countryid' AND ud.city_id='$cityid' AND ud.city_id=ci.id";
      $search1=$this->db->query($search);
      $search2=$search1->result();
 	 return $search2;
 	}else{
-		 $search="SELECT ud.user_id,ud.name,ud.country_id,ud.city_id,um.id,um.user_name,um.email_id,um.mobile_no,ci.city_name FROM user_details AS ud, user_master AS um,city_master AS ci WHERE um.id=ud.user_id  AND um.user_name='$username' AND ud.city_id=ci.id";
+		 $search="SELECT ud.user_id,ud.name,ud.country_id,ud.city_id,um.id,um.user_name,um.email_id,um.mobile_no,ci.city_name FROM user_details AS ud, user_master AS um,city_master AS ci WHERE um.id=ud.user_id AND ud.country_id='$countryid' AND ud.city_id='$cityid' AND um.user_name='$username' AND ud.city_id=ci.id";
 	     $search1=$this->db->query($search);
 	     $search2=$search1->result();
 		 return $search2;

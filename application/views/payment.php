@@ -67,7 +67,7 @@
 
           <?php
              if(empty($user_role)){ ?>
-            
+
           <?php
              }else{ ?>
                <?php  if($user_role=='3' || $user_role=='2'){ ?>
@@ -111,7 +111,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <p class="fnt-footer">Powered By Happysanz Tech</p>
+                <p class="fnt-footer">Crafted With Happiness</p>
             </div>
             <div class="col-md-6">
                 <ul class="list-inline fnt-footer ">

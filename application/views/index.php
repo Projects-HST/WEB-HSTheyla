@@ -277,8 +277,8 @@
         <div class="container">
             <div class="row ">
                 <div class="col-md-12">
-                    <p class="text-center getin">Take a look awesome app </p>
-                    <p class="text-center featuretext">Features You Ill Love it </p>
+                    <!-- <p class="text-center getin">Take a look awesome app </p> -->
+                    <p class="text-center" style="font-size:35px;">Features You Will Love it </p>
                 </div>
             </div>
 
@@ -294,17 +294,21 @@
                     <div class="row">
                         <div class="col-sm-6 col-md-6 featurebox">
                             <div class="media mediaobj">
-                                <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/refer.png" alt="Generic placeholder image">
+                                <!-- <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/refer.png" alt="Generic placeholder image">
                                 <div class="media-body">
-                                    <h5 class="mt-0">Refer & Earn</h5> Refer, refer and refer - Redemption for paid events is always exciting </div>
+                                    <h5 class="mt-0">Refer & Earn</h5> Refer, refer and refer - Redemption for paid events is always exciting </div> -->
+                                    <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/Popular.png" alt="Generic placeholder image">
+                                    <div class="media-body">
+                                        <h5 class="mt-0">Popular</h5>The trending events happening in your city . </div>
                             </div>
 
                         </div>
                         <div class="col-sm-6 col-md-6  featurebox">
                             <div class="media mediaobj">
-                                <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/Popular.png" alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <h5 class="mt-0">Popular</h5>The trending events happening in your city . </div>
+                              <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/favourite.png" alt="Generic placeholder image">
+                              <div class="media-body">
+                                  <h5 class="mt-0">Favourite</h5> Tailor fit events for you.<br></div>
+
                             </div>
                         </div>
                     </div>
@@ -320,7 +324,7 @@
                             <div class="media mediaobj">
                                 <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/Rewards.png" alt="Generic placeholder image">
                                 <div class="media-body">
-                                    <h5 class="mt-0">Rewards</h5> Let's add to the overall fun by competing with other Heyla App Users. </div>
+                                    <h5 class="mt-0">Leaderboard</h5> Let's add to the overall fun by competing with other Heyla App Users. </div>
                             </div>
                         </div>
                     </div>
@@ -334,9 +338,9 @@
                         </div>
                         <div class="col-sm-6 col-md-6 featurebox">
                             <div class="media mediaobj">
-                                <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/favourite.png" alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <h5 class="mt-0">Favourite</h5> Tailor fit events for you.<br></div>
+                              <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/Rewards1.png" alt="Generic placeholder image">
+                              <div class="media-body">
+                                  <h5 class="mt-0">Rewards</h5>Book, Check-in, share and review to win rewards.</div>
                             </div>
                         </div>
                     </div>
@@ -400,14 +404,14 @@
                     <div class="organiserbox text-center">
                         <img src="<?php echo base_url(); ?>assets/front/images/add.png" class="featureicons img-fluid mx-auto d-block">
                         <p class="organiser-heading">CREATE</p>
-                        <p class="normal-txt">It's simple! Enter events, setup ticketing option and Go live.</p>
+                        <p class="normal-txt">It's simple! Enter events, setup ticketing option,<br> and Go live.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="organiserbox text-center">
                         <img src="<?php echo base_url(); ?>assets/front/images/view.png" class="featureicons img-fluid mx-auto d-block">
                         <p class="organiser-heading">PROMOTE</p>
-                        <p class="normal-txt">Our promotional reach is widespread; Be it local, social or even mobile. </p>
+                        <p class="normal-txt">Our promotional reach is widespread; <br> Be it local, social or even mobile. </p>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -455,7 +459,7 @@
                 </div>
                 <div class="col-md-3">
                     <p class="getin">Contact Information</p>
-                    <p>No:6, Kummalamman Koil Street,<br>
+                    <p>No: 6, Kummalamman Koil Street,<br>
                     3rd Lane Tondiarpet, <br>Chennai - 600081</p>
                 </div>
             </div>
@@ -467,7 +471,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <p class="fnt-footer">Powered By Happysanz Tech</p>
+                    <p class="fnt-footer" >Crafted With Happiness</p>
                 </div>
                 <div class="col-md-6">
                     <ul class="list-inline fnt-footer ">

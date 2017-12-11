@@ -20,7 +20,7 @@ Class Usersmodel extends CI_Model
 
     function getall_users_details()
     {
-       $query="SELECT ud.*,um.user_name,um.mobile_no,um.email_id,um.password,um.user_role,um.status,ci.city_name,up.total_count FROM user_details AS ud LEFT JOIN user_master AS um ON ud.user_id=um.id LEFT JOIN city_master AS ci ON ci.id=ud.city_id LEFT JOIN user_points_count AS up ON up.user_id=ud.user_id ORDER BY ud.id  DESC";
+       $query="SELECT ud.*,um.user_name,um.mobile_no,um.email_id,um.password,um.user_role,um.status,ci.city_name,up.total_points FROM user_details AS ud LEFT JOIN user_master AS um ON ud.user_id=um.id LEFT JOIN city_master AS ci ON ci.id=ud.city_id LEFT JOIN user_points_count AS up ON up.user_id=ud.user_id ORDER BY ud.id  DESC";
 	  $udresu=$this->db->query($query);
 	  $udres=$udresu->result();
 	  return $udres;

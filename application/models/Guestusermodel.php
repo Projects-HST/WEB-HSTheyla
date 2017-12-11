@@ -1,6 +1,6 @@
 <?php
-Class Guestusermodel extends CI_Model
-{ 
+ Class Guestusermodel extends CI_Model
+ { 
 
    public function __construct()
    {
@@ -31,10 +31,8 @@ Class Guestusermodel extends CI_Model
     $resu1=$this->db->query($sql1);
     $res1=$resu1->result();
     return $res1;
-
     }
 
-}
-?>
+}?>
 
 

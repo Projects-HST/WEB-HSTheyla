@@ -50,15 +50,15 @@ class Home extends CI_Controller {
 
 	public function gmaillogin(){
 		$this->load->library('googleplus');
-		$CLIENT_ID = '56118066242-ndqa7sis300o0ce5otglegn629ktmjj5.apps.googleusercontent.com';
-		$CLIENT_SECRET = 'QBjwPGP5PE6tzJt3bDekC4a1';
+		$CLIENT_ID = '41690620391-rjhrim1r62fltr51nllsole87fi0geae.apps.googleusercontent.com';
+		$CLIENT_SECRET = 'Ogmgt5HC2m8ZeRlQd2NRYIO4';
 		$APPLICATION_NAME = "Heyla";
 		$client = new Google_Client();
 		$client->setApplicationName($APPLICATION_NAME);
 		$client->setClientId($CLIENT_ID);
 		$client->setClientSecret($CLIENT_SECRET);
 		$client->setAccessType("offline");
-		$client->setRedirectUri('http://heylaapp.com/heyla/google_login');
+		$client->setRedirectUri('http://heylaapp.com/google_login');
 		$client->setScopes('email');
 		$objOAuthService = new Google_Service_Plus($client);
 		$client->setScopes(array('https://www.googleapis.com/auth/userinfo.email','https://www.googleapis.com/auth/userinfo.profile'));

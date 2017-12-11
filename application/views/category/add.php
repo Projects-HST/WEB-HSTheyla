@@ -7,11 +7,11 @@
 <!-- Start content >
 <div class="content-page">
    <div class="content">
-      <!- Top Bar Start >
+      <!-- Top Bar Start >
       <div class="topbar">
          <nav class="navbar-custom">
             <ul class="list-inline float-right mb-0">
-               <!-li class="list-inline-item dropdown notification-list">
+               <!--li class="list-inline-item dropdown notification-list">
                   <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                   <i class="ion-ios7-bell noti-icon"></i>
                   <span class="badge badge-success noti-icon-badge">3</span>
@@ -22,7 +22,7 @@
                   <img src="<?php echo base_url(); ?>assets/images/admin/admin.png" alt="user" class="rounded-circle">
                   </a>
                   <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                     <!-a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
+                     <!--a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
                      <a class="dropdown-item" href="#"><span class="badge badge-success pull-right">5</span><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
                      <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a!->
                      <a class="dropdown-item" href="<?php echo base_url(); ?>adminlogin/logout"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
@@ -42,7 +42,7 @@
             <div class="clearfix"></div>
          </nav>
       </div>
-      <! Top Bar End -->
+      <!-- Top Bar End -->
       <div class="page-content-wrapper">
          <div class="container">
             <div class="row">
@@ -129,7 +129,7 @@
                                     <input type="text" name="categoryname" id="ct_name" class="form-control" value="">
                                  </div>
                               </div>
-                              <button type="submit" id="save" class="btn btn-primary" style="float:right;">Save changes</button>
+                              <button type="submit" class="btn btn-primary" style="float:right;">Save changes</button>
                            </form>
                         </div>
                         <div class="modal-footer">
@@ -225,16 +225,14 @@
             if(orgi<1024){
               $("#preview").html('');
               //$("#preview").html('<img src="<?php echo base_url(); ?>assets/loader.gif" alt="Uploading...."/>');
-              // $("#categoryform").ajaxForm({
-              //     target: '#preview'
-              // }).submit();
+              $("#categoryform").ajaxForm({
+                  target: '#preview'
+              }).submit();
             }else{
               $("#preview").html('File Size Must be  Lesser than 1 MB');
-             
               //alert("File Size Must be  Lesser than 1 MB");
               //$("#file_upload").empty();
               return false;
-
             }
         });
    

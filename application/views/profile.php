@@ -232,7 +232,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <p class="fnt-footer">Powered By Happysanz Tech</p>
+                    <p class="fnt-footer">Crafted With Happiness</p>
                 </div>
                 <div class="col-md-6">
                     <ul class="list-inline fnt-footer ">

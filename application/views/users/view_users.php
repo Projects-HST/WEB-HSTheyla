@@ -86,7 +86,7 @@
                             <td><?php echo $rows->user_name ; ?></td>
                             <td><?php echo $rows->name ; ?></td>
                             <td><?php echo $rows->city_name ; ?></td>
-                            <td><?php echo $rows->total_count ; ?></td>
+                            <td><?php echo $rows->total_points ; ?></td>
                             <td></td>
                             <td><?php if($sts=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
                             <td>

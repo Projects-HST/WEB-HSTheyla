@@ -56,7 +56,6 @@ class Events extends CI_Controller
         $contact_person = $this->input->post('contact_person');
         $email          = $this->input->post('email');
         //echo $city; exit;
-
         $event_pic      = $_FILES['eventbanner']['name'];
         $temp = pathinfo($event_pic, PATHINFO_EXTENSION);
         $file_name      = time() . rand(1, 5) . rand(6, 10);
@@ -64,7 +63,6 @@ class Events extends CI_Controller
         $uploaddir      = 'assets/events/banner/';
         $profilepic     = $uploaddir . $event_banner;
         move_uploaded_file($_FILES['eventbanner']['tmp_name'], $profilepic);
-
         $eadv_status   = $this->input->post('eadv_status');
         $booking_sts   = $this->input->post('booking_sts');
         $hotspot_sts   = $this->input->post('hotspot_sts');
@@ -279,14 +277,14 @@ class Events extends CI_Controller
             $total_uploads = array();
             $upload_path   = 'assets/events/gallery/';
             foreach ($_FILES['eventpicture']['name'] as $key => $value) {
-                $temp1 = pathinfo($_FILES['eventpicture']['name'][$key], PATHINFO_EXTENSION);
-                $temp      = explode(".", $_FILES['eventpicture']['name'][$key]);
+                $temp = pathinfo($_FILES['eventpicture']['name'][$key], PATHINFO_EXTENSION);
+               // $temp      = explode(".", $_FILES['eventpicture']['name'][$key]);
                 $extension = end($temp);
                 if ($_FILES["eventpicture"]["type"][$key] != "image/gif" && $_FILES["eventpicture"]["type"][$key] != "image/jpeg" && $_FILES["eventpicture"]["type"][$key] != "image/jpg" && $_FILES["eventpicture"]["type"][$key] != "image/pjpeg" && $_FILES["eventpicture"]["type"][$key] != "image/x-png" && $_FILES["eventpicture"]["type"][$key] != "image/png" && !in_array($extension, $allowedExts)) {
                     $error_uploads++;
                     continue;
                 }
-                $file_name = time() . rand(1, 5) . rand(6, 10) . '.' .$temp1;
+                $file_name = time() . rand(1, 5) . rand(6, 10) . '.' .$temp;
                 if (move_uploaded_file($_FILES["eventpicture"]['tmp_name'][$key], $upload_path . $file_name)) {
                     $total_uploads[] = $file_name;
                 } else {
