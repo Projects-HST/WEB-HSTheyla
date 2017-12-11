@@ -304,6 +304,17 @@ class Apimainmodel extends CI_Model {
 			$activity_sql = "INSERT INTO user_activity (date,user_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $login_type . "')";
 			$insert_activity = $this->db->query($activity_sql);
 			
+			
+		    $pointsQuery = "SELECT * FROM user_points_count WHERE user_id = '$user_id' LIMIT 1";
+			$points_result = $this->db->query($pointsQuery);
+			$points_ress = $points_result->result();
+			
+					if($points_result->num_rows()==0)
+					{
+            			$points_sql = "INSERT INTO user_points_count (user_id) VALUES ('". $user_id . "')";
+            			$insert_points = $this->db->query($points_sql);
+					}
+
 			$gcmQuery = "SELECT * FROM push_notification_master WHERE gcm_key like '%" .$gcm_key. "%' LIMIT 1";
 			$gcm_result = $this->db->query($gcmQuery);
 			$gcm_ress = $gcm_result->result();
@@ -335,7 +346,7 @@ class Apimainmodel extends CI_Model {
         $user_id ="";
         if ($login_type = "1") {
             $login_mode = "fb_login";
-            $signup_type = "Fb_signup";
+            $signup_type = "fb_signup";
         } else {
             $login_mode = "gplus_login";
             $signup_type = "gplus_signup";
@@ -359,6 +370,16 @@ class Apimainmodel extends CI_Model {
 				$activity_sql = "INSERT INTO user_activity (date,user_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $login_mode . "')";
     			$insert_activity = $this->db->query($activity_sql);
 				
+    			$pointsQuery = "SELECT * FROM user_points_count WHERE user_id = '$user_id' LIMIT 1";
+    			$points_result = $this->db->query($pointsQuery);
+    			$points_ress = $points_result->result();
+			
+					if($points_result->num_rows()==0)
+					{
+            			$points_sql = "INSERT INTO user_points_count (user_id) VALUES ('". $user_id . "')";
+            			$insert_points = $this->db->query($points_sql);
+					}
+				
 				$gcmQuery = "SELECT * FROM push_notification_master WHERE gcm_key like '%" .$gcm_key. "%' LIMIT 1";
 				$gcm_result = $this->db->query($gcmQuery);
 				$gcm_ress = $gcm_result->result();
@@ -380,6 +401,16 @@ class Apimainmodel extends CI_Model {
 				
     			$activity_sql = "INSERT INTO user_activity (date,user_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $signup_type . "')";
     			$insert_activity = $this->db->query($activity_sql);
+    			
+        		$pointsQuery = "SELECT * FROM user_points_count WHERE user_id = '$user_id' LIMIT 1";
+    			$points_result = $this->db->query($pointsQuery);
+    			$points_ress = $points_result->result();
+    			
+    					if($points_result->num_rows()==0)
+    					{
+                			$points_sql = "INSERT INTO user_points_count (user_id) VALUES ('". $user_id . "')";
+                			$insert_points = $this->db->query($points_sql);
+    					}
     			
     			$sQuery = "INSERT INTO push_notification_master (user_id,gcm_key,mobile_type) VALUES ('". $user_id . "','". $gcm_key . "','". $mobile_type . "')";
 				$update_gcm = $this->db->query($sQuery);
@@ -561,7 +592,7 @@ class Apimainmodel extends CI_Model {
 				
             $activity_sql = "INSERT INTO user_activity (date,user_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $login_type . "')";
 			$insert_activity = $this->db->query($activity_sql);
-    			
+    		
             $gcmQuery = "SELECT * FROM push_notification_master WHERE gcm_key like '%" .$gcm_key. "%' LIMIT 1";
 			$gcm_result = $this->db->query($gcmQuery);
 			$gcm_ress = $gcm_result->result();
@@ -1339,6 +1370,8 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 							"description" => $rows->description,
 							"start_date" => $rows->start_date,
 							"end_date" => $rows->end_date,
+							"start_time" => $rows->start_time,
+							"end_time" => $rows->end_time,
 							"event_banner" => base_url().'assets/events/banner/'.$rows->event_banner,
 							"event_latitude" => $rows->event_latitude,
 							"event_longitude" => $rows->event_longitude,
@@ -1410,6 +1443,8 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 							"description" => $rows->description,
 							"start_date" => $rows->start_date,
 							"end_date" => $rows->end_date,
+							"start_time" => $rows->start_time,
+							"end_time" => $rows->end_time,
 							"event_banner" => base_url().'assets/events/banner/'.$rows->event_banner,
 							"event_latitude" => $rows->event_latitude,
 							"event_longitude" => $rows->event_longitude,
@@ -1485,6 +1520,8 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 							"description" => $rows->description,
 							"start_date" => $rows->start_date,
 							"end_date" => $rows->end_date,
+							"start_time" => $rows->start_time,
+							"end_time" => $rows->end_time,
 							"event_banner" => base_url().'assets/events/banner/'.$rows->event_banner,
 							"event_latitude" => $rows->event_latitude,
 							"event_longitude" => $rows->event_longitude,
@@ -1542,6 +1579,8 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 							"description" => $rows->description,
 							"start_date" => $rows->start_date,
 							"end_date" => $rows->end_date,
+							"start_time" => $rows->start_time,
+							"end_time" => $rows->end_time,
 							"event_banner" => base_url().'assets/events/banner/'.$rows->event_banner,
 							"event_latitude" => $rows->event_latitude,
 							"event_longitude" => $rows->event_longitude,
@@ -1639,6 +1678,24 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	}
 //#################### Event review photo End ###############//
 
+//#################### Event review photo ###############//
+	public function Event_popularity($event_id,$user_id)
+	{
+	        $popularQuery = "SELECT * FROM event_popularity WHERE event_id = '$event_id' AND  user_id = '$user_id' LIMIT 1";
+			$popular_result = $this->db->query($popularQuery);
+			$popular_ress = $popular_result->result();
+			
+					if($popular_result->num_rows()==0)
+					{
+            			$popular_sql = "INSERT INTO event_popularity (event_id,user_id,view_date) VALUES ('". $event_id . "','". $user_id . "',NOW())";
+            			$insert_popular = $this->db->query($popular_sql);
+					$response = array("status" => "success", "msg" => "Popularity Added");
+			}else{
+			        $response = array("status" => "error", "msg" => "Already Added");
+			}  
+			return $response;
+	}
+//#################### Event review photo End ###############//
 
 //#################### Advanced Events Search ####################//
 	public function Advance_search($today_date,$tomorrow_date,$single_date,$from_date,$to_date,$event_type,$event_type_category,$selected_category,$selected_city)
@@ -1719,6 +1776,8 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 							"description" => $rows->description,
 							"start_date" => $rows->start_date,
 							"end_date" => $rows->end_date,
+							"start_time" => $rows->start_time,
+							"end_time" => $rows->end_time,
 							"event_banner" => base_url().'assets/events/banner/'.$rows->event_banner,
 							"event_latitude" => $rows->event_latitude,
 							"event_longitude" => $rows->event_longitude,
@@ -1801,16 +1860,53 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	}
 //#################### Booking Plan End ###############//
 
-//#################### Booking Plan details###############//
-	public function Booking($order_id,$event_id,$plan_id,$plan_time_id,$user_id,$number_of_seats,$total_amount,$booking_date)
+
+//#################### Booking Process Add ###############//
+	public function Bookingprocess($order_id,$event_id,$plan_id,$plan_time_id,$user_id,$number_of_seats,$total_amount,$booking_date)
 	{
+
 	        $sQuery = "INSERT INTO booking_process (order_id,event_id,plan_id,plan_time_id,user_id,number_of_seats,total_amount,booking_date) VALUES ('". $order_id . "','". $event_id . "','". $plan_id . "','". $plan_time_id . "','". $user_id . "','". $number_of_seats . "','". $total_amount . "','". $booking_date . "')";
 			$booking_insert = $this->db->query($sQuery);
 			
-			$response = array("status" => "success", "msg" => "Booking");		
+			$update_seats = "UPDATE booking_plan_timing SET seat_available = seat_available-$number_of_seats WHERE id ='$plan_time_id'";
+		    $seatsupdate = $this->db->query($update_seats);
+		    
+
+            $start = microtime(true);
+            set_time_limit(300);
+            
+            for ($i = 0; $i <= 300; ++$i) {
+    	        $order_query = "SELECT * FROM booking_history WHERE order_id = '$order_id' LIMIT 1";
+    			$order_res = $this->db->query($order_query);
+    			//$order_result= $plan_res->result();
+    			
+    			if($order_res->num_rows()==0){
+    			     time_sleep_until($start + $i + 1);
+
+        			 if ($i=='300'){
+    			        $update_seats = "UPDATE booking_plan_timing SET seat_available = seat_available+$number_of_seats WHERE id ='$plan_time_id'";
+    		            $seatsupdate = $this->db->query($update_seats);
+    		            $response = array("status" => "error", "msg" => "Time over");
+    			    }
+    			} 
+ 
+            }
+
+			$response = array("status" => "success", "msg" => "Bookingprocess");		
 			return $response;
 	}
-//#################### Booking Plan End ###############//
+//#################### Booking Process End ###############//
+
+//#################### Booking attendees Add ###############//
+	public function Bookingattendees($order_id,$name,$email_id,$mobile_no)
+	{
+	        $sQuery = "INSERT INTO booking_event_attendees (order_id,name,email_id,mobile_no) VALUES ('". $order_id . "','". $name . "','". $email_id . "','". $mobile_no . "')";
+			$booking_insert = $this->db->query($sQuery);
+
+			$response = array("status" => "success", "msg" => "Attendees Added");		
+			return $response;
+	}
+//#################### Booking attendees End ###############//
 
 
 //#################### Booking history ####################//
@@ -1859,6 +1955,142 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			return $response;
 	}
 //#################### Booking details End ###############//
+
+//#################### User activity Add ###############//
+	public function User_activity($rule_id,$user_id,$event_id,$date)
+	{
+	    if ($rule_id == '1') //Login//
+	        {
+                $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' AND DATE(`login_date`) = DATE( DATE_SUB( NOW() , INTERVAL 1 DAY ) ) ORDER BY id DESC";
+		        $login_res = $this->db->query($login_query);
+            	if($login_res->num_rows()>0){
+            		    foreach ($login_res->result() as $rows)
+            			{
+            				  $day_count  = $rows->cons_login_days ;
+            			} 
+            			if ($day_count <5){
+            			    $total_count = $day_count +1;
+            			    $activity_sql = "INSERT INTO user_login (user_id,login_date,cons_login_days) VALUES ('". $user_id . "','". $date . "','". $total_count . "')";
+		    	            $insert_activity = $this->db->query($activity_sql);
+		    	            
+		    	            if ($total_count =='5'){
+		    	                $activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+20,total_points=total_points+20 WHERE user_id  ='$user_id'";
+		    	                $insert_points = $this->db->query($activity_points);
+		    	            }
+            			} else {
+            			    $total_count = 1;
+            			    $activity_sql = "INSERT INTO user_login (user_id,login_date,cons_login_days) VALUES ('". $user_id . "','". $date . "','". $total_count . "')";
+		    	            $insert_activity = $this->db->query($activity_sql);
+            			}
+            	}else {
+                            $total_count = 1;
+            			    $activity_sql = "INSERT INTO user_login (user_id,login_date,cons_login_days) VALUES ('". $user_id . "','". $date . "','". $total_count . "')";
+		    	            $insert_activity = $this->db->query($activity_sql);
+            	}
+            	$response = array("status" => "success", "msg" => "User Activity Updated");	
+	        }
+	    if ($rule_id == '2') //Sharing//
+	        {
+	            $activity_sql = "INSERT INTO user_activity (date,user_id,event_id,rule_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $event_id . "','". $rule_id . "','Sharing')";
+		    	$insert_activity = $this->db->query($activity_sql);
+		    	
+		    	$activity_points = "UPDATE user_points_count SET sharing_count = sharing_count+1,sharing_points = sharing_points+5,total_points=total_points+5 WHERE user_id  ='$user_id'";
+		    	$insert_points = $this->db->query($activity_points);
+
+    			$response = array("status" => "success", "msg" => "User Activity Updated");	
+	        }
+	   	if ($rule_id == '3') //Checkin//
+	        {
+    	       	$activity_sql = "INSERT INTO user_activity (date,user_id,event_id,rule_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $event_id . "','". $rule_id . "','Checkin')";
+		    	$insert_activity = $this->db->query($activity_sql);
+		    	
+		    	$activity_points = "UPDATE user_points_count SET checkin_count = checkin_count+1,checkin_points = checkin_points+10,total_points=total_points+10 WHERE user_id  ='$user_id'";
+		    	$insert_points = $this->db->query($activity_points);
+
+    			$response = array("status" => "success", "msg" => "User Activity Updated");	
+	        }
+
+			return $response; 
+	}
+//#################### User activity End ###############//
+
+
+//#################### Leaderboard details###############//
+	public function Leaderboard($user_id)
+	{
+	        $leaderboard_query = "SELECT * FROM user_points_count WHERE user_id = '$user_id' LIMIT 1";
+			$leaderboard_res = $this->db->query($leaderboard_query);
+			$leaderboard_result= $leaderboard_res->result();
+
+			 if($leaderboard_res->num_rows()>0){
+			     $response = array("status" => "success", "msg" => "View Leaderboard","Leaderboard"=>$leaderboard_result);
+			}else{
+			     $response = array("status" => "error", "msg" => "Leaderboard not found");
+			}  
+						
+			return $response;
+	}
+//#################### Leaderboard End ###############//
+
+//#################### Leaderboard details###############//
+	public function Activity_history($user_id,$rule_id)
+	{
+	    if ($rule_id =='1') {
+                $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' AND DATE(`login_date`) = CURDATE() ORDER BY id DESC";
+                $login_res = $this->db->query($login_query);
+                if($login_res->num_rows()>0){
+            		    foreach ($login_res->result() as $rows)
+            			{
+            		      $day_count  = $rows->cons_login_days ;
+            			}
+            			
+                                if ($day_count =='5'){
+                                        $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 5";
+                                } else if ($day_count =='4') {
+                                        $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 4";
+                                } else if ($day_count =='3') {
+                                        $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 3";
+                                } else if ($day_count =='2') {
+                                        $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 2";
+                                } else if ($day_count =='1'){
+                                        $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 1";
+                                }
+        		                $login_res = $this->db->query($login_query);
+                                if($login_res->num_rows()>0){
+                    		    foreach ($login_res->result() as $rows) {
+                    		      $Data[]  = array(
+            							"login_date " => $rows->login_date,
+            							"cons_login_days " => $rows->cons_login_days ,
+                				    );
+                            }
+                        }
+            	    $response = array("status" => "success", "msg" => "Login History","Data"=>$Data);
+                } else {
+                    $response = array("status" => "error", "msg" => "Sorry! Something wrong");
+                }
+	    }
+// // 	    } else if ($rule_id =='2'){
+// // 	        $sQuery = "SELECT * FROM user_points_count WHERE user_id = '$user_id' LIMIT 1";
+// // 	    } else if ($rule_id =='3'){
+// // 	        $sQuery = "SELECT * FROM user_points_count WHERE user_id = '$user_id' LIMIT 1";
+// // 	    } else if ($rule_id =='4'){
+// // 	        $sQuery = "SELECT * FROM booking_history A,events B WHERE A.user_id = '$user_id' AND A.event_id = B.id";
+// // 	    } else {
+// // 	        $sQuery = "SELECT * FROM user_points_count WHERE user_id = '$user_id' LIMIT 1";
+// // 	    }
+// // 			$activity_res = $this->db->query($sQuery);
+// // 			$activity_result= $activity_res->result();
+
+// 			 if($activity_res->num_rows()>0){
+// 			     $response = array("status" => "success", "msg" => "View Leaderboard","Leaderboard"=>$leaderboard_result);
+// 			}else{
+// 			     $response = array("status" => "error", "msg" => "Leaderboard not found");
+// 			}  
+		
+			return $response;
+	}
+//#################### Leaderboard End ###############//
+
 }
 
 ?>
