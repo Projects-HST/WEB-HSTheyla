@@ -41,7 +41,7 @@ class Reviews extends CI_Controller
 
         $datas['views'] = $this->reviewsmodel->view_all_reviews();
 
-        // echo'<pre>';print_r($datas['views']);exit();
+        //echo'<pre>';print_r($datas['views']);exit();
 
 		if($user_role==1)
 		{
@@ -53,15 +53,15 @@ class Reviews extends CI_Controller
 	 		 }
 
     }
-    public function display($id,$sts)
+    public function display($id,$sts,$event_id,$userid)
     { 
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-	    //echo $id; echo $sts; exit;
+	    //echo $id; echo $sts; echo $event_id; exit;
        if($user_role==1)
        { 
-		    $datas = $this->reviewsmodel->reviews_status($id,$sts,$user_id);
+		    $datas = $this->reviewsmodel->reviews_status($id,$sts,$user_id,$event_id,$userid);
 			if($datas['status']=="success")
 		     {  
 		       $this->session->set_flashdata('msg','Updated Successfully');
@@ -76,7 +76,7 @@ class Reviews extends CI_Controller
 
     }
 
-     public function archive($id,$sts)
+     public function archive($id,$sts,$event_id,$userid)
     { 
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
@@ -84,7 +84,7 @@ class Reviews extends CI_Controller
 	    //echo $id; echo $sts; exit;
         if($user_role==1)
         { 
-	      $datas = $this->reviewsmodel->reviews_status($id,$sts,$user_id);
+	      $datas = $this->reviewsmodel->reviews_status($id,$sts,$user_id,$event_id,$userid);
 		  if($datas['status']=="success")
 	       {  
 		       $this->session->set_flashdata('msg','Updated Successfully');

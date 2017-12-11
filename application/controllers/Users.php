@@ -183,10 +183,10 @@ class Users extends CI_Controller
 	        $email=$this->input->post('email');
 	        $old_pwd=$this->input->post('old_pwd');
 	        $pwd1=$this->db->escape_str($this->input->post('new_pwd'));
-
+            //echo $old_pwd; echo'<br>'; echo md5($pwd1);
 	        if(empty($pwd1)){
 				$pwd=$old_pwd;
-			}else{ $pwd=$pwd1; }
+			}else{ $pwd=md5($pwd1); }
 
 	        $sdate=$this->input->post('dob');
 

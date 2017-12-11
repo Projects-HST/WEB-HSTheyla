@@ -245,7 +245,7 @@
                 </div>
                 <!-- Slide Three - Set the background image for this slide in the line below -->
                 <div class="carousel-item" style="background-image: url('<?php echo base_url(); ?>assets/front/images/slider3.jpg')">
-                      <h1 class="caption-head">Encyclopedia of  <br>Events.</h1>
+                      <h1 class="caption-head">Encyclopedia of Events.</h1>
                     <div class="carousel-caption  d-md-block">
                       <img src="<?php echo base_url(); ?>assets/front/images/play.png" class=""> <img src="<?php echo base_url(); ?>assets/front/images/app.png" class="">
 
@@ -454,7 +454,9 @@
                     </form>
                 </div>
                 <div class="col-md-3">
-                    <p>Contact Information</p>
+                    <p class="getin">Contact Information</p>
+                    <p>No:6, Kummalamman Koil Street,<br>
+                    3rd Lane Tondiarpet, <br>Chennai - 600081</p>
                 </div>
             </div>
         </div>

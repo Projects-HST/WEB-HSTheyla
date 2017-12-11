@@ -59,7 +59,7 @@
 
                
                  <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>organizer/updateeventsdetails" name="eventform" id="eventform" onSubmit='return check();'>
-                  <?php foreach($edit as $rows){}?>
+                  <?php foreach($edit as $rows){} $sts=$rows->event_status;?>
                         <div class="form-group row">
                             <label for="Category" class="col-sm-2 col-form-label">Select Category</label>
                             <div class="col-sm-4">
@@ -307,18 +307,23 @@
 
                             <label class="col-sm-2 col-form-label">Event Banner</label>
                               <div class="col-sm-4">
-                               <input type="file" name="eventbanner" class="form-control" accept="image/*" >
+                               <input type="file" name="eventbanner" id="file_upload" class="form-control" accept="image/*" >
+                                 <div id="preview" style="color: red;"></div>
                                <input type="hidden" name="currentcpic" class="form-control" value="<?php echo $rows->event_banner;?>" >
                               <input type="hidden" name="eventid" class="form-control" value="<?php echo $rows->id; ?>" >
                                <img src="<?php echo base_url(); ?>assets/events/banner/<?php echo $rows->event_banner; ?>" class="img-circle">
+
                               </div>                            
                         </div>
 
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label"></label>
                             <div class="col-sm-2">
+                              <?php if($sts!='Y'){?>
                               <button type="submit" class="btn btn-primary waves-effect waves-light">
-                              Update </button></div>
+                              Update </button>
+                              <?php } ?>
+                            </div>
                               <div class="col-sm-2">
                               </div>
                         </div>
@@ -327,17 +332,13 @@
                 </div>
             </div> <!-- end col -->
         </div> <!-- end row -->
-
    </div><!-- container -->
    </div>
    <!-- Page content Wrapper -->
 </div>
 <!-- content -->
-         
-        </div><!--/span-->
-
-        
-      </div><!--/row-->
+ </div><!--/span-->
+</div><!--/row-->
  </div>
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByz7sU142AeFwpK3KiFilK0IOoa2GU9tw"></script>
@@ -375,6 +376,23 @@ $(document).ready(function () {
         format: 'dd-mm-yyyy'
       });
 
+$('#file_upload').on('change', function()
+        {
+          var f=this.files[0]
+          var actual=f.size||f.fileSize;
+          var orgi=actual/1024;
+            if(orgi<1024){
+              $("#preview").html('');
+              //$("#preview").html('<img src="<?php echo base_url(); ?>assets/loader.gif" alt="Uploading...."/>');
+              // $("#eventform").ajaxForm({
+              //     target: '#preview'
+              // }).submit();
+            }else{
+              $("#preview").html('File Size Must be  Lesser than 1 MB');
+              //alert("File Size Must be  Lesser than 1 MB");
+              return false;
+            }
+        });
 
     $('#eventform').validate({ // initialize the plugin
        rules: {

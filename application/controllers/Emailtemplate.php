@@ -13,7 +13,7 @@ class Emailtemplate extends CI_Controller
 		  $this->load->library('session');
        }
 
-//------------------------- Guest user View ---------------------------------
+//------------------------- Guest user View --------------------------------- send_email
 
     public function home()
 	{
@@ -189,7 +189,7 @@ class Emailtemplate extends CI_Controller
 	        $datas['res']=$this->mailmodel->send_mail_to_users($mailids,$email_temp_id);
 	        $sts=$datas['status'];
 	        //print_r($sts);exit;
-	        if($sta=="success"){
+	        if($sts=="Y"){
 		       $this->session->set_flashdata('msg','Send Successfully');
 			   redirect('emailtemplate/select_users');
 		    }else{

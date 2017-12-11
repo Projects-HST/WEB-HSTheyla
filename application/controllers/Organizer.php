@@ -105,11 +105,11 @@ class Organizer extends CI_Controller
         $contact_person = $this->input->post('contact_person');
         $email = $this->input->post('email');
         
-     //       $event_pic = $_FILES['eventbanner']['name']; 
-  //       $temp = pathinfo($event_pic, PATHINFO_EXTENSION);
-  //       $file_name      = time() . rand(1, 5) . rand(6, 10);
-  //       $event_banner   = $file_name. '.' .$temp;
-		// //$event_banner = trim($event_pic);
+	    //$event_pic = $_FILES['eventbanner']['name']; 
+	    //$temp = pathinfo($event_pic, PATHINFO_EXTENSION);
+        // $file_name      = time() . rand(1, 5) . rand(6, 10);
+        // $event_banner   = $file_name. '.' .$temp;
+		// $event_banner = trim($event_pic);
 		// $uploaddir = 'assets/events/banners/';
 		// $profilepic = $uploaddir.$event_banner;
 		// move_uploaded_file($_FILES['eventbanner']['tmp_name'],$profilepic);
@@ -259,7 +259,7 @@ class Organizer extends CI_Controller
         $colour_scheme=$this->input->post('colour_scheme');
 		$event_status=$this->input->post('event_status');
           
-         if(empty($event_banner)){
+         if(empty($event_pic)){
             $event_banner=$currentcpic;
          }else{
          	$event_banner=$event_banner;

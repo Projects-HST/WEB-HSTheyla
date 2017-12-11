@@ -68,7 +68,7 @@ Class Usersmodel extends CI_Model
 
     function add_user_details($name,$username,$cell,$email,$pwd,$dob,$gender,$address1,$address2,$address3,$occupation,$country,$statename,$city,$zip,$user_pic1,$status,$userrole,$user_id,$display_status)
     {
-    $pwd1=md5($pwd);
+    $pwd1=$pwd;
     $check_user="SELECT * FROM user_master WHERE user_name='$username'";
     $result=$this->db->query($check_user);
     if($result->num_rows()==0)

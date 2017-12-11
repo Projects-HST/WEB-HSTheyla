@@ -35,10 +35,20 @@ function edit_all_reviews($id)
 	return $res1;
 }
 
-function reviews_status($id,$sts,$user_id)
+function reviews_status($id,$sts,$user_id,$event_id,$userid)
 {
 	$rsts="UPDATE event_reviews SET status='$sts' WHERE id='$id'";
 	$resu1=$this->db->query($rsts);
+  
+    if($sts=='Y'){
+    	
+	$activity_sql = "INSERT INTO user_activity (date,user_id,event_id,rule_id,activity_detail) VALUES (NOW(),'$userid','$event_id','4','Review')";
+    $insert_activity = $this->db->query($activity_sql);
+            
+    $activity_points = "UPDATE user_points_count SET review_count = review_count+1,review_points=review_points +15, total_points =total_points+15 WHERE user_id ='$userid'";
+    $insert_points = $this->db->query($activity_points);
+	 }		
+			
 	$data= array("status"=>"success");
 	return $data;
 }
