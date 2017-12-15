@@ -19,6 +19,9 @@
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url(); ?>assets/front/css/carousel.css" rel="stylesheet">
     <script src="<?php echo base_url(); ?>assets/front/js/jquery.min.js"></script>
+
+    <script src="<?php echo base_url(); ?>assets/front/js/analytics.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-92904528-2"></script>
     <script src="<?php echo base_url(); ?>assets/front/js/popper.min.js"></script>
 
     <script src="<?php echo base_url(); ?>assets/front/js/bootstrap.min.js"></script>
@@ -129,6 +132,5 @@
 </body>
 <script src="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/pages/sweet-alert.init.js"></script>
-
 
 </html>
