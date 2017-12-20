@@ -99,7 +99,7 @@
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-calendar-clock"></i> <span> Event Advertisement</span> </a>
                     <ul class="list-unstyled">
                         <li id="plan"><a href="<?php echo base_url();?>advertisement/home"> Add Plan</a></li>
-                        <li id="list"><a href="<?php echo base_url();?>advertisement/view_adv_plan">Review</a></li>
+                        <li id="list"><a href="<?php echo base_url();?>advertisement/view_adv_plan">View List of Advertisement Events </a></li>
                         <li id="history"><a href="<?php echo base_url();?>advertisement/view_adv_history ">History</a></li>
                     </ul>
                 </li>
