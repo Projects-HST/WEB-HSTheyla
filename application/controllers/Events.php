@@ -186,7 +186,9 @@ class Events extends CI_Controller
         $profilepic     = $uploaddir . $event_banner;
         move_uploaded_file($_FILES['eventbanner']['tmp_name'], $profilepic);
         $eadv_status   = $this->input->post('eadv_status');
+
         $booking_sts   = $this->input->post('booking_sts');
+        //echo $booking_sts ;exit;
         $hotspot_sts   = $this->input->post('hotspot_sts');
         $colour_scheme = $this->input->post('colour_scheme');
         $event_status  = $this->input->post('event_status');

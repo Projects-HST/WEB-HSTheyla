@@ -128,10 +128,9 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                           
                             <label for="Venue" class="col-sm-2 col-form-label">Venue</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" value="<?php echo $rows->event_venue; ?>" required="" name="venue">
+                             <input class="form-control" type="text" value="<?php echo $rows->event_venue; ?>" required="" name="venue">
                             </div>
                              <label for="Address" class="col-sm-2 col-form-label">Address</label>
                             <div class="col-sm-4">
@@ -180,23 +179,11 @@
                             <div class="col-sm-4">
 
                                <input  type="text" class="form-control" id="stime" name="start_time" value="<?php echo $rows->start_time; ?>">
-
-                                <!-- select name="start_time" required="" class="form-control"  >
-                                     <option value="">Select Start Time</option>
-									                   <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
-								                </select>
-                                <script language="JavaScript">document.eventform.start_time.value="<?php echo $rows->start_time; ?>";</script-->
-
                             </div>
 
                              <label for="etime" class="col-sm-2 col-form-label">End Time</label>
                             <div class="col-sm-4">
                               <input  type="text" class="form-control" id="etime" name="end_time" value="<?php echo $rows->end_time; ?>">
-                                <!--select name="end_time" required="" class="form-control" id="etime">
-                                     <option value="">Select End Time</option>
-									                   <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
-								                </select>
-                                 <script language="JavaScript">document.eventform.end_time.value="<?php echo $rows->end_time; ?>";</script-->
                             </div>
 
                         </div>
@@ -226,6 +213,7 @@
                             <label for="seccell" class="col-sm-2 col-form-label">Secondary Contact Phone</label>
                             <div class="col-sm-4">
                                 <input class="form-control" type="text" value="<?php echo $rows->secondary_contact_no; ?>" name="scontact_cell" value="" >
+                                 <input class="form-control" type="hidden" value="<?php echo $rows->booking_status; ?>" name="booking_sts" value="" >
                             </div>
                         </div>
                        <div class="form-group row">
