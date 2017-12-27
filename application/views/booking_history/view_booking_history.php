@@ -57,7 +57,8 @@
                         <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
-							                   <th>S.No</th>
+							     <th>S.No</th>
+							     <th style="width: 70px;">Order Id</th>
                                  <th>Event Name</th>
                                  <th>Plan</th>
                                  <th>Show Date & Time</th>
@@ -75,6 +76,7 @@
                                 ?>
                                <tr>
                                  <td><?php echo $i; ?></td>
+                                 <td style="width: 70px;"><?php echo $rows->order_id;?></td>
                                  <td><?php echo $rows->event_name; ?></td>
                                  <td><?php echo $rows->plan_name; ?></td>
                                  <td><?php $date=date_create($rows->show_date);

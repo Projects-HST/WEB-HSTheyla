@@ -78,7 +78,7 @@ class Bookinghistory extends CI_Controller
 	    $user_role=$this->session->userdata('user_role');
 
         $datas['status'] = $this->bookinghistorymodel->view_booking_status_details();
-        //echo'<pre>'; print_r($datas['status']); exit;
+       // echo'<pre>'; print_r($datas['status']); exit;
 		if($user_role==1)
 		{
 		  $this->load->view('header');
@@ -87,6 +87,25 @@ class Bookinghistory extends CI_Controller
 	 	}else{
 	 			redirect('/');
 	 		 }
+	}
+	
+	public function view_payment_details($booking_id)
+	{
+	   // echo $booking_id; exit;
+	    $datas=$this->session->userdata();
+	    $user_id=$this->session->userdata('id');
+	    $user_role=$this->session->userdata('user_role');
+
+        $datas['all'] = $this->bookinghistorymodel->view_payment_alldetails($booking_id);
+       //echo'<pre>'; print_r($datas['all']); exit;
+		if($user_role==1)
+		{
+		  $this->load->view('header');
+		  $this->load->view('booking_history/view_all_details',$datas);
+		  $this->load->view('footer');
+	 	}else{
+	 			redirect('/');
+	 		 }  
 	}
 
 }
