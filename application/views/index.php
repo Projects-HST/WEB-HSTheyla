@@ -236,7 +236,7 @@
             <!-- <div class="carousel-inner carousel-fade" role="listbox"> -->
                 <!-- Slide One - Set the background image for this slide in the line below -->
                 <div class="carousel-item active" style="background-image: url('<?php echo base_url(); ?>assets/front/images/slider1.jpg')">
-                    <h1 class="caption-head"> Click. Explore. Connect.</h1>
+                    <h1 class="caption-head"> Events on your Fingertips</h1>
                     <div class="carousel-caption  d-md-block">
 
                         <img src="<?php echo base_url(); ?>assets/front/images/play.png" class=""> <img src="<?php echo base_url(); ?>assets/front/images/app.png" class="">
@@ -245,7 +245,7 @@
                 </div>
                 <!-- Slide Two - Set the background image for this slide in the line below -->
                 <div class="carousel-item" style="background-image: url('<?php echo base_url(); ?>assets/front/images/slider2.jpg')">
-                      <h1 class="caption-head">Your Event Search Ends Here.</h1>
+                      <h1 class="caption-head">Extreme Event Search is now Heyla</h1>
                     <div class="carousel-caption  d-md-block">
                       <img src="<?php echo base_url(); ?>assets/front/images/play.png" class=""> <img src="<?php echo base_url(); ?>assets/front/images/app.png" class="">
 
@@ -253,7 +253,7 @@
                 </div>
                 <!-- Slide Three - Set the background image for this slide in the line below -->
                 <div class="carousel-item" style="background-image: url('<?php echo base_url(); ?>assets/front/images/slider3.jpg')">
-                      <h1 class="caption-head">Encyclopedia of Events.</h1>
+                      <h1 class="caption-head">Encyclopedia of Events</h1>
                     <div class="carousel-caption  d-md-block">
                       <img src="<?php echo base_url(); ?>assets/front/images/play.png" class=""> <img src="<?php echo base_url(); ?>assets/front/images/app.png" class="">
 
@@ -270,10 +270,10 @@
         <div class="container">
             <div>
                 <p class="heading2">WHAT'S HEYLA</p>
-                <p class="whatsheyla">Wanna do something exciting? Wanna do something alone? Or wanna take someone out? Or are you one amongst those who is the planner of the group? Or are you the bored set to find out what's happening in your city? We all think that, don't we??
+                <p class="whatsheyla">Heyla is your Gateway to the World Outside in your Pocket – Explore, Discover, Share and Enjoy. It is the encyclopaedia of “What, When and Where” of the World of Entertainment, Shopping, Sports, Dining, Travelling and more
                     <p>
                         <p class="whatsheyla">
-                            With Heyla App, create, share, find and attend events that enrich lives and make your wishes come true. So what are you waiting for? Hit the download icon and let Heyla App be your go-to for events!
+                          The Power of Heyla is just clicks away – Download the app now and embark on a journey to discover the undiscovered World of total Entertainment. Heyla is an everything-for-everybody App – Start Exploring Straightaway.
 
                         </p>
             </div>
