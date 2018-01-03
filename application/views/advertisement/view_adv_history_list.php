@@ -81,7 +81,7 @@
                         <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
-							                   <th>S.No</th>
+							     <th>S.No</th>
                                  <th>Event Name</th>
                                  <th>Category Rate</th>
                                  <th>From Date</th>
@@ -90,7 +90,7 @@
                                  <th>To Time</th>
                                  <th>Plan Name</th>
                                  <th>Status</th>
-                                 <th>Action</th>
+                                 <!--th>Action</th-->
                               </tr>
                            </thead>
                            <tbody>
@@ -112,12 +112,12 @@
                                  <td> <?php echo date("g:i a",strtotime("$rows->time_to")); ?></td>
                                  <td><?php  echo $rows->plan_name; ?></td>
                                     <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
-                                 <td>
+                                 <!--td>
                                   <a href="<?php echo base_url();?>advertisement/edit_history_all/<?php echo $rows->id;?>">
                                   <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
-                                 <!--a onclick="confirmGetMessage(<?php echo $ahid;?>)" >
-                                 <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
-                               </td>
+                                 <a onclick="confirmGetMessage(<?php echo $ahid;?>)" >
+                                 <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
+                               </td-->
                                   
                            </td>
                               </tr>

@@ -19,6 +19,14 @@
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url(); ?>assets/front/css/carousel.css" rel="stylesheet">
     <script src="<?php echo base_url(); ?>assets/front/js/jquery.min.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-92904528-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-92904528-2');
+    </script>
     <script src="<?php echo base_url(); ?>assets/front/js/popper.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/front/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/front/js/jquery.validate.js"></script>
@@ -97,7 +105,7 @@
             <?php
               // $user_role=$this->session->userdata('user_role');
                if(empty($user_role)){ ?>
-              
+
             <?php
                }else{ ?>
                  <?php  if($user_role=='3' || $user_role=='2'){ ?>
@@ -143,7 +151,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <p class="fnt-footer">Powered By Happysanz Tech</p>
+                    <p class="fnt-footer">Crafted With Happiness</p>
                 </div>
                 <div class="col-md-6">
                     <ul class="list-inline fnt-footer ">
@@ -215,5 +223,4 @@
    });
 
 </script>
-
 </html>

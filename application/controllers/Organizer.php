@@ -105,11 +105,11 @@ class Organizer extends CI_Controller
         $contact_person = $this->input->post('contact_person');
         $email = $this->input->post('email');
         
-	    //$event_pic = $_FILES['eventbanner']['name']; 
-	    //$temp = pathinfo($event_pic, PATHINFO_EXTENSION);
-        // $file_name      = time() . rand(1, 5) . rand(6, 10);
-        // $event_banner   = $file_name. '.' .$temp;
-		// $event_banner = trim($event_pic);
+     //       $event_pic = $_FILES['eventbanner']['name']; 
+  //       $temp = pathinfo($event_pic, PATHINFO_EXTENSION);
+  //       $file_name      = time() . rand(1, 5) . rand(6, 10);
+  //       $event_banner   = $file_name. '.' .$temp;
+		// //$event_banner = trim($event_pic);
 		// $uploaddir = 'assets/events/banners/';
 		// $profilepic = $uploaddir.$event_banner;
 		// move_uploaded_file($_FILES['eventbanner']['tmp_name'],$profilepic);
@@ -245,6 +245,7 @@ class Organizer extends CI_Controller
 		// move_uploaded_file($_FILES['eventbanner']['tmp_name'],$profilepic);
 
 		$event_pic      = $_FILES['eventbanner']['name'];
+	
         $temp = pathinfo($event_pic, PATHINFO_EXTENSION);
         $file_name      = time() . rand(1, 5) . rand(6, 10);
         $event_banner   = $file_name. '.' .$temp;
@@ -258,6 +259,8 @@ class Organizer extends CI_Controller
 		
         $colour_scheme=$this->input->post('colour_scheme');
 		$event_status=$this->input->post('event_status');
+		
+        //echo $currentcpic; echo $event_banner;
           
          if(empty($event_pic)){
             $event_banner=$currentcpic;
@@ -270,7 +273,7 @@ class Organizer extends CI_Controller
          }else{
          	$city=$city;
          }
-
+          //echo'<br>'; echo $event_banner; exit;
         $datas=$this->organizermodel->update_events_details($eventid,$event_name,$category,$country,$city,$venue,$address,$description,$eventcost,$start_date,$end_date,$start_time,$end_time,$txtLatitude,$txtLongitude,$pcontact_cell,$scontact_cell,$contact_person,$email,$event_banner,$colour_scheme,$event_status,$eadv_status,$booking_sts,$hotspot_sts,$user_id,$user_role);
         $sta=$datas['status'];
 	   // print_r($sta);exit;

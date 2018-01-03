@@ -372,7 +372,6 @@
          event_status:{required:true },
          txtLatitude:{required:true },
          txtLongitude:{required:true }
-         
         },
 
         messages: {
@@ -403,9 +402,9 @@
  function getcityname(cid) {
            //alert(cid);
             $.ajax({
-               type: 'post',
-               url: '<?php echo base_url(); ?>events/get_city_name',
-               data: { country_id:cid },
+              type: 'post',
+              url: '<?php echo base_url(); ?>events/get_city_name',
+              data: { country_id:cid },
              dataType: "JSON",
              cache: false,
             success:function(test)
@@ -439,15 +438,16 @@ function check()
       var fdate = document.getElementById("datepicker-autoclose").value;
       var tdate = document.getElementById("datepicker").value;
 
-       //alert(fdate);alert(tdate);
+      //alert(fdate);alert(tdate);
       var chunks = fdate.split('-');
       var formattedDate = chunks[1]+'/'+chunks[0]+'/'+chunks[2];
        //alert(formattedDate);
       var chunks1 = tdate.split('-');
       var formattedDate1 = chunks1[1]+'/'+chunks1[0]+'/'+chunks1[2];
-      //alert(formattedDate1);
+      //alert(chunks1[2]);
       //alert( Date.parse(formattedDate));
       //alert( Date.parse(formattedDate1));
+
       if(Date.parse(formattedDate) > Date.parse(formattedDate1) )
       {
        alert("Startdate should be less than Enddate");
@@ -456,7 +456,6 @@ function check()
 
       if(Date.parse(formattedDate)==Date.parse(formattedDate1) )
       {
-      
         var strStartTime = document.getElementById("stime").value;
         var strEndTime = document.getElementById("etime").value;
 
@@ -478,21 +477,27 @@ function check()
           return false;
         }
     }else{
-      var date1 = new Date(formattedDate);
-      var date2 = new Date(formattedDate1);
-
-      var strStartTime = document.getElementById("stime").value;
-      var strEndTime = document.getElementById("etime").value;
-       var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
-       var endTime = new Date(startTime);
-       endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
-      var a=formattedDate + '' + strStartTime;
-      var b=formattedDate1 + '' + strEndTime;
-      //alert(startTime);alert(endTime); alert(a);alert(b); 
-      if (a == b || a > b) {
-      alert("Start Date & Time is greater than end Date & Time");
-      return false;
-      }
+        var date1 = new Date(formattedDate);
+        var date2 = new Date(formattedDate1);
+      
+         var y1=chunks[2];
+         var y2=chunks1[2]; 
+        if(y1<y2){
+            //alert(chunks[2]);alert(chunks1[2]); 
+        }else{
+          var strStartTime = document.getElementById("stime").value;
+          var strEndTime = document.getElementById("etime").value;
+          var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+          var endTime = new Date(startTime);
+          endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+          var a=formattedDate + '' +startTime;
+          var b=formattedDate1 + ''+endTime;
+          //alert(startTime);alert(endTime); alert(a);alert(b); 
+          if (a == b || a > b) {
+          alert("Start Date & Time is greater than end Date & Time");
+          return false;
+          }
+        }
     }
       function GetHours(d) 
       {

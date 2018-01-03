@@ -44,5 +44,13 @@ function view_booking_status_details()
   return $res;
 }
 
+function view_payment_alldetails($booking_id)
+{
+    $sql="SELECT * FROM booking_status WHERE id='$booking_id'";
+    $resu=$this->db->query($sql);
+    $res=$resu->result();
+    return $res;
+}
+
 }
 ?>

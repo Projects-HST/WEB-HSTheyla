@@ -335,19 +335,23 @@ function confirmGetMessage(adid)
     }else{
       var date1 = new Date(formattedDate);
       var date2 = new Date(formattedDate1);
-
-      var strStartTime = document.getElementById("stime").value;
-      var strEndTime = document.getElementById("etime").value;
-      var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
-      var endTime = new Date(startTime);
-       endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
-      var a=formattedDate + '' + strStartTime;
-      var b=formattedDate1 + '' + strEndTime;
-      //alert(startTime);alert(endTime); alert(a);alert(b); 
-      if (a == b || a > b) {
-      alert("Start Date & Time is greater than end Date & Time");
-      return false;
-      }
+      var y1=chunks[2];
+      var y2=chunks1[2]; 
+      if(y1<y2){
+            //alert(chunks[2]);alert(chunks1[2]); 
+        }else{
+            var strStartTime = document.getElementById("stime").value;
+            var strEndTime = document.getElementById("etime").value;
+            var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+            var endTime = new Date(startTime);
+             endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+            var a=formattedDate + '' + strStartTime;
+            var b=formattedDate1 + '' + strEndTime;
+            //alert(startTime);alert(endTime); alert(a);alert(b); 
+            if (a == b || a > b) {
+            alert("Start Date & Time is greater than end Date & Time");
+            return false; }
+          }
     }
       function GetHours(d) 
       {

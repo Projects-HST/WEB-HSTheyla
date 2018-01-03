@@ -57,7 +57,8 @@
                         <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
-							                   <th>S.No</th>
+							     <th>S.No</th>
+							     <th>Order Id</th>
                                  <th>Order Status</th>
                                  <th>Payment Mode</th>
                                  <th>Status Message</th>
@@ -72,6 +73,7 @@
                                 ?>
                               <tr>
                                  <td><?php echo $i; ?></td>
+                                 <td><?php echo $rows->order_id; ?></td>
                                  <td><?php echo $rows->order_status; ?></td>
                                  <td><?php echo $rows->payment_mode; ?></td>
                                  <td><?php echo $rows->status_message; ?></td>

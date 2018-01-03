@@ -1,14 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Guestuser extends CI_Controller 
 {
 	function __construct() 
 	   {
 		  parent::__construct();
-		  $this->load->model('guestusermodel');
 		  $this->load->helper('url');
-		  $this->load->library('session');
+          $this->load->library('session');
+		  $this->load->model('guestusermodel');
        }
 
 //------------------------- Guest user View ---------------------------------
@@ -75,4 +74,5 @@ class Guestuser extends CI_Controller
 	 		 }
     }
 
-}?>
+}
+?>
