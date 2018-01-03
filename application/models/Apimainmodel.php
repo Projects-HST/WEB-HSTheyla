@@ -23,6 +23,34 @@ class Apimainmodel extends CI_Model {
 //#################### Email End ####################//
 
 
+//#################### Email ####################//
+
+	public function seatCheck($order_id,$number_of_seats)
+	{
+	
+			$start = microtime(true);
+            set_time_limit(10);
+            
+            for ($i = 0; $i <= 10; ++$i) {
+    	        $order_query = "SELECT * FROM booking_history WHERE order_id = '$order_id' LIMIT 1";
+    			$order_res = $this->db->query($order_query);
+    			//$order_result= $plan_res->result();
+    			
+    			if($order_res->num_rows()==0){
+    			     time_sleep_until($start + $i + 1);
+
+        			 if ($i=='10'){
+    			        $update_seats = "UPDATE booking_plan_timing SET seat_available = seat_available+$number_of_seats WHERE id ='$plan_time_id'";
+    		            $seatsupdate = $this->db->query($update_seats);
+    		            $response = array("status" => "error", "msg" => "Time over");
+    			    }
+    			} 
+ 
+            }
+	}
+
+//#################### Email End ####################//
+
 //#################### Notification ####################//
 
 	public function sendNotification($gcm_key,$Title,$Message,$mobiletype)
@@ -1481,133 +1509,133 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	}
 //#################### View Events End ###############//
 
-//#################### View Adv Events ####################//
-	public function View_adv_events($city,$user_id,$preferrence)
-	{
-	    $current_date = date("Y-m-d");
+// //#################### View Adv Events ####################//
+// 	public function View_adv_events($city,$user_id,$preferrence)
+// 	{
+// 	    $current_date = date("Y-m-d");
 	    
-        $city_query = "SELECT * FROM city_master WHERE city_name like '%" .$city. "%' LIMIT 1";
-		$city_res = $this->db->query($city_query);
-		 if($city_res->num_rows()>0){
-		    foreach ($city_res->result() as $rows)
-			{
-				  $city_id  = $rows->id ;
-			}
-		 }
+//         $city_query = "SELECT * FROM city_master WHERE city_name like '%" .$city. "%' LIMIT 1";
+// 		$city_res = $this->db->query($city_query);
+// 		 if($city_res->num_rows()>0){
+// 		    foreach ($city_res->result() as $rows)
+// 			{
+// 				  $city_id  = $rows->id ;
+// 			}
+// 		 }
 		 
-		 $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
-                        from events as ev
-                        left join event_popularity as ep on ep.event_id = ev.id
-                        LEFT JOIN city_master AS ci ON ev.event_city = ci.id
-                        LEFT JOIN country_master AS cy ON ev.event_country = cy.id
-                        LEFT JOIN adv_event_history AS aeh ON aeh.event_id = ev.id
-                        WHERE ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y' AND aeh.date_to >= '$current_date' group by ev.id, aeh.event_id";
-    	    //echo $event_query;
-		    $event_res = $this->db->query($event_query);
+// 		 $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
+//                         from events as ev
+//                         left join event_popularity as ep on ep.event_id = ev.id
+//                         LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+//                         LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+//                         LEFT JOIN adv_event_history AS aeh ON aeh.event_id = ev.id
+//                         WHERE ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y' AND aeh.date_to >= '$current_date' group by ev.id, aeh.event_id";
+//     	    //echo $event_query;
+// 		    $event_res = $this->db->query($event_query);
 
-			if($event_res->num_rows()>0){
-                $event_result= $event_res->result();
+// 			if($event_res->num_rows()>0){
+//                 $event_result= $event_res->result();
 
-                foreach ($event_res->result() as $rows)
-			    {
-				     $eventData[]  = array(
-							"event_id" => $rows->id,
-							"popularity" => $rows->popularity,
-							"category_id" => $rows->category_id,
-							"event_name" => $rows->event_name,
-							"event_venue" => $rows->event_venue,
-							"event_address" => $rows->event_address,
-							"description" => $rows->description,
-							"start_date" => $rows->start_date,
-							"end_date" => $rows->end_date,
-							"start_time" => $rows->start_time,
-							"end_time" => $rows->end_time,
-							"event_banner" => base_url().'assets/events/banner/'.$rows->event_banner,
-							"event_latitude" => $rows->event_latitude,
-							"event_longitude" => $rows->event_longitude,
-							"event_country" => $rows->event_country,
-							"country_name" => $rows->country_name,
-							"event_city" => $rows->event_city,
-							"city_name" => $rows->city_name,
-							"primary_contact_no" => $rows->primary_contact_no,
-							"secondary_contact_no" => $rows->secondary_contact_no,
-							"contact_person" => $rows->contact_person,
-							"contact_email" => $rows->contact_email,
-							"event_type" => $rows->event_type,
-							"adv_status" => $rows->adv_status,
-							"booking_status" => $rows->booking_status,
-							"hotspot_status" => $rows->hotspot_status,
-							"event_colour_scheme" => $rows->event_colour_scheme,
-							"event_status" => $rows->event_status,
-				    );
-			    }
-			     	$response = array("status" => "success", "msg" => "View Events","Eventdetails"=>$eventData);
-			}else{
-			        $response = array("status" => "error", "msg" => "Events not found");
-			}  
+//                 foreach ($event_res->result() as $rows)
+// 			    {
+// 				     $eventData[]  = array(
+// 							"event_id" => $rows->id,
+// 							"popularity" => $rows->popularity,
+// 							"category_id" => $rows->category_id,
+// 							"event_name" => $rows->event_name,
+// 							"event_venue" => $rows->event_venue,
+// 							"event_address" => $rows->event_address,
+// 							"description" => $rows->description,
+// 							"start_date" => $rows->start_date,
+// 							"end_date" => $rows->end_date,
+// 							"start_time" => $rows->start_time,
+// 							"end_time" => $rows->end_time,
+// 							"event_banner" => base_url().'assets/events/banner/'.$rows->event_banner,
+// 							"event_latitude" => $rows->event_latitude,
+// 							"event_longitude" => $rows->event_longitude,
+// 							"event_country" => $rows->event_country,
+// 							"country_name" => $rows->country_name,
+// 							"event_city" => $rows->event_city,
+// 							"city_name" => $rows->city_name,
+// 							"primary_contact_no" => $rows->primary_contact_no,
+// 							"secondary_contact_no" => $rows->secondary_contact_no,
+// 							"contact_person" => $rows->contact_person,
+// 							"contact_email" => $rows->contact_email,
+// 							"event_type" => $rows->event_type,
+// 							"adv_status" => $rows->adv_status,
+// 							"booking_status" => $rows->booking_status,
+// 							"hotspot_status" => $rows->hotspot_status,
+// 							"event_colour_scheme" => $rows->event_colour_scheme,
+// 							"event_status" => $rows->event_status,
+// 				    );
+// 			    }
+// 			     	$response = array("status" => "success", "msg" => "View Events","Eventdetails"=>$eventData);
+// 			}else{
+// 			        $response = array("status" => "error", "msg" => "Events not found");
+// 			}  
 						
-			return $response;
-	}
-//#################### Adv Events End ###############//
+// 			return $response;
+// 	}
+// //#################### Adv Events End ###############//
 
-//#################### View Events ####################//
-	public function View_eventdetails($event_id,$user_id)
-	{
-        $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
-                        from events as ev
-                        left join event_popularity as ep on ep.event_id = ev.id
-                        LEFT JOIN city_master AS ci ON ev.event_city = ci.id
-                        LEFT JOIN country_master AS cy ON ev.event_country = cy.id
-                        WHERE ev.id = '$event_id'AND ev.event_status  ='Y'
-                        group by ev.id";
+// //#################### View Events ####################//
+// 	public function View_eventdetails($event_id,$user_id)
+// 	{
+//         $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
+//                         from events as ev
+//                         left join event_popularity as ep on ep.event_id = ev.id
+//                         LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+//                         LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+//                         WHERE ev.id = '$event_id'AND ev.event_status  ='Y'
+//                         group by ev.id";
 	   
-		//echo $event_query;
-		$event_res = $this->db->query($event_query);
+// 		//echo $event_query;
+// 		$event_res = $this->db->query($event_query);
 
-		 if($event_res->num_rows()>0){
-                $event_result= $event_res->result();
+// 		 if($event_res->num_rows()>0){
+//                 $event_result= $event_res->result();
 
-                foreach ($event_res->result() as $rows)
-			    {
-				     $eventData[]  = array(
-							"event_id" => $rows->id,
-							"popularity" => $rows->popularity,
-							"category_id" => $rows->category_id,
-							"event_name" => $rows->event_name,
-							"event_venue" => $rows->event_venue,
-							"event_address" => $rows->event_address,
-							"description" => $rows->description,
-							"start_date" => $rows->start_date,
-							"end_date" => $rows->end_date,
-							"start_time" => $rows->start_time,
-							"end_time" => $rows->end_time,
-							"event_banner" => base_url().'assets/events/banner/'.$rows->event_banner,
-							"event_latitude" => $rows->event_latitude,
-							"event_longitude" => $rows->event_longitude,
-							"event_country" => $rows->event_country,
-							"country_name" => $rows->country_name,
-							"event_city" => $rows->event_city,
-							"city_name" => $rows->city_name,
-							"primary_contact_no" => $rows->primary_contact_no,
-							"secondary_contact_no" => $rows->secondary_contact_no,
-							"contact_person" => $rows->contact_person,
-							"contact_email" => $rows->contact_email,
-							"event_type" => $rows->event_type,
-							"adv_status" => $rows->adv_status,
-							"booking_status" => $rows->booking_status,
-							"hotspot_status" => $rows->hotspot_status,
-							"event_colour_scheme" => $rows->event_colour_scheme,
-							"event_status" => $rows->event_status,
-				    );
-			    }
-			     	$response = array("status" => "success", "msg" => "View Events","Eventdetails"=>$eventData);
-			}else{
-			        $response = array("status" => "error", "msg" => "Events not found");
-			}  
+//                 foreach ($event_res->result() as $rows)
+// 			    {
+// 				     $eventData[]  = array(
+// 							"event_id" => $rows->id,
+// 							"popularity" => $rows->popularity,
+// 							"category_id" => $rows->category_id,
+// 							"event_name" => $rows->event_name,
+// 							"event_venue" => $rows->event_venue,
+// 							"event_address" => $rows->event_address,
+// 							"description" => $rows->description,
+// 							"start_date" => $rows->start_date,
+// 							"end_date" => $rows->end_date,
+// 							"start_time" => $rows->start_time,
+// 							"end_time" => $rows->end_time,
+// 							"event_banner" => base_url().'assets/events/banner/'.$rows->event_banner,
+// 							"event_latitude" => $rows->event_latitude,
+// 							"event_longitude" => $rows->event_longitude,
+// 							"event_country" => $rows->event_country,
+// 							"country_name" => $rows->country_name,
+// 							"event_city" => $rows->event_city,
+// 							"city_name" => $rows->city_name,
+// 							"primary_contact_no" => $rows->primary_contact_no,
+// 							"secondary_contact_no" => $rows->secondary_contact_no,
+// 							"contact_person" => $rows->contact_person,
+// 							"contact_email" => $rows->contact_email,
+// 							"event_type" => $rows->event_type,
+// 							"adv_status" => $rows->adv_status,
+// 							"booking_status" => $rows->booking_status,
+// 							"hotspot_status" => $rows->hotspot_status,
+// 							"event_colour_scheme" => $rows->event_colour_scheme,
+// 							"event_status" => $rows->event_status,
+// 				    );
+// 			    }
+// 			     	$response = array("status" => "success", "msg" => "View Events","Eventdetails"=>$eventData);
+// 			}else{
+// 			        $response = array("status" => "error", "msg" => "Events not found");
+// 			}  
 						
-			return $response;
-	}
-//#################### View Events End ###############//
+// 			return $response;
+// 	}
+// //#################### View Events End ###############//
 
 //#################### View Event Images ####################//
 	public function View_eventimages($event_id)
@@ -1635,10 +1663,62 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	}
 //#################### View Event Images End ###############//
 
-//#################### Event review ###############//
-	public function Event_review($event_id)
+//#################### Check Event review ###############//
+	public function Check_review($event_id,$user_id)
 	{
-	        $review_query = "SELECT A.*,B.user_name FROM event_reviews A, user_master B WHERE A.event_id = '$event_id' AND A.status='Y' AND A.user_id=B.id ORDER by A.review_positive DESC";
+	        $review_query = "SELECT * FROM event_reviews WHERE event_id = '$event_id' AND user_id='$user_id'";
+			$review_res = $this->db->query($review_query);
+			$review_result= $review_res->result();
+
+			 if($review_res->num_rows()>0){
+			     	$response = array("status" => "exist", "msg" => "Already Exist","Reviewdetails"=>$review_result);
+			}else{
+			        $response = array("status" => "new", "msg" => "Review Not found");
+			}  
+						
+			return $response;
+	}
+//#################### Check Event review End ###############//
+
+//#################### Add Event review ###############//
+	public function Add_review($user_id,$event_id,$event_rating,$comments)
+	{
+	        $review_query = "INSERT INTO `event_reviews` (`user_id`, `event_id`, `event_rating`, `comments`,`status`,`created_at`) VALUES ('$user_id', '$event_id', '$event_rating', '$comments','N',NOW())";
+	        $review_res = $this->db->query($review_query);
+            $review_id = $this->db->insert_id();
+            
+			if($review_res) {
+			    $response = array("status" => "success", "msg" => "Review Added", "review_id"=>$review_id);
+			} else {
+			    $response = array("status" => "error");
+			}
+			return $response;
+
+	}
+//#################### Event review End ###############//
+
+//#################### Update Event review ###############//
+	public function Update_review($review_id,$event_rating,$comments)
+	{
+	        $review_query = "UPDATE event_reviews SET event_rating='$event_rating',comments='$comments',status='N',updated_at=NOW() WHERE id='$review_id'";
+			$review_res = $this->db->query($review_query);
+			//$review_result= $review_res->result();
+
+			 if($review_res) {
+			    $response = array("status" => "success", "msg" => "Review Updated");
+			} else {
+			    $response = array("status" => "error");
+			}
+			return $response;
+	}
+//#################### Update Event review End ###############//
+
+
+//#################### Event review ###############//
+	public function List_eventreview($event_id)
+	{
+	        //$review_query = "SELECT A.*,B.user_name FROM event_reviews A, user_master B WHERE A.event_id = '$event_id' AND A.status='Y' AND A.user_id=B.id ORDER by A.review_positive DESC";
+	        $review_query = "SELECT A.id,A.event_id,C.event_name,A.event_rating,A.comments,B.user_name FROM event_reviews A, user_master B, events C  WHERE A.event_id = '$event_id' AND A.status='Y' AND A.user_id=B.id AND A.event_id = C.id ORDER by A.id DESC";
 			$review_res = $this->db->query($review_query);
 			$review_result= $review_res->result();
 
@@ -1678,24 +1758,26 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	}
 //#################### Event review photo End ###############//
 
-//#################### Event review photo ###############//
+//#################### Event popularity ###############//
 	public function Event_popularity($event_id,$user_id)
 	{
 	        $popularQuery = "SELECT * FROM event_popularity WHERE event_id = '$event_id' AND  user_id = '$user_id' LIMIT 1";
 			$popular_result = $this->db->query($popularQuery);
 			$popular_ress = $popular_result->result();
 			
-					if($popular_result->num_rows()==0)
-					{
-            			$popular_sql = "INSERT INTO event_popularity (event_id,user_id,view_date) VALUES ('". $event_id . "','". $user_id . "',NOW())";
-            			$insert_popular = $this->db->query($popular_sql);
-					$response = array("status" => "success", "msg" => "Popularity Added");
-			}else{
-			        $response = array("status" => "error", "msg" => "Already Added");
-			}  
+			if($popular_result->num_rows()==0)
+			{
+    			$popular_sql = "INSERT INTO event_popularity (event_id,user_id,view_date) VALUES ('". $event_id . "','". $user_id . "',NOW())";
+    			$insert_popular = $this->db->query($popular_sql);
+			    $response = array("status" => "success", "msg" => "Popularity Added");
+	        }else if($popular_result->num_rows()==1){
+	            $response = array("status" => "exist", "msg" => "Already Added");
+	        }  else {
+	            $response = array("status" => "error", "msg" => "Already Added");
+	        }
 			return $response;
 	}
-//#################### Event review photo End ###############//
+//#################### Event popularity End ###############//
 
 //#################### Advanced Events Search ####################//
 	public function Advance_search($today_date,$tomorrow_date,$single_date,$from_date,$to_date,$event_type,$event_type_category,$selected_category,$selected_city)
@@ -1807,10 +1889,10 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 //#################### Advanced Events Search End ###############//
 
 
-//#################### Booking Plan Dates###############//
+//#################### Booking Plan Dates###############//  
 	public function Booking_plandates($event_id)
 	{
-    		$date_query = "SELECT show_date FROM booking_plan_timing WHERE event_id  = '$event_id' GROUP BY show_date";
+    		$date_query = "SELECT show_date FROM booking_plan_timing WHERE event_id  = '$event_id' AND `show_date` >= CURDATE()  GROUP BY show_date";
 			$date_res = $this->db->query($date_query);
 			$date_result= $date_res->result();
     			
@@ -1818,7 +1900,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			     	$response = array("status" => "success", "msg" => "View Booking Dates","Eventdates"=>$date_result);
 				 
 			}else{
-			        $response = array("status" => "error", "msg" => "Booking Timings not found");
+			        $response = array("status" => "error", "msg" => "Booking Date not found");
 			}  
 						
 			return $response;
@@ -1828,7 +1910,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 //#################### Booking Plan Times ###############//
 	public function Booking_plantimes($event_id,$show_date)
 	{
-    		$time_query = "SELECT show_time FROM booking_plan_timing WHERE event_id  = '$event_id' AND show_date='$show_date' GROUP BY show_time";
+    		$time_query = "SELECT id,show_time FROM booking_plan_timing WHERE event_id  = '$event_id' AND show_date='$show_date' GROUP BY show_time";
 			$time_res = $this->db->query($time_query);
 			$time_result= $time_res->result();
     			
@@ -1871,11 +1953,31 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			$update_seats = "UPDATE booking_plan_timing SET seat_available = seat_available-$number_of_seats WHERE id ='$plan_time_id'";
 		    $seatsupdate = $this->db->query($update_seats);
 		    
-
-            $start = microtime(true);
-            set_time_limit(300);
+		    $_SESSION['booking_start'] = time(); // taking now logged in time
+            $_SESSION['booking_expire'] = $_SESSION['booking_start'] + (18* 10) ; // ending a session in 60 seconds
+		    
+		    $session_seats = "INSERT INTO booking_session (session_expiry,order_id,plan_time_id,number_of_seats) VALUES ('". $_SESSION['booking_expire'] . "','". $order_id . "','". $plan_time_id . "','". $number_of_seats . "')";
+			$session_insert = $this->db->query($session_seats);
+/*		    
+		    
             
-            for ($i = 0; $i <= 300; ++$i) {
+            $now = time(); // checking the time now when home page starts
+            if($now > $_SESSION['booking_expire'])
+            {
+                session_destroy();
+                echo "Your session has expire !  <a href='logout.php'>Click Here to Login</a>";
+            }
+            else
+            {
+                echo "This should be expired in 1 min <a href='logout.php'>Click Here to Login</a>";
+            }
+
+
+
+			$start = microtime(true);
+            set_time_limit(10);
+            
+            for ($i = 0; $i <= 10; ++$i) {
     	        $order_query = "SELECT * FROM booking_history WHERE order_id = '$order_id' LIMIT 1";
     			$order_res = $this->db->query($order_query);
     			//$order_result= $plan_res->result();
@@ -1883,7 +1985,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
     			if($order_res->num_rows()==0){
     			     time_sleep_until($start + $i + 1);
 
-        			 if ($i=='300'){
+        			 if ($i=='10'){
     			        $update_seats = "UPDATE booking_plan_timing SET seat_available = seat_available+$number_of_seats WHERE id ='$plan_time_id'";
     		            $seatsupdate = $this->db->query($update_seats);
     		            $response = array("status" => "error", "msg" => "Time over");
@@ -1891,8 +1993,8 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
     			} 
  
             }
-
-			$response = array("status" => "success", "msg" => "Bookingprocess");		
+*/
+        	$response = array("status" => "success", "msg" => "Bookingprocess");
 			return $response;
 	}
 //#################### Booking Process End ###############//
@@ -1912,7 +2014,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 //#################### Booking history ####################//
 	public function Booking_history($user_id)
 	{
-	        $booking_query = "SELECT * FROM booking_history A,events B WHERE A.user_id  = '$user_id' AND A.event_id = B.id";
+	        $booking_query = "SELECT A.id,A.order_id,E.category_name,B.id AS event_id,B.event_name,B.event_venue,B.event_address,C.show_date,C.show_time,D.plan_name,A.number_of_seats, A.total_amount,A.created_at,B.event_colour_scheme FROM booking_history A,events B,booking_plan_timing C,booking_plan D,category_master E WHERE A.user_id  = '$user_id' AND A.event_id = B.id AND A.plan_time_id = C.id AND A.plan_id = D.id AND B.category_id = E.id";
 			$booking_res = $this->db->query($booking_query);
 
 			 if($booking_res->num_rows()>0){
@@ -1923,14 +2025,15 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			}else{
 			        $response = array("status" => "error", "msg" => "Booking not found");
 			}  
-						
+		
 			return $response;
 	}
 //#################### Booking history End ###############//
 
 //#################### Booking details###############//
-	public function Booking_details($booking_id)
+	public function Booking_attendeesdetails($order_id)
 	{
+	       /*
 	        $booking_query = "SELECT * FROM booking_history A,events B WHERE A.id  = '$booking_id' AND A.event_id = B.id";
 			$booking_res = $this->db->query($booking_query);
 			$booking_result= $booking_res->result();
@@ -1941,16 +2044,17 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
     			{
     				  $order_id  = $rows->order_id ;
     			}
-    			
+    		*/
     			$attendees_query = "SELECT * FROM booking_event_attendees WHERE  order_id  ='$order_id'";
 			    $attendees_res = $this->db->query($attendees_query);
-			    $attendees_result= $attendees_res->result();
-    			
-			     	$response = array("status" => "success", "msg" => "View Booking History","Bookingdetails"=>$booking_result,"Bookingattendees"=>$attendees_result);
-				 
-			}else{
-			        $response = array("status" => "error", "msg" => "Booking not found");
-			}  
+			    
+    			if($attendees_res->num_rows()>0){
+    			        $attendees_result= $attendees_res->result();
+    			     	$response = array("status" => "success", "msg" => "View Booking attendees","Bookingattendees"=>$attendees_result);
+    				 
+    			}else{
+    			        $response = array("status" => "error", "msg" => "Booking not found");
+    			}  
 						
 			return $response;
 	}
