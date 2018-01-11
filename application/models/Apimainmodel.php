@@ -1363,15 +1363,15 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
         } else {
             $pre_query = "SELECT * FROM guest_user_preference WHERE user_id = '$user_id'";
         }
-		$pre_res = $this->db->query($pre_query);
+		    $pre_res = $this->db->query($pre_query);
       
-		 if($pre_res->num_rows()>0){
-		    foreach ($pre_res->result() as $rows)
-			{	
-				   $pref_ids[]  = $rows->category_id;
-			}
-			$preferrence = implode (",", $pref_ids);
-		 }
+    		 if($pre_res->num_rows()>0){
+    		    foreach ($pre_res->result() as $rows)
+    			{	
+    				   $pref_ids[]  = $rows->category_id;
+    			}
+    			$preferrence = implode (",", $pref_ids);
+    		 }
 
             $adv_event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
                         from events as ev
@@ -1779,8 +1779,9 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	}
 //#################### Event popularity End ###############//
 
+
 //#################### Advanced Events Search ####################//
-	public function Advance_search($today_date,$tomorrow_date,$single_date,$from_date,$to_date,$event_type,$event_type_category,$selected_category,$selected_city)
+	public function Advance_search($single_date,$from_date,$to_date,$event_type,$event_category,$selected_preference,$selected_city)
 	{
 	    $current_date = date("Y-m-d");
 	    
@@ -1795,52 +1796,73 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			}
 		 }
     
-        if ($event_type == 'General'){
-            $event_type_query = "ev.hotspot_status = 'N'";
+        if ($event_type ==''){
+            $event_type_query = "";
         }
-        if ($event_type == 'Hotspot'){
-            $event_type_query = "ev.hotspot_status = 'Y'";
+        if ($event_type =='Paid'){
+            $event_type_query = "ev.event_type = 'Paid' AND";
         }
-        if ($event_type == 'Popularity'){
-            $event_type_query = "ev.hotspot_status = 'N'";
+        if ($event_type =='Free'){
+            $event_type_query = "ev.event_type = 'Free' AND";
+        }
+        if ($event_type =='Invite'){
+            $event_type_query = "ev.event_type = 'Invite' AND";
+        }
+    
+    
+        if ($event_category == ''){
+            $event_category_query = "";
+        }
+        if ($event_category == 'General'){
+            $event_category_query = "ev.hotspot_status = 'N' AND";
+        }
+        if ($event_category == 'Hotspot'){
+            $event_category_query = "ev.hotspot_status = 'Y' AND";
+        }
+        if ($event_category == 'Popularity'){
+            $event_category_query = "ev.hotspot_status = 'N' AND";
             $event_popularity = "ORDER by popularity DESC";
         }
-        if ($event_type_category =='Paid'){
-            $event_type_cat_query = "ev.event_type = 'Paid'";
-        }
-        if ($event_type_category =='Free'){
-            $event_type_cat_query = "ev.event_type = 'Free'";
-        }
-        if ($event_type_category =='Invite'){
-            $event_type_cat_query = "ev.event_type = 'Invite'";
-        }
-        
-        $today_query = '';
-        if ($today_date !=''){
-            $today_query = "SUBSTRING(ev.end_date, 1, 10)  = '" . $today_date . "' or  SUBSTRING(ev.start_date, 1, 10) = '" . $today_date . "' AND";
-        }
-        $tomorrow_query ='';
-         if ($tomorrow_date !=''){
-            $tomorrow_query = "SUBSTRING(ev.end_date, 1, 10)  = '" . $tomorrow_date . "' or  SUBSTRING(ev.start_date, 1, 10) = '" . $tomorrow_date . "' AND";
-        }
+    
 	   $single_date_query ='';
          if ($single_date !=''){
-            $single_date_query = "SUBSTRING(ev.end_date, 1, 10)  = '" . $single_date . "' or  SUBSTRING(ev.start_date, 1, 10) = '" . $single_date . "' AND";
+             $single_date_query = "'$single_date' between ev.start_date AND ev.end_date AND";
         }
+        
 	   $fromto_date_query ='';
 	    if ($from_date !='' &&  $to_date !=''){
-	        $fromto_date_query = "ev.start_date  >= STR_TO_DATE('" . $from_date . "','%Y-%m-%d') and  ev.end_date <= STR_TO_DATE('" . $to_date . "','%Y-%m-%d') AND";
+	         $fromto_date_query = "ev.start_date  >= STR_TO_DATE('" . $from_date . "','%Y-%m-%d') and  ev.end_date <= STR_TO_DATE('" . $to_date . "','%Y-%m-%d') AND";
 	   }
 	   
-	    $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
-                            from events as ev
-                            left join event_popularity as ep on ep.event_id = ev.id
-                            LEFT JOIN city_master AS ci ON ev.event_city = ci.id
-                            LEFT JOIN country_master AS cy ON ev.event_country = cy.id
-                            WHERE $event_type_query AND $event_type_cat_query AND $today_query $tomorrow_query $single_date_query $fromto_date_query ev.end_date>='$current_date' AND ev.category_id IN ($selected_category) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
-                            group by ev.id $event_popularity";
+        $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
+            from events as ev
+            left join event_popularity as ep on ep.event_id = ev.id
+            LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+            LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+            WHERE $event_category_query $event_type_query $single_date_query $fromto_date_query ev.end_date>='$current_date' AND ev.category_id IN ($selected_preference) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
+            group by ev.id $event_popularity";
 
-	//	echo $event_query;
+            // $event_query = "SELECT
+            //     ev.*,
+            //     ci.city_name,
+            //     cy.country_name,
+            //     COUNT(ep.event_id) AS popularity
+            // FROM EVENTS AS
+            //     ev
+            // LEFT JOIN event_popularity AS ep
+            // ON
+            //     ep.event_id = ev.id
+            // LEFT JOIN city_master AS ci
+            // ON
+            //     ev.event_city = ci.id
+            // LEFT JOIN country_master AS cy
+            // ON
+            //     ev.event_country = cy.id
+            // WHERE
+            //     ev.hotspot_status = 'Y' AND ev.event_type = 'Paid' AND ev.start_date BETWEEN '2018-01-13' AND '2018-01-30' OR ev.end_date BETWEEN '2018-01-13' AND '2018-01-30' AND ev.end_date >= '2018-01-10' AND ev.category_id IN(17, 2) AND ev.event_city = '1' AND ev.event_status = 'Y'
+            // GROUP BY
+            //     ev.id";
+		//echo $event_query;
 		$event_res = $this->db->query($event_query);
 
 		 if($event_res->num_rows()>0){
@@ -2168,29 +2190,35 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                 				    );
                             }
                         }
-            	    $response = array("status" => "success", "msg" => "Login History","Data"=>$Data);
-                } else {
-                    $response = array("status" => "error", "msg" => "Sorry! Something wrong");
-                }
-	    }
-// // 	    } else if ($rule_id =='2'){
-// // 	        $sQuery = "SELECT * FROM user_points_count WHERE user_id = '$user_id' LIMIT 1";
-// // 	    } else if ($rule_id =='3'){
-// // 	        $sQuery = "SELECT * FROM user_points_count WHERE user_id = '$user_id' LIMIT 1";
-// // 	    } else if ($rule_id =='4'){
-// // 	        $sQuery = "SELECT * FROM booking_history A,events B WHERE A.user_id = '$user_id' AND A.event_id = B.id";
-// // 	    } else {
-// // 	        $sQuery = "SELECT * FROM user_points_count WHERE user_id = '$user_id' LIMIT 1";
-// // 	    }
-// // 			$activity_res = $this->db->query($sQuery);
-// // 			$activity_result= $activity_res->result();
+                        
+            	  $response = array("status" => "success", "msg" => "Login History","Data"=>$Data);
+                } 
 
-// 			 if($activity_res->num_rows()>0){
-// 			     $response = array("status" => "success", "msg" => "View Leaderboard","Leaderboard"=>$leaderboard_result);
-// 			}else{
-// 			     $response = array("status" => "error", "msg" => "Leaderboard not found");
-// 			}  
-		
+ 	    } else if ($rule_id =='2'){
+ 	            $sQuery = "SELECT A.user_id,A.rule_id,A.date,B.id AS event_id,B.event_name,B.event_venue FROM user_activity A,events B WHERE A.user_id = '$user_id' AND A.rule_id = '$rule_id' AND A.event_id = B.id ORDER BY A.date DESC";
+ 	            $activity_res = $this->db->query($sQuery);
+			    $activity_result= $activity_res->result();
+			    $response = array("status" => "success", "msg" => "Sharing History","Data"=>$activity_result);
+			    
+ 	    } else if ($rule_id =='3'){
+ 	            $sQuery = "SELECT A.user_id,A.rule_id,A.date,B.id AS event_id,B.event_name,B.event_venue FROM user_activity A,events B WHERE A.user_id = '$user_id' AND A.rule_id = '$rule_id' AND A.event_id = B.id ORDER BY A.date DESC";
+ 	            $activity_res = $this->db->query($sQuery);
+			    $activity_result= $activity_res->result();
+			    $response = array("status" => "success", "msg" => "Checking History","Data"=>$activity_result);
+			    
+ 	    } else if ($rule_id =='4'){
+ 	            $sQuery = "SELECT A.user_id,A.rule_id,A.date,B.id AS event_id,B.event_name,B.event_venue FROM user_activity A,events B WHERE A.user_id = '$user_id' AND A.rule_id = '$rule_id' AND A.event_id = B.id ORDER BY A.date DESC";
+ 	            $activity_res = $this->db->query($sQuery);
+			    $activity_result= $activity_res->result();
+			    $response = array("status" => "success", "msg" => "Review History","Data"=>$activity_result);
+			    
+ 	    } else {
+ 	            $sQuery = "SELECT A.user_id,A.rule_id,A.date,B.id AS event_id,B.event_name,B.event_venue FROM user_activity A,events B WHERE A.user_id = '$user_id' AND A.rule_id = '$rule_id' AND A.event_id = B.id ORDER BY A.date DESC";
+ 	            $activity_res = $this->db->query($sQuery);
+			    $activity_result= $activity_res->result();
+			    $response = array("status" => "success", "msg" => "Booking History","Data"=>$activity_result);
+ 	    }
+
 			return $response;
 	}
 //#################### Leaderboard End ###############//

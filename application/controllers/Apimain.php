@@ -1461,29 +1461,30 @@ public function profilePictureUpload()
 			echo json_encode($res);
 			return;
 		}
-		
-        $event_type = '';
-        $event_type_category = '';
-        $selected_category = '';
-        $selected_city = '';
-        $today_date = '';
-        $tomorrow_date ='';
-        $single_date = '';
+
+		$single_date = '';
         $from_date ='';
         $to_date = '';
-        
+        $event_type = '';
+        $event_category = '';
+        $selected_preference = '';
+        $selected_city = '';
+        //$today_date = '';
+        //$tomorrow_date ='';
 
-        $event_type = $this->input->post("event_type");
-        $event_type_category = $this->input->post("event_type_category");
-        $selected_category = $this->input->post("selected_category");
-        $selected_city = $this->input->post("selected_city");
-        $today_date = $this->input->post("today_date");
-        $tomorrow_date = $this->input->post("tomorrow_date");
+        
         $single_date = $this->input->post("single_date");
         $from_date = $this->input->post("from_date");
         $to_date = $this->input->post("to_date");
+        $event_type = $this->input->post("event_type");
+        $event_category = $this->input->post("event_category");
+        $selected_preference = $this->input->post("selected_preference");
+        $selected_city = $this->input->post("selected_city");
+       // $today_date = $this->input->post("today_date");
+       // $tomorrow_date = $this->input->post("tomorrow_date");
 
-		$data['result']=$this->apimainmodel->Advance_search($today_date,$tomorrow_date,$single_date,$from_date,$to_date,$event_type,$event_type_category,$selected_category,$selected_city);
+
+		$data['result']=$this->apimainmodel->Advance_search($single_date,$from_date,$to_date,$event_type,$event_category,$selected_preference,$selected_city);
 		$response = $data['result'];
 		echo json_encode($response);
 	}
@@ -1823,7 +1824,7 @@ public function profilePictureUpload()
 
 	public function activityHistory()
 	{
-		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
