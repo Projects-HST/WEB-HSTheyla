@@ -341,6 +341,9 @@ class Apimainmodel extends CI_Model {
 					{
             			$points_sql = "INSERT INTO user_points_count (user_id) VALUES ('". $user_id . "')";
             			$insert_points = $this->db->query($points_sql);
+            			
+            			$activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+20,total_points=total_points+20 WHERE user_id  ='$user_id'";
+		    	        $insert_points = $this->db->query($activity_points);
 					}
 
 			$gcmQuery = "SELECT * FROM push_notification_master WHERE gcm_key like '%" .$gcm_key. "%' LIMIT 1";
@@ -1255,17 +1258,18 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 //#################### Add Wishlist ####################//
 	public function Add_wishlist($user_id,$wishlist_master_id,$event_id)
 	{
-            $wishlistQuery = "SELECT * FROM user_wish_list WHERE wish_list_id  = '$wishlist_master_id' AND event_id = '$event_id'  LIMIT 1";
+            //$wishlistQuery = "SELECT * FROM user_wish_list WHERE wish_list_id  = '$wishlist_master_id' AND event_id = '$event_id'  LIMIT 1";
+            $wishlistQuery = "SELECT * FROM user_wish_list WHERE user_id  = '$user_id' AND event_id = '$event_id'  LIMIT 1";
 			$wishlist_result = $this->db->query($wishlistQuery);
 			$wishlist_ress = $wishlist_result->result();
 			
 				if($wishlist_result->num_rows()==0)
 				{
-					$sQuery = "INSERT INTO user_wish_list (wish_list_id ,event_id) VALUES ('". $wishlist_master_id . "','". $event_id . "')";
+					$sQuery = "INSERT INTO user_wish_list (user_id ,event_id) VALUES ('". $user_id . "','". $event_id . "')";
 					$update_gcm = $this->db->query($sQuery);
 					$response = array("status" => "success", "msg" => "Wishlist Added");
 				} else {
-				    $response = array("status" => "error", "msg" => "Already Added");
+				    $response = array("status" => "exist", "msg" => "Already Added");
 				}
 
 			return $response;
@@ -1276,12 +1280,54 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 //#################### View Wishlist ####################//
 	public function View_wishlist($user_id,$wishlist_master_id)
 	{
-	        $wishlist_query = "SELECT * FROM user_wish_list A,events B WHERE A.wish_list_id  = '$wishlist_master_id' AND A.event_id = B.id";
+	       // $wishlist_query = "SELECT * FROM user_wish_list A,events B WHERE A.wish_list_id  = '$wishlist_master_id' AND A.event_id = B.id";
+	        $wishlist_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
+                            from events as ev
+                            left join user_wish_list as uwl on uwl.event_id = ev.id
+                            left join event_popularity as ep on ep.event_id = ev.id
+                            LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+                            LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+                            WHERE uwl.user_id = '$user_id' AND ev.event_status  ='Y'
+                            group by ev.id ORDER by popularity DESC";
 			$wishlist_res = $this->db->query($wishlist_query);
 
-			 if($wishlist_res->num_rows()>0){
-			     	$wishlist_result= $wishlist_res->result();
-			     	$response = array("status" => "success", "msg" => "View Wishlist","Wishlist"=>$wishlist_result);
+			if($wishlist_res->num_rows()>0){
+	     	        $event_result= $wishlist_res->result();
+                    foreach ($wishlist_res->result() as $rows)
+    			    {
+    				     $eventData[]  = array(
+    							"event_id" => $rows->id,
+    							"popularity" => $rows->popularity,
+    							"category_id" => $rows->category_id,
+    							"event_name" => $rows->event_name,
+    							"event_venue" => $rows->event_venue,
+    							"event_address" => $rows->event_address,
+    							"description" => $rows->description,
+    							"start_date" => $rows->start_date,
+    							"end_date" => $rows->end_date,
+    							"start_time" => $rows->start_time,
+    							"end_time" => $rows->end_time,
+    							"event_banner" => base_url().'assets/events/banner/'.$rows->event_banner,
+    							"event_latitude" => $rows->event_latitude,
+    							"event_longitude" => $rows->event_longitude,
+    							"event_country" => $rows->event_country,
+    							"country_name" => $rows->country_name,
+    							"event_city" => $rows->event_city,
+    							"city_name" => $rows->city_name,
+    							"primary_contact_no" => $rows->primary_contact_no,
+    							"secondary_contact_no" => $rows->secondary_contact_no,
+    							"contact_person" => $rows->contact_person,
+    							"contact_email" => $rows->contact_email,
+    							"event_type" => $rows->event_type,
+    							"adv_status" => $rows->adv_status,
+    							"booking_status" => $rows->booking_status,
+    							"hotspot_status" => $rows->hotspot_status,
+    							"event_colour_scheme" => $rows->event_colour_scheme,
+    							"event_status" => $rows->event_status,
+    							"advertisement" => ''
+    				    );
+    			    }
+			     	$response = array("status" => "success", "msg" => "View Wishlist","Eventdetails"=>$eventData);
 				 
 			}else{
 			        $response = array("status" => "error", "msg" => "Wishlist not found");
@@ -1295,7 +1341,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 //#################### Delete Wishlist ####################//
 	public function Delete_wishlist($user_id,$wishlist_id)
 	{
-            	$sQuery = "DELETE FROM user_wish_list WHERE id = '" .$wishlist_id. "'";
+            	$sQuery = "DELETE FROM user_wish_list WHERE id = '" .$wishlist_id. "' AND user_id = '" .$user_id. "'";
     			$delete_list = $this->db->query($sQuery);
 
 				$response = array("status" => "success", "msg" => "Wishlist Deleted");
@@ -1303,6 +1349,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			return $response;
 	}
 //#################### Delete Wishlist ####################//
+
 /*
 //#################### View Events ####################//
 	public function View_events($event_type,$city,$user_id,$preferrence)
@@ -1785,20 +1832,30 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	{
 	    $current_date = date("Y-m-d");
 	    
-	    $event_popularity = '';
+	    $city_query ='';
+	    $preference_query = '';
+	    $event_type_query = '';
+	    $event_category_query = '';
+	    $single_date_query ='';
+	    $fromto_date_query ='';
+	    $event_popularity_query ='';
 	    
-        $city_query = "SELECT * FROM city_master WHERE city_name like '%" .$selected_city. "%' LIMIT 1";
-		$city_res = $this->db->query($city_query);
-		 if($city_res->num_rows()>0){
-		    foreach ($city_res->result() as $rows)
-			{
-				  $city_id  = $rows->id ;
-			}
-		 }
-    
-        if ($event_type ==''){
-            $event_type_query = "";
+	    if ($selected_city!='') {
+            $city_query = "SELECT * FROM city_master WHERE city_name like '%" .$selected_city. "%' LIMIT 1";
+    		$city_res = $this->db->query($city_query);
+    		 if($city_res->num_rows()>0){
+    		    foreach ($city_res->result() as $rows)
+    			{
+    				  $city_id  = $rows->id ;
+    			}
+    		 }
+    		 $city_query = "ev.event_city = '$city_id' AND";
+	    }
+	    
+	    if ($selected_preference != ''){
+            $preference_query = "ev.category_id IN ($selected_preference) AND";
         }
+        
         if ($event_type =='Paid'){
             $event_type_query = "ev.event_type = 'Paid' AND";
         }
@@ -1808,11 +1865,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
         if ($event_type =='Invite'){
             $event_type_query = "ev.event_type = 'Invite' AND";
         }
-    
-    
-        if ($event_category == ''){
-            $event_category_query = "";
-        }
+
         if ($event_category == 'General'){
             $event_category_query = "ev.hotspot_status = 'N' AND";
         }
@@ -1821,47 +1874,24 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
         }
         if ($event_category == 'Popularity'){
             $event_category_query = "ev.hotspot_status = 'N' AND";
-            $event_popularity = "ORDER by popularity DESC";
+            $event_popularity_query = "ORDER by popularity DESC";
         }
     
-	   $single_date_query ='';
          if ($single_date !=''){
-             $single_date_query = "'$single_date' between ev.start_date AND ev.end_date AND";
+             $single_date_query = "'$single_date' BETWEEN ev.start_date AND ev.end_date AND";
         }
-        
-	   $fromto_date_query ='';
+
 	    if ($from_date !='' &&  $to_date !=''){
-	         $fromto_date_query = "ev.start_date  >= STR_TO_DATE('" . $from_date . "','%Y-%m-%d') and  ev.end_date <= STR_TO_DATE('" . $to_date . "','%Y-%m-%d') AND";
+	        $fromto_date_query = "ev.start_date <= STR_TO_DATE('" . $to_date . "','%Y-%m-%d') AND  ev.end_date >= STR_TO_DATE('" . $from_date . "','%Y-%m-%d') AND";
 	   }
 	   
         $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
-            from events as ev
-            left join event_popularity as ep on ep.event_id = ev.id
-            LEFT JOIN city_master AS ci ON ev.event_city = ci.id
-            LEFT JOIN country_master AS cy ON ev.event_country = cy.id
-            WHERE $event_category_query $event_type_query $single_date_query $fromto_date_query ev.end_date>='$current_date' AND ev.category_id IN ($selected_preference) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
-            group by ev.id $event_popularity";
-
-            // $event_query = "SELECT
-            //     ev.*,
-            //     ci.city_name,
-            //     cy.country_name,
-            //     COUNT(ep.event_id) AS popularity
-            // FROM EVENTS AS
-            //     ev
-            // LEFT JOIN event_popularity AS ep
-            // ON
-            //     ep.event_id = ev.id
-            // LEFT JOIN city_master AS ci
-            // ON
-            //     ev.event_city = ci.id
-            // LEFT JOIN country_master AS cy
-            // ON
-            //     ev.event_country = cy.id
-            // WHERE
-            //     ev.hotspot_status = 'Y' AND ev.event_type = 'Paid' AND ev.start_date BETWEEN '2018-01-13' AND '2018-01-30' OR ev.end_date BETWEEN '2018-01-13' AND '2018-01-30' AND ev.end_date >= '2018-01-10' AND ev.category_id IN(17, 2) AND ev.event_city = '1' AND ev.event_status = 'Y'
-            // GROUP BY
-            //     ev.id";
+                        FROM events AS ev
+                        LEFT join event_popularity AS ep on ep.event_id = ev.id
+                        LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+                        LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+                        WHERE $city_query $preference_query $event_type_query $event_category_query $single_date_query $fromto_date_query
+                        ev.end_date>= '$current_date' AND ev.event_status  ='Y' group by ev.id $event_popularity_query";
 		//echo $event_query;
 		$event_res = $this->db->query($event_query);
 
@@ -1976,7 +2006,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 		    $seatsupdate = $this->db->query($update_seats);
 		    
 		    $_SESSION['booking_start'] = time(); // taking now logged in time
-            $_SESSION['booking_expire'] = $_SESSION['booking_start'] + (18* 10) ; // ending a session in 60 seconds
+            $_SESSION['booking_expire'] = $_SESSION['booking_start'] + (300) ; // ending a session in 180 seconds
 		    
 		    $session_seats = "INSERT INTO booking_session (session_expiry,order_id,plan_time_id,number_of_seats) VALUES ('". $_SESSION['booking_expire'] . "','". $order_id . "','". $plan_time_id . "','". $number_of_seats . "')";
 			$session_insert = $this->db->query($session_seats);
@@ -2112,6 +2142,9 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                             $total_count = 1;
             			    $activity_sql = "INSERT INTO user_login (user_id,login_date,cons_login_days) VALUES ('". $user_id . "','". $date . "','". $total_count . "')";
 		    	            $insert_activity = $this->db->query($activity_sql);
+		    	            
+		    	             $activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+20,total_points=total_points+20 WHERE user_id  ='$user_id'";
+		    	             $insert_points = $this->db->query($activity_points);
             	}
             	$response = array("status" => "success", "msg" => "User Activity Updated");	
 	        }
@@ -2165,34 +2198,36 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                 $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' AND DATE(`login_date`) = CURDATE() ORDER BY id DESC";
                 $login_res = $this->db->query($login_query);
                 if($login_res->num_rows()>0){
-            		    foreach ($login_res->result() as $rows)
-            			{
-            		      $day_count  = $rows->cons_login_days ;
-            			}
-            			
-                                if ($day_count =='5'){
-                                        $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 5";
-                                } else if ($day_count =='4') {
-                                        $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 4";
-                                } else if ($day_count =='3') {
-                                        $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 3";
-                                } else if ($day_count =='2') {
-                                        $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 2";
-                                } else if ($day_count =='1'){
-                                        $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 1";
-                                }
-        		                $login_res = $this->db->query($login_query);
-                                if($login_res->num_rows()>0){
+                		    foreach ($login_res->result() as $rows)
+                			{
+                		      $day_count  = $rows->cons_login_days ;
+                			}
+                			
+                            if ($day_count =='5'){
+                                    $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 5";
+                            } else if ($day_count =='4') {
+                                    $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 4";
+                            } else if ($day_count =='3') {
+                                    $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 3";
+                            } else if ($day_count =='2') {
+                                    $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 2";
+                            } else if ($day_count =='1'){
+                                    $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 1";
+                            }
+    		                $login_res = $this->db->query($login_query);
+                            if($login_res->num_rows()>0){
                     		    foreach ($login_res->result() as $rows) {
                     		      $Data[]  = array(
             							"login_date " => $rows->login_date,
             							"cons_login_days " => $rows->cons_login_days ,
                 				    );
+                                }
                             }
-                        }
                         
-            	  $response = array("status" => "success", "msg" => "Login History","Data"=>$Data);
-                } 
+            	    $response = array("status" => "success", "msg" => "Login History","Data"=>$Data);
+                } else {
+                    $response = array("status" => "error", "msg" => "No Records Found.");
+                }
 
  	    } else if ($rule_id =='2'){
  	            $sQuery = "SELECT A.user_id,A.rule_id,A.date,B.id AS event_id,B.event_name,B.event_venue FROM user_activity A,events B WHERE A.user_id = '$user_id' AND A.rule_id = '$rule_id' AND A.event_id = B.id ORDER BY A.date DESC";
@@ -2212,11 +2247,13 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			    $activity_result= $activity_res->result();
 			    $response = array("status" => "success", "msg" => "Review History","Data"=>$activity_result);
 			    
- 	    } else {
+ 	    } else if ($rule_id =='5'){
  	            $sQuery = "SELECT A.user_id,A.rule_id,A.date,B.id AS event_id,B.event_name,B.event_venue FROM user_activity A,events B WHERE A.user_id = '$user_id' AND A.rule_id = '$rule_id' AND A.event_id = B.id ORDER BY A.date DESC";
  	            $activity_res = $this->db->query($sQuery);
 			    $activity_result= $activity_res->result();
 			    $response = array("status" => "success", "msg" => "Booking History","Data"=>$activity_result);
+ 	    } else {
+ 	            $response = array("status" => "error", "msg" => "Sorry! No Records found.");
  	    }
 
 			return $response;

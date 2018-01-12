@@ -981,7 +981,7 @@ public function profilePictureUpload()
 
 	public function addWishList()
 	{
-		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
@@ -1018,7 +1018,7 @@ public function profilePictureUpload()
 
 	public function viewWishList()
 	{
-		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
@@ -1053,7 +1053,7 @@ public function profilePictureUpload()
 
 	public function deleteWishList()
 	{
-		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
