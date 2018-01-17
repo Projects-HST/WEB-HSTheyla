@@ -116,7 +116,7 @@
                     <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-calendar-check-o" aria-hidden="true"></i><span> Booking </span></a>
                     <ul class="list-unstyled">
                         <li><a href="<?php echo base_url();?>bookinghistory/process_details">Process</a></li>
-                        <li><a href="<?php echo base_url();?>bookinghistory/status_details">Status</a></li>
+                        <li id="booking_status"><a href="<?php echo base_url();?>bookinghistory/status_details">Status</a></li>
                         <li id="booking_history"><a href="<?php echo base_url();?>bookinghistory/home">History</a></li>
                     </ul>
                 </li>

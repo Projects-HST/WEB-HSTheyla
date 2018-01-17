@@ -41,7 +41,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark   menupage">
       <div class="container">
-          <a class="navbar-brand" href="#"><img src="<?php echo base_url(); ?>assets/front/images/logo.png" class="imglogo"></a>
+          <a class="navbar-brand" href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>assets/front/images/logo.png" class="imglogo"></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
           </button>
@@ -116,7 +116,7 @@
 </section>
 
 <!-- Footer -->
-<footer class="footer-bg fixed-bottom">
+<footer class="footer-bg" style="position:relative;top:0px;bottom:0px;width:100%;">
     <div class="container">
         <div class="row">
             <div class="col-md-6">

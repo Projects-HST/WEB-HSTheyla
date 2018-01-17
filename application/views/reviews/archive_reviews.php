@@ -61,7 +61,7 @@
                     <div class="form-group row">
                       
                       <div class="col-sm-2">
-                          <a href="<?php echo base_url(); ?>reviews/display/<?php echo $value->id; ?>/Y" class="btn btn-primary waves-effect waves-light">
+                          <a href="<?php echo base_url(); ?>reviews/display/<?php echo $value->id; ?>/Y/<?php echo $value->event_id; ?>/<?php echo $value->user_id; ?>" class="btn btn-primary waves-effect waves-light">
                           Display </a>
                         </div>
                         <div class="col-sm-2">
@@ -80,55 +80,3 @@
 
 
 </div> <!-- content -->
-<script type="text/javascript">
-// $(document).ready(function () {
-//  $('#myformsection').validate({ //
-//   submitHandler: function(formdisplay) {
-//     alert("hi");
-// //function reviewfunc(){
-//  swal({
-
-//         title: "Are you sure?",
-//         text: "You Want To Display This Review",
-//         type: "warning",
-//         showCancelButton: true,
-//         confirmButtonColor: "#DD6B55",
-//         confirmButtonText: "Yes, Do it",
-//         cancelButtonText: "No, cancel",
-//         closeOnConfirm: false,
-//         closeOnCancel: false 
-//     },
-//     function(isConfirm) {
-//         if (isConfirm) {           
-//          $.ajax({
-//                   url: "<?php echo base_url(); ?>reviews/display",
-//                   type:'POST',
-//                   data: $('#myformsection').serialize(),
-//                   success: function(response) {
-//                   alert(response);
-//                    if(response=="success")
-//                     {
-//                      //swal("Success!", "Thanks for Your Note!", "success");
-//                         $('#myformsection')[0].reset();
-//                         swal({
-//                            title: "Wow!",
-//                            text: "Message!",
-//                            type: "success"
-//                          },
-//            function() {
-//                  window.location = "<?php echo base_url(); ?>reviews/home";
-//              });
-//              }else{
-//                     sweetAlert("Oops...", "Something went wrong!", "error");
-//                    }
-//                  }
-//              });
-//         }else {
-//             swal("Cancelled", "Your imaginary file is safe :)", "error");
-//         }
-//     });
-
-// }
-// }); 
-//    });
-</script>
