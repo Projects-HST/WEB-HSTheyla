@@ -128,7 +128,7 @@
                         <li id="createuser"><a href="<?php echo base_url();?>users/home">New User</a></li>
                         <li id="viewuser"><a href="<?php echo base_url();?>users/view">View User Information</a></li>
                         <li id="followers"><a href="<?php echo base_url();?>users/view_followers">View User Followers</a></li>
-                        <li id="guestuser"><a href="<?php echo base_url();?>guestuser/home">Guest User</a></li>
+                        <!--li id="guestuser"><a href="<?php echo base_url();?>guestuser/home">Guest User</a></li-->
 
                     </ul>
                 </li>
