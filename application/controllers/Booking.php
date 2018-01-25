@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Booking extends CI_Controller 
+class Booking extends CI_Controller
 {
 
 
-	function __construct() 
+	function __construct()
 	   {
 		  parent::__construct();
 		  $this->load->model('bookingmodel');
@@ -14,7 +14,7 @@ class Booking extends CI_Controller
        }
 
     //-------------------------Booking Add / Update---------------------------------
-     
+
 	public  function home($id)
 	{
         $id=base64_decode($id);
@@ -25,7 +25,7 @@ class Booking extends CI_Controller
 
         $datas['view_plan'] = $this->bookingmodel->view_plan_details($id);
         $datas['eventid']=$id;
-		if($user_role==1)
+		if($user_role == 1 || $user_role == 4)
 		{
 		  $this->load->view('header');
 		  $this->load->view('booking/add',$datas);
@@ -43,7 +43,7 @@ class Booking extends CI_Controller
 	    $user_role=$this->session->userdata('user_role');
 
 	    $planname=$this->input->post('planname');
-	    
+
 	    $amount=$this->input->post('amount');
 	    $eventid=$this->input->post('event_id');
 
@@ -64,13 +64,13 @@ class Booking extends CI_Controller
 	}
 
 	public function edit_plan($id)
-	{    
+	{
 		$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
         $datas['edit']=$this->bookingmodel->edit_events_plans($id);
         //print_r($datas['edit']);exit;
-        if($user_role==1)
+        if($user_role == 1 || $user_role == 4)
 		{
 		  $this->load->view('header');
 		  $this->load->view('booking/edit',$datas);
@@ -87,7 +87,7 @@ class Booking extends CI_Controller
 	    $user_role=$this->session->userdata('user_role');
 
 	    $planname=$this->input->post('planname');
-	    
+
 	    $amount=$this->input->post('amount');
 	    $eventid=$this->input->post('event_id');
 	    $planid=$this->input->post('plan_id');
@@ -110,8 +110,8 @@ class Booking extends CI_Controller
 		$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-         
-        if($user_role==1){ 
+
+        if($user_role == 1 || $user_role == 4){
 	    $datas = $this->bookingmodel->delete_plan_details($plaid);
         $sta=$datas['status'];
         $eveid=base64_encode($eveid);
@@ -127,7 +127,7 @@ class Booking extends CI_Controller
            redirect('/');
 		 }
 	}
-    
+
     //-------------------------show_time----------------------------------
 
     public function add_show_time($plaid,$eveid)
@@ -142,7 +142,7 @@ class Booking extends CI_Controller
         $datas['planid']=$plaid;
         $datas['eventid']=$eveid;
         //echo '<pre>';print_r($datas['plan_time'] );exit;
-		if($user_role==1)
+		if($user_role == 1 || $user_role == 4)
 		{
 		  $this->load->view('header');
 		  $this->load->view('booking/add_plan_time',$datas);
@@ -190,7 +190,7 @@ class Booking extends CI_Controller
 	    $user_role=$this->session->userdata('user_role');
         $datas['edit']=$this->bookingmodel->edit_plans_time($id);
         //echo '<pre>'; print_r($datas['edit']);exit;
-        if($user_role==1)
+        if($user_role == 1 || $user_role == 4)
 		{
 		  $this->load->view('header');
 		  $this->load->view('booking/edit_plan_time',$datas);
@@ -206,7 +206,7 @@ class Booking extends CI_Controller
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-        
+
         $time_id=$this->input->post('time_id');
 	    $plan_id=$this->input->post('plan_id');
 	    $eventid=$this->input->post('event_id');

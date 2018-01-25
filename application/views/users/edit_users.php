@@ -203,8 +203,9 @@
                               <div class="col-sm-4">
                                  <input type="file" name="user_picture" class="form-control" accept="image/*" >
                                  <input type="hidden" name="old_picture" class="form-control" value="<?php echo $res->user_picture; ?>" >
+                                    <input type="hidden" name="userrole" class="form-control" value="<?php echo $res->user_role; ?>" >
                               </div>
-
+                              
                               <label for="Status" class="col-sm-2 col-form-label">User Role</label>
                             <div class="col-sm-4">
                                <select class="form-control"  name="userrole">

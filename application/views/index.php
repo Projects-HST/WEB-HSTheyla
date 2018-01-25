@@ -365,12 +365,12 @@
 
                 <div id="wrap">
                     <div id="showcase" class="noselect">
-                        <img class="cloud9-item img-fluid" src="<?php echo base_url(); ?>assets/front/images/1.png" alt="Heyla">
-                        <img class="cloud9-item img-fluid" src="<?php echo base_url(); ?>assets/front/images/2.png" alt="Heyla">
-                        <img class="cloud9-item img-fluid" src="<?php echo base_url(); ?>assets/front/images/3.png" alt="Heyla">
-                        <img class="cloud9-item img-fluid" src="<?php echo base_url(); ?>assets/front/images/4.png" alt="Heyla">
-                        <img class="cloud9-item img-fluid" src="<?php echo base_url(); ?>assets/front/images/5.png" alt="Heyla">
-                        <img class="cloud9-item img-fluid" src="<?php echo base_url(); ?>assets/front/images/6.png" alt="Heyla">
+                        <img class="cloud9-item img-fluid" src="<?php echo base_url(); ?>assets/front/images/1.jpg" alt="Heyla">
+                        <img class="cloud9-item img-fluid" src="<?php echo base_url(); ?>assets/front/images/2.jpg" alt="Heyla">
+                        <img class="cloud9-item img-fluid" src="<?php echo base_url(); ?>assets/front/images/3.jpg" alt="Heyla">
+                        <img class="cloud9-item img-fluid" src="<?php echo base_url(); ?>assets/front/images/4.jpg" alt="Heyla">
+                        <img class="cloud9-item img-fluid" src="<?php echo base_url(); ?>assets/front/images/5.jpg" alt="Heyla">
+                        <img class="cloud9-item img-fluid" src="<?php echo base_url(); ?>assets/front/images/6.jpg" alt="Heyla">
 
                     </div>
                     <p id="item-title">&nbsp;</p>

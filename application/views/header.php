@@ -73,17 +73,22 @@
                         <span> Dashboard </span>
                     </a>
                 </li>
+                <?php $user_role=$this->session->userdata('user_role');
+                if($user_role==4){
 
-                <li class="has_sub" id="master">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-apps"></i> <span> Masters </span> </a>
-                    <ul class="list-unstyled">
-                        <li id="country"><a href="<?php echo base_url();?>country/home">Country</a></li>
-                        <li id="state"><a href="<?php echo base_url();?>state/home">State</a></li>
-                        <li id="city"><a href="<?php echo base_url();?>city/home">City</a></li>
-                        <li id="category"><a href="<?php echo base_url();?>category/home">Category</a></li>
-                        <li id="userrole"><a href="<?php echo base_url();?>userrole/home">User Role</a></li>
-                    </ul>
-                </li>
+                }else{ ?>
+                  <li class="has_sub" id="master">
+                      <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-apps"></i> <span> Masters </span> </a>
+                      <ul class="list-unstyled">
+                          <li id="country"><a href="<?php echo base_url();?>country/home">Country</a></li>
+                          <li id="state"><a href="<?php echo base_url();?>state/home">State</a></li>
+                          <li id="city"><a href="<?php echo base_url();?>city/home">City</a></li>
+                          <li id="category"><a href="<?php echo base_url();?>category/home">Category</a></li>
+                          <li id="userrole"><a href="<?php echo base_url();?>userrole/home">User Role</a></li>
+                      </ul>
+                  </li>
+              <?php   } ?>
+
 
                 <li class="has_sub" id="events">
                     <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-star" aria-hidden="true"></i>
@@ -120,7 +125,10 @@
                         <li id="booking_history"><a href="<?php echo base_url();?>bookinghistory/home">History</a></li>
                     </ul>
                 </li>
+                <?php $user_role=$this->session->userdata('user_role');
+                if($user_role==4){
 
+                }else{ ?>
                 <li class="has_sub" id="users">
                     <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-users" aria-hidden="true"></i>
                 <span> User Management</span></a>
@@ -132,6 +140,7 @@
 
                     </ul>
                 </li>
+              <?php  } ?>
 
                 <li class="has_sub" id="email">
                     <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-envelope" aria-hidden="true"></i>
@@ -184,14 +193,21 @@
               View All
           </a>
       </div>
-   </li!--><?php 
+   </li!--><?php
                     $id=$this->session->userdata('id');
                     //echo $id;
                     ?>
               <li class="list-inline-item dropdown notification-list">
+                <?php $user_role=$this->session->userdata('user_role');
+                if($user_role==4){
+
+                }else{ ?>
                   <a class="nav-link  arrow-none waves-effect nav-user" data-toggle="tooltip" data-placement="bottom" title="Edit Profile" href="<?php echo base_url(); ?>users/edit/<?php echo $id;?>">
                      Profile
                   </a>
+              <?php  }
+                 ?>
+
                   <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" href="<?php echo base_url(); ?>adminlogin/logout">
                      Logout
                   </a>
