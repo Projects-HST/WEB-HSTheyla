@@ -134,7 +134,7 @@ class Apimainmodel extends CI_Model {
 	public function sendSMS($Phoneno,$Message)
 	{
         //Your authentication key
-        $authKey = "181620ALl9WDEru59f871db";
+        $authKey = "191431AStibz285a4f14b4";
         
         //Multiple mobiles numbers separated by comma
         $mobileNumber = "$Phoneno";
@@ -341,9 +341,23 @@ class Apimainmodel extends CI_Model {
 					{
             			$points_sql = "INSERT INTO user_points_count (user_id) VALUES ('". $user_id . "')";
             			$insert_points = $this->db->query($points_sql);
-            			
-            			$activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+20,total_points=total_points+20 WHERE user_id  ='$user_id'";
-		    	        $insert_points = $this->db->query($activity_points);
+
+            			 //$total_count = 1;
+            			 //$date = date('Y-m-d');
+            			 
+            			 //$activity_sql = "INSERT INTO user_login (user_id,login_date,cons_login_days) VALUES ('". $user_id . "','". $date . "','". $total_count . "')";
+		    	         //$insert_activity = $this->db->query($activity_sql);
+		    	            
+		    	         $activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+1,total_points=total_points+1 WHERE user_id  ='$user_id'";
+		    	         $insert_points = $this->db->query($activity_points);
+
+					} else {
+					    //$activity_sql = "INSERT INTO user_login (user_id,login_date,cons_login_days) VALUES ('". $user_id . "','". $date . "','". $total_count . "')";
+					     //$activity_sql = "INSERT INTO user_login (user_id,login_date,cons_login_days) VALUES ('". $user_id . "','". $date . "','". $total_count . "')";
+		    	         //$insert_activity = $this->db->query($activity_sql);
+		    	            
+		    	         $activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+1,total_points=total_points+1 WHERE user_id  ='$user_id'";
+		    	         $insert_points = $this->db->query($activity_points);
 					}
 
 			$gcmQuery = "SELECT * FROM push_notification_master WHERE gcm_key like '%" .$gcm_key. "%' LIMIT 1";
@@ -401,7 +415,7 @@ class Apimainmodel extends CI_Model {
 				$activity_sql = "INSERT INTO user_activity (date,user_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $login_mode . "')";
     			$insert_activity = $this->db->query($activity_sql);
 				
-    			$pointsQuery = "SELECT * FROM user_points_count WHERE user_id = '$user_id' LIMIT 1";
+				$pointsQuery = "SELECT * FROM user_points_count WHERE user_id = '$user_id' LIMIT 1";
     			$points_result = $this->db->query($pointsQuery);
     			$points_ress = $points_result->result();
 			
@@ -409,7 +423,36 @@ class Apimainmodel extends CI_Model {
 					{
             			$points_sql = "INSERT INTO user_points_count (user_id) VALUES ('". $user_id . "')";
             			$insert_points = $this->db->query($points_sql);
+
+            			 //$total_count = 1;
+            			 //$date = date('Y-m-d');
+            			 
+            			 //$activity_sql = "INSERT INTO user_login (user_id,login_date,cons_login_days) VALUES ('". $user_id . "','". $date . "','". $total_count . "')";
+		    	         //$insert_activity = $this->db->query($activity_sql);
+		    	            
+		    	         $activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+1,total_points=total_points+1 WHERE user_id  ='$user_id'";
+		    	         $insert_points = $this->db->query($activity_points);
+
+					} else {
+					    //$activity_sql = "INSERT INTO user_login (user_id,login_date,cons_login_days) VALUES ('". $user_id . "','". $date . "','". $total_count . "')";
+					     //$activity_sql = "INSERT INTO user_login (user_id,login_date,cons_login_days) VALUES ('". $user_id . "','". $date . "','". $total_count . "')";
+		    	         //$insert_activity = $this->db->query($activity_sql);
+		    	            
+		    	         $activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+1,total_points=total_points+1 WHERE user_id  ='$user_id'";
+		    	         $insert_points = $this->db->query($activity_points);
 					}
+				
+				
+				
+    // 			$pointsQuery = "SELECT * FROM user_points_count WHERE user_id = '$user_id' LIMIT 1";
+    // 			$points_result = $this->db->query($pointsQuery);
+    // 			$points_ress = $points_result->result();
+			
+				// 	if($points_result->num_rows()==0)
+				// 	{
+    //         			$points_sql = "INSERT INTO user_points_count (user_id) VALUES ('". $user_id . "')";
+    //         			$insert_points = $this->db->query($points_sql);
+				// 	}
 				
 				$gcmQuery = "SELECT * FROM push_notification_master WHERE gcm_key like '%" .$gcm_key. "%' LIMIT 1";
 				$gcm_result = $this->db->query($gcmQuery);
@@ -433,15 +476,42 @@ class Apimainmodel extends CI_Model {
     			$activity_sql = "INSERT INTO user_activity (date,user_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $signup_type . "')";
     			$insert_activity = $this->db->query($activity_sql);
     			
-        		$pointsQuery = "SELECT * FROM user_points_count WHERE user_id = '$user_id' LIMIT 1";
+    			$pointsQuery = "SELECT * FROM user_points_count WHERE user_id = '$user_id' LIMIT 1";
     			$points_result = $this->db->query($pointsQuery);
     			$points_ress = $points_result->result();
+			
+					if($points_result->num_rows()==0)
+					{
+            			$points_sql = "INSERT INTO user_points_count (user_id) VALUES ('". $user_id . "')";
+            			$insert_points = $this->db->query($points_sql);
+
+            			 //$total_count = 1;
+            			 //$date = date('Y-m-d');
+            			 
+            			 //$activity_sql = "INSERT INTO user_login (user_id,login_date,cons_login_days) VALUES ('". $user_id . "','". $date . "','". $total_count . "')";
+		    	         //$insert_activity = $this->db->query($activity_sql);
+		    	            
+		    	         $activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+1,total_points=total_points+1 WHERE user_id  ='$user_id'";
+		    	         $insert_points = $this->db->query($activity_points);
+
+					} else {
+					    //$activity_sql = "INSERT INTO user_login (user_id,login_date,cons_login_days) VALUES ('". $user_id . "','". $date . "','". $total_count . "')";
+					     //$activity_sql = "INSERT INTO user_login (user_id,login_date,cons_login_days) VALUES ('". $user_id . "','". $date . "','". $total_count . "')";
+		    	         //$insert_activity = $this->db->query($activity_sql);
+		    	            
+		    	         $activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+1,total_points=total_points+1 WHERE user_id  ='$user_id'";
+		    	         $insert_points = $this->db->query($activity_points);
+					}
     			
-    					if($points_result->num_rows()==0)
-    					{
-                			$points_sql = "INSERT INTO user_points_count (user_id) VALUES ('". $user_id . "')";
-                			$insert_points = $this->db->query($points_sql);
-    					}
+    //     		$pointsQuery = "SELECT * FROM user_points_count WHERE user_id = '$user_id' LIMIT 1";
+    // 			$points_result = $this->db->query($pointsQuery);
+    // 			$points_ress = $points_result->result();
+    			
+    // 					if($points_result->num_rows()==0)
+    // 					{
+    //             			$points_sql = "INSERT INTO user_points_count (user_id) VALUES ('". $user_id . "')";
+    //             			$insert_points = $this->db->query($points_sql);
+    // 					}
     			
     			$sQuery = "INSERT INTO push_notification_master (user_id,gcm_key,mobile_type) VALUES ('". $user_id . "','". $gcm_key . "','". $mobile_type . "')";
 				$update_gcm = $this->db->query($sQuery);
@@ -859,7 +929,7 @@ class Apimainmodel extends CI_Model {
 //#################### Profile Update ####################//
 public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$gender,$occupation,$address_line_1,$address_line_2,$address_line_3,$country_id,$state_id,$city_id,$zip_code,$news_letter)
 	{
- 			$sql = "SELECT * FROM user_master WHERE user_name = '".$user_name."'";
+ 			$sql = "SELECT * FROM user_master WHERE user_name = '".$user_name."' AND id != '$user_id'";
     		$user_result = $this->db->query($sql);
     		$ress = $user_result->result();
     		
@@ -2117,36 +2187,63 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	{
 	    if ($rule_id == '1') //Login//
 	        {
-                $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' AND DATE(`login_date`) = DATE( DATE_SUB( NOW() , INTERVAL 1 DAY ) ) ORDER BY id DESC";
-		        $login_res = $this->db->query($login_query);
-            	if($login_res->num_rows()>0){
-            		    foreach ($login_res->result() as $rows)
-            			{
-            				  $day_count  = $rows->cons_login_days ;
-            			} 
-            			if ($day_count <5){
-            			    $total_count = $day_count +1;
-            			    $activity_sql = "INSERT INTO user_login (user_id,login_date,cons_login_days) VALUES ('". $user_id . "','". $date . "','". $total_count . "')";
-		    	            $insert_activity = $this->db->query($activity_sql);
-		    	            
-		    	            if ($total_count =='5'){
-		    	                $activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+20,total_points=total_points+20 WHERE user_id  ='$user_id'";
-		    	                $insert_points = $this->db->query($activity_points);
-		    	            }
-            			} else {
-            			    $total_count = 1;
-            			    $activity_sql = "INSERT INTO user_login (user_id,login_date,cons_login_days) VALUES ('". $user_id . "','". $date . "','". $total_count . "')";
-		    	            $insert_activity = $this->db->query($activity_sql);
-            			}
-            	}else {
-                            $total_count = 1;
-            			    $activity_sql = "INSERT INTO user_login (user_id,login_date,cons_login_days) VALUES ('". $user_id . "','". $date . "','". $total_count . "')";
-		    	            $insert_activity = $this->db->query($activity_sql);
-		    	            
-		    	             $activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+20,total_points=total_points+20 WHERE user_id  ='$user_id'";
-		    	             $insert_points = $this->db->query($activity_points);
+                $activity_query = "SELECT * FROM user_login WHERE user_id = '$user_id' AND login_date ='$date' LIMIT 1";
+    	        $activity_res = $this->db->query($activity_query);
+            	if($activity_res->num_rows()==0){
+	            
+                    $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' AND DATE(`login_date`) = DATE( DATE_SUB( NOW() , INTERVAL 1 DAY ) ) ORDER BY id DESC";
+    		        $login_res = $this->db->query($login_query);
+                	if($login_res->num_rows()>0){
+                		    foreach ($login_res->result() as $rows)
+                			{
+                				   $day_count  = $rows->cons_login_days;
+                			} 
+                			if ($day_count <5){
+                			    $total_count = $day_count +1;
+                			    $activity_sql = "INSERT INTO user_login (user_id,login_date,cons_login_days) VALUES ('". $user_id . "','". $date . "','". $total_count . "')";
+    		    	            $insert_activity = $this->db->query($activity_sql);
+    		    	            
+    		    	            if ($total_count =='5'){
+    		    	                $activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+20,total_points=total_points+20 WHERE user_id  ='$user_id'";
+    		    	                $insert_points = $this->db->query($activity_points);
+    		    	            }
+    		    	            
+    		    	             if ($total_count =='4'){
+    		    	                $activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+4,total_points=total_points+4 WHERE user_id  ='$user_id'";
+    		    	                $insert_points = $this->db->query($activity_points);
+    		    	            }
+    		    	            
+    		    	             if ($total_count =='3'){
+    		    	                $activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+3,total_points=total_points+3 WHERE user_id  ='$user_id'";
+    		    	                $insert_points = $this->db->query($activity_points);
+    		    	            }
+    		    	            
+    		    	             if ($total_count =='2'){
+    		    	                $activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+2,total_points=total_points+2 WHERE user_id  ='$user_id'";
+    		    	                $insert_points = $this->db->query($activity_points);
+    		    	            }
+                			} else {
+                			    $total_count = 1;
+                			    $activity_sql = "INSERT INTO user_login (user_id,login_date,cons_login_days) VALUES ('". $user_id . "','". $date . "','". $total_count . "')";
+    		    	            $insert_activity = $this->db->query($activity_sql);
+    		    	            
+    		    	            $activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+1,total_points=total_points+1 WHERE user_id  ='$user_id'";
+    		    	            $insert_points = $this->db->query($activity_points);
+                			}
+                	}else {
+                                $total_count = 1;
+                			    $activity_sql = "INSERT INTO user_login (user_id,login_date,cons_login_days) VALUES ('". $user_id . "','". $date . "','". $total_count . "')";
+    		    	            $insert_activity = $this->db->query($activity_sql);
+    		    	            
+    		    	             $activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+1,total_points=total_points+1 WHERE user_id  ='$user_id'";
+    		    	             $insert_points = $this->db->query($activity_points);
+                	}
+                	
+            	    $response = array("status" => "added", "msg" => "User Activity Updated");	
+            	} else {
+            	     $response = array("status" => "exist", "msg" => "Already Exist");
             	}
-            	$response = array("status" => "success", "msg" => "User Activity Updated");	
+            	
 	        }
 	    if ($rule_id == '2') //Sharing//
 	        {
@@ -2195,36 +2292,46 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	public function Activity_history($user_id,$rule_id)
 	{
 	    if ($rule_id =='1') {
+	        
+	            $point_query = "SELECT login_points FROM user_points_count WHERE user_id = '$user_id' LIMIT 1";
+                $point_res = $this->db->query($point_query);
+                if($point_res->num_rows()>0){
+        		    foreach ($point_res->result() as $rows)
+        			{
+        		      $total_login_points  = $rows->login_points;
+        			}
+                }
+                
                 $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' AND DATE(`login_date`) = CURDATE() ORDER BY id DESC";
                 $login_res = $this->db->query($login_query);
                 if($login_res->num_rows()>0){
-                		    foreach ($login_res->result() as $rows)
-                			{
-                		      $day_count  = $rows->cons_login_days ;
-                			}
-                			
-                            if ($day_count =='5'){
-                                    $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 5";
-                            } else if ($day_count =='4') {
-                                    $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 4";
-                            } else if ($day_count =='3') {
-                                    $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 3";
-                            } else if ($day_count =='2') {
-                                    $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 2";
-                            } else if ($day_count =='1'){
-                                    $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 1";
-                            }
-    		                $login_res = $this->db->query($login_query);
-                            if($login_res->num_rows()>0){
-                    		    foreach ($login_res->result() as $rows) {
-                    		      $Data[]  = array(
-            							"login_date " => $rows->login_date,
-            							"cons_login_days " => $rows->cons_login_days ,
-                				    );
-                                }
-                            }
+        		    foreach ($login_res->result() as $rows)
+        			{
+        		      $day_count  = $rows->cons_login_days;
+        			}
+        			
+                    if ($day_count =='5'){
+                            $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 5";
+                    } else if ($day_count =='4') {
+                            $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 4";
+                    } else if ($day_count =='3') {
+                            $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 3";
+                    } else if ($day_count =='2') {
+                            $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 2";
+                    } else if ($day_count =='1'){
+                            $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 1";
+                    }
+	                $login_res = $this->db->query($login_query);
+                    if($login_res->num_rows()>0){
+            		    foreach ($login_res->result() as $rows) {
+            		      $Data[]  = array(
+    							"login_date" => $rows->login_date,
+    							"cons_login_days" => $rows->cons_login_days,
+        				    );
+                        }
+                    }
                         
-            	    $response = array("status" => "success", "msg" => "Login History","Data"=>$Data);
+            	    $response = array("status" => "success", "msg" => "Login History","Totalpoints"=>$total_login_points,"Data"=>$Data);
                 } else {
                     $response = array("status" => "error", "msg" => "No Records Found.");
                 }
@@ -2259,6 +2366,108 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			return $response;
 	}
 //#################### Leaderboard End ###############//
+
+
+//#################### Nearby Events ####################//
+	public function Nearby_events($event_type,$user_type,$user_id,$city_id,$latitude,$longitude,$nearby_distance)
+	{
+	    $current_date = date("Y-m-d");
+
+        if ($user_type ==1){
+            $pre_query = "SELECT * FROM user_preference WHERE user_id = '$user_id'";
+        } else {
+            $pre_query = "SELECT * FROM guest_user_preference WHERE user_id = '$user_id'";
+        }
+		    $pre_res = $this->db->query($pre_query);
+      
+    		 if($pre_res->num_rows()>0){
+    		    foreach ($pre_res->result() as $rows)
+    			{	
+    				   $pref_ids[]  = $rows->category_id;
+    			}
+    			$preferrence = implode (",", $pref_ids);
+    		 }
+
+
+	    if ($event_type == 'Favourite'){
+	        $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity,
+	                        (3959 * acos( cos( radians('$latitude')) * cos(radians(event_latitude)) * cos(radians(event_longitude) - radians('$longitude') ) + sin( radians('$latitude') ) * sin(radians( event_latitude) ))) AS distance
+                            from events as ev
+                            left join event_popularity as ep on ep.event_id = ev.id
+                            LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+                            LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+                            WHERE ev.hotspot_status = 'N' AND ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
+                            group by ev.id HAVING distance <= '$nearby_distance'";
+	    } 
+	    if ($event_type == 'Hotspot'){
+	            $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity,
+	                        (3959 * acos( cos( radians('$latitude')) * cos(radians(event_latitude)) * cos(radians(event_longitude) - radians('$longitude') ) + sin( radians('$latitude') ) * sin(radians( event_latitude) ))) AS distance
+                            from events as ev
+                            left join event_popularity as ep on ep.event_id = ev.id
+                            LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+                            LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+                            WHERE ev.hotspot_status = 'Y' AND ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
+                            group by ev.id HAVING distance <= '$nearby_distance'";
+	    } 
+	    if ($event_type == 'Popular'){
+	            $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity,
+	                        (3959 * acos( cos( radians('$latitude')) * cos(radians(event_latitude)) * cos(radians(event_longitude) - radians('$longitude') ) + sin( radians('$latitude') ) * sin(radians( event_latitude) ))) AS distance
+                            from events as ev
+                            left join event_popularity as ep on ep.event_id = ev.id
+                            LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+                            LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+                            WHERE ev.hotspot_status = 'N' AND ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
+                            group by ev.id HAVING distance <= '$nearby_distance' ORDER by popularity DESC";
+	    } 
+		//echo $event_query;
+		$event_res = $this->db->query($event_query);
+
+		 if($event_res->num_rows()>0){
+                $event_result= $event_res->result();
+
+                foreach ($event_res->result() as $rows)
+			    {
+				     $eventData[]  = array(
+							"event_id" => $rows->id,
+							"popularity" => $rows->popularity,
+							"category_id" => $rows->category_id,
+							"event_name" => $rows->event_name,
+							"event_venue" => $rows->event_venue,
+							"event_address" => $rows->event_address,
+							"description" => $rows->description,
+							"start_date" => $rows->start_date,
+							"end_date" => $rows->end_date,
+							"start_time" => $rows->start_time,
+							"end_time" => $rows->end_time,
+							"event_banner" => base_url().'assets/events/banner/'.$rows->event_banner,
+							"event_latitude" => $rows->event_latitude,
+							"event_longitude" => $rows->event_longitude,
+							"event_country" => $rows->event_country,
+							"country_name" => $rows->country_name,
+							"event_city" => $rows->event_city,
+							"city_name" => $rows->city_name,
+							"primary_contact_no" => $rows->primary_contact_no,
+							"secondary_contact_no" => $rows->secondary_contact_no,
+							"contact_person" => $rows->contact_person,
+							"contact_email" => $rows->contact_email,
+							"event_type" => $rows->event_type,
+							"adv_status" => $rows->adv_status,
+							"booking_status" => $rows->booking_status,
+							"hotspot_status" => $rows->hotspot_status,
+							"event_colour_scheme" => $rows->event_colour_scheme,
+							"event_status" => $rows->event_status,
+							"advertisement" => ''
+				    );
+			    }
+			     
+			     	$response = array("status" => "success", "msg" => "View Events","Eventdetails"=>$eventData);
+			}else{
+			        $response = array("status" => "error", "msg" => "Events not found");
+			}  
+						
+			return $response;
+	}
+//#################### View Events End ###############//
 
 }
 

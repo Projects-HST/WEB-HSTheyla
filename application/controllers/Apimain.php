@@ -390,10 +390,9 @@ public function profilePictureUpload()
 	{
 	  	$_POST = json_decode(file_get_contents("php://input"), TRUE);
 		
-		echo $user_id = $this->uri->segment(3);		
+		$user_id = $this->uri->segment(3);		
 		$profile = $_FILES["user_pic"]["name"];
 		$userFileName = time().'-'.$profile;
-		//echo $userFileName;
 		$uploadPicdir = './assets/users/profile/';
 		$profilepic = $uploadPicdir.$userFileName;
 		move_uploaded_file($_FILES['user_pic']['tmp_name'], $profilepic);
@@ -1855,6 +1854,51 @@ public function profilePictureUpload()
 
 //-----------------------------------------------//
 
+//-----------------------------------------------//
+
+	public function nearBy()
+	{
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
+
+		if(!$this->checkMethod())
+		{
+			return FALSE;
+		}
+
+		if($_POST == FALSE)
+		{
+			$res = array();
+			$res["opn"] = "Activity History";
+			$res["scode"] = 204;
+			$res["message"] = "Input error";
+
+			echo json_encode($res);
+			return;
+		}
+		
+        $event_type ='';
+        $user_type ='';
+        $user_id ='';
+        $city_id = '';
+        $latitude ='';
+        $longitude ='';
+        $nearby_distance ='';
+
+        $event_type =$this->input->post("event_type");
+        $user_type =$this->input->post("user_type");
+        $user_id =$this->input->post("user_id");
+        $city_id =$this->input->post("city_id");
+        $latitude =$this->input->post("latitude");
+        $longitude =$this->input->post("longitude");
+        $nearby_distance =$this->input->post("nearby_distance");
+
+	
+		$data['result']=$this->apimainmodel->Nearby_events($event_type,$user_type,$user_id,$city_id,$latitude,$longitude,$nearby_distance);
+		$response = $data['result'];
+		echo json_encode($response);
+	}
+
+//-----------------------------------------------//
 
 
 
