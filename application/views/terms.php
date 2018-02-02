@@ -39,7 +39,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark   menupage">
       <div class="container">
-          <a class="navbar-brand" href="#"><img src="<?php echo base_url(); ?>assets/front/images/logo.png" class="imglogo"></a>
+          <a class="navbar-brand" href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>assets/front/images/logo.png" class="imglogo"></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
           </button>
@@ -124,7 +124,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <p class="fnt-footer">Crafted With Happiness</p>
+                 <p class="fnt-footer"><a href="http://happysanz.com/" target="_blank">Crafted With Happiness</a></p>
             </div>
             <div class="col-md-6">
                 <ul class="list-inline fnt-footer ">

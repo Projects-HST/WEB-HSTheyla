@@ -19,7 +19,7 @@ public function home()
 
 
 	$result = $this->loginmodel->login($username,$password);
-     
+
 	$msg=$result['msg'];
 	if($result['status']=='Deactive')
 	{
@@ -55,7 +55,7 @@ public function home()
 					//$this->session->userdata($user_name);
 					$session_data=$this->session->set_userdata($datas);
 
-                         $datas['users'] = $this->loginmodel->get_tlt_no_user();
+             $datas['users'] = $this->loginmodel->get_tlt_no_user();
 						 $datas['events'] = $this->loginmodel->get_tlt_no_events();
 						 $datas['org_events'] = $this->loginmodel->get_tlt_no_orgevents();
 						 $datas['booking'] = $this->loginmodel->get_tlt_no_booking();
@@ -86,6 +86,23 @@ public function home()
 
 					redirect('profile');
 
+				break;
+				case '4':
+				  $user_name=$result['user_name'];$msg=$result['msg'];$mobile_no=$result['mobile_no'];$email_id=$result['email_id'];$status=$result['status'];$id=$result['id'];$user_role=$result['user_role'];
+
+					$datas= array("user_name"=>$user_name, "msg"=>$msg,"mobile_no"=>$mobile_no,"email_id"=>$email_id,"status"=>$status,"id"=>$id,"user_role"=>$user_role,);
+					//$this->session->userdata($user_name);
+					$session_data=$this->session->set_userdata($datas);
+
+						 $datas['users'] = $this->loginmodel->get_tlt_no_user();
+						 $datas['events'] = $this->loginmodel->get_tlt_no_events();
+						 $datas['org_events'] = $this->loginmodel->get_tlt_no_orgevents();
+						 $datas['booking'] = $this->loginmodel->get_tlt_no_booking();
+						 $datas['reviews'] = $this->loginmodel->get_tlt_no_reviews();
+
+					$this->load->view('header',$datas);
+					$this->load->view('home',$datas);
+					$this->load->view('footer');
 				break;
 			}
 		}
@@ -128,7 +145,7 @@ public function dashboard()
 	 $datas['booking'] = $this->loginmodel->get_tlt_no_booking();
 	  $datas['reviews'] = $this->loginmodel->get_tlt_no_reviews();
         //print_r( $datas['users']);exit;
-	 if($user_role==1){
+	 if($user_role == 1 || $user_role == 4){
 		$this->load->view('header',$datas);
 		$this->load->view('home',$datas);
 		$this->load->view('footer');

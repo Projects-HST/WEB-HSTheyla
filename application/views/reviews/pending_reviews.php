@@ -1,4 +1,4 @@
-<!--div class="content-page"> 
+<!--div class="content-page">
 <!- Start content ->
 <div class="content">
     <!- Top Bar Start ->
@@ -42,25 +42,25 @@
 
     <div class="page-content-wrapper ">
         <div class="container">
-          
+
            <?php if($this->session->flashdata('msg')): ?>
                           <div class="alert alert-success">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                            ×</button> <?php echo $this->session->flashdata('msg'); ?>
                           </div>
-                        <?php endif; ?> 
+                        <?php endif; ?>
          <?php if(!empty($views)) { foreach ($views as $value) {  ?>
          <div class="row">
             <div class="col-md-10">
                 <div class="card m-b-20 card-block">
                     <h3 class="card-title font-20 mt-0"> <?php echo $value->event_name;?> ( <?php echo $value->event_rating; ?> ) </h3>
                     <p class="card-text">
-                     <?php echo $value->comments;?> 
-                    
+                     <?php echo $value->comments;?>
+
                    </p>
                     <div class="form-group row">
                       <div class="col-sm-2">
-                           <img src="<?php echo base_url();?>assets/review/images/<?php echo $value->photo; ?>" style="width:80%;border-radius:100px;float: right;">
+                           <!-- <img src="<?php echo base_url();?>assets/review/images/<?php echo $value->photo; ?>" style="width:80%;border-radius:100px;float: right;"> -->
                         </div>
                       <div class="col-sm-2">
                           <a href="<?php echo base_url(); ?>reviews/display/<?php echo $value->id; ?>/Y/<?php echo $value->event_id; ?>/<?php echo $value->user_id; ?>" class="btn btn-primary waves-effect waves-light">
@@ -98,10 +98,10 @@
 //         confirmButtonText: "Yes, Do it",
 //         cancelButtonText: "No, cancel",
 //         closeOnConfirm: false,
-//         closeOnCancel: false 
+//         closeOnCancel: false
 //     },
 //     function(isConfirm) {
-//         if (isConfirm) {           
+//         if (isConfirm) {
 //          $.ajax({
 //                   url: "<?php echo base_url(); ?>reviews/display",
 //                   type:'POST',
@@ -131,6 +131,6 @@
 //     });
 
 // }
-// }); 
+// });
 //    });
 </script>

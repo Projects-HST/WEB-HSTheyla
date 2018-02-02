@@ -77,7 +77,7 @@ Class Usersmodel extends CI_Model
       $result=$this->db->query($check_user);
       if($result->num_rows()==0)
       {
-        $uinsert="INSERT INTO user_master(user_name,mobile_no,email_id,password,user_role,status,created_by,created_at) VALUES ('$username','$cell','$email','$pwd1','$userrole','$display_status','$user_id',NOW())";
+        $uinsert="INSERT INTO user_master(user_name,mobile_no,email_id,password,user_role,status,created_by,created_at,email_verify,mobile_verify) VALUES ('$username','$cell','$email','$pwd1','$userrole','$display_status','$user_id',NOW(),'Y','Y')";
     	  $uresu=$this->db->query($uinsert);
         $insert_id = $this->db->insert_id();
         $userdetails="INSERT INTO user_details(user_id,name,birthdate,gender,occupation,address_line1,address_line2,address_line3,country_id,state_id,city_id,zip,user_picture,newsletter_status) VALUES ('$insert_id','$name','$dob','$gender','$occupation','$address1','$address2','$address3','$country','$statename','$city','$zip','$user_pic1','$status')";

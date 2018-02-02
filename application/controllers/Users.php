@@ -59,7 +59,7 @@ class Users extends CI_Controller
 			$username=$this->input->post('username');
 	        $cell=$this->input->post('mobile');
 	        $email=$this->input->post('email');
-	        $pwd=$this->db->escape_str($this->input->post('pwd'));
+	        $pwd=md5($this->db->escape_str($this->input->post('pwd')));
             //echo $name;exit;
 	        $sdate=$this->input->post('dob');
 					$dateTime = new DateTime($sdate);
@@ -153,7 +153,7 @@ class Users extends CI_Controller
 	    $datas['users_role'] = $this->usersmodel->getall_users_role_list();
 	    $datas['users_view'] = $this->usersmodel->getall_users_details1($id);
        // echo'<pre>';print_r($datas['users_view']);exit;
-		if($user_role==1)
+		if($user_role == 1 || $user_role == 4)
 		{
 		  $this->load->view('header');
 		  $this->load->view('users/edit_users',$datas);
@@ -169,7 +169,7 @@ class Users extends CI_Controller
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
 
-		if($user_role==1)
+		if($user_role == 1 || $user_role == 4)
 		{
 			$uid=$this->input->post('uid');
 			$umid=$this->input->post('umid');
@@ -245,7 +245,7 @@ class Users extends CI_Controller
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
 
-	    if($user_role==1)
+	    if($user_role == 1 || $user_role == 4)
 		{
 		   $id=$this->input->post('uaid');
 	       $users_id=$this->input->post('userid');
@@ -275,7 +275,7 @@ class Users extends CI_Controller
 	    $user_role=$this->session->userdata('user_role');
 	    $datas['fdetails'] = $this->usersmodel->users_followers_details($usersid);
         //echo'<pre>';print_r($datas['fdetails']);exit;
-		if($user_role==1)
+		if($user_role == 1 || $user_role == 4)
 		{
 		  $this->load->view('header');
 		  $this->load->view('users/view_followers_details',$datas);

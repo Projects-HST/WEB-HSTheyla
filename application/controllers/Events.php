@@ -10,7 +10,7 @@ class Events extends CI_Controller
         $this->load->library('session');
     }
     //-------------------------Events Add / Update---------------------------------
-    
+
     public function home()
     {
         $datas                  = $this->session->userdata();
@@ -19,7 +19,7 @@ class Events extends CI_Controller
         $datas['country_list']  = $this->eventsmodel->getall_country_list();
         $datas['category_list'] = $this->eventsmodel->getall_category_list();
         // echo '<pre>'; print_r($datas['country_list']); exit;
-        if ($user_role == 1) {
+        if ($user_role == 1 || $user_role == 4) {
             $this->load->view('header');
             $this->load->view('events/add_events', $datas);
             $this->load->view('footer');
@@ -102,7 +102,7 @@ class Events extends CI_Controller
         $datas['sts']  = $this->eventsmodel->getall_archived_events_details();
         $datas['popular'] = $this->eventsmodel->events_popularity();
         //echo '<pre>'; print_r($datas['result']); exit;
-        if ($user_role == 1) {
+        if ($user_role == 1 || $user_role == 4) {
             $this->load->view('header');
             $this->load->view('events/view_events', $datas);
             $this->load->view('footer');
@@ -119,7 +119,7 @@ class Events extends CI_Controller
         $datas['org']  = $this->eventsmodel->getall_organizer_events_details();
         $datas['popular'] = $this->eventsmodel->events_popularity();
         //echo '<pre>'; print_r($datas['org']); exit;
-        if ($user_role == 1) {
+        if ($user_role == 1 || $user_role == 4) {
             $this->load->view('header');
             $this->load->view('events/organizer_events', $datas);
             $this->load->view('footer');
@@ -140,7 +140,7 @@ class Events extends CI_Controller
         $datas['city_list']     = $this->eventsmodel->getall_city_list();
         $datas['edit']          = $this->eventsmodel->edit_events_details($id);
         //echo '<pre>'; print_r($datas['city_list']); exit;
-        if ($user_role == 1) {
+        if ($user_role == 1 || $user_role == 4) {
             $this->load->view('header');
             $this->load->view('events/edit_events', $datas);
             $this->load->view('footer');
@@ -220,7 +220,7 @@ class Events extends CI_Controller
         $user_role     = $this->session->userdata('user_role');
         $datas['view'] = $this->eventsmodel->view_single_events_plans($id);
         //print_r($datas['edit']);exit;
-        if ($user_role == 1) {
+        if ($user_role == 1 || $user_role == 4) {
             $this->load->view('header');
             $this->load->view('events/events_details', $datas);
             $this->load->view('footer');
@@ -256,7 +256,7 @@ class Events extends CI_Controller
         $datas['view_pic'] = $this->eventsmodel->view_upload_events_pic($id);
         $datas['eventname'] = $this->eventsmodel->get_event_name($id);
 
-        if ($user_role == 1) {
+        if ($user_role == 1 || $user_role == 4) {
             $this->load->view('header');
             $this->load->view('events/add_gallery', $datas);
             $this->load->view('footer');
@@ -330,7 +330,7 @@ class Events extends CI_Controller
         $user_role      = $this->session->userdata('user_role');
         $datas['views'] = $this->eventsmodel->view_all_reviews($id);
         //echo'<pre>';print_r($datas['views']);exit();
-        if ($user_role == 1) {
+        if ($user_role == 1 || $user_role == 4) {
             $this->load->view('header');
             $this->load->view('events/events_reviews', $datas);
             $this->load->view('footer');

@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Emailtemplate extends CI_Controller 
+class Emailtemplate extends CI_Controller
 {
-	function __construct() 
+	function __construct()
 	   {
 		  parent::__construct();
 		  $this->load->model('emailtemplatemodel');
@@ -23,7 +23,7 @@ class Emailtemplate extends CI_Controller
 	    $datas['view'] = $this->emailtemplatemodel->getall_email_template_details();
 	    //echo'<pre>';print_r($datas['view'] );exit;
 
-		if($user_role==1)
+		if($user_role == 1 || $user_role == 4)
 		{
 		  $this->load->view('header');
 		  $this->load->view('email_template/add_template',$datas);
@@ -40,7 +40,7 @@ class Emailtemplate extends CI_Controller
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
 
-       if($user_role==1)
+       if($user_role == 1 || $user_role == 4)
 	   {
 		    $tempname=$this->db->escape_str($this->input->post('templatename'));
 		    $tempdetails=$this->db->escape_str($this->input->post('templatecontent'));
@@ -62,7 +62,7 @@ class Emailtemplate extends CI_Controller
 		    }
 		}else{
 	 			redirect('/');
-	 		 }    
+	 		 }
 	}
 
 	public function delete_template($id)
@@ -71,7 +71,7 @@ class Emailtemplate extends CI_Controller
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
 
-       if($user_role==1)
+       if($user_role == 1 || $user_role == 4)
 	   {
 		    $datas = $this->emailtemplatemodel->delete_templates_details($id,$user_id);
 	        $sta=$datas['status'];
@@ -96,7 +96,7 @@ class Emailtemplate extends CI_Controller
 	    $datas['edit'] = $this->emailtemplatemodel->edit_email_template_details($id);
 	    //echo'<pre>';print_r($datas['edit'] );exit;
 
-		if($user_role==1)
+		if($user_role == 1 || $user_role == 4)
 		{
 		  $this->load->view('header');
 		  $this->load->view('email_template/edit_template',$datas);
@@ -112,8 +112,8 @@ class Emailtemplate extends CI_Controller
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
 
-       if($user_role==1)
-	   {    
+       if($user_role == 1 || $user_role == 4)
+	   {
 	   	    $id=$this->db->escape_str($this->input->post('tid'));
 		    $tempname=$this->db->escape_str($this->input->post('templatename'));
 		    $tempdetails=$this->db->escape_str($this->input->post('templatecontent'));
@@ -132,7 +132,7 @@ class Emailtemplate extends CI_Controller
 		    }
 		}else{
 	 			redirect('/');
-	 		 }    
+	 		 }
 	}
 
 
@@ -144,12 +144,12 @@ class Emailtemplate extends CI_Controller
         $datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-        if($user_role==1)
+        if($user_role == 1 || $user_role == 4)
 		{
         $countryid=$this->input->post('countryid');
         $cityid=$this->input->post('cityid');
         $username=$this->input->post('username');
-  
+
         if($countryid!='' || $cityid!='' || $username!='')
         {
           $datas['countyr_list'] = $this->citymodel->getall_country_list();
@@ -181,11 +181,11 @@ class Emailtemplate extends CI_Controller
 		$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-        if($user_role==1)
+        if($user_role == 1 || $user_role == 4)
 		{
 	        $email_temp_id=$this->input->post('email_temp_id');
 	        $mailids=$this->input->post('usersemailid');
-	       
+
 	        $datas['res']=$this->mailmodel->send_mail_to_users($mailids,$email_temp_id);
 	        $sts=$datas['status'];
 	        //print_r($sts);exit;
