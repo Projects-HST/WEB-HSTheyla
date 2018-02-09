@@ -116,7 +116,7 @@ input[type=password] {
 <center>
 
 
-  <p style="margin-top:5%;font-size:22px;">Your password has been reset successfully.</p>
+  <p style="margin-top:5%;font-size:22px;">Reset your Password here .</p>
         <div class="reset">
 
   <div class="">

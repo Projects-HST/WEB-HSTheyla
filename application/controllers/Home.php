@@ -29,6 +29,44 @@ class Home extends CI_Controller {
 			}
 
 	}
+
+	public function signin()
+	{
+
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
+		$user_role=$this->session->userdata('user_role');
+		$this->load->view('front_header');
+		$this->load->view('signin', $datas);
+		$this->load->view('front_footer');
+
+
+	}
+	public function signup()
+	{
+
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
+		$user_role=$this->session->userdata('user_role');
+		$this->load->view('front_header');
+		$this->load->view('signup', $datas);
+		$this->load->view('front_footer');
+
+
+	}
+	public function events()
+	{
+
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
+		$user_role=$this->session->userdata('user_role');
+		$this->load->view('front_header');
+		$this->load->view('events', $datas);
+		$this->load->view('front_footer');
+
+
+	}
+
 	public function home()
 	{
 		$this->load->library('facebook');
@@ -170,7 +208,7 @@ class Home extends CI_Controller {
                     $datas['res']=$this->loginmodel->getuserinfo($user_id);
 					$this->load->view('profile', $datas);
 				}else{
-				 redirect('/');	
+				 redirect('/');
 				}
 			}else{
 				redirect('/');
@@ -184,7 +222,7 @@ class Home extends CI_Controller {
 			$datas['res']=$this->loginmodel->getuserinfo($user_id);
 			if($user_role==3){
 				$this->load->view('mobilenumber', $datas);
-			}else if($user_role==2){ 
+			}else if($user_role==2){
                   $this->load->view('mobilenumber', $datas);
 			}else{
 				redirect('/');
@@ -203,7 +241,7 @@ class Home extends CI_Controller {
 			}else{
 				redirect('/');
 			}
-			
+
 		}
 
 		public function organiser(){
