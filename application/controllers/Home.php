@@ -66,7 +66,42 @@ class Home extends CI_Controller {
 
 
 	}
+	public function eventdetails()
+	{
 
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
+		$user_role=$this->session->userdata('user_role');
+		$this->load->view('front_header');
+		$this->load->view('eventdetails', $datas);
+		$this->load->view('front_footer');
+
+
+	}
+	public function booking()
+	{
+
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
+		$user_role=$this->session->userdata('user_role');
+		$this->load->view('front_header');
+		$this->load->view('booking', $datas);
+		$this->load->view('front_footer');
+
+
+	}
+	public function leaderboard()
+	{
+
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
+		$user_role=$this->session->userdata('user_role');
+		$this->load->view('front_header');
+		$this->load->view('leaderboard', $datas);
+		$this->load->view('front_footer');
+
+
+	}
 	public function home()
 	{
 		$this->load->library('facebook');

@@ -13,7 +13,7 @@
     <!-- Bootstrap core CSS -->
     <link href="<?php echo base_url(); ?>assets/front/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/front/css/style.css" rel="stylesheet">
-    <link href="<?php echo base_url(); ?>assets/front/css/main.css" rel="stylesheet">
+    <!-- <link href="<?php echo base_url(); ?>assets/front/css/main.css" rel="stylesheet"> -->
     <link href="<?php echo base_url(); ?>assets/css/button.css" rel="stylesheet" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
@@ -21,7 +21,7 @@
 
     <link href="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template -->
-    <link href="<?php echo base_url(); ?>assets/front/css/carousel.css" rel="stylesheet">
+    <!-- <link href="<?php echo base_url(); ?>assets/front/css/carousel.css" rel="stylesheet"> -->
     <script src="<?php echo base_url(); ?>assets/front/js/jquery.min.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-92904528-2"></script>
     <script>
