@@ -1,8 +1,5 @@
-<link rel="stylesheet" href="
-	<?php echo base_url(); ?>assets/front/css/multiselect.css">
-	<script src="
-		<?php echo base_url(); ?>assets/front/js/multiselect.js">
-	</script>
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/multiselect.css">
+	<script src="<?php echo base_url(); ?>assets/front/js/multiselect.js"></script>
 	<div class="container-fluid eventlist-pge">
 		<div class="container">
 			<div class="row">
@@ -157,7 +154,8 @@
     }
 
 </style>
-												<script>
+<script>
+// $('#example-getting-started').multiselect();
     $('#category').multiselect();
     $('.carousel').carousel({
       interval:6000,
@@ -174,8 +172,7 @@ function getevents()
 
     //make the ajax call
     $.ajax({
-        url: '
-													<?php echo base_url(); ?>eventslist/get_search_events',
+        url: '<?php echo base_url(); ?>eventslist/get_search_events',
         type: 'POST',
         data: {country_id : country_id,city_id:city_id,cat_id:cat_id},
         success: function(data) {
@@ -183,8 +180,7 @@ function getevents()
 			var len = data.length;
 			alert(len);
 			var cityname='';
-			var ctitle='
-													<option>Select City</option>';
+			var ctitle='<option>Select City</option>';
 			if(data!='')
 			 {    alert(len);
 				for(var i=0; i
@@ -195,8 +191,7 @@ function getevents()
 
 				$("#cmsg").hide();
 			}else{
-			  $("#cmsg").html('
-														<p style="color: red;">Events Not Found</p>').show();
+			  $("#cmsg").html('<p style="color: red;">Events Not Found</p>').show();
 
 			}
         }
@@ -207,8 +202,7 @@ function getevents()
 	//alert(cid);
 	$.ajax({
 		type: 'post',
-		url: '
-														<?php echo base_url(); ?>eventslist/get_city_name',
+		url: '<?php echo base_url(); ?>eventslist/get_city_name',
 		data: { country_id:cid },
 		dataType: "JSON",
 		cache: false,
@@ -218,8 +212,7 @@ function getevents()
 			var len = cty.length;
 			//alert(len);
 			var cityname='';
-			var ctitle='
-														<option>Select City</option>';
+			var ctitle='<option>Select City</option>';
 			if(cty!='')
 			 {    //alert(len);
 				for(var i=0; i
@@ -228,15 +221,13 @@ function getevents()
 					var cityid = cty[i].id;
 					var city_name = cty[i].city_name;
 					//alert(city_name);
-					cityname +='
-															<option value=' + cityid + '> ' + city_name + ' </option>';
+					cityname +='<option value=' + cityid + '> ' + city_name + ' </option>';
 				}
 
 				$("#ctyname").html(ctitle+cityname).show();
 				$("#cmsg").hide();
 			}else{
-			  $("#cmsg").html('
-															<p style="color: red;">City Not Found</p>').show();
+			  $("#cmsg").html('<p style="color: red;">City Not Found</p>').show();
 			  $("#ctyname").hide();
 			}
 		}
