@@ -19,6 +19,7 @@ class Eventslist extends CI_Controller
 		$data['city_list'] = $this->eventslistmodel->getall_city_list(); 
 		$data['category_list'] = $this->eventslistmodel->getall_category_list(); 
 		$data['event_result'] = $this->eventslistmodel->getall_events();
+		$data['adv_event_result'] = $this->eventslistmodel->getadv_events();
 		$this->load->view('front_header');
 		$this->load->view('events', $data);
 		$this->load->view('front_footer');
@@ -41,5 +42,11 @@ class Eventslist extends CI_Controller
         echo json_encode($data['event_result']);
     }
 	
+	public function search_term_events()
+    {
+      	$srch_term  = $this->input->post('srch_term');
+        $data['event_term_result'] = $this->eventslistmodel->getsearch_term_events($srch_term);
+        echo json_encode($data['event_term_result']);
+    }
 }
 
