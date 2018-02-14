@@ -91,7 +91,7 @@
         </div>
         <p class="upcoming-event-heading">Upcoming Events</p><br>
         <div class="row" id="event_list">
-<div id="event_result">
+<div id="event_result_disp">
 			<?php foreach($event_result as $res){ 
 			$sdate = $res->start_date;
 			?>
@@ -181,15 +181,23 @@ function getevents()
         type: 'POST',
         data: {country_id : country_id,city_id:city_id,cat_id:cat_id},
         success: function(data) {
-			console.log(data);
-			
-			alert(data.length);
-			if(data.length > 0){
-              for(i=0; i<data.length; i++){
-              	$('#event_result').html(data);
-              }
-            }
+			alert(data);
+			var len = data.length;
+			alert(len);
+			var cityname='';
+			var ctitle='<option>Select City</option>';
+			if(data!='')
+			 {    alert(len);
+				for(var i=0; i<len; i++)
+				{
+					
+				}
 
+				$("#cmsg").hide();
+			}else{
+			  $("#cmsg").html('<p style="color: red;">Events Not Found</p>').show();
+
+			}
         }
     });
 }
