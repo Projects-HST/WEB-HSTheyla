@@ -88,8 +88,7 @@
             ?>
          <div class="col-md-4 event-thumb">
             <div class="card event-card">
-               <img class="img-fluid" src="
-                  <?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>" alt="">
+               <img class="img-fluid event-banner-img" src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>" alt="" >
                <div class="card-img-overlay">
                   <span class="badge badge-pill badge-danger">
 
@@ -169,7 +168,7 @@ function getevents()
 	var city_id=ctyname.value;
 	var category_id=$("#category").val();
 	cat_id = category_id.toString();
-	
+
 	//make the ajax call
 	$.ajax({
 	url: '<?php echo base_url(); ?>eventslist/get_search_events',
@@ -181,13 +180,13 @@ function getevents()
 	 {    alert(len);
 		for(var i=0; i<len; i++)
 		{
-	
+
 		}
-	
+
 		$("#cmsg").hide();
 	}else{
 	  $("#cmsg").html('<p style="color: red;">Events Not Found</p>').show();
-	
+
 	}
 	}
 	});
@@ -217,7 +216,7 @@ function getcityname(cid) {
 			//alert(city_name);
 			cityname +='<option value=' + cityid + '> ' + city_name + ' </option>';
 		}
-	
+
 		$("#ctyname").html(ctitle+cityname).show();
 		$("#cmsg").hide();
 	}else{

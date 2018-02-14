@@ -499,7 +499,9 @@ padding-bottom: 15px;
 .favourite-icon{
   font-size: 16px;
 }
-
+.event-banner-img{
+  height: 234px;
+}
 .event-title-list a{
   font-size: 20px;
   color: #000;
@@ -657,6 +659,9 @@ input#quantity{
   .booking-section{
       background-color: #000;
 
+  }
+  .event-banner-img{
+    height: 234px;
   }
 .carousel-fade .carousel-inner, .carousel-fade .carousel-item {
   height: 320px;
