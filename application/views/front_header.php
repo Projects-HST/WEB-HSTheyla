@@ -14,7 +14,7 @@
     <link href="<?php echo base_url(); ?>assets/front/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/front/css/style.css" rel="stylesheet">
     <!-- <link href="<?php echo base_url(); ?>assets/front/css/main.css" rel="stylesheet"> -->
-    <link href="<?php echo base_url(); ?>assets/css/button.css" rel="stylesheet" type="text/css">
+    <!-- <link href="<?php echo base_url(); ?>assets/css/button.css" rel="stylesheet" type="text/css"> -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 
@@ -41,18 +41,7 @@
     <script src="<?php echo base_url(); ?>assets/js/additional-methods.min.js"></script>
 </head>
 <style>
-.carousel-fade .carousel-item {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  opacity: 0;
-  transition: opacity 100ms ease;
-}
-.carousel-fade .carousel-item.active {
-  opacity: 1;
-}
+
 
 </style>
 <body>

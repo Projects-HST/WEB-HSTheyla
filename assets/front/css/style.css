@@ -598,6 +598,60 @@ input#quantity{
 .header-title{
   height: 400px;
 }
+.leaderboard-menu-tab{
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.menu-icons{
+  padding-right: 10px;
+
+}
+.page-bg{
+  background-color: #f6f6f6;
+}
+.total-points-div{
+
+    padding-left: 60px;
+    padding-right: 60px;
+    background-color: #fff;
+    border-bottom: 4px solid orange;
+}
+.leaderboard-img{
+  padding: 12px;
+}
+.points-one-div{
+  margin: 20px 10px 20px 0px;
+  background-color: #fff;
+  border-left: 4px solid #8ec641;
+}
+.points-two-div{
+  margin: 20px 10px 20px 0px;
+  background-color: #fff;
+  border-left: 4px solid #454ea1;
+}
+.points-three-div{
+  margin: 20px 10px 20px 0px;
+  background-color: #fff;
+  border-left: 4px solid  #ec2227;
+}
+.points-four-div{
+  margin: 20px 10px 20px 0px;
+  background-color: #fff;
+  border-left: 4px solid #029b8c;
+}
+.points-five-div{
+  margin: 20px 10px 20px 0px;
+  background-color: #fff;
+  border-left: 4px solid #ee7f22;
+}
+
+.points-six-div{
+  margin: 20px;
+  border: none;
+}
+.leaderboard-widgets{
+  margin-top: 35px;
+}
 /* Ipad */
 @media (min-width: 768px) and (max-width: 1024px){
   .booking-section{

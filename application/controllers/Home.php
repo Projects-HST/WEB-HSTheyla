@@ -102,6 +102,18 @@ class Home extends CI_Controller {
 
 
 	}
+	public function profile_update()
+	{
+
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
+		$user_role=$this->session->userdata('user_role');
+		$this->load->view('front_header');
+		$this->load->view('profile_update', $datas);
+		$this->load->view('front_footer');
+
+
+	}
 	public function home()
 	{
 		$this->load->library('facebook');
