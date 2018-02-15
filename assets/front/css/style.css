@@ -501,6 +501,7 @@ padding-bottom: 15px;
 }
 .event-banner-img{
   height: 234px;
+  width: 100%;
 }
 .event-title-list a{
   font-size: 20px;
@@ -662,6 +663,7 @@ input#quantity{
   }
   .event-banner-img{
     height: 234px;
+    width: 100%;
   }
 .carousel-fade .carousel-inner, .carousel-fade .carousel-item {
   height: 320px;

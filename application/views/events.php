@@ -5,14 +5,14 @@
       <div class="row">
          <div class="carousel carousel-fade" data-ride="carousel" data-interval="2000">
             <div class="carousel-inner" role="listbox">
-            <?php 
+            <?php
 			$i = 0;
-			foreach($adv_event_result as $res){ 
+			foreach($adv_event_result as $res){
 			?>
                <div class="carousel-item <?php if ($i=='0') echo "active" ?>">
                   <a href="#"><img class="d-block w-100" src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>" alt="First slide"></a>
                </div>
-               
+
                <?php $i = $i+1; } ?>
             </div>
          </div>
@@ -82,7 +82,9 @@
             ?>
          <div class="col-md-4 event-thumb">
             <div class="card event-card">
+              <a href="#">
                <img class="img-fluid event-banner-img" src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>" alt="" >
+             </a>
                <div class="card-img-overlay">
                   <span class="badge badge-pill badge-danger">
 
@@ -104,9 +106,7 @@
                   </p>
                   <div class="news-title">
                      <p class=" title-small event-title-list">
-                        <a href="#">
-                        <?php echo $res->event_name; ?>
-                        </a>
+                        <a href="<?php echo base_url(); ?>"><?php echo $res->event_name; ?></a>
                      </p>
                   </div>
                   <p class="card-text">
@@ -147,7 +147,13 @@ position: absolute;
 		height: 180px;
 	}
 }
-
+.card-img-overlay{
+  position: relative;
+  padding: 0px;
+}
+.card-body{
+  padding-top: 0px;
+}
 </style>
 <script>
 	$('#category').multiselect();
@@ -163,7 +169,7 @@ function getevents()
 	var category_id=$("#category").val();
 	cat_id = category_id.toString();
 	var result = '';
-	
+
 	//make the ajax call
 	$.ajax({
 	url: '<?php echo base_url(); ?>eventslist/get_search_events',
@@ -199,7 +205,7 @@ function searchevents()
 {
 	var srch_term = search_term.value;
 	var result = '';
-	
+
 	//make the ajax call
 	$.ajax({
 	url: '<?php echo base_url(); ?>eventslist/search_term_events',
@@ -219,9 +225,9 @@ function searchevents()
 				var date = new Date(Date.parse(start_date));
 				var sdate = String (date);
 				var disp_date = sdate.replace('05:30:00 GMT+0530 (India Standard Time)', '');
-			
+
 			   result +="<div class='col-md-4 event-thumb'><div class='card event-card'><img class='img-fluid event-banner-img' src='<?php echo base_url(); ?>assets/events/banner/"+event_banner+"' alt='' ><div class='card-img-overlay'><span class='badge badge-pill badge-danger'>"+event_type+"</span></div><div class='card-body'><p class='card-text'><small class='text-time'><p>"+disp_date+", "+start_time+"<span class='pull-right favourite-icon'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' alt=''></span></p></small></p><div class='news-title'><p class=' title-small event-title-list'><a href='#'>"+event_name+"</a></p></div><p class='card-text'><small class='text-time'><em>"+country_name+", "+city_name+"</em></small></p></div></div></div>";
-			  
+
 			   $("#event_list").html(result).show();
 			};
 		} else {

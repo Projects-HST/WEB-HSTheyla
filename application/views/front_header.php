@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
     <meta charset="utf-8">
@@ -24,13 +23,6 @@
     <!-- <link href="<?php echo base_url(); ?>assets/front/css/carousel.css" rel="stylesheet"> -->
     <script src="<?php echo base_url(); ?>assets/front/js/jquery.min.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-92904528-2"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'UA-92904528-2');
-    </script>
     <script src="<?php echo base_url(); ?>assets/front/js/popper.min.js"></script>
 
     <script src="<?php echo base_url(); ?>assets/front/js/bootstrap.min.js"></script>
