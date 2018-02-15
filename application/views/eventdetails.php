@@ -1,57 +1,56 @@
-<link rel="stylesheet" href="
-	<?php echo base_url(); ?>assets/front/css/multiselect.css">
-	<script src="
-		<?php echo base_url(); ?>assets/front/js/multiselect.js">
-	</script>
 	<div class="container-fluid eventdetail-pge">
 		<div class="container">
 			<div class="row">
 				<div class="carousel carousel-fade" data-ride="carousel" data-interval="2000">
 					<div class="carousel-inner" role="listbox">
-						<div class="carousel-item active">
-							<a href="#">
-								<img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" alt="Third slide">
-								</a>
-							</div>
-							<div class="carousel-item" style="background: blue;">
-								<a href="#">
-									<img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(129).jpg" alt="Second slide">
-									</a>
-								</div>
-								<div class="carousel-item" style="background: green;">
-									<a href="#">
-										<img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" alt="Third slide">
-										</a>
-									</div>
-								</div>
-							</div>
+                    <?php 
+					//print_r($event_gallery);
+					if (!empty($event_gallery)){
+						$i = 0;
+						foreach($event_gallery as $res){
+					?>
+                            <div class="carousel-item <?php if ($i=='0') echo "active"; ?>">
+                                <img class="d-block w-100" src="<?php echo base_url(); ?>assets/events/gallery/<?php echo $res->event_image; ?>">
+                            </div>
+                            
+                      <?php 
+					   $i = $i+1; 
+					   	}
+					  } else { 
+					  	foreach($event_details as $res){}
+					  ?>
+                      		<div class="carousel-item active">
+                                <img class="d-block w-100" src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>">
+                            </div>
+                      <?php  } ?>
+                      </div>
 						</div>
+						</div>
+                        <?php foreach($event_details as $res){} ?>
 						<div class="row booking-section">
 							<div class="col-md-10">
 								<div class="event-heading">
-									<p class="event-heading-text">Event Name</p>
+									<p class="event-heading-text"><?php echo $res->event_name; ?></p>
 								</div>
 							</div>
-							<div class="col-md-2">
+							<div class="col-md-2"><?php if ($res->booking_status =='Y') { ?>
 								<p>
 									<a href="" class="btn btn-primary btn-login">Book Now</a>
 								</p>
+                                <?php } ?>
 							</div>
 						</div>
 						<section class="row event-details-desc">
 							<div class="col-md-8">
 								<p class="event-desc">Description</p>
-								<p class="event-desc-details">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
-                    book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and
-                    more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
-                    ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                    It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+								<p class="event-desc-details"><?php echo $res->description; ?></p>
 							</div>
 							<div class="col-md-4">
 								<p class="event-desc">Date and Time</p>
-								<p class="event-desc-details">Lorem Ipsum is simply dummy text of the printing</p>
+								<p class="event-desc-details"><?php echo date('d/m/Y',strtotime($res->start_date));?> <?php echo $res->start_time;?> to <?php echo date('d/m/Y',strtotime($res->end_date)); ?> <?php echo $res->end_time;?></p>
 								<p class="event-desc">Venue</p>
-								<p class="event-desc-details">Lorem Ipsum is simply dummy text of the printing</p>
+								<p class="event-desc-details"><b><?php echo $res->event_venue; ?></b> <br /><?php echo $res->event_address; ?></p>
+                               
 							</div>
 						</section>
 						<section class="row">
@@ -64,7 +63,7 @@
 				</div>
 				<style>
 .carousel-fade .carousel-inner, .carousel-fade .carousel-item{
-height: 400px;
+	height: 400px;
 }
 .carousel{
   width: 100%;
@@ -75,16 +74,16 @@ height: 400px;
   }
 }
 </style>
-				<script>
+<script>
     $('.carousel').carousel({
       interval:4000,
       pause: "false"
   })
 
     function initMap() {
-      var uluru = {lat: -25.363, lng: 131.044};
+      var uluru = {lat: <?php echo $res->event_latitude; ?>, lng: <?php echo $res->event_longitude; ?>};
       var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 8,
+        zoom: 12,
         center: uluru
       });
       var marker = new google.maps.Marker({
@@ -93,3 +92,4 @@ height: 400px;
       });
     }
 </script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZLXcA6pQcEJA_iE0xX5XA_ObPQ4ww1eM&callback=initMap"></script>

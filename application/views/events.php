@@ -2,21 +2,24 @@
 <script src="<?php echo base_url(); ?>assets/front/js/multiselect.js"></script>
 <div class="container-fluid eventlist-pge">
    <div class="container">
+   <?php if (count($adv_event_result)>0){ ?>
       <div class="row">
          <div class="carousel carousel-fade" data-ride="carousel" data-interval="2000">
             <div class="carousel-inner" role="listbox">
-            <?php
-			$i = 0;
+            <?php $i = 0;
 			foreach($adv_event_result as $res){
+				$event_id = $res->id * 564738;
+				$event_name = strtolower(preg_replace("/[^\w]/", "-", $res->event_name));
+				$enc_event_id = base64_encode($event_id);
 			?>
-               <div class="carousel-item <?php if ($i=='0') echo "active" ?>">
-                  <a href="#"><img class="d-block w-100" src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>" alt="First slide"></a>
+               <div class="carousel-item <?php if ($i=='0') echo "active"; ?>">
+                  <a href="<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/"><img class="d-block w-100" src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>" alt="<?php echo $event_name; ?>"></a>
                </div>
-
                <?php $i = $i+1; } ?>
             </div>
          </div>
       </div>
+      <?php } ?>
       <form method="post" class="navbar-form navbar-right search-event-form" role="search" action="">
          <div class="row search-area">
             <div class="col-md-2">
@@ -79,10 +82,13 @@
       <div class="row" id="event_list">
          <?php foreach($event_result as $res){
             $sdate = $res->start_date;
+			$event_id = $res->id * 564738;
+			$event_name = strtolower(preg_replace("/[^\w]/", "-", $res->event_name));
+			$enc_event_id = base64_encode($event_id);
             ?>
          <div class="col-md-4 event-thumb">
             <div class="card event-card">
-              <a href="#">
+              <a href="<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/">
                <img class="img-fluid event-banner-img" src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>" alt="" >
              </a>
                <div class="card-img-overlay">
@@ -98,15 +104,15 @@
                   <?php echo date('D M d Y', strtotime($sdate));?>
                   <?php echo $res->start_time  ?>
                   <span class="pull-right favourite-icon">
-                  <img class="img-fluid" src="
-                     <?php echo base_url(); ?>assets/front/images/fav-unselect.png" alt="">
+                  <img class="img-fluid" src="<?php echo base_url(); ?>assets/front/images/fav-unselect.png" alt="">
+                  <img class="img-fluid" src="<?php echo base_url(); ?>assets/front/images/fav-select.png" alt="">
                   </span>
                   </p>
                   </small>
                   </p>
                   <div class="news-title">
                      <p class=" title-small event-title-list">
-                        <a href="<?php echo base_url(); ?>"><?php echo $res->event_name; ?></a>
+                        <a href="<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/"><?php echo $res->event_name; ?></a>
                      </p>
                   </div>
                   <p class="card-text">
@@ -172,25 +178,28 @@ function getevents()
 
 	//make the ajax call
 	$.ajax({
-	url: '<?php echo base_url(); ?>eventslist/get_search_events',
+	url: '<?php echo base_url(); ?>eventlist/get_search_events',
 	type: 'POST',
 	data: {country_id : country_id,city_id:city_id,cat_id:cat_id},
 	success: function(data) {
 		var dataArray = JSON.parse(data);
 		if (dataArray.length>0) {
 			for (var i = 0; i < dataArray.length; i++){
-			   var event_name = dataArray[i].event_name;
-			   var event_banner = dataArray[i].event_banner;
-			   var event_type = dataArray[i].event_type;
-			   var country_name = dataArray[i].country_name;
-			   var city_name = dataArray[i].city_name;
-			   var start_time = dataArray[i].start_time;
-			   var start_date = dataArray[i].start_date;
+				var event_id = dataArray[i].id*564738;
+				var enc_event_id = btoa(event_id);
+				var event_name = dataArray[i].event_name;
+				var sevent_name = event_name.toLowerCase();
+				var enc_event_name = sevent_name.replace(/\s/g, '-');
+				var event_banner = dataArray[i].event_banner;
+				var event_type = dataArray[i].event_type;
+				var country_name = dataArray[i].country_name;
+				var city_name = dataArray[i].city_name;
+				var start_time = dataArray[i].start_time;
+				var start_date = dataArray[i].start_date;
 				var date = new Date(Date.parse(start_date));
 				var sdate = String (date);
 				var disp_date = sdate.replace('05:30:00 GMT+0530 (India Standard Time)', '');
-
-			   result +="<div class='col-md-4 event-thumb'><div class='card event-card'><img class='img-fluid event-banner-img' src='<?php echo base_url(); ?>assets/events/banner/"+event_banner+"' alt='' ><div class='card-img-overlay'><span class='badge badge-pill badge-danger'>"+event_type+"</span></div><div class='card-body'><p class='card-text'><small class='text-time'><p>"+disp_date+", "+start_time+"<span class='pull-right favourite-icon'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' alt=''></span></p></small></p><div class='news-title'><p class=' title-small event-title-list'><a href='#'>"+event_name+"</a></p></div><p class='card-text'><small class='text-time'><em>"+country_name+", "+city_name+"</em></small></p></div></div></div>";
+			   result +="<div class='col-md-4 event-thumb'><div class='card event-card'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img class='img-fluid event-banner-img' src='<?php echo base_url(); ?>assets/events/banner/"+event_banner+"' alt='' ></a><div class='card-img-overlay'><span class='badge badge-pill badge-danger'>"+event_type+"</span></div><div class='card-body'><p class='card-text'><small class='text-time'><p>"+disp_date+", "+start_time+"<span class='pull-right favourite-icon'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' alt=''><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-select.png' alt=''></span></p></small></p><div class='news-title'><p class=' title-small event-title-list'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></div><p class='card-text'><small class='text-time'><em>"+country_name+", "+city_name+"</em></small></p></div></div></div>";
 			   $("#event_list").html(result).show();
 			};
 		} else {
@@ -208,14 +217,18 @@ function searchevents()
 
 	//make the ajax call
 	$.ajax({
-	url: '<?php echo base_url(); ?>eventslist/search_term_events',
+	url: '<?php echo base_url(); ?>eventlist/search_term_events',
 	type: 'POST',
 	data: {srch_term : srch_term},
 	success: function(data) {
 		var dataArray = JSON.parse(data);
 		if (dataArray.length>0) {
 			for (var i = 0; i < dataArray.length; i++){
+				var event_id = dataArray[i].id*564738;
+				var enc_event_id = btoa(event_id);
 				var event_name = dataArray[i].event_name;
+				var sevent_name = event_name.toLowerCase();
+				var enc_event_name = sevent_name.replace(/\s/g, '-');
 				var event_banner = dataArray[i].event_banner;
 				var event_type = dataArray[i].event_type;
 				var country_name = dataArray[i].country_name;
@@ -226,7 +239,7 @@ function searchevents()
 				var sdate = String (date);
 				var disp_date = sdate.replace('05:30:00 GMT+0530 (India Standard Time)', '');
 
-			   result +="<div class='col-md-4 event-thumb'><div class='card event-card'><img class='img-fluid event-banner-img' src='<?php echo base_url(); ?>assets/events/banner/"+event_banner+"' alt='' ><div class='card-img-overlay'><span class='badge badge-pill badge-danger'>"+event_type+"</span></div><div class='card-body'><p class='card-text'><small class='text-time'><p>"+disp_date+", "+start_time+"<span class='pull-right favourite-icon'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' alt=''></span></p></small></p><div class='news-title'><p class=' title-small event-title-list'><a href='#'>"+event_name+"</a></p></div><p class='card-text'><small class='text-time'><em>"+country_name+", "+city_name+"</em></small></p></div></div></div>";
+			   result +="<div class='col-md-4 event-thumb'><div class='card event-card'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img class='img-fluid event-banner-img' src='<?php echo base_url(); ?>assets/events/banner/"+event_banner+"' alt='' ></a><div class='card-img-overlay'><span class='badge badge-pill badge-danger'>"+event_type+"</span></div><div class='card-body'><p class='card-text'><small class='text-time'><p>"+disp_date+", "+start_time+"<span class='pull-right favourite-icon'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' alt=''><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-select.png' alt=''></span></p></small></p><div class='news-title'><p class=' title-small event-title-list'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></div><p class='card-text'><small class='text-time'><em>"+country_name+", "+city_name+"</em></small></p></div></div></div>";
 
 			   $("#event_list").html(result).show();
 			};
@@ -238,12 +251,10 @@ function searchevents()
 	});
 }
 
-
-
 function getcityname(cid) {
 	$.ajax({
 	type: 'post',
-	url: '<?php echo base_url(); ?>eventslist/get_city_name',
+	url: '<?php echo base_url(); ?>eventlist/get_city_name',
 	data: { country_id:cid },
 	dataType: "JSON",
 	cache: false,
@@ -260,7 +271,6 @@ function getcityname(cid) {
 			var city_name = cty[i].city_name;
 			cityname +='<option value=' + cityid + '> ' + city_name + ' </option>';
 		}
-
 		$("#ctyname").html(ctitle+cityname).show();
 		$("#cmsg").hide();
 	}else{
