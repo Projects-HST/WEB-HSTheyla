@@ -20,6 +20,7 @@ class Eventlist extends CI_Controller
 		$data['category_list'] = $this->eventlistmodel->getall_category_list();
 		$data['event_result'] = $this->eventlistmodel->getall_events();
 		$data['adv_event_result'] = $this->eventlistmodel->getadv_events();
+		//$data['user_wishlist'] = $this->eventlistmodel->get_wishlist($user_id);
 		$this->load->view('front_header');
 		$this->load->view('events', $data);
 		$this->load->view('front_footer');
