@@ -2,7 +2,9 @@
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/multiselect.css">
 <script src="<?php echo base_url(); ?>assets/front/js/jquery-ui.js"></script>
 <script src="<?php echo base_url(); ?>assets/front/js/multiselect.js"></script>
-
+<?php $user_id = $this->session->userdata('id'); 
+//$user_id = 85;
+?>
 <div class="container-fluid eventlist-pge">
    <div class="container">
    <?php if (count($adv_event_result)>0){ ?>
@@ -86,11 +88,15 @@
       <p class="upcoming-event-heading">Upcoming Events</p>
       <br>
       <div class="row" id="event_list">
-         <?php foreach($event_result as $res){
+         <?php
+		   
+		  foreach($event_result as $res){
+			
             $sdate = $res->start_date;
 			$event_id = $res->id * 564738;
 			$event_name = strtolower(preg_replace("/[^\w]/", "-", $res->event_name));
 			$enc_event_id = base64_encode($event_id);
+			$wishlist_status = $res->wlstatus;
             ?>
          <div class="col-md-4 event-thumb">
             <div class="card event-card">
@@ -110,8 +116,13 @@
                   <?php echo date('D M d Y', strtotime($sdate));?>
                   <?php echo $res->start_time  ?>
                   <span class="pull-right favourite-icon">
-                  <img class="img-fluid" src="<?php echo base_url(); ?>assets/front/images/fav-unselect.png" alt="">
-                  <img class="img-fluid" src="<?php echo base_url(); ?>assets/front/images/fav-select.png" alt="">
+				  	<?php 
+					if ($user_id !=''){
+					if ($wishlist_status !=""){ ?>
+							<img class="img-fluid" src="<?php echo base_url(); ?>assets/front/images/fav-select.png" alt="">
+						  <?php } else { ?>
+							<img class="img-fluid" src="<?php echo base_url(); ?>assets/front/images/fav-unselect.png" alt="">
+					<?php  } }?>
                   </span>
                   </p>
                   </small>
@@ -132,7 +143,7 @@
                </div>
             </div>
          </div>
-         <?php } ?>
+         <?php }  ?>
       </div>
    </div>
 </div>

@@ -57,7 +57,20 @@ Class Eventlistmodel extends CI_Model
 	function getall_events()
     {
 		$current_date = date("Y-m-d");
-      	$sql="SELECT ev.*,cy.country_name,ci.city_name,ca.category_name FROM country_master AS cy,city_master AS ci,category_master AS ca,events AS ev WHERE ev.category_id=ca.id AND ev.event_country=cy.id AND ev.event_city=ci.id AND ev.end_date>= '$current_date' AND ev.event_status='Y' ORDER BY ev.id DESC";
+		if ($this->session->userdata('id') !=''){
+			$user_id = $this->session->userdata('id');
+		} else {
+			$user_id = 0;
+		}
+		//$user_id = '85';
+		$sql="SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+				FROM events AS e
+				LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
+				LEFT JOIN country_master AS cy ON e.event_country = cy.id
+				LEFT JOIN city_master AS ci ON e.event_city = ci.id
+				LEFT JOIN category_master AS ca ON e.category_id = ca.id
+				WHERE e.end_date >= '$current_date' AND e.event_status = 'Y' ORDER BY e.id DESC";
+
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
 	  	return $res;
@@ -99,5 +112,13 @@ Class Eventlistmodel extends CI_Model
 	  	return $res;
     }
 	
+	function get_wishlist($user_id)
+    {
+		$user_id = 85;
+		$sql="SELECT event_id FROM user_wish_list WHERE user_id = '$user_id'";
+	  	$resu=$this->db->query($sql);
+	  	$res=$resu->result();
+	  	return $res;
+    }
 }
 ?>
