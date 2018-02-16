@@ -269,7 +269,7 @@ class Home extends CI_Controller {
 					$datas['res']=$this->loginmodel->getuserinfo($user_id);
 					$this->load->view('profile', $datas);
 				}else if($user_role==2){
-                    $datas['res']=$this->loginmodel->getuserinfo($user_id);
+          $datas['res']=$this->loginmodel->getuserinfo($user_id);
 					$this->load->view('profile', $datas);
 				}else{
 				 redirect('/');
@@ -285,9 +285,13 @@ class Home extends CI_Controller {
 			$user_role=$this->session->userdata('user_role');
 			$datas['res']=$this->loginmodel->getuserinfo($user_id);
 			if($user_role==3){
+				$this->load->view('front_header');
 				$this->load->view('mobilenumber', $datas);
+				$this->load->view('front_footer');
 			}else if($user_role==2){
-                  $this->load->view('mobilenumber', $datas);
+				$this->load->view('front_header');
+				$this->load->view('mobilenumber', $datas);
+				$this->load->view('front_footer');
 			}else{
 				redirect('/');
 			}
@@ -299,9 +303,14 @@ class Home extends CI_Controller {
 			$user_role=$this->session->userdata('user_role');
 			$datas['res']=$this->loginmodel->getuserinfo($user_id);
 			if($user_role==3){
+				$this->load->view('front_header');
 				$this->load->view('changeemail', $datas);
+				$this->load->view('front_footer');
+
 			}else if($user_role==2){
-				  $this->load->view('changeemail', $datas);
+				$this->load->view('front_header');
+				$this->load->view('changeemail', $datas);
+				$this->load->view('front_footer');
 			}else{
 				redirect('/');
 			}
@@ -325,16 +334,33 @@ class Home extends CI_Controller {
 
 
 		public function verify(){
+			$this->load->view('front_header');
 			$this->load->view('verify');
+			$this->load->view('front_footer');
+
 		}
 		public function privacy(){
+
+			$this->load->view('front_header');
 			$this->load->view('privacy');
+			$this->load->view('front_footer');
+		}
+		public function review(){
+
+			$this->load->view('front_header');
+			$this->load->view('review');
+			$this->load->view('front_footer');
 		}
 		public function payment(){
+			$this->load->view('front_header');
 			$this->load->view('payment');
+			$this->load->view('front_footer');
 		}
 		public function terms(){
+
+			$this->load->view('front_header');
 			$this->load->view('terms');
+			$this->load->view('front_footer');
 		}
 
 		public function resetpassword(){
@@ -343,11 +369,12 @@ class Home extends CI_Controller {
 			$this->load->view('front_footer');
 
 		}
-		public function deactive(){
-			$this->load->view('deactive');
-		}
+
 		public function verified(){
+			$this->load->view('front_header');
 			$this->load->view('email_verification');
+			$this->load->view('front_footer');
+
 		}
 
 		public function reset_password(){

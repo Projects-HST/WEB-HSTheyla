@@ -208,7 +208,7 @@
 }
 .form-control{
   margin-bottom: 10px;
-  font-weight: 600;
+
   color: #A7A7A7;
   border: 1px solid grey;
 }
@@ -606,11 +606,15 @@ input#quantity{
 .whishlist-card{
   padding: 10px;
 }
-.review-btn{
+a.btn.btn-login.btn-primary.btn-block.review-btn{
   color: #fff;
 }
 .modal-header-review{
   background-color: #478ecc;
+}
+.textarea-review{
+  width: 100%;
+  overflow: hidden;
 }
 /* Leaderboard */
 .leaderboard-bg{
@@ -639,6 +643,12 @@ input#quantity{
 .leaderboard-menu-tab{
   margin-top: 30px;
   margin-bottom: 30px;
+}
+
+
+/* ReviewPage */
+.review-img{
+  width: 200px;
 }
 .menu-icons{
   padding-right: 10px;
