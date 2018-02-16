@@ -1,4 +1,4 @@
-<footer class="footer-bg footer">
+<footer class="footer-bg footer" id="stickfooter">
     <div class="container">
         <div class="row">
             <div class="col-md-6">
@@ -18,6 +18,9 @@
 </footer>
 
 </body>
+
+<script src="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/pages/sweet-alert.init.js"></script>
 <script src="<?php echo base_url(); ?>assets/front/js/jquery.reflection.js"></script>
 <script src="<?php echo base_url(); ?>assets/front/js/jquery.cloud9carousel.js"></script>
 <script type="text/javascript">

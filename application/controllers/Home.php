@@ -104,16 +104,33 @@ class Home extends CI_Controller {
 	}
 	public function profile_update()
 	{
-
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
 		$this->load->view('front_header');
 		$this->load->view('profile_update', $datas);
 		$this->load->view('front_footer');
-
-
 	}
+
+	public function booking_history()
+	{
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
+		$user_role=$this->session->userdata('user_role');
+		$this->load->view('front_header');
+		$this->load->view('booking_history', $datas);
+		$this->load->view('front_footer');
+	}
+	public function wishlist()
+	{
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
+		$user_role=$this->session->userdata('user_role');
+		$this->load->view('front_header');
+		$this->load->view('wishlist', $datas);
+		$this->load->view('front_footer');
+	}
+
 	public function home()
 	{
 		$this->load->library('facebook');
@@ -321,7 +338,10 @@ class Home extends CI_Controller {
 		}
 
 		public function resetpassword(){
+			$this->load->view('front_header');
 			$this->load->view('resetpassword');
+			$this->load->view('front_footer');
+
 		}
 		public function deactive(){
 			$this->load->view('deactive');
@@ -356,7 +376,9 @@ class Home extends CI_Controller {
 		public function reset(){
 			  $email_token = $this->uri->segment(3);
 				$datas['res']=$email_token;
+				$this->load->view('front_header');
 			  $this->load->view('reset',$datas);
+				$this->load->view('front_footer');
 
 		}
 

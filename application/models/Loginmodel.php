@@ -11,11 +11,12 @@ Class Loginmodel extends CI_Model
 
  function login($username,$password)
   {
-    $query = "SELECT * FROM user_master WHERE user_name='$username' OR mobile_no='$username' OR email_id='$username' ";
+   $query = "SELECT * FROM user_master WHERE user_name='$username' OR mobile_no='$username' OR email_id='$username' ";
     $resultset=$this->db->query($query);
+    $resultset->num_rows();
     if($resultset->num_rows()==1)
       {
-        $pwdcheck="SELECT * FROM user_master WHERE password='$password' AND (user_name='$username' OR mobile_no='$username' OR email_id='$username')";
+         $pwdcheck="SELECT * FROM user_master WHERE password='$password' AND (user_name='$username' OR mobile_no='$username' OR email_id='$username')";
           $res=$this->db->query($pwdcheck);
           if($res->num_rows()==1)
 	        {
@@ -84,7 +85,7 @@ Class Loginmodel extends CI_Model
            $resultset=$this->db->query($query);
            return $resultset->result();
          }
-        
+
         function get_tlt_no_reviews()
         {
           $rev="SELECT COUNT(*) AS reviews FROM event_reviews WHERE status='N'";

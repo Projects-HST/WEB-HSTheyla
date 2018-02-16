@@ -226,6 +226,11 @@
 .fnt-footer{
   color:#fff;
 }
+.bottom-footer{
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
 .formbg{
   padding-top: 60px;
   padding-bottom:60px;
@@ -367,13 +372,8 @@
   padding-top: 30px;
   font-size: 24px;
 }
-.form-control{
-  line-height: 0px;
 
-}
-.form-group{
-  margin-bottom: -10px;
-}
+
 .formsignin{
   padding-top:50px;
   padding-bottom: 50px;
@@ -575,8 +575,43 @@ input#quantity{
   margin-left: 10px;
 
 }
-
-
+.change-email{
+  font-size: 12px;
+}
+.booked-ticket{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 12px;
+}
+.booked-event-img{
+  width: 100px;
+  float: left;
+  margin-right: 20px;
+}
+.card-header-title{
+  background-color: #fff;
+}
+.card-header-title h3{
+  font-size: 22px;
+}
+.booked-date{
+  border-left: 2px solid black;
+  margin: 0px;
+  border-left-style: dotted;
+}
+.event-wish{
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.whishlist-card{
+  padding: 10px;
+}
+.review-btn{
+  color: #fff;
+}
+.modal-header-review{
+  background-color: #478ecc;
+}
 /* Leaderboard */
 .leaderboard-bg{
   background: url("../images/leaderboard-bg.jpg");

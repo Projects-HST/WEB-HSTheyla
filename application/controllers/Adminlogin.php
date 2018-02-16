@@ -20,7 +20,7 @@ public function home()
 
 	$result = $this->loginmodel->login($username,$password);
 
-	$msg=$result['msg'];
+	 $msg=$result['msg'];
 	if($result['status']=='Deactive')
 	{
 		$datas['user_data']=array("status"=>$result['status'],"msg"=>$result['msg']);
