@@ -1,5 +1,8 @@
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/jquery-ui.css">
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/multiselect.css">
+<script src="<?php echo base_url(); ?>assets/front/js/jquery-ui.js"></script>
 <script src="<?php echo base_url(); ?>assets/front/js/multiselect.js"></script>
+
 <div class="container-fluid eventlist-pge">
    <div class="container">
    <?php if (count($adv_event_result)>0){ ?>
@@ -72,11 +75,14 @@
       <button class="btn btn-info btn-login" type="button" onclick="searchevents()">
       <i class="fas fa-search"></i>
       </button>
+      
       </div>
       </div>
       </form>
       </div>
       </div>
+
+      
       <p class="upcoming-event-heading">Upcoming Events</p>
       <br>
       <div class="row" id="event_list">
@@ -280,5 +286,21 @@ function getcityname(cid) {
 	}
 	});
 }
+</script>
 
+<script>
+  $( function() {
+    var availableTags = [<?php 
+	 $tot_count = count($event_result);
+	 $i = 1;
+		foreach($event_result as $res){
+		echo "'";
+		echo $event_name = $res->event_name;
+		echo "'";
+		if ($i < $tot_count) echo ",";
+		 $i = $i+1;} ?>];
+    $( "#search_term" ).autocomplete({
+      source: availableTags
+    });
+  } );
 </script>
