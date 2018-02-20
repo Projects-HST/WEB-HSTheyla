@@ -18,14 +18,21 @@ class Eventlist extends CI_Controller
 		$data['country_list'] = $this->eventlistmodel->getall_country_list();
 		$data['city_list'] = $this->eventlistmodel->getall_city_list(); 
 		$data['category_list'] = $this->eventlistmodel->getall_category_list();
-		$data['event_result'] = $this->eventlistmodel->getall_events();
+		$data['event_resu'] = $this->eventlistmodel->get_events();
 		$data['adv_event_result'] = $this->eventlistmodel->getadv_events();
-		//$data['user_wishlist'] = $this->eventlistmodel->get_wishlist($user_id);
 		$this->load->view('front_header');
 		$this->load->view('events', $data);
 		$this->load->view('front_footer');
 		//echo json_encode($data['result']);
 	}
+ 
+     public function get_all_events()
+    {
+        $limit  = $this->input->post('limit');
+		$offset  = $this->input->post('offset');
+        $data['event_result'] = $this->eventlistmodel->getall_events($limit, $offset);
+        echo json_encode($data['event_result']);
+    }
  
     public function get_city_name()
     {
@@ -61,6 +68,14 @@ class Eventlist extends CI_Controller
 		$this->load->view('front_footer');
 		   
         //echo json_encode($data['event_term_result']);
+    }
+	
+	public function eventwishlist()
+    {
+      	$user_id  = $this->input->post('user_id');
+		$event_id  = $this->input->post('event_id');
+        $data['wishlist_result'] = $this->eventlistmodel->update_wishlist($user_id,$event_id);
+        echo json_encode($data['wishlist_result']);
     }
 }
 

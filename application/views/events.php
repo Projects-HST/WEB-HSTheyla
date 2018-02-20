@@ -3,7 +3,7 @@
 <script src="<?php echo base_url(); ?>assets/front/js/jquery-ui.js"></script>
 <script src="<?php echo base_url(); ?>assets/front/js/multiselect.js"></script>
 <?php $user_id = $this->session->userdata('id'); 
-//$user_id = 85;
+$user_id = 85;
 ?>
 <div class="container-fluid eventlist-pge">
    <div class="container">
@@ -88,66 +88,15 @@
       <p class="upcoming-event-heading">Upcoming Events</p>
       <br>
       <div class="row" id="event_list">
-         <?php
-		   
-		  foreach($event_result as $res){
-			
-            $sdate = $res->start_date;
-			$event_id = $res->id * 564738;
-			$event_name = strtolower(preg_replace("/[^\w]/", "-", $res->event_name));
-			$enc_event_id = base64_encode($event_id);
-			$wishlist_status = $res->wlstatus;
-            ?>
-         <div class="col-md-4 event-thumb">
-            <div class="card event-card">
-              <a href="<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/">
-               <img class="img-fluid event-banner-img" src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>" alt="" >
-             </a>
-               <div class="card-img-overlay">
-                  <span class="badge badge-pill badge-danger">
 
-                  <?php echo $res->event_type; ?>
-                  </span>
-               </div>
-               <div class="card-body">
-                  <p class="card-text">
-                     <small class="text-time">
-                  <p>
-                  <?php echo date('D M d Y', strtotime($sdate));?>
-                  <?php echo $res->start_time  ?>
-                  <span class="pull-right favourite-icon">
-				  	<?php 
-					if ($user_id !=''){
-					if ($wishlist_status !=""){ ?>
-							<img class="img-fluid" src="<?php echo base_url(); ?>assets/front/images/fav-select.png" alt="">
-						  <?php } else { ?>
-							<img class="img-fluid" src="<?php echo base_url(); ?>assets/front/images/fav-unselect.png" alt="">
-					<?php  } }?>
-                  </span>
-                  </p>
-                  </small>
-                  </p>
-                  <div class="news-title">
-                     <p class=" title-small event-title-list">
-                        <a href="<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/"><?php echo $res->event_name; ?></a>
-                     </p>
-                  </div>
-                  <p class="card-text">
-                     <small class="text-time">
-                     <em>
-                     <?php echo $res->country_name; ?>,
-                     <?php echo $res->city_name; ?>
-                     </em>
-                     </small>
-                  </p>
-               </div>
-            </div>
-         </div>
-         <?php }  ?>
       </div>
+      			
+			<div id='loader_image'><img src='<?php echo base_url(); ?>assets/loader.gif' width='24' height='24'> Loading...please wait</div>
+      		<div id='loader_message'></div>
    </div>
 </div>
 
+        
 
 
 <style>
@@ -179,11 +128,89 @@ position: absolute;
 }
 </style>
 <script>
-	$('#category').multiselect();
+
+$('#category').multiselect();
 		$('.carousel').carousel({
 		interval:6000,
 		pause: "false"
 })
+
+	var limit = 9
+   	var offset = 0;
+	var result = '';
+      $(document).ready(function() {
+        // start to load the first set of data
+        displayEvents(limit, offset);
+
+        $('#loader_message').click(function() {
+          // if it has no more records no need to fire ajax request
+          var d = $('#loader_message').find("button").attr("data-atr");
+          if (d != "nodata") {
+            offset = limit + offset;
+            displayEvents(limit, offset);
+          }
+        });
+
+      });
+
+
+function displayEvents(lim, off) {
+		
+        $.ajax({
+		url: '<?php echo base_url(); ?>eventlist/get_all_events',
+		type: 'POST',
+		data: {limit:lim,offset:off},
+		cache: false,
+        beforeSend: function() {
+            $("#loader_message").html("").hide();
+            $('#loader_image').show();
+          },
+        success: function(html) {
+            $('#loader_image').hide();
+			var dataArray = JSON.parse(html);
+			
+		if (dataArray.length>0) {
+			for (var i = 0; i < dataArray.length; i++){
+				var disp_event_id = dataArray[i].id;
+				var event_id = dataArray[i].id*564738;
+				var enc_event_id = btoa(event_id);
+				var event_name = dataArray[i].event_name;
+				var sevent_name = event_name.toLowerCase();
+				var enc_event_name = sevent_name.replace(/\s/g, '-');
+				var event_banner = dataArray[i].event_banner;
+				var event_type = dataArray[i].event_type;
+				var country_name = dataArray[i].country_name;
+				var city_name = dataArray[i].city_name;
+				var start_time = dataArray[i].start_time;
+				var start_date = dataArray[i].start_date;
+				var date = new Date(Date.parse(start_date));
+				var sdate = String (date);
+				var disp_date = sdate.replace('05:30:00 GMT+0530 (India Standard Time)', '');
+				var wlstatus = dataArray[i].wlstatus;
+				if(wlstatus==null){
+					 var wishliststatus="<span class='pull-right favourite-icon' id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' alt=''><a></span>";
+				}else{
+					 var wishliststatus="<span class='pull-right favourite-icon' id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-select.png' alt=''></a></span>";
+				}
+				
+				result +="<div class='col-md-4 event-thumb'><div class='card event-card'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img class='img-fluid event-banner-img' src='<?php echo base_url(); ?>assets/events/banner/"+event_banner+"' alt='' ></a><div class='card-img-overlay'><span class='badge badge-pill badge-danger'>"+event_type+"</span></div><div class='card-body'><p class='card-text'><small class='text-time'><p>"+disp_date+", "+start_time+"<?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></small></p><div class='news-title'><p class=' title-small event-title-list'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></div><p class='card-text'><small class='text-time'><em>"+country_name+", "+city_name+"</em></small></p></div></div></div>";
+				
+			};
+				$("#event_list").html(result);
+			}
+			
+            if (dataArray.length>0) {
+			$("#loader_message").html('<button class="btn btn-default" type="button">Load more data</button>').show();
+              
+            } else {
+             $("#loader_message").html('<button data-atr="nodata" class="btn btn-default" type="button">No more records.</button>').show()
+            }
+
+          }
+        });
+      }
+
+
 
 function getevents()
 {
@@ -216,10 +243,21 @@ function getevents()
 				var date = new Date(Date.parse(start_date));
 				var sdate = String (date);
 				var disp_date = sdate.replace('05:30:00 GMT+0530 (India Standard Time)', '');
-			   result +="<div class='col-md-4 event-thumb'><div class='card event-card'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img class='img-fluid event-banner-img' src='<?php echo base_url(); ?>assets/events/banner/"+event_banner+"' alt='' ></a><div class='card-img-overlay'><span class='badge badge-pill badge-danger'>"+event_type+"</span></div><div class='card-body'><p class='card-text'><small class='text-time'><p>"+disp_date+", "+start_time+"<span class='pull-right favourite-icon'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' alt=''><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-select.png' alt=''></span></p></small></p><div class='news-title'><p class=' title-small event-title-list'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></div><p class='card-text'><small class='text-time'><em>"+country_name+", "+city_name+"</em></small></p></div></div></div>";
-			   $("#event_list").html(result).show();
+				var wlstatus = dataArray[i].wlstatus;
+				
+				if(wlstatus==null){
+					 var wishliststatus="<span class='pull-right favourite-icon'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' alt=''></span>";
+				}else{
+					  var wishliststatus="<span class='pull-right favourite-icon'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-select.png' alt=''></span>";
+				}
+				
+				result +="<div class='col-md-4 event-thumb'><div class='card event-card'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img class='img-fluid event-banner-img' src='<?php echo base_url(); ?>assets/events/banner/"+event_banner+"' alt='' ></a><div class='card-img-overlay'><span class='badge badge-pill badge-danger'>"+event_type+"</span></div><div class='card-body'><p class='card-text'><small class='text-time'><p>"+disp_date+", "+start_time+"<?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></small></p><div class='news-title'><p class=' title-small event-title-list'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></div><p class='card-text'><small class='text-time'><em>"+country_name+", "+city_name+"</em></small></p></div></div></div>";
+			  
 			};
+			$('#loader_message').hide();
+			 $("#event_list").html(result).show();
 		} else {
+			$('#loader_message').hide();
 			result +="No Records found!..";
 			$("#event_list").html(result).show();
 		}
@@ -255,18 +293,46 @@ function searchevents()
 				var date = new Date(Date.parse(start_date));
 				var sdate = String (date);
 				var disp_date = sdate.replace('05:30:00 GMT+0530 (India Standard Time)', '');
-
-			   result +="<div class='col-md-4 event-thumb'><div class='card event-card'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img class='img-fluid event-banner-img' src='<?php echo base_url(); ?>assets/events/banner/"+event_banner+"' alt='' ></a><div class='card-img-overlay'><span class='badge badge-pill badge-danger'>"+event_type+"</span></div><div class='card-body'><p class='card-text'><small class='text-time'><p>"+disp_date+", "+start_time+"<span class='pull-right favourite-icon'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' alt=''><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-select.png' alt=''></span></p></small></p><div class='news-title'><p class=' title-small event-title-list'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></div><p class='card-text'><small class='text-time'><em>"+country_name+", "+city_name+"</em></small></p></div></div></div>";
-
-			   $("#event_list").html(result).show();
+				var wlstatus = dataArray[i].wlstatus;
+				
+				if(wlstatus==null){
+					 var wishliststatus="<span class='pull-right favourite-icon'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' alt=''></span>";
+				}else{
+					  var wishliststatus="<span class='pull-right favourite-icon'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-select.png' alt=''></span>";
+				}
+				
+				result +="<div class='col-md-4 event-thumb'><div class='card event-card'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img class='img-fluid event-banner-img' src='<?php echo base_url(); ?>assets/events/banner/"+event_banner+"' alt='' ></a><div class='card-img-overlay'><span class='badge badge-pill badge-danger'>"+event_type+"</span></div><div class='card-body'><p class='card-text'><small class='text-time'><p>"+disp_date+", "+start_time+"<?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></small></p><div class='news-title'><p class=' title-small event-title-list'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></div><p class='card-text'><small class='text-time'><em>"+country_name+", "+city_name+"</em></small></p></div></div></div>";
 			};
+			$('#loader_message').hide();
+			$("#event_list").html(result).show();
 		} else {
+			$('#loader_message').hide();
 			result +="No Records found!..";
 			$("#event_list").html(result).show();
 		}
 	}
 	});
 }
+
+
+function editwishlist(user_id,event_id)
+{
+	//make the ajax call
+	$.ajax({
+	url: '<?php echo base_url(); ?>eventlist/eventwishlist',
+	type: 'POST',
+	data: {user_id : user_id,event_id : event_id},
+	success: function(data) {
+		var dataArray = JSON.parse(data);
+		if (dataArray =='Added'){
+			$('#wishlist' + event_id).html("<span class='pull-right favourite-icon'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-select.png' alt=''></span>").show();
+		} else {
+			$('#wishlist' + event_id).html("<span class='pull-right favourite-icon'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' alt=''></span>").show();
+		}
+	}
+	});
+}
+
 
 function getcityname(cid) {
 	$.ajax({
@@ -297,14 +363,12 @@ function getcityname(cid) {
 	}
 	});
 }
-</script>
 
-<script>
-  $( function() {
+$( function() {
     var availableTags = [<?php 
-	 $tot_count = count($event_result);
+	 $tot_count = count($event_resu);
 	 $i = 1;
-		foreach($event_result as $res){
+		foreach($event_resu as $res){
 		echo "'";
 		echo $event_name = $res->event_name;
 		echo "'";
@@ -313,5 +377,5 @@ function getcityname(cid) {
     $( "#search_term" ).autocomplete({
       source: availableTags
     });
-  } );
+  } ); 
 </script>
