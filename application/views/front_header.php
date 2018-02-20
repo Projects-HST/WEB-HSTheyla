@@ -68,9 +68,7 @@
                         <a class="nav-link" href="<?php echo  base_url(); ?>dashboard">Create Event</a>
                     </li>
                     <?php }else{ ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#create">Create Event</a>
-                    </li>
+                  
                     <?php } ?>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
