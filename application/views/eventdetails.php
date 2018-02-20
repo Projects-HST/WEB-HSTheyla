@@ -247,9 +247,6 @@ $('#user-rating-form').on('change','[name="rating"]',function(){
 
 function sharepoints(user_id,event_id)
 {
-	alert(user_id);
-	alert(event_id);
-
 	//make the ajax call
 	$.ajax({
 	url: '<?php echo base_url(); ?>eventlist/eventsharing',
