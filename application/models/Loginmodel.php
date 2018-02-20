@@ -166,32 +166,24 @@ Class Loginmodel extends CI_Model
        echo "already";
      }
    }
-   function check_mobile($mobile){
-     $check_email="SELECT * FROM user_master WHERE mobile_no='$mobile'";
-     $res=$this->db->query($check_email);
-     if($res->num_rows()>=1){
-       echo "Mobile Number Already Exists";
-     }else{
-       echo "success";
-     }
-   }
+
 
    function exist_email($email){
       $check_email="SELECT * FROM user_master WHERE email_id='$email'";
      $res=$this->db->query($check_email);
      if($res->num_rows()==0){
-       echo "success";
+       echo "true";
      }else{
-       echo "Already Exist";
+       echo "false";
      }
    }
    function exist_mobile($mobile){
      $check_email="SELECT * FROM user_master WHERE mobile_no='$mobile'";
      $res=$this->db->query($check_email);
      if($res->num_rows()==0){
-       echo "success";
+       echo "true";
      }else{
-       echo "already";
+       echo "false";
      }
    }
 
@@ -199,9 +191,9 @@ Class Loginmodel extends CI_Model
      $check_username="SELECT * FROM user_master WHERE user_name='$username'";
      $res=$this->db->query($check_username);
      if($res->num_rows()==0){
-       echo "success";
+       echo "true";
      }else{
-       echo "already";
+       echo "false";
      }
    }
 
@@ -234,6 +226,26 @@ Class Loginmodel extends CI_Model
        echo "failed";
      }
    }
+
+   function check_username($user_name,$user_id){
+    $select="SELECT * FROM user_master Where user_name='$user_name' and id!='$user_id'";
+     $result=$this->db->query($select);
+     if($result->num_rows()>0){
+       echo "false";
+       }else{
+         echo "true";
+     }
+   }
+   function check_mobile($mobile_no,$user_id){
+     $select="SELECT * FROM user_master Where mobile_no='$mobile_no' and id!='$user_id'";
+      $result=$this->db->query($select);
+      if($result->num_rows()>0){
+        echo "false";
+        }else{
+          echo "true";
+      }
+   }
+
    function save_email_id($email,$user_id){
      $check_email="SELECT * FROM user_master WHERE email_id='$email'";
      $res=$this->db->query($check_email);
@@ -357,8 +369,11 @@ Class Loginmodel extends CI_Model
 
    }
 
-   function save_profile_info($user_id,$name,$address){
-				 $update_user_master="UPDATE user_details SET name='$name',address_line1='$address' WHERE user_id='$user_id'";
+   function save_profile_info($first_name,$user_name,$address,$gender,$newsletter_status,$occupation,$user_id){
+				  $update_user_details="UPDATE user_details SET name='$first_name',address_line1='$address',occupation='$occupation',gender='$gender',newsletter_status='$newsletter_status' WHERE user_id='$user_id'";
+
+				 $result=$this->db->query($update_user_details);
+         $update_user_master="UPDATE user_master SET user_name='$user_name' WHERE id='$user_id'";
 				 $result=$this->db->query($update_user_master);
 				 if($result){
 					  echo "success";
@@ -374,7 +389,7 @@ Class Loginmodel extends CI_Model
       $OTP = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT);
       $update_user_otp="UPDATE user_master SET mobile_otp='$OTP' WHERE id='$user_id'";
       $result=$this->db->query($update_user_otp);
-      $mobile_message = 'Verify OTP To Change Mobile Number:'. $OTP;
+      $mobile_message = 'Verify Your Mobile Number:'. $OTP;
       $this->load->model('smsmodel');
       $response=$this->smsmodel->sendOTPtomobile($mob,$mobile_message);
 

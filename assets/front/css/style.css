@@ -355,6 +355,7 @@
   -o-background-size: cover;
   background-size: cover;
   background-size: 100% 100%;
+  background-attachment: fixed;
   height: 100%;
 }
 
@@ -363,8 +364,12 @@
 {
 
   margin-top: 100px;
+  margin-bottom: 10%;
   background-color: #fff;
   border-radius: 3px;
+}
+.user-text-box{
+  line-height: 0px;
 }
 .login-heading{
   width:100%;
@@ -372,8 +377,12 @@
   padding-top: 30px;
   font-size: 24px;
 }
-
-
+.textarea-form{
+  overflow-x: hidden;
+}
+.notverfied{
+  color: red;
+}
 .formsignin{
   padding-top:50px;
   padding-bottom: 50px;

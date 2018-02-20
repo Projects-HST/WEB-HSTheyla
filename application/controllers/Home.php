@@ -36,9 +36,18 @@ class Home extends CI_Controller {
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
-		$this->load->view('front_header');
-		$this->load->view('signin', $datas);
-		$this->load->view('front_footer');
+		if($user_role==1){
+			redirect('adminlogin/dashboard');
+		}else if($user_role==2){
+							redirect('dashboard');
+		}else if($user_role==3){
+							redirect('profile');
+		}else{
+			$this->load->view('front_header');
+			$this->load->view('signin', $datas);
+			$this->load->view('front_footer');
+		}
+
 
 
 	}
@@ -48,9 +57,17 @@ class Home extends CI_Controller {
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
-		$this->load->view('front_header');
-		$this->load->view('signup', $datas);
-		$this->load->view('front_footer');
+		if($user_role==1){
+			redirect('adminlogin/dashboard');
+		}else if($user_role==2){
+							redirect('dashboard');
+		}else if($user_role==3){
+							redirect('profile');
+		}else{
+			$this->load->view('front_header');
+			$this->load->view('signup', $datas);
+			$this->load->view('front_footer');
+		}
 
 
 	}
@@ -72,22 +89,26 @@ class Home extends CI_Controller {
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
+			if($user_role==3){
 		$this->load->view('front_header');
 		$this->load->view('eventdetails', $datas);
 		$this->load->view('front_footer');
-
-
+		}else{
+			redirect('/');
+		}
 	}
 	public function booking()
 	{
-
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
+		if($user_role==3){
 		$this->load->view('front_header');
 		$this->load->view('booking', $datas);
 		$this->load->view('front_footer');
-
+	}else{
+		redirect('/');
+	}
 
 	}
 	public function leaderboard()
@@ -96,9 +117,13 @@ class Home extends CI_Controller {
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
+		if($user_role==3){
 		$this->load->view('front_header');
 		$this->load->view('leaderboard', $datas);
 		$this->load->view('front_footer');
+	}else{
+		redirect('/');
+	}
 
 
 	}
@@ -107,9 +132,15 @@ class Home extends CI_Controller {
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
-		$this->load->view('front_header');
-		$this->load->view('profile_update', $datas);
-		$this->load->view('front_footer');
+		if($user_role==3){
+			$datas['res']=$this->loginmodel->getuserinfo($user_id);
+			$this->load->view('front_header');
+			$this->load->view('profile_update', $datas);
+			$this->load->view('front_footer');
+		}else{
+			redirect('/');
+		}
+
 	}
 
 	public function booking_history()
@@ -117,18 +148,26 @@ class Home extends CI_Controller {
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
+		if($user_role==3){
 		$this->load->view('front_header');
 		$this->load->view('booking_history', $datas);
 		$this->load->view('front_footer');
+		}else{
+			redirect('/');
+		}
 	}
 	public function wishlist()
 	{
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
+		if($user_role==3){
 		$this->load->view('front_header');
 		$this->load->view('wishlist', $datas);
 		$this->load->view('front_footer');
+		}else{
+			redirect('/');
+		}
 	}
 
 	public function home()
@@ -160,7 +199,7 @@ class Home extends CI_Controller {
 		$client->setClientId($CLIENT_ID);
 		$client->setClientSecret($CLIENT_SECRET);
 		$client->setAccessType("offline");
-		$client->setRedirectUri('http://heylaapp.com/google_login');
+		$client->setRedirectUri(''.base_url().'google_login');
 		$client->setScopes('email');
 		$objOAuthService = new Google_Service_Plus($client);
 		$client->setScopes(array('https://www.googleapis.com/auth/userinfo.email','https://www.googleapis.com/auth/userinfo.profile'));
@@ -216,6 +255,7 @@ class Home extends CI_Controller {
 			{
 				// User logged in, get user details
 				$user = $this->facebook->request('get', '/me?fields=id,name,email');
+
 
 				if (!isset($user['error']))
 				{
@@ -297,6 +337,24 @@ class Home extends CI_Controller {
 			}
 		}
 
+		public function mobile(){
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			$datas['res']=$this->loginmodel->getuserinfo($user_id);
+			if($user_role==3){
+				$this->load->view('front_header');
+				$this->load->view('add_mobile_number', $datas);
+				$this->load->view('front_footer');
+			}else if($user_role==2){
+				$this->load->view('front_header');
+				$this->load->view('add_mobile_number', $datas);
+				$this->load->view('front_footer');
+			}else{
+				redirect('/');
+			}
+		}
+
 		public function changeemail(){
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
@@ -316,6 +374,23 @@ class Home extends CI_Controller {
 			}
 
 		}
+
+
+		public function change_profile_picture(){
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			$datas['res']=$this->loginmodel->getuserinfo($user_id);
+			if($user_role==3){
+				$this->load->view('front_header');
+				$this->load->view('profile_picture', $datas);
+				$this->load->view('front_footer');
+			}else{
+				redirect('/');
+			}
+
+		}
+
 
 		public function organiser(){
 			$datas=$this->session->userdata();
@@ -421,11 +496,20 @@ class Home extends CI_Controller {
 			$data=$this->loginmodel->check_email($email);
 
 		}
-		public function checkmobile(){
-			$mobile=$this->input->post('mobile');
-			$data=$this->loginmodel->check_mobile($mobile);
+
+		public function check_username(){
+			$user_name=$this->input->post('user_name');
+			$user_id=$this->uri->segment(3);
+			$data=$this->loginmodel->check_username($user_name,$user_id);
 
 		}
+		public function check_mobile(){
+			$mobile_no=$this->input->post('mobile_no');
+			$user_id=$this->uri->segment(3);
+			$data=$this->loginmodel->check_mobile($mobile_no,$user_id);
+
+		}
+
 
 
 		public function existemail(){
@@ -501,9 +585,14 @@ class Home extends CI_Controller {
 			$user_id=$this->session->userdata('id');
 			 $user_role=$this->session->userdata('user_role');
 			if($user_id){
-				$name=$this->input->post('name');
+				$first_name=$this->input->post('first_name');
+
+				$user_name=$this->input->post('user_name');
 				$address=$this->input->post('address');
-				$datas['res']=$this->loginmodel->save_profile_info($user_id,$name,$address);
+				$gender=$this->input->post('gender');
+				$newsletter_status=$this->input->post('newsletter_status');
+				$occupation=$this->input->post('occupation');
+				$datas['res']=$this->loginmodel->save_profile_info($first_name,$user_name,$address,$gender,$newsletter_status,$occupation,$user_id);
 			}else{
 				redirect('/');
 			}

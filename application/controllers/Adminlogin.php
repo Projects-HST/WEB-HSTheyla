@@ -25,20 +25,20 @@ public function home()
 	{
 		$datas['user_data']=array("status"=>$result['status'],"msg"=>$result['msg']);
 		$this->session->set_flashdata('msg', 'Account Deactivated');
-		redirect('/');
+		redirect('signin');
 	}
 
 	if($result['status']=='notRegistered')
 	{
 		$datas['user_data']=array("status"=>$result['status'],"msg"=>$result['msg']);
 		$this->session->set_flashdata('msg', 'Invalid Login');
-		redirect('/');
+		redirect('signin');
 	}
 	if($result['status']=='emailverfiy')
 	{
 		$datas['user_data']=array("status"=>$result['status'],"msg"=>$result['msg']);
 		$this->session->set_flashdata('msg', 'You have to Verify your Email to login');
-		redirect('/');
+		redirect('signin');
 	}
 
 	$user_type=$this->session->userdata('user_role');
@@ -109,16 +109,16 @@ public function home()
 	elseif($msg=="Password Wrong"){
 		$datas['user_data']=array("status"=>$result['status'],"msg"=>$result['msg']);
 		$this->session->set_flashdata('msg', 'Password Wrong');
-		redirect('/');
+		redirect('signin');
 	}	elseif($msg=="emailverfiy"){
 			$datas['user_data']=array("status"=>$result['status'],"msg"=>$result['msg']);
 			$this->session->set_flashdata('msg', 'You have to Verify your Email to login');
-			redirect('/');
+			redirect('signin');
 		}
 	else{
 		$datas['user_data']=array("status"=>$result['status'],"msg"=>$result['msg']);
 		$this->session->set_flashdata('msg', 'Email invalid');
-		redirect('/');
+		redirect('signin');
 	}
 }
 

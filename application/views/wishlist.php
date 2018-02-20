@@ -13,13 +13,14 @@
         <div class="row row-offcanvas row-offcanvas-right">
           <div class="col-12 col-md-3 sidebar-offcanvas" id="sidebar">
             <div class="list-group">
-              <a href="#" class="list-group-item "><span class="menu-icons"><i class="fas fa-trophy"></i></span>Dashboard</a>
-              <a href="#" class="list-group-item "><span class="menu-icons"><i class="fas fa-user"></i></span>Profile</a>
-              <a href="#" class="list-group-item "><span class="menu-icons"><i class="fas fa-book"></i></span>Booking </a>
-              <a href="#" class="list-group-item active"><span class="menu-icons"><i class="fas fa-heart"></i></span>Whishlist</a>
+              <a href="<?php echo base_url(); ?>leaderboard" class="list-group-item "><span class="menu-icons"><i class="fas fa-trophy"></i></span>Dashboard</a>
+              <a href="<?php echo base_url(); ?>profile" class="list-group-item "><span class="menu-icons"><i class="fas fa-user"></i></span>Profile</a>
+                <a href="<?php echo base_url(); ?>profile_picture" class="list-group-item "><span class="menu-icons"><i class="fas fa-user"></i></span>Display Picture</a>
+              <a href="<?php echo base_url(); ?>booking_history" class="list-group-item "><span class="menu-icons"><i class="fas fa-book"></i></span>Booking </a>
+              <a href="<?php echo base_url(); ?>wishlist" class="list-group-item active"><span class="menu-icons"><i class="fas fa-heart"></i></span>Whishlist</a>
               <!--a href="<?php echo base_url(); ?>organizerbooking/messageboard/" class="list-group-item">Messages</a-->
               <a href="#" class="list-group-item"><span class="menu-icons"><i class="fab fa-wpforms"></i></span>Reviews</a>
-              <a href="#" class="list-group-item"><span class="menu-icons"><i class="fas fa-sign-out-alt"></i></span>Sign Out</a>
+              <a href="<?php echo base_url(); ?>logout" class="list-group-item "><span class="menu-icons"><i class="fas fa-sign-out-alt"></i></span>Sign Out</a>
             </div>
           </div><!--/span-->
 

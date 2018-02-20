@@ -26,17 +26,13 @@ input[type=text] {
 <center>
 
 
-  <p style="margin-top:5%;font-size:22px;">Change the Mobile Number</p>
+  <p style="margin-top:5%;font-size:22px;">Add the Mobile Number</p>
         <div class="reset">
 
   <div class="">
     <form class="form" role="form" autocomplete="off" id="update_mobile_number" method="post" enctype="multipart/form-data">
       <?php foreach($res as $rows){} ?>
-        <div class="form-group">
-            <input type="text" class="form-control" id="new_password" name="new_password" readonly required="" value="<?php echo $rows->mobile_no; ?>">
-
-        </div>
-
+      
 
 
         <div class="form-group">
@@ -87,7 +83,7 @@ input[type=text] {
                    if (response == "success") {
                      swal({
                 title: "Success",
-                text: " Mobile Number Has been Added Successfully",
+                text: " Mobile Number Has been Changed Successfully",
                 type: "success"
             }).then(function() {
                 location.href = '<?php echo base_url(); ?>profile';

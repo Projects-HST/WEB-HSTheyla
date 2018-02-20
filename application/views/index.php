@@ -187,7 +187,7 @@
                                         <div class="social-login">
 
                      <a href="<?php echo base_url(); ?>google_login" class="btn btn-lg  btn-google"><i class="fa fa-google-plus"></i> Login With Google + </a>
-                                                <a href="<?php echo base_url(); ?>facebook_login" class="btn btn-facebook btn-lg">
+                                                <a href="#" class="btn btn-facebook btn-lg">
                       <i class="fa fa-facebook"></i> Login with Facebook
                      </a>
                                         </div>
