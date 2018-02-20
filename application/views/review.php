@@ -25,7 +25,7 @@
 
           <div class="col-12 col-md-9">
             <div class="card-header card-header-title">
-                           <h3 class="mb-0">Review</h3>
+                           <h3 class="mb-0">Reviews</h3>
             </div>
               <div class="row">
                 <div class="col-12 event-wish">
