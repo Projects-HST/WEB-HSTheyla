@@ -66,7 +66,6 @@ class Eventlist extends CI_Controller
 		$this->load->view('front_header');
 		$this->load->view('eventdetails', $data);
 		$this->load->view('front_footer');
-		   
         //echo json_encode($data['event_term_result']);
     }
 	
@@ -76,6 +75,15 @@ class Eventlist extends CI_Controller
 		$event_id  = $this->input->post('event_id');
         $data['wishlist_result'] = $this->eventlistmodel->update_wishlist($user_id,$event_id);
         echo json_encode($data['wishlist_result']);
+    }
+	
+	public function eventsharing()
+    {
+      	$user_id  = $this->input->post('user_id');
+		$event_id  = $this->input->post('event_id');
+		$type  = $this->input->post('type');
+        $data['result'] = $this->eventlistmodel->update_sharing($user_id,$event_id,$type);
+        echo json_encode($data['result']);
     }
 }
 

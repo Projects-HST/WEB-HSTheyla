@@ -58,8 +58,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#services">Services</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo  base_url(); ?>eventlist/">List Events</a>
+                    </li>
                      <?php
-                        $user_role=$this->session->userdata('user_role');
+                     $user_role=$this->session->userdata('user_role');
                      if($user_role=='2'){ ?>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo  base_url(); ?>dashboard">Create Event</a>

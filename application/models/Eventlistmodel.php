@@ -166,5 +166,17 @@ Class Eventlistmodel extends CI_Model
 			}
 	  	return $res;
     }
+	
+	function update_sharing($user_id,$event_id)
+    {
+				$activity_sql = "INSERT INTO user_activity (date,user_id,event_id,rule_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $event_id . "','2','Sharing')";
+		    	$insert_activity = $this->db->query($activity_sql);
+		    	
+		    	$activity_points = "UPDATE user_points_count SET sharing_count = sharing_count+1,sharing_points = sharing_points+5,total_points=total_points+5 WHERE user_id  ='$user_id'";
+		    	$insert_points = $this->db->query($activity_points);
+				
+			$res = "Added";
+			return $res;
+    }
 }
 ?>
