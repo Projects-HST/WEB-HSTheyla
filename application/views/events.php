@@ -1,10 +1,9 @@
+<?php $user_id = $this->session->userdata('id'); ?>
+
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/jquery-ui.css">
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/multiselect.css">
 <script src="<?php echo base_url(); ?>assets/front/js/jquery-ui.js"></script>
 <script src="<?php echo base_url(); ?>assets/front/js/multiselect.js"></script>
-<?php $user_id = $this->session->userdata('id'); 
-$user_id = 85;
-?>
 <div class="container-fluid eventlist-pge">
    <div class="container">
    <?php if (count($adv_event_result)>0){ ?>

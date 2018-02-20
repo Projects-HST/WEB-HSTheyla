@@ -1,8 +1,6 @@
-<link rel="stylesheet" href="
-	<?php echo base_url(); ?>assets/front/css/multiselect.css">
-	<script src="
-		<?php echo base_url(); ?>assets/front/js/multiselect.js">
-	</script>
+<?php $user_id = $this->session->userdata('id'); ?>
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/multiselect.css">
+<script src="<?php echo base_url(); ?>assets/front/js/multiselect.js"></script>
 	<div class="container-fluid eventdetail-pge">
 		<div class="container">
 			<div class="row">

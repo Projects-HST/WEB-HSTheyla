@@ -85,5 +85,16 @@ class Eventlist extends CI_Controller
         $data['result'] = $this->eventlistmodel->update_sharing($user_id,$event_id,$type);
         echo json_encode($data['result']);
     }
+	
+	public function booking($event_id)
+    {
+		$dec_event_id = base64_decode($event_id);
+		$event_id = ($dec_event_id/564738);
+		$data['booking_details'] = $this->eventlistmodel->booking($event_id);
+		$this->load->view('front_header');
+		$this->load->view('booking', $data);
+		$this->load->view('front_footer');
+        //echo json_encode($data['event_term_result']);
+    }
 }
 

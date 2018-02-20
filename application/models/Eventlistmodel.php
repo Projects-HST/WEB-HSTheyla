@@ -74,7 +74,6 @@ Class Eventlistmodel extends CI_Model
 		} else {
 			$user_id = 0;
 		}
-		$user_id = '85';
 
 		$sql="SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 				FROM events AS e
@@ -98,7 +97,6 @@ Class Eventlistmodel extends CI_Model
 		} else {
 			$user_id = 0;
 		}
-		$user_id = '85';
 
 		 $sql="SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus FROM events AS e LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id' LEFT JOIN country_master AS cy ON e.event_country = cy.id LEFT JOIN city_master AS ci ON e.event_city = ci.id LEFT JOIN category_master AS ca ON e.category_id = ca.id WHERE e.end_date >= '$current_date' AND e.event_country='$country_id' AND e.event_city='$city_id' AND e.event_status = 'Y' AND e.category_id IN ($category_id) ORDER BY e.id DESC";
 	  	$resu=$this->db->query($sql);
@@ -115,7 +113,6 @@ Class Eventlistmodel extends CI_Model
 		} else {
 			$user_id = 0;
 		}
-		$user_id = '85';
 		
 		 $sql="SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus FROM events AS e LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id' LEFT JOIN country_master AS cy ON e.event_country = cy.id LEFT JOIN city_master AS ci ON e.event_city = ci.id LEFT JOIN category_master AS ca ON e.category_id = ca.id WHERE e.end_date >= '$current_date' AND e.event_name like '%$srch_term%' AND e.event_status = 'Y' ORDER BY e.id DESC";
 	  	$resu=$this->db->query($sql);
@@ -142,7 +139,6 @@ Class Eventlistmodel extends CI_Model
 	
 	function eventwishlist($user_id,$event_id)
     {
-		$user_id = 85;
 		$sql="SELECT event_id FROM user_wish_list WHERE user_id = '$user_id'";
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
@@ -174,6 +170,15 @@ Class Eventlistmodel extends CI_Model
 		    	
 		    	$activity_points = "UPDATE user_points_count SET sharing_count = sharing_count+1,sharing_points = sharing_points+5,total_points=total_points+5 WHERE user_id  ='$user_id'";
 		    	$insert_points = $this->db->query($activity_points);
+				
+			$res = "Added";
+			return $res;
+    }
+	
+	
+	function booking($event_id)
+    {
+				
 				
 			$res = "Added";
 			return $res;

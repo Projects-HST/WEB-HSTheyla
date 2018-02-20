@@ -1,6 +1,4 @@
-<?php $user_id = $this->session->userdata('id'); 
-$user_id = 85;
-?>
+<?php $user_id = $this->session->userdata('id'); ?>
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <div class="container-fluid eventdetail-pge">
 <div class="container">
@@ -42,11 +40,10 @@ $user_id = 85;
 					<p class="event-heading-text"><?php echo $res->event_name; ?></p>
 				</div>
 			</div>
-			<div class="col-md-2"><?php if ($res->booking_status =='Y') { ?>
-				<p>
-					<a href="" class="btn btn-primary btn-login">Book Now</a>
-				</p>
-				<?php } ?>
+			<div class="col-md-2">
+			<?php if ($res->booking_status =='Y') { ?>
+				<p><a href="<?php echo base_url(); ?>eventlist/booking/<?php echo $enc_event_id; ?>/" class="btn btn-primary btn-login">Book Now</a></p>
+			<?php } ?>
 			</div>
 		</div>
 		<section class="row event-details-desc">
