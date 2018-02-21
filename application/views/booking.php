@@ -38,7 +38,7 @@
 							</div>
 							<div class="col-md-2"></div>
 						</div>
-                        
+
                 <section class="row event-details-desc">
                 <div class="col-md-8">
                 <form class="form-horizontal">
@@ -67,8 +67,9 @@
                                 </div>
                             </fieldset>
                           <div id="plan_time"></div>
- <!--                           
-                            <fieldset>
+
+
+                            <!-- <fieldset>
                                 <p class="event-desc-head">Select Time</p>
                                 <div class="form-group">
                                     <div class="col-md-10">
@@ -85,8 +86,8 @@
                                             </div>
                                         </div>
                                     </fieldset>
-                                    
-                                    
+
+
                                     <fieldset>
                                         <p class="event-desc-head">Select Plan</p>
                                         <div class="form-group">
@@ -124,9 +125,9 @@
                                                         </div>
                                                     </div>
                                                 </fieldset>
+ -->
 
--->
-                                                
+
                                             </form>
                                         </div>
                                         <div class="col-md-4">
@@ -183,6 +184,14 @@
     input[type="radio"] {
         visibility:hidden;
     }
+		.plan_show_time{
+			background: none;
+    	color: #000;
+    	margin-right: 10px;
+		}
+		label.btn.btn-primary.plan_show_time.active {
+    color: #fff;
+	}
     .carousel-fade .carousel-inner, .carousel-fade .carousel-item{
     height: 400px;
     }
@@ -203,7 +212,7 @@
   $(function() {
       // Input radio-group visual controls
       $('.radio-group label').on('click', function(){
-          $(this).removeClass('not-active').siblings().addClass('not-active');
+          $(this).removeClass('not-active').siblings().addClass('active');
       });
   });
 
@@ -237,13 +246,13 @@
               $('#quantity').val(quantity - 1);
               }
       });
-	  
+
 	function disp_time(event_id,plan_date)
 	{
 		var result = '';
 		//alert(plan_date);
 		//alert(event_id);
-		
+
 		//make the ajax call
 		$.ajax({
 		url: '<?php echo base_url(); ?>eventlist/plantiming',
@@ -252,23 +261,26 @@
 		success: function(data) {
 		var dataArray = JSON.parse(data);
 		if (dataArray.length>0) {
-			result +="<fieldset><p class='event-desc-head'>Select Time</p><div class='form-group'><div class='col-md-10'><div class='input-group'><div class='radio-group'>";
+			// result +="<fieldset><p class='event-desc-head'>Select Time</p><div class='form-group'><div class='col-md-10'><div class='input-group'><div class='radio-group'>";
+						result +="<fieldset><p class='event-desc-head'>Select Time</p><div class='form-group'><div class='btn-group colors' data-toggle='buttons'>";
+
 			for (var i = 0; i < dataArray.length; i++){
 				var id = dataArray[i].id;
 				var show_date = dataArray[i].show_date;
 				var show_time = dataArray[i].show_time;
-				result +="<label class='btn btn-primary not-active'>"+show_time+"<input type='radio' value='"+show_time+"' name='show_time'></label>";
+				result +="<label class='btn btn-primary plan_show_time'>"+show_time+"<input type='radio' value='"+show_time+"' name='show_time'></label>";
 			};
-			result +="</div></div></div></div></fieldset>";
-			
+			// result +="</div></div></div></div></fieldset>";
+				result +="</div></div></fieldset>";
+
 			$("#plan_time").html(result).show();
 		} else {
 			result +="No Records found!..";
 			$("#plan_time").html(result).show();
 		}
-			
-			
-			
+
+
+
 		}
 		});
 	}

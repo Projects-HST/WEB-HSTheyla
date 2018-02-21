@@ -33,6 +33,11 @@ Class Loginmodel extends CI_Model
                  switch($status)
                  {
                     case "Y":
+                  $insert_activity="INSERT INTO  user_activity (date,user_id,activity_detail) VALUES(NOW(),'$rows->id','normal_login') ";
+                  $result_activity=$this->db->query($insert_activity);
+                  $update_user_points="UPDATE user_points_count SET login_count=login_count+1,login_points=login_points+1,total_points=total_points+1 WHERE user_id='$rows->id'";
+                  $excu_user_points=$this->db->query($update_user_points);
+
                       $data = array("user_name" => $rows->user_name,"msg"  =>"success","mobile_no"=>$rows->mobile_no,"status"=>$rows->status,"email_id"=>$rows->email_id,"user_role"=>$rows->user_role,"id"=>$rows->id);
                       return $data;
                       //break;
@@ -110,6 +115,8 @@ Class Loginmodel extends CI_Model
        $insert_id = $this->db->insert_id();
        $user_master_query="INSERT INTO user_details(user_id,name) VALUES('$insert_id','$firstname')";
        $result=$this->db->query($user_master_query);
+       $user_points_query="INSERT INTO user_points_count(user_id) VALUES('$insert_id')";
+       $exc_user_points=$this->db->query($user_points_query);
        if($result){
          $quer="SELECT * FROM user_master WHERE id='$insert_id'";
          $resultset=$this->db->query($quer);
@@ -119,6 +126,12 @@ Class Loginmodel extends CI_Model
          {
             case "Y":
               $data = array("user_name" => $rows->user_name,"msg"  =>"success","mobile_no"=>$rows->mobile_no,"status"=>$rows->status,"email_id"=>$rows->email_id,"user_role"=>$rows->user_role,"id"=>$rows->id);
+              $insert_activity="INSERT INTO  user_activity (date,user_id,activity_detail) VALUES(NOW(),'$rows->id','google_login') ";
+              $result_activity=$this->db->query($insert_activity);
+              $update_user_login_count="UPDATE user_master SET login_count=login_count+1 WHERE user_id='$rows->id'";
+              $excu_user_login_count=$this->db->query($update_user_login_count);
+              $update_user_points="UPDATE user_points_count SET login_count=login_count+1,login_points=login_points+1,total_points=total_points+1 WHERE user_id='$rows->id'";
+              $excu_user_points=$this->db->query($update_user_points);
               $this->session->set_userdata($data);
               return $data;
 
@@ -130,6 +143,13 @@ Class Loginmodel extends CI_Model
           }
 
          $data =  array("user_name" => $rows->user_name,"msg"  =>"success","mobile_no"=>$rows->mobile_no,"status"=>$rows->status,"email_id"=>$rows->email_id,"user_role"=>$rows->user_role,"id"=>$rows->id);
+          $insert_activity="INSERT INTO  user_activity (date,user_id,activity_detail) VALUES(NOW(),'$rows->id','google_login') ";
+         $result_activity=$this->db->query($insert_activity);
+         $update_user_login_count="UPDATE user_master SET login_count=login_count+1 WHERE id='$rows->id'";
+
+         $excu_user_login_count=$this->db->query($update_user_login_count);
+         $update_user_points="UPDATE user_points_count SET login_count=login_count+1,login_points=login_points+1,total_points=total_points+1 WHERE user_id='$rows->id'";
+         $excu_user_points=$this->db->query($update_user_points);
          $this->session->set_userdata($data);
          return $data;
          $data= array("status" => "success");
@@ -144,6 +164,12 @@ Class Loginmodel extends CI_Model
        foreach($res->result() as $rows){}
        $status=$rows->status;
        $data= array("user_name" => $rows->user_name,"msg"  =>"success","mobile_no"=>$rows->mobile_no,"status"=>$rows->status,"email_id"=>$rows->email_id,"user_role"=>$rows->user_role,"id"=>$rows->id);
+       $insert_activity="INSERT INTO  user_activity (date,user_id,activity_detail) VALUES(NOW(),'$rows->id','normal_login') ";
+       $result_activity=$this->db->query($insert_activity);
+       $update_user_login_count="UPDATE user_master SET login_count=login_count+1 WHERE id='$rows->id'";
+       $excu_user_login_count=$this->db->query($update_user_login_count);
+       $update_user_points="UPDATE user_points_count SET login_count=login_count+1,login_points=login_points+1,total_points=total_points+1 WHERE user_id='$rows->id'";
+       $excu_user_points=$this->db->query($update_user_points);
        $this->session->set_userdata($data);
        return $data;
      }
@@ -329,6 +355,8 @@ Class Loginmodel extends CI_Model
        $create="INSERT INTO user_master (user_name,mobile_no,email_id,password,user_role,email_verify,mobile_verify,status) VALUES('$name','$mobile','$email','$pwd','3','N','N','Y')";
        $res=$this->db->query($create);
        $last_id=$this->db->insert_id();
+       $user_points_query="INSERT INTO user_points_count(user_id) VALUES('$last_id')";
+       $exc_user_points=$this->db->query($user_points_query);
        $user_details="INSERT INTO user_details (user_id,newsletter_status) VALUES('$last_id','Y')";
         $result=$this->db->query($user_details);
         $s=$email;
@@ -463,6 +491,8 @@ Class Loginmodel extends CI_Model
         $query="INSERT INTO user_master (email_id,last_login,user_role,email_verify,status,created_at) VALUES('$email',NOW(),'3','Y','Y',NOW())";
         $resultset=$this->db->query($query);
         $insert_id = $this->db->insert_id();
+        $user_points_query="INSERT INTO user_points_count(user_id) VALUES('$insert_id')";
+        $exc_user_points=$this->db->query($user_points_query);
         $user_master_query="INSERT INTO user_details(user_id,name) VALUES('$insert_id','$firstname')";
         $result=$this->db->query($user_master_query);
         if($result){
@@ -474,6 +504,12 @@ Class Loginmodel extends CI_Model
           {
              case "Y":
                $data = array("user_name" => $rows->user_name,"msg"  =>"success","mobile_no"=>$rows->mobile_no,"status"=>$rows->status,"email_id"=>$rows->email_id,"user_role"=>$rows->user_role,"id"=>$rows->id);
+               $insert_activity="INSERT INTO  user_activity (date,user_id,activity_detail) VALUES(NOW(),'$rows->id','fb_login') ";
+               $result_activity=$this->db->query($insert_activity);
+               $update_user_login_count="UPDATE user_master SET login_count=login_count+1 WHERE id='$rows->id'";
+               $excu_user_login_count=$this->db->query($update_user_login_count);
+               $update_user_points="UPDATE user_points_count SET login_count=login_count+1,login_points=login_points+1,total_points=total_points+1 WHERE user_id='$rows->id'";
+               $excu_user_points=$this->db->query($update_user_points);
                $this->session->set_userdata($data);
                return $data;
 
@@ -485,6 +521,12 @@ Class Loginmodel extends CI_Model
            }
 
           $data =  array("user_name" => $rows->user_name,"msg"  =>"success","mobile_no"=>$rows->mobile_no,"status"=>$rows->status,"email_id"=>$rows->email_id,"user_role"=>$rows->user_role,"id"=>$rows->id);
+          $insert_activity="INSERT INTO  user_activity (date,user_id,activity_detail) VALUES(NOW(),'$rows->id','fb_login') ";
+          $result_activity=$this->db->query($insert_activity);
+          $update_user_login_count="UPDATE user_master SET login_count=login_count+1 WHERE id='$rows->id'";
+          $excu_user_login_count=$this->db->query($update_user_login_count);
+          $update_user_points="UPDATE user_points_count SET login_count=login_count+1,login_points=login_points+1,total_points=total_points+1 WHERE user_id='$rows->id'";
+          $excu_user_points=$this->db->query($update_user_points);
           $this->session->set_userdata($data);
           return $data;
           $data= array("status" => "success");
@@ -499,6 +541,12 @@ Class Loginmodel extends CI_Model
         foreach($res->result() as $rows){}
         $status=$rows->status;
         $data= array("user_name" => $rows->user_name,"msg"  =>"success","mobile_no"=>$rows->mobile_no,"status"=>$rows->status,"email_id"=>$rows->email_id,"user_role"=>$rows->user_role,"id"=>$rows->id);
+        $insert_activity="INSERT INTO  user_activity (date,user_id,activity_detail) VALUES(NOW(),'$rows->id','fb_login') ";
+        $result_activity=$this->db->query($insert_activity);
+        $update_user_login_count="UPDATE user_master SET login_count=login_count+1 WHERE id='$rows->id'";
+        $excu_user_login_count=$this->db->query($update_user_login_count);
+        $update_user_points="UPDATE user_points_count SET login_count=login_count+1,login_points=login_points+1,total_points=total_points+1 WHERE user_id='$rows->id'";
+        $excu_user_points=$this->db->query($update_user_points);
         $this->session->set_userdata($data);
         return $data;
       }
