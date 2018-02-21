@@ -6,129 +6,147 @@
 			<div class="row">
 				<div class="carousel carousel-fade" data-ride="carousel" data-interval="2000">
 					<div class="carousel-inner" role="listbox">
-						<div class="carousel-item active">
-							<a href="#">
-								<img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" alt="Third slide">
-								</a>
-							</div>
-							<div class="carousel-item">
-								<a href="#">
-									<img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(129).jpg" alt="Second slide">
-									</a>
-								</div>
-								<div class="carousel-item">
-									<a href="#">
-										<img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" alt="Third slide">
-										</a>
-									</div>
+						<?php
+	//print_r($event_gallery);
+	if (!empty($event_gallery)){
+		$i = 0;
+		foreach($event_gallery as $res){
+	?>
+			<div class="carousel-item <?php if ($i=='0') echo "active"; ?>">
+				<img class="d-block w-100" src="<?php echo base_url(); ?>assets/events/gallery/<?php echo $res->event_image; ?>">
+			</div>
+
+	  <?php
+	   $i = $i+1;
+		}
+	  } else {
+		foreach($event_details as $res){}
+	  ?>
+			<div class="carousel-item active">
+				<img class="d-block w-100" src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>">
+			</div>
+	  <?php  } ?>
 								</div>
 							</div>
 						</div>
-						<div class="row booking-section">
+					<?php foreach($event_details as $res){ $event_id = $res->id;}	?>
+					<div class="row booking-section">
 							<div class="col-md-10">
 								<div class="event-heading">
-									<p class="event-heading-text">Event Name</p>
+									<p class="event-heading-text"><?php echo $res->event_name; ?></p>
 								</div>
 							</div>
 							<div class="col-md-2"></div>
 						</div>
-						<section class="row event-details-desc">
-							<div class="col-md-8">
-								<form class="form-horizontal">
-									<fieldset>
-										<p class="event-desc-head">Select date</p>
-										<div class="form-group">
-											<div class="col-md-10">
-												<div class="input-group">
-													<div class="radio-group">
-														<label class="btn btn-primary not-active">Male
-															<input type="radio" value="male" name="gender">
-															</label>
-															<label class="btn btn-primary not-active">Female
-																<input type="radio" value="female" name="gender">
-																</label>
-																<label class="btn btn-primary not-active">Male
-																	<input type="radio" value="male" name="gender">
-																	</label>
-																	<label class="btn btn-primary not-active">Female
-																		<input type="radio" value="female" name="gender">
-																		</label>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</fieldset>
-													<fieldset>
-														<p class="event-desc-head">Select Time</p>
-														<div class="form-group">
-															<div class="col-md-10">
-																<div class="input-group">
-																	<div class="radio-group">
-																		<label class="btn btn-primary not-active">10:00 AM
-																			<input type="radio" value="male" name="gender">
-																			</label>
-																			<label class="btn btn-primary not-active">11:00 AM
-																				<input type="radio" value="female" name="gender">
-																				</label>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</fieldset>
-															<fieldset>
-																<p class="event-desc-head">Select Plan</p>
-																<div class="form-group">
-																	<div class="col-md-10">
-																		<div class="input-group">
-																			<div class="radio-group">
-																				<label class="btn btn-primary not-active">Gold
-																					<input type="radio" value="male" name="gender">
-																					</label>
-																					<label class="btn btn-primary not-active">Platinum
-																						<input type="radio" value="female" name="gender">
-																						</label>
-																					</div>
-																				</div>
-																			</div>
-																		</div>
-																	</fieldset>
-																	<fieldset>
-																		<p class="event-desc-head">Select Ticket</p>
-																		<div class="form-group">
-																			<div class="col-md-4">
-																				<div class="input-group">
-																					<span class="input-group-btn">
-																						<button type="button" class="quantity-left-minus btn  btn-number  btn-color"  data-type="minus" data-field="">
-																							<i class="fas fa-minus"></i>
-																						</button>
-																					</span>
-																					<input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="10">
-																						<span class="input-group-btn">
-																							<button type="button" class="quantity-right-plus btn  btn-number btn-color" data-type="plus" data-field="">
-																								<i class="fas fa-plus"></i>
-																							</button>
-																						</span>
-																					</div>
-																				</div>
-																			</div>
-																		</fieldset>
-																	</form>
-																</div>
-																<div class="col-md-4">
-																	<p class="event-desc-head">Summary</p>
-																	<div class="price-details">
-																		<p class="amt-price">Gold Plan:
-																			<span class="pull-right plan-amt">100</span>
-																		</p>
-																		<p class="total-price">Total Amount:
-																			<span class="pull-right amt">100</span>
-																		</p>
-																		<p>
-																			<input type="submit" class="btn btn-primary btn-block btn-login" placeholder="Password" value="Continue" />
-																		</p>
-																	</div>
-																</div>
-															</section>
+                        
+                <section class="row event-details-desc">
+                <div class="col-md-8">
+                <form class="form-horizontal">
+                <fieldset>
+                <p class="event-desc-head">Select date</p>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="input-group">
+                            <div class="radio-group">
+                                <?php
+								//print_r ($booking_dates);
+								if (!empty($booking_dates)){
+								foreach($booking_dates as $res){
+								?>
+								<label class="btn btn-primary not-active"><?php echo $res->show_date; ?>
+							<input type="radio" value="<?php echo $res->show_date; ?>" name="show_date" onchange="disp_time(<?php echo $event_id; ?>,this.value)">
+								</label>
+								<?php }
+								} else {
+								echo "No Dates Found";
+								}
+								?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                          <div id="plan_time"></div>
+ <!--                           
+                            <fieldset>
+                                <p class="event-desc-head">Select Time</p>
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        <div class="input-group">
+                                            <div class="radio-group">
+                                                <label class="btn btn-primary not-active">10:00 AM
+                                                    <input type="radio" value="male" name="gender">
+                                                    </label>
+                                                    <label class="btn btn-primary not-active">11:00 AM
+                                                        <input type="radio" value="female" name="gender">
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    
+                                    
+                                    <fieldset>
+                                        <p class="event-desc-head">Select Plan</p>
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <div class="input-group">
+                                                    <div class="radio-group">
+                                                        <label class="btn btn-primary not-active">Gold
+                                                            <input type="radio" value="male" name="gender">
+                                                            </label>
+                                                            <label class="btn btn-primary not-active">Platinum
+                                                                <input type="radio" value="female" name="gender">
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <fieldset>
+                                                <p class="event-desc-head">Select Ticket</p>
+                                                <div class="form-group">
+                                                    <div class="col-md-4">
+                                                        <div class="input-group">
+                                                            <span class="input-group-btn">
+                                                                <button type="button" class="quantity-left-minus btn  btn-number  btn-color"  data-type="minus" data-field="">
+                                                                    <i class="fas fa-minus"></i>
+                                                                </button>
+                                                            </span>
+                                                            <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="10">
+                                                                <span class="input-group-btn">
+                                                                    <button type="button" class="quantity-right-plus btn  btn-number btn-color" data-type="plus" data-field="">
+                                                                        <i class="fas fa-plus"></i>
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+
+-->
+                                                
+                                            </form>
+                                        </div>
+                                        <div class="col-md-4">
+
+                                            <p class="event-desc-head">Summary</p>
+<!--
+                                            <div class="price-details">
+                                                <p class="amt-price">Gold Plan:
+                                                    <span class="pull-right plan-amt">100</span>
+                                                </p>
+                                                <p class="total-price">Total Amount:
+                                                    <span class="pull-right amt">100</span>
+                                                </p>
+                                                <p>
+                                                    <input type="submit" class="btn btn-primary btn-block btn-login" placeholder="Password" value="Continue" />
+                                                </p>
+                                            </div>
+-->
+                                        </div>
+                                    </section>
 														</div>
 													</div>
 													<style>
@@ -177,7 +195,7 @@
       }
     }
 </style>
-													<script>
+<script>
     $('.carousel').carousel({
       interval:6000,
       pause: "false"
@@ -219,4 +237,39 @@
               $('#quantity').val(quantity - 1);
               }
       });
+	  
+	function disp_time(event_id,plan_date)
+	{
+		var result = '';
+		//alert(plan_date);
+		//alert(event_id);
+		
+		//make the ajax call
+		$.ajax({
+		url: '<?php echo base_url(); ?>eventlist/plantiming',
+		type: 'POST',
+		data: {event_id : event_id,plan_date : plan_date},
+		success: function(data) {
+		var dataArray = JSON.parse(data);
+		if (dataArray.length>0) {
+			result +="<fieldset><p class='event-desc-head'>Select Time</p><div class='form-group'><div class='col-md-10'><div class='input-group'><div class='radio-group'>";
+			for (var i = 0; i < dataArray.length; i++){
+				var id = dataArray[i].id;
+				var show_date = dataArray[i].show_date;
+				var show_time = dataArray[i].show_time;
+				result +="<label class='btn btn-primary not-active'>"+show_time+"<input type='radio' value='"+show_time+"' name='show_time'></label>";
+			};
+			result +="</div></div></div></div></fieldset>";
+			
+			$("#plan_time").html(result).show();
+		} else {
+			result +="No Records found!..";
+			$("#plan_time").html(result).show();
+		}
+			
+			
+			
+		}
+		});
+	}
 </script>

@@ -90,11 +90,21 @@ class Eventlist extends CI_Controller
     {
 		$dec_event_id = base64_decode($event_id);
 		$event_id = ($dec_event_id/564738);
-		$data['booking_details'] = $this->eventlistmodel->booking($event_id);
+		$data['event_gallery'] = $this->eventlistmodel->getevent_gallery($event_id);
+		$data['event_details'] = $this->eventlistmodel->getevent_details($event_id);
+		$data['booking_dates'] = $this->eventlistmodel->booking_plandates($event_id);
 		$this->load->view('front_header');
 		$this->load->view('booking', $data);
 		$this->load->view('front_footer');
         //echo json_encode($data['event_term_result']);
+    }
+	
+	public function plantiming()
+    {
+		$event_id  = $this->input->post('event_id');
+		$plan_date  = $this->input->post('plan_date');
+        $data['plan_timings'] = $this->eventlistmodel->booking_plantimes($event_id,$plan_date);
+        echo json_encode($data['plan_timings']);
     }
 }
 

@@ -176,12 +176,21 @@ Class Eventlistmodel extends CI_Model
     }
 	
 	
-	function booking($event_id)
+	function booking_plandates($event_id)
     {
-				
-				
-			$res = "Added";
-			return $res;
+		$sql="SELECT show_date FROM booking_plan_timing WHERE event_id  ='". $event_id . "' AND `show_date` >= CURDATE()  GROUP BY show_date";
+	  	$resu=$this->db->query($sql);
+	  	$res=$resu->result();
+		return $res;
     }
+	
+	function booking_plantimes($event_id,$plan_date)
+    {
+		$sql="SELECT id,show_time,show_date FROM booking_plan_timing WHERE event_id  = '$event_id' AND show_date='$plan_date' GROUP BY show_time";
+	  	$resu=$this->db->query($sql);
+	  	$res=$resu->result();
+		return $res;
+    }
+	
 }
 ?>
