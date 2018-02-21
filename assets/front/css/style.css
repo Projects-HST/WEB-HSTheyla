@@ -285,6 +285,9 @@
  background-color: blue;
  }
 
+.multiselect {
+  width: 200px;
+}
 /*Organiser home*/
 
 .organiser-home{
