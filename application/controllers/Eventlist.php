@@ -106,5 +106,14 @@ class Eventlist extends CI_Controller
         $data['plan_timings'] = $this->eventlistmodel->booking_plantimes($event_id,$plan_date);
         echo json_encode($data['plan_timings']);
     }
+	
+	public function plandetails()
+    {
+		$event_id  = $this->input->post('event_id');
+		$plan_date  = $this->input->post('show_date');
+		$plan_time  = $this->input->post('show_time');
+        $data['plan_timings'] = $this->eventlistmodel->booking_plans($event_id,$plan_date,$plan_time);
+        echo json_encode($data['plan_timings']);
+    }
 }
 

@@ -29,7 +29,7 @@
 								</div>
 							</div>
 						</div>
-					<?php foreach($event_details as $res){ $event_id = $res->id;}	?>
+					<?php foreach($event_details as $res){ $event_id = $res->id;} 	?>
 					<div class="row booking-section">
 							<div class="col-md-10">
 								<div class="event-heading">
@@ -41,12 +41,13 @@
 
                 <section class="row event-details-desc">
                 <div class="col-md-8">
-                <form class="form-horizontal">
+                <form class="form-horizontal" method='post' action='' id='eventplan'>
                 <fieldset>
                 <p class="event-desc-head">Select date</p>
                 <div class="form-group">
                     <div class="col-md-10">
                         <div class="input-group">
+						<input type="hidden" name="event_id" id="event_id" value="<?php  echo $event_id; ?>">
                             <div class="radio-group">
                                 <?php
 								//print_r ($booking_dates);
@@ -54,7 +55,7 @@
 								foreach($booking_dates as $res){
 								?>
 								<label class="btn btn-primary not-active"><?php echo $res->show_date; ?>
-							<input type="radio" value="<?php echo $res->show_date; ?>" name="show_date" onchange="disp_time(<?php echo $event_id; ?>,this.value)">
+							<input type="radio" value="<?php echo $res->show_date; ?>" name="show_date" id="show_date" onchange="disp_time(<?php echo $event_id; ?>,this.value)">
 								</label>
 								<?php }
 								} else {
@@ -67,7 +68,7 @@
                                 </div>
                             </fieldset>
                           <div id="plan_time"></div>
-
+						  <div id="plan_details"></div>
 
                             <!-- <fieldset>
                                 <p class="event-desc-head">Select Time</p>
@@ -250,9 +251,6 @@
 	function disp_time(event_id,plan_date)
 	{
 		var result = '';
-		//alert(plan_date);
-		//alert(event_id);
-
 		//make the ajax call
 		$.ajax({
 		url: '<?php echo base_url(); ?>eventlist/plantiming',
@@ -261,16 +259,14 @@
 		success: function(data) {
 		var dataArray = JSON.parse(data);
 		if (dataArray.length>0) {
-			// result +="<fieldset><p class='event-desc-head'>Select Time</p><div class='form-group'><div class='col-md-10'><div class='input-group'><div class='radio-group'>";
-						result +="<fieldset><p class='event-desc-head'>Select Time</p><div class='form-group'><div class='btn-group colors' data-toggle='buttons'>";
+			result +="<fieldset><p class='event-desc-head'>Select Time</p><div class='form-group'><div class='btn-group colors' data-toggle='buttons'>";
 
 			for (var i = 0; i < dataArray.length; i++){
 				var id = dataArray[i].id;
 				var show_date = dataArray[i].show_date;
 				var show_time = dataArray[i].show_time;
-				result +="<label class='btn btn-primary plan_show_time'>"+show_time+"<input type='radio' value='"+show_time+"' name='show_time'></label>";
+				result +="<label class='btn btn-primary plan_show_time'>"+show_time+"<input type='radio' value='"+show_time+"' id='show_plan_time' name='show_plan_time' onchange='disp_plan(<?php echo $event_id; ?>,show_date.value,this.value)'></label>";
 			};
-			// result +="</div></div></div></div></fieldset>";
 				result +="</div></div></fieldset>";
 
 			$("#plan_time").html(result).show();
@@ -278,9 +274,46 @@
 			result +="No Records found!..";
 			$("#plan_time").html(result).show();
 		}
+		}
+		});
+	}
+	
+	function disp_plan(event_id,show_date,show_time)
+	{
+		var result = '';
+		//make the ajax call
+		$.ajax({
+		url: '<?php echo base_url(); ?>eventlist/plandetails',
+		type: 'POST',
+		data: {event_id : event_id,show_date : show_date,show_time : show_time},
+		success: function(data) {
+		//alert(data);
+		var dataArray = JSON.parse(data);
+		
 
+		if (dataArray.length>0) {
+			result +="<fieldset><p class='event-desc-head'>Select Plan</p><div class='form-group'><div class='col-md-10'><div class='input-group'><div class='radio-group'>";
+			for (var i = 0; i < dataArray.length; i++){
+				[{"plan_name":"BKT_A","seat_rate":"1.00","event_id":"41","plan_id":"60","show_date":"2018-02-23","show_time":"11:00 AM","seat_available":"45"}]
+				var event_id = dataArray[i].event_id;
+				var plan_name = dataArray[i].plan_name;
+				var show_date = dataArray[i].show_date;
+				var show_time = dataArray[i].show_time;
+				var seat_available = dataArray[i].seat_available;
+				var show_time = dataArray[i].seat_rate;
 
-
+				result +="<label class='btn btn-primary not-active'>"+plan_name+"<input type='radio' value='"+plan_name+"' name='plan_name'></label>";
+			};
+			result +="</div></div></div></div></fieldset>";
+			
+			result +="</fieldset><p class='event-desc-head'>Select Ticket</p><div class='form-group'><div class='col-md-4'><div class='input-group'><span class='input-group-btn'><button type='button' class='quantity-left-minus btn  btn-number  btn-color'  data-type='minus' data-field=''><i class='fas fa-minus'></i></button></span><input type='text' id='quantity' name='quantity' class='form-control input-number' value='1' min='1' max='"+seat_available+"'><span class='input-group-btn'><button type='button' class='quantity-right-plus btn  btn-number btn-color' data-type='plus' data-field=''><i class='fas fa-plus'></i></button></span></div></div></div></fieldset>";
+			
+			$("#plan_details").html(result).show();
+		} else {
+			result +="No Records found!..";
+			$("#plan_details").html(result).show();
+		}
+			
 		}
 		});
 	}
