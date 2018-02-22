@@ -65,7 +65,7 @@ $route['wishlist'] = 'home/wishlist';
 $route['booking_history'] = 'home/booking_history';
 $route['profile_picture'] = 'home/change_profile_picture';
 $route['mobilenumber'] = 'home/mobilenumberchange';
-$route['mobilenumber'] = 'home/mobile';
+// $route['mobilenumber'] = 'home/mobile';
 $route['changemail'] = 'home/changeemail';
 $route['dashboard'] = 'home/organiser';
 
@@ -73,7 +73,7 @@ $route['home'] = 'home/home';
 $route['privacy'] = 'home/privacy';
 $route['payment'] = 'home/payment';
 $route['terms'] = 'home/terms';
-$route['events/(:any)'] = 'eventslist/index';
+// $route['events/(:any)'] = 'eventslist/index';
 // $route['emailverfiy'] = 'home/emailverfiy';
 $route['deactive'] = 'home/deactive';
 $route['logout'] = 'home/logout';

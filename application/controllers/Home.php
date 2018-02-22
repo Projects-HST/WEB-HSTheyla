@@ -496,6 +496,14 @@ class Home extends CI_Controller {
 			$data=$this->loginmodel->check_email($email);
 
 		}
+		public function checkmobile(){
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			$mobile=$this->input->post('mobile');
+			$data=$this->loginmodel->check_mobile_number($mobile,$user_id);
+
+		}
 
 		public function check_username(){
 			$user_name=$this->input->post('user_name');

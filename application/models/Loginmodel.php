@@ -272,6 +272,16 @@ Class Loginmodel extends CI_Model
       }
    }
 
+   function check_mobile_number($mobile_no,$user_id){
+      $select="SELECT * FROM user_master Where mobile_no='$mobile_no' and id!='$user_id'";
+      $result=$this->db->query($select);
+      if($result->num_rows()>0){
+        echo "Mobile Already Exist";
+        }else{
+          echo "success";
+      }
+   }
+
    function save_email_id($email,$user_id){
      $check_email="SELECT * FROM user_master WHERE email_id='$email'";
      $res=$this->db->query($check_email);

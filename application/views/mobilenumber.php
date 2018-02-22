@@ -63,7 +63,7 @@ input[type=text] {
    $('#update_mobile_number').validate({ // initialize the plugin
        rules: {
          mobile : {
-            required: true,  maxlength : 10
+            required: true,  maxlength : 10,
           },
           mobileotp : {
              required: true
@@ -151,11 +151,12 @@ input[type=text] {
            },
            url: 'home/checkmobile',
            success: function(data) {
-               console.log(data);
+               // console.log(data);
+
                if ((data) == "success") {
                    $("#submit").removeAttr("disabled");
                     $('#mobilenum').html(' ');
-                    //  $("#sendbtn").removeAttr("disabled");
+                     $("#sendbtn").removeAttr("disabled");
                        $('#sendbtn').show();
                } else {
                    $('#submit').prop('disabled', true);

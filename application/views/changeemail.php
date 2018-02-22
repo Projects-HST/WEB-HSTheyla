@@ -40,7 +40,7 @@ input[type=text] {
 
 
         <div class="form-group">
-            <input type="text" class="form-control" id="email" name="email" required="" placeholder="Enter New Email_id " onkeyup="check_email()">
+            <input type="text" class="form-control" id="email" name="email" required="" placeholder="Enter New Email_id " >
 
             <p id="emailmsg"></p>
         </div>
@@ -66,13 +66,18 @@ $.validator.addMethod("user_email_not_same", function(value, element) {
          old_mail :{required:true,user_email_not_same:true},
           email : {
               email : true,
-              user_email_not_same : true
+              user_email_not_same : true,
+              required: true,email:true,
+              remote: {
+                     url: "<?php echo base_url(); ?>home/existemail",
+                     type: "post"
+                  }
           }
 
        },
        messages: {
 
-            email: {   required: "Enter New Mail",user_email_not_same:" ",
+            email: {   required: "Enter New Mail",user_email_not_same:" ",remote:"Email already exist"
 
           }
 
@@ -104,28 +109,5 @@ $.validator.addMethod("user_email_not_same", function(value, element) {
 
 
 
-   function check_email() {
-       var email = $('#email').val();
 
-       $.ajax({
-           method: "post",
-           data: {
-               email: email
-           },
-           url: 'home/existemail',
-           success: function(data) {
-
-               if ((data) == "success") {
-                   $("#submit").removeAttr("disabled");
-                    $('#emailmsg').html(' ');
-                    //  $("#sendbtn").removeAttr("disabled");
-                       $('#sendbtn').show();
-               } else {
-                   $('#submit').prop('disabled', true);
-                    $('#emailmsg').html(data);
-                      $('#sendbtn').hide();
-               }
-           }
-       });
-   }
 </script>

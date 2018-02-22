@@ -42,7 +42,7 @@
                 <section class="row event-details-desc">
                 <div class="col-md-8">
                 <form class="form-horizontal" method='post' action='' id='eventplan'>
-                <fieldset>
+                <!-- <fieldset>
                 <p class="event-desc-head">Select date</p>
                 <div class="form-group">
                     <div class="col-md-10">
@@ -66,30 +66,54 @@
                                         </div>
                                     </div>
                                 </div>
-                            </fieldset>
+                            </fieldset> -->
                           <div id="plan_time"></div>
 						  <div id="plan_details"></div>
 
-                            <!-- <fieldset>
-                                <p class="event-desc-head">Select Time</p>
-                                <div class="form-group">
-                                    <div class="col-md-10">
-                                        <div class="input-group">
-                                            <div class="radio-group">
-                                                <label class="btn btn-primary not-active">10:00 AM
-                                                    <input type="radio" value="male" name="gender">
-                                                    </label>
-                                                    <label class="btn btn-primary not-active">11:00 AM
-                                                        <input type="radio" value="female" name="gender">
-                                                        </label>
-                                                    </div>
-                                                </div>
+                            	<fieldset>
+                                		<p class="event-desc-head">Select Date </p>
+                                	<div class="form-group">
+                                    	<div class="col-md-4">
+																								<select class="form-control input-lg select_booking">
+																									<option value="">.input-lg</option>
+																								</select>
                                             </div>
                                         </div>
                                     </fieldset>
 
+																		<fieldset>
+																			<p class="event-desc-head">SelectTime</p>
+																			<div class="form-group">
+																			<div class="col-md-4">
+																					<select class="form-control input-lg select_booking">
+																						<option value="">.input-lg</option>
+																					</select>
+																			</div>
+																	</div>
+																</fieldset>
+																<fieldset>
+																	<p class="event-desc-head">Select Plan</p>
+																	<div class="form-group">
+																	<div class="col-md-4">
+																			<select class="form-control input-lg select_booking">
+																				<option value="">.input-lg</option>
+																			</select>
+																	</div>
+															</div>
+														</fieldset>
+														<fieldset>
+															<p class="event-desc-head">Select Seats</p>
+															<div class="form-group">
+															<div class="col-md-4">
+																	<select class="form-control input-lg select_booking">
+																		<option value="">.input-lg</option>
+																	</select>
+															</div>
+													</div>
+												</fieldset>
 
-                                    <fieldset>
+
+                                    <!-- <fieldset>
                                         <p class="event-desc-head">Select Plan</p>
                                         <div class="form-group">
                                             <div class="col-md-10">
@@ -105,8 +129,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </fieldset>
-                                            <fieldset>
+                                            </fieldset> -->
+                                            <!-- <fieldset>
                                                 <p class="event-desc-head">Select Ticket</p>
                                                 <div class="form-group">
                                                     <div class="col-md-4">
@@ -125,8 +149,8 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </fieldset>
- -->
+                                                </fieldset> -->
+
 
 
                                             </form>
@@ -152,6 +176,10 @@
 														</div>
 													</div>
 													<style>
+													.select_booking{
+														border: 2px solid #478ecc;
+														color: #000;
+													}
 .fa-plus{
   color:#fff;
 }
@@ -277,7 +305,7 @@
 		}
 		});
 	}
-	
+
 	function disp_plan(event_id,show_date,show_time)
 	{
 		var result = '';
@@ -289,12 +317,14 @@
 		success: function(data) {
 		//alert(data);
 		var dataArray = JSON.parse(data);
-		
+
 
 		if (dataArray.length>0) {
-			result +="<fieldset><p class='event-desc-head'>Select Plan</p><div class='form-group'><div class='col-md-10'><div class='input-group'><div class='radio-group'>";
+			// result +="<fieldset><p class='event-desc-head'>Select Plan</p><div class='form-group'><div class='col-md-10'><div class='input-group'><div class='radio-group'>";
+
+				result +="<fieldset><p class='event-desc-head'>Select Plan</p><div class='form-group'><div class='btn-group colors' data-toggle='buttons'>";
 			for (var i = 0; i < dataArray.length; i++){
-				[{"plan_name":"BKT_A","seat_rate":"1.00","event_id":"41","plan_id":"60","show_date":"2018-02-23","show_time":"11:00 AM","seat_available":"45"}]
+				// [{"plan_name":"BKT_A","seat_rate":"1.00","event_id":"41","plan_id":"60","show_date":"2018-02-23","show_time":"11:00 AM","seat_available":"45"}]
 				var event_id = dataArray[i].event_id;
 				var plan_name = dataArray[i].plan_name;
 				var show_date = dataArray[i].show_date;
@@ -302,18 +332,26 @@
 				var seat_available = dataArray[i].seat_available;
 				var show_time = dataArray[i].seat_rate;
 
-				result +="<label class='btn btn-primary not-active'>"+plan_name+"<input type='radio' value='"+plan_name+"' name='plan_name'></label>";
+				// result +="<label class='btn btn-primary not-active'>"+plan_name+"<input type='radio' value='"+plan_name+"' name='plan_name'></label>";
+					result +="<label class='btn btn-primary plan_name'>"+plan_name+"<input type='radio' value='"+plan_name+"' id='plan_name' name='plan_name'></label>";
 			};
-			result +="</div></div></div></div></fieldset>";
-			
-			result +="</fieldset><p class='event-desc-head'>Select Ticket</p><div class='form-group'><div class='col-md-4'><div class='input-group'><span class='input-group-btn'><button type='button' class='quantity-left-minus btn  btn-number  btn-color'  data-type='minus' data-field=''><i class='fas fa-minus'></i></button></span><input type='text' id='quantity' name='quantity' class='form-control input-number' value='1' min='1' max='"+seat_available+"'><span class='input-group-btn'><button type='button' class='quantity-right-plus btn  btn-number btn-color' data-type='plus' data-field=''><i class='fas fa-plus'></i></button></span></div></div></div></fieldset>";
-			
+			// result +="</div></div></div></div></fieldset>";
+			result +="</div></div></fieldset>";
+			result +="<fieldset><p class='event-desc-head'>Select Ticket</p><div class='form-group'><div class='btn-group colors' data-toggle='buttons'>";
+			result +="<div class='input-group'><span class='input-group-btn'><button type='button' class='quantity-left-minus btn  btn-number  btn-color'  data-type='minus' data-field=''><i class='fas fa-minus'></i></button></span><input type='text' id='quantity' name='quantity' class='form-control input-number' value='1' min='1' max='"+seat_available+"'><span class='input-group-btn'><button type='button' class='quantity-right-plus btn  btn-number btn-color' data-type='plus' data-field=''><i class='fas fa-plus'></i></button></span></div>";
+			result +="</div></div></fieldset>";
+
+
+			// result +="</fieldset><p class='event-desc-head'>Select Ticket</p><div class='form-group'><div class='col-md-4'><div class='input-group'><span class='input-group-btn'><button type='button' class='quantity-left-minus btn  btn-number  btn-color'  data-type='minus' data-field=''><i class='fas fa-minus'></i></button></span><input type='text' id='quantity' name='quantity' class='form-control input-number' value='1' min='1' max='"+seat_available+"'><span class='input-group-btn'><button type='button' class='quantity-right-plus btn  btn-number btn-color' data-type='plus' data-field=''><i class='fas fa-plus'></i></button></span></div></div></div></fieldset>";
+
+
+
 			$("#plan_details").html(result).show();
 		} else {
 			result +="No Records found!..";
 			$("#plan_details").html(result).show();
 		}
-			
+
 		}
 		});
 	}
