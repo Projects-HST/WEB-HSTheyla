@@ -320,7 +320,6 @@
 
 				result +="<fieldset><p class='event-desc-head'>Select Plan</p><div class='form-group'><div class='btn-group colors' data-toggle='buttons'>";
 			for (var i = 0; i < dataArray.length; i++){
-
 				var event_id = dataArray[i].event_id;
 				var plan_name = dataArray[i].plan_name;
 				var show_date = dataArray[i].show_date;
