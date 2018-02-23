@@ -1,4 +1,6 @@
-<?php $user_id = $this->session->userdata('id'); ?>
+<?php $user_id = $this->session->userdata('id'); 
+$user_id = '85';
+?>
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/multiselect.css">
 <script src="<?php echo base_url(); ?>assets/front/js/multiselect.js"></script>
 	<div class="container-fluid eventdetail-pge">
@@ -6,8 +8,7 @@
 			<div class="row">
 				<div class="carousel carousel-fade" data-ride="carousel" data-interval="2000">
 					<div class="carousel-inner" role="listbox">
-						<?php
-	//print_r($event_gallery);
+	<?php
 	if (!empty($event_gallery)){
 		$i = 0;
 		foreach($event_gallery as $res){
@@ -15,7 +16,6 @@
 			<div class="carousel-item <?php if ($i=='0') echo "active"; ?>">
 				<img class="d-block w-100" src="<?php echo base_url(); ?>assets/events/gallery/<?php echo $res->event_image; ?>">
 			</div>
-
 	  <?php
 	   $i = $i+1;
 		}
@@ -39,315 +39,203 @@
 							<div class="col-md-2"></div>
 						</div>
 
-                <section class="row event-details-desc">
-                <div class="col-md-8">
-                <form class="form-horizontal" method='post' action='' id='eventplan'>
-                <!-- <fieldset>
-                <p class="event-desc-head">Select date</p>
+            <form class="form-horizontal" method='post' action='<?php echo base_url(); ?>eventlist/event_booking' id='eventplan'>
+            <section class="row event-details-desc" style="min-height:400px;">
+            
+            <div class="col-md-6">
+               <fieldset>
+                <p class="event-desc-head">Select Date </p>
                 <div class="form-group">
-                    <div class="col-md-10">
-                        <div class="input-group">
-						<input type="hidden" name="event_id" id="event_id" value="<?php  echo $event_id; ?>">
-                            <div class="radio-group">
-                                <?php
-								//print_r ($booking_dates);
-								if (!empty($booking_dates)){
-								foreach($booking_dates as $res){
-								?>
-								<label class="btn btn-primary not-active"><?php echo $res->show_date; ?>
-							<input type="radio" value="<?php echo $res->show_date; ?>" name="show_date" id="show_date" onchange="disp_time(<?php echo $event_id; ?>,this.value)">
-								</label>
-								<?php }
-								} else {
-								echo "No Dates Found";
-								}
-								?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset> -->
-                          <div id="plan_time"></div>
-						  <div id="plan_details"></div>
+                    <div class="col-md-4">
+                    		<?php if (!empty($booking_dates)){ ?>
+                            <select class="form-control input-lg select_booking" id="show_date" onchange="disp_time()">
+                            <option value="">Select Date</option>
+							<?php foreach($booking_dates as $res){ ?>
+                            <option value="<?php echo $res->show_date; ?>"><?php echo $res->show_date; ?></option>
+							<?php } ?>
+                            </select>
+                            <?php }  else {
+							echo "No Dates Found";
+							}?>
+                        </div>
+                    </div>
+                </fieldset>
+                <div id="plan_time"></div>
+                <div id="plan_details"></div>
+                <div id="plan_seats"></div>
+            </div>
 
 
-                            	<fieldset>
-                                		<p class="event-desc-head">Select Date </p>
-                                	<div class="form-group">
-                                    	<div class="col-md-4">
-																								<select class="form-control input-lg select_booking">
-																									<option value="">.input-lg</option>
-																								</select>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-																		<fieldset>
-																			<p class="event-desc-head">SelectTime</p>
-																			<div class="form-group">
-																			<div class="col-md-4">
-																					<select class="form-control input-lg select_booking">
-																						<option value="">.input-lg</option>
-																					</select>
-																			</div>
-																	</div>
-																</fieldset>
-																<fieldset>
-																	<p class="event-desc-head">Select Plan</p>
-																	<div class="form-group">
-																	<div class="col-md-4">
-																			<select class="form-control input-lg select_booking">
-																				<option value="">.input-lg</option>
-																			</select>
-																	</div>
-															</div>
-														</fieldset>
-														<fieldset>
-															<p class="event-desc-head">Select Seats</p>
-															<div class="form-group">
-															<div class="col-md-4">
-																	<select class="form-control input-lg select_booking">
-																		<option value="">.input-lg</option>
-																	</select>
-															</div>
-													</div>
-												</fieldset>
-
-
-                                    <!-- <fieldset>
-                                        <p class="event-desc-head">Select Plan</p>
-                                        <div class="form-group">
-                                            <div class="col-md-10">
-                                                <div class="input-group">
-                                                    <div class="radio-group">
-                                                        <label class="btn btn-primary not-active">Gold
-                                                            <input type="radio" value="male" name="gender">
-                                                            </label>
-                                                            <label class="btn btn-primary not-active">Platinum
-                                                                <input type="radio" value="female" name="gender">
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </fieldset> -->
-                                            <!-- <fieldset>
-                                                <p class="event-desc-head">Select Ticket</p>
-                                                <div class="form-group">
-                                                    <div class="col-md-4">
-                                                        <div class="input-group">
-                                                            <span class="input-group-btn">
-                                                                <button type="button" class="quantity-left-minus btn  btn-number  btn-color"  data-type="minus" data-field="">
-                                                                    <i class="fas fa-minus"></i>
-                                                                </button>
-                                                            </span>
-                                                            <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="10">
-                                                                <span class="input-group-btn">
-                                                                    <button type="button" class="quantity-right-plus btn  btn-number btn-color" data-type="plus" data-field="">
-                                                                        <i class="fas fa-plus"></i>
-                                                                    </button>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </fieldset> -->
-
-
-
-                                            </form>
-                                        </div>
-                                        <div class="col-md-4">
-
-                                            <p class="event-desc-head">Summary</p>
-<!--
-                                            <div class="price-details">
-                                                <p class="amt-price">Gold Plan:
-                                                    <span class="pull-right plan-amt">100</span>
-                                                </p>
-                                                <p class="total-price">Total Amount:
-                                                    <span class="pull-right amt">100</span>
-                                                </p>
-                                                <p>
-                                                    <input type="submit" class="btn btn-primary btn-block btn-login" placeholder="Password" value="Continue" />
-                                                </p>
-                                            </div>
--->
-                                        </div>
-                                    </section>
-														</div>
-													</div>
-													<style>
-													.select_booking{
-														border: 2px solid #478ecc;
-														color: #000;
-													}
-.fa-plus{
-  color:#fff;
+            <div class="col-md-4">
+                <p class="event-desc-head">Summary</p>
+                 <div id="plan_summary"></div>
+            </div>
+            
+            <div class="col-md-2">
+            </div>
+         
+        </section>
+         </form>
+</div>
+</div>
+<style>
+.select_booking{
+	border: 2px solid #478ecc;
+	color: #000;
 }
-.fa-minus{
-  color:#fff;
-}
-    .quantity-remove, .quantity-add {
-        cursor: pointer;
-    }
-    .quantity-add.glyphicon, .quantity-remove.glyphicon {
-        display: block;
-        cursor: pointer;
-    }
-    .form-group{
-      margin-bottom: 20px;
-    }
-    .radio-group label {
-       overflow: hidden;
-    } .radio-group input {
-        /* This is on purpose for accessibility. Using display: hidden is evil.
-        This makes things keyboard friendly right out tha box! */
-       height: 1px;
-       width: 1px;
 
-       top: -20px;
-    } .radio-group .not-active  {
-       color: #000;
-       background-color: #fff;
-       border:2px solid #478ecc;
-    }
-    input[type="radio"] {
-        visibility:hidden;
-    }
-		.plan_show_time{
-			background: none;
-    	color: #000;
-    	margin-right: 10px;
-		}
-		label.btn.btn-primary.plan_show_time.active {
-    color: #fff;
-	}
-    .carousel-fade .carousel-inner, .carousel-fade .carousel-item{
-    height: 400px;
-    }
-    .carousel{
-      width: 100%;
-    }
-    @media (min-width: 320px) and (max-width: 480px){
-      .carousel-fade .carousel-inner, .carousel-fade .carousel-item{
-      height: 180px;
-      }
-    }
+.carousel-fade .carousel-inner, .carousel-fade .carousel-item{
+height: 400px;
+}
+.carousel{
+  width: 100%;
+}
+@media (min-width: 320px) and (max-width: 480px){
+  .carousel-fade .carousel-inner, .carousel-fade .carousel-item{
+  height: 180px;
+  }
+}
 </style>
 <script>
     $('.carousel').carousel({
       interval:6000,
       pause: "false"
   })
-  $(function() {
-      // Input radio-group visual controls
-      $('.radio-group label').on('click', function(){
-          $(this).removeClass('not-active').siblings().addClass('active');
-      });
-  });
-
-  var quantitiy=0;
-
-	 $('.quantity-right-plus').click(function(e){
-
-          // Stop acting like a button
-          e.preventDefault();
-          // Get the field name
-          var quantity = parseInt($('#quantity').val());
-          // If is not undefined
-              $('#quantity').val(quantity + 1);
-              // Increment
-      });
-
-       $('.quantity-left-minus').click(function(e){
-          // Stop acting like a button
-          e.preventDefault();
-          // Get the field name
-          var quantity = parseInt($('#quantity').val());
-          // If is not undefined
-              // Increment
-              if(quantity>0){
-              $('#quantity').val(quantity - 1);
-              }
-      });
-
-	function disp_time(event_id,plan_date)
+ 
+function disp_time()
 	{
+		var plan_date=$('#show_date').val();
+
 		$('#plan_details').hide();
+		$('#plan_seats').hide();
+		$('#plan_summary').hide();
 		var result = '';
+		
 		//make the ajax call
 		$.ajax({
 		url: '<?php echo base_url(); ?>eventlist/plantiming',
 		type: 'POST',
-		data: {event_id : event_id,plan_date : plan_date},
+		data: {event_id : <?php echo $event_id; ?>,plan_date : plan_date},
 		success: function(data) {
 		var dataArray = JSON.parse(data);
 		if (dataArray.length>0) {
-			result +="<fieldset><p class='event-desc-head'>Select Time</p><div class='form-group'><div class='btn-group colors' data-toggle='buttons'>";
+			result +="<fieldset><p class='event-desc-head'>Select Time</p><div class='form-group'><div class='col-md-4'><select class='form-control input-lg select_booking' id='show_time' onchange='disp_plan()'><option value=''>Select Time</option>";
 
 			for (var i = 0; i < dataArray.length; i++){
 				var id = dataArray[i].id;
-				var show_date = dataArray[i].show_date;
 				var show_time = dataArray[i].show_time;
-				result +="<label class='btn btn-primary plan_show_time'>"+show_time+"<input type='radio' value='"+show_time+"' id='show_plan_time' name='show_plan_time' onchange='disp_plan(<?php echo $event_id; ?>,show_date.value,this.value)'></label>";
+				
+				result +="<option value='"+show_time+"'>"+show_time+"</option>";
 			};
-				result +="</div></div></fieldset>";
+				result +="</select></div></div></fieldset>";
 
 			$("#plan_time").html(result).show();
 		} else {
 			result +="No Records found!..";
 			$("#plan_time").html(result).show();
+			$('#plan_details').hide();
+			$('#plan_seats').hide();
 		}
 		}
 		});
 	}
 
-	function disp_plan(event_id,show_date,show_time)
+	function disp_plan()
 	{
+		$('#plan_seats').hide();
+		$('#plan_summary').hide()
+		
+		var show_date=$('#show_date').val();
+		var show_time=$('#show_time').val();
+		
 		var result = '';
 		//make the ajax call
 		$.ajax({
 		url: '<?php echo base_url(); ?>eventlist/plandetails',
 		type: 'POST',
-		data: {event_id : event_id,show_date : show_date,show_time : show_time},
+		data: {event_id : <?php echo $event_id; ?>,show_date : show_date,show_time : show_time},
 		success: function(data) {
-		//alert(data);
 		var dataArray = JSON.parse(data);
 
-
 		if (dataArray.length>0) {
-			// result +="<fieldset><p class='event-desc-head'>Select Plan</p><div class='form-group'><div class='col-md-10'><div class='input-group'><div class='radio-group'>";
+			
+			result +="<fieldset><p class='event-desc-head'>Select Plan</p><div class='form-group'><div class='col-md-4'><select class='form-control input-lg select_booking' id='show_plan' onchange='disp_seats()'><option value=''>Select Plan</option>";
 
-				result +="<fieldset><p class='event-desc-head'>Select Plan</p><div class='form-group'><div class='btn-group colors' data-toggle='buttons'>";
 			for (var i = 0; i < dataArray.length; i++){
-				var event_id = dataArray[i].event_id;
 				var plan_name = dataArray[i].plan_name;
-				var show_date = dataArray[i].show_date;
-				var show_time = dataArray[i].show_time;
-				var seat_available = dataArray[i].seat_available;
-				var show_time = dataArray[i].seat_rate;
-
-				// result +="<label class='btn btn-primary not-active'>"+plan_name+"<input type='radio' value='"+plan_name+"' name='plan_name'></label>";
-					result +="<label class='btn btn-primary plan_name'>"+plan_name+"<input type='radio' value='"+plan_name+"' id='plan_name' name='plan_name'></label>";
+				var plantime_id = dataArray[i].plantime_id;
+			result +="<option value='"+plan_name+"'>"+plan_name+"</option>";
 			};
-			// result +="</div></div></div></div></fieldset>";
-			result +="</div></div></fieldset>";
-			result +="<fieldset><p class='event-desc-head'>Select Ticket</p><div class='form-group'><div class='btn-group colors' data-toggle='buttons'>";
-			result +="<div class='input-group'><span class='input-group-btn'><button type='button' class='quantity-left-minus btn  btn-number  btn-color'  data-type='minus' data-field=''><i class='fas fa-minus'></i></button></span><input type='text' id='quantity' name='quantity' class='form-control input-number' value='1' min='1' max='"+seat_available+"'><span class='input-group-btn'><button type='button' class='quantity-right-plus btn  btn-number btn-color' data-type='plus' data-field=''><i class='fas fa-plus'></i></button></span></div>";
-			result +="</div></div></fieldset>";
-
-
-			// result +="</fieldset><p class='event-desc-head'>Select Ticket</p><div class='form-group'><div class='col-md-4'><div class='input-group'><span class='input-group-btn'><button type='button' class='quantity-left-minus btn  btn-number  btn-color'  data-type='minus' data-field=''><i class='fas fa-minus'></i></button></span><input type='text' id='quantity' name='quantity' class='form-control input-number' value='1' min='1' max='"+seat_available+"'><span class='input-group-btn'><button type='button' class='quantity-right-plus btn  btn-number btn-color' data-type='plus' data-field=''><i class='fas fa-plus'></i></button></span></div></div></div></fieldset>";
-
-
+			result +="</select></div></div></fieldset>";
 
 			$("#plan_details").html(result).show();
+			
 		} else {
 			result +="No Records found!..";
 			$("#plan_details").html(result).show();
+			$('#plan_seats').hide();
 		}
 
 		}
 		});
+	}
+	function disp_seats()
+	{
+		$('#plan_summary').hide()
+		
+		var show_date=$('#show_date').val();
+		var show_time=$('#show_time').val();
+		var show_plan = $('#show_plan').val();
+		
+		var result = '';
+		//make the ajax call
+		$.ajax({
+		url: '<?php echo base_url(); ?>eventlist/seatdetails',
+		type: 'POST',
+		data: {event_id : <?php echo $event_id; ?>,show_date : show_date,show_time : show_time,show_plan : show_plan},
+		success: function(data) {
+
+		var dataArray = JSON.parse(data);
+		if (dataArray.length>0) {
+			result +="<fieldset><p class='event-desc-head'>Select Seats</p><div class='form-group'><div class='col-md-4'><select class='form-control input-lg select_booking' id='show_seats' onchange='plan_summary()'><option value=''>Select Seats</option>";
+			for (var i = 0; i < dataArray.length; i++){
+				var event_id = dataArray[i].event_id;
+				var plan_id = dataArray[i].plan_id;
+				var plan_name = dataArray[i].plan_name;
+				var plantime_id = dataArray[i].plantime_id;
+				var seat_available = dataArray[i].seat_available;
+				var seat_rate = dataArray[i].seat_rate;
+			};
+			var available_seats = (parseInt(seat_available)+1);
+			for (var i = 1; i < available_seats; i++){
+				result +="<option value='"+i+"'>"+i+"</option>";
+			};
+			result +="</select><input type='hidden' id='booking_date' name='booking_date' value='"+show_date+"' /><input type='hidden' id='event_id' name='event_id' value='"+event_id+"' /><input type='hidden' name='plan_id' id='plan_id' value='"+plan_id+"' /><input type='hidden' id='plan_name' value='"+plan_name+"' /><input type='hidden' name='plantime_id' id='plantime_id' value='"+plantime_id+"' /><input type='hidden' name='seat_rate' id='seat_rate' value='"+seat_rate+"' /></div></div></fieldset>";
+
+			$("#plan_seats").html(result).show();
+			
+		} else {
+			result +="No Records found!..";
+			$("#plan_seats").html(result).show();
+			$('#plan_summary').hide();
+		}
+
+		}
+		});
+	}
+	
+	function plan_summary()
+	{
+		var result = '';
+		var disp_plan_name=$('#show_plan').val();
+		var disp_plan_rate=$('#seat_rate').val();
+		var no_seats=$('#show_seats').val();
+		var plan=parseInt($('#seat_rate').val());
+		var seats=parseInt($('#show_seats').val());
+		var total = plan * seats;
+		var disp_total = total.toFixed(2);
+		
+		 result +="<div class='price-details'><p class='amt-price'>"+disp_plan_name+"<span class='pull-right plan-amt'>"+disp_plan_rate+"</span></p><p class='total-price'>Total Amount:<span class='pull-right amt'>"+disp_total+"</span></p><p><input type='submit' class='btn btn-primary btn-block btn-login' placeholder='Password' value='Continue' /></p><input type='hidden' name='no_seats' id='no_seats' value='"+no_seats+"' /><input type='hidden' name='total_amount' id='total_amount' value='"+disp_total+"' /><input type='hidden' name='user_id' id='user_id' value='<?php echo $user_id; ?>' /></div>";
+		 $("#plan_summary").html(result).show();
 	}
 </script>

@@ -103,7 +103,7 @@ class Eventlist extends CI_Controller
     {
 		$event_id  = $this->input->post('event_id');
 		$plan_date  = $this->input->post('plan_date');
-        $data['plan_timings'] = $this->eventlistmodel->booking_plantimes($event_id,$plan_date);
+		$data['plan_timings'] = $this->eventlistmodel->booking_plantimes($event_id,$plan_date);
         echo json_encode($data['plan_timings']);
     }
 	
@@ -112,8 +112,45 @@ class Eventlist extends CI_Controller
 		$event_id  = $this->input->post('event_id');
 		$plan_date  = $this->input->post('show_date');
 		$plan_time  = $this->input->post('show_time');
-        $data['plan_timings'] = $this->eventlistmodel->booking_plans($event_id,$plan_date,$plan_time);
-        echo json_encode($data['plan_timings']);
+        $data['plan_details'] = $this->eventlistmodel->booking_plans($event_id,$plan_date,$plan_time);
+        echo json_encode($data['plan_details']);
+    }
+	
+	public function seatdetails()
+    {
+		$event_id  = $this->input->post('event_id');
+		$plan_date  = $this->input->post('show_date');
+		$plan_time  = $this->input->post('show_time');
+		$show_plan  = $this->input->post('show_plan');
+        $data['plan_seats'] = $this->eventlistmodel->booking_seats($event_id,$plan_date,$plan_time,$show_plan);
+        echo json_encode($data['plan_seats']);
+    }
+	
+	
+	
+	public function event_booking()
+    {
+		$number = '1234567890';
+		$randomNumber = '';
+		for ($i = 0; $i < 7; $i++) {
+			$randomNumber .= $number[rand(0, 7 - 1)];
+		}
+		
+		$user_id = $this->input->post('user_id');
+		$order_id = $randomNumber."-".$user_id;
+		$event_id  = $this->input->post('event_id');
+		$plan_id  = $this->input->post('plan_id');
+		$plan_time_id  = $this->input->post('plantime_id');
+		$number_of_seats  = $this->input->post('no_seats');
+		$total_amount  = $this->input->post('total_amount');
+		$booking_date = $this->input->post('booking_date');
+		
+		$data['booking_process'] = $this->eventlistmodel->booking_process($order_id,$event_id,$plan_id,$plan_time_id,$user_id,$number_of_seats,$total_amount,$booking_date);
+		$this->load->view('front_header');
+		$this->load->view('bookingprocess', $data);
+		$this->load->view('front_footer');
+		
+		//echo json_encode($data['booking_process']);
     }
 }
 

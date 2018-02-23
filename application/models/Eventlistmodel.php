@@ -192,9 +192,38 @@ Class Eventlistmodel extends CI_Model
 		return $res;
     }
 	
-		function booking_plans($event_id,$plan_date,$plan_time)
+	function booking_plans($event_id,$plan_date,$plan_time)
     {
-		$sql="SELECT B.plan_name,B.seat_rate,A.event_id,A.plan_id,A.show_date,A.show_time,A.seat_available FROM booking_plan_timing A,booking_plan B WHERE A.event_id  = '$event_id' AND show_date = '$plan_date' AND show_time = '$plan_time' AND A.seat_available>0 AND A.plan_id = B.id";
+		$sql="SELECT B.plan_name,B.seat_rate,A.event_id,A.plan_id,A.id AS plantime_id, A.show_date,A.show_time,A.seat_available FROM booking_plan_timing A,booking_plan B WHERE A.event_id  = '$event_id' AND show_date = '$plan_date' AND show_time = '$plan_time' AND A.seat_available>0 AND A.plan_id = B.id";
+	  	$resu=$this->db->query($sql);
+	  	$res=$resu->result();
+		return $res;
+    }
+	
+	function booking_seats($event_id,$plan_date,$plan_time,$show_plan)
+    {
+		$sql="SELECT B.plan_name,B.seat_rate,A.event_id,A.plan_id,A.id AS plantime_id, A.show_date,A.show_time,A.seat_available FROM booking_plan_timing A,booking_plan B WHERE A.event_id  = '$event_id' AND show_date = '$plan_date' AND show_time = '$plan_time' AND A.seat_available>0 AND B.plan_name='$show_plan' AND A.plan_id = B.id";
+	  	$resu=$this->db->query($sql);
+	  	$res=$resu->result();
+		return $res;
+    }
+	
+	function booking_process($order_id,$event_id,$plan_id,$plan_time_id,$user_id,$number_of_seats,$total_amount,$booking_date)
+    {
+		
+		$sQuery = "INSERT INTO booking_process (order_id,event_id,plan_id,plan_time_id,user_id,number_of_seats,total_amount,booking_date) VALUES ('". $order_id . "','". $event_id . "','". $plan_id . "','". $plan_time_id . "','". $user_id . "','". $number_of_seats . "','". $total_amount . "','". $booking_date . "')";
+		$booking_insert = $this->db->query($sQuery);
+		
+		$update_seats = "UPDATE booking_plan_timing SET seat_available = seat_available-$number_of_seats WHERE id ='$plan_time_id'";
+		$seatsupdate = $this->db->query($update_seats);
+		
+		$_SESSION['booking_start'] = time(); // taking now logged in time
+		$_SESSION['booking_expire'] = $_SESSION['booking_start'] + (300) ; // ending a session in 180 seconds
+		
+		$session_seats = "INSERT INTO booking_session (session_expiry,order_id,plan_time_id,number_of_seats) VALUES ('". $_SESSION['booking_expire'] . "','". $order_id . "','". $plan_time_id . "','". $number_of_seats . "')";
+		$session_insert = $this->db->query($session_seats);
+				
+		$sql="SELECT A.id,A.order_id,E.category_name,B.id AS event_id,B.event_name,B.event_venue,B.event_address,C.show_date,C.show_time,D.plan_name,A.number_of_seats, A.total_amount FROM booking_process A,events B,booking_plan_timing C,booking_plan D,category_master E WHERE A.order_id  = '$order_id' AND A.event_id = B.id AND A.plan_time_id = C.id AND A.plan_id = D.id AND B.category_id = E.id";
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
 		return $res;
