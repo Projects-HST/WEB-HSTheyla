@@ -23,7 +23,6 @@ class Eventlist extends CI_Controller
 		$this->load->view('front_header');
 		$this->load->view('events', $data);
 		$this->load->view('front_footer');
-		//echo json_encode($data['result']);
 	}
  
      public function get_all_events()
@@ -66,7 +65,6 @@ class Eventlist extends CI_Controller
 		$this->load->view('front_header');
 		$this->load->view('eventdetails', $data);
 		$this->load->view('front_footer');
-        //echo json_encode($data['event_term_result']);
     }
 	
 	public function eventwishlist()
@@ -88,15 +86,22 @@ class Eventlist extends CI_Controller
 	
 	public function booking($event_id)
     {
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
 		$dec_event_id = base64_decode($event_id);
 		$event_id = ($dec_event_id/564738);
-		$data['event_gallery'] = $this->eventlistmodel->getevent_gallery($event_id);
-		$data['event_details'] = $this->eventlistmodel->getevent_details($event_id);
-		$data['booking_dates'] = $this->eventlistmodel->booking_plandates($event_id);
-		$this->load->view('front_header');
-		$this->load->view('booking', $data);
-		$this->load->view('front_footer');
-        //echo json_encode($data['event_term_result']);
+		if ($user_id!=''){
+			$data['event_gallery'] = $this->eventlistmodel->getevent_gallery($event_id);
+			$data['event_details'] = $this->eventlistmodel->getevent_details($event_id);
+			$data['booking_dates'] = $this->eventlistmodel->booking_plandates($event_id);
+			$this->load->view('front_header');
+			$this->load->view('booking', $data);
+			$this->load->view('front_footer');
+		} else {
+			$event_session_id = array("session_event_id" => $event_id);
+			$event_id_session = $this->session->set_userdata($event_session_id);
+			redirect('/signin/');
+		}
     }
 	
 	public function plantiming()
@@ -149,8 +154,6 @@ class Eventlist extends CI_Controller
 		$this->load->view('front_header');
 		$this->load->view('bookingprocess', $data);
 		$this->load->view('front_footer');
-		
-		//echo json_encode($data['booking_process']);
     }
 }
 

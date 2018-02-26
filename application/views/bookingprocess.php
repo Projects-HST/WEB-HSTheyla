@@ -1,6 +1,5 @@
 <?php 
 $user_id = $this->session->userdata('id'); ?>
-
 <div class="container-fluid eventlist-pge">
    <div class="container" style="min-height:400px;">
    

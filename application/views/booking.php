@@ -1,6 +1,4 @@
-<?php $user_id = $this->session->userdata('id'); 
-$user_id = '85';
-?>
+<?php $user_id = $this->session->userdata('id'); ?>
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/multiselect.css">
 <script src="<?php echo base_url(); ?>assets/front/js/multiselect.js"></script>
 	<div class="container-fluid eventdetail-pge">
