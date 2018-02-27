@@ -595,6 +595,28 @@ Class Loginmodel extends CI_Model
    }
     }
 
+	public function get_points($user_id)
+	{
+		$sql="SELECT * FROM user_points_count WHERE user_id = '$user_id' LIMIT 1";
+		$resu=$this->db->query($sql);
+		$res=$resu->result();
+		return $res;
+	}
 
 
+	public function get_booking($user_id)
+	{
+		$sql="SELECT A.id,A.order_id,E.category_name,B.id AS event_id,B.event_name,B.event_banner,B.description,B.event_venue,B.event_address,C.show_date,C.show_time,D.plan_name,A.number_of_seats, A.total_amount,A.created_at,B.event_colour_scheme FROM booking_history A,events B,booking_plan_timing C,booking_plan D,category_master E WHERE A.user_id  = '$user_id' AND A.event_id = B.id AND A.plan_time_id = C.id AND A.plan_id = D.id AND B.category_id = E.id";
+		$resu=$this->db->query($sql);
+		$res=$resu->result();
+		return $res;
+	}
+	
+		public function get_wishlist($user_id)
+	{
+		$sql="select ev.*,uwl.updated_at as wl_updated_at from events as ev LEFT JOIN user_wish_list as uwl on uwl.event_id = ev.id WHERE uwl.user_id = '85' group by ev.id ORDER BY uwl.updated_at desc";
+		$resu=$this->db->query($sql);
+		$res=$resu->result();
+		return $res;
+	}
 }

@@ -1,3 +1,4 @@
+<?php $user_id = $this->session->userdata('id'); ?>
 <div class="container-fluid page-bg">
 <div class="">
 <div class="row header-title leaderboard-bg">
@@ -29,34 +30,37 @@
                            <h3 class="mb-0">Wishlist</h3>
             </div>
               <div class="row">
+              
+              <?php
+			foreach($wishlist_details as $res){ 
+            
+            $string = strip_tags($res->description);
+			if (strlen($string) > 150) {
+			
+				// truncate string
+				$stringCut = substr($string, 0, 150);
+				$endPoint = strrpos($stringCut, ' ');
+			
+				//if the string doesn't contain any space then it will cut without word basis.
+				$string = $endPoint? substr($stringCut, 0, $endPoint):substr($stringCut, 0);
+				$string .= '...';
+			}
+?>
                 <div class="col-6 event-wish">
                   <div class="card-group">
                   <div class="card whishlist-card">
-                    <img class="card-img-top" src="<?php echo base_url(); ?>assets/front/images/sample.jpg" alt="Card image cap">
+                    <img class="card-img-top" src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>" alt="">
                     <div class="card-block">
-                    <a href="#">  <h4 class="card-title">Card title</h4></a>
-                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    <a href="#">  <h4 class="card-title"><?php echo $res->event_name; ?></h4></a>
+                      <p class="card-text"><?php echo $string;?></p>
+                      <p class="card-text"><small class="text-muted">Last updated on <?php echo $res->wl_updated_at; ?></small></p>
                     </div>
                   </div>
                 </div>
               </div>
-
-            <div class="col-6 event-wish">
-              <div class="card-group">
-              <div class="card whishlist-card">
-                <img class="card-img-top" src="<?php echo base_url(); ?>assets/front/images/sample.jpg" alt="Card image cap">
-                <div class="card-block">
-                  <a href=""><h4 class="card-title">Card title</h4></a>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-
+<?php
+		}
+?>
 
               </div>
             </div><!--/span-->

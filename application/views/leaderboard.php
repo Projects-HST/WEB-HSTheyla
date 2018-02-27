@@ -28,11 +28,16 @@
             <h3>Heyla Leaderboard</h3>
             <div class="row justify-content-md-center">
              <div class="col col-lg-3">
+            </div>
 
-             </div>
+<?php
+		foreach($user_points as $res){ 
+			 
+		}
+?>
              <div class="col-md-auto total-points-div">
                <p><img src="<?php echo base_url(); ?>assets/front/images/trophy.png" class="rounded mx-auto d-block leaderboard-img"></p>
-               <p class="text-center">Total Points : <b>200</b></p>
+               <p class="text-center">Total Points : <b><?php echo $res->total_points; ?></b></p>
              </div>
              <div class="col col-lg-3">
 
@@ -41,30 +46,30 @@
             <div class="row">
               <div class="col-sm points-one-div">
                 <p class="leaderboard-widgets"><img src="<?php echo base_url(); ?>assets/front/images/login-img.png" class="img-responsive ">
-                    <span class="text-center">login()</span>
+                    <span class="text-center">login(<?php echo $res->login_points ; ?>)</span>
                 </p>
 
               </div>
               <div class="col-sm points-two-div">
                 <p class="leaderboard-widgets"><img src="<?php echo base_url(); ?>assets/front/images/event-share.png" class="img-responsive ">
-                    <span class="text-center">Events-Share()</span>
+                    <span class="text-center">Events-Share(<?php echo $res->sharing_points  ; ?>)</span>
                 </p>
               </div>
               <div class="col-sm points-three-div">
                 <p class="leaderboard-widgets"><img src="<?php echo base_url(); ?>assets/front/images/event-checkin.png" class="img-responsive ">
-                    <span class="text-center">Check-ins()</span>
+                    <span class="text-center">Check-ins(<?php echo $res->checkin_points  ; ?>)</span>
                 </p>
               </div>
             </div>
             <div class="row">
               <div class="col-sm-4 points-four-div">
                 <p class="leaderboard-widgets"><img src="<?php echo base_url(); ?>assets/front/images/review.png" class="img-responsive ">
-                    <span class="text-center">Review ()</span>
+                    <span class="text-center">Review (<?php echo $res->review_points ; ?>)</span>
                 </p>
               </div>
               <div class="col-sm-4 points-five-div">
                 <p class="leaderboard-widgets"><img src="<?php echo base_url(); ?>assets/front/images/event-booking.png" class="img-responsive ">
-                    <span class="text-center">Booking ()</span>
+                    <span class="text-center">Booking (<?php echo $res->booking_points  ; ?>)</span>
                 </p>
               </div>
               <div class="col-sm-3"></div>

@@ -118,6 +118,7 @@ class Home extends CI_Controller {
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
 		if($user_role==3){
+		$datas['user_points'] = $this->loginmodel->get_points($user_id);
 		$this->load->view('front_header');
 		$this->load->view('leaderboard', $datas);
 		$this->load->view('front_footer');
@@ -148,6 +149,7 @@ class Home extends CI_Controller {
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
+		$datas['booking_details'] = $this->loginmodel->get_booking($user_id);
 		if($user_role==3){
 		$this->load->view('front_header');
 		$this->load->view('booking_history', $datas);
@@ -161,6 +163,7 @@ class Home extends CI_Controller {
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
+		$datas['wishlist_details'] = $this->loginmodel->get_wishlist($user_id);
 		if($user_role==3){
 		$this->load->view('front_header');
 		$this->load->view('wishlist', $datas);

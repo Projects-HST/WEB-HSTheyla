@@ -155,5 +155,6 @@ class Eventlist extends CI_Controller
 		$this->load->view('bookingprocess', $data);
 		$this->load->view('front_footer');
     }
+	
 }
 
