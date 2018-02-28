@@ -2,60 +2,59 @@
 $user_id = $this->session->userdata('id'); ?>
 <div class="container-fluid eventlist-pge">
    <div class="container" style="min-height:400px;">
-   
 		<?php foreach($booking_process as $res){ } ?>
         <table width="100%" border="0" cellpadding="3" cellspacing="3">
-  <tr>
-    <td width="50%">order_id</td>
-    <td width="50%"><?php echo $res->order_id;?></td>
-  </tr>
-  <tr>
-    <td>event_name</td>
-    <td><?php echo $res->order_id;?></td>
-  </tr>
-  <tr>
-    <td>category_name</td>
-    <td><?php echo $res->order_id;?></td>
-  </tr>
-  <tr>
-    <td>event_venue</td>
-    <td><?php echo $res->event_venue;?></td>
-  </tr>
-  <tr>
-    <td>event_address</td>
-    <td><?php echo $res->event_address;?></td>
-  </tr>
-  <tr>
-    <td>show_date</td>
-    <td><?php echo $res->show_date;?></td>
-  </tr>
-  <tr>
-    <td>show_time</td>
-    <td><?php echo $res->show_time;?></td>
-  </tr>
-  <tr>
-    <td>plan_name</td>
-    <td><?php echo $res->plan_name;?></td>
-  </tr>
-  <tr>
-    <td>number_of_seats</td>
-    <td><?php echo $res->number_of_seats;?></td>
-  </tr>
-  <tr>
-    <td>total_amount</td>
-    <td><?php echo $res->total_amount;?></td>
-  </tr>
-      </table>
-      <form method="post" name="customerData" action="http://hobbistan.com/web/ccavenue/ccavRequestHandler.php">
-        	<input type="hidden" name="merchant_id" value="89958"/>
-            <input type="hidden" name="order_id" value="<?php echo $res->order_id;?>"/>
-            <input type="hidden" name="amount" value="<?php echo $res->total_amount;?>"/>
-            <input type="hidden" name="currency" value="INR"/>
-            <input type="hidden" name="redirect_url" value="http://hobbistan.com/web/ccavenue/ccavResponseHandler.php"/>
-            <input type="hidden" name="cancel_url" value="http://heylaapp.com/heylav2/eventlist/"/>
-            <input type="hidden" name="language" value="EN"/>
-            <INPUT type="submit" value="CheckOut">
- 	</form>
+          <tr>
+            <td width="50%">Order Id</td>
+            <td width="50%"><?php echo $res->order_id;?></td>
+          </tr>
+          <tr>
+            <td>Event Name</td>
+            <td><?php echo $res->event_name;?></td>
+          </tr>
+          <tr>
+            <td>Category Name</td>
+            <td><?php echo $res->category_name;?></td>
+          </tr>
+          <tr>
+            <td>Event Venue</td>
+            <td><?php echo $res->event_venue;?></td>
+          </tr>
+          <tr>
+            <td>Event Address</td>
+            <td><?php echo $res->event_address;?></td>
+          </tr>
+          <tr>
+            <td>Event Show date</td>
+            <td><?php echo $res->show_date;?></td>
+          </tr>
+          <tr>
+            <td>Event Show time</td>
+            <td><?php echo $res->show_time;?></td>
+          </tr>
+          <tr>
+            <td>Booking Plan</td>
+            <td><?php echo $res->plan_name;?></td>
+          </tr>
+          <tr>
+            <td>Booking Seats</td>
+            <td><?php echo $res->number_of_seats;?></td>
+          </tr>
+          <tr>
+            <td>Booking Amount</td>
+            <td><?php echo $res->total_amount;?></td>
+          </tr>
+              </table>
+              <form method="post" name="customerData" action="http://hobbistan.com/web/ccavenue/ccavRequestHandler.php">
+                    <input type="hidden" name="merchant_id" value="89958"/>
+                    <input type="hidden" name="order_id" value="<?php echo $res->order_id;?>"/>
+                    <input type="hidden" name="amount" value="<?php echo $res->total_amount;?>"/>
+                    <input type="hidden" name="currency" value="INR"/>
+                    <input type="hidden" name="redirect_url" value="http://hobbistan.com/web/ccavenue/ccavResponseHandler.php"/>
+                    <input type="hidden" name="cancel_url" value="http://heylaapp.com/heylav2/eventlist/"/>
+                    <input type="hidden" name="language" value="EN"/>
+                    <INPUT type="submit" value="CheckOut">
+            </form>
 <!--
 				<tr>
 		     		<td colspan="2">Billing information(optional):</td>
