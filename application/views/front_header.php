@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="theme-color" content="#478ECC" />
-    <title>HEYLA</title>
+    <title>HEYLA </title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?php echo base_url(); ?>assets/front/css/bootstrap.min.css" rel="stylesheet">

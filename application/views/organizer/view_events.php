@@ -86,14 +86,14 @@
                         <tbody>
                         <?php foreach($result as $rows){ 
                            $adv_sts=$rows->adv_status;
-                          if($adv_sts=='Y'){ ?>
+                         ?>
                         <tr>
                             <td><?php echo $rows->event_name ; ?></td>
                             <td><?php echo $rows->category_name ; ?></td>
                             <td><?php echo $rows->city_name ; ?></td>
                             <td><a href="<?php echo base_url();?>organizer/updateevents/<?php echo $rows->id;?>"><i class="fa fa-pencil-square-o"></a></td>
                         </tr>
-                       <?php } } ?>
+                       <?php  } ?>
                         </tbody>
                     </table>
                         </div>

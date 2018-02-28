@@ -19,8 +19,8 @@
                 <?php $user_id=$this->session->userdata('id');
                 if($user_id=='2'){ ?>
                     <a href="<?php echo base_url(); ?>createevent" class="list-group-item"><span class="menu-icons"><i class="far fa-plus-square"></i></span>Create event </a>
-                      <a href="<?php echo base_url(); ?>viewevents" class="list-group-item  active"><span class="menu-icons"><i class="fas fa-table"></i></span>View events </a>
-                        <a href="<?php echo base_url(); ?>bookedevents" class="list-group-item"><span class="menu-icons"><i class="far fa-list-alt"></i></i></span>Booked Events</a>
+                      <a href="<?php echo base_url(); ?>viewevents" class="list-group-item"><span class="menu-icons"><i class="fas fa-table"></i></span>View events </a>
+                        <a href="<?php echo base_url(); ?>bookedevents" class="list-group-item active"><span class="menu-icons"><i class="far fa-list-alt"></i></i></span>Booked Events</a>
               <?php   }else{
 
                 } ?>
@@ -40,30 +40,38 @@
                          
                 <!-- form user info -->
                   <div class="card card-outline-secondary" style="padding:5px;">
-                  <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
-                        <thead>
-                        <tr>
-                            <th>Event Name</th>
-                            <th>Event Category</th>
-                            <th>Event City</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php foreach($result as $rows){
-							 $status=$rows->event_status;
-							 ?>
-                        <tr>
-                            <td><?php echo $rows->event_name ; ?></td>
-                            <td><?php echo $rows->category_name ; ?></td>
-                            <td><?php echo $rows->city_name ; ?></td>
-                            <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
-                            <td><a href="<?php echo base_url();?>home/updateevents/<?php echo base64_encode($rows->id);?>"><i class="fa fa-pencil-square-o"></a></td>
-                        </tr>
-                       <?php  } ?>
-                        </tbody>
-                    </table>
+                  <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                           <thead>
+                              <tr>
+                                 <th>S.No</th>
+                                 <th>Event Name</th>
+                                 <th>Plan</th>
+                                 <th>Show Date & Time</th>
+                                 <th>Seats</th>
+                                 <th>Booking Date</th>
+                                 <!--th>Amount</th-->
+                              </tr>
+                           </thead>
+                           <tbody>
+                <?php
+                                $i=1;
+                                foreach($view as $rows) {
+                                ?>
+                              <tr>
+                                 <td><?php echo $i; ?></td>
+                                 <td><?php echo $rows->event_name; ?></td>
+                                 <td><?php echo $rows->plan_name; ?></td>
+                                  <td><?php $date=date_create($rows->show_date);
+                                       echo date_format($date,"d-m-Y");  ?> ( <?php echo $rows->show_time; ?> ) </td>
+                                 <td><?php echo $rows->number_of_seats; ?></td>
+                                 <td><?php $date=date_create($rows->booking_date);
+                                       echo date_format($date,"d-m-Y"); ?></td>
+                                  <!--td><?php echo $rows->total_amount; ?></td-->
+                              </tr>
+                             <?php $i++;  }  ?>
+                           </tbody>
+                        </table>
+
 					</div>
             </div>
           </div><!--/span-->
