@@ -73,7 +73,7 @@ public function home()
 					$session_data=$this->session->set_userdata($datas);
 
 
-					redirect('home');
+					redirect('leaderboard');
 
 				break;
 				case '3':
@@ -84,7 +84,7 @@ public function home()
 					$session_data=$this->session->set_userdata($datas);
 
 
-					redirect('profile');
+					redirect('leaderboard');
 
 				break;
 				case '4':
@@ -192,9 +192,9 @@ public function dashboard()
 			 $status=$datas['result']['status'];
 			 if($status=='Y'){
 				 if($user_role==3){
-				 	redirect('profile');
+				 	redirect('leaderboard');
 				 }else if($user_role==2){
-						redirect('dashboard');
+						redirect('leaderboard');
 				 }else{
 					 redirect('/');
 				 }
