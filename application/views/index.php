@@ -463,7 +463,7 @@
                                 <input type="text" class="form-control" name="subject" placeholder="Enter the Subject" required>
                             </div>
                             <div class="col-12">
-                                <textarea class="form-control" name="message" placeholder="Write Message" required></textarea>
+                                <textarea class="form-control textarea-form" name="message" placeholder="Write Message" required></textarea>
                             </div>
                             <div class="col-md-3 col-sm-6">
                                 <input type="submit" class="form-control submitbtn btn-primary" value="SUBMIT FORM">
