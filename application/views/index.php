@@ -352,7 +352,7 @@
                         </div>
                         <div class="col-sm-6 col-md-6 featurebox">
                             <div class="media mediaobj">
-                              <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/Rewards1.png" alt="Generic placeholder image">
+                              <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/Rewards.png" alt="Generic placeholder image">
                               <div class="media-body">
                                   <h5 class="mt-0">Rewards</h5>Book, Check-in, share and review to win rewards.</div>
                             </div>
@@ -411,33 +411,7 @@
             </p>
         </div>
     </section>
-    <section class="organiserevent" style="">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-4 center-block">
-                    <div class="organiserbox text-center">
-                        <img src="<?php echo base_url(); ?>assets/front/images/add.png" class="featureicons img-fluid mx-auto d-block">
-                        <p class="organiser-heading">CREATE</p>
-                        <p class="normal-txt">It's simple! Enter events, setup ticketing option,<br> and Go live.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="organiserbox text-center">
-                        <img src="<?php echo base_url(); ?>assets/front/images/view.png" class="featureicons img-fluid mx-auto d-block">
-                        <p class="organiser-heading">PROMOTE</p>
-                        <p class="normal-txt">Our promotional reach is widespread; <br> Be it local, social or even mobile. </p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="organiserbox-last text-center">
-                        <img src="<?php echo base_url(); ?>assets/front/images/ticket.png" class=" featureicons img-fluid mx-auto d-block">
-                        <p class="organiser-heading">HOST</p>
-                        <p class="normal-txt">Right from guest lists to scanning of tickets; we assure you a great event without a glitch.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <section class="formbg" id="contact">
         <div class="container">

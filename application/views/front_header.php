@@ -24,10 +24,10 @@
     <script src="<?php echo base_url(); ?>assets/front/js/jquery.min.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-92904528-2"></script>
     <script src="<?php echo base_url(); ?>assets/front/js/popper.min.js"></script>
-
+    <script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/front/js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/plugins/sweetalert2.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/js/sweet-alert.init.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/pages/sweet-alert.init.js"></script>
     <!--  Forms Validations Plugin -->
     <script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/additional-methods.min.js"></script>

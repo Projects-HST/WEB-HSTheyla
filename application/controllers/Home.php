@@ -149,15 +149,32 @@ class Home extends CI_Controller {
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
-		if($user_role==3){
 			$datas['res']=$this->loginmodel->getuserinfo($user_id);
 			$this->load->view('front_header');
-			$this->load->view('profile_update', $datas);
+			$this->load->view('create_event', $datas);
 			$this->load->view('front_footer');
-		}else{
-			redirect('/');
-		}
 
+
+	}
+	public function viewevents()
+	{
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
+		$user_role=$this->session->userdata('user_role');
+			$datas['res']=$this->loginmodel->getuserinfo($user_id);
+			$this->load->view('front_header');
+			$this->load->view('view_event', $datas);
+			$this->load->view('front_footer');
+	}
+	public function bookedevents()
+	{
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
+		$user_role=$this->session->userdata('user_role');
+			$datas['res']=$this->loginmodel->getuserinfo($user_id);
+			$this->load->view('front_header');
+			$this->load->view('event_booked', $datas);
+			$this->load->view('front_footer');
 	}
 
 	public function booking_history()

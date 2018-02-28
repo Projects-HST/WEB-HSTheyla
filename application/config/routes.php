@@ -68,7 +68,9 @@ $route['mobilenumber'] = 'home/mobilenumberchange';
 $route['mobile'] = 'home/mobile';
 $route['changemail'] = 'home/changeemail';
 $route['dashboard'] = 'home/organiser';
-
+$route['createevent'] = 'home/createevent';
+$route['viewevents'] = 'home/viewevents';
+$route['bookedevents'] = 'home/bookedevents';
 $route['home'] = 'home/home';
 $route['privacy'] = 'home/privacy';
 $route['payment'] = 'home/payment';
