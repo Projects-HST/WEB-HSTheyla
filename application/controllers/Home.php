@@ -144,6 +144,22 @@ class Home extends CI_Controller {
 
 	}
 
+	public function createevent()
+	{
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
+		$user_role=$this->session->userdata('user_role');
+		if($user_role==3){
+			$datas['res']=$this->loginmodel->getuserinfo($user_id);
+			$this->load->view('front_header');
+			$this->load->view('profile_update', $datas);
+			$this->load->view('front_footer');
+		}else{
+			redirect('/');
+		}
+
+	}
+
 	public function booking_history()
 	{
 		$datas=$this->session->userdata();
@@ -302,25 +318,7 @@ class Home extends CI_Controller {
 			redirect('/');
 		}
 
-		public function profile(){
 
-			$datas=$this->session->userdata();
-			$user_id=$this->session->userdata('id');
-			$user_role=$this->session->userdata('user_role');
-			if($user_id){
-				if($user_role==3){
-					$datas['res']=$this->loginmodel->getuserinfo($user_id);
-					$this->load->view('profile', $datas);
-				}else if($user_role==2){
-          $datas['res']=$this->loginmodel->getuserinfo($user_id);
-					$this->load->view('profile', $datas);
-				}else{
-				 redirect('/');
-				}
-			}else{
-				redirect('/');
-			}
-		}
 
 		public function mobilenumberchange(){
 			$datas=$this->session->userdata();

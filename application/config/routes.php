@@ -65,7 +65,7 @@ $route['wishlist'] = 'home/wishlist';
 $route['booking_history'] = 'home/booking_history';
 $route['profile_picture'] = 'home/change_profile_picture';
 $route['mobilenumber'] = 'home/mobilenumberchange';
-// $route['mobilenumber'] = 'home/mobile';
+$route['mobile'] = 'home/mobile';
 $route['changemail'] = 'home/changeemail';
 $route['dashboard'] = 'home/organiser';
 

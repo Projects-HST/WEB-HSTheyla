@@ -26,8 +26,8 @@
     <script src="<?php echo base_url(); ?>assets/front/js/popper.min.js"></script>
 
     <script src="<?php echo base_url(); ?>assets/front/js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/pages/sweet-alert.init.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/sweetalert2.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/sweet-alert.init.js"></script>
     <!--  Forms Validations Plugin -->
     <script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/additional-methods.min.js"></script>
@@ -68,7 +68,7 @@
                         <a class="nav-link" href="<?php echo  base_url(); ?>dashboard">Create Event</a>
                     </li>
                     <?php }else{ ?>
-                  
+
                     <?php } ?>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
