@@ -89,7 +89,7 @@ class Home extends CI_Controller {
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
-			if($user_role==3){
+			if($user_role==3 || $user_role==2){
 		$this->load->view('front_header');
 		$this->load->view('eventdetails', $datas);
 		$this->load->view('front_footer');
@@ -102,7 +102,7 @@ class Home extends CI_Controller {
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
-		if($user_role==3){
+		if($user_role==3 || $user_role==2){
 		$this->load->view('front_header');
 		$this->load->view('booking', $datas);
 		$this->load->view('front_footer');
@@ -133,7 +133,7 @@ class Home extends CI_Controller {
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
-		if($user_role==3){
+		if($user_role==3 || $user_role==2){
 			$datas['res']=$this->loginmodel->getuserinfo($user_id);
 			$this->load->view('front_header');
 			$this->load->view('profile_update', $datas);
@@ -183,7 +183,7 @@ class Home extends CI_Controller {
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
 		$datas['booking_details'] = $this->loginmodel->get_booking($user_id);
-		if($user_role==3){
+		if($user_role==3 || $user_role==2){
 		$this->load->view('front_header');
 		$this->load->view('booking_history', $datas);
 		$this->load->view('front_footer');
@@ -197,7 +197,7 @@ class Home extends CI_Controller {
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
 		$datas['wishlist_details'] = $this->loginmodel->get_wishlist($user_id);
-		if($user_role==3){
+		if($user_role==3 || $user_role==2){
 		$this->load->view('front_header');
 		$this->load->view('wishlist', $datas);
 		$this->load->view('front_footer');
@@ -399,7 +399,7 @@ class Home extends CI_Controller {
 			$user_id=$this->session->userdata('id');
 			$user_role=$this->session->userdata('user_role');
 			$datas['res']=$this->loginmodel->getuserinfo($user_id);
-			if($user_role==3){
+			if($user_role==3 || $user_role==2){
 				$this->load->view('front_header');
 				$this->load->view('profile_picture', $datas);
 				$this->load->view('front_footer');
