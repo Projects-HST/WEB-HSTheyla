@@ -18,7 +18,7 @@
               <a href="<?php echo base_url(); ?>profile" class="list-group-item "><span class="menu-icons"><i class="fas fa-user"></i></span>Profile</a>
                 <a href="<?php echo base_url(); ?>profile_picture" class="list-group-item active"><span class="menu-icons"><i class="fas fa-user"></i></span>Display Picture</a>
                 <?php $user_id=$this->session->userdata('id');
-                if($user_id=='3'){ ?>
+                if($user_id=='2'){ ?>
                     <a href="<?php echo base_url(); ?>createevent" class="list-group-item"><span class="menu-icons"><i class="far fa-plus-square"></i></span>Create event </a>
                       <a href="<?php echo base_url(); ?>viewevents" class="list-group-item"><span class="menu-icons"><i class="fas fa-table"></i></span>View events </a>
                         <a href="<?php echo base_url(); ?>viewevents" class="list-group-item"><span class="menu-icons"><i class="far fa-list-alt"></i></i></span>Events Booked </a>
