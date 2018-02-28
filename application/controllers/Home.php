@@ -117,7 +117,7 @@ class Home extends CI_Controller {
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
-		if($user_role==3){
+		if($user_role==3 || $user_role==2){
 		$datas['user_points'] = $this->loginmodel->get_points($user_id);
 		$this->load->view('front_header');
 		$this->load->view('leaderboard', $datas);

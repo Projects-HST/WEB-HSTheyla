@@ -66,13 +66,11 @@ public function home()
 					$this->load->view('footer');
 				break;
 				case '2':
-				     $user_name=$result['user_name'];$msg=$result['msg'];$mobile_no=$result['mobile_no'];$email_id=$result['email_id'];$status=$result['status'];$id=$result['id'];$user_role=$result['user_role'];
+				  $user_name=$result['user_name'];$msg=$result['msg'];$mobile_no=$result['mobile_no'];$email_id=$result['email_id'];$status=$result['status'];$id=$result['id'];$user_role=$result['user_role'];
 
 					$datas= array("user_name"=>$user_name, "msg"=>$msg,"mobile_no"=>$mobile_no,"email_id"=>$email_id,"status"=>$status,"id"=>$id,"user_role"=>$user_role,);
 					//$this->session->userdata($user_name);
 					$session_data=$this->session->set_userdata($datas);
-
-
 					redirect('leaderboard');
 
 				break;
