@@ -18,6 +18,7 @@
 </footer>
 
 </body>
+<script src="<?php echo base_url(); ?>assets/plugins/datatables/dataTables.buttons.min.js"></script>
 
 <script src="<?php echo base_url(); ?>assets/js/tether.min.js"></script><!-- Tether for Bootstrap -->
 <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
