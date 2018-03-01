@@ -75,23 +75,20 @@ class Home extends CI_Controller {
 	}
 	public function events()
 	{
-
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
 		$this->load->view('front_header');
 		$this->load->view('events', $datas);
 		$this->load->view('front_footer');
-
-
 	}
+	
 	public function eventdetails()
 	{
-
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
-			if($user_role==3 || $user_role==2){
+		if($user_role==3 || $user_role==2){
 		$this->load->view('front_header');
 		$this->load->view('eventdetails', $datas);
 		$this->load->view('front_footer');
@@ -360,6 +357,41 @@ class Home extends CI_Controller {
 		}
 	}
 
+
+	public function eventattendees($order_id)
+	 {
+		$sorder_id = base64_decode($order_id);
+	 	$datas = $this->session->userdata();
+	    $user_id = $this->session->userdata('id');
+	    $user_role = $this->session->userdata('user_role');
+    	$datas['seats'] = $this->loginmodel->event_attendees($sorder_id);
+		  $this->load->view('front_header');
+		  $this->load->view('event_attendees',$datas);
+		  $this->load->view('front_footer');
+		 }
+	 
+	 
+	 	
+	 public function insertattendees()
+     {
+        $datas=$this->session->userdata();
+	    $user_id=$this->session->userdata('id');
+	    $user_role=$this->session->userdata('user_role');
+
+ 		$order_id=$this->input->post('order_id');
+		$count=$this->input->post('count');
+
+		for ($i=1; $i<=$count; $i++)
+		{
+			$name=$this->input->post('name'.$i);
+			$email=$this->input->post('email'.$i);
+			$phone=$this->input->post('phone'.$i);
+			 $datas=$this->loginmodel->insert_attendees($order_id,$name,$email,$phone);
+		}
+		 	redirect('/eventlist');
+     }
+	 
+	 
 	public function home()
 	{
 		$this->load->library('facebook');

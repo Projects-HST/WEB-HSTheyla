@@ -612,11 +612,25 @@ Class Loginmodel extends CI_Model
 		return $res;
 	}
 	
-		public function get_wishlist($user_id)
+	public function get_wishlist($user_id)
 	{
 		$sql="select ev.*,uwl.updated_at as wl_updated_at from events as ev LEFT JOIN user_wish_list as uwl on uwl.event_id = ev.id WHERE uwl.user_id = '$user_id' group by ev.id ORDER BY uwl.updated_at desc";
 		$resu=$this->db->query($sql);
 		$res=$resu->result();
 		return $res;
+	}
+	
+	public function event_attendees($sorder_id)
+	{
+		$sql="SELECT A.`order_id`,A.`number_of_seats`,B.user_name,B.mobile_no,B.email_id,C.name FROM `booking_history` A,user_master B,user_details C WHERE A.user_id = B.id AND A.user_id = C.user_id AND A.`order_id` = '$sorder_id'";
+		$resu=$this->db->query($sql);
+		$res=$resu->result();
+		return $res;
+	}
+	
+	public function insert_attendees($order_id,$name,$email,$phone)
+	{
+		$query = "INSERT INTO booking_event_attendees (order_id,name,email_id,mobile_no) VALUES('$order_id','$name','$email','$phone')";
+      	$resultset = $this->db->query($query);
 	}
 }
