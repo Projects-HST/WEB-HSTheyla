@@ -228,7 +228,7 @@ function disp_time()
 		var disp_plan_name=$('#show_plan').val();
 		var disp_plan_rate=$('#seat_rate').val();
 		var no_seats=$('#show_seats').val();
-		var GST = 10;
+		var GST = 1;
 		var total = disp_plan_rate * no_seats;
 		var stotal = total + GST;
 		var disp_total = stotal.toFixed(2);
