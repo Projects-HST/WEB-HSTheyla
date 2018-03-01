@@ -228,12 +228,12 @@ function disp_time()
 		var disp_plan_name=$('#show_plan').val();
 		var disp_plan_rate=$('#seat_rate').val();
 		var no_seats=$('#show_seats').val();
-		var plan=parseInt($('#seat_rate').val());
-		var seats=parseInt($('#show_seats').val());
-		var total = plan * seats;
-		var disp_total = total.toFixed(2);
-		
-		 result +="<div class='price-details'><p class='amt-price'>"+disp_plan_name+"<span class='pull-right plan-amt'>"+disp_plan_rate+"</span></p><p class='total-price'>Total Amount:<span class='pull-right amt'>"+disp_total+"</span></p><p><input type='submit' class='btn btn-primary btn-block btn-login' placeholder='Password' value='Continue' /></p><input type='hidden' name='no_seats' id='no_seats' value='"+no_seats+"' /><input type='hidden' name='total_amount' id='total_amount' value='"+disp_total+"' /><input type='hidden' name='user_id' id='user_id' value='<?php echo $user_id; ?>' /></div>";
+		var GST = 10;
+		var total = disp_plan_rate * no_seats;
+		var stotal = total + GST;
+		var disp_total = stotal.toFixed(2);
+
+		 result +="<div class='price-details'><p class='amt-price'>"+disp_plan_name+"<span class='pull-right plan-amt'>"+disp_plan_rate+"</span></p><p class='total-price'>GST Tax :<span class='pull-right amt'>"+GST.toFixed(2)+"</span></p><p class='total-price'>Total Amount:<span class='pull-right amt'>"+disp_total+"</span></p><p><input type='submit' class='btn btn-primary btn-block btn-login' placeholder='Password' value='Continue' /></p><input type='hidden' name='no_seats' id='no_seats' value='"+no_seats+"' /><input type='hidden' name='total_amount' id='total_amount' value='"+disp_total+"' /><input type='hidden' name='user_id' id='user_id' value='<?php echo $user_id; ?>' /></div>";
 		 $("#plan_summary").html(result).show();
 	}
 </script>
