@@ -48,15 +48,15 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto topmenu">
                     <li class="nav-item ">
-                        <a class="nav-link" href="#">Home
+                        <a class="nav-link" href="<?php echo base_url(); ?>home">Home
                 <span class="sr-only"></span>
               </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>home#about">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#services">Services</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>home#services">Services</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo  base_url(); ?>eventlist/">List Events</a>
@@ -71,7 +71,7 @@
 
                     <?php } ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>home#contact">Contact</a>
                     </li>
 
                     <?php

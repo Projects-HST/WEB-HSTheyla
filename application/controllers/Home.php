@@ -417,9 +417,9 @@ class Home extends CI_Controller {
 			if($user_role==1){
 				redirect('adminlogin/dashboard');
 			}else if($user_role==2){
-				$this->load->view('leaderboard');
+				$this->load->view('index');
 			}else if($user_role==3){
-				$this->load->view('leaderboard');
+				$this->load->view('index');
 			}else{
 				$this->load->view('index');
 			}
