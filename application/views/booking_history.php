@@ -38,7 +38,7 @@
             </div>
 <?php
 		foreach($booking_details as $res){
-        $string = strip_tags($res->description);
+        	$string = strip_tags($res->description);
 			if (strlen($string) > 150) {
 
 				// truncate string
@@ -54,13 +54,16 @@
           <div class="card-block">
             <div class="row">
               <div class="col-md-8">
-                <a href="#"><h4 class="card-title"><?php echo $res->event_name; ?></h4></a>
+                <h4 class="card-title"><?php echo $res->event_name; ?></h4>
                 <h6 class="card-subtitle mb-2 text-muted"><?php echo $res->event_venue; ?></h6>
                 <img src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>" class="img-fluid booked-event-img">
                 <p  class="card-text"><?php echo $string; ?></p>
               </div>
               <div class="col-md-4 booked-date">
                 <p class="card-title"><?php echo $res->show_date; ?> - <?php echo $res->show_time; ?></p>
+                 <p class="card-title"><?php echo $res->plan_name; ?> - <?php echo $res->number_of_seats; ?></p>
+                 <p class="card-title">₹ <?php echo $res->total_amount; ?></p>
+                 <!--<p class="card-title"><b><a href="<?php //echo base_url(); ?>home/user_booking_history/<?php //echo $res->order_id; ?>">View Details</a></b></p>-->
               </div>
             </div>
           </div>

@@ -358,6 +358,23 @@ class Home extends CI_Controller {
 			redirect('/');
 		}
 	}
+	
+	public function user_booking_history($order_id)
+	{
+		//echo $order_id;
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
+		$user_role=$this->session->userdata('user_role');
+		$datas['booking_details'] = $this->loginmodel->get_booking_history($order_id);
+		if($user_role==3 || $user_role==2){
+			$this->load->view('front_header');
+			$this->load->view('booking_history_details', $datas);
+			$this->load->view('front_footer');
+		}else{
+			redirect('/');
+		}
+	}
+	
 	public function wishlist()
 	{
 		$datas=$this->session->userdata();

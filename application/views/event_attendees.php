@@ -62,7 +62,7 @@
             ?>
          	<input type="hidden" name="order_id" id="order_id" value="<?php echo $order_id; ?>" />
             <input type="hidden" name="count" id="count" value="<?php echo $number_of_seats; ?>" />
-            <input type="submit" name="button" id="button" value="Submit" />
+            <input type="submit" class="btn btn-primary" name="button" id="button" value="Submit" />
          </form>
       </div>
     </div>
