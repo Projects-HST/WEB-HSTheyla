@@ -683,6 +683,38 @@ class Home extends CI_Controller {
 			$msg=$this->db->escape_str($this->input->post('message'));
 			$data=$this->loginmodel->mail_contact_form($name,$email,$subject,$msg);
 		}
+		public function become_organiser(){
+			$name=$this->db->escape_str($this->input->post('name'));
+			$email=$this->db->escape_str($this->input->post('email'));
+			$mobile=$this->db->escape_str($this->input->post('mobile'));
+			$to="hello@heylaapp.com,kamal.happysanz@gmail.com";
+			$subject="Contact Form Enquiry";
+			$htmlContent = '
+			 <html>
+			 <head>
+			 <title>Become Organiser Form</title>
+					</head>
+					<body>
+						<div class="mail-content">
+							<p>Name - '.$name.'</p>
+							<p>Email - '.$email.'</p>
+							<p>Subject - '.$mobile.'</p>
+
+						</div>
+					</body>
+			 </html>';
+	 $headers = "MIME-Version: 1.0" . "\r\n";
+	 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+	 // Additional headers
+	 $headers .= 'From: heylapp<info@heylapp.com>' . "\r\n";
+	 $sent= mail($to,$subject,$htmlContent,$headers);
+	 if($sent){
+		 echo "success";
+	 }else{
+			echo "failed";
+	 }
+
+		}
 
 		public function emailverfiy(){
   	  $email = $this->uri->segment(3);

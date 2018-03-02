@@ -134,101 +134,38 @@
            ?>
    </div>
 
-   <div class="modal fade" id="wrongpassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-       <div class="modal-dialog">
-           <div class="modal-content">
-               <div class="modal-body">
-                 <center>
 
-
-                   <p class="modal-msg">
-                     <?php echo $this->session->flashdata('msg'); ?>
-
-                 </p>
-                 </center>
-               </div>
-
-           </div>
-       </div>
-   </div>
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
                     <div role="tabpanel">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs modalmenu" role="tablist">
-                            <li role="presentation" class="tabmenu"><a href="#uploadTab" aria-controls="uploadTab" role="tab" data-toggle="tab" class="" id="loginbtn">Sign In</a>
+                      <div role="tabpanel" class="tab-pane" id="browseTab">
+                          <div class="card">
 
-                            </li>
-                            <li role="presentation" class="loginbtn"><a href="#browseTab" aria-controls="browseTab" role="tab" data-toggle="tab">Sign Up</a>
+                              <div class="">
+                                  <form class="form" role="form" autocomplete="off" id="formsignup" method="post" enctype="multipart/form-data">
+                                      <div class="form-group">
+                                          <input type="text" class="form-control" name="name" id="name" placeholder="Name">
+                                          <p id="usermsg"></p>
+                                      </div>
+                                      <div class="form-group">
+                                          <input type="email" class="form-control" id="email" name="email" required="" placeholder="Email">
+                                          <p id="emailmsg"></p>
+                                      </div>
+                                      <div class="form-group">
+                                          <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Mobile Number">
+                                          <p id="mobilemsg"></p>
+                                      </div>
 
-                            </li>
-                        </ul>
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="uploadTab">
-                                <div class="card">
+                                      <button type="submit" id="submit" class="btn btn-event btn-lg">Become Organiser</button>
+                                  </form>
+                              </div>
+                              <!--/card-block-->
+                          </div>
+                      </div>
 
-                                    <div class="">
-                                        <form class="form" role="form" autocomplete="off" id="formLogin" action="<?php echo base_url(); ?>adminlogin/home" method="post">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" name="username" id="username" placeholder="UserName or Mobile Number or Email" required="">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="password" class="form-control" id="pwd" name="pwd" required="" placeholder="Password" autocomplete="new-password">
-                                            </div>
-                                            <center>
-                                                <button type="submit" class="btn btn-event btn-lg">Login</button>
-                                            </center>
-                                        </form>
-                                        <p class="float-right"><a href="<?php echo base_url(); ?>reset">Forgot Password</a></p>
-                                    </div>
-
-                                    <div class="socialmedia">
-                                        <span class="">Or Sign Up With Social Media</span>
-                                    </div>
-                                    <center>
-                                        <div class="social-login">
-
-                     <a href="<?php echo base_url(); ?>google_login" class="btn btn-lg  btn-google"><i class="fa fa-google-plus"></i> Login With Google + </a>
-                                                <a href="#" class="btn btn-facebook btn-lg">
-                      <i class="fa fa-facebook"></i> Login with Facebook
-                     </a>
-                                        </div>
-                                    </center>
-                                    <!--/card-block-->
-                                </div>
-                                <!-- /form card login -->
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="browseTab">
-                                <div class="card">
-
-                                    <div class="">
-                                        <form class="form" role="form" autocomplete="off" id="formsignup" method="post" enctype="multipart/form-data">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" name="name" id="name" placeholder="Username" onchange="check_username()">
-                                                <p id="usermsg"></p>
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="email" class="form-control" id="email" name="email" required="" placeholder="Email" onchange="check_email()">
-                                                <p id="emailmsg"></p>
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Mobile Number" onchange="check_mobile()">
-                                                <p id="mobilemsg"></p>
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="password" class="form-control" id="new_password" name="new_password" required="" placeholder="Password">
-                                            </div>
-                                            <button type="submit" id="submit" class="btn btn-event btn-lg">Sign Up</button>
-                                        </form>
-                                    </div>
-                                    <!--/card-block-->
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -395,9 +332,9 @@
     <section class="organsier" style="" id="create">
         <div class="container">
             <div class="heading">
-                Promote & Sell Tickets
+              Become an Event Organizer
             </div>
-            <p class="normal-txt white-color">Promote and sell your ticket with our ticketing service, we’ll ensure you gain momentum the whole way through; right from tickets Avaliable to Sold Out!.
+            <p class="normal-txt white-color">Heyla is a powerhouse of opportunities for event organizers. You can expect the widest visiblity that will translate into big ticket sales. That is not all either - Heyla is punch packed to help your business to build a formidable brand image and a lasting reputation. Start now to experience the power of Heyla.
             </p>
             <p class="text-center">
               <?php
@@ -563,7 +500,7 @@
     $('#formsignup').validate({ // initialize the plugin
         rules: {
             name: {
-                required: true,minlength: 6, maxlength: 12
+                required: true
             },
             email: {
                 required: true
@@ -571,33 +508,31 @@
             mobile: {
                 required: true,minlength: 10, maxlength: 10, digits: true
             },
-            new_password: {
-                required: true,minlength: 6, maxlength: 12
-            },
+
         },
         messages: {
-            name: { required:"Enter the Username", minlength: "Min is 6", maxlength: "Max is 12" },
+            name: { required:"Enter the Name", minlength: "Min is 6", maxlength: "Max is 12" },
             email: "Enter Valid Email ",
-              mobile: { required:"Enter the Mobile number", minlength: "Min is 6", maxlength: "Max is 10" },
+              mobile: { required:"Enter the Mobile number", minlength: "Min is 6", maxlength: "Max is 10" }
 
-            new_password: { required:"Enter the Password", minlength: "Min is 6", maxlength: "Max is 12" }
+
         },
         submitHandler: function(form) {
             //alert("hi");
 
             $.ajax({
-                url: "<?php echo base_url(); ?>home/create_profile",
+                url: "<?php echo base_url(); ?>home/become_organiser",
                 type: 'POST',
                 data: $('#formsignup').serialize(),
                 success: function(response) {
 
-                    if (response == "verify") {
+                    if (response == "success") {
                         swal({
                             title: "Success",
-                            text: "You have Registered Successfully.",
+                            text: "Thank you for Your Requesting We Contact You Shortly.",
                             type: "success"
                         }).then(function() {
-                            location.href = '<?php echo base_url(); ?>verify';
+                            location.href = '<?php echo base_url(); ?>';
                         });
                     } else {
                         sweetAlert("Oops...", response, "error");
@@ -654,71 +589,10 @@
     });
 
 
-    function check_email() {
-        var email = $('#email').val();
-        $.ajax({
-            method: "post",
-            data: {
-                email: email
-            },
-            url: 'home/existemail',
-            success: function(data) {
 
-                if ((data) == "success") {
-                    $("#submit").removeAttr("disabled");
-                      $('#emailmsg').html(' ');
-                } else {
-                    $('#submit').prop('disabled', true);
-                    $('#emailmsg').html('Email  Already Exist');
-                }
-            }
-        });
-    }
 
-    function check_username() {
-        var name = $('#name').val();
-        // alert(name);
-        $.ajax({
-            method: "post",
-            data: {
-                name: name
-            },
-            url: 'home/existusername',
-            success: function(data) {
 
-                if ((data) == "success") {
-                    $("#submit").removeAttr("disabled");
-                    $('#usermsg').html('Username Available');
-                } else {
-                    $('#submit').prop('disabled', true);
-                    $('#usermsg').html('Username Already Exist');
-                }
-            }
-        });
-    }
 
-    function check_mobile() {
-        var mobile = $('#mobile').val();
-
-        $.ajax({
-            method: "post",
-            data: {
-                mobile: mobile
-            },
-            url: 'home/existmobile',
-            success: function(data) {
-                console.log(data);
-                if ((data) == "success") {
-                    $("#submit").removeAttr("disabled");
-                        $('#mobilemsg').html(' ');
-                    // $('#mobilemsg').html('Username Available');
-                } else {
-                    $('#submit').prop('disabled', true);
-                    $('#mobilemsg').html('Mobile number Already Exist');
-                }
-            }
-        });
-    }
 
 </script>
 </html>
