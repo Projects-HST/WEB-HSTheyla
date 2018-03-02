@@ -143,18 +143,18 @@ class Eventlist extends CI_Controller
 		
 		$user_id = $this->input->post('user_id');
 		if($user_id!=''){
-		$order_id = $randomNumber."-".$user_id;
-		$event_id  = $this->input->post('event_id');
-		$plan_id  = $this->input->post('plan_id');
-		$plan_time_id  = $this->input->post('plantime_id');
-		$number_of_seats  = $this->input->post('no_seats');
-		$total_amount  = $this->input->post('total_amount');
-		$booking_date = $this->input->post('booking_date');
-		
-		$data['booking_process'] = $this->eventlistmodel->booking_process($order_id,$event_id,$plan_id,$plan_time_id,$user_id,$number_of_seats,$total_amount,$booking_date);
-		$this->load->view('front_header');
-		$this->load->view('bookingprocess', $data);
-		$this->load->view('front_footer');
+			$order_id = $randomNumber."-".$user_id;
+			$event_id  = $this->input->post('event_id');
+			$plan_id  = $this->input->post('plan_id');
+			$plan_time_id  = $this->input->post('plantime_id');
+			$number_of_seats  = $this->input->post('no_seats');
+			$total_amount  = $this->input->post('total_amount');
+			$booking_date = $this->input->post('booking_date');
+			
+			$data['booking_process'] = $this->eventlistmodel->booking_process($order_id,$event_id,$plan_id,$plan_time_id,$user_id,$number_of_seats,$total_amount,$booking_date);
+			$this->load->view('front_header');
+			$this->load->view('bookingprocess', $data);
+			$this->load->view('front_footer');
 		}else{
 			redirect('/eventlist/');
 		}
