@@ -142,6 +142,7 @@ class Eventlist extends CI_Controller
 		}
 		
 		$user_id = $this->input->post('user_id');
+		if($user_id!=''){
 		$order_id = $randomNumber."-".$user_id;
 		$event_id  = $this->input->post('event_id');
 		$plan_id  = $this->input->post('plan_id');
@@ -154,6 +155,9 @@ class Eventlist extends CI_Controller
 		$this->load->view('front_header');
 		$this->load->view('bookingprocess', $data);
 		$this->load->view('front_footer');
+		}else{
+			redirect('/eventlist/');
+		}
     }
 	
 }
