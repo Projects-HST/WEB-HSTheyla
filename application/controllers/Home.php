@@ -82,7 +82,7 @@ class Home extends CI_Controller {
 		$this->load->view('events', $datas);
 		$this->load->view('front_footer');
 	}
-	
+
 	public function eventdetails()
 	{
 		$datas=$this->session->userdata();
@@ -124,6 +124,22 @@ class Home extends CI_Controller {
 	}else{
 		redirect('/');
 	}
+}
+
+	public function attendees()
+	{
+
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
+		$user_role=$this->session->userdata('user_role');
+		if($user_role==3 || $user_role==2){
+		//$datas['user_points'] = $this->loginmodel->get_points($user_id);
+		$this->load->view('front_header');
+		$this->load->view('attendees');
+		$this->load->view('front_footer');
+	}else{
+		redirect('/');
+	}
 
 
 	}
@@ -148,12 +164,12 @@ class Home extends CI_Controller {
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
-		
+
 		$datas['res']=$this->loginmodel->getuserinfo($user_id);
 		$datas['country_list'] = $this->organizermodel->get_country();
 		$datas['category_list'] = $this->organizermodel->get_category();
-		
-		
+
+
 		if($user_role==2)
 		{
 			$this->load->view('front_header');
@@ -170,7 +186,7 @@ class Home extends CI_Controller {
 	 	$datas = $this->session->userdata();
 	    $user_id = $this->session->userdata('id');
 	    $user_role = $this->session->userdata('user_role');
-		
+
 	    $event_name = $this->db->escape_str($this->input->post('event_name'));
         $category = $this->input->post('category');
         $country = $this->input->post('country');
@@ -207,7 +223,7 @@ class Home extends CI_Controller {
         $colour_scheme = $this->input->post('colour_scheme');
 
         $datas = $this->organizermodel->create_events($event_name,$category,$country,$city,$venue,$address,$description,$eventcost,$start_date,$end_date,$start_time,$end_time,$txtLatitude,$txtLongitude,$pcontact_cell,$scontact_cell,$contact_person,$email,$event_banner,$colour_scheme,$eadv_status,$hotspot_sts,$user_id,$user_role);
-        
+
 		$sta = $datas['status'];
 		redirect('/viewevents');
 	 }
@@ -217,21 +233,21 @@ class Home extends CI_Controller {
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
-		
+
 		$datas['res']=$this->loginmodel->getuserinfo($user_id);
 		$datas['result'] = $this->organizermodel->list_events($user_id);
 		$this->load->view('front_header');
 		$this->load->view('view_event', $datas);
 		$this->load->view('front_footer');
 	}
-	
+
 	public function updateevents($id)
 	 {
 		$id = base64_decode($id);
 	 	$datas = $this->session->userdata();
 	    $user_id = $this->session->userdata('id');
 	    $user_role = $this->session->userdata('user_role');
-		
+
 		$datas['country_list'] = $this->organizermodel->get_country();
 	    $datas['category_list'] = $this->organizermodel->get_category();
 	    $datas['city_list'] = $this->organizermodel->get_city_list();
@@ -246,8 +262,8 @@ class Home extends CI_Controller {
 	 			redirect('/');
 	 		 }
 	 }
-	
-	
+
+
 	 public function updateeventsdetails()
      {
         $datas=$this->session->userdata();
@@ -279,7 +295,7 @@ class Home extends CI_Controller {
         $email=$this->input->post('email');
         $currentcpic=$this->input->post('currentcpic');
         $eventid=$this->input->post('eventid');
-		
+
 		$event_pic      = $_FILES['eventbanner']['name'];
         $temp = pathinfo($event_pic, PATHINFO_EXTENSION);
         $file_name      = time() . rand(1, 5) . rand(6, 10);
@@ -291,10 +307,10 @@ class Home extends CI_Controller {
         $eadv_status=$this->input->post('eadv_status');
 		$booking_sts=$this->input->post('booking_sts');
 		$hotspot_sts=$this->input->post('hotspot_sts');
-		
+
         $colour_scheme=$this->input->post('colour_scheme');
 		$event_status=$this->input->post('event_status');
-          
+
          if(empty($event_pic)){
             $event_banner=$currentcpic;
          }else{
@@ -307,12 +323,12 @@ class Home extends CI_Controller {
          }
 
         $datas=$this->organizermodel->update_events_details($eventid,$event_name,$category,$country,$city,$venue,$address,$description,$eventcost,$start_date,$end_date,$start_time,$end_time,$txtLatitude,$txtLongitude,$pcontact_cell,$scontact_cell,$contact_person,$email,$event_banner,$colour_scheme,$event_status,$eadv_status,$booking_sts,$hotspot_sts,$user_id,$user_role);
-		
+
         	$sta=$datas['status'];
 		   redirect('/viewevents');
      }
-	
-	
+
+
 	public function bookedevents()
 	{
 		$datas=$this->session->userdata();
@@ -320,7 +336,7 @@ class Home extends CI_Controller {
 		$user_role=$this->session->userdata('user_role');
 		$datas['res']=$this->loginmodel->getuserinfo($user_id);
 		$datas['view'] = $this->organizerbookingmodel->get_all_booking_details($user_id);
-			
+
 		$this->load->view('front_header');
 		$this->load->view('booked_events', $datas);
 		$this->load->view('front_footer');
@@ -369,9 +385,9 @@ class Home extends CI_Controller {
 		  $this->load->view('event_attendees',$datas);
 		  $this->load->view('front_footer');
 		 }
-	 
-	 
-	 	
+
+
+
 	 public function insertattendees()
      {
         $datas=$this->session->userdata();
@@ -390,8 +406,8 @@ class Home extends CI_Controller {
 		}
 		 	redirect('/eventlist');
      }
-	 
-	 
+
+
 	public function home()
 	{
 		$this->load->library('facebook');

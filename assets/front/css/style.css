@@ -640,6 +640,17 @@ a.btn.btn-login.btn-primary.btn-block.review-btn{
   height:310px;
 
 }
+.attendees-bg{
+  background: url("../images/attendees-bg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  height:310px;
+
+}
 .leader-title{
   justify-content: center;
   position: relative;
@@ -711,6 +722,32 @@ a.btn.btn-login.btn-primary.btn-block.review-btn{
 }
 .leaderboard-widgets{
   margin-top: 35px;
+}
+
+
+.add-attendees{
+  text-align: center;
+  margin-top: 70px;
+  font-size: 32px;
+  color: #fff;
+}
+.attendees-form{
+    background: #fff;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 150px;
+}
+.label-form{
+  justify-content: start !important;
+}
+.booking_process_page{
+  background-color: #fff;
+  margin-top: 50px;
+  padding: 20px;
+}
+.confirm_process{
+  text-align: center;
+  padding: 10px;
 }
 /* Ipad */
 @media (min-width: 768px) and (max-width: 1024px){

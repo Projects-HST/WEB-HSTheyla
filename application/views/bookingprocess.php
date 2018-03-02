@@ -1,12 +1,14 @@
-<?php 
+<?php
 $user_id = $this->session->userdata('id'); ?>
-<div class="container-fluid eventlist-pge">
-   <div class="container" style="min-height:400px;">
+<div class="container-fluid">
+
+   <div class="container" style="">
+<div class="booking_process_page">
 		<?php foreach($booking_process as $res){ } ?>
-        <table width="100%" border="0" cellpadding="3" cellspacing="3">
+        <table width="100%" border="0" cellpadding="3" cellspacing="3" align="center" style="margin: 0px auto;">
           <tr>
-            <td width="50%">Order Id</td>
-            <td width="50%"><?php echo $res->order_id;?></td>
+            <td width="">Order Id</td>
+            <td width=""><?php echo $res->order_id;?></td>
           </tr>
           <tr>
             <td>Event Name</td>
@@ -45,7 +47,7 @@ $user_id = $this->session->userdata('id'); ?>
             <td><?php echo $res->total_amount;?></td>
           </tr>
               </table>
-              <form method="post" name="customerData" action="http://hobbistan.com/web/ccavenue/ccavRequestHandler.php">
+              <form method="post" name="customerData"  class="confirm_process" action="http://hobbistan.com/web/ccavenue/ccavRequestHandler.php">
                     <input type="hidden" name="merchant_id" value="89958"/>
                     <input type="hidden" name="order_id" value="<?php echo $res->order_id;?>"/>
                     <input type="hidden" name="amount" value="<?php echo $res->total_amount;?>"/>
@@ -53,7 +55,7 @@ $user_id = $this->session->userdata('id'); ?>
                     <input type="hidden" name="redirect_url" value="http://hobbistan.com/web/ccavenue/ccavResponseHandler.php"/>
                     <input type="hidden" name="cancel_url" value="http://heylaapp.com/heylav2/eventlist/"/>
                     <input type="hidden" name="language" value="EN"/>
-                    <INPUT type="submit" value="CheckOut">
+                    <INPUT type="submit" value="CheckOut" class="btn  btn-primary">
             </form>
 <!--
 				<tr>
@@ -131,3 +133,15 @@ $user_id = $this->session->userdata('id'); ?>
 -->
 </div>
 </div>
+</div>
+<style>
+#stickfooter{
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+}
+body{
+  background-color:  #eeeeee;
+
+}
+</style>
