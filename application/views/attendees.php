@@ -49,11 +49,7 @@
 
 </div>
 <style>
-#stickfooter{
-  position: absolute;
-  width: 100%;
-  bottom: 0px;
-}
+
 
 label {
   margin-bottom: 0;

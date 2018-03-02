@@ -1,10 +1,10 @@
  <?php
         foreach($seats as $rows) {
          $number_of_seats = $rows->number_of_seats;
-         $order_id = $rows->order_id; 
-         $name = $rows->name; 
-         $email_id = $rows->email_id; 
-         $mobile_no = $rows->mobile_no; 
+         $order_id = $rows->order_id;
+         $name = $rows->name;
+         $email_id = $rows->email_id;
+         $mobile_no = $rows->mobile_no;
         }
 ?>
 <div class="container-fluid page-bg">
@@ -16,10 +16,10 @@
       <div class="container attendees-form">
     <div class="row">
       <div class="col-md-12">
-       
+
         <form id="attendees" name="attendees" class="form-inline" method="post" action="<?php echo base_url(); ?>home/insertattendees" onsubmit="return check();">
-        
-        
+
+
          <?php
                 for ($i=1; $i < $number_of_seats+1; $i++) {
                     if ($i=='1'){
@@ -74,7 +74,7 @@
 </div>
 <style>
 #stickfooter{
-  position: absolute;
+  position: fixed;
   width: 100%;
   bottom: 0px;
 }
@@ -105,7 +105,7 @@ function check()
 	myArrayName=new Array();
 	for(i=0;i<count;i++)
 	{
-		
+
 		elmName=("name"+(i+1));
 		myArrayName[i]=document.attendees.elements[elmName].value;
 
