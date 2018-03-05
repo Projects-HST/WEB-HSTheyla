@@ -178,22 +178,25 @@ $('#category').select2({
 
 
 
+$( document ).ready(function() {
+  var limit = 9
+    var offset = 0;
+  var result = '';
 
-                     var limit = 9
-                       var offset = 0;
-                     var result = '';
+        // start to load the first set of data
+        displayEvents(limit, offset);
 
-                           // start to load the first set of data
-                           displayEvents(limit, offset);
+        $('#loader_message').click(function() {
+          // if it has no more records no need to fire ajax request
+          var d = $('#loader_message').find("button").attr("data-atr");
+          if (d != "nodata") {
+            offset = limit + offset;
+            displayEvents(limit, offset);
+          }
+        });
+});
 
-                           $('#loader_message').click(function() {
-                             // if it has no more records no need to fire ajax request
-                             var d = $('#loader_message').find("button").attr("data-atr");
-                             if (d != "nodata") {
-                               offset = limit + offset;
-                               displayEvents(limit, offset);
-                             }
-                           });
+
 
 
 
@@ -239,7 +242,7 @@ function displayEvents(lim, off) {
 					 var wishliststatus="<span class='pull-right favourite-icon' id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-select.png' alt=''></a></span>";
 				}
 
-				result +="<div class='col-md-4 event-thumb'><div class='card event-card'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img class='img-fluid event-banner-img' src='<?php echo base_url(); ?>assets/events/banner/"+event_banner+"' alt='' ></a><div class='card-img-overlay'><span class='badge badge-pill badge-danger'>"+event_type+"</span></div><div class='card-body'><p class='card-text'><small class='text-time'><p>"+disp_date+", "+start_time+"<?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></small></p><div class='news-title'><p class=' title-small event-title-list'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></div><p class='card-text'><small class='text-time'><em>"+country_name+", "+city_name+"</em></small></p></div></div></div>";
+				var result ="<div class='col-md-4 event-thumb'><div class='card event-card'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img class='img-fluid event-banner-img' src='<?php echo base_url(); ?>assets/events/banner/"+event_banner+"' alt='' ></a><div class='card-img-overlay'><span class='badge badge-pill badge-danger'>"+event_type+"</span></div><div class='card-body'><p class='card-text'><small class='text-time'><p>"+disp_date+", "+start_time+"<?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></small></p><div class='news-title'><p class=' title-small event-title-list'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></div><p class='card-text'><small class='text-time'><em>"+country_name+", "+city_name+"</em></small></p></div></div></div>";
 
 			};
 				$("#event_list").html(result);
