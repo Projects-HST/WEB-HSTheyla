@@ -358,7 +358,7 @@ class Home extends CI_Controller {
 			redirect('/');
 		}
 	}
-	
+
 	public function user_booking_history($order_id)
 	{
 		//echo $order_id;
@@ -374,7 +374,7 @@ class Home extends CI_Controller {
 			redirect('/');
 		}
 	}
-	
+
 	public function wishlist()
 	{
 		$datas=$this->session->userdata();
@@ -704,8 +704,8 @@ class Home extends CI_Controller {
 			$name=$this->db->escape_str($this->input->post('name'));
 			$email=$this->db->escape_str($this->input->post('email'));
 			$mobile=$this->db->escape_str($this->input->post('mobile'));
-			$to="hello@heylaapp.com,kamal.happysanz@gmail.com";
-			$subject="Contact Form Enquiry";
+			$to="hello@heylaapp.com,ganesh.happysanz@gmail.com,kamal.happysanz@gmail.com";
+			$subject="Organiser Enquiry form";
 			$htmlContent = '
 			 <html>
 			 <head>

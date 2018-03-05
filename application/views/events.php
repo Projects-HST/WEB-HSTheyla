@@ -1,9 +1,13 @@
 <?php $user_id = $this->session->userdata('id'); ?>
+<script src="<?php echo base_url(); ?>assets/front/js/jquery-ui.js"></script>
+<script src="<?php echo base_url(); ?>assets/front/js/multiselect.js"></script>
 
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/jquery-ui.css">
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/multiselect.css">
-<script src="<?php echo base_url(); ?>assets/front/js/jquery-ui.js"></script>
-<script src="<?php echo base_url(); ?>assets/front/js/multiselect.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+
+
 <div class="container-fluid eventlist-pge">
    <div class="container">
    <?php if (count($adv_event_result)>0){ ?>
@@ -56,14 +60,25 @@
             <div class="col-md-3">
                <b>Category</b>
                <br>
-               <select id="category" multiple="multiple" name="catname[]" onchange="getevents()">
+               <!-- <select id="category" multiple="multiple" name="catname[]" onchange="getevents()">
                   <?php foreach($category_list as $res){ ?>
                   <option value="
                      <?php echo $res->id; ?>">
                      <?php echo $res->category_name; ?>
                   </option>
                   <?php } ?>
-               </select>
+               </select> -->
+               <select id="category" size="3" onchange="getevents()">
+                 <?php foreach($category_list as $res){ ?>
+                 <option value="
+                    <?php echo $res->id; ?>">
+                    <?php echo $res->category_name; ?>
+                 </option>
+                 <?php } ?>
+</select>
+
+
+
             </div>
       </form>
       <div class="col-md-5">
@@ -76,14 +91,14 @@
       <button class="btn btn-info btn-login" type="button" onclick="searchevents()">
       <i class="fas fa-search"></i>
       </button>
-      
+
       </div>
       </div>
       </form>
       </div>
       </div>
 
-      
+
       <p class="upcoming-event-heading">Upcoming Events</p>
       <br>
       <div class="row" id="event_list">
@@ -93,7 +108,7 @@
    </div>
 </div>
 
-        
+
 
 
 <style>
@@ -101,6 +116,18 @@
 	float: right;
 	border-radius: 0px;
 	padding: 5px 5px 5px 5px;
+}
+#event_list{
+  height: 100vh;
+
+}
+body{
+  background-color: #eae7e7;
+}
+.footer{
+  position: fixed;
+  width: 100%;
+  bottom: 0px;
 }
 /* .carousel-indicators{
 position: absolute;
@@ -123,36 +150,58 @@ position: absolute;
 .card-body{
   padding-top: 0px;
 }
+
+.select2{
+width: 250px !important;
+}
+.select2-selection__rendered{
+  font-size: 12px;
+}
+
+
 </style>
 <script>
 
-$('#category').multiselect();
+// $('#category').multiselect();
 		$('.carousel').carousel({
 		interval:6000,
 		pause: "false"
-})
+});
 
-	var limit = 9
-   	var offset = 0;
-	var result = '';
-      $(document).ready(function() {
-        // start to load the first set of data
-        displayEvents(limit, offset);
 
-        $('#loader_message').click(function() {
-          // if it has no more records no need to fire ajax request
-          var d = $('#loader_message').find("button").attr("data-atr");
-          if (d != "nodata") {
-            offset = limit + offset;
-            displayEvents(limit, offset);
-          }
-        });
+$('#category').select2({
+    "placeholder": "Select Category",
+        "multiple": true
+});
 
-      });
+
+
+
+
+
+                     var limit = 9
+                       var offset = 0;
+                     var result = '';
+
+                           // start to load the first set of data
+                           displayEvents(limit, offset);
+
+                           $('#loader_message').click(function() {
+                             // if it has no more records no need to fire ajax request
+                             var d = $('#loader_message').find("button").attr("data-atr");
+                             if (d != "nodata") {
+                               offset = limit + offset;
+                               displayEvents(limit, offset);
+                             }
+                           });
+
+
+
+
 
 
 function displayEvents(lim, off) {
-		
+
         $.ajax({
 		url: '<?php echo base_url(); ?>eventlist/get_all_events',
 		type: 'POST',
@@ -165,7 +214,7 @@ function displayEvents(lim, off) {
         success: function(html) {
             $('#loader_image').hide();
 			var dataArray = JSON.parse(html);
-			
+
 		if (dataArray.length>0) {
 			for (var i = 0; i < dataArray.length; i++){
 				var disp_event_id = dataArray[i].id;
@@ -189,16 +238,16 @@ function displayEvents(lim, off) {
 				}else{
 					 var wishliststatus="<span class='pull-right favourite-icon' id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-select.png' alt=''></a></span>";
 				}
-				
+
 				result +="<div class='col-md-4 event-thumb'><div class='card event-card'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img class='img-fluid event-banner-img' src='<?php echo base_url(); ?>assets/events/banner/"+event_banner+"' alt='' ></a><div class='card-img-overlay'><span class='badge badge-pill badge-danger'>"+event_type+"</span></div><div class='card-body'><p class='card-text'><small class='text-time'><p>"+disp_date+", "+start_time+"<?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></small></p><div class='news-title'><p class=' title-small event-title-list'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></div><p class='card-text'><small class='text-time'><em>"+country_name+", "+city_name+"</em></small></p></div></div></div>";
-				
+
 			};
 				$("#event_list").html(result);
 			}
-			
+
             if (dataArray.length>0) {
 			$("#loader_message").html('<button class="btn btn-default" type="button">Load more data</button>').show();
-              
+
             } else {
              $("#loader_message").html('<button data-atr="nodata" class="btn btn-default" type="button">No more records.</button>').show()
             }
@@ -242,15 +291,15 @@ function getevents()
 				var sdate = String (date);
 				var disp_date = sdate.replace('05:30:00 GMT+0530 (India Standard Time)', '');
 				var wlstatus = dataArray[i].wlstatus;
-				
+
 				if(wlstatus==null){
 					 var wishliststatus="<span class='pull-right favourite-icon' id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' alt=''><a></span>";
 				}else{
 					 var wishliststatus="<span class='pull-right favourite-icon' id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-select.png' alt=''></a></span>";
 				}
-				
+
 				result +="<div class='col-md-4 event-thumb'><div class='card event-card'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img class='img-fluid event-banner-img' src='<?php echo base_url(); ?>assets/events/banner/"+event_banner+"' alt='' ></a><div class='card-img-overlay'><span class='badge badge-pill badge-danger'>"+event_type+"</span></div><div class='card-body'><p class='card-text'><small class='text-time'><p>"+disp_date+", "+start_time+"<?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></small></p><div class='news-title'><p class=' title-small event-title-list'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></div><p class='card-text'><small class='text-time'><em>"+country_name+", "+city_name+"</em></small></p></div></div></div>";
-			  
+
 			};
 			$('#loader_message').hide();
 			 $("#event_list").html(result).show();
@@ -293,16 +342,16 @@ function searchevents()
 				var sdate = String (date);
 				var disp_date = sdate.replace('05:30:00 GMT+0530 (India Standard Time)', '');
 				var wlstatus = dataArray[i].wlstatus;
-				
+
 				if(wlstatus==null){
 					 var wishliststatus="<span class='pull-right favourite-icon' id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' alt=''><a></span>";
 				}else{
 					 var wishliststatus="<span class='pull-right favourite-icon' id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-select.png' alt=''></a></span>";
 				}
-				
+
 				result +="<div class='col-md-4 event-thumb'><div class='card event-card'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img class='img-fluid event-banner-img' src='<?php echo base_url(); ?>assets/events/banner/"+event_banner+"' alt='' ></a><div class='card-img-overlay'><span class='badge badge-pill badge-danger'>"+event_type+"</span></div><div class='card-body'><p class='card-text'><small class='text-time'><p>"+disp_date+", "+start_time+"<?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></small></p><div class='news-title'><p class=' title-small event-title-list'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></div><p class='card-text'><small class='text-time'><em>"+country_name+", "+city_name+"</em></small></p></div></div></div>";
 			};
-			
+
 			$('#loader_message').hide();
 			$("#event_list").html(result).show();
 		} else {
@@ -365,7 +414,7 @@ function getcityname(cid) {
 }
 
 $( function() {
-    var availableTags = [<?php 
+    var availableTags = [<?php
 	 $tot_count = count($event_resu);
 	 $i = 1;
 		foreach($event_resu as $res){
@@ -377,5 +426,5 @@ $( function() {
     $( "#search_term" ).autocomplete({
       source: availableTags
     });
-  } ); 
+  } );
 </script>

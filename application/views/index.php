@@ -81,11 +81,11 @@
                         $user_role=$this->session->userdata('user_role');
                      if($user_role=='2'){ ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo  base_url(); ?>dashboard">Create Event</a>
+                        <a class="nav-link" href="<?php echo  base_url(); ?>createevent">Create Event</a>
                     </li>
                     <?php }else{ ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="#create">Create Event</a>
+                        <a class="nav-link" href="#create">Organiser</a>
                     </li>
                     <?php } ?>
                     <li class="nav-item">
