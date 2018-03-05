@@ -1,13 +1,9 @@
 <?php $user_id = $this->session->userdata('id'); ?>
-<script src="<?php echo base_url(); ?>assets/front/js/jquery-ui.js"></script>
-<!-- <script src="<?php echo base_url(); ?>assets/front/js/multiselect.js"></script> -->
 
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/jquery-ui.css">
-<!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/multiselect.css"> -->
-<link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/select2.min.css">
-<script src="<?php echo base_url(); ?>assets/front/js/select2.min.js"></script>
-
-
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/multiselect.css">
+<script src="<?php echo base_url(); ?>assets/front/js/jquery-ui.js"></script>
+<script src="<?php echo base_url(); ?>assets/front/js/multiselect.js"></script>
 <div class="container-fluid eventlist-pge">
    <div class="container">
    <?php if (count($adv_event_result)>0){ ?>
@@ -60,25 +56,14 @@
             <div class="col-md-3">
                <b>Category</b>
                <br>
-               <!-- <select id="category" multiple="multiple" name="catname[]" onchange="getevents()">
+               <select id="category" multiple="multiple" name="catname[]" onchange="getevents()">
                   <?php foreach($category_list as $res){ ?>
                   <option value="
                      <?php echo $res->id; ?>">
                      <?php echo $res->category_name; ?>
                   </option>
                   <?php } ?>
-               </select> -->
-               <select id="category" size="3" onchange="getevents()">
-                 <?php foreach($category_list as $res){ ?>
-                 <option value="
-                    <?php echo $res->id; ?>">
-                    <?php echo $res->category_name; ?>
-                 </option>
-                 <?php } ?>
-</select>
-
-
-
+               </select>
             </div>
       </form>
       <div class="col-md-5">
@@ -117,18 +102,7 @@
 	border-radius: 0px;
 	padding: 5px 5px 5px 5px;
 }
-#event_list{
-  height: 100vh;
 
-}
-body{
-  background-color: #eae7e7;
-}
-.footer{
-  position: fixed;
-  width: 100%;
-  bottom: 0px;
-}
 /* .carousel-indicators{
 position: absolute;
 } */
@@ -150,39 +124,19 @@ position: absolute;
 .card-body{
   padding-top: 0px;
 }
-
-.select2{
-width: 250px !important;
-}
-.select2-selection__rendered{
-  font-size: 12px;
-}
-
-
 </style>
 <script>
 
-// $('#category').multiselect();
+$('#category').multiselect();
 		$('.carousel').carousel({
 		interval:6000,
 		pause: "false"
-});
+})
 
-
-$('#category').select2({
-    "placeholder": "Select Category",
-        "multiple": true
-});
-
-
-
-
-
-$( document ).ready(function() {
-  var limit = 9
-    var offset = 0;
-  var result = '';
-
+	var limit = 9
+   	var offset = 0;
+	var result = '';
+      $(document).ready(function() {
         // start to load the first set of data
         displayEvents(limit, offset);
 
@@ -194,13 +148,8 @@ $( document ).ready(function() {
             displayEvents(limit, offset);
           }
         });
-});
 
-
-
-
-
-
+      });
 
 
 function displayEvents(lim, off) {
@@ -242,7 +191,7 @@ function displayEvents(lim, off) {
 					 var wishliststatus="<span class='pull-right favourite-icon' id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-select.png' alt=''></a></span>";
 				}
 
-				var result ="<div class='col-md-4 event-thumb'><div class='card event-card'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img class='img-fluid event-banner-img' src='<?php echo base_url(); ?>assets/events/banner/"+event_banner+"' alt='' ></a><div class='card-img-overlay'><span class='badge badge-pill badge-danger'>"+event_type+"</span></div><div class='card-body'><p class='card-text'><small class='text-time'><p>"+disp_date+", "+start_time+"<?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></small></p><div class='news-title'><p class=' title-small event-title-list'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></div><p class='card-text'><small class='text-time'><em>"+country_name+", "+city_name+"</em></small></p></div></div></div>";
+				result +="<div class='col-md-4 event-thumb'><div class='card event-card'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img class='img-fluid event-banner-img' src='<?php echo base_url(); ?>assets/events/banner/"+event_banner+"' alt='' ></a><div class='card-img-overlay'><span class='badge badge-pill badge-danger'>"+event_type+"</span></div><div class='card-body'><p class='card-text'><small class='text-time'><p>"+disp_date+", "+start_time+"<?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></small></p><div class='news-title'><p class=' title-small event-title-list'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></div><p class='card-text'><small class='text-time'><em>"+country_name+", "+city_name+"</em></small></p></div></div></div>";
 
 			};
 				$("#event_list").html(result);
