@@ -1,11 +1,11 @@
 <?php $user_id = $this->session->userdata('id'); ?>
 <script src="<?php echo base_url(); ?>assets/front/js/jquery-ui.js"></script>
-<script src="<?php echo base_url(); ?>assets/front/js/multiselect.js"></script>
+<!-- <script src="<?php echo base_url(); ?>assets/front/js/multiselect.js"></script> -->
 
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/jquery-ui.css">
-<link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/multiselect.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+<!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/multiselect.css"> -->
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/select2.min.css">
+<script src="<?php echo base_url(); ?>assets/front/js/select2.min.js"></script>
 
 
 <div class="container-fluid eventlist-pge">
