@@ -63,8 +63,8 @@
 				  <li><a href="https://plus.google.com/share?url=<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/" onclick="sharepoints(<?php echo $user_id; ?> ,<?php echo $disp_event_id; ?>)" target="_blank" title="Share on Google+"><img alt="Share on Google+" src="<?php echo base_url(); ?>assets/images/Google+.svg" /></a></li>
 				</ul>
                 <?php } ?>
-			 <!--<p><a class="btn btn-login btn-primary btn-block review-btn" data-toggle="modal" data-target="#myModal" data-original-title>Wite a  Review</a> </p>-->
-  </p>
+			 <p><a class="btn btn-login btn-primary btn-block review-btn" data-toggle="modal" data-target="#myModal" data-original-title>Wite a  Review</a> </p>
+
 			</div>
 		</section>
 		<section class="row">
@@ -73,44 +73,58 @@
 				<div id="map" class="map"></div>
 			</div>
 		</section>
-		
+        
+ 		<section class="row">
+			<div class="col-md-12">
+				<p class="event-desc">User Reviews</p>
+				
+			</div>
+		</section>
+        
 		<div class="modal fade modal-lg " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
 		<div class="modal-dialog">
 		<div class="modal-content">
 		<div class="modal-header">
-			<h4 class="modal-title">Write Review about the Event</h4>
+			<h4 class="modal-title">Write Review</h4>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		</div>
 		<div class="modal-body">
 			<center>
-				<form class="form" role="form" autocomplete="off">
+            <form name="frmReview" id="" action="#" method="post" enctype="multipart/form-data" class="form" autocomplete="off" >
 					<div class="form-group row">
-						<div class="col-lg-12">
+					<div class="col-lg-12">
 							<div class="rating">
 								<span class="user-rating">
-								<input type="radio" name="rating" value="5"><span class="star"></span>
-								<input type="radio" name="rating" value="4"><span class="star"></span>
-								<input type="radio" name="rating" value="3"><span class="star"></span>
-								<input type="radio" name="rating" value="2"><span class="star"></span>
-								<input type="radio" name="rating" value="1"><span class="star"></span>
+								<input type="radio" name="rating" id="rating" value="5"><span class="star"></span>
+								<input type="radio" name="rating" id="rating" value="4"><span class="star"></span>
+								<input type="radio" name="rating" id="rating" value="3"><span class="star"></span>
+								<input type="radio" name="rating" id="rating" value="2"><span class="star"></span>
+								<input type="radio" name="rating"id="rating"  value="1"><span class="star"></span>
 								</span>
 							</div>
 						</div>
 					</div>
 					<div class="form-group row">
 						<div class="col-lg-12">
-							<textarea type="text" value="" placeholder="Message" class="form-control"></textarea>
+							<textarea type="text" name="message" id="message" placeholder="Message" class="form-control"></textarea>
 						</div>
 					</div>
+                    <div class="form-group row">
+						<div class="col-lg-12">
+                        <input type="file" name="reviewimage" id="reviewimage" class="form-control" accept="image/*" >
+						</div>
+					</div>
+                    <!--
 					<div class="form-group row">
 						<div class="col-lg-12">
 							<div class="g-recaptcha " data-sitekey="6Lf_tUYUAAAAAFhSWPgXhaoCJ-Zlr8ax4rLo-cxE"></div>
 						</div>
 					</div>
-
+					-->
 					<div class="form-group row">
 						<div class="col-lg-12">
-							<input type="submit" value="Submit Review" placeholder="Message" class="btn btn-primary btn-login">
+                        	<input type="hidden" name="event_id" id="event_id" value="<?php echo $disp_event_id; ?>" />
+							<input type="button" id="upload" value="Submit Review" placeholder="Message" class="btn btn-primary btn-login">
 						</div>
 					</div>
 				</form>
@@ -237,27 +251,56 @@ span.fa.fa-star.checked{
 }
 </style>
 <script>
-$('#user-rating-form').on('change','[name="rating"]',function(){
-	$('#selected-rating').text($('[name="rating"]:checked').val());
-});
-    $('.carousel').carousel({
-      interval:4000,
-      pause: "false"
-  })
-
-function sharepoints(user_id,event_id)
-{
-	//make the ajax call
-	$.ajax({
-	url: '<?php echo base_url(); ?>eventlist/eventsharing',
-	type: 'POST',
-	data: {user_id : user_id,event_id : event_id},
-	success: function(data) {
-		var dataArray = JSON.parse(data);
-		
-	}
+	$('#user-rating-form').on('change','[name="rating"]',function(){
+		$('#selected-rating').text($('[name="rating"]:checked').val());
 	});
-}
+	
+	$('.carousel').carousel({
+		  interval:4000,
+		  pause: "false"
+	})
+
+	function sharepoints(user_id,event_id)
+	{
+		//make the ajax call
+		$.ajax({
+		url: '<?php echo base_url(); ?>eventlist/eventsharing',
+		type: 'POST',
+		data: {user_id : user_id,event_id : event_id},
+		success: function(data) {
+			var dataArray = JSON.parse(data);
+			
+		}
+		});
+	}
+
+	$('#upload').on('click', function() {
+		
+		var rating=$('#rating').val();
+		var message=$('#message').val();
+		var event_id=$('#event_id').val();
+        var file_data = $('#reviewimage').prop('files')[0];
+        var form_data = new FormData();
+        form_data.append('reviewimage', file_data);
+		form_data.append('rating', rating);
+		form_data.append('message', message);
+		form_data.append('event_id', event_id);
+	
+        $.ajax({
+                url         : '<?php echo base_url(); ?>eventlist/addreview',     // point to server-side PHP script 
+                dataType    : 'text',           // what to expect back from the PHP script, if anything
+                cache       : false,
+                contentType : false,
+                processData : false,
+                data        : form_data,                         
+                type        : 'post',
+                success     : function(output){
+                    alert(output);              // display response from the PHP script, if any
+                }
+         });
+         //$('#pic').val('');                     /* Clear the file container */
+    });
+	
 
 function initMap() {
       var uluru = {lat: <?php echo $res->event_latitude; ?>, lng: <?php echo $res->event_longitude; ?>};

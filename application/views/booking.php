@@ -48,8 +48,11 @@
                     		<?php if (!empty($booking_dates)){ ?>
                             <select class="form-control input-lg select_booking" id="show_date" onchange="disp_time()">
                             <option value="">Select Date</option>
-							<?php foreach($booking_dates as $res){ ?>
-                            <option value="<?php echo $res->show_date; ?>"><?php echo $res->show_date; ?></option>
+							<?php foreach($booking_dates as $res){ 
+							$originalDate = $res->show_date;;
+							?>
+                            
+                            <option value="<?php echo $res->show_date; ?>"><?php echo  date("d-m-Y", strtotime($originalDate)) ?></option>
 							<?php } ?>
                             </select>
                             <?php }  else {
@@ -228,7 +231,7 @@ function disp_time()
 		var disp_plan_name=$('#show_plan').val();
 		var disp_plan_rate=$('#seat_rate').val();
 		var no_seats=$('#show_seats').val();
-		var GST = 1;
+		var GST = 0;
 		var total = disp_plan_rate * no_seats;
 		var stotal = total + GST;
 		var disp_total = stotal.toFixed(2);

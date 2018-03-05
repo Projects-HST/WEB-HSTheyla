@@ -160,5 +160,27 @@ class Eventlist extends CI_Controller
 		}
     }
 	
+	public function addreview()
+    {
+		$event_id  = $this->input->post('event_id');
+		$user_id=$this->session->userdata('id');
+		$rating  = $this->input->post('rating');
+		$message  = $this->input->post('message');
+		
+		$review_pic      = $_FILES['reviewimage']['name'];
+        $temp = pathinfo($review_pic, PATHINFO_EXTENSION);
+        $file_name      = time() . rand(1, 5) . rand(6, 10);
+        $review_banner   = $file_name. '.' .$temp;
+        $uploaddir      = 'assets/review/images/';
+        $profilepic     = $uploaddir . $review_banner;
+        move_uploaded_file($_FILES['reviewimage']['tmp_name'], $profilepic);
+		
+		echo "OK";
+	
+        //$data['reviews'] = $this->eventlistmodel->add_review($event_id,$user_id,$rating,$message,$message,$review_banner);
+       // echo json_encode($data['plan_seats']);
+    }
+		
+		
 }
 

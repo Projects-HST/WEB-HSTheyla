@@ -4,7 +4,9 @@ $user_id = $this->session->userdata('id'); ?>
 
    <div class="container" style="">
 <div class="booking_process_page">
-		<?php foreach($booking_process as $res){ } ?>
+		<?php foreach($booking_process as $res){ 
+		$originalDate = $res->show_date;;
+		} ?>
         <table width="100%" border="0" cellpadding="3" cellspacing="3" align="center" style="margin: 0px auto;">
           <tr>
             <td width="">Order Id</td>
@@ -28,7 +30,7 @@ $user_id = $this->session->userdata('id'); ?>
           </tr>
           <tr>
             <td>Event Show date</td>
-            <td><?php echo $res->show_date;?></td>
+            <td><?php echo  date("d-m-Y", strtotime($originalDate)) ?></td>
           </tr>
           <tr>
             <td>Event Show time</td>
