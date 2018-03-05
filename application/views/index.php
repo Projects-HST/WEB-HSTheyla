@@ -159,7 +159,7 @@
                                           <p id="mobilemsg"></p>
                                       </div>
 
-                                      <button type="submit" id="submit" class="btn btn-event btn-lg">Become Organiser</button>
+                                      <button type="submit" id="submit" class="btn btn-event btn-lg">Become an organiser</button>
                                   </form>
                               </div>
                               <!--/card-block-->
@@ -342,7 +342,7 @@
               if($user_role=="2"){ ?>
                   <a href="<?php echo base_url(); ?>organizer/createevents" class="btn btn-event">CREATE EVENT</a>
             <?php   }else{  ?>
-                <a  data-toggle="modal" data-target="#myModal" class="btn btn-event white">CREATE EVENT</a>
+                <a  data-toggle="modal" data-target="#myModal" class="btn btn-event white">Start Now</a>
               <?php }    ?>
 
             </p>
