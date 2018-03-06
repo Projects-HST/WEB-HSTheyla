@@ -46,7 +46,8 @@
 			<?php } ?>
 			</div>
 		</div>
-		<section class="row event-details-desc">
+		
+        <section class="row event-details-desc">
 			<div class="col-md-8">
 				<p class="event-desc">Description</p>
 				<p class="event-desc-details"><?php echo $res->description; ?></p>
@@ -67,20 +68,30 @@
 
 			</div>
 		</section>
-		<section class="row">
+		
+        <section class="row">
 			<div class="col-md-12">
 				<p class="event-desc">Location</p>
 				<div id="map" class="map"></div>
 			</div>
 		</section>
 
- 		<section class="row">
+<?php
+	if (!empty($event_reviews)){
+?>
+ 		<section class="row event-details-desc">
 			<div class="col-md-12">
 				<p class="event-desc">User Reviews</p>
-
 			</div>
+         
+            <?php foreach($event_reviews as $res){ ?>
+            	 <div>
+               		<p><?php echo $res->user_name; ?></p>
+					<p><?php echo $res->comments;?></p>
+				</div>
+			<?php } ?>
 		</section>
-
+<?php } ?>
 		<div class="modal fade modal-lg " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
 		<div class="modal-dialog">
 		<div class="modal-content">
@@ -88,9 +99,9 @@
 			<h4 class="modal-title">Write Review</h4>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		</div>
-		<div class="modal-body">
+		<div class="modal-body" id="modal-body">
 			<center>
-            <form name="frmReview" id="" action="#" method="post" enctype="multipart/form-data" class="form" autocomplete="off" >
+            <form name="frmReview" id="" action="#" method="post" enctype="multipart/form-data" class="form" autocomplete="off">
 					<div class="form-group row">
 					<div class="col-lg-12">
 							<div class="rating">
@@ -109,11 +120,11 @@
 							<textarea type="text" name="message" id="message" placeholder="Message" class="form-control"></textarea>
 						</div>
 					</div>
-                    <div class="form-group row">
+                    <!--<div class="form-group row">
 						<div class="col-lg-12">
                         <input type="file" name="reviewimage" id="reviewimage" class="form-control" accept="image/*" >
 						</div>
-					</div>
+					</div>-->
 					<div class="form-group row">
 						<div class="col-lg-12">
                         	<input type="hidden" name="event_id" id="event_id" value="<?php echo $disp_event_id; ?>" />
@@ -253,7 +264,7 @@ span.fa.fa-star.checked{
 		  pause: "false"
 	})
 
-	function sharepoints(user_id,event_id)
+function sharepoints(user_id,event_id)
 	{
 		//make the ajax call
 		$.ajax({
@@ -262,40 +273,50 @@ span.fa.fa-star.checked{
 		data: {user_id : user_id,event_id : event_id},
 		success: function(data) {
 			var dataArray = JSON.parse(data);
-
 		}
 		});
 	}
 
-	$('#upload').on('click', function() {
-
+$('#upload').on('click', function() {
+		var result = '';
+		var form_data = new FormData();
 		//var rating= $("input[name=rating]").val();
+		//var name = '';
 		var rating=$('input[name=rating]:checked').val();
 		var message=$('#message').val();
 		var event_id=$('#event_id').val();
-		alert(rating);
-        var file_data = $('#reviewimage').prop('files')[0];
-        var form_data = new FormData();
-        form_data.append('reviewimage', file_data);
+		var event_id=$('#event_id').val();
+	
+		if (message == '') {
+			alert("Enter Message");
+			return false;
+		}
+		
 		form_data.append('rating', rating);
 		form_data.append('message', message);
 		form_data.append('event_id', event_id);
-
-        // $.ajax({
-        //         url         : '<?php echo base_url(); ?>eventlist/addreview',     // point to server-side PHP script
-        //         dataType    : 'text',           // what to expect back from the PHP script, if anything
-        //         cache       : false,
-        //         contentType : false,
-        //         processData : false,
-        //         data        : form_data,
-        //         type        : 'post',
-        //         success     : function(output){
-        //             alert(output);              // display response from the PHP script, if any
-        //         }
-        //  });
-         //$('#pic').val('');                     /* Clear the file container */
+		//alert(form_data);
+         $.ajax({
+                 url         : '<?php echo base_url(); ?>eventlist/addreview',     // point to server-side PHP script
+                 dataType    : 'text',           // what to expect back from the PHP script, if anything
+                 cache       : false,
+                 contentType : false,
+                 processData : false,
+                 data        : form_data,
+                 type        : 'post',
+                 success     : function(result){
+					 if (result=='OK'){
+						  swal({
+							title: "success",
+							text: " Review Added.",
+							type: "success"
+							}).then(function() {
+							location.reload();
+							});
+					 } 
+                }
+          });
     });
-
 
 function initMap() {
       var uluru = {lat: <?php echo $res->event_latitude; ?>, lng: <?php echo $res->event_longitude; ?>};

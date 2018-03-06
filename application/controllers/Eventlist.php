@@ -62,6 +62,7 @@ class Eventlist extends CI_Controller
 		$event_id = ($dec_event_id/564738);
 		$data['event_gallery'] = $this->eventlistmodel->getevent_gallery($event_id);
 		$data['event_details'] = $this->eventlistmodel->getevent_details($event_id);
+		$data['event_reviews'] = $this->eventlistmodel->getevent_reviews($event_id);
 		$this->load->view('front_header');
 		$this->load->view('eventdetails', $data);
 		$this->load->view('front_footer');
@@ -164,21 +165,30 @@ class Eventlist extends CI_Controller
     {
 		$event_id  = $this->input->post('event_id');
 		$user_id = $this->session->userdata('id');
-		echo $rating  = $this->input->post('rating');
+		$rating  = $this->input->post('rating');
 		$message  = $this->input->post('message');
+		$data['reviews'] = $this->eventlistmodel->add_review($event_id,$user_id,$rating,$message);
+		echo "OK";
 		
-		$review_pic      = $_FILES['reviewimage']['name'];
-        $temp = pathinfo($review_pic, PATHINFO_EXTENSION);
-        $file_name      = time() . rand(1, 5) . rand(6, 10);
-        $review_banner   = $file_name. '.' .$temp;
-        $uploaddir      = 'assets/review/images/';
-        $profilepic     = $uploaddir . $review_banner;
-       // move_uploaded_file($_FILES['reviewimage']['tmp_name'], $profilepic);
+		/*
+		$sreviewimage  = $_FILES['reviewimage']['name'];
+		echo $sreviewimage;
 		
-		//echo "OK";
-	
-        //$data['reviews'] = $this->eventlistmodel->add_review($event_id,$user_id,$rating,$message,$message,$review_banner);
-       // echo json_encode($data['plan_seats']);
+		if($_FILES['reviewimage']['name']!='') {
+			$review_pic = $_FILES['reviewimage']['name'];
+			$temp = pathinfo($review_pic, PATHINFO_EXTENSION);
+			$file_name      = time() . rand(1, 5) . rand(6, 10);
+			$review_banner   = $file_name. '.' .$temp;
+			$uploaddir      = 'assets/review/images/';
+			$profilepic     = $uploaddir . $review_banner;
+			move_uploaded_file($_FILES['reviewimage']['tmp_name'], $profilepic);
+			$data['reviews'] = $this->eventlistmodel->add_review($event_id,$user_id,$rating,$message,$review_banner);   
+		} else {
+			$review_banner ="";
+			$data['reviews'] = $this->eventlistmodel->add_review($event_id,$user_id,$rating,$message,$review_banner); 
+		}
+       	echo json_encode($data['reviews']);
+		*/
     }
 		
 		
