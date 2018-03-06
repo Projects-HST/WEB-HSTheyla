@@ -95,11 +95,11 @@
 					<div class="col-lg-12">
 							<div class="rating">
 								<span class="user-rating">
-								<input type="radio" name="rating" id="rating" value="5"><span class="star"></span>
-								<input type="radio" name="rating" id="rating" value="4"><span class="star"></span>
-								<input type="radio" name="rating" id="rating" value="3"><span class="star"></span>
+								<input type="radio" name="rating" id="rating" value="1"><span class="star"></span>
 								<input type="radio" name="rating" id="rating" value="2"><span class="star"></span>
-								<input type="radio" name="rating"id="rating"  value="1"><span class="star"></span>
+								<input type="radio" name="rating" id="rating" value="3"><span class="star"></span>
+								<input type="radio" name="rating" id="rating" value="4"><span class="star"></span>
+								<input type="radio" name="rating"id="rating"  value="5"><span class="star"></span>
 								</span>
 							</div>
 						</div>
@@ -114,13 +114,6 @@
                         <input type="file" name="reviewimage" id="reviewimage" class="form-control" accept="image/*" >
 						</div>
 					</div>
-                    <!--
-					<div class="form-group row">
-						<div class="col-lg-12">
-							<div class="g-recaptcha " data-sitekey="6Lf_tUYUAAAAAFhSWPgXhaoCJ-Zlr8ax4rLo-cxE"></div>
-						</div>
-					</div>
-					-->
 					<div class="form-group row">
 						<div class="col-lg-12">
                         	<input type="hidden" name="event_id" id="event_id" value="<?php echo $disp_event_id; ?>" />
