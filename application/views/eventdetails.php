@@ -73,14 +73,14 @@
 				<div id="map" class="map"></div>
 			</div>
 		</section>
-        
+
  		<section class="row">
 			<div class="col-md-12">
 				<p class="event-desc">User Reviews</p>
-				
+
 			</div>
 		</section>
-        
+
 		<div class="modal fade modal-lg " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
 		<div class="modal-dialog">
 		<div class="modal-content">
@@ -95,11 +95,11 @@
 					<div class="col-lg-12">
 							<div class="rating">
 								<span class="user-rating">
-								<input type="radio" name="rating" id="rating" value="1"><span class="star"></span>
-								<input type="radio" name="rating" id="rating" value="2"><span class="star"></span>
-								<input type="radio" name="rating" id="rating" value="3"><span class="star"></span>
-								<input type="radio" name="rating" id="rating" value="4"><span class="star"></span>
-								<input type="radio" name="rating"id="rating"  value="5"><span class="star"></span>
+								<input type="radio" name="rating" id="rating_1" value="5"><span class="star"></span>
+								<input type="radio" name="rating" id="rating_2" value="4"><span class="star"></span>
+								<input type="radio" name="rating" id="rating_3" value="3"><span class="star"></span>
+								<input type="radio" name="rating" id="rating_4" value="2"><span class="star"></span>
+								<input type="radio" name="rating"id="rating_5"  value="1"><span class="star"></span>
 								</span>
 							</div>
 						</div>
@@ -127,7 +127,7 @@
 		</div>
 		</div>
 		</div>
-		
+
 	</div>
 </div>
 
@@ -247,7 +247,7 @@ span.fa.fa-star.checked{
 	$('#user-rating-form').on('change','[name="rating"]',function(){
 		$('#selected-rating').text($('[name="rating"]:checked').val());
 	});
-	
+
 	$('.carousel').carousel({
 		  interval:4000,
 		  pause: "false"
@@ -262,38 +262,40 @@ span.fa.fa-star.checked{
 		data: {user_id : user_id,event_id : event_id},
 		success: function(data) {
 			var dataArray = JSON.parse(data);
-			
+
 		}
 		});
 	}
 
 	$('#upload').on('click', function() {
-		
-		var rating=$('#rating').val();
+
+		//var rating= $("input[name=rating]").val();
+		var rating=$('input[name=rating]:checked').val();
 		var message=$('#message').val();
 		var event_id=$('#event_id').val();
+		alert(rating);
         var file_data = $('#reviewimage').prop('files')[0];
         var form_data = new FormData();
         form_data.append('reviewimage', file_data);
 		form_data.append('rating', rating);
 		form_data.append('message', message);
 		form_data.append('event_id', event_id);
-	
-        $.ajax({
-                url         : '<?php echo base_url(); ?>eventlist/addreview',     // point to server-side PHP script 
-                dataType    : 'text',           // what to expect back from the PHP script, if anything
-                cache       : false,
-                contentType : false,
-                processData : false,
-                data        : form_data,                         
-                type        : 'post',
-                success     : function(output){
-                    alert(output);              // display response from the PHP script, if any
-                }
-         });
+
+        // $.ajax({
+        //         url         : '<?php echo base_url(); ?>eventlist/addreview',     // point to server-side PHP script
+        //         dataType    : 'text',           // what to expect back from the PHP script, if anything
+        //         cache       : false,
+        //         contentType : false,
+        //         processData : false,
+        //         data        : form_data,
+        //         type        : 'post',
+        //         success     : function(output){
+        //             alert(output);              // display response from the PHP script, if any
+        //         }
+        //  });
          //$('#pic').val('');                     /* Clear the file container */
     });
-	
+
 
 function initMap() {
       var uluru = {lat: <?php echo $res->event_latitude; ?>, lng: <?php echo $res->event_longitude; ?>};
