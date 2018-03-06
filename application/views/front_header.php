@@ -61,15 +61,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo  base_url(); ?>eventlist/">List Events</a>
                     </li>
-                     <?php
-                     $user_role=$this->session->userdata('user_role');
-                     if($user_role=='2'){ ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo  base_url(); ?>createevent">Create Event</a>
+                     <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url(); ?>home#create">Organiser</a>
                     </li>
-                    <?php }else{ ?>
-
-                    <?php } ?>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url(); ?>home#contact">Contact</a>
                     </li>
