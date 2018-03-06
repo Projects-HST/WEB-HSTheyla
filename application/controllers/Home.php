@@ -421,7 +421,7 @@ class Home extends CI_Controller {
 			$phone=$this->input->post('phone'.$i);
 			$datas=$this->loginmodel->insert_attendees($order_id,$name,$email,$phone);
 		}
-		 	redirect('/paymentsuccess');
+		 	redirect('/home/paymentsuccess');
      }
 
 	public function paymentsuccess()

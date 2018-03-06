@@ -77,11 +77,14 @@
 		</section>
 
 
-
+<?php
+	if (!empty($event_reviews)){
+?>
 
 <section class="row">
 	<div class="col-md-12">
 		<p class="event-desc">User Reviews</p>
+        <?php foreach($event_reviews as $result){ ?>
 		<div class="row">
 		<div class="col-md-12">
 			<div class="rating">
@@ -90,35 +93,19 @@
 					<input type="radio" name="rating" id="rating_2" value="4"><span class="star"></span>
 					<input type="radio" name="rating" id="rating_3" value="3"><span class="star"></span>
 					<input type="radio" name="rating" id="rating_4" value="2"><span class="star"></span>
-					<input type="radio" name="rating"id="rating_5"  value="1"><span class="star"></span>
+					<input type="radio" name="rating" id="rating_5" value="1"><span class="star"></span>
 					</span>
 				</div>
-			<p  style="margin-left:10px;"><b>Name</b></p>
-			<p style="margin-left:10px;">Description</p>
+			<p  style="margin-left:10px;"><b><?php echo $result->user_name; ?></b></p>
+			<p style="margin-left:10px;"><?php echo $result->comments;?></p>
 			</div>
-
-
+	
 		</div>
+       	<?php } ?>
 	</div>
 </section>
+ <?php } ?>
 
-
-<!-- <?php
-	if (!empty($event_reviews)){
-?>
- 		<section class="row event-details-desc">
-			<div class="col-md-12">
-				<p class="event-desc">User Reviews</p>
-			</div>
-
-            <?php foreach($event_reviews as $result){ ?>
-            	 <div>
-               		<p><?php echo $result->user_name; ?></p>
-									<p><?php echo $result->comments;?></p>
-				</div>
-			<?php } ?>
-		</section>
-<?php } ?> -->
 		<div class="modal fade modal-lg " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
 		<div class="modal-dialog">
 		<div class="modal-content">
@@ -137,7 +124,7 @@
 								<input type="radio" name="rating" id="rating_2" value="4"><span class="star"></span>
 								<input type="radio" name="rating" id="rating_3" value="3"><span class="star"></span>
 								<input type="radio" name="rating" id="rating_4" value="2"><span class="star"></span>
-								<input type="radio" name="rating"id="rating_5"  value="1"><span class="star"></span>
+								<input type="radio" name="rating" id="rating_5" value="1"><span class="star"></span>
 								</span>
 							</div>
 						</div>

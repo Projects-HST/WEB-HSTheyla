@@ -164,7 +164,8 @@ class Eventlist extends CI_Controller
 	public function addreview()
     {
 		$event_id  = $this->input->post('event_id');
-		$user_id = $this->session->userdata('id');
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
 		$rating  = $this->input->post('rating');
 		$message  = $this->input->post('message');
 		$data['reviews'] = $this->eventlistmodel->add_review($event_id,$user_id,$rating,$message);
