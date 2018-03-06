@@ -46,7 +46,7 @@
 			<?php } ?>
 			</div>
 		</div>
-		
+
         <section class="row event-details-desc">
 			<div class="col-md-8">
 				<p class="event-desc">Description</p>
@@ -68,7 +68,7 @@
 
 			</div>
 		</section>
-		
+
         <section class="row">
 			<div class="col-md-12">
 				<p class="event-desc">Location</p>
@@ -76,22 +76,49 @@
 			</div>
 		</section>
 
-<?php
+
+
+
+<section class="row">
+	<div class="col-md-12">
+		<p class="event-desc">User Reviews</p>
+		<div class="row">
+		<div class="col-md-12">
+			<div class="rating">
+					<span class="user-rating" style="direction:ltr;padding:0px 10px 0px 10px;">
+					<input type="radio" name="rating" id="rating_1" value="5"><span class="star"></span>
+					<input type="radio" name="rating" id="rating_2" value="4"><span class="star"></span>
+					<input type="radio" name="rating" id="rating_3" value="3"><span class="star"></span>
+					<input type="radio" name="rating" id="rating_4" value="2"><span class="star"></span>
+					<input type="radio" name="rating"id="rating_5"  value="1"><span class="star"></span>
+					</span>
+				</div>
+			<p  style="margin-left:10px;"><b>Name</b></p>
+			<p style="margin-left:10px;">Description</p>
+			</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+<!-- <?php
 	if (!empty($event_reviews)){
 ?>
  		<section class="row event-details-desc">
 			<div class="col-md-12">
 				<p class="event-desc">User Reviews</p>
 			</div>
-         
-            <?php foreach($event_reviews as $res){ ?>
+
+            <?php foreach($event_reviews as $result){ ?>
             	 <div>
-               		<p><?php echo $res->user_name; ?></p>
-					<p><?php echo $res->comments;?></p>
+               		<p><?php echo $result->user_name; ?></p>
+									<p><?php echo $result->comments;?></p>
 				</div>
 			<?php } ?>
 		</section>
-<?php } ?>
+<?php } ?> -->
 		<div class="modal fade modal-lg " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
 		<div class="modal-dialog">
 		<div class="modal-content">
@@ -255,6 +282,17 @@ span.fa.fa-star.checked{
 }
 </style>
 <script>
+function initMap() {
+      var uluru = {lat: <?php echo $res->event_latitude; ?>, lng: <?php echo $res->event_longitude; ?>};
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: uluru
+      });
+      var marker = new google.maps.Marker({
+        position: uluru,
+        map: map
+      });
+}
 	$('#user-rating-form').on('change','[name="rating"]',function(){
 		$('#selected-rating').text($('[name="rating"]:checked').val());
 	});
@@ -286,12 +324,12 @@ $('#upload').on('click', function() {
 		var message=$('#message').val();
 		var event_id=$('#event_id').val();
 		var event_id=$('#event_id').val();
-	
+
 		if (message == '') {
 			alert("Enter Message");
 			return false;
 		}
-		
+
 		form_data.append('rating', rating);
 		form_data.append('message', message);
 		form_data.append('event_id', event_id);
@@ -313,21 +351,11 @@ $('#upload').on('click', function() {
 							}).then(function() {
 							location.reload();
 							});
-					 } 
+					 }
                 }
           });
     });
 
-function initMap() {
-      var uluru = {lat: <?php echo $res->event_latitude; ?>, lng: <?php echo $res->event_longitude; ?>};
-      var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 12,
-        center: uluru
-      });
-      var marker = new google.maps.Marker({
-        position: uluru,
-        map: map
-      });
-}
+
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZLXcA6pQcEJA_iE0xX5XA_ObPQ4ww1eM&callback=initMap"></script>
