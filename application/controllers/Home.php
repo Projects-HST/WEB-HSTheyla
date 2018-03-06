@@ -419,11 +419,24 @@ class Home extends CI_Controller {
 			$name=$this->input->post('name'.$i);
 			$email=$this->input->post('email'.$i);
 			$phone=$this->input->post('phone'.$i);
-			 $datas=$this->loginmodel->insert_attendees($order_id,$name,$email,$phone);
+			$datas=$this->loginmodel->insert_attendees($order_id,$name,$email,$phone);
 		}
-		 	redirect('/eventlist');
+		 	redirect('/paymentsuccess');
      }
 
+	public function paymentsuccess()
+	 {
+		  $this->load->view('front_header');
+		  $this->load->view('payment_success');
+		  $this->load->view('front_footer');
+	}
+
+	public function paymenterror()
+	 {
+		  $this->load->view('front_header');
+		  $this->load->view('payment_error');
+		  $this->load->view('front_footer');
+	}
 
 	public function home()
 	{
