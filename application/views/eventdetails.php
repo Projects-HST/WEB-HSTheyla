@@ -48,25 +48,28 @@
 		</div>
 
         <section class="row event-details-desc">
-			<div class="col-md-8">
+			<div class="col-md-6">
 				<p class="event-desc">Description</p>
 				<p class="event-desc-details"><?php echo $res->description; ?></p>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<p class="event-desc">Date and Time</p>
-				<p class="event-desc-details"><?php echo date('d/m/Y',strtotime($res->start_date));?> <?php echo $res->start_time;?> to <?php echo date('d/m/Y',strtotime($res->end_date)); ?> <?php echo $res->end_time;?></p>
+				<p class="event-desc-details"><?php echo date('d/m/Y',strtotime($res->start_date));?> <?php echo $res->start_time;?> <br /> to  <br /><?php echo date('d/m/Y',strtotime($res->end_date)); ?> <?php echo $res->end_time;?></p>
 				<p class="event-desc">Venue</p>
 				<p class="event-desc-details"><b><?php echo $res->event_venue; ?></b> <br /><?php echo $res->event_address; ?></p>
+			</div>
+            <div class="col-md-3">
+            <p class="event-desc">Contact</p>
+				<p class="event-desc-details"><?php echo $res->contact_person; ?><br /><?php echo $res->primary_contact_no; ?><br /><?php echo $res->contact_email; ?></p>
                 <?php if ($user_id !='') { ?>
 				<p class="event-desc">Sharing</p>
 				<ul class="share-buttons">
 				  <li><a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/&redirect_uri=https://developers.facebook.com/tools/explorer" onclick="sharepoints(<?php echo $user_id; ?> ,<?php echo $disp_event_id; ?>)" target="_blank" title="Share on Facebook"><img alt="Sharing" src="<?php echo base_url(); ?>assets/images/Facebook.svg" /></a></li>
 				  <li><a href="https://plus.google.com/share?url=<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/" onclick="sharepoints(<?php echo $user_id; ?> ,<?php echo $disp_event_id; ?>)" target="_blank" title="Share on Google+"><img alt="Share on Google+" src="<?php echo base_url(); ?>assets/images/Google+.svg" /></a></li>
 				</ul>
-                
-			 <p><a class="btn btn-login btn-primary btn-block review-btn" data-toggle="modal" data-target="#myModal" data-original-title>Wite a  Review</a> </p>
+				 <p><a class="btn btn-login btn-primary btn-block review-btn" data-toggle="modal" data-target="#myModal" data-original-title>Wite a  Review</a> </p>
 <?php } ?>
-			</div>
+            </div>
 		</section>
 
         <section class="row">
