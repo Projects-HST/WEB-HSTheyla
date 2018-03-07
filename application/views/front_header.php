@@ -69,7 +69,7 @@
                     </li>
 
                     <?php
-                    	// $user_role=$this->session->userdata('user_role');
+                   	$user_role = $this->session->userdata('user_role');
                        if(empty($user_role)){ ?>
                          <li class="nav-item">
                               <a class="nav-link" href="<?php echo base_url(); ?>signin" >Sign In </a>
@@ -87,7 +87,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo base_url(); ?>logout">Logout</a>
                             </li>
-                            <?php } ?>
+                     <?php } ?>
                 </ul>
             </div>
         </div>
