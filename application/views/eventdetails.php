@@ -63,9 +63,9 @@
 				  <li><a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/&redirect_uri=https://developers.facebook.com/tools/explorer" onclick="sharepoints(<?php echo $user_id; ?> ,<?php echo $disp_event_id; ?>)" target="_blank" title="Share on Facebook"><img alt="Sharing" src="<?php echo base_url(); ?>assets/images/Facebook.svg" /></a></li>
 				  <li><a href="https://plus.google.com/share?url=<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/" onclick="sharepoints(<?php echo $user_id; ?> ,<?php echo $disp_event_id; ?>)" target="_blank" title="Share on Google+"><img alt="Share on Google+" src="<?php echo base_url(); ?>assets/images/Google+.svg" /></a></li>
 				</ul>
-                <?php } ?>
+                
 			 <p><a class="btn btn-login btn-primary btn-block review-btn" data-toggle="modal" data-target="#myModal" data-original-title>Wite a  Review</a> </p>
-
+<?php } ?>
 			</div>
 		</section>
 
