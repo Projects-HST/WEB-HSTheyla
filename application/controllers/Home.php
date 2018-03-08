@@ -375,6 +375,50 @@ class Home extends CI_Controller {
 		}
 	}
 
+   //-------------------------------Reviews--------------------------------
+
+   public function reviewevents()
+   {
+   		$datas = $this->session->userdata();
+	    $user_id = $this->session->userdata('id');
+	    $user_role = $this->session->userdata('user_role');
+
+		$datas['result'] = $this->organizermodel->list_events($user_id);
+		
+		if($user_role==2)
+		{
+		  $this->load->view('front_header');	
+		  //$this->load->view('organizer/reviews/view_events',$datas);
+		  $this->load->view('review_events',$datas);
+		  $this->load->view('front_footer');
+		  
+	 	}else{
+	 			redirect('/');
+	 	}
+   }
+
+   public function viewreviews($id)
+   {
+   	$datas=$this->session->userdata();
+	   $user_id=$this->session->userdata('id');
+	   $user_role=$this->session->userdata('user_role');
+
+      $datas['views'] = $this->organizerbookingmodel->view_all_reviews($id);
+      //echo'<pre>';print_r($datas['views']);exit();
+		if($user_role==2)
+		{
+		  $this->load->view('front_header');	
+		  //$this->load->view('organizer/reviews/events_reviews',$datas);
+		  $this->load->view('view_reviews',$datas);
+		  $this->load->view('front_footer');
+	 	}else{
+	 			redirect('/');
+	 		 }
+   }
+
+     //-------------------------------Followers--------------------------------
+
+
 	public function wishlist()
 	{
 		$datas=$this->session->userdata();

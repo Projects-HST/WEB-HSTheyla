@@ -64,9 +64,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto topmenu">
                     <li class="nav-item ">
-                        <a class="nav-link" href="#">Home
-                <span class="sr-only"></span>
-              </a>
+                        <a class="nav-link" href="#">Home<span class="sr-only"></span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#about">About</a>
@@ -77,23 +75,14 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo  base_url(); ?>eventlist/">List Events</a>
                     </li>
-                     <?php
-                        $user_role=$this->session->userdata('user_role');
-                     if($user_role=='2'){ ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo  base_url(); ?>createevent">Create Event</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>#create">Organiser</a>
                     </li>
-                    <?php }else{ ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="#create">Organiser</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>#contact">Contact</a>
                     </li>
-                    <?php } ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
-                    </li>
-
-                    <?php
-                    	// $user_role=$this->session->userdata('user_role');
+                   <?php
+                   	$user_role = $this->session->userdata('user_role');
                        if(empty($user_role)){ ?>
                          <li class="nav-item">
                               <a class="nav-link" href="<?php echo base_url(); ?>signin" >Sign In </a>
@@ -104,14 +93,14 @@
                     <?php
                        }else{ ?>
                          <?php  if($user_role=='3' || $user_role=='2'){ ?>
-                       <li class="nav-item">
-                           <a class="nav-link" href="<?php echo base_url(); ?>profile">Profile</a>
-                       </li>
+                           <li class="nav-item">
+                               <a class="nav-link" href="<?php echo base_url(); ?>profile">Profile</a>
+                           </li>
                      <?php  } ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo base_url(); ?>logout">Logout</a>
                             </li>
-                            <?php } ?>
+                     <?php } ?>
                 </ul>
             </div>
         </div>
@@ -119,19 +108,13 @@
 
     <!-- Button trigger modal -->
     <div class="container">
-           <?php
-               if($this->session->flashdata('msg') !=   ''){
-               ?>
-
-                   <script>
-                   $(document).ready(function(){
-                       $("#wrongpassword").modal();
-                   });
-                   </script>
-
-               <?php
-               }
-           ?>
+           <?php if($this->session->flashdata('msg') !=   ''){ ?>
+		   <script>
+			   $(document).ready(function(){
+				   $("#wrongpassword").modal();
+			   });
+           </script>
+           <?php } ?>
    </div>
 
 
@@ -151,7 +134,7 @@
                                           <p id="usermsg"></p>
                                       </div>
                                       <div class="form-group">
-                                          <input type="email" class="form-control" id="email" name="email" required="" placeholder="Email">
+                                          <input type="email" class="form-control" id="email" name="email" required placeholder="Email">
                                           <p id="emailmsg"></p>
                                       </div>
                                       <div class="form-group">

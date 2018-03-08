@@ -48,9 +48,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto topmenu">
                     <li class="nav-item ">
-                        <a class="nav-link" href="<?php echo base_url(); ?>home">Home
-                <span class="sr-only"></span>
-              </a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>home">Home<span class="sr-only"></span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url(); ?>home#about">About</a>
@@ -80,9 +78,9 @@
                     <?php
                        }else{ ?>
                          <?php  if($user_role=='3' || $user_role=='2'){ ?>
-                       <li class="nav-item">
-                           <a class="nav-link" href="<?php echo base_url(); ?>profile">Profile</a>
-                       </li>
+                           <li class="nav-item">
+                               <a class="nav-link" href="<?php echo base_url(); ?>profile">Profile</a>
+                           </li>
                      <?php  } ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo base_url(); ?>logout">Logout</a>

@@ -16,16 +16,17 @@
               <a href="<?php echo base_url(); ?>leaderboard" class="list-group-item "><span class="menu-icons"><i class="fas fa-trophy"></i></span>Dashboard</a>
               <a href="<?php echo base_url(); ?>profile" class="list-group-item"><span class="menu-icons"><i class="fas fa-user"></i></span>Profile</a>
                 <a href="<?php echo base_url(); ?>profile_picture" class="list-group-item "><span class="menu-icons"><i class="fas fa-user"></i></span>Display Picture</a>
-               <?php $user_role = $this->session->userdata('user_role');
+                 <?php $user_role = $this->session->userdata('user_role');
                 if($user_role=='2'){ ?>
                     <a href="<?php echo base_url(); ?>createevent" class="list-group-item"><span class="menu-icons"><i class="far fa-plus-square"></i></span>Create event </a>
-                    <a href="<?php echo base_url(); ?>viewevents" class="list-group-item  active"><span class="menu-icons"><i class="fas fa-table"></i></span>View events </a>
-                    <a href="<?php echo base_url(); ?>bookedevents" class="list-group-item"><span class="menu-icons"><i class="far fa-list-alt"></i></i></span>Booked Events</a>
-                    <a href="<?php echo base_url(); ?>reviewevents" class="list-group-item"><span class="menu-icons"><i class="fab fa-wpforms"></i></span>Reviews</a>
-              <?php } ?>
+                      <a href="<?php echo base_url(); ?>viewevents" class="list-group-item"><span class="menu-icons"><i class="fas fa-table"></i></span>View events </a>
+                        <a href="<?php echo base_url(); ?>bookedevents" class="list-group-item"><span class="menu-icons"><i class="far fa-list-alt"></i></i></span>Booked Events</a>
+                         <a href="<?php echo base_url(); ?>reviewevents" class="list-group-item active"><span class="menu-icons"><i class="fab fa-wpforms"></i></span>Reviews</a>
+              <?php  } ?>
               <a href="<?php echo base_url(); ?>booking_history" class="list-group-item"><span class="menu-icons"><i class="fas fa-book"></i></span>Booking </a>
               <a href="<?php echo base_url(); ?>wishlist" class="list-group-item"><span class="menu-icons"><i class="fas fa-heart"></i></span>Whishlist</a>
               <!--a href="<?php echo base_url(); ?>organizerbooking/messageboard/" class="list-group-item">Messages</a-->
+             
               <a href="<?php echo base_url(); ?>logout" class="list-group-item"><span class="menu-icons"><i class="fas fa-sign-out-alt"></i></span>Sign Out</a>
             </div>
           </div><!--/span-->
@@ -33,9 +34,8 @@
           <div class="col-12 col-md-9">
        
               <div class="card-header">
-				<h3 class="mb-0">View  Event</h3>
+				<h3 class="mb-0">Review Event</h3>
 			</div>
-                         
                 <!-- form user info -->
                   <div class="card card-outline-secondary" style="padding:5px;">
                   <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
@@ -44,7 +44,6 @@
                             <th>Event Name</th>
                             <th>Event Category</th>
                             <th>Event City</th>
-                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -56,8 +55,8 @@
                             <td><?php echo $rows->event_name ; ?></td>
                             <td><?php echo $rows->category_name ; ?></td>
                             <td><?php echo $rows->city_name ; ?></td>
-                            <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
-                            <td><a href="<?php echo base_url();?>home/updateevents/<?php echo base64_encode($rows->id);?>"><i class="fa fa-pencil-square-o"></a></td>
+                            <td><a href="<?php echo base_url();?>home/viewreviews/<?php echo $rows->id;?>">
+                          <img title="View Reviews" src="<?php echo base_url();?>assets/icons/customerreviews.png"/></td>
                         </tr>
                        <?php  } ?>
                         </tbody>
