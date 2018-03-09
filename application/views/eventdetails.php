@@ -86,8 +86,8 @@
 <section class="row">
 	<div class="col-md-12">
 		<p class="event-desc">User Reviews</p>
-        <?php foreach($event_reviews as $result){ 
-				$ratings = $result->event_rating;
+        <?php foreach($event_reviews as $result){
+				 $ratings = $result->event_rating;
 		?>
 		<div class="row">
 		<div class="col-md-12">
@@ -97,9 +97,9 @@
                      for ($i=1; $i <6; $i++)
             			{
 							if ($i <= $ratings){
-								echo "<span class='star' style='background:#ffd100;margin:1px;'></span>";
+								echo "<span style='margin:1px;'><img src='".base_url()."assets/front/images/rated.png'></span>";
 							} else {
-								echo "<span class='star' style='margin:1px;'></span>";
+								echo "<span style='margin:1px;'><img src='".base_url()."assets/front/images/unrated.png'></span>";
 							}
 						}
 					?>
@@ -108,7 +108,7 @@
 			<p  style="margin-left:10px;"><b><?php echo $result->user_name; ?></b></p>
 			<p style="margin-left:10px;"><?php echo $result->comments;?></p>
 			</div>
-	
+
 		</div>
        	<?php } ?>
 	</div>
