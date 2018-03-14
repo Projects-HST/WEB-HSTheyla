@@ -160,6 +160,7 @@ class Emailtemplate extends CI_Controller
 	    $datas['view'] = $this->emailtemplatemodel->getall_users_details();
 	    $datas['email_tem'] = $this->emailtemplatemodel->getall_email_template();
 	    $datas['countyr_list'] = $this->citymodel->getall_country_list();
+		
 		  $this->load->view('header');
 		  $this->load->view('email_template/send_template',$datas);
 		  $this->load->view('footer');

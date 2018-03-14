@@ -237,7 +237,8 @@
      });
 
  $(document).on("click", "#sendSelectedBtn", function () 
-   {   
+   { 
+	$('#addmodel').modal('show');
      if($('input[name="email[]"]:checked').length > 0) {
         var selected_value=[]; //initialize empty array 
         $('#sendmail:checked').each(function()
@@ -245,11 +246,11 @@
          selected_value.push($(this).val());
         });
       $(".modal-body #emails_id").val(selected_value);
-      // $('#addmodel').modal();
+       
 
    }else{
-         alert('Please select any one user');
-        $('#addmodel').modal('hide');
+         	alert('Please select any one user');
+        	$('#addmodel').modal('hide');
          }
    });
 

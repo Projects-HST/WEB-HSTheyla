@@ -99,9 +99,9 @@
             </div>
             
 			<div class="card-block" style="padding:20px;">
-				<?php foreach($event_attendees as $rows){?>
+				<?php foreach($event_attendees as $rows){ ?>
                 <div class="row" style="padding:5px;">
-                    <div class="col-sm-3"><?php echo $rows-> user_name; ?></div>
+                    <div class="col-sm-3"><?php echo $rows-> name; ?></div>
                     <div class="col-sm-3"><?php echo $rows-> email_id; ?></div>
                     <div class="col-sm-6"><?php echo $rows-> mobile_no; ?></div>
                 </div>
