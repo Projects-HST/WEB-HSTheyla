@@ -144,19 +144,21 @@ class Emailtemplate extends CI_Controller
         $datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
+		
         if($user_role == 1 || $user_role == 4)
 		{
-        $countryid=$this->input->post('countryid');
-        $cityid=$this->input->post('cityid');
-        $username=$this->input->post('username');
+			$countryid=$this->input->post('countryid');
+			$cityid=$this->input->post('cityid');
+			$username=$this->input->post('username');
 
         if($countryid!='' || $cityid!='' || $username!='')
         {
           $datas['countyr_list'] = $this->citymodel->getall_country_list();
           $datas['city_list'] = $this->emailtemplatemodel->getall_city_list();
           $datas['search_view'] = $this->emailtemplatemodel->getall_search_users_details($countryid,$cityid,$username);
-          // echo'<pre>';print_r($datas['search_view'] );exit;
+           //echo'<pre>';print_r($datas['search_view'] );exit;
         }
+		
 	    $datas['view'] = $this->emailtemplatemodel->getall_users_details();
 	    $datas['email_tem'] = $this->emailtemplatemodel->getall_email_template();
 	    $datas['countyr_list'] = $this->citymodel->getall_country_list();

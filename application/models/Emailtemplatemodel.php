@@ -59,14 +59,6 @@ Class Emailtemplatemodel extends CI_Model
 
 //-------------------------SEND----------------------------
 
-   function getall_users_details()
-   {
-   	$sel="SELECT id,user_name,mobile_no,email_id FROM user_master WHERE status='Y'";
-   	$sel1=$this->db->query($sel);
-    $sel2=$sel1->result();
-    return $sel2;
-   }
-
    function get_city_name($country_id)
    {
    	  $query="SELECT id,city_name,event_status FROM city_master WHERE country_id='$country_id' AND event_status='Y'";
@@ -82,6 +74,16 @@ Class Emailtemplatemodel extends CI_Model
 	  return $row;
    }
 
+
+   function getall_users_details()
+   {
+   	//$sel="SELECT id,name,user_name,mobile_no,email_id FROM user_master WHERE status='Y'";
+	$sel="SELECT ud.user_id,ud.name,ud.country_id,ud.city_id,um.id,um.email_id,um.mobile_no FROM user_details AS ud, user_master AS um WHERE um.id=ud.user_id";
+   	$sel1=$this->db->query($sel);
+    $sel2=$sel1->result();
+    return $sel2;
+   }
+   
    function getall_search_users_details($countryid,$cityid,$username)
    { if(empty($username)){
 		$search="SELECT ud.user_id,ud.name,ud.country_id,ud.city_id,um.id,um.email_id,um.mobile_no,ci.city_name FROM user_details AS ud, user_master AS um,city_master AS ci WHERE um.id=ud.user_id AND ud.country_id='$countryid' AND ud.city_id='$cityid' AND ud.city_id=ci.id";
