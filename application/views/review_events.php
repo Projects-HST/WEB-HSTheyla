@@ -26,13 +26,13 @@
               <a href="<?php echo base_url(); ?>booking_history" class="list-group-item"><span class="menu-icons"><i class="fas fa-book"></i></span>Booking </a>
               <a href="<?php echo base_url(); ?>wishlist" class="list-group-item"><span class="menu-icons"><i class="fas fa-heart"></i></span>Whishlist</a>
               <!--a href="<?php echo base_url(); ?>organizerbooking/messageboard/" class="list-group-item">Messages</a-->
-             
+
               <a href="<?php echo base_url(); ?>logout" class="list-group-item"><span class="menu-icons"><i class="fas fa-sign-out-alt"></i></span>Sign Out</a>
             </div>
           </div><!--/span-->
 
           <div class="col-12 col-md-9">
-       
+
               <div class="card-header">
 				<h3 class="mb-0">Review Event</h3>
 			</div>
@@ -69,7 +69,18 @@
 </section>
 </div>
 </div>
+<style>
+.list-group-item{
+  border: none;
+}
+.list-group a{
+  color: #000;
+}
+body{
+  background-color: #f6f6f6;
+}
 
+</style>
 <script>
 $(document).ready(function() {
   $('table.display').DataTable();
