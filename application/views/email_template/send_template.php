@@ -141,7 +141,9 @@
                         <tr>
                           <th>S.No</th>
                           <th></th>
+                          <th>Name</th>
                           <th>Email</th>
+                          <th>Mobile</th>
                         </tr>
                      </thead>
                      <tbody>
@@ -154,7 +156,9 @@
                             <tr>
                                <td><?php  echo $i; ?></td>
                                <td><input type="checkbox" name="email[]" id="sendmail" class="checkbox check" value="<?php  echo $rows->email_id; ?>"></td>
-                               <td><?php  echo $rows->email_id; ?></td>
+                               <td><?php  echo $rows->name; ?></td>
+                                <td><?php  echo $rows->email_id; ?></td>
+                                <td><?php  echo $rows->mobile_no; ?></td>
                             </tr>
                            <?php $i++;  } ?> 
                            <div style="display: none;">
@@ -167,7 +171,9 @@
                                <td>
                                  <input type="checkbox" name="email[]" id="sendmail" class="checkbox check" value="<?php  echo $res->email_id; ?>">
                               </td>
+                               <td><?php  echo $res->name; ?></td>
                                <td><?php  echo $res->email_id; ?></td>
+                                <td><?php  echo $res->mobile_no; ?></td>
                             </tr>
                        <?php $i++;  } ?> 
                        <div style="display: none;"> 
@@ -237,7 +243,8 @@
      });
 
  $(document).on("click", "#sendSelectedBtn", function () 
-   {   
+   { 
+	$('#addmodel').modal('show');
      if($('input[name="email[]"]:checked').length > 0) {
         var selected_value=[]; //initialize empty array 
         $('#sendmail:checked').each(function()
@@ -245,11 +252,11 @@
          selected_value.push($(this).val());
         });
       $(".modal-body #emails_id").val(selected_value);
-      // $('#addmodel').modal();
+       
 
    }else{
-         alert('Please select any one user');
-        $('#addmodel').modal('hide');
+         	alert('Please select any one user');
+        	$('#addmodel').modal('hide');
          }
    });
 

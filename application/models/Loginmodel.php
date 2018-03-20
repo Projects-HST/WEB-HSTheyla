@@ -612,14 +612,15 @@ Class Loginmodel extends CI_Model
 		return $res;
 	}
 	
-		public function get_booking_history($order_id)
+	public function get_booking_history($order_id)
 	{
-		echo $sql="SELECT A.id,A.order_id,E.category_name,B.id AS event_id,B.event_name,B.event_banner,B.description,B.event_venue,B.event_address,C.show_date,C.show_time,D.plan_name,A.number_of_seats, A.total_amount,A.created_at,B.event_colour_scheme FROM booking_history A,events B,booking_plan_timing C,booking_plan D,category_master E WHERE A.order_id  = '$order_id' AND A.event_id = B.id AND A.plan_time_id = C.id AND A.plan_id = D.id AND B.category_id = E.id";
+		$sql="SELECT A.id,A.order_id,E.category_name,B.id AS event_id,B.event_name,B.event_banner,B.description,B.event_venue,B.event_address,C.show_date,C.show_time,D.plan_name,A.number_of_seats, A.total_amount,A.created_at, F.* FROM booking_history A,events B,booking_plan_timing C,booking_plan D,category_master E, booking_status F  WHERE A.order_id  = '$order_id' AND F.order_id  = '$order_id' AND A.event_id = B.id AND A.plan_time_id = C.id AND A.plan_id = D.id AND B.category_id = E.id";
 		$resu=$this->db->query($sql);
 		$res=$resu->result();
 		return $res;
 	}
 	
+
 	public function get_wishlist($user_id)
 	{
 		$sql="select ev.*,uwl.updated_at as wl_updated_at from events as ev LEFT JOIN user_wish_list as uwl on uwl.event_id = ev.id WHERE uwl.user_id = '$user_id' group by ev.id ORDER BY uwl.updated_at desc";
@@ -630,7 +631,15 @@ Class Loginmodel extends CI_Model
 	
 	public function event_attendees($sorder_id)
 	{
-		$sql="SELECT A.`order_id`,A.`number_of_seats`,B.user_name,B.mobile_no,B.email_id,C.name FROM `booking_history` A,user_master B,user_details C WHERE A.user_id = B.id AND A.user_id = C.user_id AND A.`order_id` = '$sorder_id'";
+		$sql = "SELECT A.`order_id`,A.`number_of_seats`,B.user_name,B.mobile_no,B.email_id,C.name FROM `booking_history` A,user_master B,user_details C WHERE A.user_id = B.id AND A.user_id = C.user_id AND A.`order_id` = '$sorder_id'";
+		$resu=$this->db->query($sql);
+		$res=$resu->result();
+		return $res;
+	}
+	
+    public function disp_event_attendees($sorder_id)
+	{
+		$sql = "SELECT * from booking_event_attendees WHERE order_id = '$sorder_id'";
 		$resu=$this->db->query($sql);
 		$res=$resu->result();
 		return $res;

@@ -35,7 +35,7 @@
                   </div>
                   <div class="col-md-4">
                   <label for="exampleInputEmail3" class="label-form">Phone Number</label>
-                    <input type="text" class="form-control" name="email<?php echo $i;?>" value="<?php echo $mobile_no; ?>">
+                    <input type="text" class="form-control" name="phone<?php echo $i;?>" value="<?php echo $mobile_no; ?>">
                   </div>
                </div>
             <?php
@@ -52,7 +52,7 @@
                   </div>
                   <div class="col-md-4">
                   <label for="exampleInputEmail3" class="label-form">Phone Number</label>
-                    <input type="text" class="form-control" name="email<?php echo $i;?>" value="">
+                    <input type="text" class="form-control" name="phone<?php echo $i;?>" value="">
                   </div>
                </div>
 

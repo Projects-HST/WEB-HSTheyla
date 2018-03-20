@@ -124,7 +124,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="primarycell" class="col-sm-2 col-form-label">Billing Person Address : </label>
+                            <label for="primarycell" class="col-sm-2 col-form-label">Billing Address : </label>
                             <div class="col-sm-4">
 
                                <h4 class="header-title"> <?php echo $rows->billing_address; ?> </h4>
@@ -282,8 +282,13 @@
                          <div class="form-group row">
                             <label for="Status" class="col-sm-2 col-form-label">Transation Date : </label>
                             <div class="col-sm-4">
-                                 <h4 class="header-title"> <?php $date=date_create($rows->trans_date);
-                                       echo date_format($date,"d-m-Y");?> </h4>
+                                 <h4 class="header-title"> 
+								 <?php 
+								 if ($rows->trans_date !='null') {
+									 echo $rows->trans_date;
+								 } //else {
+									 // echo "Not OK";
+								 //} ?></h4>
                             </div>
                           <label for="ecost" class="col-sm-2 col-form-label">Bin Country : </label>
                             <div class="col-sm-2">
