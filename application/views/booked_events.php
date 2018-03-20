@@ -26,17 +26,17 @@
               <a href="<?php echo base_url(); ?>booking_history" class="list-group-item"><span class="menu-icons"><i class="fas fa-book"></i></span>Booking </a>
               <a href="<?php echo base_url(); ?>wishlist" class="list-group-item"><span class="menu-icons"><i class="fas fa-heart"></i></span>Whishlist</a>
               <!--a href="<?php echo base_url(); ?>organizerbooking/messageboard/" class="list-group-item">Messages</a-->
-              
+
               <a href="<?php echo base_url(); ?>logout" class="list-group-item"><span class="menu-icons"><i class="fas fa-sign-out-alt"></i></span>Sign Out</a>
             </div>
           </div><!--/span-->
 
           <div class="col-12 col-md-9">
-       
+
               <div class="card-header">
 				<h3 class="mb-0">View  Event</h3>
 			</div>
-                         
+
                 <!-- form user info -->
                   <div class="card card-outline-secondary" style="padding:5px;">
                   <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -79,7 +79,20 @@
 </section>
 </div>
 </div>
-
+<style>
+.list-group-item{
+  border: none;
+}
+.list-group a{
+  color: #000;
+}
+body{
+  background-color: #f6f6f6;
+}
+.dt-buttons{
+  display: none;
+}
+</style>
 <script>
 $(document).ready(function() {
   $('table.display').DataTable();

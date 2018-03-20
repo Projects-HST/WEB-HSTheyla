@@ -31,11 +31,11 @@
           </div><!--/span-->
 
           <div class="col-12 col-md-9">
-       
+
               <div class="card-header">
 				<h3 class="mb-0">View  Event</h3>
 			</div>
-                         
+
                 <!-- form user info -->
                   <div class="card card-outline-secondary" style="padding:5px;">
                   <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
@@ -70,7 +70,17 @@
 </section>
 </div>
 </div>
-
+<style>
+.list-group-item{
+  border: none;
+}
+.list-group a{
+  color: #000;
+}
+body{
+  background-color: #f6f6f6;
+}
+</style>
 <script>
 $(document).ready(function() {
   $('table.display').DataTable();
