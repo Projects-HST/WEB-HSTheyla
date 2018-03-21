@@ -1,5 +1,5 @@
 <?php
-function get_times( $default = '10:00', $interval = '+15 minutes' ) 
+function get_times( $default = '10:00', $interval = '+15 minutes' )
 	{
 		$output = '';
 		$current = strtotime( '00:00:00' );
@@ -60,8 +60,8 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
                            ×</button> <?php echo $this->session->flashdata('msg'); ?>
                         </div>
                         <?php endif; ?>
-                        
-                        
+
+
                   <div class="card card-outline-secondary">
                     <div class="card-block">
                           <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>home/insertevents" name="eventform" id="eventform" onSubmit='return check();'>
@@ -133,7 +133,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
                 <div class="col-sm-4">
                   <div class="input-group">
                     <input type="text" class="form-control"  name="start_date" id="datepicker-autoclose">
-                    <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
+                    <span class="input-group-addon bg-custom b-0"><i class="far fa-calendar-plus"></i></span>
                 </div>
                 </div>
 
@@ -141,15 +141,15 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
                 <div class="col-sm-4">
                    <div class="input-group">
                     <input type="text" class="form-control" name="end_date" id="datepicker">
-                    <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
-                     
+                    <span class="input-group-addon bg-custom b-0"><i class="far fa-calendar-plus"></i></span>
+
                 </div>
                 </div>
             </div>
-            
+
 
             <div class="form-group row">
-                           
+
             <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
             <div class="col-sm-4">
 
@@ -262,7 +262,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
            </div>
 
             <div class="form-group row">
-              
+
                 <label for="Colour" class="col-sm-2 col-form-label">Colour</label>
                 <div class="col-sm-4">
                     <!--input class="form-control" type="text" name="colour_scheme" value=""-->
@@ -278,7 +278,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
                   <div class="col-sm-4">
                      <input type="file" name="eventbanner" id="file_upload" class="form-control" accept="image/*" >
                       <div id="preview" style="color: red;"></div>
-                  </div> 
+                  </div>
             </div>
 
 
@@ -290,7 +290,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
                         <option value="Y">Yes</option>
                         <option value="N">No</option>
                     </select>
-                </div-->                    
+                </div-->
             </div>
 
 
@@ -304,7 +304,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
                   Reset
                   </button></div>
             </div>
-         
+
          </form>
                       </div>
                   </div>
@@ -318,9 +318,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 </div>
 </div>
 <style>
-.form-group{
-  margin-bottom: 0px;
-}
+
 .list-group-item{
   border: none;
   color: #000;
@@ -339,7 +337,7 @@ body{
 
    $('#stime').timepicki();
    $('#etime').timepicki();
-   
+
 window.onload = function () {
 var mapOptions = {
     center: new google.maps.LatLng(20.5937, 78.9629),
@@ -349,7 +347,7 @@ var mapOptions = {
 var infoWindow = new google.maps.InfoWindow();
 var latlngbounds = new google.maps.LatLngBounds();
 var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
-google.maps.event.addListener(map, 'click', function (e) 
+google.maps.event.addListener(map, 'click', function (e)
 {
  var la=e.latLng.lat();
  var lo=e.latLng.lng();
@@ -427,7 +425,7 @@ event_status:"Select Status",
 txtLatitude:"Enter Latitude",
 txtLongitude:"Enter Longitude",
 },
-}); 
+});
 });
 
 function getcityname(cid) {
@@ -461,19 +459,19 @@ success:function(test)
       $("#ctname").hide();
      }
 }
-}); 
+});
 }
 
 function check()
 {
-        
-   
+
+
 
       var fdate = document.getElementById("datepicker-autoclose").value;
       var tdate = document.getElementById("datepicker").value;
 
        //alert(fdate);alert(tdate);
-    
+
       var chunks = fdate.split('-');
       var formattedDate = chunks[1]+'/'+chunks[0]+'/'+chunks[2];
        //alert(formattedDate);
@@ -490,23 +488,23 @@ function check()
 
       if(Date.parse(formattedDate)==Date.parse(formattedDate1) )
       {
-      
+
         var strStartTime = document.getElementById("stime").value;
         var strEndTime = document.getElementById("etime").value;
 
         var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
         var endTime = new Date(startTime)
         endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
-         
+
         //var timefrom = date1;
          temp =strStartTime.split(":");
          var a = temp[0];
          var b = temp[1];
          temp1 =b.split(" ");
          var c = temp1[1]
-       
+
         if(a==12 && c=='AM'){
-        
+
         }else if (startTime > endTime){
           alert("Start Time is greater than end time");
           return false;
@@ -521,13 +519,13 @@ function check()
        endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
       var a=formattedDate + '' + strStartTime;
       var b=formattedDate1 + '' + strEndTime;
-      //alert(startTime);alert(endTime); alert(a);alert(b); 
+      //alert(startTime);alert(endTime); alert(a);alert(b);
       if (a == b || a > b) {
       alert("Start Date & Time is greater than end Date & Time");
       return false;
       }
     }
-      function GetHours(d) 
+      function GetHours(d)
       {
         var h = parseInt(d.split(':')[0]);
         if (d.split(':')[1].split(' ')[1] == "PM") {
@@ -535,7 +533,7 @@ function check()
       }
       return h;
       }
-      function GetMinutes(d) 
+      function GetMinutes(d)
       {
        return parseInt(d.split(':')[1].split(' ')[0]);
       }
@@ -560,7 +558,7 @@ function check()
     if(document.eventform.txtLongitude.value!="")
     {
             sLongitude = document.eventform.txtLongitude.value
-            
+
             if(isNaN(sLongitude) || sLongitude.indexOf(".")<0)
             {
                 //alert ("Please enter valid Longitude.")
@@ -579,9 +577,9 @@ function check()
     // {
     //     var latitude = document.eventform.txtLatitude.value;
     //     var longitude = document.eventform.txtLongitude.value;
-        
+
     //     var reg = new RegExp("^[-+]?[0-9]{1,3}(?:\.[0-9]{1,10})?$");
-        
+
     //     if( reg.exec(latitude) ) {
     //      //do nothing
     //     } else {
@@ -591,7 +589,7 @@ function check()
     //         document.eventform.txtLatitude.focus();
     //         return false;
     //     }
-        
+
     //     if( reg.exec(longitude) ) {
     //      //do nothing
     //     } else {
@@ -602,7 +600,7 @@ function check()
     //         return false;
     //     }
     // }
-    
+
 }
 
 </script>

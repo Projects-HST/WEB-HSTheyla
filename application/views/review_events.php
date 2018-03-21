@@ -70,6 +70,9 @@
 </div>
 </div>
 <style>
+div#DataTables_Table_0_filter{
+  float: right;
+}
 .list-group-item{
   border: none;
 }
