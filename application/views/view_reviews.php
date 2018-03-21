@@ -68,7 +68,23 @@
 </section>
 </div>
 </div>
-
+<style>
+div#DataTables_Table_0_filter{
+  float: right;
+}
+.list-group-item{
+  border: none;
+}
+.list-group a{
+  color: #000;
+}
+body{
+  background-color: #f6f6f6;
+}
+.dt-buttons{
+  display: none;
+}
+</style>
 <script>
 $(document).ready(function() {
   $('table.display').DataTable();

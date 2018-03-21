@@ -89,7 +89,7 @@
                                  <th>From Time</th>
                                  <th>To Time</th>
                                  <th>Plan Name</th>
-                                 <th>Status</th>
+                                 <!--<th>Status</th>-->
                                  <!--th>Action</th-->
                               </tr>
                            </thead>
@@ -111,15 +111,15 @@
                                  <td><?php  echo date("g:i a",strtotime("$rows->time_from")); ?></td>
                                  <td> <?php echo date("g:i a",strtotime("$rows->time_to")); ?></td>
                                  <td><?php  echo $rows->plan_name; ?></td>
-                                    <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
-                                 <!--td>
+                                    <!--<td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
+                                 <td>
                                   <a href="<?php echo base_url();?>advertisement/edit_history_all/<?php echo $rows->id;?>">
                                   <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
                                  <a onclick="confirmGetMessage(<?php echo $ahid;?>)" >
                                  <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
                                </td-->
                                   
-                           </td>
+                          
                               </tr>
                              <?php $i++;  }  ?>
                            </tbody>

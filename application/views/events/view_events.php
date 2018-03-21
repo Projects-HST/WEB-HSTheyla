@@ -302,7 +302,9 @@
           </div><!-- container -->
         </div> <!-- Page content Wrapper -->
       </div> <!-- content -->
+<style>
 
+</style>
 <script type="text/javascript">
   function confirmGetMessage(eid)
   {

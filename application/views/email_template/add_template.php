@@ -45,7 +45,7 @@
       <div class="page-content-wrapper">
          <div class="container">
             <div class="row">
-               <div class="col-lg-10">
+               <div class="col-lg-8">
                   <div class="card m-b-20">
                      <div class="card-block">
                         <h4 class="mt-0 header-title"> Add Template </h4>
@@ -60,7 +60,7 @@
                            <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Template Content</label>
                               <div class="col-sm-8">
-                                  <textarea class="summernote form-control" name="templatecontent"></textarea>     
+                                  <textarea class="form-control" name="templatecontent"></textarea>     
                               </div>
                            </div>
                            <div class="form-group">

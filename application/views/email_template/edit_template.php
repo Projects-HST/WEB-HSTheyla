@@ -61,7 +61,7 @@
                            <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Template Content</label>
                               <div class="col-sm-8">
-                                  <textarea class="summernote form-control" name="templatecontent"><?php echo $res->template_content;?></textarea>     
+                                  <textarea class="form-control" name="templatecontent"><?php echo $res->template_content;?></textarea>     
                               </div>
                            </div>
                            <div class="form-group">

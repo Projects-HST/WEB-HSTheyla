@@ -71,11 +71,12 @@ class Events extends CI_Controller
         $colour_scheme = $this->input->post('colour_scheme');
         $event_status  = $this->input->post('event_status');
         $datas         = $this->eventsmodel->insert_events_details($event_name, $category, $country, $city, $venue, $address, $description, $eventcost, $start_date, $end_date, $start_time, $end_time, $txtLatitude, $txtLongitude, $pcontact_cell, $scontact_cell, $contact_person, $email, $event_banner, $colour_scheme, $event_status, $eadv_status, $booking_sts, $hotspot_sts, $user_id, $user_role);
-        $sta           = $datas['status'];
+        $sta		     = $datas['status'];
+		$event_id		 = $datas['event_id'];
         // print_r($sta);exit;
         if ($sta == "success") {
             $this->session->set_flashdata('msg', 'Added Successfully');
-            redirect('events/view_events');
+            redirect('events/add_events_gallery/'.$event_id);
         } else if ($sta == "Already Exist") {
             $this->session->set_flashdata('msg', 'Already Exist');
             redirect('events/view_events');
