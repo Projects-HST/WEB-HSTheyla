@@ -80,6 +80,9 @@
 body{
   background-color: #f6f6f6;
 }
+div#DataTables_Table_0_filter{
+  float: right;
+}
 </style>
 <script>
 $(document).ready(function() {
