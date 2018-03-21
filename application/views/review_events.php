@@ -79,7 +79,9 @@
 body{
   background-color: #f6f6f6;
 }
-
+.dt-buttons{
+  display: none;
+}
 </style>
 <script>
 $(document).ready(function() {
