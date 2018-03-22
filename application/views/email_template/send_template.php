@@ -1,52 +1,8 @@
-<!-- Start content -->
- <!--Summernote js-->
-<script src="<?php echo base_url(); ?>assets/plugins/summernote/summernote.min.js"></script>
- <link href="<?php echo base_url(); ?>assets/plugins/summernote/summernote.css" rel="stylesheet" />
-<!--div class="content-page">
-<div class="content">
-   <!- Top Bar Start ->
-   <div class="topbar">
-      <nav class="navbar-custom">
-         <ul class="list-inline float-right mb-0">
-            <!-li class="list-inline-item dropdown notification-list">
-               <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
-                  aria-haspopup="false" aria-expanded="false">
-               <i class="ion-ios7-bell noti-icon"></i>
-               <span class="badge badge-success noti-icon-badge">3</span>
-               </a>
-            </li!->
-            <li class="list-inline-item dropdown notification-list">
-            <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
-               aria-haspopup="false" aria-expanded="false">
-            <img src="<?php echo base_url(); ?>assets/images/admin/admin.png" alt="user" class="rounded-circle">
-            </a>
-            <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-            <!-a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
-            <a class="dropdown-item" href="#"><span class="badge badge-success pull-right">5</span><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
-            <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a!->
-            <a class="dropdown-item" href="<?php echo base_url(); ?>adminlogin/logout"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
-            </div>
-            </li>
-         </ul>
-         <ul class="list-inline menu-left mb-0">
-         <li class="list-inline-item">
-         <button type="button" class="button-menu-mobile open-left waves-effect">
-         <i class="ion-navicon"></i>
-         </button>
-         </li>
-         <li class="hide-phone list-inline-item app-search">
-         <h3 class="page-title">Send Email</h3>
-         </li>
-         </ul>
-         <div class="clearfix"></div>
-      </nav>
-      </div>
-      <!- Top Bar End -->
       <div class="page-content-wrapper">
          <div class="container">
            <h4 class="mt-0 header-title"> Send Email</h4>
            
-          <form method="post" action="<?php echo base_url();?>emailtemplate/select_users" name="emailform" id="emailform" style="margin-bottom: 20px;">
+          <form method="post" action="<?php echo base_url();?>emailtemplate/select_users" name="newsletterform" id="newsletterform" style="margin-bottom: 20px;">
          <?php  if(empty($search_view)) { ?>
             <div class="row">
               <div class="col-md-6 col-lg-6 col-xl-3">
@@ -89,7 +45,7 @@
                         <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
                      <?php } ?>
                   </select>
-                  <script language="JavaScript">document.emailform.countryid.value="<?php echo $res->country_id; ?>";</script>
+                  <script language="JavaScript">document.newsletterform.countryid.value="<?php echo $res->country_id; ?>";</script>
                   <!--/div-->
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
@@ -98,7 +54,7 @@
                         <option value="<?php echo $city->id; ?>"><?php echo $city->city_name; ?></option>
                      <?php } ?>
                   </select>
-                  <script language="JavaScript">document.emailform.cityid.value="<?php echo $res->city_id; ?>";</script>
+                  <script language="JavaScript">document.newsletterform.cityid.value="<?php echo $res->city_id; ?>";</script>
                  <div id="msg"></div>
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
@@ -147,37 +103,41 @@
                         </tr>
                      </thead>
                      <tbody>
-				                <?php
+<?php
                           $i=1;
                           if(empty($search_view))
                           {
-                            $pro_id = [];
-                           foreach($view as $rows) { $pro_id[] = $rows->email_id; $a=implode(',',$pro_id);?>
+                            $usr_id = [];
+                           	foreach($view as $rows) { 
+								$usr_id[] = $rows->user_id; 
+								$a = implode(',',$usr_id);
+?>
                             <tr>
                                <td><?php  echo $i; ?></td>
-                               <td><input type="checkbox" name="email[]" id="sendmail" class="checkbox check" value="<?php  echo $rows->email_id; ?>"></td>
+                               <td><input type="checkbox" name="users_id[]" id="sendnews" class="checkbox check" value="<?php  echo $rows->user_id; ?>"></td>
                                <td><?php  echo $rows->name; ?></td>
                                 <td><?php  echo $rows->email_id; ?></td>
                                 <td><?php  echo $rows->mobile_no; ?></td>
                             </tr>
                            <?php $i++;  } ?> 
-                           <div style="display: none;">
-                              <input type="text" name="useremail[]"  class="demo" value="<?php echo $a; ?>">
-                           </div>
-                            <?php  }else{  $ser_id = [];
-                             foreach($search_view as $res){   $ser_id[] = $res->email_id; $b=implode(',',$ser_id); ?>
+                           <div style="display: none;"><input type="text" name="userid[]"  class="demo" value="<?php echo $a; ?>"></div>
+                           <?php  }else{ 
+						   
+							$usr_id = [];
+                             foreach($search_view as $res){   
+								 $usr_id[] = $res->user_id; 
+								 $b=implode(',',$usr_id); ?>
                             <tr>
                                <td><?php  echo $i; ?></td>
                                <td>
-                                 <input type="checkbox" name="email[]" id="sendmail" class="checkbox check" value="<?php  echo $res->email_id; ?>">
+                                 <input type="checkbox" name="users_id[]" id="sendnews" class="checkbox check" value="<?php  echo $res->user_id; ?>">
                               </td>
                                <td><?php  echo $res->name; ?></td>
                                <td><?php  echo $res->email_id; ?></td>
-                                <td><?php  echo $res->mobile_no; ?></td>
+                               <td><?php  echo $res->mobile_no; ?></td>
                             </tr>
                        <?php $i++;  } ?> 
-                       <div style="display: none;"> 
-                        <input type="text" name="useremail[]"  class="demo" value="<?php echo $b; ?>"> </div>
+                       		<div style="display: none;"><input type="text" name="userid[]"  class="demo" value="<?php echo $b; ?>"></div>
                        <?php }?>
                      </tbody>
                         </table>
@@ -205,19 +165,21 @@
                       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                   </div>
                <div class="modal-body">
-               <form method="post" action="<?php echo base_url();?>emailtemplate/send_email" >
-            <select class="form-control" required="" name="email_temp_id" id="email_temp_id" style="margin-bottom:05%;" >
+               <!--<form method="post" action="<?php echo base_url();?>emailtemplate/send_email" >-->
+               <form method="post" action="<?php echo base_url();?>emailtemplate/send_newsletter" >
+            		<select class="form-control" required="" name="email_temp_id" id="email_temp_id" style="margin-bottom:05%;" >
                   <option value="">Select Templates</option>
                     <?php foreach($email_tem as $temp){ ?>
                         <option value="<?php echo $temp->id; ?>"><?php echo $temp->template_name; ?></option>
                      <?php } ?>
                   </select>
-                <input type="hidden" id="emails_id" name="usersemailid" class="form-control"/>
-               
-                  <div class="col-md-6 col-lg-6 col-xl-3">
+                  	<input type="checkbox" name="email" value="email">Email</input>
+					<input type="checkbox" name="sms" value="sms">SMS</input>
+                    <input type="checkbox" name="notify" value="notify">Notification</input>
+                <input type="hidden" id="user_id" name="user_id" class="form-control"/>
+                <div class="col-md-6 col-lg-6 col-xl-3">
                   <!--div class="mini-stat clearfix bg-primary"-->
-                     <button type="submit" class="btn btn-primary waves-effect waves-light">
-                      Send </button>
+                     <button type="submit" class="btn btn-primary waves-effect waves-light">Send</button>
                     
                   <!--/div-->
               </div>
@@ -235,7 +197,7 @@
    $('#checkAll:checkbox').change(function() {
             $("input:checkbox").prop('checked', $(this).prop("checked"));
            // var selected_value=[]; // initialize empty array 
-           // $('#sendmail:checked').each(function(){
+           // $('#sendnews:checked').each(function(){
            //  selected_value.push($(this).val());
            // });
            // console.log(selected_value);
@@ -245,13 +207,13 @@
  $(document).on("click", "#sendSelectedBtn", function () 
    { 
 	$('#addmodel').modal('show');
-     if($('input[name="email[]"]:checked').length > 0) {
+     if($('input[name="users_id[]"]:checked').length > 0) {
         var selected_value=[]; //initialize empty array 
-        $('#sendmail:checked').each(function()
+        $('#sendnews:checked').each(function()
         {
          selected_value.push($(this).val());
         });
-      $(".modal-body #emails_id").val(selected_value);
+      $(".modal-body #user_id").val(selected_value);
        
 
    }else{
@@ -268,7 +230,7 @@
             //energy=all_value.toString($(this).val());
             all_value.push($(this).val());
            });
-          $(".modal-body #emails_id").val(all_value);
+          $(".modal-body #user_id").val(all_value);
       });
   
   function getstatename(cid) {
@@ -307,4 +269,3 @@
  }
 
 </script>
-

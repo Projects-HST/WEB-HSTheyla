@@ -157,11 +157,12 @@ class Emailtemplate extends CI_Controller
           $datas['city_list'] = $this->emailtemplatemodel->getall_city_list();
           $datas['search_view'] = $this->emailtemplatemodel->getall_search_users_details($countryid,$cityid,$username);
            //echo'<pre>';print_r($datas['search_view'] );exit;
-        }
-		
-	    $datas['view'] = $this->emailtemplatemodel->getall_users_details();
-	    $datas['email_tem'] = $this->emailtemplatemodel->getall_email_template();
-	    $datas['countyr_list'] = $this->citymodel->getall_country_list();
+        } else {
+			$datas['view'] = $this->emailtemplatemodel->getall_users_details();
+		}
+			
+			$datas['email_tem'] = $this->emailtemplatemodel->getall_email_template();
+			$datas['countyr_list'] = $this->citymodel->getall_country_list();
 		
 		  $this->load->view('header');
 		  $this->load->view('email_template/send_template',$datas);
@@ -203,6 +204,51 @@ class Emailtemplate extends CI_Controller
 	    	redirect('/');
 	    }
 	}
+
+
+public function send_newsletter()
+	{
+		$datas=$this->session->userdata();
+	    $user_id=$this->session->userdata('id');
+	    $user_role=$this->session->userdata('user_role');
+        if($user_role == 1 || $user_role == 4)
+		{
+			
+			$user_ids = $this->input->post('user_id');
+	        $email_temp_id=$this->input->post('email_temp_id');
+			$email = $this->input->post('email');
+			$sms = $this->input->post('sms');
+			$notify = $this->input->post('notify');
+	        
+			if ($email!=""){
+				$datas['res']=$this->mailmodel->send_mail_to_users($user_ids,$email_temp_id);
+			}
+			if ($sms !=""){
+				$datas['res']=$this->mailmodel->send_sms_to_users($user_ids,$email_temp_id);
+			}
+			
+			if ($notify !=""){
+				$datas['res']=$this->mailmodel->send_nofify_to_users($user_ids,$email_temp_id);
+			}
+			exit;
+	        $sts = $datas['status'];
+	        //print_r($sts);
+			
+		
+			
+	        if($sts=="Y"){
+		       	$this->session->set_flashdata('msg','Send Successfully');
+			   	redirect('emailtemplate/select_users');
+		    }else{
+		     	 $this->session->set_flashdata('msg','Faild To Send');
+			     redirect('emailtemplate/select_users');
+		    }
+	    }else{
+	    	redirect('/');
+	    }
+	}
+
+
 
 }
 ?>
