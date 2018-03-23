@@ -122,6 +122,7 @@ class Emailtemplate extends CI_Controller
 
 		    $datas = $this->emailtemplatemodel->update_templates_details($id,$tempname,$tempdetails,$user_id);
 	        $sta=$datas['status'];
+	        
 	        //print_r($sta);exit;
 	        if($sta=="success"){
 		       $this->session->set_flashdata('msg','Updated Successfully');
@@ -157,10 +158,8 @@ class Emailtemplate extends CI_Controller
           $datas['city_list'] = $this->emailtemplatemodel->getall_city_list();
           $datas['search_view'] = $this->emailtemplatemodel->getall_search_users_details($countryid,$cityid,$username);
            //echo'<pre>';print_r($datas['search_view'] );exit;
-        } else {
+        } 
 			$datas['view'] = $this->emailtemplatemodel->getall_users_details();
-		}
-			
 			$datas['email_tem'] = $this->emailtemplatemodel->getall_email_template();
 			$datas['countyr_list'] = $this->citymodel->getall_country_list();
 		
@@ -221,28 +220,18 @@ public function send_newsletter()
 			$notify = $this->input->post('notify');
 	        
 			if ($email!=""){
-				$datas['res']=$this->mailmodel->send_mail_to_users($user_ids,$email_temp_id);
+				$datas1 =$this->mailmodel->send_mail_to_users($user_ids,$email_temp_id);
 			}
 			if ($sms !=""){
-				$datas['res']=$this->mailmodel->send_sms_to_users($user_ids,$email_temp_id);
+				$datas2 =$this->mailmodel->send_sms_to_users($user_ids,$email_temp_id);
 			}
 			
 			if ($notify !=""){
-				$datas['res']=$this->mailmodel->send_nofify_to_users($user_ids,$email_temp_id);
+				$datas3 =$this->mailmodel->send_nofify_to_users($user_ids,$email_temp_id);
 			}
-			exit;
-	        $sts = $datas['status'];
-	        //print_r($sts);
-			
 		
-			
-	        if($sts=="Y"){
-		       	$this->session->set_flashdata('msg','Send Successfully');
-			   	redirect('emailtemplate/select_users');
-		    }else{
-		     	 $this->session->set_flashdata('msg','Faild To Send');
-			     redirect('emailtemplate/select_users');
-		    }
+	        $this->session->set_flashdata('msg','Send Successfully');
+	        redirect('emailtemplate/select_users');
 	    }else{
 	    	redirect('/');
 	    }
