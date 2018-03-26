@@ -202,7 +202,7 @@ class Users extends CI_Controller
             $city=$this->input->post('city');
             $zip=$this->input->post('zip');
             $status=$this->input->post('status');
-            $userrole=$this->input->post('userrole');
+            $userrole=$this->input->post('role');
             $display_status=$this->input->post('display_status');
 
             $old_picture=$this->input->post('old_picture');

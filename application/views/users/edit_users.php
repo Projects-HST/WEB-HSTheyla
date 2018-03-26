@@ -208,14 +208,15 @@
 
                               <label for="Status" class="col-sm-2 col-form-label">User Role</label>
                             <div class="col-sm-4">
-                               <select class="form-control"  name="userrole" id="userrole">
-                                    <option value=" ">Select User Role</option>
+                              
+                               <select class="form-control"  name="role" id="userrole">
+                                    <!-- <option value=" ">Select User Role</option> -->
                                     <?php foreach ($users_role as $value) { ?>
                                      <option value="<?php echo $value->id; ?>"><?php echo $value->user_role_name; ?></option>
                                    <?php } ?>
                                 </select>
-                                <!-- <script type="text/javascript">document.usersform.userrole.value="<?php echo $res->user_role; ?>";</script> -->
-                                <script type="text/javascript">document.usersform.userrole.value="<?php echo $res->user_role; ?>";</script>
+
+                                <script type="text/javascript">document.usersform.role.value="<?php echo $res->user_role; ?>";</script>
                             </div>
 
                         </div>
