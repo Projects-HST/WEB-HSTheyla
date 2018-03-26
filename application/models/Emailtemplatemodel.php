@@ -11,10 +11,10 @@ Class Emailtemplatemodel extends CI_Model
 
    function getall_email_template_details()
    {
-		$email="SELECT id,template_name,template_content FROM email_template ORDER BY id DESC";
-		$resu=$this->db->query($email);
-		$res=$resu->result();
-		return $res;
+   	$email="SELECT id,template_name,template_content FROM email_template ORDER BY id DESC";
+   	$resu=$this->db->query($email);
+    $res=$resu->result();
+    return $res;
    }
    
    function add_templates_details($tempname,$tempdetails,$user_id)
@@ -35,26 +35,26 @@ Class Emailtemplatemodel extends CI_Model
 
    function delete_templates_details($id,$user_id)
    {
-		$del="DELETE FROM email_template WHERE id='$id' ";
-		$del1=$this->db->query($del);
-		$data = array("status"=>"success");
-		return $data;
+   	$del="DELETE FROM email_template WHERE id='$id' ";
+   	$del1=$this->db->query($del);
+	$data = array("status"=>"success");
+	return $data;
    }
 
    function edit_email_template_details($id)
    {
-		$email="SELECT id,template_name,template_content FROM email_template WHERE id='$id'";
-		$resu=$this->db->query($email);
-		$res=$resu->result();
-		return $res;
+   	$email="SELECT id,template_name,template_content FROM email_template WHERE id='$id'";
+   	$resu=$this->db->query($email);
+    $res=$resu->result();
+    return $res;
    }
 
    function update_templates_details($id,$tempname,$tempdetails,$user_id)
    {
-		$update="UPDATE email_template SET template_name='$tempname',template_content='$tempdetails',updated_by='$user_id',updated_at=NOW() WHERE id='$id'";
-		$resu1=$this->db->query($update);
-		$data = array("status"=>"success");
-		return $data;
+   	$update="UPDATE email_template SET template_name='$tempname',template_content='$tempdetails',updated_by='$user_id',updated_at=NOW() WHERE id='$id'";
+   	$resu1=$this->db->query($update);
+    $data = array("status"=>"success");
+	return $data;
    }
 
 //-------------------------SEND----------------------------
@@ -85,26 +85,25 @@ Class Emailtemplatemodel extends CI_Model
    }
    
    function getall_search_users_details($countryid,$cityid,$username)
-   { 
-	   if(empty($username)){
-			 $search="SELECT ud.user_id,ud.name,ud.country_id,ud.city_id,um.id,um.email_id,um.mobile_no,ci.city_name FROM user_details AS ud, user_master AS um,city_master AS ci WHERE um.id=ud.user_id AND ud.country_id='$countryid' AND ud.city_id='$cityid' AND ud.city_id=ci.id";
-		 $search1=$this->db->query($search);
-		 $search2=$search1->result();
+   { if(empty($username)){
+        $search="SELECT ud.user_id,ud.name,ud.country_id,ud.city_id,um.id,um.email_id,um.mobile_no,ci.city_name FROM user_details AS ud, user_master AS um,city_master AS ci WHERE um.id=ud.user_id AND ud.country_id='$countryid' AND ud.city_id='$cityid' AND ud.city_id=ci.id";
+        $search1=$this->db->query($search);
+        $search2=$search1->result();
+	 return $search2;
+	}else{
+		 $search="SELECT ud.user_id,ud.name,ud.country_id,ud.city_id,um.id,um.user_name,um.email_id,um.mobile_no,ci.city_name FROM user_details AS ud, user_master AS um,city_master AS ci WHERE um.id=ud.user_id AND ud.country_id='$countryid' AND ud.city_id='$cityid' AND um.user_name='$username' AND ud.city_id=ci.id";
+	     $search1=$this->db->query($search);
+	     $search2=$search1->result();
 		 return $search2;
-		}else{
-			 $search="SELECT ud.user_id,ud.name,ud.country_id,ud.city_id,um.id,um.user_name,um.email_id,um.mobile_no,ci.city_name FROM user_details AS ud, user_master AS um,city_master AS ci WHERE um.id=ud.user_id AND ud.country_id='$countryid' AND ud.city_id='$cityid' AND um.user_name='$username' AND ud.city_id=ci.id";
-			 $search1=$this->db->query($search);
-			 $search2=$search1->result();
-			 return $search2;
-		}
+	}
    }
 
    function getall_email_template()
    {
-		$temp="SELECT * FROM email_template";
-		$resultset1=$this->db->query($temp);
-		$row1=$resultset1->result();
-		return $row1;
+   	$temp="SELECT * FROM email_template";
+   	$resultset1=$this->db->query($temp);
+    $row1=$resultset1->result();
+	return $row1;
    }
 
 }
