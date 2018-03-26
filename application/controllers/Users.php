@@ -187,11 +187,9 @@ class Users extends CI_Controller
 	        if(empty($pwd1)){
 				$pwd=$old_pwd;
 			}else{ $pwd=md5($pwd1); }
-
-	        $sdate=$this->input->post('dob');
-
-			$dateTime = new DateTime($sdate);
-			$dob=date_format($dateTime,'Y-m-d');
+					$sdate=$this->input->post('dob');
+					$dateTime =DateTime::createFromFormat('m-d-Y', $sdate);
+					$dob=$dateTime->format('Y-m-d');
            //echo $dob; exit;
 	        $gender=$this->input->post('gender');
 
