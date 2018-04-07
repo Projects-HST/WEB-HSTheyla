@@ -46,8 +46,9 @@
 </div>
     <div class="col-md-5">
       <div class="socialmedia-tab">
-        <a href="<?php echo base_url(); ?>facebook_login" class="social-link-img"><img src="<?php echo base_url(); ?>assets/front/images/login-facebook.png" class="img-responsive social-img"></a><br>
-        <a href="<?php echo base_url(); ?>google_login" class="social-link-img"><img src="<?php echo base_url(); ?>assets/front/images/login-google.png" class="img-responsive social-img"></a>
+
+        <a class="social-link-img" onclick="fbAuthUser()"><img src="<?php echo base_url(); ?>assets/front/images/login-facebook.png" class="img-responsive social-img"></a><br>
+          <a href="<?php echo base_url(); ?>google_login" class="social-link-img"><img src="<?php echo base_url(); ?>assets/front/images/login-google.png" class="img-responsive social-img"></a>
                 </div>
             </div>
         </div>
@@ -131,4 +132,56 @@ $('#formsignup').validate({ // initialize the plugin
 
 
 
+</script>
+
+<script src="//connect.facebook.net/en_US/all.js"></script>
+<script type="text/javascript">
+
+// Initialize the Facebook JavaScript SDK
+FB.init({
+  appId: '323814224809825', // Your app id
+  channelUrl : '', // Your channel url
+  xfbml: true,
+  status: true,
+  cookie: true,
+});
+
+function fbAuthUser() {
+    FB.login(checkLoginStatus);
+}
+
+function checkLoginStatus(response) {
+    if(response && response.status == 'connected') {
+      //  document.getElementById("fb").checked = true;
+		FB.api('/me?fields=email,name,first_name,last_name', function(response)
+	{
+
+
+        var fbname=response.name;
+		    var fbemail=response.email;
+        swal('Please wait')
+        swal.showLoading();
+         $.ajax({
+              url:'<?php echo base_url(); ?>home/facebook_login',
+              data: { 'fbname' : fbname, 'fbemail' : fbemail },
+              type: "POST",
+              crossDomain: true,
+              success: function (data) {
+              if(data=="success"){
+                setTimeout(function(){
+                 window.location.reload(1);
+              }, 1000);
+              }else{
+                sweetAlert("Oops...", "Something wen Wrong", "error");
+              }
+
+           }
+
+
+        });
+    });
+    } else {
+        document.getElementById("fb").checked = false
+    }
+}
 </script>
