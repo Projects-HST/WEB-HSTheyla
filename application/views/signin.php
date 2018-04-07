@@ -33,7 +33,7 @@
 </div>
     <div class="col-md-5">
       <div class="socialmedia-tab">
-        <a class="social-link-img" onclick="fbAuthUser()"><img src="<?php echo base_url(); ?>assets/front/images/login-facebook.png" class="img-responsive social-img"></a><br>
+        <a class="social-link-img" onclick="fbAuthUser(function(response){},{perms:'email,publish_stream'})" scope="public_profile,email"><img src="<?php echo base_url(); ?>assets/front/images/login-facebook.png" class="img-responsive social-img"></a><br>
       <a href="<?php echo base_url(); ?>google_login" class="social-link-img"><img src="<?php echo base_url(); ?>assets/front/images/login-google.png" class="img-responsive social-img"></a>
     </div>
     </div>

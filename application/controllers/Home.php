@@ -561,7 +561,9 @@ class Home extends CI_Controller {
 		{
 
 				$firstname=$this->input->post('fbname');
-				$email=$this->input->post('fbemail');
+			 	$email=$this->input->post('fbemail');
+
+
 				$datas['result'] = $this->loginmodel->getuserfb($firstname,$email);
 
 						$user_role=$datas['result']['user_role'];

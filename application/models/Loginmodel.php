@@ -495,8 +495,9 @@ Class Loginmodel extends CI_Model
    }
 
    function getuserfb($firstname,$email){
-      $check_email="SELECT * FROM user_master WHERE email_id='$email'";
+     $check_email="SELECT * FROM user_master WHERE email_id='$email'";
       $res=$this->db->query($check_email);
+
       if($res->num_rows()==0){
         $query="INSERT INTO user_master (email_id,last_login,user_role,email_verify,status,created_at) VALUES('$email',NOW(),'3','Y','Y',NOW())";
         $resultset=$this->db->query($query);
