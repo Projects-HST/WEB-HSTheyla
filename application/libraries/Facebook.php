@@ -121,6 +121,7 @@ Class Facebook
 
         if (isset($access_token))
         {
+          
             return $access_token;
         }
 

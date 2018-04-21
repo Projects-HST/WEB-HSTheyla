@@ -7,6 +7,7 @@ class Home extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('loginmodel');
+	//	$this->load->model('facebook');
 		$this->load->model('organizermodel');
 		$this->load->model('organizerbookingmodel');
 		$this->load->helper('url');
@@ -385,14 +386,14 @@ class Home extends CI_Controller {
 	    $user_role = $this->session->userdata('user_role');
 
 		$datas['result'] = $this->organizermodel->list_events($user_id);
-		
+
 		if($user_role==2)
 		{
-		  $this->load->view('front_header');	
+		  $this->load->view('front_header');
 		  //$this->load->view('organizer/reviews/view_events',$datas);
 		  $this->load->view('review_events',$datas);
 		  $this->load->view('front_footer');
-		  
+
 	 	}else{
 	 			redirect('/');
 	 	}
@@ -408,7 +409,7 @@ class Home extends CI_Controller {
       //echo'<pre>';print_r($datas['views']);exit();
 		if($user_role==2)
 		{
-		  $this->load->view('front_header');	
+		  $this->load->view('front_header');
 		  //$this->load->view('organizer/reviews/events_reviews',$datas);
 		  $this->load->view('view_reviews',$datas);
 		  $this->load->view('front_footer');
@@ -558,47 +559,73 @@ class Home extends CI_Controller {
 
 	public function facebook_login()
 		{
-			$datas=$this->session->userdata();
-			$this->load->library('facebook');
-			$data['user'] = array();
 
-			// Check if user is logged in
-			if ($this->facebook->is_authenticated())
-			{
-				// User logged in, get user details
-				$user = $this->facebook->request('get', '/me?fields=id,name,email');
+				$firstname=$this->input->post('fbname');
+			 	$email=$this->input->post('fbemail');
 
 
-				if (!isset($user['error']))
-				{
-					$data['user'] = $user;
-					$firstname= $data['user']['name'];
-					$email=$data['user']['email'];
+				$datas['result'] = $this->loginmodel->getuserfb($firstname,$email);
 
-					$datas['result'] = $this->loginmodel->getuserfb($firstname,$email);
-					$user_role=$datas['result']['user_role'];
-					$status=$datas['result']['status'];
-					if($status=='Y'){
-						if($user_role==3){
-							redirect('leaderboard');
-						}else if($user_role==2){
-							redirect('leaderboard');
+						$user_role=$datas['result']['user_role'];
+						$status=$datas['result']['status'];
+
+
+						if($status=='Y'){
+							if($user_role==3){
+							echo "success";
+							}else if($user_role==2){
+									echo "success";
+							}else{
+								redirect('/');
+							}
 						}else{
-							redirect('/');
+						redirect('deactive');
+
 						}
-					}else{
-					redirect('deactive');
 
-					}
-				}else{
-					redirect('/');
-				}
-
-			}else{
-
-				redirect($this->facebook->login_url());
-				//$this->load->view('web', $data);
-			}
+			// $datas=$this->session->userdata();
+			// $this->load->library('facebook');
+			// $data['user'] = array();
+			//
+			// // Check if user is logged in
+			// if ($this->facebook->is_authenticated())
+			// {
+			// 	// User logged in, get user details
+			// 	$user = $this->facebook->request('get', '/me?fields=id,name,email');
+			//
+			//
+			// 	if (!isset($user['error']))
+			// 	{
+			// 		$data['user'] = $user;
+			// 		$firstname= $data['user']['name'];
+			// 		$email=$data['user']['email'];
+			//
+			// 		$datas['result'] = $this->loginmodel->getuserfb($firstname,$email);
+			//
+			// 		$user_role=$datas['result']['user_role'];
+			// 		$status=$datas['result']['status'];
+			//
+			//
+			// 		if($status=='Y'){
+			// 			if($user_role==3){
+			// 				redirect('leaderboard');
+			// 			}else if($user_role==2){
+			// 				redirect('leaderboard');
+			// 			}else{
+			// 				redirect('/');
+			// 			}
+			// 		}else{
+			// 		redirect('deactive');
+			//
+			// 		}
+			// 	}else{
+			// 		redirect('/');
+			// 	}
+			//
+			// }else{
+			// 	//echo "out";exit;
+			//  redirect($this->facebook->login_url());
+			// }
 
 		}
 
