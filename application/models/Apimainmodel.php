@@ -2396,7 +2396,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                             left join event_popularity as ep on ep.event_id = ev.id
                             LEFT JOIN city_master AS ci ON ev.event_city = ci.id
                             LEFT JOIN country_master AS cy ON ev.event_country = cy.id
-                            WHERE ev.hotspot_status = 'N' AND ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
+                            WHERE ev.hotspot_status = 'N' AND ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_status  ='Y'
                             group by ev.id HAVING distance <= '$nearby_distance'";
 	    } 
 	    if ($event_type == 'Hotspot'){
@@ -2406,7 +2406,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                             left join event_popularity as ep on ep.event_id = ev.id
                             LEFT JOIN city_master AS ci ON ev.event_city = ci.id
                             LEFT JOIN country_master AS cy ON ev.event_country = cy.id
-                            WHERE ev.hotspot_status = 'Y' AND ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
+                            WHERE ev.hotspot_status = 'Y' AND ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_status  ='Y'
                             group by ev.id HAVING distance <= '$nearby_distance'";
 	    } 
 	    if ($event_type == 'Popular'){
@@ -2416,7 +2416,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                             left join event_popularity as ep on ep.event_id = ev.id
                             LEFT JOIN city_master AS ci ON ev.event_city = ci.id
                             LEFT JOIN country_master AS cy ON ev.event_country = cy.id
-                            WHERE ev.hotspot_status = 'N' AND ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
+                            WHERE ev.hotspot_status = 'N' AND ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_status  ='Y'
                             group by ev.id HAVING distance <= '$nearby_distance' ORDER by popularity DESC";
 	    } 
 		//echo $event_query;

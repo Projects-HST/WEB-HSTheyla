@@ -85,7 +85,7 @@
                      <div class="card-block">
                         <h4 class="mt-0 header-title">View All Countries</h4>
                         
-                           <?php if($this->session->flashdata('msg')): ?>
+                       <?php if($this->session->flashdata('msg')): ?>
                         <div class="alert alert-success">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                            ×</button> <?php echo $this->session->flashdata('msg'); ?>
