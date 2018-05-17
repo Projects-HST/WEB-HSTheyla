@@ -50,7 +50,7 @@
         <section class="row event-details-desc">
 			<div class="col-md-6">
 				<p class="event-desc">Description</p>
-				<p class="event-desc-details"><?php echo $res->description; ?></p>
+				<p class="event-desc-details"><?php echo nl2br($res->description); ?></p>
 			</div>
 			<div class="col-md-3">
 				<p class="event-desc">Date and Time</p>
