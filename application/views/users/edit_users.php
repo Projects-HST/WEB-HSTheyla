@@ -91,7 +91,7 @@
                             </div>
                               <label for="Name" class="col-sm-2 col-form-label">New Password</label>
                             <div class="col-sm-4">
-                              <input class="form-control" type="text"  name="new_pwd" >
+                              <input class="form-control" type="password"  name="new_pwd" >
                               <input class="form-control" type="hidden"  name="old_pwd"  value="<?php echo $res->password;?>">
                             </div>
                         </div>
@@ -203,7 +203,7 @@
                               <div class="col-sm-4">
                                  <input type="file" name="user_picture" class="form-control" accept="image/*" >
                                  <input type="hidden" name="old_picture" class="form-control" value="<?php echo $res->user_picture; ?>" >
-                                    <input type="hidden" name="userrole" class="form-control" value="<?php echo $res->user_role; ?>" >
+                                 <input type="hidden" name="userrole" class="form-control" value="<?php echo $res->user_role; ?>" >
                               </div>
 
                               <label for="Status" class="col-sm-2 col-form-label">User Role</label>

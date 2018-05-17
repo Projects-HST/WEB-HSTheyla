@@ -95,14 +95,14 @@ Class Usersmodel extends CI_Model
 
     }
 
-    function update_user_details($uid,$umid,$username,$name,$cell,$email,$pwd,$dob,$gender,$address1,$address2,$address3,$occupation,$country,$statename,$city,$zip,$user_pic1,$status,$userrole,$user_id,$display_status)
+    function update_user_details($uid,$umid,$username,$pwd,$name,$cell,$email,$pwd,$dob,$gender,$address1,$address2,$address3,$occupation,$country,$statename,$city,$zip,$user_pic1,$status,$userrole,$user_id,$display_status)
     {
       //$check_user="SELECT * FROM user_master WHERE user_name='$username' OR mobile_no='$cell' OR email_id='$email'";
       //$result=$this->db->query($check_user);
       //if($result->num_rows()==0)
       //{
-    	 $pwd1=md5($pwd);
-    	 $umupdate="UPDATE user_master SET user_name='$username',mobile_no='$cell',email_id='$email',password='$pwd1',user_role='$userrole',status='$display_status',updated_by='$user_id',updated_at=NOW() WHERE  id='$umid' ";
+    	 //$pwd1=md5($pwd);
+    	 $umupdate="UPDATE user_master SET user_name='$username',mobile_no='$cell',email_id='$email',password='$pwd',user_role='$userrole',status='$display_status',updated_by='$user_id',updated_at=NOW() WHERE  id='$umid' ";
     	 $umdetails=$this->db->query($umupdate);
         $usupdate="UPDATE user_details SET name='$name',birthdate='$dob',gender='$gender',occupation='$occupation',address_line1='$address1',address_line2='$address2',address_line3='$address3',country_id='$country',state_id='$statename',city_id='$city',zip='$zip',user_picture='$user_pic1',newsletter_status='$status' WHERE id='$uid' AND user_id='$umid'";
         $usdetails=$this->db->query($usupdate);

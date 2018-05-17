@@ -12,6 +12,9 @@
 		}
 		return $output;
     }
+	
+	$dateTime = new DateTime('now', new DateTimeZone('Asia/Kolkata')); 
+	$current_time = $dateTime->format("h:i A"); 
 ?>
 <script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
 <link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
@@ -144,7 +147,7 @@
                             <label for="sdate" class="col-sm-2 col-form-label">Start Date</label>
                             <div class="col-sm-4">
                               <div class="input-group">
-                                <input type="text" class="form-control datepicker"  name="start_date" id="datepicker-autoclose">
+                                <input type="text" class="form-control datepicker"  name="start_date" id="datepicker-autoclose" value="<?php echo date("d-m-Y"); ?>">
                                 <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
                             </div>
                             </div>
@@ -152,7 +155,7 @@
                              <label for="edate" class="col-sm-2 col-form-label">End Date</label>
                             <div class="col-sm-4">
                                <div class="input-group">
-                                <input type="text" class="form-control datepicker" name="end_date" id="datepicker">
+                                <input type="text" class="form-control datepicker" name="end_date" id="datepicker" value="<?php echo date("d-m-Y"); ?>">
                                 <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
                                  
                             </div>
@@ -162,7 +165,7 @@
                         <div class="form-group row">
                             <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
                             <div class="col-sm-4">
-                               <input  type="text" class="form-control" id="stime" name="start_time">
+                               <input  type="text" class="form-control" id="stime" name="start_time" value="<?php echo $current_time; ?>">
                                 <!-- select name="start_time" required="" class="form-control"  >
                                      <option value="">Select Start Time</option>
                                      <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
@@ -171,7 +174,7 @@
                             </div>
                              <label for="etime" class="col-sm-2 col-form-label">End Time</label>
                             <div class="col-sm-4">
-                              <input  type="text" class="form-control" id="etime" name="end_time" >
+                              <input  type="text" class="form-control" id="etime" name="end_time" value="<?php echo $current_time; ?>">
                                 <!--select name="end_time" required="" class="form-control" id="etime">
                                      <option value="">Select End Time</option>
                                      <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>

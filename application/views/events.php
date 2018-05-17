@@ -170,13 +170,11 @@ $('#category').select2({
 });
 
 
-
-
-
 $( document ).ready(function() {
-  var limit = 9
-    var offset = 0;
-  var result = '';
+
+		var limit = 9
+		var offset = 0;
+		var result = '';
 
         // start to load the first set of data
         displayEvents(limit, offset);
@@ -206,15 +204,22 @@ function displayEvents(lim, off) {
         success: function(html) {
             $('#loader_image').hide();
 			var dataArray = JSON.parse(html);
+			
+//alert(escape("mike's"));
+//
 
 		if (dataArray.length>0) {
+			
 			for (var i = 0; i < dataArray.length; i++){
 				var disp_event_id = dataArray[i].id;
 				var event_id = dataArray[i].id*564738;
 				var enc_event_id = btoa(event_id);
 				var event_name = dataArray[i].event_name;
-				var sevent_name = event_name.toLowerCase();
-				var enc_event_name = sevent_name.replace(/\s/g, '-');
+				var sm_event_name = event_name.toLowerCase();
+				var eevent_name = sm_event_name.replace(/"/g, "");
+				var sevent_name = eevent_name.replace(/'/g, "");
+				var qevent_name = sevent_name.replace(/,/g, '');
+				var enc_event_name = qevent_name.replace(/\s/g,"-");
 				var event_banner = dataArray[i].event_banner;
 				var event_type = dataArray[i].event_type;
 				var country_name = dataArray[i].country_name;
@@ -224,8 +229,9 @@ function displayEvents(lim, off) {
 				var date = new Date(Date.parse(start_date));
 				var sdate = String (date);
 				var disp_date = sdate.replace('05:30:00 GMT+0530 (India Standard Time)', '');
-				var wlstatus = dataArray[i].wlstatus;
+				var wlstatus = dataArray[i].wlstatus; 
 				if(wlstatus==null){
+					
 					 var wishliststatus="<span class='pull-right favourite-icon' id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' alt=''><a></span>";
 				}else{
 					 var wishliststatus="<span class='pull-right favourite-icon' id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-select.png' alt=''></a></span>";
@@ -235,17 +241,20 @@ function displayEvents(lim, off) {
 
 			};
 				$("#event_list").append(result);
+				
 			}
-
-            if (dataArray.length>0) {
+		
+         if (dataArray.length>0) {
 			$("#loader_message").html('<button class="btn btn-default" type="button">Load more data</button>').show();
 
             } else {
              $("#loader_message").html('<button data-atr="nodata" class="btn btn-default" type="button">No more records.</button>').show()
-            }
+            } 
 
-          }
+         
+		}
         });
+
       }
 
 
@@ -271,8 +280,11 @@ function getevents()
 				var event_id = dataArray[i].id*564738;
 				var enc_event_id = btoa(event_id);
 				var event_name = dataArray[i].event_name;
-				var sevent_name = event_name.toLowerCase();
-				var enc_event_name = sevent_name.replace(/\s/g, '-');
+				var sm_event_name = event_name.toLowerCase();
+				var eevent_name = sm_event_name.replace(/"/g, "");
+				var sevent_name = eevent_name.replace(/'/g, "");
+				var qevent_name = sevent_name.replace(/,/g, '');
+				var enc_event_name = qevent_name.replace(/\s/g,"-");
 				var event_banner = dataArray[i].event_banner;
 				var event_type = dataArray[i].event_type;
 				var country_name = dataArray[i].country_name;
@@ -307,6 +319,7 @@ function getevents()
 
 function searchevents()
 {
+	
 	var srch_term = search_term.value;
 	var result = '';
 
@@ -323,8 +336,11 @@ function searchevents()
 				var event_id = dataArray[i].id*564738;
 				var enc_event_id = btoa(event_id);
 				var event_name = dataArray[i].event_name;
-				var sevent_name = event_name.toLowerCase();
-				var enc_event_name = sevent_name.replace(/\s/g, '-');
+				var sm_event_name = event_name.toLowerCase();
+				var eevent_name = sm_event_name.replace(/"/g, "");
+				var sevent_name = eevent_name.replace(/'/g, "");
+				var qevent_name = sevent_name.replace(/,/g, '');
+				var enc_event_name = qevent_name.replace(/\s/g,"-");
 				var event_banner = dataArray[i].event_banner;
 				var event_type = dataArray[i].event_type;
 				var country_name = dataArray[i].country_name;
@@ -405,19 +421,20 @@ function getcityname(cid) {
 	}
 	});
 }
-
+ 
 $( function() {
     var availableTags = [<?php
 	 $tot_count = count($event_resu);
 	 $i = 1;
 		foreach($event_resu as $res){
 		echo "'";
-		echo $event_name = $res->event_name;
+		echo $str = addslashes($res->event_name);
+		//echo str_replace("'", "", $res->event_name);
 		echo "'";
 		if ($i < $tot_count) echo ",";
 		 $i = $i+1;} ?>];
     $( "#search_term" ).autocomplete({
       source: availableTags
     });
-  } );
+  } ); 
 </script>

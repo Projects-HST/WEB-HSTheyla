@@ -182,11 +182,21 @@ class Users extends CI_Controller
 
 	        $email=$this->input->post('email');
 	        $old_pwd=$this->input->post('old_pwd');
-	        $pwd1=$this->db->escape_str($this->input->post('new_pwd'));
-            //echo $old_pwd; echo'<br>'; echo md5($pwd1);
-	        if(empty($pwd1)){
-				$pwd=$old_pwd;
-			}else{ $pwd=md5($pwd1); }
+			 $new_pwd=$this->input->post('new_pwd');
+			
+			if(!empty($new_pwd)){
+				  $pwd = md5($new_pwd);
+			}else{
+				  $pwd = $old_pwd;
+			 }
+			//exit;
+	        //$pwd1=$this->db->escape_str($this->input->post('new_pwd'));
+            //echo $new_pwd; echo'<br>'; echo $old_pwd; echo'<br>'; echo md5($new_pwd);
+			
+	        //if(empty($pwd1)){
+			//	$pwd=$old_pwd;
+			//}else{ $pwd=md5($pwd1); }
+			
 					$sdate=$this->input->post('dob');
 					$dateTime =DateTime::createFromFormat('m-d-Y', $sdate);
 					$dob=$dateTime->format('Y-m-d');
@@ -218,7 +228,8 @@ class Users extends CI_Controller
 				$user_pic1=$old_picture;
 			}else{ $user_pic1=$user_pic1; }
               //echo $user_pic1;exit;
-		    $datas=$this->usersmodel->update_user_details($uid,$umid,$username,$name,$cell,$email,$pwd,$dob,$gender,$address1,$address2,$address3,$occupation,$country,$statename,$city,$zip,$user_pic1,$status,$userrole,$user_id,$display_status);
+			  
+		    $datas=$this->usersmodel->update_user_details($uid,$umid,$username,$pwd,$name,$cell,$email,$pwd,$dob,$gender,$address1,$address2,$address3,$occupation,$country,$statename,$city,$zip,$user_pic1,$status,$userrole,$user_id,$display_status);
 			 $sta=$datas['status'];
 		     if($sta=="success"){
 		       $this->session->set_flashdata('msg','Updated Successfully');
