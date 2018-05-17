@@ -898,24 +898,24 @@ class Home extends CI_Controller {
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
 			$user_role=$this->session->userdata('user_role');
-			if($user_role=='3'){
+			// if($user_role=='3'){
 				$mobile=$this->input->post('mobile');
 				$data=$this->loginmodel->save_mobile_number($mobile,$user_id);
-			}else{
-				redirect('/');
-			}
+			// }else{
+			// 	redirect('/');
+			// }
 		}
 
 		public function save_email_id(){
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
 			$user_role=$this->session->userdata('user_role');
-			if($user_role=='3'){
+			// if($user_role=='3'){
 				$email=$this->input->post('email');
 				$data=$this->loginmodel->save_email_id($email,$user_id);
-			}else{
-				redirect('/');
-			}
+			// }else{
+			// 	redirect('/');
+			// }
 		}
 		public function change_pic(){
 			$datas=$this->session->userdata();

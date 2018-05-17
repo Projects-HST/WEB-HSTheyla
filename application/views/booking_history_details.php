@@ -3,8 +3,7 @@
 <div class="row header-title leaderboard-bg">
   <div class="col-md-12">
   <div class="container">
-      <p class="leader-title">Bootstrap example of Fixed Background Image using HTML, Javascript, jQuery, and CSS. Snippet by iammahesh.</p>
-    </div>
+      <p class="leader-title">Heyla is an everything-for-everybody App – Start Exploring Straightaway.</p>  </div>
   </div>
 </div>
 
@@ -31,11 +30,11 @@
           </div><!--/span-->
 
           <div class="col-12 col-md-9">
-          
+
             <div class="card-header card-header-title">
 				<h3 class="mb-0">Booking History</h3>
             </div>
-            
+
 			<div class="card-block" style="padding:20px;">
                   <?php foreach($booking_details as $rows){}?>
                   		<div class="row" style="padding:5px;">
@@ -87,7 +86,7 @@
                             <div class="col-sm-3">Total Amount  : </div>
                             <div class="col-sm-3">₹ <?php echo $rows->total_amount; ?></div>
                             <div class="col-sm-3"></div>
-                        </div>                
+                        </div>
 			</div><!--/span-->
 
 
@@ -95,7 +94,7 @@
  			<div class="card-header card-header-title">
 				<h3 class="mb-0">Booking Attendees</h3>
             </div>
-            
+
 			<div class="card-block" style="padding:20px;">
 				<?php foreach($event_attendees as $rows){ ?>
                 <div class="row" style="padding:5px;">

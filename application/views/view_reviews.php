@@ -3,7 +3,7 @@
 <div class="row header-title leaderboard-bg">
   <div class="col-md-12">
   <div class="container">
-      <p class="leader-title">Bootstrap example of Fixed Background Image using HTML, Javascript, jQuery, and CSS. Snippet by iammahesh.</p>
+      <p class="leader-title">Heyla is an everything-for-everybody App – Start Exploring Straightaway.</p>
     </div>
   </div>
 </div>
@@ -26,40 +26,40 @@
               <a href="<?php echo base_url(); ?>booking_history" class="list-group-item"><span class="menu-icons"><i class="fas fa-book"></i></span>Booking </a>
               <a href="<?php echo base_url(); ?>wishlist" class="list-group-item"><span class="menu-icons"><i class="fas fa-heart"></i></span>Whishlist</a>
               <!--a href="<?php echo base_url(); ?>organizerbooking/messageboard/" class="list-group-item">Messages</a-->
-             
+
               <a href="<?php echo base_url(); ?>logout" class="list-group-item"><span class="menu-icons"><i class="fas fa-sign-out-alt"></i></span>Sign Out</a>
             </div>
           </div><!--/span-->
 
           <div class="col-12 col-md-9">
-       
+
               <div class="card-header">
 				<h3 class="mb-0">Event Reviews</h3>
 			</div>
 
            <div class="card card-outline-secondary" style="padding:5px;">
-                  
-		<?php if(!empty($views)) { 
+
+		<?php if(!empty($views)) {
 				foreach ($views as $value) {  ?>
          <div class="row">
             <div class="col-md-10">
                 <div class="card m-b-20 card-block">
                     <h3 class="card-title font-20 mt-0"> <?php echo $value->event_name;?> ( <?php echo $value->event_rating; ?> ) </h3>
                     <p class="card-text">
-                     <?php echo $value->comments;?> 
+                     <?php echo $value->comments;?>
 	                </p>
            		</div>
             </div>
         </div>
       <!-- end row -->
-        <?php } 
-			}else{ 
+        <?php }
+			}else{
 			echo "<p class=card-text> No Reviews Found </p>";
 			}?>
 
         </div><!-- container -->
-                  
-					
+
+
                   </div>
             </div>
           </div><!--/span-->

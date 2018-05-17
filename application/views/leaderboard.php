@@ -3,7 +3,7 @@
 <div class="row header-title leaderboard-bg">
   <div class="col-md-12">
     <div class="container">
-    <p class="leader-title">Bootstrap example of Fixed Background Image using HTML, Javascript, jQuery, and CSS. Snippet by iammahesh.</p>
+    <p class="leader-title">Heyla is an everything-for-everybody App – Start Exploring Straightaway.</p>
   </div>
   </div>
 </div>
@@ -26,7 +26,7 @@
               <a href="<?php echo base_url(); ?>booking_history" class="list-group-item"><span class="menu-icons"><i class="fas fa-book"></i></span>Booking </a>
               <a href="<?php echo base_url(); ?>wishlist" class="list-group-item"><span class="menu-icons"><i class="fas fa-heart"></i></span>Whishlist</a>
               <!--a href="<?php echo base_url(); ?>organizerbooking/messageboard/" class="list-group-item">Messages</a-->
-              
+
               <a href="<?php echo base_url(); ?>logout" class="list-group-item"><span class="menu-icons"><i class="fas fa-sign-out-alt"></i></span>Sign Out</a>
             </div>
           </div><!--/span-->
@@ -95,4 +95,3 @@ body{
   background-color: #f6f6f6;
 }
 </style>
-

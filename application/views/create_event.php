@@ -21,8 +21,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 <div class="row header-title leaderboard-bg">
   <div class="col-md-12">
   <div class="container">
-      <p class="leader-title">Bootstrap example of Fixed Background Image using HTML, Javascript, jQuery, and CSS. Snippet by iammahesh.</p>
-    </div>
+        <p class="leader-title">Heyla is an everything-for-everybody App – Start Exploring Straightaway.</p>  </div>
   </div>
 </div>
 

@@ -1,5 +1,5 @@
 <?php
-  function get_times( $default = '10:00', $interval = '+15 minutes' ) 
+  function get_times( $default = '10:00', $interval = '+15 minutes' )
   {
     $output = '';
     $current = strtotime( '00:00:00' );
@@ -27,8 +27,8 @@
 <div class="row header-title leaderboard-bg">
   <div class="col-md-12">
   <div class="container">
-      <p class="leader-title">Bootstrap example of Fixed Background Image using HTML, Javascript, jQuery, and CSS. Snippet by iammahesh.</p>
-    </div>
+      <p class="leader-title">Heyla is an everything-for-everybody App – Start Exploring Straightaway.</p>
+      </div>
   </div>
 </div>
 
@@ -66,7 +66,7 @@
                            ×</button> <?php echo $this->session->flashdata('msg'); ?>
                         </div>
                   <?php endif; ?>
-                        
+
                   <div class="card card-outline-secondary">
                     <div class="card-block">
                           <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>home/updateeventsdetails" name="eventform" id="eventform" onSubmit='return check();'>
@@ -103,7 +103,7 @@
                              <label for="city" class="col-sm-2 col-form-label">Select City</label>
                             <div class="col-sm-4">
                               <select class="form-control" name="city" id="ctname">
-                              <?php 
+                              <?php
                                 $cntyrid=$rows->event_country;
                                 $sql="SELECT id,city_name FROM city_master WHERE country_id='$cntyrid' AND event_status='Y' ORDER BY id ASC";
                                 $resu=$this->db->query($sql);
@@ -114,11 +114,11 @@
                                 </select>
                                 <script language="JavaScript">document.eventform.city.value="<?php echo $rows->event_city; ?>";</script>
                                  <div id="cmsg"></div>
-                             
+
                             </div>
                         </div>
                         <div class="form-group row">
-                           
+
                             <label for="Venue" class="col-sm-2 col-form-label">Venue</label>
                             <div class="col-sm-4">
                                 <input class="form-control" type="text" value="<?php echo $rows->event_venue; ?>" required="" name="venue"  >
@@ -130,7 +130,7 @@
 
                         </div>
                         <div class="form-group row">
-                           
+
                             <label for="Description" class="col-sm-2 col-form-label">Description</label>
                             <div class="col-sm-4">
                                 <textarea  id="textarea" required="" name="description" class="form-control" maxlength="30000" rows="3" placeholder=""><?php echo $rows->description; ?></textarea>
@@ -147,7 +147,7 @@
                             </div>
                         </div>
                        <div class="form-group row">
-                           
+
                             <label for="sdate" class="col-sm-2 col-form-label">Start Date</label>
                             <div class="col-sm-4">
                               <div class="input-group">
@@ -166,7 +166,7 @@
                         </div>
 
                         <div class="form-group row">
-                           
+
                             <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
                             <div class="col-sm-4">
 
@@ -220,7 +220,7 @@
 
               </div>
                         <div class="form-group row">
-                           
+
                             <label for="latitude" class="col-sm-2 col-form-label">Event Latitude</label>
                             <div class="col-sm-4">
                                 <input class="form-control" type="text" name="txtLatitude" value="<?php echo $rows->event_latitude; ?>" id="latu" >
@@ -254,7 +254,7 @@
                         </div>
 
                         <div class="form-group row">
-                           
+
                             <label for="Status" class="col-sm-2 col-form-label">Advertisement Display</label>
                             <div class="col-sm-4">
                                <select class="form-control" name="eadv_status">
@@ -264,7 +264,7 @@
                                 </select>
                                 <script language="JavaScript">document.eventform.eadv_status.value="<?php echo $rows->adv_status; ?>";</script>
                             </div>
-                        
+
                         <label for="Colour" class="col-sm-2 col-form-label">Booking Display</label>
                             <div class="col-sm-4">
                                  <select class="form-control" name="booking_sts">
@@ -277,7 +277,7 @@
                        </div>
 
                         <div class="form-group row">
-                            
+
                             <label for="Status" class="col-sm-2 col-form-label">Hotspot Display</label>
                             <div class="col-sm-4">
                                <select class="form-control" name="hotspot_sts">
@@ -305,7 +305,7 @@
 
 
                         <div class="form-group row">
-                            
+
                             <!--label for="Status" class="col-sm-2 col-form-label">Event Display</label>
                             <div class="col-sm-4">
                                <select class="form-control" required="" name="event_status">
@@ -324,7 +324,7 @@
                               <input type="hidden" name="eventid" class="form-control" value="<?php echo $rows->id; ?>" >
                                <img src="<?php echo base_url(); ?>assets/events/banner/<?php echo $rows->event_banner; ?>" class="img-circle">
 
-                              </div>                            
+                              </div>
                         </div>
 
                         <div class="form-group row">
@@ -374,7 +374,7 @@ body{
    $('#stime').timepicki();
    $('#etime').timepicki();
 
-   
+
     window.onload = function () {
 var mapOptions = {
     center: new google.maps.LatLng(20.5937, 78.9629),
@@ -384,7 +384,7 @@ var mapOptions = {
 var infoWindow = new google.maps.InfoWindow();
 var latlngbounds = new google.maps.LatLngBounds();
 var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
-google.maps.event.addListener(map, 'click', function (e) 
+google.maps.event.addListener(map, 'click', function (e)
 {
  var la=e.latLng.lat();
  var lo=e.latLng.lng();
@@ -464,9 +464,9 @@ $('#file_upload').on('change', function()
         event_status:"Select Status",
         txtLatitude:"Enter Latitude",
         txtLongitude:"Enter Longitude",
-        
+
                },
-         }); 
+         });
    });
  function getcityname(cid) {
            //alert(cid);
@@ -502,7 +502,7 @@ $('#file_upload').on('change', function()
                   $("#ctname").hide();
                  }
             }
-          }); 
+          });
        }
 
 function check()
@@ -515,7 +515,7 @@ function check()
             document.eventform.txtLatitude.focus();
             return false;
     }
-    
+
     if(document.eventform.txtLongitude.value=="")
     {
             //alert("Please enter Longitude.");
@@ -543,7 +543,7 @@ function check()
     if(document.eventform.txtLongitude.value!="")
     {
             sLongitude = document.eventform.txtLongitude.value
-            
+
             if(isNaN(sLongitude) || sLongitude.indexOf(".")<0)
             {
                 //alert ("Please enter valid Longitude.")
@@ -556,7 +556,7 @@ function check()
                  $("#ermsg3").hide();
             }
     }
-      
+
       var fdate = document.getElementById("datepicker-autoclose").value;
       var tdate = document.getElementById("datepicker").value;
 
@@ -583,7 +583,7 @@ function check()
         var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
         var endTime = new Date(startTime)
         endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
-         
+
         //var timefrom = date1;
          temp =strStartTime.split(":");
          var a = temp[0];
@@ -607,13 +607,13 @@ function check()
       endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
       var a=formattedDate + '' + strStartTime;
       var b=formattedDate1 + '' + strEndTime;
-      //alert(startTime);alert(endTime); alert(a);alert(b); 
+      //alert(startTime);alert(endTime); alert(a);alert(b);
       if (a == b || a > b) {
       alert("Start Date & Time is greater than end Date & Time");
       return false;
       }
     }
-      function GetHours(d) 
+      function GetHours(d)
       {
         var h = parseInt(d.split(':')[0]);
         if (d.split(':')[1].split(' ')[1] == "PM") {
@@ -621,7 +621,7 @@ function check()
       }
       return h;
       }
-      function GetMinutes(d) 
+      function GetMinutes(d)
       {
        return parseInt(d.split(':')[1].split(' ')[0]);
       }

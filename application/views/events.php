@@ -152,7 +152,9 @@ width: 250px !important;
 .select2-selection__rendered{
   font-size: 12px;
 }
-
+#stickfooter{
+  position: fixed;width: 100%;bottom: 0px;
+}
 
 </style>
 <script>
@@ -204,12 +206,12 @@ function displayEvents(lim, off) {
         success: function(html) {
             $('#loader_image').hide();
 			var dataArray = JSON.parse(html);
-			
+
 //alert(escape("mike's"));
 //
 
 		if (dataArray.length>0) {
-			
+
 			for (var i = 0; i < dataArray.length; i++){
 				var disp_event_id = dataArray[i].id;
 				var event_id = dataArray[i].id*564738;
@@ -229,9 +231,9 @@ function displayEvents(lim, off) {
 				var date = new Date(Date.parse(start_date));
 				var sdate = String (date);
 				var disp_date = sdate.replace('05:30:00 GMT+0530 (India Standard Time)', '');
-				var wlstatus = dataArray[i].wlstatus; 
+				var wlstatus = dataArray[i].wlstatus;
 				if(wlstatus==null){
-					
+
 					 var wishliststatus="<span class='pull-right favourite-icon' id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' alt=''><a></span>";
 				}else{
 					 var wishliststatus="<span class='pull-right favourite-icon' id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-select.png' alt=''></a></span>";
@@ -241,17 +243,17 @@ function displayEvents(lim, off) {
 
 			};
 				$("#event_list").append(result);
-				
+
 			}
-		
+
          if (dataArray.length>0) {
 			$("#loader_message").html('<button class="btn btn-default" type="button">Load more data</button>').show();
 
             } else {
              $("#loader_message").html('<button data-atr="nodata" class="btn btn-default" type="button">No more records.</button>').show()
-            } 
+            }
 
-         
+
 		}
         });
 
@@ -319,7 +321,7 @@ function getevents()
 
 function searchevents()
 {
-	
+
 	var srch_term = search_term.value;
 	var result = '';
 
@@ -421,7 +423,7 @@ function getcityname(cid) {
 	}
 	});
 }
- 
+
 $( function() {
     var availableTags = [<?php
 	 $tot_count = count($event_resu);
@@ -436,5 +438,5 @@ $( function() {
     $( "#search_term" ).autocomplete({
       source: availableTags
     });
-  } ); 
+  } );
 </script>
