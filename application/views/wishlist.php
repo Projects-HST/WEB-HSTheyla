@@ -33,8 +33,9 @@
 
           <div class="col-12 col-md-9">
             <div class="card-header card-header-title">
-                           <h3 class="mb-0">Wishlist</h3>
+              <h3 class="mb-0">Wishlist</h3>
             </div>
+              
               <div class="row">
 
               <?php
@@ -64,7 +65,7 @@
                     <h4 class="card-title"><a href="<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/"><?php echo $res->event_name; ?></a></h4>
                       <p class="card-text"><?php echo $string;?></p>
                       <p class="card-text"><small class="text-muted">Last updated on <?php echo $res->wl_updated_at; ?></small></p>
-                      <p class="card-text"><a href="<a href='javascript:void(0);' onclick='remove_wishlist(<?php echo $res->wishlist_id; ?>);'>">Remove</a></p>
+                      <p class="card-text"><a href="<?php echo base_url(); ?>home/removewishlist/<?php echo $res->wishlist_id; ?>" onclick="return confirm('Are you sure want to Remove?')">Remove</a></p>
                     </div>
                   </div>
                 </div>

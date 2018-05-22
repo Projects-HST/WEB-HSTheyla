@@ -436,6 +436,21 @@ class Home extends CI_Controller {
 		}
 	}
 
+	public function removewishlist($wishlist_id)
+	{
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
+		$user_role=$this->session->userdata('user_role');
+		$datas['wishlist_remove'] = $this->loginmodel->remove_wishlist($wishlist_id);
+		$datas['wishlist_details'] = $this->loginmodel->get_wishlist($user_id);
+		if($user_role==3 || $user_role==2){
+		$this->load->view('front_header');
+		$this->load->view('wishlist', $datas);
+		$this->load->view('front_footer');
+		}else{
+			redirect('/');
+		}
+	}
 
 	public function eventattendees($order_id)
 	 {

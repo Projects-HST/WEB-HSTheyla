@@ -638,6 +638,14 @@ Class Loginmodel extends CI_Model
 		return $res;
 	}
 
+	public function remove_wishlist($wishlist_id)
+	{
+		$sql="DELETE FROM user_wish_list WHERE id='$wishlist_id'";
+		$resu=$this->db->query($sql);		
+		//$res = "Removed";
+		//return $res;
+	}
+
 	public function event_attendees($sorder_id)
 	{
 		$sql = "SELECT A.`order_id`,A.`number_of_seats`,B.user_name,B.mobile_no,B.email_id,C.name FROM `booking_history` A,user_master B,user_details C WHERE A.user_id = B.id AND A.user_id = C.user_id AND A.`order_id` = '$sorder_id'";
