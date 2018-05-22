@@ -629,8 +629,11 @@ Class Loginmodel extends CI_Model
 
 	public function get_wishlist($user_id)
 	{
-		$sql="select ev.*,uwl.updated_at as wl_updated_at from events as ev LEFT JOIN user_wish_list as uwl on uwl.event_id = ev.id WHERE uwl.user_id = '$user_id' group by ev.id ORDER BY uwl.updated_at desc";
+		//$user_id = '300';
+		$current_date = date("Y-m-d");
+		$sql="select ev.*,uwl.id as wishlist_id,uwl.updated_at as wl_updated_at from events as ev LEFT JOIN user_wish_list as uwl on uwl.event_id = ev.id WHERE uwl.user_id = '$user_id' AND ev.end_date >= '$current_date'  group by ev.id ORDER BY uwl.updated_at desc";
 		$resu=$this->db->query($sql);
+	
 		$res=$resu->result();
 		return $res;
 	}

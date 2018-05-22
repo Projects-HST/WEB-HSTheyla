@@ -40,6 +40,10 @@
               <?php
 			foreach($wishlist_details as $res){
 
+				$event_id = $res->id * 564738;
+				$event_name = strtolower(preg_replace("/[^\w]/", "-", $res->event_name));
+				$enc_event_id = base64_encode($event_id);
+
             $string = strip_tags($res->description);
 			if (strlen($string) > 150) {
 
@@ -57,9 +61,10 @@
                   <div class="card whishlist-card">
                     <img class="card-img-top" src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>" alt="">
                     <div class="card-block">
-                    <h4 class="card-title"><?php echo $res->event_name; ?></h4>
+                    <h4 class="card-title"><a href="<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/"><?php echo $res->event_name; ?></a></h4>
                       <p class="card-text"><?php echo $string;?></p>
                       <p class="card-text"><small class="text-muted">Last updated on <?php echo $res->wl_updated_at; ?></small></p>
+                      <p class="card-text"><a href="<a href='javascript:void(0);' onclick='remove_wishlist(<?php echo $res->wishlist_id; ?>);'>">Remove</a></p>
                     </div>
                   </div>
                 </div>
