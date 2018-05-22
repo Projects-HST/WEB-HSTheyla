@@ -20,10 +20,11 @@ Class Usersmodel extends CI_Model
 
     function getall_users_details()
     {
-       $query="SELECT ud.*,um.user_name,um.mobile_no,um.email_id,um.password,um.user_role,um.status,ci.city_name,up.total_points FROM user_details AS ud LEFT JOIN user_master AS um ON ud.user_id=um.id LEFT JOIN city_master AS ci ON ci.id=ud.city_id LEFT JOIN user_points_count AS up ON up.user_id=ud.user_id ORDER BY ud.id  DESC";
-	  $udresu=$this->db->query($query);
-	  $udres=$udresu->result();
-	  return $udres;
+       $query="SELECT erm.user_role_name,ud.*,um.user_name,um.mobile_no,um.email_id,um.password,um.user_role,um.status,ci.city_name,up.total_points 
+FROM user_details AS ud LEFT JOIN user_master AS um ON ud.user_id=um.id LEFT JOIN city_master AS ci ON ci.id=ud.city_id LEFT JOIN user_points_count AS up ON up.user_id=ud.user_id LEFT JOIN user_role_master AS erm ON um.user_role=erm.id ORDER BY ud.id  DESC";
+	      $udresu=$this->db->query($query);
+	       $udres=$udresu->result();
+	        return $udres;
     }
 
     function getall_users_Followers_details()
@@ -95,7 +96,7 @@ Class Usersmodel extends CI_Model
 
     }
 
-    function update_user_details($uid,$umid,$username,$pwd,$name,$cell,$email,$pwd,$dob,$gender,$address1,$address2,$address3,$occupation,$country,$statename,$city,$zip,$user_pic1,$status,$userrole,$user_id,$display_status)
+    function update_user_details($uid,$umid,$username,$pwd,$name,$cell,$email,$dob,$gender,$address1,$address2,$address3,$occupation,$country,$statename,$city,$zip,$user_pic1,$status,$userrole,$user_id,$display_status)
     {
       //$check_user="SELECT * FROM user_master WHERE user_name='$username' OR mobile_no='$cell' OR email_id='$email'";
       //$result=$this->db->query($check_user);

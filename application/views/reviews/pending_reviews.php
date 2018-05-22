@@ -49,8 +49,39 @@
                            ×</button> <?php echo $this->session->flashdata('msg'); ?>
                           </div>
                         <?php endif; ?>
-         <?php if(!empty($views)) { foreach ($views as $value) {  ?>
-         <div class="row">
+
+            <div class="row">
+              <div class="col-md-12">
+                <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>Event Name</th>
+                    <th>Event Comments</th>
+
+
+                    <th>Action</th>
+                </tr>
+                </thead>
+            <tbody>
+          <?php if(!empty($views)) { foreach ($views as $value) {  ?>
+            <tr>
+                <td><?php echo $value->event_name;?> ( <?php echo $value->event_rating; ?> )</td>
+                <td><?php echo $value->comments;?></td>
+
+               <td><a href="<?php echo base_url(); ?>reviews/display/<?php echo $value->id; ?>/Y/<?php echo $value->event_id; ?>/<?php echo $value->user_id; ?>" class="btn btn-primary waves-effect waves-light">
+                   Display </a> <a href="<?php echo base_url(); ?>reviews/archive/<?php echo $value->id; ?>/A/<?php echo $value->event_id; ?>/<?php echo $value->user_id; ?>" class="btn btn-primary waves-effect waves-light">
+             Archive</a>  </td>
+            </tr>
+              <?php } }else{ echo "<p class=card-text> No Reviews Found </p>";}?>
+            </tbody>
+        </table>
+              </div>
+            </div>
+
+
+         <!-- <?php if(!empty($views)) { foreach ($views as $value) {  ?> -->
+         <!-- <div class="row">
+
             <div class="col-md-10">
                 <div class="card m-b-20 card-block">
                     <h3 class="card-title font-20 mt-0"> <?php echo $value->event_name;?> ( <?php echo $value->event_rating; ?> ) </h3>
@@ -60,7 +91,6 @@
                    </p>
                     <div class="form-group row">
                       <div class="col-sm-2">
-                           <!-- <img src="<?php echo base_url();?>assets/review/images/<?php echo $value->photo; ?>" style="width:80%;border-radius:100px;float: right;"> -->
                         </div>
                       <div class="col-sm-2">
                           <a href="<?php echo base_url(); ?>reviews/display/<?php echo $value->id; ?>/Y/<?php echo $value->event_id; ?>/<?php echo $value->user_id; ?>" class="btn btn-primary waves-effect waves-light">
@@ -73,12 +103,12 @@
                         </div>
             </div>
             </div>
-        </div>
-      <!-- end row -->
-        <?php } }else{ echo "<p class=card-text> No Reviews Found </p>";}?>
+        </div> -->
 
-        </div><!-- container -->
-    </div> <!-- Page content Wrapper -->
+        <!-- <?php } }else{ echo "<p class=card-text> No Reviews Found </p>";}?> -->
+
+        </div>
+    </div>
 
 
 </div> <!-- content -->
@@ -133,4 +163,8 @@
 // }
 // });
 //    });
+
+$(document).ready(function() {
+  $('table.display').DataTable();
+} );
 </script>

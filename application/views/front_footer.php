@@ -66,6 +66,23 @@
 <script src="<?php echo base_url(); ?>assets/front/js/jquery.reflection.js"></script>
 <script src="<?php echo base_url(); ?>assets/front/js/jquery.cloud9carousel.js"></script>
 <script type="text/javascript">
+function logout(){
+  swal({
+      title: 'Are you sure?',
+      text: "You Want to logout !",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirm!'
+  }).then(function(){
+    window.location.href='<?php echo base_url(); ?>logout';
+  }).catch(function(reason){
+
+  });
+}
+
+
 $('.topmenu .nav-item a').click(function() {
     $('.topmenu .nav-item a').removeClass("menuactive");
     $(this).addClass("menuactive");

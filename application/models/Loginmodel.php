@@ -566,34 +566,39 @@ Class Loginmodel extends CI_Model
 
 
     function mail_contact_form($name,$email,$subject,$msg){
-      $query="INSERT INTO contact_form (name,email,subject,message,created_at,updated_by) VALUES('$name','$email','$subject','$msg',NOW(),NOW())";
-      $resultset=$this->db->query($query);
-      $to="hello@heylaapp.com,kamal.happysanz@gmail.com";
-      $subject="Contact Form Enquiry";
-      $htmlContent = '
-       <html>
-       <head>
-       <title>Contact Form</title>
-          </head>
-          <body>
-            <div class="mail-content">
-              <p>Name - '.$name.'</p>
-              <p>Email - '.$email.'</p>
-              <p>Subject - '.$subject.'</p>
-              <p>Message - '.$msg.'</p>
-            </div>
-          </body>
-       </html>';
-   $headers = "MIME-Version: 1.0" . "\r\n";
-   $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-   // Additional headers
-   $headers .= 'From: heylapp<info@heylapp.com>' . "\r\n";
-   $sent= mail($to,$subject,$htmlContent,$headers);
-   if($sent){
-     echo "success";
-   }else{
-      echo "failed";
-   }
+      if(empty($name)){
+
+      }else{
+        $query="INSERT INTO contact_form (name,email,subject,message,created_at,updated_by) VALUES('$name','$email','$subject','$msg',NOW(),NOW())";
+        $resultset=$this->db->query($query);
+        $to="hello@heylaapp.com,kamal.happysanz@gmail.com";
+        $subject="Contact Form Enquiry";
+        $htmlContent = '
+         <html>
+         <head>
+         <title>Contact Form</title>
+            </head>
+            <body>
+              <div class="mail-content">
+                <p>Name - '.$name.'</p>
+                <p>Email - '.$email.'</p>
+                <p>Subject - '.$subject.'</p>
+                <p>Message - '.$msg.'</p>
+              </div>
+            </body>
+         </html>';
+     $headers = "MIME-Version: 1.0" . "\r\n";
+     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+     // Additional headers
+     $headers .= 'From: heylapp<info@heylapp.com>' . "\r\n";
+     $sent= mail($to,$subject,$htmlContent,$headers);
+     if($sent){
+       echo "success";
+     }else{
+        echo "failed";
+     }
+      }
+
     }
 
 	public function get_points($user_id)
@@ -649,6 +654,67 @@ Class Loginmodel extends CI_Model
 	public function insert_attendees($order_id,$name,$email,$phone)
 	{
 		$query = "INSERT INTO booking_event_attendees (order_id,name,email_id,mobile_no) VALUES('$order_id','$name','$email','$phone')";
-      	$resultset = $this->db->query($query);
+    $resultset = $this->db->query($query);
 	}
+
+
+  function save_request_orgainser($name,$email,$message,$user_id){
+    $check_email="SELECT * FROM organiser_request WHERE user_id='$user_id'";
+   $res=$this->db->query($check_email);
+    if($res->num_rows()>1){
+      echo "You have already requested and waiting for Approval";
+    }else{
+    $query = "INSERT INTO organiser_request (user_id,name,email_or_phone,message,req_status,created_at) VALUES('$user_id','$name','$email','$message','Pending',NOW())";
+    $resultset = $this->db->query($query);
+    if($resultset){
+      echo "Thanks for requesting we contact you shortly";
+    }else{
+        echo "failed";
+    }
+  }
+}
+
+  function organiser_pending_request(){
+    $sql = "SELECT COUNT(*) AS request_pending FROM organiser_request WHERE req_status='Pending'";
+    $resu=$this->db->query($sql);
+    $res=$resu->result();
+    return $res;
+  }
+
+
+  function get_all_organiser_request(){
+    $sql = "SELECT ogr.id as rq_id,ogr.*,um.* FROM organiser_request AS ogr LEFT JOIN user_master AS um ON um.id=ogr.user_id ORDER BY ogr.id DESC";
+    $resu=$this->db->query($sql);
+    $res=$resu->result();
+    return $res;
+  }
+
+  function get_organiser_request($id){
+    $rq_id=$id/9876;
+    $sql = "SELECT ogr.id as rq_id,ogr.*,um.* FROM organiser_request AS ogr LEFT JOIN user_master AS um ON um.id=ogr.user_id WHERE ogr.id='$rq_id'";
+    $resu=$this->db->query($sql);
+    $res=$resu->result();
+    return $res;
+  }
+
+  function change_req_status($req_status,$rq_id,$org_id){
+    $sql = "UPDATE  organiser_request SET req_status='$req_status' WHERE id='$rq_id'";
+    $resu=$this->db->query($sql);
+    if($req_status=="Approval"){
+      $sql = "UPDATE  user_master SET user_role='2' WHERE id='$org_id'";
+      $resu=$this->db->query($sql);
+    }else if($req_status=="Rejected"){
+      $sql = "UPDATE  user_master SET user_role='3' WHERE id='$org_id'";
+      $resu=$this->db->query($sql);
+    }else{
+      $sql = "UPDATE  user_master SET user_role='3' WHERE id='$org_id'";
+      $resu=$this->db->query($sql);
+    }
+    if($resu){
+      echo "success";
+    }else{
+        echo "failure";
+    }
+  }
+
 }

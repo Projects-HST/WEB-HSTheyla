@@ -15,10 +15,15 @@
           </div>
         </div>
         <div class="col-xs-6" >
-          <div class="left-inner-addon">
+          <!-- <div class="left-inner-addon">
             <i class="fas fa-lock"></i>
             <input type="password" class="form-control" id="pwd" name="pwd"  placeholder="Password"  required/>
-          </div>
+          </div> -->
+          <div class="left-inner-addon">
+            <i class="fas fa-lock"></i>
+            <input id="password-field" type="password" class="form-control"  name="pwd"  placeholder="Password" value="" required>
+             <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+           </div>
         </div>
         <p><a href="<?php echo base_url(); ?>reset" class="forgotpwdtext">Forgot Password?</a></p>
         <div class="col-xs-12" >
@@ -80,8 +85,18 @@
         </div>
     </div>
 </div>
+<style>
+.field-icon {
+  float: right;
+  margin-left: -25px;
+  margin-top: -38px;
+  position: relative;
+  z-index: 2;
+}
+</style>
 <script src="//connect.facebook.net/en_US/all.js"></script>
 <script type="text/javascript">
+
 
 // Initialize the Facebook JavaScript SDK
 FB.init({
@@ -130,6 +145,17 @@ function checkLoginStatus(response) {
         document.getElementById("fb").checked = false
     }
 }
+
+$(".toggle-password").click(function() {
+
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $($(this).attr("toggle"));
+  if (input.attr("type") == "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+});
 </script>
 <style>
 

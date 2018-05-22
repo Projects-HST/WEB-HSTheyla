@@ -9,7 +9,7 @@
 
 
 <div class="container-fluid eventlist-pge">
-   <div class="container">
+   <div class="container" style="padding-bottom:100px;">
    <?php if (count($adv_event_result)>0){ ?>
       <div class="row">
          <div class="carousel carousel-fade" data-ride="carousel" data-interval="2000">
@@ -68,7 +68,7 @@
                   </option>
                   <?php } ?>
                </select> -->
-               <select id="category" size="3" onchange="getevents()">
+               <select id="category" size="3" onchange="getevents()"  multiple>
                  <?php foreach($category_list as $res){ ?>
                  <option value="
                     <?php echo $res->id; ?>">
@@ -155,7 +155,15 @@ width: 250px !important;
 #stickfooter{
   position: fixed;width: 100%;bottom: 0px;
 }
-
+.select2-selection--multiple:before {
+    content: "";
+    position: absolute;
+    right: 7px;
+    top: 42%;
+    border-top: 5px solid #888;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+}
 </style>
 <script>
 
@@ -167,9 +175,12 @@ width: 250px !important;
 
 
 $('#category').select2({
-    "placeholder": "Select Category",
-        "multiple": true
+
+    placeholder: 'Select Category',
+        "multiple": true,
+
 });
+
 
 
 $( document ).ready(function() {
@@ -311,7 +322,7 @@ function getevents()
 			 $("#event_list").html(result).show();
 		} else {
 			$('#loader_message').hide();
-      $("#event_list").css({height: "100vh"});
+      // $("#event_list").css({padding-bottom: "100px;"});
 			result +="No Records found!..";
 			$("#event_list").html(result).show();
 		}

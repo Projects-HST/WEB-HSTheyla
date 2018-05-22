@@ -785,35 +785,44 @@ class Home extends CI_Controller {
 			$data=$this->loginmodel->mail_contact_form($name,$email,$subject,$msg);
 		}
 		public function become_organiser(){
-			$name=$this->db->escape_str($this->input->post('name'));
-			$email=$this->db->escape_str($this->input->post('email'));
-			$mobile=$this->db->escape_str($this->input->post('mobile'));
-			$to="hello@heylaapp.com,ganesh.happysanz@gmail.com,kamal.happysanz@gmail.com";
-			$subject="Organiser Enquiry form";
-			$htmlContent = '
-			 <html>
-			 <head>
-			 <title>Become Organiser Form</title>
-					</head>
-					<body>
-						<div class="mail-content">
-							<p>Name - '.$name.'</p>
-							<p>Email - '.$email.'</p>
-							<p>Subject - '.$mobile.'</p>
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			 if($user_id){
+				 $name=$this->db->escape_str($this->input->post('name'));
+				 $email=$this->db->escape_str($this->input->post('email'));
+				 $message=$this->db->escape_str($this->input->post('message'));
+				 if(empty($name)){
 
-						</div>
-					</body>
-			 </html>';
-	 $headers = "MIME-Version: 1.0" . "\r\n";
-	 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-	 // Additional headers
-	 $headers .= 'From: heylapp<info@heylapp.com>' . "\r\n";
-	 $sent= mail($to,$subject,$htmlContent,$headers);
-	 if($sent){
-		 echo "success";
-	 }else{
-			echo "failed";
-	 }
+				 }else{
+					 $data=$this->loginmodel->save_request_orgainser($name,$email,$message,$user_id);
+					 $to="hello@heylaapp.com";
+					 $subject="Organiser Enquiry form";
+					 $htmlContent = '
+						<html>
+						<head>
+						<title>Become Organiser Form</title>
+							 </head>
+							 <body>
+								 <div class="mail-content">
+									 <p>Name - '.$name.'</p>
+									 <p>Email or Phone - '.$email.'</p>
+									 <p>Message - '.$message.'</p>
+
+								 </div>
+							 </body>
+						</html>';
+				$headers = "MIME-Version: 1.0" . "\r\n";
+				$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+				// Additional headers
+				$headers .= 'From: heylapp<info@heylapp.com>' . "\r\n";
+				$sent= mail($to,$subject,$htmlContent,$headers);
+				 }
+			 }else{
+
+			 }
+
+
 
 		}
 

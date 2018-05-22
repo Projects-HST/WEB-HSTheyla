@@ -20,37 +20,31 @@ class Reviews extends CI_Controller
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-
-        $datas['views'] = $this->reviewsmodel->view_all_reviews();
-
-		if($user_role == 1 || $user_role == 4)
-		{
-		  $this->load->view('header');
-		  $this->load->view('reviews/view_reviews',$datas);
-		  $this->load->view('footer');
-	 	}else{
-	 			redirect('/');
-	 		 }
+      $datas['views'] = $this->reviewsmodel->view_all_reviews();
+			if($user_role == 1 || $user_role == 4)
+			{
+			  $this->load->view('header');
+			  $this->load->view('reviews/view_reviews',$datas);
+			  $this->load->view('footer');
+		 	}else{
+		 			redirect('/');
+		 		 }
     }
 
     public function view_reviews()
     {
-        $datas=$this->session->userdata();
+      $datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-
-        $datas['views'] = $this->reviewsmodel->view_all_reviews();
-
-        //echo'<pre>';print_r($datas['views']);exit();
-
-		if($user_role == 1 || $user_role == 4)
-		{
-		  $this->load->view('header');
-		  $this->load->view('reviews/pending_reviews',$datas);
-		  $this->load->view('footer');
-	 	}else{
-	 			redirect('/');
-	 		 }
+      $datas['views'] = $this->reviewsmodel->view_all_reviews();
+			if($user_role == 1 || $user_role == 4)
+			{
+			  $this->load->view('header');
+			  $this->load->view('reviews/pending_reviews',$datas);
+			  $this->load->view('footer');
+		 	}else{
+		 			redirect('/');
+		 		 }
 
     }
     public function display($id,$sts,$event_id,$userid)
@@ -58,12 +52,10 @@ class Reviews extends CI_Controller
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-	    //echo $id; echo $sts; echo $event_id; exit;
        if($user_role == 1 || $user_role == 4)
        {
 		    $datas = $this->reviewsmodel->reviews_status($id,$sts,$user_id,$event_id,$userid);
-			if($datas['status']=="success")
-		     {
+				if($datas['status']=="success"){
 		       $this->session->set_flashdata('msg','Updated Successfully');
 			   redirect('reviews/view_reviews');
 		     }else{
@@ -81,21 +73,20 @@ class Reviews extends CI_Controller
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-	    //echo $id; echo $sts; exit;
-        if($user_role == 1 || $user_role == 4)
-        {
-	      $datas = $this->reviewsmodel->reviews_status($id,$sts,$user_id,$event_id,$userid);
-		  if($datas['status']=="success")
-	       {
-		       $this->session->set_flashdata('msg','Updated Successfully');
-			   redirect('reviews/view_reviews');
-	       }else{
-             $this->session->set_flashdata('msg','Faild To Update');
-		     redirect('reviews/view_reviews');
-            }
-        }else{
-       	 redirect('/');
-        }
+      if($user_role == 1 || $user_role == 4)
+      {
+      $datas = $this->reviewsmodel->reviews_status($id,$sts,$user_id,$event_id,$userid);
+	  if($datas['status']=="success")
+       {
+	       $this->session->set_flashdata('msg','Updated Successfully');
+		   redirect('reviews/view_reviews');
+       }else{
+           $this->session->set_flashdata('msg','Faild To Update');
+	     redirect('reviews/view_reviews');
+          }
+      }else{
+     	 redirect('/');
+      }
 
     }
 
@@ -104,19 +95,15 @@ class Reviews extends CI_Controller
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-
-        $datas['views'] = $this->reviewsmodel->view_all_archive_reviews();
-
-        //echo'<pre>';print_r($datas['views']);exit();
-
-		if($user_role == 1 || $user_role == 4)
-		{
-		  $this->load->view('header');
-		  $this->load->view('reviews/archive_reviews',$datas);
-		  $this->load->view('footer');
-	 	}else{
-	 			redirect('/');
-	 		 }
+      $datas['views'] = $this->reviewsmodel->view_all_archive_reviews();
+			if($user_role == 1 || $user_role == 4)
+			{
+			  $this->load->view('header');
+			  $this->load->view('reviews/archive_reviews',$datas);
+			  $this->load->view('footer');
+		 	}else{
+		 			redirect('/');
+		 		 }
     }
 
 

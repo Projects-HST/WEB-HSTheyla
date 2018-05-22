@@ -1,4 +1,4 @@
-<!--div class="content-page"> 
+<!--div class="content-page">
 <!- Start content ->
 <div class="content">
     <!- Top Bar Start ->
@@ -43,7 +43,7 @@
     <div class="page-content-wrapper ">
         <div class="container">
             <div class="row">
-      
+
         <div class="col-lg-12">
             <div class="card m-b-20">
                 <div class="card-block">
@@ -64,41 +64,40 @@
                         <thead>
                         <tr>
                             <th>S.No</th>
-                            <th>User Id / Name</th>
+                            <th>Username</th>
                             <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Role</th>
                             <th>City</th>
                             <th>Points</th>
-                            <th>Promo</th>
+                          
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <?php 
+                        <?php
                            $i=1;
-                           foreach($users_view as $rows){ 
-                           $sts=$rows->status; 
-                           $uid=$rows->user_id; 
-                           $usid=$rows->id; 
+                           foreach($users_view as $rows){
+                           $sts=$rows->status;
+                           $uid=$rows->user_id;
+                           $usid=$rows->id;
                               ?>
                         <tr>
                             <td><?php echo $i; ?></td>
                             <td><?php echo $rows->user_name ; ?></td>
                             <td><?php echo $rows->name ; ?></td>
+                            <td><?php echo $rows->email_id; ?></td>
+                            <td><?php echo $rows->mobile_no; ?></td>
+                            <td><?php echo $rows->user_role_name; ?></td>
                             <td><?php echo $rows->city_name ; ?></td>
                             <td><?php echo $rows->total_points ; ?></td>
-                            <td></td>
+
                             <td><?php if($sts=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
                             <td>
                              <a href="<?php echo base_url();?>users/edit/<?php echo $rows->id;?>">
                               <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
-
-                             <!--a href="<?php echo base_url();?>users/view_single_events/<?php echo $rows->id;?>">
-                              <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a-->
-
-                              <!--a onclick="confirmGetMessage(<?php echo $usid;?>,<?php echo $uid;?>)">   
-                              <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
-
                             </td>
                         </tr>
                        <?php $i++; }  ?>
@@ -106,7 +105,7 @@
                     </table>
                         </div>
 
-                      
+
                     </div>
 
                 </div>
@@ -135,7 +134,7 @@
                   title: "Success",
                   text: "Deleted Successfully",
                   type: "success"
-              }).then(function() { 
+              }).then(function() {
                   location.href = '<?php echo base_url(); ?>users/view';
               });
           } else {
@@ -150,6 +149,6 @@
 
 
   $(document).ready(function() {
-   
+
 } );
 </script>

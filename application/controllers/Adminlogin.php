@@ -54,12 +54,12 @@ public function home()
 					$datas= array("user_name"=>$user_name, "msg"=>$msg,"mobile_no"=>$mobile_no,"email_id"=>$email_id,"status"=>$status,"id"=>$id,"user_role"=>$user_role,);
 					//$this->session->userdata($user_name);
 					$session_data=$this->session->set_userdata($datas);
-
              $datas['users'] = $this->loginmodel->get_tlt_no_user();
 						 $datas['events'] = $this->loginmodel->get_tlt_no_events();
 						 $datas['org_events'] = $this->loginmodel->get_tlt_no_orgevents();
 						 $datas['booking'] = $this->loginmodel->get_tlt_no_booking();
 						 $datas['reviews'] = $this->loginmodel->get_tlt_no_reviews();
+						 $datas['organiser_request'] = $this->loginmodel->organiser_pending_request();
 
 					$this->load->view('header',$datas);
 					$this->load->view('home',$datas);
@@ -142,7 +142,7 @@ public function dashboard()
 	 $datas['org_events'] = $this->loginmodel->get_tlt_no_orgevents();
 	 $datas['booking'] = $this->loginmodel->get_tlt_no_booking();
 	  $datas['reviews'] = $this->loginmodel->get_tlt_no_reviews();
-        //print_r( $datas['users']);exit;
+    $datas['organiser_request'] = $this->loginmodel->organiser_pending_request();
 	 if($user_role == 1 || $user_role == 4){
 		$this->load->view('header',$datas);
 		$this->load->view('home',$datas);

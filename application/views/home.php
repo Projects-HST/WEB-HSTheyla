@@ -78,6 +78,22 @@
                       </div>
                   </div></a>
               </div>
+
+              <div class="col-md-6 col-lg-6 col-xl-3">
+                 <a href="<?php echo base_url();?>dashboard/get_all_organiser_request" class="test" data-toggle="tooltip" title="View
+                  Organiser Request">
+                  <div class="mini-stat clearfix bg-primary">
+                      <span class="mini-stat-icon"><img style="padding-bottom:10px; padding-right:2px;" src="<?php echo base_url();?>assets/icons/dashboard/Pending.png" /></span>
+                      <div class="mini-stat-info text-right text-white">
+                          <span class="counter"><?php foreach ($organiser_request as $res) {
+                            echo $res->request_pending;
+                          } ?></span>
+                         <b style="font-size:16px;"> Organiser Request </b>
+                      </div>
+                  </div></a>
+              </div>
+
+
           </div>
       </div><!-- container -->
 

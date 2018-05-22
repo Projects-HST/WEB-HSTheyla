@@ -60,7 +60,7 @@
                         <a class="nav-link" href="<?php echo  base_url(); ?>eventlist/">List Events</a>
                     </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url(); ?>home#create">Organiser</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>home#create">Become Organiser</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url(); ?>home#contact">Contact</a>
@@ -83,7 +83,7 @@
                            </li>
                      <?php  } ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url(); ?>logout">Logout</a>
+                                <a class="nav-link logout-btn" onclick="logout()">Logout</a>
                             </li>
                      <?php } ?>
                 </ul>

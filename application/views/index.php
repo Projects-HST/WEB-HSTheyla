@@ -76,10 +76,10 @@
                         <a class="nav-link" href="<?php echo  base_url(); ?>eventlist/">List Events</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url(); ?>#create">Organiser</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>home#create">Become Organiser</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url(); ?>#contact">Contact</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>home#contact">Contact</a>
                     </li>
                    <?php
                    	$user_role = $this->session->userdata('user_role');
@@ -98,7 +98,7 @@
                            </li>
                      <?php  } ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url(); ?>logout">Logout</a>
+                                <a class="nav-link logout-btn" onclick="logout()">Logout</a>
                             </li>
                      <?php } ?>
                 </ul>
@@ -134,18 +134,18 @@
                                           <p id="usermsg"></p>
                                       </div>
                                       <div class="form-group">
-                                          <input type="email" class="form-control" id="email" name="email" required placeholder="Email">
-                                          <p id="emailmsg"></p>
+                                          <input type="email" class="form-control" id="email" name="email" required placeholder="Email or Phone number">
+
                                       </div>
                                       <div class="form-group">
-                                          <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Mobile Number">
-                                          <p id="mobilemsg"></p>
+                                        <textarea type="text" name="message" rows="3" cols="50" placeholder="Message"></textarea>
+
                                       </div>
 
                                       <button type="submit" id="submit" class="btn btn-event btn-lg">Become an organiser</button>
                                   </form>
                               </div>
-                              <!--/card-block-->
+                            
                           </div>
                       </div>
 
@@ -324,8 +324,15 @@
               $user_role=$this->session->userdata('user_role');
               if($user_role=="2"){ ?>
                   <a href="<?php echo base_url(); ?>organizer/createevents" class="btn btn-event">CREATE EVENT</a>
-            <?php   }else{  ?>
-                <a  data-toggle="modal" data-target="#myModal" class="btn btn-event white">Start Now</a>
+            <?php   }else{
+              $user_id=$this->session->userdata('id');
+              if(empty($user_id)){ ?>
+                  <a href="<?php echo base_url(); ?>signin" class="btn btn-event">Login here</a>
+              <?php }else{ ?>
+                <a  data-toggle="modal" data-target="#myModal" class="btn btn-event white">Request Now</a>
+            <?php  }   ?>
+
+
               <?php }    ?>
 
             </p>
@@ -488,15 +495,15 @@
             email: {
                 required: true
             },
-            mobile: {
-                required: true,minlength: 10, maxlength: 10, digits: true
+            message: {
+                required: true
             },
 
         },
         messages: {
             name: { required:"Enter the Name", minlength: "Min is 6", maxlength: "Max is 12" },
-            email: "Enter Valid Email ",
-              mobile: { required:"Enter the Mobile number", minlength: "Min is 6", maxlength: "Max is 10" }
+            email: "Enter Valid Email or Phone Number",
+              message: { required:"Enter the Message" }
 
 
         },
@@ -512,7 +519,7 @@
                     if (response == "success") {
                         swal({
                             title: "Success",
-                            text: "Thank you for Your Requesting We Contact You Shortly.",
+                            text: response,
                             type: "success"
                         }).then(function() {
                             location.href = '<?php echo base_url(); ?>';
@@ -572,10 +579,20 @@
     });
 
 
+    function logout(){
+      swal({
+          title: 'Are you sure?',
+          text: "You Want to logout !",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Confirm!'
+      }).then(function(){
+        window.location.href='<?php echo base_url(); ?>logout';
+      }).catch(function(reason){
 
-
-
-
-
+      });
+    }
 </script>
 </html>

@@ -1,5 +1,5 @@
 <?php
-    function get_times( $default = '10:00', $interval = '+15 minutes' ) 
+    function get_times( $default = '10:00', $interval = '+15 minutes' )
 	{
 		$output = '';
 		$current = strtotime( '00:00:00' );
@@ -12,9 +12,9 @@
 		}
 		return $output;
     }
-	
-	$dateTime = new DateTime('now', new DateTimeZone('Asia/Kolkata')); 
-	$current_time = $dateTime->format("h:i A"); 
+
+	$dateTime = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
+	$current_time = $dateTime->format("h:i A");
 ?>
 <script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
 <link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
@@ -128,9 +128,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="Description" class="col-sm-2 col-form-label">Description</label>
+                            <label for="" class="col-sm-2 col-form-label">Description</label>
                             <div class="col-sm-4">
-                                <textarea  id="textarea"  name="description" class="form-control" maxlength="30000" rows="3" placeholder=""> </textarea>
+                                <textarea type="text" id="description"  name="description" class="form-control" maxlength="30000" rows="3" placeholder=""></textarea>
                             </div>
 
                              <label for="ecost" class="col-sm-2 col-form-label">Event Type</label>
@@ -157,7 +157,7 @@
                                <div class="input-group">
                                 <input type="text" class="form-control datepicker" name="end_date" id="datepicker" value="<?php echo date("d-m-Y"); ?>">
                                 <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
-                                 
+
                             </div>
                             </div>
                         </div>
@@ -252,7 +252,7 @@
                        </div>
 
                         <div class="form-group row">
-                           
+
                             <label for="Colour" class="col-sm-2 col-form-label">Colour</label>
                             <div class="col-sm-4">
                                 <!--input class="form-control" type="text" name="colour_scheme" value=""-->
@@ -318,7 +318,7 @@
             var infoWindow = new google.maps.InfoWindow();
             var latlngbounds = new google.maps.LatLngBounds();
             var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
-            google.maps.event.addListener(map, 'click', function (e) 
+            google.maps.event.addListener(map, 'click', function (e)
             {
              var la=e.latLng.lat();
              var lo=e.latLng.lng();
@@ -329,9 +329,9 @@
             });
  }
 
-      
+
   $(document).ready(function () {
-      
+
       $( ".datepicker" ).datepicker({
         format: 'dd-mm-yyyy'
       });
@@ -399,9 +399,9 @@
         txtLatitude:"Enter Latitude",
         txtLongitude:"Enter Longitude",
        },
-         }); 
+         });
    });
-  
+
  function getcityname(cid) {
            //alert(cid);
             $.ajax({
@@ -433,7 +433,7 @@
                   $("#ctname").hide();
                  }
             }
-          }); 
+          });
        }
 
 function check()
@@ -465,16 +465,16 @@ function check()
         var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
         var endTime = new Date(startTime)
         endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
-         
+
         //var timefrom = date1;
          temp =strStartTime.split(":");
          var a = temp[0];
          var b = temp[1];
          temp1 =b.split(" ");
          var c = temp1[1]
-       
+
         if(a==12 && c=='AM'){
-        
+
         }else if (startTime > endTime){
           alert("Start Time is greater than end time");
           return false;
@@ -482,11 +482,11 @@ function check()
     }else{
         var date1 = new Date(formattedDate);
         var date2 = new Date(formattedDate1);
-      
+
          var y1=chunks[2];
-         var y2=chunks1[2]; 
+         var y2=chunks1[2];
         if(y1<y2){
-            //alert(chunks[2]);alert(chunks1[2]); 
+            //alert(chunks[2]);alert(chunks1[2]);
         }else{
           var strStartTime = document.getElementById("stime").value;
           var strEndTime = document.getElementById("etime").value;
@@ -495,14 +495,14 @@ function check()
           endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
           var a=formattedDate + '' +startTime;
           var b=formattedDate1 + ''+endTime;
-          //alert(startTime);alert(endTime); alert(a);alert(b); 
+          //alert(startTime);alert(endTime); alert(a);alert(b);
           if (a == b || a > b) {
           alert("Start Date & Time is greater than end Date & Time");
           return false;
           }
         }
     }
-      function GetHours(d) 
+      function GetHours(d)
       {
         var h = parseInt(d.split(':')[0]);
         if (d.split(':')[1].split(' ')[1] == "PM") {
@@ -510,7 +510,7 @@ function check()
       }
       return h;
       }
-      function GetMinutes(d) 
+      function GetMinutes(d)
       {
        return parseInt(d.split(':')[1].split(' ')[0]);
       }
@@ -535,7 +535,7 @@ function check()
     if(document.eventform.txtLongitude.value!="")
     {
             sLongitude = document.eventform.txtLongitude.value
-            
+
             if(isNaN(sLongitude) || sLongitude.indexOf(".")<0)
             {
                 //alert ("Please enter valid Longitude.")
@@ -554,9 +554,9 @@ function check()
     // {
     //     var latitude = document.eventform.txtLatitude.value;
     //     var longitude = document.eventform.txtLongitude.value;
-        
+
     //     var reg = new RegExp("^[-+]?[0-9]{1,3}(?:\.[0-9]{1,10})?$");
-        
+
     //     if( reg.exec(latitude) ) {
     //      //do nothing
     //     } else {
@@ -566,7 +566,7 @@ function check()
     //         document.eventform.txtLatitude.focus();
     //         return false;
     //     }
-        
+
     //     if( reg.exec(longitude) ) {
     //      //do nothing
     //     } else {
@@ -577,9 +577,7 @@ function check()
     //         return false;
     //     }
     // }
-    
+
 }
 
 </script>
-
-

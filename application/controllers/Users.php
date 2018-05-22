@@ -115,16 +115,14 @@ class Users extends CI_Controller
 	    $user_role=$this->session->userdata('user_role');
 	    $datas['users_view'] = $this->usersmodel->getall_users_details();
 	    $datas['followers'] = $this->usersmodel->getall_users_Followers_details();
-
-        //echo'<pre>';print_r($datas['followers']);exit;
-		if($user_role==1)
-		{
-		  $this->load->view('header');
-		  $this->load->view('users/view_users',$datas);
-		  $this->load->view('footer');
-	 	}else{
-	 			redirect('/');
-	 		 }
+			if($user_role==1)
+			{
+			  $this->load->view('header');
+			  $this->load->view('users/view_users',$datas);
+			  $this->load->view('footer');
+		 	}else{
+		 			redirect('/');
+		 		 }
     }
 
     public function view_followers()
@@ -133,15 +131,14 @@ class Users extends CI_Controller
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
 	    $datas['followers'] = $this->usersmodel->getall_users_Followers_details();
-        //echo'<pre>';print_r($datas['followers']);exit;
-		if($user_role==1)
-		{
-		  $this->load->view('header');
-		  $this->load->view('users/view_followers_list',$datas);
-		  $this->load->view('footer');
-	 	}else{
-	 			redirect('/');
-	 		 }
+				if($user_role==1)
+				{
+				  $this->load->view('header');
+				  $this->load->view('users/view_followers_list',$datas);
+				  $this->load->view('footer');
+			 	}else{
+			 			redirect('/');
+			 		 }
     }
 
     public function edit($id)
@@ -183,7 +180,7 @@ class Users extends CI_Controller
 	        $email=$this->input->post('email');
 	        $old_pwd=$this->input->post('old_pwd');
 			 $new_pwd=$this->input->post('new_pwd');
-			
+
 			if(!empty($new_pwd)){
 				  $pwd = md5($new_pwd);
 			}else{
@@ -192,11 +189,11 @@ class Users extends CI_Controller
 			//exit;
 	        //$pwd1=$this->db->escape_str($this->input->post('new_pwd'));
             //echo $new_pwd; echo'<br>'; echo $old_pwd; echo'<br>'; echo md5($new_pwd);
-			
+
 	        //if(empty($pwd1)){
 			//	$pwd=$old_pwd;
 			//}else{ $pwd=md5($pwd1); }
-			
+
 					$sdate=$this->input->post('dob');
 					$dateTime =DateTime::createFromFormat('m-d-Y', $sdate);
 					$dob=$dateTime->format('Y-m-d');
@@ -228,7 +225,7 @@ class Users extends CI_Controller
 				$user_pic1=$old_picture;
 			}else{ $user_pic1=$user_pic1; }
               //echo $user_pic1;exit;
-			  
+
 		    $datas=$this->usersmodel->update_user_details($uid,$umid,$username,$pwd,$name,$cell,$email,$pwd,$dob,$gender,$address1,$address2,$address3,$occupation,$country,$statename,$city,$zip,$user_pic1,$status,$userrole,$user_id,$display_status);
 			 $sta=$datas['status'];
 		     if($sta=="success"){
