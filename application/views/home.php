@@ -78,7 +78,7 @@
                       </div>
                   </div></a>
               </div>
-
+              <?php   $user_role=$this->session->userdata('user_role');if($user_role==1){ ?>
               <div class="col-md-6 col-lg-6 col-xl-3">
                  <a href="<?php echo base_url();?>dashboard/get_all_organiser_request" class="test" data-toggle="tooltip" title="View
                   Organiser Request">
@@ -88,10 +88,13 @@
                           <span class="counter"><?php foreach ($organiser_request as $res) {
                             echo $res->request_pending;
                           } ?></span>
-                         <b style="font-size:16px;"> Organiser Request </b>
+                         <b style="font-size:16px;"> Organiser  Request </b>
                       </div>
                   </div></a>
               </div>
+            <?php }else{
+
+            } ?>
 
 
           </div>

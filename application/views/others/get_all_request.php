@@ -28,7 +28,7 @@
                             <a href="" class="btn btn-primary waves-effect waves-light">Rejected</a>
                       <?php  }?></td>
 
-                       <td><a href="<?php echo base_url(); ?>dashboard/update_req_status/<?php echo $value->rq_id*9876; ?>"><?php echo $value->rq_id; ?></a>  </td>
+                       <td><a href="<?php echo base_url(); ?>dashboard/update_req_status/<?php echo $value->rq_id*9876; ?>"><img title="View Request" src="<?php echo base_url(); ?>assets/icons/view.png"></a>  </td>
                     </tr>
                   <?php } $i++; ?>
                     </tbody>

@@ -1,4 +1,4 @@
-<!--div class="content-page"> 
+<!--div class="content-page">
   <!- Start content ->
 <div class="content">
     <!- Top Bar Start ->
@@ -75,9 +75,9 @@
                     <!-- Tab panes >
                     <div class="tab-content">
                         <div class="tab-pane active p-3" id="home-1" role="tabpanel"-->
-                            <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
+                  <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
                         <thead>
-                        <tr> <th>S.No</th>
+                            <tr> <th>S.No</th>
                             <th>Event Name</th>
                             <!--th>Event Category</th-->
                             <th>Event City</th>
@@ -87,7 +87,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php 
+                        <?php
                         $i=1;
                          foreach($org as $rows){
                            $eid=$rows->id;
@@ -118,7 +118,7 @@
                        <?php  $i++; }  ?>
                         </tbody>
                     </table>
-                 
+
                   </div>
                 </div>
               </div>
@@ -129,7 +129,7 @@
 
 <script type="text/javascript">
 
-  
+
 
   function confirmGetMessage(eid)
   {

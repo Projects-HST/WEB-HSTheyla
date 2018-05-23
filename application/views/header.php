@@ -142,6 +142,21 @@
 
                     </ul>
                 </li>
+
+                <li class="has_sub" id="track">
+                    <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-users" aria-hidden="true"></i>
+                <span> Tracking</span></a>
+                    <ul class="list-unstyled">
+                        <li id="org_request"><a href="<?php echo base_url();?>dashboard/get_all_organiser_request">Organizer Request</a></li>
+                        <li id="org_track"><a href="<?php echo base_url();?>tracking/organiser_event_tracking">Organizer Event Tracking</a></li>
+                        <li id="event_track"><a href="<?php echo base_url();?>tracking/admin_event_tracking">Admin's Event Tracking</a></li>
+                        <li id="event_track"><a href="<?php echo base_url();?>tracking/organiser_track_date">Organizer Event By Date</a></li>
+                        <li id="event_track"><a href="<?php echo base_url();?>tracking/admin_track_date">Admin's Event By Date</a></li>
+
+
+                    </ul>
+                </li>
+
               <?php  } ?>
 
                 <li class="has_sub" id="email">
@@ -169,36 +184,11 @@
   <div class="topbar">
 <nav class="navbar-custom">
   <ul class="list-inline float-right mb-0">
-  <!--li class="list-inline-item dropdown notification-list">
-      <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
-         aria-haspopup="false" aria-expanded="false">
-          <i class="ion-ios7-bell noti-icon"></i>
-          <span class="badge badge-success noti-icon-badge">3</span>
-      </a>
-      <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-menu-lg">
-          <div class="dropdown-item noti-title">
-              <h5><span class="badge badge-danger float-right">87</span>Notification</h5>
-          </div>
-          <a href="javascript:void(0);" class="dropdown-item notify-item">
-              <div class="notify-icon bg-primary"><i class="mdi mdi-cart-outline"></i></div>
-              <p class="notify-details"><b>Your order is placed</b><small class="text-muted">Dummy text of the printing and typesetting industry.</small></p>
-          </a>
-          <a href="javascript:void(0);" class="dropdown-item notify-item">
-              <div class="notify-icon bg-primary"><i class="mdi mdi-message"></i></div>
-              <p class="notify-details"><b>New Message received</b><small class="text-muted">You have 87 unread messages</small></p>
-          </a>
-          <a href="javascript:void(0);" class="dropdown-item notify-item">
-              <div class="notify-icon bg-primary"><i class="mdi mdi-martini"></i></div>
-              <p class="notify-details"><b>Your item is shipped</b><small class="text-muted">It is a long established fact that a reader will</small></p>
-          </a>
-          <a href="javascript:void(0);" class="dropdown-item notify-item">
-              View All
-          </a>
-      </div>
-   </li!--><?php
+          <?php
                     $id=$this->session->userdata('id');
                     //echo $id;
                     ?>
+
               <li class="list-inline-item dropdown notification-list">
                 <?php $user_role=$this->session->userdata('user_role');
                 if($user_role==4){
