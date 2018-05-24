@@ -20,7 +20,7 @@ Class Usersmodel extends CI_Model
 
     function getall_users_details()
     {
-       $query="SELECT erm.user_role_name,ud.*,um.user_name,um.mobile_no,um.email_id,um.password,um.user_role,um.status,ci.city_name,up.total_points 
+       $query="SELECT erm.user_role_name,ud.*,um.user_name,um.mobile_no,um.email_id,um.password,um.user_role,um.status,ci.city_name,up.total_points
 FROM user_details AS ud LEFT JOIN user_master AS um ON ud.user_id=um.id LEFT JOIN city_master AS ci ON ci.id=ud.city_id LEFT JOIN user_points_count AS up ON up.user_id=ud.user_id LEFT JOIN user_role_master AS erm ON um.user_role=erm.id ORDER BY ud.id  DESC";
 	      $udresu=$this->db->query($query);
 	       $udres=$udresu->result();
@@ -103,7 +103,7 @@ FROM user_details AS ud LEFT JOIN user_master AS um ON ud.user_id=um.id LEFT JOI
       //if($result->num_rows()==0)
       //{
     	 //$pwd1=md5($pwd);
-    	 $umupdate="UPDATE user_master SET user_name='$username',mobile_no='$cell',email_id='$email',password='$pwd',user_role='$userrole',status='$display_status',updated_by='$user_id',updated_at=NOW() WHERE  id='$umid' ";
+    	 $umupdate="UPDATE user_master SET user_name='$username',mobile_no='$cell',email_id='$email',user_role='$userrole',status='$display_status',updated_by='$user_id',updated_at=NOW() WHERE  id='$umid' ";
     	 $umdetails=$this->db->query($umupdate);
         $usupdate="UPDATE user_details SET name='$name',birthdate='$dob',gender='$gender',occupation='$occupation',address_line1='$address1',address_line2='$address2',address_line3='$address3',country_id='$country',state_id='$statename',city_id='$city',zip='$zip',user_picture='$user_pic1',newsletter_status='$status' WHERE id='$uid' AND user_id='$umid'";
         $usdetails=$this->db->query($usupdate);

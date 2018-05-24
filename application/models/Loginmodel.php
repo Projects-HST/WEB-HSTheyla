@@ -633,7 +633,7 @@ Class Loginmodel extends CI_Model
 		$current_date = date("Y-m-d");
 		$sql="select ev.*,uwl.id as wishlist_id,uwl.updated_at as wl_updated_at from events as ev LEFT JOIN user_wish_list as uwl on uwl.event_id = ev.id WHERE uwl.user_id = '$user_id' AND ev.end_date >= '$current_date'  group by ev.id ORDER BY uwl.updated_at desc";
 		$resu=$this->db->query($sql);
-	
+
 		$res=$resu->result();
 		return $res;
 	}
@@ -641,7 +641,7 @@ Class Loginmodel extends CI_Model
 	public function remove_wishlist($wishlist_id)
 	{
 		$sql="DELETE FROM user_wish_list WHERE id='$wishlist_id'";
-		$resu=$this->db->query($sql);		
+		$resu=$this->db->query($sql);
 		//$res = "Removed";
 		//return $res;
 	}
@@ -711,7 +711,7 @@ Class Loginmodel extends CI_Model
   function change_req_status($req_status,$rq_id,$org_id){
     $sql = "UPDATE  organiser_request SET req_status='$req_status' WHERE id='$rq_id'";
     $resu=$this->db->query($sql);
-    if($req_status=="Approval"){
+    if($req_status=="Approved"){
       $sql = "UPDATE  user_master SET user_role='2' WHERE id='$org_id'";
       $resu=$this->db->query($sql);
     }else if($req_status=="Rejected"){

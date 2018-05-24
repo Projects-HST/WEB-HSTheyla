@@ -22,7 +22,7 @@
                         <td><?php echo $value->message;?></td>
                           <td><?php if($value->req_status=="Pending"){ ?>
                             <a href="" class="btn btn-primary waves-effect waves-light">Pending</a>
-                          <?php }else if($value->req_status=="Approval"){ ?>
+                          <?php }else if($value->req_status=="Approved"){ ?>
                               <a href="" class="btn btn-primary waves-effect waves-light">Approved</a>
                         <?php  }else{ ?>
                             <a href="" class="btn btn-primary waves-effect waves-light">Rejected</a>

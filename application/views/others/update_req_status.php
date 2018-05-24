@@ -34,7 +34,7 @@
                                         <select name="req_status" class="form-control">
                                             <option  value="Rejected">Rejected</option>
                                           <option  value="Pending">Pending</option>
-                                          <option  value="Approval">Approval</option>
+                                          <option  value="Approved">Approved</option>
                                         </select>
                                           <script language="JavaScript">document.organsier_req_form.req_status.value="<?php echo $rows->req_status; ?>";</script>
                                       </div>
