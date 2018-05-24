@@ -165,7 +165,6 @@ class Apimainmodel extends CI_Model {
 
 	public function seatCheck($order_id,$number_of_seats)
 	{
-	
 			$start = microtime(true);
             set_time_limit(10);
             
@@ -205,8 +204,8 @@ class Apimainmodel extends CI_Model {
 		{
 			foreach ($user_result->result() as $rows)
 			{
-				  $user_id = $rows->id;
-				  $login_count = $rows->login_count+1;
+				  echo $user_id = $rows->id;
+				  echo $login_count = $rows->login_count+1;
 
 			}
 		} 
@@ -236,8 +235,11 @@ class Apimainmodel extends CI_Model {
 			}
 		} 
 		
+		
+		
 
 		if ( $user_id != "") {
+			
 			
 		    $sql = "SELECT A.id as userid, A.user_name, A.mobile_no, A.email_id, A.email_verify, A.login_count, A.user_role, B.name, B.birthdate, B.gender, B.occupation, B.address_line1, B.address_line2, B.address_line3, B.country_id, B. state_id, B.city_id, B.zip, B.user_picture, B.newsletter_status, B.referal_code, C.user_role_name FROM user_master A, user_details B, user_role_master C WHERE A.id=B.user_id AND A.user_role = C.id AND A.id ='".$user_id."'";
 		    
@@ -252,6 +254,31 @@ class Apimainmodel extends CI_Model {
     				  $country_id = $rows->country_id;
     				  $state_id = $rows->state_id;
     				  $city_id = $rows->city_id;
+					  $user_role = $rows->user_role;
+					 
+					 if ($user_role =='2') {
+							$organiser_sql = "SELECT * FROM organiser_request WHERE user_id  ='".$user_id."'";
+							$organiser_result = $this->db->query($organiser_sql);
+							$organiser_ress = $organiser_result->result();
+							if($organiser_result->num_rows()>0)
+							{
+								foreach ($organiser_result->result() as $orgs)
+    							{
+									$req_status = $orgs->req_status;
+								}
+								if ($req_status =='Pending'){
+									$event_organizer = 'P';
+								}
+								if($req_status =='Approved'){
+									$event_organizer = 'Y';
+								}
+								if($req_status =='Rejected'){
+									$event_organizer = 'R';
+								}
+							}
+					  } else {
+						  $event_organizer = 'N';
+					  }
     			}
 
 			    if ($user_picture != ''){
@@ -321,7 +348,8 @@ class Apimainmodel extends CI_Model {
 							"user_role" => $ress[0]->user_role,
 							"user_role_name" => $ress[0]->user_role_name,
 							"referal_code" => $ress[0]->referal_code,
-							"user_login_count" => $ress[0]->login_count
+							"user_login_count" => $ress[0]->login_count,
+							"event_organizer" => $event_organizer
 				);
 			}
 			
@@ -430,6 +458,31 @@ class Apimainmodel extends CI_Model {
     				  $country_id = $rows->country_id;
     				  $state_id = $rows->state_id;
     				  $city_id = $rows->city_id;
+					  $user_role = $rows->user_role;
+					  
+					  if ($user_role =='2') {
+						  	$organiser_sql = "SELECT * FROM organiser_request WHERE user_id  ='".$user_id."'";
+							$organiser_result = $this->db->query($organiser_sql);
+							$organiser_ress = $organiser_result->result();
+							if($organiser_result->num_rows()>0)
+							{
+								foreach ($organiser_result->result() as $orgs)
+    							{
+									$req_status = $orgs->req_status;
+								}
+								if ($req_status =='Pending'){
+									$event_organizer = 'P';
+								}
+								if($req_status =='Approved'){
+									$event_organizer = 'Y';
+								}
+								if($req_status =='Rejected'){
+									$event_organizer = 'R';
+								}
+							}
+					  } else {
+						  $event_organizer = 'N';
+					  }
     			}
 			  
 			    if ($user_picture != ''){
@@ -499,7 +552,8 @@ class Apimainmodel extends CI_Model {
 							"user_role" => $ress[0]->user_role,
 							"user_role_name" => $ress[0]->user_role_name,
 							"referal_code" => $ress[0]->referal_code,
-							"user_login_count" => $ress[0]->login_count
+							"user_login_count" => $ress[0]->login_count,
+							"event_organizer" => $event_organizer
 				);
 			}
     		
@@ -544,7 +598,6 @@ class Apimainmodel extends CI_Model {
 		}
  		
 	}
-	
 	
 /*
 	public function Fb_gm_login($email_id,$name,$gcm_key,$mobile_type,$login_type)
@@ -2657,6 +2710,36 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			}  
 						
 			return $response;
+	}
+//#################### View Events End ###############//
+
+
+//#################### View Events End ###############//
+	public function Organizer_request($user_id,$message)
+	{
+	$sql = "SELECT A.id as userid, A.user_name, A.mobile_no, A.email_id, A.email_verify, A.login_count, A.user_role, B.name, B.birthdate, B.gender, B.occupation, B.address_line1, B.address_line2, B.address_line3, B.country_id, B. state_id, B.city_id, B.zip, B.user_picture, B.newsletter_status, B.referal_code, C.user_role_name FROM user_master A, user_details B, user_role_master C WHERE A.id=B.user_id AND A.user_role = C.id AND A.id ='".$user_id."'";
+		$user_result = $this->db->query($sql);
+		$ress = $user_result->result();
+		if($user_result->num_rows()>0)
+		{
+			foreach ($user_result->result() as $rows)
+			{
+				  $email_id = $rows->email_id;
+				  $mobile_no = $rows->mobile_no;
+				  $name = $rows->name;
+			}
+			
+			echo $activity = "INSERT INTO organiser_request (name,user_id,email_or_phone,message,req_status,created_at ) VALUES ('". $name . "','". $user_id . "','". $email_id . "','". $message . "','Pending',NOW())";
+		    $insert_query = $this->db->query($activity);
+
+			$email_id = 'hello@heylaapp.com';
+			$subject = "Heyla App - Event Organizer Request";
+            $email_message = 'Dear Admin<br><br>Event Organizer Reguest from,<br>Name :'.$name.'<br> Email : '.$email_id.'<br>Mobile :'.$mobile_no.'<br>';
+            $this->sendMail($email_id,$subject,$email_message);
+			
+    		$response = array("status" => "success", "msg" => "Mail Send to Admin");	
+			
+		}
 	}
 //#################### View Events End ###############//
 

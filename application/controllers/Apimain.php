@@ -1375,7 +1375,7 @@ public function profilePictureUpload()
 
 	public function listEventReview()
 	{
-		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
@@ -1970,6 +1970,41 @@ public function profilePictureUpload()
 
 //-----------------------------------------------//
 
+//-----------------------------------------------//
+
+	public function organizerRequest()
+	{
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
+
+		if(!$this->checkMethod())
+		{
+			return FALSE;
+		}
+
+		if($_POST == FALSE)
+		{
+			$res = array();
+			$res["opn"] = "Event Organizer Request";
+			$res["scode"] = 204;
+			$res["message"] = "Input error";
+
+			echo json_encode($res);
+			return;
+		}
+		
+        $user_id ='';
+        $message ='';
+
+        $user_id = $this->input->post("user_id");
+        $message = $this->input->post("message");
+        
+	
+		$data['result']=$this->apimainmodel->Organizer_request($user_id,$message);
+		$response = $data['result'];
+		echo json_encode($response);
+	}
+
+//-----------------------------------------------//
 
 
 
