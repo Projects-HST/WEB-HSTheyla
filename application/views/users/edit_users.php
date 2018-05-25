@@ -1,44 +1,3 @@
-<!--div class="content-page">
-
-<!- Start content ->
-<div class="content">
-   <!- Top Bar Start ->
-   <div class="topbar">
-      <nav class="navbar-custom">
-         <ul class="list-inline float-right mb-0">
-            <!-li class="list-inline-item dropdown notification-list">
-               <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
-                  aria-haspopup="false" aria-expanded="false">
-               <i class="ion-ios7-bell noti-icon"></i>
-               <span class="badge badge-success noti-icon-badge">3</span>
-               </a>
-            </li!->
-            <li class="list-inline-item dropdown notification-list">
-               <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
-                  aria-haspopup="false" aria-expanded="false">
-               <img src="<?php echo base_url(); ?>assets/images/admin/admin.png" alt="user" class="rounded-circle">
-               </a>
-               <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                  <!-a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
-                  <a class="dropdown-item" href="#"><span class="badge badge-success pull-right">5</span><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
-                  <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a!->
-                  <a class="dropdown-item" href="<?php echo base_url(); ?>adminlogin/logout"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
-               </div>
-            </li>
-         </ul>
-         <ul class="list-inline menu-left mb-0">
-            <li class="list-inline-item">
-               <button type="button" class="button-menu-mobile open-left waves-effect">
-               <i class="ion-navicon"></i>
-               </button>
-            </li>
-            <li class="hide-phone list-inline-item app-search">
-               <h3 class="page-title">Edit Users Details</h3>
-            </li>
-         </ul>
-         <div class="clearfix"></div>
-      </nav>
-   </div-->
    <div class="page-content-wrapper ">
      <div class="container">
 
@@ -67,6 +26,15 @@
                             <input class="form-control" type="hidden" name="umid" value="<?php echo $res->user_id; ?>">
                                 <p id="msg2" style="color:red;"> </p>
                             </div>
+                            <label for="Status" class="col-sm-2 col-form-label">User Role</label>
+                          <div class="col-sm-4">
+                             <select class="form-control"  name="role" id="userrole" style="pointer-events:none;">
+                                  <?php foreach ($users_role as $value) { ?>
+                                   <option value="<?php echo $value->id; ?>"><?php echo $value->user_role_name; ?></option>
+                                 <?php } ?>
+                              </select>
+                              <script type="text/javascript">document.usersform.role.value="<?php echo $res->user_role; ?>";</script>
+                          </div>
                       </div>
                            <div class="form-group row">
                             <label for="Category" class="col-sm-2 col-form-label">Full Name</label>
@@ -128,18 +96,7 @@
                                  <textarea id="textarea" name="address1" class="form-control" maxlength="100" rows="3"><?php echo $res->address_line1;?></textarea>
                             </div>
                         </div>
-                       <div class="form-group row">
 
-                            <label for="ecost" class="col-sm-2 col-form-label">Address2</label>
-                            <div class="col-sm-4">
-                                 <textarea id="textarea" name="address2"  class="form-control" maxlength="100" rows="3"><?php echo $res->address_line2;?></textarea>
-                            </div>
-                             <label for="ecost" class="col-sm-2 col-form-label">Address3</label>
-                            <div class="col-sm-4">
-                                 <textarea id="textarea" name="address3"  class="form-control" maxlength="100" rows="3"><?php echo $res->address_line3;?></textarea>
-                            </div>
-
-                        </div>
 
                         <div class="form-group row">
 
@@ -206,18 +163,7 @@
                                  <input type="hidden" name="userrole" class="form-control" value="<?php echo $res->user_role; ?>" >
                               </div>
 
-                              <label for="Status" class="col-sm-2 col-form-label">User Role</label>
-                            <div class="col-sm-4">
-                              
-                               <select class="form-control"  name="role" id="userrole">
-                                    <!-- <option value=" ">Select User Role</option> -->
-                                    <?php foreach ($users_role as $value) { ?>
-                                     <option value="<?php echo $value->id; ?>"><?php echo $value->user_role_name; ?></option>
-                                   <?php } ?>
-                                </select>
 
-                                <script type="text/javascript">document.usersform.role.value="<?php echo $res->user_role; ?>";</script>
-                            </div>
 
                         </div>
 
@@ -285,66 +231,65 @@
           }
        }
    $(document).ready(function () {
-    $('#usersform').validate({ // initialize the plugin
-       rules: {
-         username:{required:true },
-         name:{required:true},
-         mobile:{required:true },
-         email:{required:true,
-         //   remote: {
-         //   url: "<?php echo base_url(); ?>users/mail_checker",
-         //   type: "post",
-         //   data: {
-         //     email: function() {
-         //       return $( "#email" ).val();
-         //     }
-         //   }
-         // }
 
+     $('#usersform').validate({
+        rules: {
+          username:{required:true,
+            remote: {
+                   url: "<?php echo base_url(); ?>users/username_checker_exist/<?php echo $res->id ?>",
+                   type: "post"
+                }
           },
-         pwd:{required:true },
-         dob:{required:true },
-         gender:{required:true },
-         occupation:{required:true },
-         address1:{required:true },
-         //address2:{required:true },
-         //address3:{required:true },
-         country:{required:true },
-         statename:{required:true },
-         city:{required:true },
-         zip:{required:true },
-         //user_picture:{required:true },
-         status:{required:true },
-         userrole:{required:true},
-         display_status:{required:true}
-        },
-        messages: {
-        username:"Enter UserName",
-        name:"Enter Name",
-        email: {
-          required: "Email required"
+          name:{required:true},
+          mobile:{required:true,
+            remote: {
+                   url: "<?php echo base_url(); ?>users/mobile_checker_exist/<?php echo $res->id ?>",
+                   type: "post"
+                }
+          },
+          email:{required:true,
+            remote: {
+                   url: "<?php echo base_url(); ?>users/mail_checker_exist/<?php echo $res->id ?>",
+                   type: "post"
+                }
+          },
+          pwd:{required:true },
+          dob:{required:true },
+          gender:{required:true },
+          occupation:{required:true },
+          address1:{required:true },
+          country:{required:true },
+          statename:{required:true },
+          city:{required:true },
+          zip:{required:true },
+          //user_picture:{required:true },
+          status:{required:true },
+          userrole:{required:true},
+          display_status:{required:true}
+         },
 
-        },
-        mobile:"Enter Mobile Number",
-        // email:"Enter Email Id",
-        pwd:"Enter Password",
-        dob:"Select DOB",
-        gender:"Select Gender",
-        occupation:"Enter Occupation",
-        address1:"Enter Address1",
-        //address2:"Enter Address2",
-        //address3:"Enter Address3",
-        country:"Select Country Name",
-        statename:"Select State Name",
-        city:"Select City Name",
-        zip:"Enter Zip",
-        //user_picture:"Select User Picture",
-        status:"Select Status",
-        userrole:"Select User Role",
-        display_status:"Select Display Status"
-              },
-         });
-   });
+         messages: {
+         username: { required:"Enter the Username ",remote:"Username Already Exists" },
+         name:"Enter Name",
+         mobile: { required:"Enter the Mobile Number ",remote:"Mobile Number Already Exists" },
+         email: { required:"Enter the Email ",remote:"Email Already Exists" },
+         pwd:"Enter Password",
+         dob:"Select DOB",
+         gender:"Select Gender",
+         occupation:"Enter Occupation",
+         address1:"Enter Address1",
+         country:"Select Country Name",
+         statename:"Select State Name",
+         city:"Select City Name",
+         zip:"Enter Zip",
+         status:"Select Status",
+         userrole:"Select User Role",
+         display_status:"Select Display Status"
+               },
+          });
+    });
+
+
   function getstatename(cuid)
   {
          //alert(cuid);
@@ -421,82 +366,6 @@
             }
           });
        }
- function checkusernamefun(val)
-  {
-   $.ajax({
-     type:'post',
-     url:'<?php echo base_url(); ?>/users/username_checker',
-     data:'uname='+val,
-     success:function(test)
-     {
-       if(test=="UserName already Exit")
-         {
-           $("#msg2").html('<p style="color:red;"><b>UserName already Exit</b></p>');
-           $("#save").hide();
-           $("#save1").hide();
-           //$("#mfun").hide();
-           //$("#efun").hide();
-          }else{
-            $("#msg2").html('<p style="color:green;"><b>UserName Available</b></p>');
-            $("#save").show();
-            $("#save1").show();
-           //$ ("#mfun").show();
-           //$("#efun").show();
-          }
-      }
-   });
-  }
 
-  function checkemailfun(val)
-  {
-   $.ajax({
-     type:'post',
-     url:'<?php echo base_url(); ?>/users/mail_checker',
-     data:'email='+val,
-     success:function(test)
-      {
-       if(test=="Email Id already Exit")
-         {
-            $("#msg").html('<p style="color:red;"><b>Email Id already Exit</b></p>');
-            $("#save").hide();
-            $("#save1").hide();
-            //$("#mfun").hide();
-            //$("#ufun").hide();
-          }else{
-            $("#msg").html('<p style="color:green;"><b>Email Id Available</b></p>');
-            $("#save").show();
-            $("#save1").show();
-            //$("#mfun").show();
-            //$("#ufun").show();
-          }
-      }
-   });
-  }
-
-   function checkmobilefun(val)
-   {
-    $.ajax({
-    type:'post',
-    url:'<?php echo base_url(); ?>/users/mobile_checker',
-    data:'cell='+val,
-    success:function(test)
-    {
-      if(test=="Mobile Number already Exit")
-        {
-          $("#msg1").html('<p style="color:red;"><b>Mobile Number already Exit</b></p>');
-          $("#save").hide();
-          $("#save1").hide();
-          //$("#efun").hide();
-          //$("#ufun").hide();
-          }else{
-             $("#msg1").html('<p style="color:green;"><b>Mobile Number Available</b></p>');
-             $("#save").show();
-             $("#save1").show();
-             //$("#efun").show();
-            // $("#ufun").show();
-          }
-      }
-   });
-  }
 
 </script>

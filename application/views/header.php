@@ -136,7 +136,8 @@
                 <span> User Management</span></a>
                     <ul class="list-unstyled">
                         <li id="createuser"><a href="<?php echo base_url();?>users/home">New User</a></li>
-                        <li id="viewuser"><a href="<?php echo base_url();?>users/view">View User Information</a></li>
+                        <li id="viewuser"><a href="<?php echo base_url();?>users/view">View Admin User</a></li>
+                          <li id="viewuser"><a href="<?php echo base_url();?>users/view_normal_users">View Normal User</a></li>
                         <li id="followers"><a href="<?php echo base_url();?>users/view_followers">View User Followers</a></li>
                         <!--li id="guestuser"><a href="<?php echo base_url();?>guestuser/home">Guest User</a></li-->
 
