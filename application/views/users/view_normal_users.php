@@ -23,7 +23,7 @@
                         <th>Points</th>
 
                         <th>Status</th>
-                        <th>Verify</th>
+                        <th>View </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -45,7 +45,10 @@
                         <td><?php echo $rows->total_points ; ?></td>
 
                         <td><?php if($sts=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
-                        <td><?php echo $new_date = date('d-m-Y', strtotime($rows->created_at)); ?> </td>
+                        <td>
+                          <a href="<?php echo base_url();?>users/edit/<?php echo $rows->id;?>">
+                          <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
+                        </td>
                     </tr>
                    <?php $i++; }  ?>
                     </tbody>

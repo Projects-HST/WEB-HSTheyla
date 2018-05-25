@@ -1,3 +1,5 @@
+
+
    <div class="page-content-wrapper ">
      <div class="container">
 
@@ -17,7 +19,18 @@
 
 
                 <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>users/update_user_details" name="usersform" id="usersform" onSubmit='return check();'>
-                  <?php foreach($users_view AS $res){ }?>
+<?php foreach($users_view AS $res){ }
+$user_role_id=$res->user_role;
+if($user_role_id=='4'){ ?>
+
+<?php }else{ ?>
+<style>
+#user_role_id{display: none;}
+#save{display: none;}
+#normaluser a{color:#eb7475;}
+</style>
+
+<?php } ?>
                         <div class="form-group row">
 
                           <label for="Category" class="col-sm-2 col-form-label">User Id / Name</label>
@@ -26,8 +39,8 @@
                             <input class="form-control" type="hidden" name="umid" value="<?php echo $res->user_id; ?>">
                                 <p id="msg2" style="color:red;"> </p>
                             </div>
-                            <label for="Status" class="col-sm-2 col-form-label">User Role</label>
-                          <div class="col-sm-4">
+                            <label for="Status" class="col-sm-2 col-form-label" id="user_role_id">User Role</label>
+                          <div class="col-sm-4" id="user_role_id">
                              <select class="form-control"  name="role" id="userrole" style="pointer-events:none;">
                                   <?php foreach ($users_role as $value) { ?>
                                    <option value="<?php echo $value->id; ?>"><?php echo $value->user_role_name; ?></option>
@@ -156,9 +169,8 @@
 
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">User Picture</label>
                               <div class="col-sm-4">
-                                 <input type="file" name="user_picture" class="form-control" accept="image/*" >
+
                                  <input type="hidden" name="old_picture" class="form-control" value="<?php echo $res->user_picture; ?>" >
                                  <input type="hidden" name="userrole" class="form-control" value="<?php echo $res->user_role; ?>" >
                               </div>
@@ -193,10 +205,10 @@
 
 
                         <div class="form-group row">
-                             <label for="Status" class="col-sm-2 col-form-label">Old  Pic</label>
-                            <div class="col-sm-4">
-                            <img src="<?php echo base_url();?>/assets/users/<?php echo $res->user_picture; ?>" style="width:25%;" >
-                            </div>
+                          <label for="Status" class="col-sm-2 col-form-label">Current  Pic</label>
+                         <div class="col-sm-4">
+                         <img src="<?php echo base_url();?>/assets/users/<?php echo $res->user_picture; ?>" style="width:25%;" >
+                         </div>
                             <label class="col-sm-2 col-form-label"></label>
                             <div class="col-sm-2">
                               <button type="submit" id="save" class="btn btn-primary waves-effect waves-light">
