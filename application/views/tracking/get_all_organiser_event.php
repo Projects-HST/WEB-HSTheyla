@@ -24,7 +24,7 @@
                   <td><?php echo $rows_event->start_date; ?></td><td><?php  echo $rows_event->end_date; ?></td>
                   <td><?php echo $rows_event->event_type; ?></td>
                 <td><?php  if($rows_event->event_status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
-                  <td><a href="<?php echo base_url(); ?>events/edit_events/<?php echo base64_encode($rows_event->id); ?>"><img title="View Events" src="<?php echo base_url(); ?>assets/icons/view.png"></a></td>
+                  <td><a href="<?php echo base_url(); ?>events/edit_events/<?php echo base64_encode($rows_event->id); ?>"><img title="View Events" src="<?php echo base_url(); ?>assets/icons/edit.png"></a></td>
 
                 </tr>
               <?php $i++; }  ?>

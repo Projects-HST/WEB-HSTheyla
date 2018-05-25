@@ -7,9 +7,7 @@
             <div class="card-block">
 
                 <h4 class="mt-0 header-title"> View Normal Users List </h4>
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div class="tab-pane active p-3" id="home-1" role="tabpanel">
+
                 <table  id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                     <tr>
@@ -21,7 +19,6 @@
                         <th>Role</th>
                         <th>City</th>
                         <th>Points</th>
-
                         <th>Status</th>
                         <th>View </th>
                     </tr>
@@ -43,7 +40,6 @@
                         <td><?php echo $rows->user_role_name; ?></td>
                         <td><?php echo $rows->city_name ; ?></td>
                         <td><?php echo $rows->total_points ; ?></td>
-
                         <td><?php if($sts=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
                         <td>
                           <a href="<?php echo base_url();?>users/edit/<?php echo $rows->id;?>">
@@ -53,10 +49,6 @@
                    <?php $i++; }  ?>
                     </tbody>
                 </table>
-                    </div>
-
-
-                </div>
 
             </div>
         </div>
