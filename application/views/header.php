@@ -106,8 +106,8 @@
                         <li id="plan"><a href="<?php echo base_url();?>advertisement/home"> Add Plan</a></li>
                         <li id="list"><a href="<?php echo base_url();?>advertisement/view_adv_plan">Add Banner Adv. </a></li>
                         <li id="history"><a href="<?php echo base_url();?>advertisement/view_adv_history">Banner Adv. History</a></li>
-                        <li id="popup"><a href="#">Add Popup Adv. </a></li>
-                        <li id="offers"><a href="#">Add Offers </a></li>
+                        <!-- <li id="popup"><a href="#">Add Popup Adv. </a></li>
+                        <li id="offers"><a href="#">Add Offers </a></li> -->
                     </ul>
                 </li>
 
@@ -136,8 +136,9 @@
                 <span> User Management</span></a>
                     <ul class="list-unstyled">
                         <li id="createuser"><a href="<?php echo base_url();?>users/home">New User</a></li>
-                        <li id="viewuser"><a href="<?php echo base_url();?>users/view">View User Information</a></li>
-                        <li id="followers"><a href="<?php echo base_url();?>users/view_followers">View User Followers</a></li>
+                        <li id="adminuser"><a href="<?php echo base_url();?>users/view">View Admin User</a></li>
+                          <li id="normaluser"><a href="<?php echo base_url();?>users/view_normal_users">View Normal User</a></li>
+                        <!-- <li id="followers"><a href="<?php echo base_url();?>users/view_followers">View User Followers</a></li> -->
                         <!--li id="guestuser"><a href="<?php echo base_url();?>guestuser/home">Guest User</a></li-->
 
                     </ul>

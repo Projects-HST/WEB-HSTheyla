@@ -1,6 +1,6 @@
 
         <footer class="footer">
-            © 2017 Developed - By Happy Sanz Tech.
+            ©<?php echo date("Y"); ?> Developed - By Happy Sanz Tech.
         </footer>
     </div>
     <!-- End Right content here -->
