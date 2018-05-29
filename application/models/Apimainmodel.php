@@ -2237,6 +2237,118 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 //#################### Advanced Events Search End ###############//
 
 
+//#################### Datewise events Search ####################//
+	public function Datewise_events($event_type,$city_id,$user_id,$user_type,$day_type)
+	{
+	    $current_date = date("Y-m-d");
+		$tomorrow_date = new DateTime('tomorrow');
+		$stomorrow_date =  $tomorrow_date->format('Y-m-d');
+
+		if ($user_type ==1){
+			$pre_query = "SELECT * FROM user_preference WHERE user_id = '$user_id'";
+		} else {
+			$pre_query = "SELECT * FROM guest_user_preference WHERE user_id = '$user_id'";
+		}
+		    $pre_res = $this->db->query($pre_query);
+      
+    		 if($pre_res->num_rows()>0){
+    		    foreach ($pre_res->result() as $rows)
+    			{	
+    				$pref_ids[]  = $rows->category_id;
+    			}
+    			$preferrence = implode (",", $pref_ids);
+    		 }
+			 
+		if ($day_type =='Today'){
+			 $day_query = "'$current_date' BETWEEN ev.start_date AND ev.end_date AND";
+		}
+		if ($day_type =='Tomorrow'){
+			 $day_query = "'$stomorrow_date' BETWEEN ev.start_date AND ev.end_date AND";
+		}
+		if ($day_type =='Week'){
+			$start = (date('D') != 'Mon') ? date('Y-m-d', strtotime('last Monday')) : date('Y-m-d');
+			$finish = (date('D') != 'Sat') ? date('Y-m-d', strtotime('next Sunday')) : date('Y-m-d');
+			 $day_query = "ev.start_date <= STR_TO_DATE('" . $finish . "','%Y-%m-%d') AND  ev.end_date >= STR_TO_DATE('" . $start . "','%Y-%m-%d') AND";
+		}
+		if ($day_type =='Month'){
+
+			$start = date('Y-m-01', strtotime($current_date));
+			$finish = date('Y-m-t', strtotime($current_date));
+			 $day_query = "ev.start_date <= STR_TO_DATE('" . $finish . "','%Y-%m-%d') AND  ev.end_date >= STR_TO_DATE('" . $start . "','%Y-%m-%d') AND";
+		}
+		
+	    if ($event_type == 'General'){
+	        $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
+                            from events as ev
+                            left join event_popularity as ep on ep.event_id = ev.id
+                            LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+                            LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+                            WHERE ev.hotspot_status = 'N' AND $day_query ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y' group by ev.id";
+	    } 
+	    if ($event_type == 'Popularity'){
+	            $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
+                            from events as ev
+                            left join event_popularity as ep on ep.event_id = ev.id
+                            LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+                            LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+                            WHERE ev.hotspot_status = 'N' AND $day_query ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y' group by ev.id ORDER by popularity DESC";
+	    } 
+
+		$event_res = $this->db->query($event_query);
+
+		 if($event_res->num_rows()>0){
+                $event_result= $event_res->result();
+
+                foreach ($event_res->result() as $rows)
+			    {
+				     $eventData[]  = array(
+							"event_id" => $rows->id,
+							"popularity" => $rows->popularity,
+							"category_id" => $rows->category_id,
+							"event_name" => $rows->event_name,
+							"event_venue" => $rows->event_venue,
+							"event_address" => $rows->event_address,
+							"description" => $rows->description,
+							"start_date" => $rows->start_date,
+							"end_date" => $rows->end_date,
+							"start_time" => $rows->start_time,
+							"end_time" => $rows->end_time,
+							"event_banner" => base_url().'assets/events/banner/'.$rows->event_banner,
+							"event_latitude" => $rows->event_latitude,
+							"event_longitude" => $rows->event_longitude,
+							"event_country" => $rows->event_country,
+							"country_name" => $rows->country_name,
+							"event_city" => $rows->event_city,
+							"city_name" => $rows->city_name,
+							"primary_contact_no" => $rows->primary_contact_no,
+							"secondary_contact_no" => $rows->secondary_contact_no,
+							"contact_person" => $rows->contact_person,
+							"contact_email" => $rows->contact_email,
+							"event_type" => $rows->event_type,
+							"adv_status" => $rows->adv_status,
+							"booking_status" => $rows->booking_status,
+							"hotspot_status" => $rows->hotspot_status,
+							"event_colour_scheme" => $rows->event_colour_scheme,
+							"event_status" => $rows->event_status,
+							"advertisement" => $rows->adv_status,
+				    );
+			    }
+			     
+
+			   //  if (!empty($adv_eventData)) {
+			    //        $output = array_merge($adv_eventData, $eventData);
+		        //    } else {
+		        //        $output = $eventData;
+		       //     }
+			     	$response = array("status" => "success", "msg" => "View Events","Eventdetails"=>$eventData);
+			}else{
+			        $response = array("status" => "error", "msg" => "Events not found");
+			}  
+						
+			return $response;
+	}
+//#################### Datewise events End ###############//
+
 //#################### Booking Plan Dates###############//  
 	public function Booking_plandates($event_id)
 	{

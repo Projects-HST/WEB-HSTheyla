@@ -1528,6 +1528,49 @@ public function profilePictureUpload()
 
 //-----------------------------------------------//
 
+
+//-----------------------------------------------//
+
+	public function datewiseEventlist()
+	{
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
+
+		if(!$this->checkMethod())
+		{
+			return FALSE;
+		}
+
+		if($_POST == FALSE)
+		{
+			$res = array();
+			$res["opn"] = "Datewise Event List";
+			$res["scode"] = 204;
+			$res["message"] = "Input error";
+
+			echo json_encode($res);
+			return;
+		}
+
+        $event_type = '';
+        $city_id = '';
+        $user_id = '';
+        $user_type = '';
+		$day_type = '';
+
+        
+        $event_type = $this->input->post("event_type");
+        $city_id = $this->input->post("city_id");
+        $user_id = $this->input->post("user_id");
+        $user_type = $this->input->post("user_type");
+        $day_type = $this->input->post("day_type");
+
+		$data['result']=$this->apimainmodel->Datewise_events($event_type,$city_id,$user_id,$user_type,$day_type);
+		$response = $data['result'];
+		echo json_encode($response);
+	}
+
+//-----------------------------------------------//
+
 //-----------------------------------------------//
 
 	public function bookingPlanDates()
