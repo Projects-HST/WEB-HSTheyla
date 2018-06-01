@@ -697,74 +697,6 @@ public function profilePictureUpload()
 
 //-----------------------------------------------//
 
-// //-----------------------------------------------//
-
-// 	public function viewpreferrence()
-// 	{
-// 		$_POST = json_decode(file_get_contents("php://input"), TRUE);
-
-// 		if(!$this->checkMethod())
-// 		{
-// 			return FALSE;
-// 		}
-
-// 		if($_POST == FALSE)
-// 		{
-// 			$res = array();
-// 			$res["opn"] = "View Preferrence";
-// 			$res["scode"] = 204;
-// 			$res["message"] = "Input error";
-
-// 			echo json_encode($res);
-// 			return;
-// 		}
-
-// 		$user_id = '';
-// 		$user_id = $this->input->post("user_id");
-
-// 		$data['result']=$this->apimainmodel->View_preferrence($user_id);
-// 		$response = $data['result'];
-// 		echo json_encode($response);
-// 	}
-
-// //-----------------------------------------------//
-
-
-
-// //-----------------------------------------------//
-
-// 	public function addpreferrence()
-// 	{
-// 		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
-
-// 		if(!$this->checkMethod())
-// 		{
-// 			return FALSE;
-// 		}
-
-// 		if($_POST == FALSE)
-// 		{
-// 			$res = array();
-// 			$res["opn"] = "Add User Preferrence";
-// 			$res["scode"] = 204;
-// 			$res["message"] = "Input error";
-
-// 			echo json_encode($res);
-// 			return;
-// 		}
-
-// 		$user_id = '';
-// 		$category_ids = '';
-// 		$user_id = $this->input->post("user_id");
-// 		$category_ids = $this->input->post("category_ids");
-
-// 		$data['result']=$this->apimainmodel->Add_preferrence($user_id,$category_ids);
-// 		$response = $data['result'];
-// 		echo json_encode($response);
-// 	}
-
-// //-----------------------------------------------//
-
 //-----------------------------------------------//
 
 	public function updatePreference()
@@ -1144,92 +1076,21 @@ public function profilePictureUpload()
 		$city = '';
 		$user_id = '';
 		$user_type ='';
+		$day_type ='';
 		
 		$event_type = $this->input->post("event_type");
 		$city_id = $this->input->post("event_city_id");
 		$user_id = $this->input->post("user_id");
 		$user_type = $this->input->post("user_type");
+		$day_type = $this->input->post("day_type");
 		
-		$data['result']=$this->apimainmodel->View_events($event_type,$city_id,$user_id,$user_type);
+		
+		$data['result']=$this->apimainmodel->View_events($event_type,$city_id,$user_id,$user_type,$day_type);
 		$response = $data['result'];
 		echo json_encode($response);
 	}
 
 //-----------------------------------------------//
-
-
-// //-----------------------------------------------//
-
-// 	public function advevents()
-// 	{
-// 		$_POST = json_decode(file_get_contents("php://input"), TRUE);
-
-// 		if(!$this->checkMethod())
-// 		{
-// 			return FALSE;
-// 		}
-
-// 		if($_POST == FALSE)
-// 		{
-// 			$res = array();
-// 			$res["opn"] = "View Adv Events";
-// 			$res["scode"] = 204;
-// 			$res["message"] = "Input error";
-
-// 			echo json_encode($res);
-// 			return;
-// 		}
-
-// 		$city = '';
-// 		$user_id = '';
-// 		$preferrence ='';
-
-// 		$city = $this->input->post("city");
-// 		$user_id = $this->input->post("user_id");
-// 		$preferrence = $this->input->post("preferrence");
-		
-// 		$data['result']=$this->apimainmodel->View_adv_events($city,$user_id,$preferrence);
-// 		$response = $data['result'];
-// 		echo json_encode($response);
-// 	}
-
-// //-----------------------------------------------//
-
-
-// //-----------------------------------------------//
-
-// 	public function vieweventdetails()
-// 	{
-// 		$_POST = json_decode(file_get_contents("php://input"), TRUE);
-
-// 		if(!$this->checkMethod())
-// 		{
-// 			return FALSE;
-// 		}
-
-// 		if($_POST == FALSE)
-// 		{
-// 			$res = array();
-// 			$res["opn"] = "View Event Details";
-// 			$res["scode"] = 204;
-// 			$res["message"] = "Input error";
-
-// 			echo json_encode($res);
-// 			return;
-// 		}
-
-// 		$event_id = '';
-// 		$user_id = '';
-
-// 		$event_id = $this->input->post("event_id");
-// 		$user_id = $this->input->post("user_id");
-
-// 		$data['result']=$this->apimainmodel->View_eventdetails($event_id,$user_id);
-// 		$response = $data['result'];
-// 		echo json_encode($response);
-// 	}
-
-// //-----------------------------------------------//
 
 
 //-----------------------------------------------//
@@ -1505,8 +1366,7 @@ public function profilePictureUpload()
         $selected_preference = '';
         $selected_city = '';
 		$price_range = '';
-        //$today_date = '';
-        //$tomorrow_date ='';
+
 
         
         $single_date = $this->input->post("single_date");
@@ -1517,11 +1377,53 @@ public function profilePictureUpload()
         $selected_preference = $this->input->post("selected_preference");
         $selected_city = $this->input->post("selected_city");
 		$price_range = $this->input->post("price_range");
-       // $today_date = $this->input->post("today_date");
-       // $tomorrow_date = $this->input->post("tomorrow_date");
+
 
 
 		$data['result']=$this->apimainmodel->Advance_search($single_date,$from_date,$to_date,$event_type,$event_category,$selected_preference,$selected_city,$price_range);
+		$response = $data['result'];
+		echo json_encode($response);
+	}
+
+//-----------------------------------------------//
+
+
+//-----------------------------------------------//
+
+	public function datewiseEventlist()
+	{
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
+
+		if(!$this->checkMethod())
+		{
+			return FALSE;
+		}
+
+		if($_POST == FALSE)
+		{
+			$res = array();
+			$res["opn"] = "Datewise Event List";
+			$res["scode"] = 204;
+			$res["message"] = "Input error";
+
+			echo json_encode($res);
+			return;
+		}
+
+        $event_type = '';
+        $city_id = '';
+        $user_id = '';
+        $user_type = '';
+		$day_type = '';
+
+        
+        $event_type = $this->input->post("event_type");
+        $city_id = $this->input->post("city_id");
+        $user_id = $this->input->post("user_id");
+        $user_type = $this->input->post("user_type");
+        $day_type = $this->input->post("day_type");
+
+		$data['result']=$this->apimainmodel->Datewise_events($event_type,$city_id,$user_id,$user_type,$day_type);
 		$response = $data['result'];
 		echo json_encode($response);
 	}
@@ -2009,23 +1911,7 @@ public function profilePictureUpload()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//-----------------------------------------------//
-
-
+/*//-----------------------------------------------//
 	public function notification()
 	{
 	   //$_POST = json_decode(file_get_contents("php://input"), TRUE);
@@ -2081,5 +1967,6 @@ public function profilePictureUpload()
 		echo json_encode($response);
 	}
 
-//-----------------------------------------------//
+//-----------------------------------------------//*/
+
 }
