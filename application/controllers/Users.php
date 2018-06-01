@@ -169,6 +169,25 @@ class Users extends CI_Controller
 	 		 }
     }
 
+		public function edit_noraml_users($id)
+		{
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			$datas['country_list'] = $this->usersmodel->getall_country_list();
+			$datas['users_role'] = $this->usersmodel->getall_users_role_list();
+			$datas['users_view'] = $this->usersmodel->getall_users_details1($id);
+			 // echo'<pre>';print_r($datas['users_view']);exit;
+		if($user_role == 1 || $user_role == 4)
+		{
+			$this->load->view('header');
+			$this->load->view('users/edit_noraml_users',$datas);
+			$this->load->view('footer');
+		}else{
+				redirect('/');
+			 }
+		}
+
     public function update_user_details()
     {
       $datas=$this->session->userdata();

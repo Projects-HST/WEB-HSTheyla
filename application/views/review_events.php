@@ -49,8 +49,8 @@
                         </thead>
                         <tbody>
                         <?php foreach($result as $rows){
-							 $status=$rows->event_status;
-							 ?>
+							                   $status=$rows->event_status;
+							                          ?>
                         <tr>
                             <td><?php echo $rows->event_name ; ?></td>
                             <td><?php echo $rows->category_name ; ?></td>

@@ -1,14 +1,6 @@
 <div class="container-fluid page-bg">
 <div class="">
-<div class="row header-title leaderboard-bg">
-  <div class="col-md-12">
-    <div class="container">
-    <p class="leader-title">Heyla is an everything-for-everybody App – Start Exploring Straightaway.</p>
-  </div>
-  </div>
-</div>
-
-<section class="container">
+<section class="container-fluid">
   <div class="leaderboard-menu-tab">
         <div class="row row-offcanvas row-offcanvas-right">
           <div class="col-12 col-md-3 sidebar-offcanvas" id="sidebar">
@@ -32,6 +24,7 @@
           </div><!--/span-->
 
           <div class="col-12 col-md-9">
+            <div class="container leaderboard-points-tab">
             <h3>Heyla Leaderboard</h3>
             <div class="row justify-content-md-center">
              <div class="col col-lg-3">
@@ -79,6 +72,7 @@
 
 
             </div>
+          </div>
           </div><!--/span-->
 
         </div><!--/row-->

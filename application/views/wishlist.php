@@ -35,7 +35,7 @@
             <div class="card-header card-header-title">
               <h3 class="mb-0">Wishlist</h3>
             </div>
-              
+
               <div class="row">
 
               <?php
@@ -45,14 +45,12 @@
 				$event_name = strtolower(preg_replace("/[^\w]/", "-", $res->event_name));
 				$enc_event_id = base64_encode($event_id);
 
-            $string = strip_tags($res->description);
+        $string = strip_tags($res->description);
 			if (strlen($string) > 150) {
 
-				// truncate string
 				$stringCut = substr($string, 0, 150);
 				$endPoint = strrpos($stringCut, ' ');
 
-				//if the string doesn't contain any space then it will cut without word basis.
 				$string = $endPoint? substr($stringCut, 0, $endPoint):substr($stringCut, 0);
 				$string .= '...';
 			}

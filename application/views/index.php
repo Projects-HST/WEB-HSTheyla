@@ -138,14 +138,14 @@
 
                                       </div>
                                       <div class="form-group">
-                                        <textarea type="text" name="message" rows="3" cols="50" placeholder="Message"></textarea>
+                                        <textarea type="text" name="message" rows="3" cols="50" class="form-control" placeholder="Message" style=" max-width: 100%;"></textarea>
 
                                       </div>
 
                                       <button type="submit" id="submit" class="btn btn-event btn-lg">Become an organiser</button>
                                   </form>
                               </div>
-                            
+
                           </div>
                       </div>
 

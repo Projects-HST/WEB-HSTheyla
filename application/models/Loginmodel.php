@@ -670,18 +670,18 @@ Class Loginmodel extends CI_Model
 
 
   function save_request_orgainser($name,$email,$message,$user_id){
-    $check_email="SELECT * FROM organiser_request WHERE user_id='$user_id'";
+   $check_email="SELECT * FROM organiser_request WHERE user_id='$user_id'";
    $res=$this->db->query($check_email);
-    if($res->num_rows()>1){
+    if($res->num_rows()==0){
+      $query = "INSERT INTO organiser_request (user_id,name,email_or_phone,message,req_status,created_at) VALUES('$user_id','$name','$email','$message','Pending',NOW())";
+      $resultset = $this->db->query($query);
+      if($resultset){
+        echo "Thanks for requesting we contact you shortly";
+      }else{
+          echo "failed";
+      }
+    }else{
       echo "You have already requested and waiting for Approval";
-    }else{
-    $query = "INSERT INTO organiser_request (user_id,name,email_or_phone,message,req_status,created_at) VALUES('$user_id','$name','$email','$message','Pending',NOW())";
-    $resultset = $this->db->query($query);
-    if($resultset){
-      echo "Thanks for requesting we contact you shortly";
-    }else{
-        echo "failed";
-    }
   }
 }
 

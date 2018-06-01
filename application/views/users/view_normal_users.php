@@ -42,7 +42,7 @@
                         <td><?php echo $rows->total_points ; ?></td>
                         <td><?php if($sts=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
                         <td>
-                          <a href="<?php echo base_url();?>users/edit/<?php echo $rows->id;?>">
+                          <a href="<?php echo base_url();?>users/edit_noraml_users/<?php echo $rows->id;?>">
                           <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
                         </td>
                     </tr>
