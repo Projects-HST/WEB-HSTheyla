@@ -2,7 +2,8 @@
   width: 125px;
 }
 .navbar-dark .navbar-nav .nav-link{
-  color: #fff;
+  color: #000;
+  font-weight: 500;
 }
 .loginbtn{
   padding-left: 30px;
@@ -27,8 +28,8 @@
 }
 .about{
   background-color: #478ECC;
-  padding-top: 120px;
-  padding-bottom: 115px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   background-repeat: no-repeat;
 }
 .tabmenu:active{
@@ -56,10 +57,10 @@
 .whatsheyla{
   text-align: center;
   font-size: 23px;
-  color: #fff;
+  color: #000;
 }
 .heading2{
-  margin-bottom: 60px;
+
   text-align: center;
   font-size: 25px;
   color: #fff;
@@ -83,7 +84,7 @@
   background-color: #e8e8e8;
 }
 .active{
-  border-bottom: 2px solid  #478ECC;
+  /* border-bottom: 2px solid  #478ECC; */
 }
 .nav-tabs{
   border: none;
@@ -190,12 +191,56 @@
      padding-bottom: 60px;
 
 }
+
+.features_section{
+      background: url("../images/feature_bg.jpg")no-repeat;
+     -webkit-background-size: cover;
+     -moz-background-size: cover;
+     -o-background-size: cover;
+
+     padding-top: 85px;
+     padding-bottom: 60px;
+
+}
 .organiserbox{
   padding-top: 60px;
   padding-bottom: 60px;
   border-right: 2px solid #DCDBD9;
 }
-
+.ad_slider{
+  margin-top: 20px;
+}
+.popular{
+  font-size: 35px;
+  color: #000;
+}
+.popular_events{
+  padding-top: 10px;
+  padding-bottom: 40px;
+}
+.popular_event_section{
+  background-color: #e4e4e4;
+}
+.event_section{
+  background-color: #fff;
+  padding-bottom: 10px;
+}
+.event_heading{
+  color: #000;
+  font-size: 22px;
+  font-weight: 500;
+}
+.event_thumb{
+  margin-left: 10px;
+  font-weight: 500;
+}
+.event_box{
+  margin-bottom: 10px;
+}
+.contact_icon{
+  background-color: #478ecc;
+  padding: 10px;
+}
 .organiserbox-last{
   padding-top: 60px;
   padding-bottom: 60px;
@@ -206,12 +251,57 @@
 .organiserevent{
   border-bottom: 4px solid #DCDBD9;
 }
-.form-control{
-  margin-bottom: 10px;
-
-  color: #A7A7A7;
-  border: 1px solid grey;
+.text_box{
+  background-color: #d7d7d7;
 }
+.app_img{
+  width:160px;
+}
+.event_details_bg{
+  background-color: #fdfdfd;
+}
+.event_details_bg_row{
+  background-color: #fff;
+  margin: 15px;
+}
+.book_tickets{
+  text-align: center;
+  padding: 10px;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  background-color: #478ECC;
+
+}
+.book_tickets:hover{
+  color: #fff;
+  text-decoration: none;
+}
+.img_gallery{
+  width:150px;
+  height: 100px;
+  padding-bottom: 10px;
+}
+.review_name{
+  font-weight: 600;
+  font-size: 18px;
+}
+.review_desc{
+  font-weight: 400;
+  color: #000;
+}
+
+
+.event_booking_section{
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.rated_star{
+  margin-left: 20px;
+}
+
 .footer-bg{
   background-color: #478ECC;
   padding-top: 15px;
@@ -234,12 +324,13 @@
 .formbg{
   padding-top: 60px;
   padding-bottom:60px;
-  background-color:  #F6F6F6;
+  background-color:  #fff;
 }
 .submitbtn{
   background-color: #478ECC;
   color:#fff;
   padding-left: 0px;
+  margin-top: 10px;
 }
 .normal-txt{
   font-size: 22px;
@@ -252,9 +343,9 @@
   font-size: 30px;
   color: #fff;
 }
-.carousel-caption{
+/* .carousel-caption{
   bottom: 100px;
-}
+} */
 .btn-event{
   padding: 10px 40px 10px 40px;
   background-color: #478ECC;
@@ -272,7 +363,13 @@
     font-weight: 300;
 }
 .getin{
-  color:#478ECC;
+  color:#000;
+  font-weight: 600;
+  font-size: 22px;
+}
+.address_form{
+  color: #000;
+  font-size: 18px;
   font-weight: 600;
 }
 .blueline{
@@ -667,7 +764,7 @@ a.btn.btn-login.btn-primary.btn-block.review-btn{
 
 }
 .leaderboard-points-tab{
-  
+
 }
 
 
@@ -761,9 +858,9 @@ a.btn.btn-login.btn-primary.btn-block.review-btn{
     height: 234px;
     width: 100%;
   }
-.carousel-fade .carousel-inner, .carousel-fade .carousel-item {
+/* .carousel-fade .carousel-inner, .carousel-fade .carousel-item {
   height: 320px;
-}
+} */
 .or-text{
   padding-top: 0px;
 }
@@ -784,4 +881,12 @@ a.btn.btn-login.btn-primary.btn-block.review-btn{
 .navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .logout-btn:hover{
   color: rgba(255,255,255,.75);
     cursor: pointer;
+}
+
+
+
+
+/* Event details page */
+.event_detail_thumb{
+  margin-top: 30px;
 }

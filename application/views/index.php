@@ -13,12 +13,13 @@
     <!-- Bootstrap core CSS -->
     <link href="<?php echo base_url(); ?>assets/front/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/front/css/style.css" rel="stylesheet">
-    <link href="<?php echo base_url(); ?>assets/front/css/main.css" rel="stylesheet">
+      <!-- <link href="<?php echo base_url(); ?>assets/front/css/multislider.css" rel="stylesheet"> -->
+    <!-- <link href="<?php echo base_url(); ?>assets/front/css/main.css" rel="stylesheet"> -->
     <link href="<?php echo base_url(); ?>assets/css/button.css" rel="stylesheet" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template -->
-    <link href="<?php echo base_url(); ?>assets/front/css/carousel.css" rel="stylesheet">
+    <!-- <link href="<?php echo base_url(); ?>assets/front/css/carousel.css" rel="stylesheet"> -->
     <script src="<?php echo base_url(); ?>assets/front/js/jquery.min.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-92904528-2"></script>
     <script>
@@ -30,6 +31,9 @@
     </script>
     <script src="<?php echo base_url(); ?>assets/front/js/popper.min.js"></script>
 
+
+
+
     <script src="<?php echo base_url(); ?>assets/front/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/pages/sweet-alert.init.js"></script>
@@ -38,7 +42,8 @@
     <script src="<?php echo base_url(); ?>assets/js/additional-methods.min.js"></script>
 </head>
 <style>
-.carousel-fade .carousel-item {
+
+/* .carousel-fade .carousel-item {
   display: block;
   position: absolute;
   top: 0;
@@ -49,6 +54,31 @@
 }
 .carousel-fade .carousel-item.active {
   opacity: 1;
+} */
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+  display: flex;
+}
+
+.carousel-inner .carousel-item-right.active,
+.carousel-inner .carousel-item-next {
+  transform: translateX(33%);
+}
+
+.carousel-inner .carousel-item-left.active,
+.carousel-inner .carousel-item-prev {
+  transform: translateX(-33%);
+}
+
+.carousel-inner .carousel-item-right,
+.carousel-inner .carousel-item-left{
+  transform: translateX(0);
+
+}
+.slider-img{
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 </style>
@@ -57,7 +87,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark  fixed-top " data-spy="affix" data-offset-top="(scroll value)">
         <div class="container">
-            <a class="navbar-brand" href="#"><img src="<?php echo base_url(); ?>assets/front/images/logo.png" class="imglogo"></a>
+            <a class="navbar-brand" href="#"><img src="<?php echo base_url(); ?>assets/front/images/heyla_b.png" class="imglogo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -157,10 +187,9 @@
     </div>
 
 
-        <div class="slider">
+        <!-- <div class="slider">
             <div class="carousel carousel-fade" data-ride="carousel" data-interval="2500">
-            <!-- <div class="carousel-inner carousel-fade" role="listbox"> -->
-                <!-- Slide One - Set the background image for this slide in the line below -->
+
                 <div class="carousel-item active" style="background-image: url('<?php echo base_url(); ?>assets/front/images/slider1.jpg')">
                     <h1 class="caption-head"> Events on your Fingertips</h1>
                     <div class="carousel-caption  d-md-block">
@@ -169,7 +198,6 @@
 
                     </div>
                 </div>
-                <!-- Slide Two - Set the background image for this slide in the line below -->
                 <div class="carousel-item" style="background-image: url('<?php echo base_url(); ?>assets/front/images/slider2.jpg')">
                       <h1 class="caption-head">Extreme Event Search is now Heyla</h1>
                     <div class="carousel-caption  d-md-block">
@@ -177,7 +205,6 @@
 
                     </div>
                 </div>
-                <!-- Slide Three - Set the background image for this slide in the line below -->
                 <div class="carousel-item" style="background-image: url('<?php echo base_url(); ?>assets/front/images/slider3.jpg')">
                       <h1 class="caption-head">Encyclopedia of Events</h1>
                     <div class="carousel-caption  d-md-block">
@@ -186,9 +213,101 @@
                     </div>
                 </div>
             </div>
+        </div> -->
 
 
+
+  <div class="container-fluid ad_slider">
+
+    <div class="row">
+        <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel" style="margin-top:60px;">
+            <div class="carousel-inner w-100" role="listbox">
+                <div class="carousel-item active">
+                    <img class="d-block col-6 img-fluid slider-img" src="http://www.cars101.com/subaru/ads-subaru-2013-love-spring-event3.JPG" style="height:500px;">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block col-6 img-fluid slider-img" src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/5e26e1428035.560095600048d.png" style="height:500px;">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block col-6 img-fluid slider-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKX4DJ_5k_5DKAqgOOrk1-ZMgkPTsSl7Fd7mxPh_M5TTEhJtrtfw" style="height:500px;">
+                </div>
+
+            </div>
+            <a class="carousel-control-prev" href="#recipeCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#recipeCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
+    </div>
+
+</div>
+
+<div class="container-fluid popular_event_section popular_events">
+  <div class="">
+  <div class="heading">
+  <p class="text-center popular"><b>Popular Events</b> </p>
+  </div>
+  <div class="row ">
+
+    <div class="col-xs-18 col-sm-4 col-md-3 event_box">
+     <div class="thumbnail  event_section">
+       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKX4DJ_5k_5DKAqgOOrk1-ZMgkPTsSl7Fd7mxPh_M5TTEhJtrtfw" alt="" style="height:204px; width:100%;">
+         <div class="event_thumb">
+           <a href="#"><p class="event_heading">Event Name</p></a>
+           <p><img src="<?php echo base_url(); ?>assets/front/images/date.png"><span class="event_thumb">May 25<span></p>
+           <p><img src="<?php echo base_url(); ?>assets/front/images/time.png"><span class="event_thumb">May 25<span></p>
+           <p><img src="<?php echo base_url(); ?>assets/front/images/location.png"><span class="event_thumb">May 25<span></p>
+       </div>
+     </div>
+   </div>
+   <div class="col-xs-18 col-sm-4 col-md-3 event_box">
+    <div class="thumbnail  event_section">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKX4DJ_5k_5DKAqgOOrk1-ZMgkPTsSl7Fd7mxPh_M5TTEhJtrtfw" alt="" style="height:204px; width:100%;">
+        <div class="event_thumb">
+          <a href="#"><p class="event_heading">Event Name</p></a>
+          <p><img src="<?php echo base_url(); ?>assets/front/images/date.png"><span class="event_thumb">May 25<span></p>
+          <p><img src="<?php echo base_url(); ?>assets/front/images/time.png"><span class="event_thumb">May 25<span></p>
+          <p><img src="<?php echo base_url(); ?>assets/front/images/location.png"><span class="event_thumb">May 25<span></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-18 col-sm-4 col-md-3 event_box">
+   <div class="thumbnail  event_section">
+     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKX4DJ_5k_5DKAqgOOrk1-ZMgkPTsSl7Fd7mxPh_M5TTEhJtrtfw" alt="" style="height:204px; width:100%;">
+       <div class="event_thumb">
+         <a href="#"><p class="event_heading">Event Name</p></a>
+         <p><img src="<?php echo base_url(); ?>assets/front/images/date.png"><span class="event_thumb">May 25<span></p>
+         <p><img src="<?php echo base_url(); ?>assets/front/images/time.png"><span class="event_thumb">May 25<span></p>
+         <p><img src="<?php echo base_url(); ?>assets/front/images/location.png"><span class="event_thumb">May 25<span></p>
+     </div>
+   </div>
+ </div>
+ <div class="col-xs-18 col-sm-4 col-md-3 event_box">
+  <div class="thumbnail  event_section">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKX4DJ_5k_5DKAqgOOrk1-ZMgkPTsSl7Fd7mxPh_M5TTEhJtrtfw" alt="" style="height:204px; width:100%;">
+      <div class="event_thumb">
+        <a href="#"><p class="event_heading">Event Name</p></a>
+        <p><img src="<?php echo base_url(); ?>assets/front/images/date.png"><span class="event_thumb">May 25<span></p>
+        <p><img src="<?php echo base_url(); ?>assets/front/images/time.png"><span class="event_thumb">May 25<span></p>
+        <p><img src="<?php echo base_url(); ?>assets/front/images/location.png"><span class="event_thumb">May 25<span></p>
+    </div>
+  </div>
+</div>
+
+
+
+
+  </div>
+</div>
+</div>
+
+
+
+
 
 
     <!-- Page Content -->
@@ -196,6 +315,15 @@
         <div class="container">
             <div>
                 <p class="heading2">WHAT'S HEYLA</p>
+
+            </div>
+        </div>
+    </section>
+      <div class="arrowimg"><img src="<?php echo base_url(); ?>assets/front/images/arrow.png" class="img-fluid mx-auto d-block"></div>
+    <section class="" style="" id="">
+        <div class="container">
+            <div>
+
                 <p class="whatsheyla">Heyla is your Gateway to the World Outside in your Pocket – Explore, Discover, Share and Enjoy. It is the encyclopaedia of “What, When and Where” of the World of Entertainment, Shopping, Sports, Dining, Travelling and more
                     <p>
                         <p class="whatsheyla">
@@ -205,19 +333,18 @@
             </div>
         </div>
     </section>
-
-    <div class="arrowimg"><img src="<?php echo base_url(); ?>assets/front/images/arrow.png" class="img-fluid mx-auto d-block"></div>
-    <section class="features" id="services">
+    <section class="features_section" style="" id="create">
         <div class="container">
-            <div class="row ">
-                <div class="col-md-12">
-                    <!-- <p class="text-center getin">Take a look awesome app </p> -->
-                    <p class="text-center" style="font-size:35px;">Features You Will Love it </p>
-                </div>
+            <div class="heading">
+            <p class="text-center" style="font-size:35px;">Features You Will Love it </p>
             </div>
 
-        </div>
 
+        </div>
+    </section>
+
+
+    <section class="features" id="services">
         <div class="container">
             <div class="row">
 
@@ -285,7 +412,7 @@
 
     </section>
 
-    <section class="mobileslider">
+    <!-- <section class="mobileslider">
         <div class="container">
             <div class="row">
 
@@ -310,7 +437,7 @@
 
             </div>
         </div>
-    </section>
+    </section> -->
 
     <section class="organsier" style="" id="create">
         <div class="container">
@@ -344,38 +471,70 @@
         <div class="container">
             <div class="row ">
                 <div class="col-md-12">
-                    <p class="text-center getin">GET IN TOUCH </p>
+                  <div class="heading">
+                  <p class="text-center popular"><b>Get in Touch</b> </p>
+                  </div>
                     <p class="text-center  cnt"><span class="blueline">Contact Us</span> </p>
                 </div>
             </div>
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-md-9">
+                <div class="col-md-6">
                     <form action="" method="post" id="contact_form">
-                        <div class="row">
-                            <div class="col-6">
-                                <input type="text" class="form-control" name="name" placeholder="Enter the Name" required>
+                        <div class="">
+                            <div class="row">
+                              <div class="col-1">
+                                 <img src="<?php echo base_url(); ?>assets/front/images/name.png" class="img-responsive contact_icon">
+                              </div>
+                              <div class="col-11">
+                                <input type="text" class="form-control text_box" name="name" placeholder="Enter the Name" required>
+                              </div>
                             </div>
-                            <div class="col-6">
-                                <input type="text" class="form-control" name="email" placeholder="Enter the Email" required>
+                            <div class="row">
+                              <div class="col-1">
+                                 <img src="<?php echo base_url(); ?>assets/front/images/email_icon.png" class="img-responsive contact_icon">
+                              </div>
+                              <div class="col-11">
+                                <input type="text" class="form-control text_box" name="email" placeholder="Enter the Email" required>
+                              </div>
                             </div>
-                            <div class="col-12">
-                                <input type="text" class="form-control" name="subject" placeholder="Enter the Subject" required>
+                            <div class="row">
+                              <div class="col-1">
+                                 <img src="<?php echo base_url(); ?>assets/front/images/subject.png" class="img-responsive contact_icon">
+                              </div>
+                              <div class="col-11">
+                                <input type="text" class="form-control text_box" name="subject" placeholder="Enter the Subject" required>
+                              </div>
                             </div>
-                            <div class="col-12">
-                                <textarea class="form-control textarea-form" name="message" placeholder="Write Message" required></textarea>
+                            <div class="row">
+                              <div class="col-1">
+                                 <img src="<?php echo base_url(); ?>assets/front/images/message.png" class="img-responsive contact_icon">
+                              </div>
+                              <div class="col-11">
+                                <textarea class="form-control textarea-form text_box" name="message"  rows="6"  placeholder="Write Message" required></textarea>
+                              </div>
                             </div>
-                            <div class="col-md-3 col-sm-6">
-                                <input type="submit" class="form-control submitbtn btn-primary" value="SUBMIT FORM">
+                            <div class="col-md-3 col-sm-6 pull-right">
+                                <input type="submit" class="form-control submitbtn btn-primary" value="SUBMIT ">
                             </div>
                         </div>
                     </form>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
                     <p class="getin">Contact Information</p>
-                    <p>No: 6, Kummalamman Koil Street,<br>
+                    <p class="address_form">No: 6, Kummalamman Koil Street,<br>
                     3rd Lane Tondiarpet, <br>Chennai - 600081</p>
+                    <p>
+                      <a href=""><img src="<?php echo base_url(); ?>assets/front/images/facebook.png"></a>
+                      <a href=""><img src="<?php echo base_url(); ?>assets/front/images/twitter.png"></a>
+                    </p>
+                    <p class="getin">Get Our App</p>
+                    <p>
+                      <a href=""><img src="<?php echo base_url(); ?>assets/front/images/play.png" class="img-responsive app_img"></a>
+                      <a href=""><img src="<?php echo base_url(); ?>assets/front/images/app.png" class="img-responsive app_img"></a>
+                    </p>
                 </div>
             </div>
         </div>
@@ -402,64 +561,65 @@
     </footer>
 
 </body>
-<script src="<?php echo base_url(); ?>assets/front/js/jquery.reflection.js"></script>
-<script src="<?php echo base_url(); ?>assets/front/js/jquery.cloud9carousel.js"></script>
+<script src="<?php echo base_url(); ?>assets/front/js/multislider.js"></script>
+<!-- <script src="<?php echo base_url(); ?>assets/front/js/jquery.reflection.js"></script>
+<script src="<?php echo base_url(); ?>assets/front/js/jquery.cloud9carousel.js"></script> -->
 <script>
-    $(function() {
-        var showcase = $("#showcase")
-
-        showcase.Cloud9Carousel({
-            yPos: 42,
-            yRadius: 48,
-            mirrorOptions: {
-                gap: 12,
-                height: 0.2
-            },
-            buttonLeft: $(".nav1 > .left"),
-            buttonRight: $(".nav1 > .right"),
-            autoPlay: true,
-            bringToFront: true,
-            onRendered: showcaseUpdated,
-            onLoaded: function() {
-                showcase.css('visibility', 'visible')
-                showcase.css('display', 'none')
-                showcase.fadeIn(1500)
-            }
-        })
-
-        function showcaseUpdated(showcase) {
-            var title = $('#item-title').html(
-                $(showcase.nearestItem()).attr('alt')
-            )
-
-            var c = Math.cos((showcase.floatIndex() % 1) * 2 * Math.PI)
-            title.css('opacity', 0.5 + (0.5 * c))
-        }
-
-        // Simulate physical button click effect
-        $('.nav1 > button').click(function(e) {
-            var b = $(e.target).addClass('down')
-            setTimeout(function() {
-                b.removeClass('down')
-            }, 80)
-        })
-
-        $(document).keydown(function(e) {
-            //
-            // More codes: http://www.javascripter.net/faq/keycodes.htm
-            //
-            switch (e.keyCode) {
-                /* left arrow */
-                case 37:
-                    $('.nav1 > .left').click()
-                    break
-
-                    /* right arrow */
-                case 39:
-                    $('.nav1 > .right').click()
-            }
-        })
-    })
+    // $(function() {
+    //     var showcase = $("#showcase")
+    //
+    //     showcase.Cloud9Carousel({
+    //         yPos: 42,
+    //         yRadius: 48,
+    //         mirrorOptions: {
+    //             gap: 12,
+    //             height: 0.2
+    //         },
+    //         buttonLeft: $(".nav1 > .left"),
+    //         buttonRight: $(".nav1 > .right"),
+    //         autoPlay: true,
+    //         bringToFront: true,
+    //         onRendered: showcaseUpdated,
+    //         onLoaded: function() {
+    //             showcase.css('visibility', 'visible')
+    //             showcase.css('display', 'none')
+    //             showcase.fadeIn(1500)
+    //         }
+    //     })
+    //
+    //     function showcaseUpdated(showcase) {
+    //         var title = $('#item-title').html(
+    //             $(showcase.nearestItem()).attr('alt')
+    //         )
+    //
+    //         var c = Math.cos((showcase.floatIndex() % 1) * 2 * Math.PI)
+    //         title.css('opacity', 0.5 + (0.5 * c))
+    //     }
+    //
+    //     // Simulate physical button click effect
+    //     $('.nav1 > button').click(function(e) {
+    //         var b = $(e.target).addClass('down')
+    //         setTimeout(function() {
+    //             b.removeClass('down')
+    //         }, 80)
+    //     })
+    //
+    //     $(document).keydown(function(e) {
+    //         //
+    //         // More codes: http://www.javascripter.net/faq/keycodes.htm
+    //         //
+    //         switch (e.keyCode) {
+    //             /* left arrow */
+    //             case 37:
+    //                 $('.nav1 > .left').click()
+    //                 break
+    //
+    //                 /* right arrow */
+    //             case 39:
+    //                 $('.nav1 > .right').click()
+    //         }
+    //     })
+    // })
 </script>
 
 <script type="text/javascript">
@@ -476,11 +636,11 @@
         $(window).scroll(function() {
             if ($(window).scrollTop() > $(window).height()) {
                 $(".navbar").css({
-                    "background-color": "#478ECC"
+                    "background-color": "#fff"
                 });
             } else {
                 $(".navbar").css({
-                    "background-color": "transparent"
+                    "background-color": "#fff"
                 });
             }
 
