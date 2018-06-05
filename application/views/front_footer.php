@@ -96,11 +96,11 @@ $(document).ready(function() {
     $(window).scroll(function() {
         if ($(window).scrollTop() > $(window).height()) {
             $(".navbar").css({
-                "background-color": "#478ECC"
+                "background-color": "#fff"
             });
         } else {
             $(".navbar").css({
-                "background-color": "#478ECC"
+                "background-color": "#fff"
             });
         }
 

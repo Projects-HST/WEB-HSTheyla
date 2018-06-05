@@ -15,9 +15,11 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 ?>
 <script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
 <link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
+<style>
 
+</style>
 <div id="page-wrapper">
-    <div class="container">
+    <div class="container create_event_section">
 
         <div class="row well mobile_leaderboard" id="main" >
             <div class="col-sm-12 col-md-12 " id="content">

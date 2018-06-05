@@ -2,13 +2,15 @@
 </div>
 <div class="footer">
   <div class="">
-    <div class="col-md-3">
+    <div class="col-md-6">Crafted with Happiness
     </div>
-    <div class="col-md-3">2
-    </div>
-    <div class="col-md-3">3
-    </div>
-    <div class="col-md-3">4
+
+    <div class="col-md-6">
+      <ul id="footmenu">
+          <li><a href="">Privacy Policy</a></li>
+          <li><a href="">Payment Policy</a></li>
+          <li><a href="">Terms and Conditions</a></li>
+        </ul>
     </div>
   </div>
 

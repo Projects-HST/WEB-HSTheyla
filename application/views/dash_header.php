@@ -32,7 +32,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a  href="">
-                <img src="<?php echo base_url(); ?>assets/front/images/logo.png" alt="LOGO">
+                <img src="<?php echo base_url(); ?>assets/front/images/logo.png" alt="heylaapp" style="width:165px;">
             </a>
 
         </div>
@@ -85,7 +85,7 @@
                   <ul class="nav navbar-nav side-nav" id="style-2">
               <li class=" hidden-xs">
                 <a  href="">
-                    <img src="<?php echo base_url(); ?>assets/front/images/logo.png" alt="LOGO">
+                    <img src="<?php echo base_url(); ?>assets/front/images/logo.png" alt="heylaapp" style="width:165px;">
                 </a>
               </li>
 

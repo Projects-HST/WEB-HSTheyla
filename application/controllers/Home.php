@@ -97,6 +97,20 @@ class Home extends CI_Controller {
 			redirect('/');
 		}
 	}
+
+	public function eventdetails_new()
+	{
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
+		$user_role=$this->session->userdata('user_role');
+	
+		$this->load->view('front_header');
+		$this->load->view('eventdetails_new');
+		$this->load->view('front_footer');
+
+	}
+
+
 	public function booking()
 	{
 		$datas=$this->session->userdata();
