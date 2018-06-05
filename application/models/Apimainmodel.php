@@ -1390,6 +1390,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	public function View_events($event_type,$city_id,$user_id,$user_type,$day_type)
 	{
 	    $current_date = date("Y-m-d");
+		$tomorrow_date = date("Y-m-d",strtotime("tomorrow"));
 		
         if ($user_type ==1){
             $pre_query = "SELECT * FROM user_preference WHERE user_id = '$user_id'";
@@ -1413,7 +1414,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 				 $day_query = "'$current_date' BETWEEN ev.start_date AND ev.end_date AND";
 			}
 			if ($day_type =='Tomorrow'){
-				 $day_query = "'$stomorrow_date' BETWEEN ev.start_date AND ev.end_date AND";
+				 $day_query = "'$tomorrow_date' BETWEEN ev.start_date AND ev.end_date AND";
 			}
 			if ($day_type =='Week'){
 				$start_date = (date('D') != 'Mon') ? date('Y-m-d', strtotime('last Monday')) : date('Y-m-d');
@@ -1646,30 +1647,33 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	public function List_eventreview($user_id,$event_id)
 	{
 		
-			$ureview_query = "SELECT A.id,A.event_id,C.event_name,A.event_rating,A.comments,B.user_name FROM event_reviews A, user_master B, events C  WHERE A.event_id = '$event_id' AND A.user_id ='$user_id' AND A.user_id=B.id AND A.event_id = C.id ORDER by A.id DESC";
+			$ureview_query = "SELECT A.id,A.event_id,C.event_name,A.event_rating,A.comments,B.user_name FROM event_reviews A, user_master B, events C  WHERE A.event_id = '$event_id' AND A.user_id ='$user_id' AND A.status='N' AND A.user_id=B.id AND A.event_id = C.id ORDER by A.id DESC";
 			$ureview_res = $this->db->query($ureview_query);
+			$ureview_res->num_rows();
 			if($ureview_res->num_rows()>0){
 				$ureview_result = $ureview_res->result();
 			} else{
 				$ureview_result = array();
 			}
-			
+			//print_r($ureview_result);
+
 	        $review_query = "SELECT A.id,A.event_id,C.event_name,A.event_rating,A.comments,B.user_name FROM event_reviews A, user_master B, events C  WHERE A.event_id = '$event_id' AND A.status='Y' AND A.user_id=B.id AND A.event_id = C.id ORDER by A.id DESC";
 			$review_res = $this->db->query($review_query);
 			$review_result = $review_res->result();
 
-			 if($review_res->num_rows()>0){
+			 //if($review_res->num_rows()>0){
 				 
-				  if (!empty($ureview_result)) {
-			            $output = array_merge($ureview_result, $review_result);
-		            } else {
-		                $output = $review_result;
-		            }
-					
-			     	$response = array("status" => "success", "msg" => "View Reviews","Reviewdetails"=>$output);
-			}else{
-			        $response = array("status" => "error", "msg" => "Reviews not found");
-			}  
+            if (!empty($ureview_result)) {
+                $output = array_merge($ureview_result, $review_result);
+            } else {
+                $output = $review_result;
+            }
+            	
+            if (!empty($output)) {
+                $response = array("status" => "success", "msg" => "View Reviews","Reviewdetails"=>$output);
+            }else{
+                $response = array("status" => "error", "msg" => "Reviews not found");
+            }
 
 			return $response;
 	}
@@ -1904,17 +1908,29 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 //#################### Booking Plan details###############//
 	public function Booking_pricerange($user_id)
 	{
-	        $plan_query = "SELECT id, CONCAT(start_price,'-',end_price) AS price_range,disp_price FROM booking_price_range WHERE status = 'y'";
-			$plan_res = $this->db->query($plan_query);
-			$plan_result= $plan_res->result();
+		$plan_query = "SELECT MAX(seat_rate) AS price_range FROM booking_plan A, booking_plan_timing B WHERE B.plan_id = A.id AND B.show_date >= CURDATE()";
+		$plan_res = $this->db->query($plan_query);
+		foreach ($plan_res->result() as $rows) {
+			$plan_result = $rows->price_range;
+		}
+		if (is_null($plan_result)){
+			$response = array("status" => "error", "msg" => "Price Range not found");
+		} else {
+			$response = array("status" => "success", "msg" => "Price Range","Pricerange"=>$plan_result);
+		}
+		
+	/*
+		$plan_query = "SELECT id, CONCAT(start_price,'-',end_price) AS price_range,disp_price FROM booking_price_range WHERE status = 'y'";
+		$plan_res = $this->db->query($plan_query);
+		$plan_result= $plan_res->result();
 
-			 if($plan_res->num_rows()>0){
-			     	$response = array("status" => "success", "msg" => "Price Range","Pricerange"=>$plan_result);
-			}else{
-			        $response = array("status" => "error", "msg" => "Price Range not found");
-			}  
-						
-			return $response;
+		 if($plan_res->num_rows()>0){
+				$response = array("status" => "success", "msg" => "Price Range","Pricerange"=>$plan_result);
+		}else{
+				$response = array("status" => "error", "msg" => "Price Range not found");
+		}  
+	*/			
+		return $response;
 	}
 //#################### Booking Plan End ###############//
 
