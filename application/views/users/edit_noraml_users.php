@@ -1,4 +1,8 @@
-
+<style>
+.label-value{
+  font-size: 18px;
+}
+</style>
 
    <div class="page-content-wrapper ">
      <div class="container">
@@ -19,48 +23,29 @@
 
 
                 <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>users/update_user_details" name="usersform" id="usersform" onSubmit='return check();'>
-<?php foreach($users_view AS $res){ }
-$user_role_id=$res->user_role;
-if($user_role_id=='4'){ ?>
-
-<?php }else{ ?>
-<style>
-#user_role_id{display: none;}
-#save{display: none;}
-#normaluser a{color:#eb7475;}
-</style>
-
-
-<?php } ?>
+<?php foreach($users_view AS $res){ } ?>
                         <div class="form-group row">
 
                           <label for="Category" class="col-sm-2 col-form-label">User Id / Name</label>
                             <div class="col-sm-4">
-                            <input class="form-control" type="text" name="username" value="<?php echo $res->user_name; ?>" onkeyup="checkusernamefun(this.value)">
+                            <p class="label-value"><?php echo $res->user_name; ?> </p>
                             <input class="form-control" type="hidden" name="umid" value="<?php echo $res->user_id; ?>">
                                 <p id="msg2" style="color:red;"> </p>
                             </div>
-                            <label for="Status" class="col-sm-2 col-form-label" id="user_role_id">User Role</label>
-                          <div class="col-sm-4" id="user_role_id">
-                             <select class="form-control"  name="role" id="userrole" style="pointer-events:none;">
-                                  <?php foreach ($users_role as $value) { ?>
-                                   <option value="<?php echo $value->id; ?>"><?php echo $value->user_role_name; ?></option>
-                                 <?php } ?>
-                              </select>
-                              <script type="text/javascript">document.usersform.role.value="<?php echo $res->user_role; ?>";</script>
-                          </div>
+
                       </div>
                            <div class="form-group row">
                             <label for="Category" class="col-sm-2 col-form-label">Full Name</label>
                             <div class="col-sm-4">
-                          <input class="form-control" type="text" name="name" value="<?php echo $res->name; ?>">
+                          <p class="label-value"><?php echo $res->name; ?></p>
                           <input class="form-control" type="hidden" name="uid" value="<?php echo $res->id; ?>">
 
                             </div>
 
                             <label for="Name" class="col-sm-2 col-form-label">Mobile Number</label>
                             <div class="col-sm-4">
-                            <input class="form-control" type="text" name="mobile" value="<?php echo $res->mobile_no;?>" onkeyup="checkmobilefun(this.value)">
+
+                            <p class="label-value"><?php echo $res->mobile_no; ?></p>
                               <p id="msg1" style="color:red;"> </p>
                             </div>
 
@@ -68,28 +53,24 @@ if($user_role_id=='4'){ ?>
                        <div class="form-group row">
                           <label for="Name" class="col-sm-2 col-form-label">Email Id</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" id="email" name="email" value="<?php echo $res->email_id;?>" onchange="checkemailfun()" >
+
+                                <p class="label-value"><?php echo $res->email_id;?></p>
                                   <p id="msg" style="color:red;"> </p>
-                            </div>
-                              <label for="Name" class="col-sm-2 col-form-label">New Password</label>
-                            <div class="col-sm-4">
-                              <input class="form-control" type="password"  name="new_pwd" >
-                              <input class="form-control" type="hidden"  name="old_pwd"  value="<?php echo $res->password;?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="Venue" class="col-sm-2 col-form-label">DOB</label>
                             <div class="col-sm-4">
                               <div class="input-group">
-                          <input type="text" class="form-control" name="dob" id="datepicker-autoclose" value="<?php if($res->birthdate!='0000-00-00')
-                          { //echo $res->birthdate;
-                             $date=date_create($res->birthdate); echo date_format($date,"m-d-Y"); }else{ echo date("m-d-Y"); } ?>">
-                                <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
+
+                                <p class="label-value"><?php if($res->birthdate!='0000-00-00')
+                                { //echo $res->birthdate;
+                                   $date=date_create($res->birthdate); echo date_format($date,"m-d-Y"); }else{ echo date("m-d-Y"); } ?></p>
                             </div>
                             </div>
                              <label for="Address" class="col-sm-2 col-form-label">Gender</label>
                             <div class="col-sm-4">
-                                <select class="form-control"  name="gender">
+                                <select class="form-control" id="gender" name="gender">
                                    <option value="">Select Gender</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
@@ -102,12 +83,14 @@ if($user_role_id=='4'){ ?>
 
                             <label for="Description" class="col-sm-2 col-form-label">Occupation</label>
                             <div class="col-sm-4">
-                               <input class="form-control" type="text" name="occupation" value="<?php echo $res->occupation;?>">
+                                <p class="label-value"><?php echo $res->occupation;?></p>
+
                             </div>
 
                              <label for="ecost" class="col-sm-2 col-form-label">Address1</label>
                             <div class="col-sm-4">
-                                 <textarea id="textarea" name="address1" class="form-control" maxlength="100" rows="3"><?php echo $res->address_line1;?></textarea>
+
+                                 <p class="label-value"><?php echo $res->address_line1;?></p>
                             </div>
                         </div>
 
@@ -116,7 +99,7 @@ if($user_role_id=='4'){ ?>
 
                              <label for="country" class="col-sm-2 col-form-label">Select Country</label>
                             <div class="col-sm-4">
-                              <select class="form-control" name="country" onchange="getstatename(this.value)">
+                              <select class="form-control" name="country" id="country_id" onchange="getstatename(this.value)">
                               <option value="">Select Country Name</option>
                                      <?php foreach($country_list as $cntry){ ?>
                                         <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
@@ -163,7 +146,8 @@ if($user_role_id=='4'){ ?>
 
                             <label for="Colour" class="col-sm-2 col-form-label">zip</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" name="zip" value="<?php echo $res->zip; ?>" >
+
+                                <p class="label-value"><?php echo $res->zip;?></p>
                             </div>
 
                         </div>
@@ -184,7 +168,7 @@ if($user_role_id=='4'){ ?>
                         <div class="form-group row">
                            <label for="Status" class="col-sm-2 col-form-label">Newsletter Status</label>
                             <div class="col-sm-4">
-                               <select class="form-control"  name="status">
+                               <select class="form-control"  name="status" id="status">
                                     <option value="">Select Status</option>
                                     <option value="Y">Yes</option>
                                     <option value="N">No</option>
@@ -194,7 +178,7 @@ if($user_role_id=='4'){ ?>
 
                             <label for="Status" class="col-sm-2 col-form-label">Display Status</label>
                             <div class="col-sm-4">
-                               <select class="form-control"  name="display_status">
+                               <select class="form-control"  name="display_status" >
                                     <option value="">Select Status</option>
                                     <option value="Y">Yes</option>
                                     <option value="N">No</option>
@@ -232,6 +216,10 @@ if($user_role_id=='4'){ ?>
   $('#viewuser').addClass("active");
   $('#users').addClass("has_sub active nav-active");
 
+ $('#ctname').prop('disabled', 'disabled');
+ $('#country_id').prop('disabled', 'disabled');
+ $('#staname').prop('disabled', 'disabled');
+ $('#gender').prop('disabled', 'disabled');
 
   function check(){
           var sname = document.getElementById("staname").value;

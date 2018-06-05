@@ -93,7 +93,7 @@
 
  			<div class="card-header card-header-title">
 				<h3 class="mb-0">Booking Attendees</h3>
-            </div>
+      </div>
 
 			<div class="card-block" style="padding:20px;">
 				<?php foreach($event_attendees as $rows){ ?>
@@ -103,7 +103,9 @@
                     <div class="col-sm-6"><?php echo $rows-> mobile_no; ?></div>
                 </div>
                 <?php } ?>
-			</div><!--/span-->
+			</div>
+
+      <!--/span-->
 
         </div><!--/row-->
    </div>

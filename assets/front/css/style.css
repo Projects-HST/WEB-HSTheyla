@@ -352,7 +352,7 @@
 
 /* Sign in page */
 .signinbg{
-    background: url("../images/login-bg.jpg") no-repeat center center fixed;
+    background: url("../images/signup_bg.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -664,8 +664,10 @@ a.btn.btn-login.btn-primary.btn-block.review-btn{
   height: 400px;
 }
 .leaderboard-menu-tab{
-  margin-top: 30px;
-  margin-bottom: 30px;
+
+}
+.leaderboard-points-tab{
+  
 }
 
 

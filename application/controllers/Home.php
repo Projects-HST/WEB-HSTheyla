@@ -111,21 +111,22 @@ class Home extends CI_Controller {
 	}
 
 	}
-	public function leaderboard()
-	{
+// 	public function leaderboard()
+// 	{
+//
+// 		$datas=$this->session->userdata();
+// 		$user_id=$this->session->userdata('id');
+// 		$user_role=$this->session->userdata('user_role');
+// 		if($user_role==3 || $user_role==2){
+// 		$datas['user_points'] = $this->loginmodel->get_points($user_id);
+// 		$this->load->view('front_header');
+// 		$this->load->view('leaderboard', $datas);
+// 		$this->load->view('front_footer');
+// 	}else{
+// 		redirect('/');
+// 	}
+// }
 
-		$datas=$this->session->userdata();
-		$user_id=$this->session->userdata('id');
-		$user_role=$this->session->userdata('user_role');
-		if($user_role==3 || $user_role==2){
-		$datas['user_points'] = $this->loginmodel->get_points($user_id);
-		$this->load->view('front_header');
-		$this->load->view('leaderboard', $datas);
-		$this->load->view('front_footer');
-	}else{
-		redirect('/');
-	}
-}
 
 	public function attendees()
 	{
@@ -144,43 +145,43 @@ class Home extends CI_Controller {
 
 
 	}
-	public function profile_update()
-	{
-		$datas=$this->session->userdata();
-		$user_id=$this->session->userdata('id');
-		$user_role=$this->session->userdata('user_role');
-		if($user_role==3 || $user_role==2){
-			$datas['res']=$this->loginmodel->getuserinfo($user_id);
-			$this->load->view('front_header');
-			$this->load->view('profile_update', $datas);
-			$this->load->view('front_footer');
-		}else{
-			redirect('/');
-		}
-
-	}
-
-	public function createevent()
-	{
-		$datas=$this->session->userdata();
-		$user_id=$this->session->userdata('id');
-		$user_role=$this->session->userdata('user_role');
-
-		$datas['res']=$this->loginmodel->getuserinfo($user_id);
-		$datas['country_list'] = $this->organizermodel->get_country();
-		$datas['category_list'] = $this->organizermodel->get_category();
-
-
-		if($user_role==2)
-		{
-			$this->load->view('front_header');
-			$this->load->view('create_event', $datas);
-			$this->load->view('front_footer');
-	 	}else{
-	 			redirect('/');
-	 		 }
-
-	}
+	// public function profile_update()
+	// {
+	// 	$datas=$this->session->userdata();
+	// 	$user_id=$this->session->userdata('id');
+	// 	$user_role=$this->session->userdata('user_role');
+	// 	if($user_role==3 || $user_role==2){
+	// 		$datas['res']=$this->loginmodel->getuserinfo($user_id);
+	// 		$this->load->view('front_header');
+	// 		$this->load->view('profile_update', $datas);
+	// 		$this->load->view('front_footer');
+	// 	}else{
+	// 		redirect('/');
+	// 	}
+	//
+	// }
+	//
+	// public function createevent()
+	// {
+	// 	$datas=$this->session->userdata();
+	// 	$user_id=$this->session->userdata('id');
+	// 	$user_role=$this->session->userdata('user_role');
+	//
+	// 	$datas['res']=$this->loginmodel->getuserinfo($user_id);
+	// 	$datas['country_list'] = $this->organizermodel->get_country();
+	// 	$datas['category_list'] = $this->organizermodel->get_category();
+	//
+	//
+	// 	if($user_role==2)
+	// 	{
+	// 		$this->load->view('front_header');
+	// 		$this->load->view('create_event', $datas);
+	// 		$this->load->view('front_footer');
+	//  	}else{
+	//  			redirect('/');
+	//  		 }
+	//
+	// }
 
     public function insertevents()
 	 {
@@ -229,49 +230,17 @@ class Home extends CI_Controller {
 		redirect('/viewevents');
 	 }
 
-	public function viewevents()
-	{
-		$datas=$this->session->userdata();
-		$user_id=$this->session->userdata('id');
-		$user_role=$this->session->userdata('user_role');
 
-		$datas['res']=$this->loginmodel->getuserinfo($user_id);
-		$datas['result'] = $this->organizermodel->list_events($user_id);
-		$this->load->view('front_header');
-		$this->load->view('view_event', $datas);
-		$this->load->view('front_footer');
-	}
 
-	public function updateevents($id)
-	 {
-		$id = base64_decode($id);
-	 	$datas = $this->session->userdata();
-	    $user_id = $this->session->userdata('id');
-	    $user_role = $this->session->userdata('user_role');
 
-		$datas['country_list'] = $this->organizermodel->get_country();
-	    $datas['category_list'] = $this->organizermodel->get_category();
-	    $datas['city_list'] = $this->organizermodel->get_city_list();
-	    $datas['edit'] = $this->organizermodel->events_details($id);
-
-		if($user_role==2)
-		{
-		  $this->load->view('front_header');
-		  $this->load->view('update_event',$datas);
-		  $this->load->view('front_footer');
-	 	}else{
-	 			redirect('/');
-	 		 }
-	 }
 
 
 	 public function updateeventsdetails()
      {
-        $datas=$this->session->userdata();
+      $datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-
-	    $event_name=$this->db->escape_str($this->input->post('event_name'));
+ 	    $event_name=$this->db->escape_str($this->input->post('event_name'));
         $category=$this->input->post('category');
         $country=$this->input->post('country');
         $city=$this->input->post('city');
@@ -281,11 +250,11 @@ class Home extends CI_Controller {
         $description=$this->db->escape_str($this->input->post('description'));
         $eventcost=$this->input->post('eventcost');
         $sdate=$this->input->post('start_date');
-		$dateTime = new DateTime($sdate);
-		$start_date=date_format($dateTime,'Y-m-d');
+				$dateTime = new DateTime($sdate);
+				$start_date=date_format($dateTime,'Y-m-d');
         $edate=$this->input->post('end_date');
         $dateTime = new DateTime($edate);
-		$end_date=date_format($dateTime,'Y-m-d');
+				$end_date=date_format($dateTime,'Y-m-d');
         $start_time=$this->input->post('start_time');
         $end_time=$this->input->post('end_time');
         $txtLatitude=$this->input->post('txtLatitude');
@@ -296,22 +265,18 @@ class Home extends CI_Controller {
         $email=$this->input->post('email');
         $currentcpic=$this->input->post('currentcpic');
         $eventid=$this->input->post('eventid');
-
-		$event_pic      = $_FILES['eventbanner']['name'];
+				$event_pic      = $_FILES['eventbanner']['name'];
         $temp = pathinfo($event_pic, PATHINFO_EXTENSION);
         $file_name      = time() . rand(1, 5) . rand(6, 10);
         $event_banner   = $file_name. '.' .$temp;
         $uploaddir      = 'assets/events/banner/';
         $profilepic     = $uploaddir . $event_banner;
         move_uploaded_file($_FILES['eventbanner']['tmp_name'], $profilepic);
-
         $eadv_status=$this->input->post('eadv_status');
-		$booking_sts=$this->input->post('booking_sts');
-		$hotspot_sts=$this->input->post('hotspot_sts');
-
+				$booking_sts=$this->input->post('booking_sts');
+				$hotspot_sts=$this->input->post('hotspot_sts');
         $colour_scheme=$this->input->post('colour_scheme');
-		$event_status=$this->input->post('event_status');
-
+				$event_status=$this->input->post('event_status');
          if(empty($event_pic)){
             $event_banner=$currentcpic;
          }else{
@@ -324,117 +289,27 @@ class Home extends CI_Controller {
          }
 
         $datas=$this->organizermodel->update_events_details($eventid,$event_name,$category,$country,$city,$venue,$address,$description,$eventcost,$start_date,$end_date,$start_time,$end_time,$txtLatitude,$txtLongitude,$pcontact_cell,$scontact_cell,$contact_person,$email,$event_banner,$colour_scheme,$event_status,$eadv_status,$booking_sts,$hotspot_sts,$user_id,$user_role);
-
-        	$sta=$datas['status'];
-		   redirect('/viewevents');
+      	$sta=$datas['status'];
+		   	redirect('/viewevents');
      }
-
-
-	public function bookedevents()
-	{
-		$datas=$this->session->userdata();
-		$user_id=$this->session->userdata('id');
-		$user_role=$this->session->userdata('user_role');
-		$datas['res']=$this->loginmodel->getuserinfo($user_id);
-		$datas['view'] = $this->organizerbookingmodel->get_all_booking_details($user_id);
-
-		$this->load->view('front_header');
-		$this->load->view('booked_events', $datas);
-		$this->load->view('front_footer');
-	}
-
-
-
-	public function booking_history()
-	{
-		$datas=$this->session->userdata();
-		$user_id=$this->session->userdata('id');
-		$user_role=$this->session->userdata('user_role');
-		$datas['booking_details'] = $this->loginmodel->get_booking($user_id);
-		if($user_role==3 || $user_role==2){
-		$this->load->view('front_header');
-		$this->load->view('booking_history', $datas);
-		$this->load->view('front_footer');
-		}else{
-			redirect('/');
-		}
-	}
-
-	public function user_booking_history($order_id)
-	{
-		//echo $order_id;
-		$datas=$this->session->userdata();
-		$user_id=$this->session->userdata('id');
-		$user_role=$this->session->userdata('user_role');
-		$datas['booking_details'] = $this->loginmodel->get_booking_history($order_id);
-		$datas['event_attendees'] = $this->loginmodel->disp_event_attendees($order_id);
-		if($user_role==3 || $user_role==2){
-			$this->load->view('front_header');
-			$this->load->view('booking_history_details', $datas);
-			$this->load->view('front_footer');
-		}else{
-			redirect('/');
-		}
-	}
-
-   //-------------------------------Reviews--------------------------------
-
-   public function reviewevents()
-   {
-   		$datas = $this->session->userdata();
-	    $user_id = $this->session->userdata('id');
-	    $user_role = $this->session->userdata('user_role');
-
-		$datas['result'] = $this->organizermodel->list_events($user_id);
-
-		if($user_role==2)
-		{
-		  $this->load->view('front_header');
-		  //$this->load->view('organizer/reviews/view_events',$datas);
-		  $this->load->view('review_events',$datas);
-		  $this->load->view('front_footer');
-
-	 	}else{
-	 			redirect('/');
-	 	}
-   }
-
-   public function viewreviews($id)
-   {
-   	$datas=$this->session->userdata();
-	   $user_id=$this->session->userdata('id');
-	   $user_role=$this->session->userdata('user_role');
-
-      $datas['views'] = $this->organizerbookingmodel->view_all_reviews($id);
-      //echo'<pre>';print_r($datas['views']);exit();
-		if($user_role==2)
-		{
-		  $this->load->view('front_header');
-		  //$this->load->view('organizer/reviews/events_reviews',$datas);
-		  $this->load->view('view_reviews',$datas);
-		  $this->load->view('front_footer');
-	 	}else{
-	 			redirect('/');
-	 		 }
-   }
 
      //-------------------------------Followers--------------------------------
 
 
-	public function wishlist()
-	{
-		$datas=$this->session->userdata();
-		$user_id=$this->session->userdata('id');
-		$user_role=$this->session->userdata('user_role');
-		$datas['wishlist_details'] = $this->loginmodel->get_wishlist($user_id);
-		if($user_role==3 || $user_role==2){
-		$this->load->view('front_header');
-		$this->load->view('wishlist', $datas);
-		$this->load->view('front_footer');
-		}else{
-			redirect('/');
-		}
-	}
+	// public function wishlist()
+	// {
+	// 	$datas=$this->session->userdata();
+	// 	$user_id=$this->session->userdata('id');
+	// 	$user_role=$this->session->userdata('user_role');
+	// 	$datas['wishlist_details'] = $this->loginmodel->get_wishlist($user_id);
+	// 	if($user_role==3 || $user_role==2){
+	// 	$this->load->view('front_header');
+	// 	$this->load->view('wishlist', $datas);
+	// 	$this->load->view('front_footer');
+	// 	}else{
+	// 		redirect('/');
+	// 	}
+	// }
 
 	public function removewishlist($wishlist_id)
 	{
@@ -712,20 +587,21 @@ class Home extends CI_Controller {
 		}
 
 
-		public function change_profile_picture(){
-			$datas=$this->session->userdata();
-			$user_id=$this->session->userdata('id');
-			$user_role=$this->session->userdata('user_role');
-			$datas['res']=$this->loginmodel->getuserinfo($user_id);
-			if($user_role==3 || $user_role==2){
-				$this->load->view('front_header');
-				$this->load->view('profile_picture', $datas);
-				$this->load->view('front_footer');
-			}else{
-				redirect('/');
-			}
+		// public function change_profile_picture(){
+		// 	$datas=$this->session->userdata();
+		// 	$user_id=$this->session->userdata('id');
+		// 	$user_role=$this->session->userdata('user_role');
+		// 	$datas['res']=$this->loginmodel->getuserinfo($user_id);
+		// 	if($user_role==3 || $user_role==2){
+		// 		$this->load->view('front_header');
+		// 		$this->load->view('profile_picture', $datas);
+		// 		$this->load->view('front_footer');
+		// 	}else{
+		// 		redirect('/');
+		// 	}
+		//
+		// }
 
-		}
 
 
 		public function organiser(){
@@ -787,6 +663,7 @@ class Home extends CI_Controller {
 			$this->load->view('front_footer');
 
 		}
+
 
 		public function reset_password(){
 			$email=$this->input->post('email');
@@ -993,5 +870,309 @@ class Home extends CI_Controller {
 			}
 		}
 
+
+		public function profile_update()
+		{
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			if($user_role==3 || $user_role==2){
+				$datas['res']=$this->loginmodel->getuserinfo($user_id);
+				$this->load->view('dash_header');
+				$this->load->view('profile_update_new', $datas);
+				$this->load->view('dash_footer');
+			}else{
+				redirect('/');
+			}
+
+		}
+
+		public function leaderboard(){
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			if($user_role==3 || $user_role==2){
+			$datas['user_points'] = $this->loginmodel->get_points($user_id);
+			$this->load->view('dash_header');
+			$this->load->view('leaderboard_new',$datas);
+			$this->load->view('dash_footer');
+			}else{
+				redirect('/');
+			}
+		}
+
+		public function change_profile_picture(){
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			$datas['res']=$this->loginmodel->getuserinfo($user_id);
+			if($user_role==3 || $user_role==2){
+				$this->load->view('dash_header');
+				$this->load->view('profile_picture_new', $datas);
+				$this->load->view('dash_footer');
+			}else{
+				redirect('/');
+			}
+
+		}
+
+
+		public function wishlist()
+		{
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			$datas['wishlist_details'] = $this->loginmodel->get_wishlist($user_id);
+			if($user_role==3 || $user_role==2){
+			$this->load->view('dash_header');
+			$this->load->view('wishlist_new', $datas);
+			$this->load->view('dash_footer');
+			}else{
+				redirect('/');
+			}
+		}
+		public function createevent(){
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			if($user_role==2){
+				$datas['res']=$this->loginmodel->getuserinfo($user_id);
+				$datas['country_list'] = $this->organizermodel->get_country();
+				$datas['category_list'] = $this->organizermodel->get_category();
+				$this->load->view('dash_header');
+				$this->load->view('create_event_new', $datas);
+				$this->load->view('dash_footer');
+			}else{
+					redirect('/');
+				 }
+
+		}
+
+
+		// public function viewevents()
+		// {
+		// 	$datas=$this->session->userdata();
+		// 	$user_id=$this->session->userdata('id');
+		// 	$user_role=$this->session->userdata('user_role');
+		//
+		// 	$datas['res']=$this->loginmodel->getuserinfo($user_id);
+		// 	$datas['result'] = $this->organizermodel->list_events($user_id);
+		// 	$this->load->view('front_header');
+		// 	$this->load->view('view_event', $datas);
+		// 	$this->load->view('front_footer');
+		// }
+
+		public function viewevents()
+		{
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+
+			$datas['res']=$this->loginmodel->getuserinfo($user_id);
+			$datas['result'] = $this->organizermodel->list_events($user_id);
+			$this->load->view('dash_header');
+			$this->load->view('view_event_new', $datas);
+			$this->load->view('dash_footer');
+		}
+
+
+		// public function updateevents($id)
+		//  {
+		// 	$id = base64_decode($id);
+		// 	$datas = $this->session->userdata();
+		// 		$user_id = $this->session->userdata('id');
+		// 		$user_role = $this->session->userdata('user_role');
+		//
+		// 	$datas['country_list'] = $this->organizermodel->get_country();
+		// 		$datas['category_list'] = $this->organizermodel->get_category();
+		// 		$datas['city_list'] = $this->organizermodel->get_city_list();
+		// 		$datas['edit'] = $this->organizermodel->events_details($id);
+		//
+		// 	if($user_role==2)
+		// 	{
+		// 		$this->load->view('front_header');
+		// 		$this->load->view('update_event',$datas);
+		// 		$this->load->view('front_footer');
+		// 	}else{
+		// 			redirect('/');
+		// 		 }
+		//  }
+
+		public function updateevents($id){
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			if($user_role==2){
+			$id = base64_decode($id);
+			$datas['country_list'] = $this->organizermodel->get_country();
+			$datas['category_list'] = $this->organizermodel->get_category();
+			$datas['city_list'] = $this->organizermodel->get_city_list();
+			$datas['edit'] = $this->organizermodel->events_details($id);
+
+			$this->load->view('dash_header');
+			$this->load->view('update_event_new', $datas);
+			$this->load->view('dash_footer');
+			}else{
+					redirect('/');
+				 }
+
+		}
+
+
+		// public function bookedevents()
+		// {
+		// 	$datas=$this->session->userdata();
+		// 	$user_id=$this->session->userdata('id');
+		// 	$user_role=$this->session->userdata('user_role');
+		// 	$datas['res']=$this->loginmodel->getuserinfo($user_id);
+		// 	$datas['view'] = $this->organizerbookingmodel->get_all_booking_details($user_id);
+		//
+		// 	$this->load->view('front_header');
+		// 	$this->load->view('booked_events', $datas);
+		// 	$this->load->view('front_footer');
+		// }
+
+		public function bookedevents()
+		{
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			$datas['res']=$this->loginmodel->getuserinfo($user_id);
+			$datas['view'] = $this->organizerbookingmodel->get_all_booking_details($user_id);
+
+			$this->load->view('dash_header');
+			$this->load->view('booked_events_new', $datas);
+			$this->load->view('dash_footer');
+		}
+
+		// public function reviewevents()
+		// {
+		// 	 $datas = $this->session->userdata();
+		// 	 $user_id = $this->session->userdata('id');
+		// 	 $user_role = $this->session->userdata('user_role');
+		//  	 $datas['result'] = $this->organizermodel->list_events($user_id);
+		// 	 	if($user_role==2)
+		// 		 {
+		// 			 $this->load->view('front_header');
+		// 			 $this->load->view('review_events',$datas);
+		// 			 $this->load->view('front_footer');
+		// 		 	}else{
+		// 				 redirect('/');
+		// 		 	}
+		// }
+
+
+		public function reviewevents()
+		{
+			 $datas = $this->session->userdata();
+			 $user_id = $this->session->userdata('id');
+			 $user_role = $this->session->userdata('user_role');
+			 $datas['result'] = $this->organizermodel->list_events($user_id);
+				if($user_role==2)
+				 {
+					 $this->load->view('dash_header');
+					 $this->load->view('review_events_new',$datas);
+					 $this->load->view('dash_footer');
+					}else{
+						 redirect('/');
+					}
+		}
+
+
+		// public function viewreviews($id)
+		// {
+		//  $datas=$this->session->userdata();
+		// 	$user_id=$this->session->userdata('id');
+		// 	$user_role=$this->session->userdata('user_role');
+		// 	$datas['views'] = $this->organizerbookingmodel->view_all_reviews($id);
+		// 	 if($user_role==2)
+		// 	 {
+		// 		 $this->load->view('front_header');
+		// 		 $this->load->view('view_reviews',$datas);
+		// 		 $this->load->view('front_footer');
+		// 	 }else{
+		// 			 redirect('/');
+		// 			}
+		// }
+
+
+		public function viewreviews($id)
+		{
+		 $datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			$datas['views'] = $this->organizerbookingmodel->view_all_reviews($id);
+			 if($user_role==2)
+			 {
+				 $this->load->view('dash_header');
+				 $this->load->view('view_reviews_new',$datas);
+				 $this->load->view('dash_footer');
+			 }else{
+					 redirect('/');
+					}
+		}
+
+
+		// public function booking_history()
+		// {
+		// 	$datas=$this->session->userdata();
+		// 	$user_id=$this->session->userdata('id');
+		// 	$user_role=$this->session->userdata('user_role');
+		// 	$datas['booking_details'] = $this->loginmodel->get_booking($user_id);
+		// 	if($user_role==3 || $user_role==2){
+		// 	$this->load->view('front_header');
+		// 	$this->load->view('booking_history', $datas);
+		// 	$this->load->view('front_footer');
+		// 	}else{
+		// 		redirect('/');
+		// 	}
+		// }
+
+		public function booking_history()
+		{
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			$datas['booking_details'] = $this->loginmodel->get_booking($user_id);
+			if($user_role==3 || $user_role==2){
+			$this->load->view('dash_header');
+			$this->load->view('booking_history_new', $datas);
+			$this->load->view('dash_footer');
+			}else{
+				redirect('/');
+			}
+		}
+
+
+		// public function user_booking_history($order_id){
+		// 	$datas=$this->session->userdata();
+		// 	$user_id=$this->session->userdata('id');
+		// 	$user_role=$this->session->userdata('user_role');
+		// 	$datas['booking_details'] = $this->loginmodel->get_booking_history($order_id);
+		// 	$datas['event_attendees'] = $this->loginmodel->disp_event_attendees($order_id);
+		// 	if($user_role==3 || $user_role==2){
+		// 		$this->load->view('front_header');
+		// 		$this->load->view('booking_history_details', $datas);
+		// 		$this->load->view('front_footer');
+		// 	}else{
+		// 		redirect('/');
+		// 	}
+		// }
+
+
+		public function user_booking_history($order_id){
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			$datas['booking_details'] = $this->loginmodel->get_booking_history($order_id);
+			$datas['event_attendees'] = $this->loginmodel->disp_event_attendees($order_id);
+			if($user_role==3 || $user_role==2){
+				$this->load->view('dash_header');
+				$this->load->view('booking_history_details_new', $datas);
+				$this->load->view('dash_footer');
+			}else{
+				redirect('/');
+			}
+		}
 
 }
