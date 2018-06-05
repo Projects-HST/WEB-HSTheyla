@@ -1,18 +1,3 @@
-<?php
-  function get_times( $default = '10:00', $interval = '+15 minutes' )
-	{
-		$output = '';
-		$current = strtotime( '00:00:00' );
-		$end = strtotime( '23:59:00' );
-		while( $current <= $end ) {
-			$time = date( 'H:i:s', $current );
-			$sel = ( $time == $default ) ? ' selected' : '';
-			$output .= "<option value=\"{$time}\">" . date( 'h.i A', $current ) .'</option>';
-			$current = strtotime( $interval, $current );
-		}
-		return $output;
-    }
-?>
 <script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
 <link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
 <style type="text/css">
@@ -22,47 +7,7 @@
          margin-top: 10px;
        }
 </style>
-<!--div class="content-page">
-<!- Start content ->
-<div class="content">
-   <!- Top Bar Start ->
-   <div class="topbar">
-      <nav class="navbar-custom">
-         <ul class="list-inline float-right mb-0">
-            <!-li class="list-inline-item dropdown notification-list">
-               <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
-                  aria-haspopup="false" aria-expanded="false">
-               <i class="ion-ios7-bell noti-icon"></i>
-               <span class="badge badge-success noti-icon-badge">3</span>
-               </a>
-            </li!->
-            <li class="list-inline-item dropdown notification-list">
-               <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
-                  aria-haspopup="false" aria-expanded="false">
-               <img src="<?php echo base_url(); ?>assets/images/admin/admin.png" alt="user" class="rounded-circle">
-               </a>
-               <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                  <!-a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
-                  <a class="dropdown-item" href="#"><span class="badge badge-success pull-right">5</span><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
-                  <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a!->
-                  <a class="dropdown-item" href="<?php echo base_url(); ?>adminlogin/logout"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
-               </div>
-            </li>
-         </ul>
-         <ul class="list-inline menu-left mb-0">
-            <li class="list-inline-item">
-               <button type="button" class="button-menu-mobile open-left waves-effect">
-               <i class="ion-navicon"></i>
-               </button>
-            </li>
-            <li class="hide-phone list-inline-item app-search">
-               <h3 class="page-title">Edit Events</h3>
-            </li>
-         </ul>
-         <div class="clearfix"></div>
-      </nav>
-   </div-->
-   <div class="page-content-wrapper ">
+<div class="page-content-wrapper ">
      <div class="container">
 
         <div class="row">
@@ -142,7 +87,6 @@
 
                             <label for="" class="col-sm-2 col-form-label">Description</label>
                             <div class="col-sm-4">
-                                <!-- <textarea type="text" id="description" name="description" class="form-control" maxlength="30000" rows="3" placeholder=""><?php echo $rows->description; ?></textarea> -->
                                 <textarea type="text" id="description"  name="description" class="form-control" maxlength="30000" rows="3" placeholder=""><?php echo $rows->description; ?></textarea>
 
                             </div>
@@ -157,8 +101,30 @@
                                 <script language="JavaScript">document.eventform.eventcost.value="<?php echo $rows->event_type; ?>";</script>
                             </div>
                         </div>
-                       <div class="form-group row">
 
+						<div class="form-group row">
+
+                            <label for="Status" class="col-sm-2 col-form-label">Advertisement</label>
+                            <div class="col-sm-4">
+                               <select class="form-control" name="eadv_status">
+                                    <option value="">Select Status</option>
+                                    <option value="Y">Yes</option>
+                                    <option value="N">No</option>
+                                </select>
+                                <script language="JavaScript">document.eventform.eadv_status.value="<?php echo $rows->adv_status; ?>";</script>
+                            </div>
+                         <label for="Status" class="col-sm-2 col-form-label">Hotspot</label>
+                            <div class="col-sm-4">
+                               <select class="form-control" name="hotspot_sts" id="hotspot_sts">
+                                    <option value="">Select Status</option>
+                                    <option value="Y">Yes</option>
+                                    <option value="N">No</option>
+                                </select>
+                                <script language="JavaScript">document.eventform.hotspot_sts.value="<?php echo $rows->hotspot_status; ?>";</script>
+                            </div>
+                       </div>
+					   <div id = "date_time">
+						<div class="form-group row">
                             <label for="sdate" class="col-sm-2 col-form-label">Start Date</label>
                             <div class="col-sm-4">
                               <div class="input-group">
@@ -175,7 +141,9 @@
                             </div>
                             </div>
                         </div>
-                        <div class="form-group row">
+					</div>
+                        
+						<div class="form-group row">
 
                             <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
                             <div class="col-sm-4">
@@ -208,11 +176,11 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="primarycell" class="col-sm-2 col-form-label">Primary Contact Phone</label>
+                            <label for="primarycell" class="col-sm-2 col-form-label">Contact Phone</label>
                             <div class="col-sm-4">
                                 <input class="form-control" type="text" required="" value="<?php echo $rows->primary_contact_no; ?>" name="pcontact_cell" maxlength="10" value="">
                             </div>
-                            <label for="seccell" class="col-sm-2 col-form-label">Secondary Contact Phone</label>
+                            <label for="seccell" class="col-sm-2 col-form-label">Sec. Contact Phone</label>
                             <div class="col-sm-4">
                                 <input class="form-control" type="text" value="<?php echo $rows->secondary_contact_no; ?>" name="scontact_cell" value="" >
                                  <input class="form-control" type="hidden" value="<?php echo $rows->booking_status; ?>" name="booking_sts" value="" >
@@ -229,52 +197,19 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-
-                            <label for="Status" class="col-sm-2 col-form-label">Advertisement Display</label>
-                            <div class="col-sm-4">
-                               <select class="form-control" name="eadv_status">
-                                    <option value="">Select Status</option>
-                                    <option value="Y">Yes</option>
-                                    <option value="N">No</option>
-                                </select>
-                                <script language="JavaScript">document.eventform.eadv_status.value="<?php echo $rows->adv_status; ?>";</script>
-                            </div>
-                         <label for="Status" class="col-sm-2 col-form-label">Hotspot Display</label>
-                            <div class="col-sm-4">
-                               <select class="form-control" name="hotspot_sts">
-                                    <option value="">Select Status</option>
-                                    <option value="Y">Yes</option>
-                                    <option value="N">No</option>
-                                </select>
-                                <script language="JavaScript">document.eventform.hotspot_sts.value="<?php echo $rows->hotspot_status; ?>";</script>
-                            </div>
-                        <!--label for="Colour" class="col-sm-2 col-form-label">Booking Display</label>
-                            <div class="col-sm-4">
-                                 <select class="form-control" name="booking_sts">
-                                    <option value="">Select Status</option>
-                                    <option value="Y">Yes</option>
-                                    <option value="N">No</option>
-                                </select>
-                                <script language="JavaScript">document.eventform.booking_sts.value="<?php echo $rows->booking_status; ?>";</script>
-                            </div-->
-                       </div>
+                        
 
                         <div class="form-group row">
-
-                            <label for="Colour" class="col-sm-2 col-form-label">Colour</label>
-                            <div class="col-sm-4">
-                                <!--input class="form-control" type="text" name="colour_scheme" value=""-->
-                                 <select class="form-control" name="colour_scheme">
-                                    <option value="">Select Colour</option>
-                                    <option value="green">Green</option>
-                                    <option value="blue">Blue</option>
-                                    <option value="red">Red</option>
-                                </select>
-                                <script language="JavaScript">document.eventform.colour_scheme.value="<?php echo $rows->event_colour_scheme; ?>";</script>
-                            </div>
-
-                             <label for="Status" class="col-sm-2 col-form-label">Event Display</label>
+						
+							<label class="col-sm-2 col-form-label">Event Banner</label>
+                              <div class="col-sm-4">
+                                 <input type="file" name="eventbanner" class="form-control" accept="image/*" >
+                               <input type="hidden" name="currentcpic" class="form-control" value="<?php echo $rows->event_banner;?>" >
+                              <input type="hidden" name="eventid" class="form-control" value="<?php echo $rows->id; ?>" >
+                               <img src="<?php echo base_url(); ?>assets/events/banner/<?php echo $rows->event_banner; ?>" class="img-circle">
+                              </div>
+							  
+                             <label for="Status" class="col-sm-2 col-form-label">Event Status</label>
                             <div class="col-sm-4">
                                <select class="form-control" required="" name="event_status">
                                     <option value="">Select Status</option>
@@ -285,17 +220,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Event Banner</label>
-                              <div class="col-sm-4">
-                                 <input type="file" name="eventbanner" class="form-control" accept="image/*" >
-                               <input type="hidden" name="currentcpic" class="form-control" value="<?php echo $rows->event_banner;?>" >
-                              <input type="hidden" name="eventid" class="form-control" value="<?php echo $rows->id; ?>" >
-                               <img src="<?php echo base_url(); ?>assets/events/banner/<?php echo $rows->event_banner; ?>" class="img-circle">
-                              </div>
-                        </div>
-
-                        <div class="form-group row">
+                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label"></label>
                             <div class="col-sm-2">
                               <button type="submit" class="btn btn-primary waves-effect waves-light">
@@ -315,7 +240,6 @@
 </div>
 <!-- content -->
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByz7sU142AeFwpK3KiFilK0IOoa2GU9tw"></script>
-
 <script type="text/javascript">
 
   $('#vieweve').addClass("active");
@@ -324,7 +248,7 @@
   $('#stime').timepicki();
   $('#etime').timepicki();
 
-     window.onload = function () {
+   window.onload = function () {
     var mapOptions = {
                 center: new google.maps.LatLng(20.5937, 78.9629),
                 zoom:4,
@@ -339,64 +263,81 @@
              var lo=e.latLng.lng();
              document.getElementById("latu").value=la;
              document.getElementById("lon").value=lo;
-             //alert(la); alert(lo);
-            //alert("Latitude: " + e.latLng.lat() + "\r\nLongitude: " + e.latLng.lng());
             });
+			
+			var hotspot = "<?php echo $rows->hotspot_status; ?>";
+			var ee = document.getElementById("date_time");
+			if(hotspot == "Y") {
+				ee.style.display = "none";
+			} else {
+				ee.style.display = "block";
+			}
  }
 
-$(document).ready(function () {
-  $( ".datepicker" ).datepicker({
-        format: 'dd-mm-yyyy',
-      });
+	$(document).ready(function () {
+		$( ".datepicker" ).datepicker({
+			format: 'dd-mm-yyyy',
+		  });
 
-    $('#eventform').validate({ // initialize the plugin
-       rules: {
-         category:{required:true },
-         event_name:{required:true },
-         country:{required:true },
-         city:{required:true },
-         venue:{required:true },
-         address:{required:true },
-         description:{required:true },
-         eventcost:{required:true },
-         start_date:{required:true },
-         end_date:{required:true },
-         start_time:{required:true },
-         end_time:{required:true },
-         pcontact_cell:{required:true },
-         contact_person:{required:true },
-         email:{required:true },
-         eadv_status:{required:true},
-         hotspot_sts:{required:true},
-         event_status:{required:true },
-         txtLatitude:{required:true },
-         txtLongitude:{required:true }
-        },
+		
+		$('#hotspot_sts').on('change', function() {
+		var strdisplay = $(this).val();
+		var e = document.getElementById("date_time");
+			if(strdisplay == "Y") {
+				e.style.display = "none";
+			} else {
+				e.style.display = "block";
+			}
+		});
+	  
+		$('#eventform').validate({ // initialize the plugin
+		   rules: {
+				 category:{required:true },
+				 event_name:{required:true },
+				 country:{required:true },
+				 city:{required:true },
+				 venue:{required:true },
+				 address:{required:true },
+				 description:{required:true },
+				 eventcost:{required:true },
+				 start_date:{required:true },
+				 end_date:{required:true },
+				 start_time:{required:true },
+				 end_time:{required:true },
+				 pcontact_cell:{required:true },
+				 contact_person:{required:true },
+				 email:{required:true },
+				 eadv_status:{required:true},
+				 hotspot_sts:{required:true},
+				 event_status:{required:true },
+				 txtLatitude:{required:true },
+				 txtLongitude:{required:true }
 
-        messages: {
-        category:"Select Category Name",
-        event_name:"Enter Event Name",
-        country:"Select Country Name",
-        city:"Select City Name",
-        venue:"Enter Venue",
-        address:"Enter Address",
-        description:"Enter Description",
-        eventcost:"Select Event Type",
-        start_date:"Select Start Date",
-        end_date:"Select End Date",
-        start_time:"Select Start Time",
-        end_time:"Select End Time",
-        pcontact_cell:"Enter Cell Number",
-        contact_person:"Enter Name",
-         eadv_status:"Select Advertisement Status ",
-        hotspot_sts:"Select Hotspot Display Status ",
-        email:"Enter Email",
-        event_status:"Select Status",
-        txtLatitude:"Enter Latitude",
-        txtLongitude:"Enter Longitude",
+				},
 
-               },
-         });
+				messages: {
+				category:"Select Category Name",
+				event_name:"Enter Event Name",
+				country:"Select Country Name",
+				city:"Select City Name",
+				venue:"Enter Venue",
+				address:"Enter Address",
+				description:"Enter Description",
+				eventcost:"Select Event Type",
+				start_date:"Select Start Date",
+				end_date:"Select End Date",
+				start_time:"Select Start Time",
+				end_time:"Select End Time",
+				pcontact_cell:"Enter Cell Number",
+				contact_person:"Enter Name",
+				eadv_status:"Select Advertisement Status ",
+				hotspot_sts:"Select Hotspot Display Status ",
+				email:"Enter Email",
+				event_status:"Select Status",
+				txtLatitude:"Enter Latitude",
+				txtLongitude:"Enter Longitude"
+				},
+			 });
    });
 
  function getcityname(cid) {
@@ -415,6 +356,7 @@ $(document).ready(function () {
                var len = test.length;
                //alert(len);
                 var cityname='';
+				var ctitle='<option value="">Select City</option>';
                 if(test!='')
                  {    //alert(len);
                    for(var i=0; i<len; i++)
@@ -424,11 +366,10 @@ $(document).ready(function () {
                      //alert(city_name);
                      cityname +='<option value=' + cityid + '> ' + city_name + ' </option>';
                   }
-                  $("#ctname").html(cityname).show();
+                  $("#ctname").html(ctitle+cityname).show();
                   $("#cmsg").hide();
                   }else{
-                  $("#cmsg").html('<p style="color: red;">City Not Found</p>').show();
-                  $("#ctname").hide();
+                 $("#ctname").html(ctitle).show();	
                  }
             }
           });
@@ -437,67 +378,14 @@ $(document).ready(function () {
 function check()
 {
 
-  if(document.eventform.txtLatitude.value=="")
-    {
-            //alert("Please enter Latitude.");
-            $("#ermsg").html('<p style="color: red;">Please enter Latitude.</p>');
-            document.eventform.txtLatitude.focus();
-            return false;
-    }
-
-    if(document.eventform.txtLongitude.value=="")
-    {
-            //alert("Please enter Longitude.");
-            $("#ermsg1").html('<p style="color: red;">Please enter Longitude.</p>');
-            document.eventform.txtLongitude.focus();
-            return false;
-    }
-
-  if(document.eventform.txtLatitude.value!="")
-    {
-            sLatitude = document.eventform.txtLatitude.value
-            if(isNaN(sLatitude) || sLatitude.indexOf(".")<0)
-            {
-                $("#ermsg2").html('<p style="color:red;">Please enter valid Latitude.</p>').show();
-                $("#ermsg").hide();
-                //alert ("Please enter valid Latitude.")
-                document.eventform.txtLatitude.focus();
-                return false;
-            }else{
-                 $("#ermsg").hide();
-                 $("#ermsg2").hide();
-            }
-    }
-
-    if(document.eventform.txtLongitude.value!="")
-    {
-            sLongitude = document.eventform.txtLongitude.value
-
-            if(isNaN(sLongitude) || sLongitude.indexOf(".")<0)
-            {
-                //alert ("Please enter valid Longitude.")
-                 $("#ermsg3").html('<p style="color: red;">Please enter valid Longitude.</p>').show();
-                 $("#ermsg1").hide();
-                document.eventform.txtLongitude.focus();
-                return false;
-            }else{
-                 $("#ermsg1").hide();
-                 $("#ermsg3").hide();
-            }
-    }
-
       var fdate = document.getElementById("datepicker-autoclose").value;
       var tdate = document.getElementById("datepicker").value;
 
-       //alert(fdate);alert(tdate);
       var chunks = fdate.split('-');
       var formattedDate = chunks[1]+'/'+chunks[0]+'/'+chunks[2];
-       //alert(formattedDate);
       var chunks1 = tdate.split('-');
       var formattedDate1 = chunks1[1]+'/'+chunks1[0]+'/'+chunks1[2];
-      //alert(formattedDate1);
-      //alert( Date.parse(formattedDate));
-      //alert( Date.parse(formattedDate1));
+
       if(Date.parse(formattedDate) > Date.parse(formattedDate1) )
       {
        alert("Startdate should be less than Enddate");
@@ -506,7 +394,6 @@ function check()
 
       if(Date.parse(formattedDate)==Date.parse(formattedDate1) )
       {
-
         var strStartTime = document.getElementById("stime").value;
         var strEndTime = document.getElementById("etime").value;
 
@@ -556,9 +443,10 @@ function check()
       }
       return h;
       }
+	  
       function GetMinutes(d)
       {
-       return parseInt(d.split(':')[1].split(' ')[0]);
+		return parseInt(d.split(':')[1].split(' ')[0]);
       }
 
 }
