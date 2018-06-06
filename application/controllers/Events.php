@@ -69,9 +69,10 @@ class Events extends CI_Controller
         $eadv_status   = $this->input->post('eadv_status');
         $booking_sts   = $this->input->post('booking_sts');
         $hotspot_sts   = $this->input->post('hotspot_sts');
+		$featured_sts   = $this->input->post('featured_sts');
         $colour_scheme = $this->input->post('colour_scheme');
         $event_status  = $this->input->post('event_status');
-        $datas         = $this->eventsmodel->insert_events_details($event_name, $category, $country, $city, $venue, $address, $description, $eventcost, $start_date, $end_date, $start_time, $end_time, $txtLatitude, $txtLongitude, $pcontact_cell, $scontact_cell, $contact_person, $email, $event_banner, $colour_scheme, $event_status, $eadv_status, $booking_sts, $hotspot_sts, $user_id, $user_role);
+        $datas         = $this->eventsmodel->insert_events_details($event_name, $category, $country, $city, $venue, $address, $description, $eventcost, $start_date, $end_date, $start_time, $end_time, $txtLatitude, $txtLongitude, $pcontact_cell, $scontact_cell, $contact_person, $email, $event_banner, $colour_scheme, $event_status, $eadv_status, $booking_sts, $hotspot_sts,$featured_sts,$user_id, $user_role);
         $sta		     = $datas['status'];
 		$event_id		 = $datas['event_id'];
         // print_r($sta);exit;
@@ -193,6 +194,7 @@ class Events extends CI_Controller
         $booking_sts   = $this->input->post('booking_sts');
         //echo $booking_sts ;exit;
         $hotspot_sts   = $this->input->post('hotspot_sts');
+		$featured_sts   = $this->input->post('featured_sts');
         $colour_scheme = $this->input->post('colour_scheme');
         $event_status  = $this->input->post('event_status');
         if (empty($event_pic)) {
@@ -201,7 +203,7 @@ class Events extends CI_Controller
             $event_banner = $event_banner;
         }
         //echo $event_banner;exit;
-        $datas = $this->eventsmodel->update_events_details($eventid, $event_name, $category, $country, $city, $venue, $address, $description, $eventcost, $start_date, $end_date, $start_time, $end_time, $txtLatitude, $txtLongitude, $pcontact_cell, $scontact_cell, $contact_person, $email, $event_banner, $colour_scheme, $event_status, $eadv_status, $booking_sts, $hotspot_sts, $user_id, $user_role);
+        $datas = $this->eventsmodel->update_events_details($eventid, $event_name, $category, $country, $city, $venue, $address, $description, $eventcost, $start_date, $end_date, $start_time, $end_time, $txtLatitude, $txtLongitude, $pcontact_cell, $scontact_cell, $contact_person, $email, $event_banner, $colour_scheme, $event_status, $eadv_status, $booking_sts, $hotspot_sts,$featured_sts,$user_id, $user_role);
         $sta   = $datas['status'];
         // print_r($sta);exit;
         if ($sta == "success") {

@@ -54,7 +54,7 @@
 <div class="col-12">
 <div class="card m-b-20">
     <div class="card-block">
-        <h4 class="mt-0 header-title"> Add Photos ( <span style="color: #28c2dc;">  <?php foreach($eventname as $rows){ echo $rows->event_name;}?>  </span> ) </h4>
+        <h4 class="mt-0 header-title"> Add Gallery ( <span style="color: #28c2dc;">  <?php foreach($eventname as $rows){ echo $rows->event_name;}?>  </span> ) </h4>
         <div class="m-b-30">
            <form  method="post" action="<?php echo base_url();?>events/add_gallery" name="eventpicform" id="eventpicform" enctype="multipart/form-data">
               <div class="form-group row">
@@ -80,7 +80,7 @@
                <div class="col-12">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title">View All Category</h4>
+                        <h4 class="mt-0 header-title">View Event Gallery</h4>
                         
                            <?php if($this->session->flashdata('msg')): ?>
                         <div class="alert alert-success">
