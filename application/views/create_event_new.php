@@ -15,9 +15,10 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 ?>
 <script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
 <link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
-<style>
+<main id="page-content-wrapper" role="main">
 
-</style>
+
+
 <div id="page-wrapper">
     <div class="container create_event_section">
 
@@ -29,7 +30,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 
             <div class="row profile_tab">
               <div class="card card-outline-secondary">
-        <div class="card-block">
+        					<div class="card-block">
         <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>home/insertevents" name="eventform" id="eventform" onSubmit='return check();'>
 
         <div class="form-group row">
@@ -115,22 +116,14 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 
 
         <div class="form-group row">
-
         <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
         <div class="col-sm-4">
-
            <input  type="text" class="form-control" id="stime" name="start_time">
-
-
-
         </div>
-
          <label for="etime" class="col-sm-2 col-form-label">End Time</label>
         <div class="col-sm-4">
           <input  type="text" class="form-control" id="etime" name="end_time" >
-
         </div>
-
     </div>
 
 
@@ -138,7 +131,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 
           <div class="form-group row">
              <label for="latitude" class="col-sm-2 col-form-label">Select</label>
-            <div id="dvMap" style="width:300px; height:250px"> </div>
+            	<div id="dvMap" style="width:300px; height:250px"> </div>
 
           </div>
         <div class="form-group row">
@@ -237,8 +230,9 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 
     </div>
 
-</div>
 
+</div>
+</main>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByz7sU142AeFwpK3KiFilK0IOoa2GU9tw"></script>
 
 <script type="text/javascript">
@@ -510,5 +504,6 @@ function check()
     // }
 
 }
+
 
 </script>

@@ -8,25 +8,25 @@
                 </p>
                 <div class="col-md-6">
                     <form action="" method="post" class="formsignup" id="formsignup">
-                        <div class="col-xs-6">
+                        <div class="col-xs-6 form_box">
                             <div class="left-inner-addon">
                                 <i class="fas fa-user"></i>
                                 <input type="text" class="form-control" name="name" placeholder="Username" />
                             </div>
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-xs-6 form_box">
                             <div class="left-inner-addon">
                                 <i class="fas fa-mobile-alt"></i>
                                 <input type="text" class="form-control" name="mobile" placeholder="Mobile Number" />
                             </div>
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-xs-6 form_box">
                             <div class="left-inner-addon">
                                 <i class="fas fa-envelope"></i>
                                 <input type="email" class="form-control" name="email" placeholder="Email" />
                             </div>
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-xs-6 form_box">
                             <div class="left-inner-addon">
                                 <!-- <i class="fas fa-lock"></i>
                                 <input type="password" class="form-control" name="new_password" placeholder="Password" /> -->
@@ -72,9 +72,12 @@
 .field-icon {
   float: right;
   margin-left: -25px;
-  margin-top: -38px;
+  margin-top: -25px;
   position: relative;
   z-index: 2;
+}
+.form_box{
+  margin-bottom: 10px;
 }
 </style>
 <script>

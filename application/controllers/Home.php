@@ -103,10 +103,21 @@ class Home extends CI_Controller {
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
-	
+
 		$this->load->view('front_header');
 		$this->load->view('eventdetails_new');
 		$this->load->view('front_footer');
+
+	}
+	public function header()
+	{
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
+		$user_role=$this->session->userdata('user_role');
+
+		$this->load->view('dash_header');
+
+		$this->load->view('dash_footer');
 
 	}
 
@@ -893,7 +904,7 @@ class Home extends CI_Controller {
 			if($user_role==3 || $user_role==2){
 				$datas['res']=$this->loginmodel->getuserinfo($user_id);
 				$this->load->view('dash_header');
-				$this->load->view('profile_update_new', $datas);
+				$this->load->view('profile_update', $datas);
 				$this->load->view('dash_footer');
 			}else{
 				redirect('/');
@@ -908,7 +919,7 @@ class Home extends CI_Controller {
 			if($user_role==3 || $user_role==2){
 			$datas['user_points'] = $this->loginmodel->get_points($user_id);
 			$this->load->view('dash_header');
-			$this->load->view('leaderboard_new',$datas);
+			$this->load->view('leaderboard',$datas);
 			$this->load->view('dash_footer');
 			}else{
 				redirect('/');
@@ -922,7 +933,7 @@ class Home extends CI_Controller {
 			$datas['res']=$this->loginmodel->getuserinfo($user_id);
 			if($user_role==3 || $user_role==2){
 				$this->load->view('dash_header');
-				$this->load->view('profile_picture_new', $datas);
+				$this->load->view('profile_picture', $datas);
 				$this->load->view('dash_footer');
 			}else{
 				redirect('/');
@@ -939,7 +950,7 @@ class Home extends CI_Controller {
 			$datas['wishlist_details'] = $this->loginmodel->get_wishlist($user_id);
 			if($user_role==3 || $user_role==2){
 			$this->load->view('dash_header');
-			$this->load->view('wishlist_new', $datas);
+			$this->load->view('wishlist', $datas);
 			$this->load->view('dash_footer');
 			}else{
 				redirect('/');
@@ -954,7 +965,7 @@ class Home extends CI_Controller {
 				$datas['country_list'] = $this->organizermodel->get_country();
 				$datas['category_list'] = $this->organizermodel->get_category();
 				$this->load->view('dash_header');
-				$this->load->view('create_event_new', $datas);
+				$this->load->view('create_event', $datas);
 				$this->load->view('dash_footer');
 			}else{
 					redirect('/');
@@ -985,7 +996,7 @@ class Home extends CI_Controller {
 			$datas['res']=$this->loginmodel->getuserinfo($user_id);
 			$datas['result'] = $this->organizermodel->list_events($user_id);
 			$this->load->view('dash_header');
-			$this->load->view('view_event_new', $datas);
+			$this->load->view('view_event', $datas);
 			$this->load->view('dash_footer');
 		}
 
@@ -1024,7 +1035,7 @@ class Home extends CI_Controller {
 			$datas['edit'] = $this->organizermodel->events_details($id);
 
 			$this->load->view('dash_header');
-			$this->load->view('update_event_new', $datas);
+			$this->load->view('update_event', $datas);
 			$this->load->view('dash_footer');
 			}else{
 					redirect('/');
@@ -1055,7 +1066,7 @@ class Home extends CI_Controller {
 			$datas['view'] = $this->organizerbookingmodel->get_all_booking_details($user_id);
 
 			$this->load->view('dash_header');
-			$this->load->view('booked_events_new', $datas);
+			$this->load->view('booked_events', $datas);
 			$this->load->view('dash_footer');
 		}
 
@@ -1085,7 +1096,7 @@ class Home extends CI_Controller {
 				if($user_role==2)
 				 {
 					 $this->load->view('dash_header');
-					 $this->load->view('review_events_new',$datas);
+					 $this->load->view('review_events',$datas);
 					 $this->load->view('dash_footer');
 					}else{
 						 redirect('/');
@@ -1119,7 +1130,7 @@ class Home extends CI_Controller {
 			 if($user_role==2)
 			 {
 				 $this->load->view('dash_header');
-				 $this->load->view('view_reviews_new',$datas);
+				 $this->load->view('view_reviews',$datas);
 				 $this->load->view('dash_footer');
 			 }else{
 					 redirect('/');
@@ -1150,7 +1161,7 @@ class Home extends CI_Controller {
 			$datas['booking_details'] = $this->loginmodel->get_booking($user_id);
 			if($user_role==3 || $user_role==2){
 			$this->load->view('dash_header');
-			$this->load->view('booking_history_new', $datas);
+			$this->load->view('booking_history', $datas);
 			$this->load->view('dash_footer');
 			}else{
 				redirect('/');
@@ -1182,7 +1193,7 @@ class Home extends CI_Controller {
 			$datas['event_attendees'] = $this->loginmodel->disp_event_attendees($order_id);
 			if($user_role==3 || $user_role==2){
 				$this->load->view('dash_header');
-				$this->load->view('booking_history_details_new', $datas);
+				$this->load->view('booking_history_details', $datas);
 				$this->load->view('dash_footer');
 			}else{
 				redirect('/');

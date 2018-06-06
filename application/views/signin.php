@@ -8,13 +8,13 @@
     </p>
     <div class="col-md-6">
       <form action="<?php echo base_url(); ?>adminlogin/home" method="post" class="formsignin">
-        <div class="col-xs-6" >
+        <div class="col-xs-6 form_box" >
           <div class="left-inner-addon">
             <i class="fas fa-user"></i>
             <input type="text" class="form-control user-text-box" name="username" id="username" required placeholder="Username or Mobile Number or Email" />
           </div>
         </div>
-        <div class="col-xs-6" >
+        <div class="col-xs-6 form_box" >
           <!-- <div class="left-inner-addon">
             <i class="fas fa-lock"></i>
             <input type="password" class="form-control" id="pwd" name="pwd"  placeholder="Password"  required/>
@@ -89,9 +89,12 @@
 .field-icon {
   float: right;
   margin-left: -25px;
-  margin-top: -38px;
+  margin-top: -25px;
   position: relative;
   z-index: 2;
+}
+.form_box{
+  margin-bottom: 10px;
 }
 </style>
 <script src="//connect.facebook.net/en_US/all.js"></script>

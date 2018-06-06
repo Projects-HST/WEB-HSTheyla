@@ -9,7 +9,7 @@
               <?php  foreach($res as $rows){} ?>
             <div class="col-md-12 points_tab">
               <!-- <img src="<?php echo base_url(); ?>assets/front/images/trophy.png" class="img-center"> -->
-              <div class="form-group row">
+              <div class="form-group">
                 <div class="profile-img">
                   <?php if(empty($rows->user_picture)){ ?>
                       <img src="<?php echo base_url(); ?>assets/images/profile/noimage.png" class="img-circle  profile-pic">
