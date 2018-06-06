@@ -18,9 +18,12 @@
 .dashboard_tab{
   width: 200px;
   background-color: #418ecc;
-  
+
   padding: 5px;
   color: #fff;
+}
+#content{
+  padding: 0px;
 }
 .error{
   color:red;

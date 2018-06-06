@@ -1,6 +1,6 @@
-<div class="col-md-12">
+<div class="col-md-12" id="content">
   <div class="col-sm-12 col-md-12 " id="content">
-      <h3 class="dashboard_tab">view events</h3>
+      <h3 class="dashboard_tab">View Events</h3>
   </div>
   <?php if(empty($result)){ echo "<center><h3>No Events Added</h3></center>"; }else{
     foreach($result as $rows){

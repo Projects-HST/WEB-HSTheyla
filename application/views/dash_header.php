@@ -18,7 +18,7 @@
 <script src="<?php echo base_url(); ?>assets/js/additional-methods.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-datetimepicker.min.css" />
 
 <style>
 .navbar-fixed-top {
@@ -75,7 +75,7 @@
     height: 100%;
     margin-left: -225px;
     overflow-y: auto;
-    background: #f8f8f8;
+    background-color: #418ecc;
     -webkit-transition: all .5s ease;
     -moz-transition: all .5s ease;
     -o-transition: all .5s ease;

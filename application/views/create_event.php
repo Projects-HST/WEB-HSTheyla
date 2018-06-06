@@ -25,7 +25,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 
 <script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
 <link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
-<div class="col-md-12">
+<div class="col-md-12" id="content">
 	<h3 class="dashboard_tab">Create Event</h3>
 </div>
 <div class="card">

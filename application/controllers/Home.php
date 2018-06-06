@@ -109,17 +109,7 @@ class Home extends CI_Controller {
 		$this->load->view('front_footer');
 
 	}
-	public function header()
-	{
-		$datas=$this->session->userdata();
-		$user_id=$this->session->userdata('id');
-		$user_role=$this->session->userdata('user_role');
 
-		$this->load->view('dash_header');
-
-		$this->load->view('dash_footer');
-
-	}
 
 
 	public function booking()
