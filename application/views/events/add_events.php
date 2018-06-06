@@ -196,8 +196,16 @@
                                  <input type="file" name="eventbanner" id="file_upload" class="form-control" accept="image/*" >
                                   <div id="preview" style="color: red;"></div>
                               </div>
-							  
-							<label for="Status" class="col-sm-2 col-form-label">Event Status</label>
+							    <label class="col-sm-2 col-form-label">Featured Event</label>
+                              <div class="col-sm-4">
+                                 <input type="radio" name="featured_sts" value="Y"> Yes
+                                  <input type="radio" name="featured_sts" value="N" checked> No
+                              </div>
+							
+                        </div>
+						
+                        <div class="form-group row">
+                            <label for="Status" class="col-sm-2 col-form-label">Event Status</label>
                             <div class="col-sm-4">
                                <select class="form-control"  name="event_status">
                                     <option value="">Select Status</option>
@@ -206,7 +214,7 @@
                                 </select>
                             </div>
                         </div>
-
+                        
 
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label"></label>
@@ -451,5 +459,4 @@ function check()
     }
 
 }
-
 </script>

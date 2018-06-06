@@ -200,7 +200,6 @@
                         
 
                         <div class="form-group row">
-						
 							<label class="col-sm-2 col-form-label">Event Banner</label>
                               <div class="col-sm-4">
                                  <input type="file" name="eventbanner" class="form-control" accept="image/*" >
@@ -209,6 +208,23 @@
                                <img src="<?php echo base_url(); ?>assets/events/banner/<?php echo $rows->event_banner; ?>" class="img-circle">
                               </div>
 							  
+                            <label class="col-sm-2 col-form-label">Featured Event</label>
+                              <div class="col-sm-4">
+                              <?php $sfeatured = $rows->featured_status;
+								echo '<input type="radio" name="featured_sts" value="Y"';  
+								if ( $sfeatured =="Y") { echo "checked"; }
+								echo '> Yes ';
+								echo '<input type="radio" name="featured_sts" value="N"';
+								if ( $sfeatured =="N") { echo "checked"; }
+								echo '> No';
+							  ?>
+                                    
+                                    
+                              </div>
+                        </div>
+
+
+						<div class="form-group row">
                              <label for="Status" class="col-sm-2 col-form-label">Event Status</label>
                             <div class="col-sm-4">
                                <select class="form-control" required="" name="event_status">
@@ -219,7 +235,6 @@
                                 <script language="JavaScript">document.eventform.event_status.value="<?php echo $rows->event_status; ?>";</script>
                             </div>
                         </div>
-
                          <div class="form-group row">
                             <label class="col-sm-2 col-form-label"></label>
                             <div class="col-sm-2">
