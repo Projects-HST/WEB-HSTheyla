@@ -86,7 +86,7 @@
     position: absolute;
     top: 0;
     width: 225px;
-    font-size: 14px;
+    font-size: 20px;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -94,7 +94,7 @@
 
 #sidebar-wrapper .sidebar-nav li {
     text-indent: 0;
-    line-height: 45px;
+    line-height: 55px;
 }
 
 #sidebar-wrapper .sidebar-nav li a {
@@ -249,20 +249,20 @@
               <ul id="sidemenu" class="sidebar-nav">
                   <li>
                       <a href="<?php echo base_url(); ?>leaderboard">
-                          <span class="sidebar-icon"><i class="fa fa-dashboard"></i></span>
+                          <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/dashboard.png"></span>
                           <span class="sidebar-title">Dashboard</span>
                       </a>
                   </li>
 
                   <li class="side-menu">
                       <a href="<?php echo base_url(); ?>profile">
-                        <span class="sidebar-icon"><i class="fa fa-dashboard"></i></span>
+                        <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/profile.png"></span>
                         <span class="sidebar-title">Pofile</span>
                       </a>
                   </li>
                   <li class="side-menu">
                       <a href="<?php echo base_url(); ?>profile_picture">
-                        <span class="sidebar-icon"><i class="fa fa-dashboard"></i></span>
+                        <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/display_picture.png"></span>
                         <span class="sidebar-title">Display Picture</span>
                       </a>
                   </li>
@@ -270,25 +270,25 @@
                   if($user_role=='2'){ ?>
                     <li class="side-menu">
                         <a href="<?php echo base_url(); ?>createevent">
-                          <span class="sidebar-icon"><i class="fa fa-dashboard"></i></span>
+                          <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/create_event.png"></span>
                           <span class="sidebar-title">Create Event</span>
                         </a>
                     </li>
                     <li class="side-menu">
                           <a href="<?php echo base_url(); ?>viewevents">
-                            <span class="sidebar-icon"><i class="fa fa-dashboard"></i></span>
+                            <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/view_events.png"></span>
                             <span class="sidebar-title">View Events</span>
                           </a>
                     </li>
                     <li class="side-menu">
                         <a href="<?php echo base_url(); ?>bookedevents">
-                          <span class="sidebar-icon"><i class="fa fa-dashboard"></i></span>
+                          <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/booked_events.png"></span>
                           <span class="sidebar-title">Booked events</span>
                         </a>
                     </li>
                     <li class="side-menu">
                         <a href="<?php echo base_url(); ?>reviewevents">
-                          <span class="sidebar-icon"><i class="fa fa-dashboard"></i></span>
+                          <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/review.png"></span>
                           <span class="sidebar-title">Reviews</span>
                         </a>
                     </li>
@@ -296,13 +296,13 @@
                   <?php  } ?>
                   <li class="side-menu">
                         <a href="<?php echo base_url(); ?>wishlist">
-                          <span class="sidebar-icon"><i class="fa fa-dashboard"></i></span>
+                          <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/wishlist.png"></span>
                           <span class="sidebar-title">Wishlist</span>
                         </a>
                   </li>
                   <li class="side-menu">
                       <a href="<?php echo base_url(); ?>booking_history">
-                        <span class="sidebar-icon"><i class="fa fa-dashboard"></i></span>
+                        <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/booking_history.png"></span>
                         <span class="sidebar-title">Booking History</span>
                       </a>
                   </li>

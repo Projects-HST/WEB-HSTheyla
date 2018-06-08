@@ -29,10 +29,10 @@
       <div class="event_detail_thumb">
          <p class="event_heading">Share with your Friends</p>
          <p>
-           <a href=""><img src="<?php echo base_url(); ?>assets/front/images/facebook.png"></a>
-           <a href=""><img src="<?php echo base_url(); ?>assets/front/images/twitter.png"></a>
-           <a href=""><img src="<?php echo base_url(); ?>assets/front/images/facebook.png"></a>
-           <a href=""><img src="<?php echo base_url(); ?>assets/front/images/twitter.png"></a>
+           <a href=""><img src="<?php echo base_url(); ?>assets/front/images/share_facebook.png"></a>
+           <a href=""><img src="<?php echo base_url(); ?>assets/front/images/share_twitter.png"></a>
+           <a href=""><img src="<?php echo base_url(); ?>assets/front/images/share_googleplus.png"></a>
+           <a href=""><img src="<?php echo base_url(); ?>assets/front/images/share_instagram.png"></a>
          </p>
       </div>
       <div class="event_detail_thumb">

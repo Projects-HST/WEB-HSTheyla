@@ -1,3 +1,9 @@
+<style>
+.card-block{
+  background-color: #fff;
+  padding: 30px;
+}
+</style>
 <div class="col-sm-12 col-md-12 " id="content">
     <h3 class="dashboard_tab"> Profile Update</h3>
 </div>
@@ -6,30 +12,31 @@
 <div class="card-block">
   <form class="form" role="form" autocomplete="off" method="post" action="" id="profile_form">
       <div class="form-group row">
-          <label class="col-md-3 col-form-label form-control-label">Name</label>
-          <div class="col-md-4">
+          <label class="col-md-2 col-form-label form-control-label">Name</label>
+          <div class="col-md-3">
               <input class="form-control" type="text" name="first_name" value="<?php echo $rows->name; ?>">
           </div>
+          
       </div>
 
       <div class="form-group row">
-          <label class="col-md-3 col-form-label form-control-label">Username</label>
-          <div class="col-md-4">
+          <label class="col-md-2 col-form-label form-control-label">Username</label>
+          <div class="col-md-3">
               <input class="form-control" type="text" name="user_name" value="<?php echo $rows->user_name; ?>">
           </div>
       </div>
 
       <div class="form-group row">
-          <label class="col-md-3 col-form-label form-control-label">Email</label>
-          <div class="col-md-4">
+          <label class="col-md-2 col-form-label form-control-label">Email</label>
+          <div class="col-md-3">
             <p>  <?php echo $rows->email_id;  if($rows->email_verify=='N'){ ?><i class="fas fa-exclamation-triangle notverfied" title="Email is Not Verified"></i>
 
           <?php  }else{  } ?> <span class="change-email"><a href="<?php echo  base_url(); ?>changemail">Change My Email</a></span></p>
           </div>
       </div>
           <div class="form-group row">
-              <label class="col-md-3 col-form-label form-control-label">Gender</label>
-              <div class="col-md-4">
+              <label class="col-md-2 col-form-label form-control-label">Gender</label>
+              <div class="col-md-3">
                 <label class="custom-control custom-radio">
                   <input id="radio1" name="gender" type="radio" class="custom-control-input" value="Male" <?php echo ($rows->gender=='Male')?'checked':'' ?>>
                   <span class="custom-control-indicator"></span>
@@ -43,8 +50,8 @@
               </div>
             </div>
       <div class="form-group row">
-          <label class="col-md-3 col-form-label form-control-label">Mobile number</label>
-          <div class="col-md-4">
+          <label class="col-md-2 col-form-label form-control-label">Mobile number</label>
+          <div class="col-md-3">
             <p>  <?php if(empty($rows->mobile_no)){ echo $rows->mobile_no; ?>
                 <span class="change-email"><a href="<?php echo  base_url(); ?>mobile">Add Mobile number</a></span></p>
           <?php  }else{ echo $rows->mobile_no; ?>
@@ -58,23 +65,23 @@
       <input class="form-control" type="hidden" name="user_id" value="<?php echo $this->session->userdata('id'); ?>">
 
       <div class="form-group row">
-          <label class="col-md-3 col-form-label form-control-label">Address</label>
-          <div class="col-md-4">
+          <label class="col-md-2 col-form-label form-control-label">Address</label>
+          <div class="col-md-3">
             <textarea class="textarea form-control textarea-form" name="address"><?php echo $rows->address_line1; ?></textarea>
               </div>
       </div>
 
 
       <div class="form-group row">
-          <label class="col-md-3 col-form-label form-control-label">Occupation</label>
-          <div class="col-md-4">
+          <label class="col-md-2 col-form-label form-control-label">Occupation</label>
+          <div class="col-md-3">
             <input class="form-control" type="text" name="occupation" value="<?php echo $rows->occupation; ?>">
 
           </div>
       </div>
       <div class="form-group row">
-          <label class="col-md-3 col-form-label form-control-label">Subscribe  Newsletter</label>
-          <div class="col-md-4">
+          <label class="col-md-2 col-form-label form-control-label">Subscribe  Newsletter</label>
+          <div class="col-md-3">
 
 
 
@@ -91,8 +98,8 @@
           </div>
         </div>
       <div class="form-group row">
-          <label class="col-md-3 col-form-label form-control-label"></label>
-          <div class="col-md-4">
+          <label class="col-md-2 col-form-label form-control-label"></label>
+          <div class="col-md-3">
               <input type="reset" class="btn btn-secondary" value="Cancel">
               <input type="submit" class="btn btn-primary" value="Save Changes">
           </div>

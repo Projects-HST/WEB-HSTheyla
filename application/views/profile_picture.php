@@ -1,9 +1,17 @@
 <script src="<?php echo base_url(); ?>assets/front/js/jquery.form.js"></script>
+<style>
+.card-block{
+  background-color: #fff;
+  padding: 30px;
+}
+</style>
 <div class="col-sm-12 col-md-12 " id="content">
     <h3 class="dashboard_tab">Profile Picture</h3>
 </div>
+
 <?php  foreach($res as $rows){} ?>
-<div class="col-md-12 points_tab">
+<div class="col-md-12">
+  <div class="card-block">
 <!-- <img src="<?php echo base_url(); ?>assets/front/images/trophy.png" class="img-center"> -->
 <div class="form-group row">
   <div class="profile-img">
@@ -23,6 +31,7 @@
   </div>
 </div>
 </div>
+</div>
 <style>
 #form {
     display: none;
@@ -38,6 +47,7 @@
     border-color: #fff;
     margin-top: 5px;
     margin-left: 5px;
+    display: none;
 }
 
 .profile-pic {
@@ -47,6 +57,10 @@
     margin-top: 10px;
     margin-left: 20px;
     height: 200px;
+
+}
+.file-upload{
+  margin-top: 10px;
 }
 </style>
 <script>

@@ -258,7 +258,7 @@
   width:160px;
 }
 .event_details_bg{
-  background-color: #fdfdfd;
+  background-color: #f5f5f5;
 }
 .event_details_bg_row{
   background-color: #fff;
@@ -293,7 +293,27 @@
   color: #000;
 }
 
+.event_select_label{
+  color: #000;
+  font-size: 22px;
+  font-weight: 500;
+  margin-left: 20px;
+  margin-top: 5px;
+}
+.event_select_text{
+  color: #000;
+  font-size: 20px;
+  font-weight: 400;
+  margin-left: 20px;
 
+}
+.total_price{
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+}
+.confirm_btn{
+  margin-top: 20px;
+}
 .event_booking_section{
   padding-top: 30px;
   padding-bottom: 30px;
@@ -304,17 +324,28 @@
 
 .footer-bg{
   background-color: #478ECC;
-  padding-top: 15px;
+  padding-top: 30px;
   padding-bottom: 15px;
 }
-.fnt-footer a{
-  font-size: 16px;
-  color: #fff;
-  text-decoration: none;
-  margin-left: 30px;
-}
 .fnt-footer{
+  padding: 0px;
+}
+.foot_copyrights{
+  color: #fff;
+}
+.footer_heading{
   color:#fff;
+  font-weight: 500;
+  font-size: 18px;
+}
+.fnt-footer li a{
+  color:#fff;
+  list-style-type: none;
+  margin: 0px;
+}
+.fnt-footer li{
+
+  list-style-type: none;
 }
 .bottom-footer{
   position: absolute;
@@ -643,6 +674,15 @@ padding-bottom: 15px;
   text-align: justify;
   font-size: 15px;
 }
+.search_form{
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid grey;
+}
+.search_filter{
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
 .map{
   width:100%;
   height: 400px;
@@ -760,14 +800,24 @@ a.btn.btn-login.btn-primary.btn-block.review-btn{
 .header-title{
   height: 400px;
 }
-.leaderboard-menu-tab{
-
+.order_summary_page{
+  background-color: #f5f5f5;
 }
-.leaderboard-points-tab{
-
+.top_heading_box{
+  background-color: #478ecc;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
-
-
+.summary_tab{
+  background-color: #fff;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.summary_title{
+  font-size: 18px;
+  color: #fff;
+  font-weight: 500;
+}
 /* ReviewPage */
 .review-img{
   width: 200px;

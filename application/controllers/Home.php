@@ -1190,4 +1190,50 @@ class Home extends CI_Controller {
 			}
 		}
 
+
+
+		public function booking_events(){
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			// $datas['booking_details'] = $this->loginmodel->get_booking_history($order_id);
+			// $datas['event_attendees'] = $this->loginmodel->disp_event_attendees($order_id);
+			if($user_role==3 || $user_role==2){
+				$this->load->view('front_header');
+				$this->load->view('booking_events_new', $datas);
+				$this->load->view('front_footer');
+			}else{
+				redirect('/');
+			}
+		}
+		public function event_list(){
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			// $datas['booking_details'] = $this->loginmodel->get_booking_history($order_id);
+			// $datas['event_attendees'] = $this->loginmodel->disp_event_attendees($order_id);
+			if($user_role==3 || $user_role==2){
+				$this->load->view('front_header');
+				$this->load->view('event_list_new', $datas);
+				$this->load->view('front_footer');
+			}else{
+				redirect('/');
+			}
+		}
+
+		public function event_booking_page(){
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			// $datas['booking_details'] = $this->loginmodel->get_booking_history($order_id);
+			// $datas['event_attendees'] = $this->loginmodel->disp_event_attendees($order_id);
+			if($user_role==3 || $user_role==2){
+				$this->load->view('front_header');
+				$this->load->view('event_booking_page', $datas);
+				$this->load->view('front_footer');
+			}else{
+				redirect('/');
+			}
+		}
+
 }

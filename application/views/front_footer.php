@@ -1,20 +1,48 @@
 <footer class="footer-bg footer" id="stickfooter">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
-                  <p class="fnt-footer"><a href="http://happysanz.com/" target="_blank">Crafted With Happiness</a></p>
+            <div class="col-md-3">
+              <p class="footer_heading">Categories</p>
+              <ul class="fnt-footer ">
+                <li class=""><a href="">Events</a></li>
+                <li class=""><a href="">Hotspot</a></li>
+                <li class=""><a href="">Ads Event</a></li>
+              </ul>
+
             </div>
-            <div class="col-md-6">
-                <ul class="list-inline fnt-footer ">
-                  <li class="list-inline-item"><a href="<?php echo base_url(); ?>privacy">Privacy Policy</a></li>
-                  <li class="list-inline-item"><a href="<?php echo base_url(); ?>payment">Payment Policy</a></li>
-                  <li class="list-inline-item"><a href="<?php echo base_url(); ?>terms">Terms & Conditions</a></li>
-                </ul>
+            <div class="col-md-3">
+              <p class="footer_heading">Quick links</p>
+              <ul class="fnt-footer ">
+                  <li class=""><a href="#">Events</a></li>
+                  <li class=""><a href="#">Blog</a></li>
+                <li class=""><a href="<?php echo base_url(); ?>privacy">Privacy Policy</a></li>
+                <li class=""><a href="<?php echo base_url(); ?>payment">Payment Policy</a></li>
+                <li class=""><a href="<?php echo base_url(); ?>terms">Terms & Conditions</a></li>
+              </ul>
+
+            </div>
+            <div class="col-md-3">
+              <p class="footer_heading">Country</p>
+              <ul class="fnt-footer ">
+                <li class=""><a href="">India</a></li>
+                <li class=""><a href="">Singapore</a></li>
+                <li class=""><a href="">Malaysia</a></li>
+              </ul>
+            </div>
+            <div class="col-md-3">
+              <p class="footer_heading">Follow  Us On</p>
+              <ul class="fnt-footer ">
+                <li class="inline"><a href="">India</a></li>
+                <li class=""><a href="">Singapore</a></li>
+                <li class=""><a href="">Malaysia</a></li>
+              </ul>
             </div>
         </div>
-
     </div>
     <!-- /.container -->
+    <div class="container">
+        <p class=" text-center foot_copyrights">Crafted with <a href="" style="text-decoration:none;"><b style="color:#fff;font-size:20px;">Happiness</b></a></p>
+    </div>
 </footer>
 
 </body>
@@ -61,7 +89,7 @@
 
  <!-- Plugins Init js -->
 <script src="<?php echo base_url(); ?>assets/pages/form-advanced.js"></script>
-
+<script src="<?php echo base_url(); ?>assets/front/js/multislider.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/app.js"></script>
 <script src="<?php echo base_url(); ?>assets/front/js/jquery.reflection.js"></script>
 <script src="<?php echo base_url(); ?>assets/front/js/jquery.cloud9carousel.js"></script>
