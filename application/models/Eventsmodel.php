@@ -69,7 +69,7 @@ Class Eventsmodel extends CI_Model
           $result=$this->db->query($check_eve);
           if($result->num_rows()==0)
           {
-            $query="INSERT INTO events(category_id,event_name,event_venue,event_address,description,start_date,end_date,start_time, end_time,event_banner,event_latitude,event_longitude,event_country,event_city,primary_contact_no, secondary_contact_no,contact_person,contact_email,event_type,adv_status,booking_status,hotspot_status,featured_status,event_colour_scheme,event_status,created_by,created_at) VALUES('$category','$event_name','$venue','$address','$description','$start_date','$end_date','$start_time','$end_time','$event_banner','$txtLatitude','$txtLongitude','$country','$city','$pcontact_cell','$scontact_cell','$contact_person','$email','$eventcost','$eadv_status','N','$hotspot_sts','$featured_sts,','$colour_scheme','$event_status','$user_id',NOW())";
+            $query="INSERT INTO events(category_id,event_name,event_venue,event_address,description,start_date,end_date,start_time, end_time,event_banner,event_latitude,event_longitude,event_country,event_city,primary_contact_no, secondary_contact_no,contact_person,contact_email,event_type,adv_status,booking_status,hotspot_status,featured_status,event_status,created_by,created_at) VALUES('$category','$event_name','$venue','$address','$description','$start_date','$end_date','$start_time','$end_time','$event_banner','$txtLatitude','$txtLongitude','$country','$city','$pcontact_cell','$scontact_cell','$contact_person','$email','$eventcost','$eadv_status','N','$hotspot_sts','$featured_sts','$event_status','$user_id',NOW())";
 			   $resultset=$this->db->query($query);
 			   $event_id = $this->db->insert_id();
 			   
@@ -108,7 +108,7 @@ Class Eventsmodel extends CI_Model
 			$booking='Y'; 
 		}
 
-      $sql="UPDATE events SET category_id='$category',event_name='$event_name',event_venue='$venue',event_address='$address',description='$description',start_date='$start_date',end_date='$end_date',start_time='$start_time',end_time='$end_time',event_banner='$event_banner',event_latitude='$txtLatitude',event_longitude='$txtLongitude',event_country='$country',event_city='$city',primary_contact_no='$pcontact_cell',secondary_contact_no='$scontact_cell',contact_person='$contact_person',contact_email='$email',event_type='$eventcost',adv_status='$eadv_status',booking_status='$booking',hotspot_status='$hotspot_sts',featured_status='$featured_sts',event_colour_scheme='$colour_scheme',event_status='$event_status',updated_by='$user_id',updated_at=NOW() WHERE id='$eventid'";
+      $sql="UPDATE events SET category_id='$category',event_name='$event_name',event_venue='$venue',event_address='$address',description='$description',start_date='$start_date',end_date='$end_date',start_time='$start_time',end_time='$end_time',event_banner='$event_banner',event_latitude='$txtLatitude',event_longitude='$txtLongitude',event_country='$country',event_city='$city',primary_contact_no='$pcontact_cell',secondary_contact_no='$scontact_cell',contact_person='$contact_person',contact_email='$email',event_type='$eventcost',adv_status='$eadv_status',booking_status='$booking',hotspot_status='$hotspot_sts',featured_status='$featured_sts',event_status='$event_status',updated_by='$user_id',updated_at=NOW() WHERE id='$eventid'";
         $eresultset=$this->db->query($sql);
         $data= array("status"=>"success");
         return $data;
