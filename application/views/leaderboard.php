@@ -1,7 +1,8 @@
 <style>
 .card-block{
   background-color: #fff;
-  padding: 30px;
+  padding-top: 50px;
+  padding-bottom: 150px;
 }
 </style>
 <div class="col-sm-12 col-md-12 " id="content">

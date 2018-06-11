@@ -79,6 +79,7 @@
 .slider-img{
   padding-left: 0px;
   padding-right: 0px;
+  height: 450px;
 }
 
 </style>
@@ -223,13 +224,13 @@
         <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel" style="margin-top:60px;">
             <div class="carousel-inner w-100" role="listbox">
                 <div class="carousel-item active">
-                    <img class="d-block col-6 img-fluid slider-img" src="http://www.cars101.com/subaru/ads-subaru-2013-love-spring-event3.JPG" style="height:500px;">
+                    <img class="d-block col-6 img-fluid slider-img" src="<?php echo base_url(); ?>assets/slider3.jpg"  >
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block col-6 img-fluid slider-img" src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/5e26e1428035.560095600048d.png" style="height:500px;">
+                    <img class="d-block col-6 img-fluid slider-img" src="<?php echo base_url(); ?>assets/slider2.jpg" >
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block col-6 img-fluid slider-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKX4DJ_5k_5DKAqgOOrk1-ZMgkPTsSl7Fd7mxPh_M5TTEhJtrtfw" style="height:500px;">
+                    <img class="d-block col-6 img-fluid slider-img" src="<?php echo base_url(); ?>assets/slider3.jpg">
                 </div>
 
             </div>
@@ -255,7 +256,7 @@
 
     <div class="col-xs-18 col-sm-4 col-md-3 event_box">
      <div class="thumbnail  event_section">
-       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKX4DJ_5k_5DKAqgOOrk1-ZMgkPTsSl7Fd7mxPh_M5TTEhJtrtfw" alt="" style="height:204px; width:100%;">
+       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzEjAM-0YaETossp3jwhspRXPNRkiq2TFT4RuV0OFnaaqR335wHA" alt="" style="height:204px; width:100%;">
          <div class="event_thumb">
            <a href="#"><p class="event_heading">Event Name</p></a>
            <p><img src="<?php echo base_url(); ?>assets/front/images/date.png"><span class="event_thumb">May 25<span></p>
@@ -266,7 +267,7 @@
    </div>
    <div class="col-xs-18 col-sm-4 col-md-3 event_box">
     <div class="thumbnail  event_section">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKX4DJ_5k_5DKAqgOOrk1-ZMgkPTsSl7Fd7mxPh_M5TTEhJtrtfw" alt="" style="height:204px; width:100%;">
+      <img src="<?php echo base_url(); ?>assets/slider3.jpg" alt="" style="height:204px; width:100%;">
         <div class="event_thumb">
           <a href="#"><p class="event_heading">Event Name</p></a>
           <p><img src="<?php echo base_url(); ?>assets/front/images/date.png"><span class="event_thumb">May 25<span></p>
@@ -540,8 +541,8 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer-bg">
+
+    <!-- <footer class="footer-bg">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -555,9 +556,54 @@
                     </ul>
                 </div>
             </div>
+        </div>
+    </footer> -->
 
+    <footer class="footer-bg footer" id="stickfooter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                  <p class="footer_heading">Categories</p>
+                  <ul class="fnt-footer ">
+                    <li class=""><a href="">Events</a></li>
+                    <li class=""><a href="">Hotspot</a></li>
+                    <li class=""><a href="">Ads Event</a></li>
+                  </ul>
+
+                </div>
+                <div class="col-md-3">
+                  <p class="footer_heading">Quick links</p>
+                  <ul class="fnt-footer ">
+                      <li class=""><a href="#">Events</a></li>
+                      <li class=""><a href="#">Blog</a></li>
+                    <li class=""><a href="<?php echo base_url(); ?>privacy">Privacy Policy</a></li>
+                    <li class=""><a href="<?php echo base_url(); ?>payment">Payment Policy</a></li>
+                    <li class=""><a href="<?php echo base_url(); ?>terms">Terms & Conditions</a></li>
+                  </ul>
+
+                </div>
+                <div class="col-md-3">
+                  <p class="footer_heading">Country</p>
+                  <ul class="fnt-footer ">
+                    <li class=""><a href="">India</a></li>
+                    <li class=""><a href="">Singapore</a></li>
+                    <li class=""><a href="">Malaysia</a></li>
+                  </ul>
+                </div>
+                <div class="col-md-3">
+                  <p class="footer_heading">Follow  Us On</p>
+                  <ul class="fnt-footer ">
+                    <li class="inline"><a href="">India</a></li>
+                    <li class=""><a href="">Singapore</a></li>
+                    <li class=""><a href="">Malaysia</a></li>
+                  </ul>
+                </div>
+            </div>
         </div>
         <!-- /.container -->
+        <div class="container">
+            <p class=" text-center foot_copyrights">Crafted with <a href="" style="text-decoration:none;"><b style="color:#fff;font-size:20px;">Happiness</b></a></p>
+        </div>
     </footer>
 
 </body>

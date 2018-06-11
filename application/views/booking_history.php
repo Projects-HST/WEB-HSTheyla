@@ -4,57 +4,36 @@
 <div class="col-md-12">
 
         <div class="card-block" style="padding:20px;">
-                    <?php foreach($booking_details as $rows){}?>
-                        <div class="row" style="padding:5px;">
-                              <div class="col-sm-3">Event Name  : </div>
-                              <div class="col-sm-6"><?php echo $rows->event_name; ?></div>
-                              <div class="col-sm-3"></div>
-                          </div>
-                          <div class="row" style="padding:5px;">
-                              <div class="col-sm-3">Event Venue  : </div>
-                              <div class="col-sm-6"><?php echo $rows->event_venue; ?></div>
-                              <div class="col-sm-3"></div>
-                          </div>
-                          <div class="row" style="padding:5px;">
-                              <div class="col-sm-3">Event Address  : </div>
-                              <div class="col-sm-6"><?php echo $rows->event_address; ?></div>
-                              <div class="col-sm-3"></div>
-                          </div>
-                          <div class="row" style="padding:5px;">
-                              <div class="col-sm-3">Event Category  : </div>
-                              <div class="col-sm-6"><?php echo $rows->category_name; ?></div>
-                              <div class="col-sm-3"></div>
-                          </div>
-                          <div class="row" style="padding:5px;">
-                              <div class="col-sm-3">Order Id  : </div>
-                              <div class="col-sm-6"><?php echo $rows->order_id; ?></div>
-                              <div class="col-sm-3"></div>
-                          </div>
-                          <div class="row" style="padding:5px;">
-                              <div class="col-sm-3">Track Id : </div>
-                              <div class="col-sm-6"><?php echo $rows->track_id; ?></div>
-                              <div class="col-sm-3"></div>
-                          </div>
-                          <div class="row" style="padding:5px;">
-                              <div class="col-sm-3">Status  : </div>
-                              <div class="col-sm-3"><?php echo $rows->status_message; ?></div>
-                              <div class="col-sm-3"></div>
-                          </div>
-                          <div class="row" style="padding:5px;">
-                              <div class="col-sm-3">Show Date Time  : </div>
-                              <div class="col-sm-3"><?php echo $rows->show_date; ?> - <?php echo $rows->show_time; ?></div>
-                              <div class="col-sm-3"></div>
-                          </div>
-              <div class="row" style="padding:5px;">
-                              <div class="col-sm-3">No. of Seats  : </div>
-                              <div class="col-sm-3"><?php echo $rows->number_of_seats; ?> Seats</div>
-                              <div class="col-sm-3"></div>
-                          </div>
-              <div class="row" style="padding:5px;">
-                              <div class="col-sm-3">Total Amount  : </div>
-                              <div class="col-sm-3">₹ <?php echo $rows->total_amount; ?></div>
-                              <div class="col-sm-3"></div>
-                          </div>
+          <?php  foreach($booking_details as $res){
+            $event_id = $res->id * 564738;
+            $event_name = strtolower(preg_replace("/[^\w]/", "-", $res->event_name));
+            $enc_event_id = base64_encode($event_id);
+
+            $string = strip_tags($res->description);
+          if (strlen($string) > 150) {
+
+            $stringCut = substr($string, 0, 150);
+            $endPoint = strrpos($stringCut, ' ');
+
+            $string = $endPoint? substr($stringCut, 0, $endPoint):substr($stringCut, 0);
+            $string .= '...';
+          }  ?>
+          <div class="col-xs-18 col-sm-6 col-md-4">
+           <div class="thumbnail">
+             <img src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>" alt="" style="height:204px;">
+               <div class="caption">
+                 <a href="<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $res->event_id; ?>/<?php echo $res->event_name; ?>"><h4><?php echo $res->event_name; ?></h4></a>
+                 <p  class="plan_details"><?php echo $string;?></p>
+                      <p class="plan_details">Plan <?php echo $res->plan_name; ?></p>
+                      <p class="plan_details">Number of Seats <?php echo $res->number_of_seats; ?></p>
+                      <p class="plan_details">Total Amount :  <?php echo $res->total_amount; ?></p>
+                      <p class="plan_details">Booking Date <?php echo $res->show_date; ?><a href="<?php echo base_url(); ?>home/user_booking_history/<?php echo $res->id; ?>" class="btn btn-default btn-xs pull-right" role="button">
+                        <i class="fa fa-eye"></i></a></p>
+             </div>
+           </div>
+         </div>
+       <?php } ?>
+
         </div>
 </div>
 <script>

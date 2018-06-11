@@ -3,7 +3,7 @@
 <div class="container-fluid event_details_bg">
   <div class="row event_details_bg_row">
     <div class="col-md-8">
-        <img class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzEjAM-0YaETossp3jwhspRXPNRkiq2TFT4RuV0OFnaaqR335wHA" style="height:500px;width:100%;">
+        <img class="img-responsive" src="<?php echo base_url(); ?>assets/slider3.jpg" style="height:500px;width:100%;">
         <p class="event_heading">Description</p>
         <p class="address_form">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
         <p class="event_heading">Location</p>

@@ -863,7 +863,6 @@ class Home extends CI_Controller {
 			 $user_role=$this->session->userdata('user_role');
 			if($user_id){
 				$first_name=$this->input->post('first_name');
-
 				$user_name=$this->input->post('user_name');
 				$address=$this->input->post('address');
 				$gender=$this->input->post('gender');
@@ -1235,5 +1234,7 @@ class Home extends CI_Controller {
 				redirect('/');
 			}
 		}
+
+
 
 }

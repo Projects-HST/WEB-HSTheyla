@@ -818,6 +818,23 @@ a.btn.btn-login.btn-primary.btn-block.review-btn{
   color: #fff;
   font-weight: 500;
 }
+.summary_card{
+  margin-top: 30px;
+}
+.summary_label{
+  text-align: center;
+
+}
+.summary_text{
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 450;
+}
+.order_table{
+  padding-top: 30px;
+  padding-bottom:30px;
+}
+
 /* ReviewPage */
 .review-img{
   width: 200px;
