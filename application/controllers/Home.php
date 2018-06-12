@@ -1053,11 +1053,14 @@ class Home extends CI_Controller {
 			$user_role=$this->session->userdata('user_role');
 			$datas['res']=$this->loginmodel->getuserinfo($user_id);
 			$datas['view'] = $this->organizerbookingmodel->get_all_booking_details($user_id);
-
+				if($user_role==3 || $user_role==2){
 			$this->load->view('dash_header');
 			$this->load->view('booked_events', $datas);
 			$this->load->view('dash_footer');
+		}else{
+			redirect('/');
 		}
+	}
 
 		// public function reviewevents()
 		// {
