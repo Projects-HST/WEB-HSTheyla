@@ -1890,7 +1890,8 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 //#################### Booking Plan price details###############//
 	public function Booking_plans($event_id,$show_date,$show_time)
 	{
-	        $plan_query = "SELECT B.plan_name,B.seat_rate,A.event_id,A.plan_id,A.show_date,A.show_time,A.seat_available FROM booking_plan_timing A,booking_plan B WHERE A.event_id  = '$event_id' AND show_date = '$show_date' AND show_time = '$show_time' AND A.seat_available>0 AND A.plan_id = B.id";
+			$plan_query = "SELECT B.plan_name,B.seat_rate,A.event_id,A.plan_id,A.id AS plan_time_id,A.show_date,A.show_time,A.seat_available FROM booking_plan_timing A,booking_plan B WHERE A.event_id  = '$event_id' AND A.show_date = '$show_date' AND A.show_time = '$show_time' AND A.seat_available>0 AND A.plan_id = B.id";
+	        //$plan_query = "SELECT B.plan_name,B.seat_rate,A.event_id,A.plan_id,A.show_date,A.show_time,A.seat_available FROM booking_plan_timing A,booking_plan B WHERE A.event_id  = '$event_id' AND show_date = '$show_date' AND show_time = '$show_time' AND A.seat_available>0 AND A.plan_id = B.id";
 			$plan_res = $this->db->query($plan_query);
 			$plan_result= $plan_res->result();
 

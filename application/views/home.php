@@ -1,11 +1,3 @@
-<style type="text/css">
-.test :hover
- {
-    /*background-color:#ccc;
-    outline-width: 10px;*/
- }
-</style>
-
   <div class="page-content-wrapper ">
       <div class="container">
           <div class="row">

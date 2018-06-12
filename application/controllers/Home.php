@@ -8,6 +8,7 @@ class Home extends CI_Controller {
 		parent::__construct();
 		$this->load->model('loginmodel');
 	//	$this->load->model('facebook');
+		$this->load->model('eventlistmodel');
 		$this->load->model('organizermodel');
 		$this->load->model('organizerbookingmodel');
 		$this->load->helper('url');
@@ -21,16 +22,22 @@ class Home extends CI_Controller {
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
+		$data['country_list'] = $this->eventlistmodel->getall_country_list();
+		$data['city_list'] = $this->eventlistmodel->getall_city_list(); 
+		$data['category_list'] = $this->eventlistmodel->getall_category_list();
+		$data['event_resu'] = $this->eventlistmodel->get_events();
+		$data['adv_event_result'] = $this->eventlistmodel->getadv_events();
+		$data['popular_events'] = $this->eventlistmodel->popular_events();
 			if($user_role==1){
 				redirect('adminlogin/dashboard');
 			}else if($user_role==2){
-		            redirect('leaderboard');
+		          $this->load->view('index',$data);
 			}else if($user_role==3){
-                redirect('leaderboard');
+                 $this->load->view('index',$data);
 			}else{
-			  $this->load->view('index');
+			   $this->load->view('index',$data);
 			}
-
+		
 	}
 
 	public function signin()
@@ -394,14 +401,20 @@ class Home extends CI_Controller {
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 	 	$user_role=$this->session->userdata('user_role');
+		$data['country_list'] = $this->eventlistmodel->getall_country_list();
+		$data['city_list'] = $this->eventlistmodel->getall_city_list(); 
+		$data['category_list'] = $this->eventlistmodel->getall_category_list();
+		$data['event_resu'] = $this->eventlistmodel->get_events();
+		$data['adv_event_result'] = $this->eventlistmodel->getadv_events();
+		$data['popular_events'] = $this->eventlistmodel->popular_events();
 			if($user_role==1){
 				redirect('adminlogin/dashboard');
 			}else if($user_role==2){
-				$this->load->view('index');
+				$this->load->view('index',$data);
 			}else if($user_role==3){
-				$this->load->view('index');
+				$this->load->view('index',$data);
 			}else{
-				$this->load->view('index');
+				$this->load->view('index',$data);
 			}
 
 	}
@@ -1209,11 +1222,14 @@ class Home extends CI_Controller {
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
 			$user_role=$this->session->userdata('user_role');
-			// $datas['booking_details'] = $this->loginmodel->get_booking_history($order_id);
-			// $datas['event_attendees'] = $this->loginmodel->disp_event_attendees($order_id);
+			$data['country_list'] = $this->eventlistmodel->getall_country_list();
+			$data['city_list'] = $this->eventlistmodel->getall_city_list(); 
+			$data['category_list'] = $this->eventlistmodel->getall_category_list();
+			$data['event_resu'] = $this->eventlistmodel->get_events();
+			$data['adv_event_result'] = $this->eventlistmodel->getadv_events();
 			if($user_role==3 || $user_role==2){
 				$this->load->view('front_header');
-				$this->load->view('event_list_new', $datas);
+				$this->load->view('event_list_new', $data);
 				$this->load->view('front_footer');
 			}else{
 				redirect('/');

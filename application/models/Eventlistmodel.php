@@ -54,6 +54,15 @@ Class Eventlistmodel extends CI_Model
 	  	return $res;
     }
 	
+	function popular_events()
+    {
+		$current_date = date("Y-m-d");
+      	$sql="SELECT ev.*,cy.country_name,ci.city_name,ca.category_name FROM country_master AS cy,city_master AS ci,category_master AS ca,events AS ev WHERE ev.category_id=ca.id AND ev.event_country=cy.id AND ev.event_city=ci.id AND ev.end_date>= '$current_date' AND ev.event_status='Y' AND ev.featured_status = 'Y' ORDER BY ev.event_name";
+	  	$resu=$this->db->query($sql);
+	  	$res=$resu->result();
+	  	return $res;
+    }
+	
 	function get_events()
     {
 		$current_date = date("Y-m-d");

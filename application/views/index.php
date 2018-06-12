@@ -223,15 +223,24 @@
     <div class="row">
         <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel" style="margin-top:60px;">
             <div class="carousel-inner w-100" role="listbox">
-                <div class="carousel-item active">
-                    <img class="d-block col-6 img-fluid slider-img" src="<?php echo base_url(); ?>assets/slider3.jpg"  >
+  
+<?php if (count($adv_event_result)>0){ 
+
+			 $i = 0;
+			foreach($adv_event_result as $res){
+				$event_id = $res->id * 564738;
+				$event_name = strtolower(preg_replace("/[^\w]/", "-", $res->event_name));
+				$enc_event_id = base64_encode($event_id);
+?>                
+
+				<div class="carousel-item <?php if ($i=='0') echo "active"; ?>">
+                <!--<a href="<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/">--><img class="d-block col-6 img-fluid slider-img" src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>" alt="<?php echo $event_name; ?>"><!--</a><-->
                 </div>
-                <div class="carousel-item">
-                    <img class="d-block col-6 img-fluid slider-img" src="<?php echo base_url(); ?>assets/slider2.jpg" >
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block col-6 img-fluid slider-img" src="<?php echo base_url(); ?>assets/slider3.jpg">
-                </div>
+               
+                 <?php $i = $i+1; } ?>
+				
+ <?php } ?>
+
 
             </div>
             <a class="carousel-control-prev" href="#recipeCarousel" role="button" data-slide="prev">
@@ -247,65 +256,39 @@
 
 </div>
 
+<?php if (count($popular_events)>0){ ?>
 <div class="container-fluid popular_event_section popular_events">
   <div class="">
   <div class="heading">
   <p class="text-center popular"><b>Popular Events</b> </p>
   </div>
   <div class="row ">
-
+<?php 
+//print_r($popular_events);
+			foreach($popular_events as $pres){
+				$event_id = $pres->id * 564738;
+				//$disp_event_name = $pres->event_name;
+				$event_name = strtolower(preg_replace("/[^\w]/", "-", $pres->event_name));
+				$enc_event_id = base64_encode($event_id);
+				
+ ?>
     <div class="col-xs-18 col-sm-4 col-md-3 event_box">
-     <div class="thumbnail  event_section">
-       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzEjAM-0YaETossp3jwhspRXPNRkiq2TFT4RuV0OFnaaqR335wHA" alt="" style="height:204px; width:100%;">
+     <div class="thumbnail event_section">
+       <img src="assets/events/banner/<?php echo $pres->event_banner; ?>" alt="<?php echo $event_name; ?>" style="height:204px; width:100%;">
          <div class="event_thumb">
-           <a href="#"><p class="event_heading">Event Name</p></a>
-           <p><img src="<?php echo base_url(); ?>assets/front/images/date.png"><span class="event_thumb">May 25<span></p>
-           <p><img src="<?php echo base_url(); ?>assets/front/images/time.png"><span class="event_thumb">May 25<span></p>
-           <p><img src="<?php echo base_url(); ?>assets/front/images/location.png"><span class="event_thumb">May 25<span></p>
+           <a href="<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/"><p class="event_heading"><?php echo $pres->event_name;?></p></a>
+           <p><img src="<?php echo base_url(); ?>assets/front/images/date.png"><span class="event_thumb"><?php echo date('d/m/Y',strtotime($pres->start_date));?> - <?php echo date('d/m/Y',strtotime($res->end_date));?><span></p>
+           <p><img src="<?php echo base_url(); ?>assets/front/images/time.png"><span class="event_thumb"><?php echo $pres->start_time;?> - <?php echo $pres->end_time;?><span></p>
+           <p><img src="<?php echo base_url(); ?>assets/front/images/location.png"><span class="event_thumb"><?php echo $pres->event_venue;?><span></p>
        </div>
      </div>
    </div>
-   <div class="col-xs-18 col-sm-4 col-md-3 event_box">
-    <div class="thumbnail  event_section">
-      <img src="<?php echo base_url(); ?>assets/slider3.jpg" alt="" style="height:204px; width:100%;">
-        <div class="event_thumb">
-          <a href="#"><p class="event_heading">Event Name</p></a>
-          <p><img src="<?php echo base_url(); ?>assets/front/images/date.png"><span class="event_thumb">May 25<span></p>
-          <p><img src="<?php echo base_url(); ?>assets/front/images/time.png"><span class="event_thumb">May 25<span></p>
-          <p><img src="<?php echo base_url(); ?>assets/front/images/location.png"><span class="event_thumb">May 25<span></p>
-      </div>
-    </div>
-  </div>
-  <div class="col-xs-18 col-sm-4 col-md-3 event_box">
-   <div class="thumbnail  event_section">
-     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKX4DJ_5k_5DKAqgOOrk1-ZMgkPTsSl7Fd7mxPh_M5TTEhJtrtfw" alt="" style="height:204px; width:100%;">
-       <div class="event_thumb">
-         <a href="#"><p class="event_heading">Event Name</p></a>
-         <p><img src="<?php echo base_url(); ?>assets/front/images/date.png"><span class="event_thumb">May 25<span></p>
-         <p><img src="<?php echo base_url(); ?>assets/front/images/time.png"><span class="event_thumb">May 25<span></p>
-         <p><img src="<?php echo base_url(); ?>assets/front/images/location.png"><span class="event_thumb">May 25<span></p>
-     </div>
-   </div>
- </div>
- <div class="col-xs-18 col-sm-4 col-md-3 event_box">
-  <div class="thumbnail  event_section">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKX4DJ_5k_5DKAqgOOrk1-ZMgkPTsSl7Fd7mxPh_M5TTEhJtrtfw" alt="" style="height:204px; width:100%;">
-      <div class="event_thumb">
-        <a href="#"><p class="event_heading">Event Name</p></a>
-        <p><img src="<?php echo base_url(); ?>assets/front/images/date.png"><span class="event_thumb">May 25<span></p>
-        <p><img src="<?php echo base_url(); ?>assets/front/images/time.png"><span class="event_thumb">May 25<span></p>
-        <p><img src="<?php echo base_url(); ?>assets/front/images/location.png"><span class="event_thumb">May 25<span></p>
-    </div>
-  </div>
-</div>
-
-
-
+ <?php } ?>
 
   </div>
 </div>
 </div>
-
+<?php } ?>
 
 
 
