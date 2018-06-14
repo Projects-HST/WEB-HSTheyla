@@ -44,7 +44,7 @@
       <div class="event_detail_thumb">
          <p class="event_heading">Share with your Friends</p>
          <p>
-           <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/&redirect_uri=https://developers.facebook.com/tools/explorer" onclick="sharepoints(<?php echo $user_id; ?> ,<?php echo $disp_event_id; ?>)" target="_blank" title="Share on Facebook"><img src="<?php echo base_url(); ?>assets/front/images/share_facebook.png"></a>
+           <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/" onclick="sharepoints(<?php echo $user_id; ?> ,<?php echo $disp_event_id; ?>)" target="_blank" title="Share on Facebook"><img src="<?php echo base_url(); ?>assets/front/images/share_facebook.png"></a>
            <a href="https://plus.google.com/share?url=<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/" onclick="sharepoints(<?php echo $user_id; ?> ,<?php echo $disp_event_id; ?>)" target="_blank" title="Share on Google+"><img src="<?php echo base_url(); ?>assets/front/images/share_googleplus.png"></a>
            <a href=""><img src="<?php echo base_url(); ?>assets/front/images/share_twitter.png"></a>
            <a href=""><img src="<?php echo base_url(); ?>assets/front/images/share_instagram.png"></a>
