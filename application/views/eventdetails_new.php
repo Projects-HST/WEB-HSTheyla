@@ -1,68 +1,102 @@
+<?php $user_id = $this->session->userdata('id'); 
+		foreach($event_details as $res){
+			$disp_event_id = $res->id;
+			$event_id = $res->id * 564738;
+			$event_name = strtolower(preg_replace("/[^\w]/", "-", $res->event_name));
+			$enc_event_id = base64_encode($event_id);
+		} ?>
 <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/jquery.galpop.css" media="screen" />
 <script src="<?php echo base_url(); ?>assets/front/js/jquery.galpop.min.js"></script>
 <div class="container-fluid event_details_bg">
   <div class="row event_details_bg_row">
     <div class="col-md-8">
-        <img class="img-responsive" src="<?php echo base_url(); ?>assets/slider3.jpg" style="height:500px;width:100%;">
+    	<img class="d-block w-100" src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>" style="height:500px;width:100%;">
         <p class="event_heading">Description</p>
-        <p class="address_form">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        <p class="address_form"><?php echo nl2br($res->description); ?></p>
         <p class="event_heading">Location</p>
         <div id="map" class="map"></div>
     </div>
     <div class="col-md-4">
       <div class="event_detail_thumb">
-         <p class="event_heading">Event Name</p>
-         <p><img src="<?php echo base_url(); ?>assets/front/images/date.png"><span class="event_thumb">May 25<span></p>
-         <p><img src="<?php echo base_url(); ?>assets/front/images/time.png"><span class="event_thumb">May 25<span></p>
-         <p><img src="<?php echo base_url(); ?>assets/front/images/location.png"><span class="event_thumb">May 25<span></p>
+         <p class="event_heading"><?php echo $res->event_name; ?></p>
+         <p><img src="<?php echo base_url(); ?>assets/front/images/date.png"><span class="event_thumb"><?php echo date('d/m/Y',strtotime($res->start_date));?> - <?php echo date('d/m/Y',strtotime($res->end_date));?><span></p>
+         <p><img src="<?php echo base_url(); ?>assets/front/images/time.png"><span class="event_thumb"><?php echo $res->start_time;?> - <?php echo $res->end_time;?><span></p>
+         <p><img src="<?php echo base_url(); ?>assets/front/images/location.png"><span class="event_thumb"><?php echo $res->event_venue; ?><span></p>
       </div>
       <div class="event_booking_section">
-        <p><a href="" class="btn-block book_tickets">Book Your Tickets</a></p>
+      <?php if ($res->booking_status =='Y') { ?>
+				<p><a href="<?php echo base_url(); ?>eventlist/booking/<?php echo $enc_event_id; ?>/" class="btn-block book_tickets">Book Your Tickets</a></p>
+		<?php } ?>
       </div>
+      
+<?php if (!empty($event_gallery)){ ?>
+      
       <div class="event_detail_thumb">
          <p class="event_heading">Gallery</p>
-         <a class="galpop-callback" data-galpop-group="callback" href="<?php echo base_url(); ?>assets/front/images/slider1.jpg"><img src="<?php echo base_url(); ?>assets/front/images/slider1.jpg" class="img-responsive  img_gallery"></a>
-         <a class="galpop-callback" data-galpop-group="callback" href="<?php echo base_url(); ?>assets/front/images/slider2.jpg"><img src="<?php echo base_url(); ?>assets/front/images/slider2.jpg" class="img-responsive  img_gallery"></a>
-         <a class="galpop-callback" data-galpop-group="callback" href="<?php echo base_url(); ?>assets/front/images/slider3.jpg"><img src="<?php echo base_url(); ?>assets/front/images/slider3.jpg" class="img-responsive  img_gallery"></a>
-          <a class="galpop-callback" data-galpop-group="callback" href="<?php echo base_url(); ?>assets/front/images/slider3.jpg"><img src="<?php echo base_url(); ?>assets/front/images/slider3.jpg" class="img-responsive  img_gallery"></a>
+         <?php foreach($event_gallery as $gallery_img){ ?>
+         <a class="galpop-callback" data-galpop-group="callback" href="<?php echo base_url(); ?>assets/events/gallery/<?php echo $gallery_img->event_image; ?>"><img src="<?php echo base_url(); ?>assets/events/gallery/<?php echo $gallery_img->event_image; ?>" class="img-responsive  img_gallery"></a>
+         <?php } ?>
       </div>
+ <?php } ?>
+      
+      <?php if ($user_id !='') { ?>
+      
       <div class="event_detail_thumb">
          <p class="event_heading">Share with your Friends</p>
          <p>
-           <a href=""><img src="<?php echo base_url(); ?>assets/front/images/share_facebook.png"></a>
+           <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/&redirect_uri=https://developers.facebook.com/tools/explorer" onclick="sharepoints(<?php echo $user_id; ?> ,<?php echo $disp_event_id; ?>)" target="_blank" title="Share on Facebook"><img src="<?php echo base_url(); ?>assets/front/images/share_facebook.png"></a>
+           <a href="https://plus.google.com/share?url=<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/" onclick="sharepoints(<?php echo $user_id; ?> ,<?php echo $disp_event_id; ?>)" target="_blank" title="Share on Google+"><img src="<?php echo base_url(); ?>assets/front/images/share_googleplus.png"></a>
            <a href=""><img src="<?php echo base_url(); ?>assets/front/images/share_twitter.png"></a>
-           <a href=""><img src="<?php echo base_url(); ?>assets/front/images/share_googleplus.png"></a>
            <a href=""><img src="<?php echo base_url(); ?>assets/front/images/share_instagram.png"></a>
          </p>
       </div>
-      <div class="event_detail_thumb">
+      <?php } ?>
+      
+      
+     
+<?php
+
+	if (!empty($event_reviews)){ ?>
+ 		<div class="event_detail_thumb">
          <p class="event_heading">Review</p>
+ <?php
+		foreach($event_reviews as $result){
+			 $ratings = $result->event_rating;
+
+?>
           <div class="review_section">
-            <p class="review_name">Kamal raj
+            <p class="review_name"><?php echo $result->user_name; ?>
               <span class="rated_star">
-                <img src="<?php echo base_url(); ?>assets/front/images/rated.png" class="img-responsive">
-                <img src="<?php echo base_url(); ?>assets/front/images/rated.png" class="img-responsive">
-                <img src="<?php echo base_url(); ?>assets/front/images/rated.png" class="img-responsive">
-                <img src="<?php echo base_url(); ?>assets/front/images/unrated.png" class="img-responsive">
-                <img src="<?php echo base_url(); ?>assets/front/images/unrated.png" class="img-responsive">
+              	<?php
+                     for ($i=1; $i <6; $i++)
+            			{
+							if ($i <= $ratings){
+								echo "<img src='".base_url()."assets/front/images/rated.png' class='img-responsive'>";
+							} else {
+								echo "<img src='".base_url()."assets/front/images/unrated.png' class='img-responsive'>";
+							}
+						}
+					?>
               </span>
             </p>
-            <p class="review_desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy </p>
-            <p class="review_name">Kamal raj
-              <span class="rated_star">
-                <img src="<?php echo base_url(); ?>assets/front/images/rated.png" class="img-responsive">
-                <img src="<?php echo base_url(); ?>assets/front/images/unrated.png" class="img-responsive">
-                <img src="<?php echo base_url(); ?>assets/front/images/unrated.png" class="img-responsive">
-                <img src="<?php echo base_url(); ?>assets/front/images/unrated.png" class="img-responsive">
-                <img src="<?php echo base_url(); ?>assets/front/images/unrated.png" class="img-responsive">
-              </span>
-            </p>
-            <p class="review_desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy </p>
-          </div>
-      </div>
+            <p class="review_desc"><?php echo $result->comments;?></p>
+            </div>
+ <?php
+		}
+		?>
+        </div>
+ <?php
+	}
+	
+?>
+
+	 <?php if ($user_id !='') { ?>
       <div class="event_booking_section">
         <p><a href="" class="book_tickets" data-toggle="modal" data-target="#myModal">Write a review</a></p>
       </div>
+      <?php } ?>
+      
+      
     </div>
   </div>
 </div>
@@ -92,6 +126,7 @@
       </div>
       <div class="form-group row">
         <div class="col-lg-12">
+        <input type="hidden" name="event_id" id="event_id" value="<?php echo $disp_event_id; ?>" />
           <textarea type="text" name="message" id="message" placeholder="Message" class="form-control"></textarea>
         </div>
       </div>
@@ -191,7 +226,8 @@ span.fa.fa-star.checked{
 </style>
 <script>
 function initMap() {
-      var uluru = {lat: 11.002598, lng: 77.016933};
+      //var uluru = {lat: 11.002598, lng: 77.016933};
+	  var uluru = {lat: <?php echo $res->event_latitude; ?>, lng: <?php echo $res->event_longitude; ?>};
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 12,
         center: uluru

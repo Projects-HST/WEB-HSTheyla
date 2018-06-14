@@ -57,7 +57,7 @@ $user_id = $this->session->userdata('id'); ?>
                     <input type="hidden" name="redirect_url" value="http://hobbistan.com/web/ccavenue/ccavResponseHandler.php"/>
                     <input type="hidden" name="cancel_url" value="http://heylaapp.com/heylav2/eventlist/"/>
                     <input type="hidden" name="language" value="EN"/>
-                    <INPUT type="submit" value="CheckOut" class="btn  btn-primary">
+                    <INPUT type="submit" value="CheckOut" class="btn btn-primary">
             </form>
 <!--
 				<tr>

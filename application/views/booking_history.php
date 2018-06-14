@@ -27,7 +27,7 @@
                       <p class="plan_details">Plan <?php echo $res->plan_name; ?></p>
                       <p class="plan_details">Number of Seats <?php echo $res->number_of_seats; ?></p>
                       <p class="plan_details">Total Amount :  <?php echo $res->total_amount; ?></p>
-                      <p class="plan_details">Booking Date <?php echo $res->show_date; ?><a href="<?php echo base_url(); ?>home/user_booking_history/<?php echo $res->id; ?>" class="btn btn-default btn-xs pull-right" role="button">
+                      <p class="plan_details">Booking Date <?php echo $res->show_date; ?><a href="<?php echo base_url(); ?>home/user_booking_history/<?php echo $res->order_id; ?>" class="btn btn-default btn-xs pull-right" role="button">
                         <i class="fa fa-eye"></i></a></p>
              </div>
            </div>

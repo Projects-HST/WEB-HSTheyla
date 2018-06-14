@@ -80,8 +80,8 @@
                             <tr> <th>S.No</th>
                             <th>Event Name</th>
                             <!--th>Event Category</th-->
-                            <th>Event City</th>
-                            <th>Event popularity</th>
+                            <th>City</th>
+                            <th>Popularity</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>

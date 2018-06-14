@@ -1793,7 +1793,18 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			$price_range_query = "bp.seat_rate>='$from_price' AND bp.seat_rate <='$to_price' AND ";
 	   }
 	   
-        $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
+	   
+	    if ($event_category == 'Hotspot'){
+            $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
+                        FROM events AS ev
+                        LEFT join event_popularity AS ep on ep.event_id = ev.id
+                        LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+                        LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+						LEFT JOIN booking_plan AS bp ON ev.id = bp.event_id
+                        WHERE $city_query $preference_query $event_type_query $event_category_query $price_range_query
+                        ev.event_status ='Y' group by ev.id $event_popularity_query";
+        } else {
+			$event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
                         FROM events AS ev
                         LEFT join event_popularity AS ep on ep.event_id = ev.id
                         LEFT JOIN city_master AS ci ON ev.event_city = ci.id
@@ -1801,6 +1812,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 						LEFT JOIN booking_plan AS bp ON ev.id = bp.event_id
                         WHERE $city_query $preference_query $event_type_query $event_category_query $single_date_query $fromto_date_query $price_range_query
                         ev.end_date>= '$current_date' AND ev.event_status ='Y' group by ev.id $event_popularity_query";
+		}
 
 		$event_res = $this->db->query($event_query);
 

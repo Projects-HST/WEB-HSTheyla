@@ -28,15 +28,15 @@ class Home extends CI_Controller {
 		$data['event_resu'] = $this->eventlistmodel->get_events();
 		$data['adv_event_result'] = $this->eventlistmodel->getadv_events();
 		$data['popular_events'] = $this->eventlistmodel->popular_events();
-			if($user_role==1){
-				redirect('adminlogin/dashboard');
-			}else if($user_role==2){
-		          $this->load->view('index',$data);
-			}else if($user_role==3){
-                 $this->load->view('index',$data);
-			}else{
-			   $this->load->view('index',$data);
-			}
+		if($user_role==1){
+			redirect('adminlogin/dashboard');
+		}else if($user_role==2){
+			  $this->load->view('index',$data);
+		}else if($user_role==3){
+			 $this->load->view('index',$data);
+		}else{
+		   $this->load->view('index',$data);
+		}
 		
 	}
 
@@ -49,9 +49,9 @@ class Home extends CI_Controller {
 		if($user_role==1){
 			redirect('adminlogin/dashboard');
 		}else if($user_role==2){
-							redirect('leaderboard');
+			redirect('leaderboard');
 		}else if($user_role==3){
-							redirect('leaderboard');
+			redirect('leaderboard');
 		}else{
 			$this->load->view('front_header');
 			$this->load->view('signin', $datas);
@@ -70,9 +70,9 @@ class Home extends CI_Controller {
 		if($user_role==1){
 			redirect('adminlogin/dashboard');
 		}else if($user_role==2){
-							redirect('leaderboard');
+			redirect('leaderboard');
 		}else if($user_role==3){
-							redirect('leaderboard');
+			redirect('leaderboard');
 		}else{
 			$this->load->view('front_header');
 			$this->load->view('signup', $datas);
@@ -96,41 +96,41 @@ class Home extends CI_Controller {
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
+		
 		if($user_role==3 || $user_role==2){
-		$this->load->view('front_header');
-		$this->load->view('eventdetails', $datas);
-		$this->load->view('front_footer');
+			$this->load->view('front_header');
+			$this->load->view('eventdetails', $datas);
+			$this->load->view('front_footer');
 		}else{
 			redirect('/');
 		}
 	}
 
-	public function eventdetails_new()
-	{
-		$datas=$this->session->userdata();
-		$user_id=$this->session->userdata('id');
-		$user_role=$this->session->userdata('user_role');
-
+	 function eventdetails_new($enc_event_id,$event_name)
+    {
+		$dec_event_id = base64_decode($enc_event_id);
+		$event_id = ($dec_event_id/564738);
+		$data['event_gallery'] = $this->eventlistmodel->getevent_gallery($event_id);
+		$data['event_details'] = $this->eventlistmodel->getevent_details($event_id);
+		$data['event_reviews'] = $this->eventlistmodel->getevent_reviews($event_id);
 		$this->load->view('front_header');
-		$this->load->view('eventdetails_new');
+		$this->load->view('eventdetails_new', $data);
 		$this->load->view('front_footer');
-
-	}
-
-
-
+    }
+	
+	
 	public function booking()
 	{
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
 		if($user_role==3 || $user_role==2){
-		$this->load->view('front_header');
-		$this->load->view('booking', $datas);
-		$this->load->view('front_footer');
-	}else{
-		redirect('/');
-	}
+			$this->load->view('front_header');
+			$this->load->view('booking', $datas);
+			$this->load->view('front_footer');
+		}else{
+			redirect('/');
+		}
 
 	}
 // 	public function leaderboard()
@@ -341,9 +341,9 @@ class Home extends CI_Controller {
 		$datas['wishlist_remove'] = $this->loginmodel->remove_wishlist($wishlist_id);
 		$datas['wishlist_details'] = $this->loginmodel->get_wishlist($user_id);
 		if($user_role==3 || $user_role==2){
-		$this->load->view('front_header');
-		$this->load->view('wishlist', $datas);
-		$this->load->view('front_footer');
+			$this->load->view('dash_header');
+			$this->load->view('wishlist', $datas);
+			$this->load->view('dash_footer');
 		}else{
 			redirect('/');
 		}
@@ -1230,13 +1230,11 @@ class Home extends CI_Controller {
 			$data['category_list'] = $this->eventlistmodel->getall_category_list();
 			$data['event_resu'] = $this->eventlistmodel->get_events();
 			$data['adv_event_result'] = $this->eventlistmodel->getadv_events();
-			if($user_role==3 || $user_role==2){
+
 				$this->load->view('front_header');
 				$this->load->view('event_list_new', $data);
 				$this->load->view('front_footer');
-			}else{
-				redirect('/');
-			}
+			
 		}
 
 		public function event_booking_page(){

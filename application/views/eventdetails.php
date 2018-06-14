@@ -33,7 +33,7 @@
 			$event_id = $res->id * 564738;
 			$event_name = strtolower(preg_replace("/[^\w]/", "-", $res->event_name));
 			$enc_event_id = base64_encode($event_id);
-			} ?>
+		} ?>
 		<div class="row booking-section">
 			<div class="col-md-10">
 				<div class="event-heading">

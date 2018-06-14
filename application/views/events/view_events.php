@@ -82,9 +82,9 @@
                          
                             <th>Event Name</th>
                             <!--th>Event Category</th-->
-                            <th>Event City</th>
-                            <th>Event popularity</th>
-                            <th>status</th>
+                            <th>City</th>
+                            <th>Popularity</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -138,10 +138,10 @@
                       <table class="table table-striped table-bordered display" cellspacing="0" width="100%">
                         <thead>
                         <tr>
-                            <th>Event Name</th>
-                             <!--th>Event Category</th-->
-                            <th>Event City</th>
-                            <th>Event popularity</th>
+                           <th>Event Name</th>
+                            <!--th>Event Category</th-->
+                            <th>City</th>
+                            <th>Popularity</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -196,8 +196,8 @@
                         <tr>
                             <th>Event Name</th>
                             <!--th>Event Category</th-->
-                            <th>Event City</th>
-                            <th>Event popularity</th>
+                            <th>City</th>
+                            <th>Popularity</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -247,11 +247,11 @@
                       <table class="table table-striped table-bordered display" cellspacing="0" width="100%">
                         <thead>
                         <tr>
-                            <th>Event Name</th>
+                           <th>Event Name</th>
                             <!--th>Event Category</th-->
-                            <th>Event City</th>
-                            <th>Event popularity</th>
-                             <th>Status</th>
+                            <th>City</th>
+                            <th>Popularity</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                         </thead>

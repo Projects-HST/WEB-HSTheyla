@@ -15,14 +15,15 @@ class Eventlist extends CI_Controller
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
-		$data['country_list'] = $this->eventlistmodel->getall_country_list();
-		$data['city_list'] = $this->eventlistmodel->getall_city_list(); 
-		$data['category_list'] = $this->eventlistmodel->getall_category_list();
-		$data['event_resu'] = $this->eventlistmodel->get_events();
-		$data['adv_event_result'] = $this->eventlistmodel->getadv_events();
-		$this->load->view('front_header');
-		$this->load->view('events', $data);
-		$this->load->view('front_footer');
+			$data['country_list'] = $this->eventlistmodel->getall_country_list();
+			$data['city_list'] = $this->eventlistmodel->getall_city_list(); 
+			$data['category_list'] = $this->eventlistmodel->getall_category_list();
+			$data['event_resu'] = $this->eventlistmodel->get_events();
+			$data['adv_event_result'] = $this->eventlistmodel->getadv_events();
+
+				$this->load->view('front_header');
+				$this->load->view('event_list_new', $data);
+				$this->load->view('front_footer');
 	}
  
      public function get_all_events()
@@ -32,12 +33,19 @@ class Eventlist extends CI_Controller
         $data['event_result'] = $this->eventlistmodel->getall_events($limit, $offset);
         echo json_encode($data['event_result']);
     }
- 
-    public function get_city_name()
+ 	
+	public function get_country_events()
     {
-        $country_id  = $this->input->post('country_id');
-        $data['res'] = $this->eventlistmodel->getcityname($country_id);
-        echo json_encode($data['res']);
+      	$country_id  = $this->input->post('country_id');
+        $data['event_result'] = $this->eventlistmodel->get_country_events($country_id);
+        echo json_encode($data['event_result']);
+    }
+	public function get_city_events()
+    {
+      	$country_id  = $this->input->post('country_id');
+		$city_id  = $this->input->post('city_id');
+        $data['event_result'] = $this->eventlistmodel->get_city_events($country_id,$city_id);
+        echo json_encode($data['event_result']);
     }
 	
 	public function get_search_events()
@@ -52,8 +60,15 @@ class Eventlist extends CI_Controller
 	public function search_term_events()
     {
       	$srch_term  = $this->input->post('srch_term');
-        $data['event_term_result'] = $this->eventlistmodel->getsearch_term_events($srch_term);
-        echo json_encode($data['event_term_result']);
+        $data['event_result'] = $this->eventlistmodel->getsearch_term_events($srch_term);
+        echo json_encode($data['event_result']);
+    }
+	
+	public function get_city_name()
+    {
+        $country_id  = $this->input->post('country_id');
+        $data['res'] = $this->eventlistmodel->getcityname($country_id);
+        echo json_encode($data['res']);
     }
 	
 	public function eventdetails($enc_event_id,$event_name)
@@ -64,9 +79,10 @@ class Eventlist extends CI_Controller
 		$data['event_details'] = $this->eventlistmodel->getevent_details($event_id);
 		$data['event_reviews'] = $this->eventlistmodel->getevent_reviews($event_id);
 		$this->load->view('front_header');
-		$this->load->view('eventdetails', $data);
+		$this->load->view('eventdetails_new', $data);
 		$this->load->view('front_footer');
     }
+	
 	
 	public function eventwishlist()
     {
@@ -96,7 +112,7 @@ class Eventlist extends CI_Controller
 			$data['event_details'] = $this->eventlistmodel->getevent_details($event_id);
 			$data['booking_dates'] = $this->eventlistmodel->booking_plandates($event_id);
 			$this->load->view('front_header');
-			$this->load->view('booking', $data);
+			$this->load->view('booking_new', $data);
 			$this->load->view('front_footer');
 		} else {
 			$event_session_id = array("session_event_id" => $event_id);
@@ -158,7 +174,7 @@ class Eventlist extends CI_Controller
 			
 			$data['booking_process'] = $this->eventlistmodel->booking_process($order_id,$event_id,$plan_id,$plan_time_id,$user_id,$number_of_seats,$total_amount,$booking_date);
 			$this->load->view('front_header');
-			$this->load->view('bookingprocess', $data);
+			$this->load->view('bookingprocess_new', $data);
 			$this->load->view('front_footer');
 		}else{
 			redirect('/signin/');
