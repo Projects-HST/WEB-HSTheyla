@@ -64,7 +64,7 @@ body{
 }
 .whatsheyla{
   text-align: center;
-  font-size: 24px;
+  font-size: 20px;
   color: #000;
   line-height: 50px;
   font-weight: 400;
@@ -92,6 +92,11 @@ body{
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+.event_address{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .event_title_heading a{
   color: #000;
@@ -394,7 +399,7 @@ body{
   margin-top: 10px;
 }
 .normal-txt{
-  font-size: 24px;
+  font-size: 22px;
   text-align: center;
 }
 .heading{
@@ -431,7 +436,7 @@ body{
 }
 .address_form{
   color: #000;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
 }
 .blueline{
