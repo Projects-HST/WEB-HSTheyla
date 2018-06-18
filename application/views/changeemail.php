@@ -26,7 +26,7 @@ input[type=text] {
 <center>
 
 
-  <p style="margin-top:5%;font-size:22px;">If email has changed the verification link has sent to the new email you have entered.</p>
+  <p style="margin-top:5%;font-size:24px;">If email has changed the verification link has sent to the new email you have entered.</p>
         <div class="reset">
 
   <div class="">

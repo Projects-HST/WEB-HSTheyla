@@ -2,10 +2,24 @@
 .card-block{
   background-color: #fff;
   padding: 30px;
+  margin-left: 50px;
+  margin-right: 50px;
+  box-shadow: 3px 11px 15px 0px #959696;
+}
+.profile_active {
+    background-color: #92bce0  !important;
+    color: #fff !important;
+}
+.form-control-label{
+  font-size: 18px;
+  font-weight: 500;
+}
+.form-control{
+  font-size: 16px;
 }
 </style>
 <div class="col-sm-12 col-md-12 " id="content">
-    <h3 class="dashboard_tab"> Profile Update</h3>
+    <h3 class="dashboard_tab"></h3>
 </div>
 <?php  foreach($res as $rows){} ?>
 <div class="col-md-12 profile_tab">
@@ -16,7 +30,7 @@
           <div class="col-md-3">
               <input class="form-control" type="text" name="first_name" value="<?php echo $rows->name; ?>">
           </div>
-          
+
       </div>
 
       <div class="form-group row">
@@ -31,7 +45,7 @@
           <div class="col-md-3">
             <p>  <?php echo $rows->email_id;  if($rows->email_verify=='N'){ ?><i class="fas fa-exclamation-triangle notverfied" title="Email is Not Verified"></i>
 
-          <?php  }else{  } ?> <span class="change-email"><a href="<?php echo  base_url(); ?>changemail">Change My Email</a></span></p>
+          <?php  }else{  } ?> <span class="change-email"><a href="<?php echo  base_url(); ?>changemail"><br><b>Change My Email</b></a></span></p>
           </div>
       </div>
           <div class="form-group row">
@@ -55,7 +69,7 @@
             <p>  <?php if(empty($rows->mobile_no)){ echo $rows->mobile_no; ?>
                 <span class="change-email"><a href="<?php echo  base_url(); ?>mobile">Add Mobile number</a></span></p>
           <?php  }else{ echo $rows->mobile_no; ?>
-              <span class="change-email"><a href="<?php echo  base_url(); ?>mobilenumber">Change Mobile number</a></span></p>
+              <span class="change-email"><a href="<?php echo  base_url(); ?>mobilenumber">&nbsp; <b>Change Mobile number</b></a></span></p>
           <?php   } ?>
           <!-- <input class="form-control" type="text" name="mobile_no" id="mobile_no" value="<?php echo $rows->mobile_no; ?>"> -->
 
@@ -100,7 +114,7 @@
       <div class="form-group row">
           <label class="col-md-2 col-form-label form-control-label"></label>
           <div class="col-md-3">
-              <input type="reset" class="btn btn-secondary" value="Cancel">
+              <input type="reset" class="btn btn-secondary" value="Cancel">&nbsp;
               <input type="submit" class="btn btn-primary" value="Save Changes">
           </div>
       </div>

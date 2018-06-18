@@ -79,6 +79,9 @@
 .form_box{
   margin-bottom: 10px;
 }
+.left-inner-addon input{
+  padding-left: 30px;
+}
 </style>
 <script>
 $('#formsignup').validate({ // initialize the plugin

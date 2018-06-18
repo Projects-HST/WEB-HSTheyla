@@ -31,10 +31,11 @@
             </div>
             <div class="col-md-3">
               <p class="footer_heading">Follow  Us On</p>
-              <ul class="fnt-footer ">
-                <li class="inline"><a href="">India</a></li>
-                <li class=""><a href="">Singapore</a></li>
-                <li class=""><a href="">Malaysia</a></li>
+              <ul class="fnt-footer social_follow">
+                <li class=""><a href=""><img src="<?php echo base_url(); ?>assets/front/images/fb_follow.png"></a></li>
+                <li class=""><a href=""><img src="<?php echo base_url(); ?>assets/front/images/in_follow.png"></a></li>
+                <li class=""><a href=""><img src="<?php echo base_url(); ?>assets/front/images/gp_follow.png"></a></li>
+                <li class=""><a href=""><img src="<?php echo base_url(); ?>assets/front/images/tw_follow.png"></a></li>
               </ul>
             </div>
         </div>
@@ -124,11 +125,11 @@ $(document).ready(function() {
     $(window).scroll(function() {
         if ($(window).scrollTop() > $(window).height()) {
             $(".navbar").css({
-                "background-color": "#fff"
+                "background-color": "#478ECC"
             });
         } else {
             $(".navbar").css({
-                "background-color": "#fff"
+                "background-color": "#478ECC"
             });
         }
 

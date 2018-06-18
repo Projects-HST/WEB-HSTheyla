@@ -1,4 +1,4 @@
-<?php $user_id = $this->session->userdata('id'); 
+<?php $user_id = $this->session->userdata('id');
 		foreach($event_details as $res){
 			$disp_event_id = $res->id;
 			$event_id = $res->id * 564738;
@@ -18,7 +18,8 @@
     </div>
     <div class="col-md-4">
       <div class="event_detail_thumb">
-         <p class="event_heading"><?php echo $res->event_name; ?></p>
+         <p class="event_heading"><?php echo $res->event_name; ?><span class="pull-right"><img src="<?php echo base_url(); ?>assets/front/images/fav-select.png" class="pull-right"></span></p>
+
          <p><img src="<?php echo base_url(); ?>assets/front/images/date.png"><span class="event_thumb"><?php echo date('d/m/Y',strtotime($res->start_date));?> - <?php echo date('d/m/Y',strtotime($res->end_date));?><span></p>
          <p><img src="<?php echo base_url(); ?>assets/front/images/time.png"><span class="event_thumb"><?php echo $res->start_time;?> - <?php echo $res->end_time;?><span></p>
          <p><img src="<?php echo base_url(); ?>assets/front/images/location.png"><span class="event_thumb"><?php echo $res->event_venue; ?><span></p>
@@ -28,9 +29,9 @@
 				<p><a href="<?php echo base_url(); ?>eventlist/booking/<?php echo $enc_event_id; ?>/" class="btn-block book_tickets">Book Your Tickets</a></p>
 		<?php } ?>
       </div>
-      
+
 <?php if (!empty($event_gallery)){ ?>
-      
+
       <div class="event_detail_thumb">
          <p class="event_heading">Gallery</p>
          <?php foreach($event_gallery as $gallery_img){ ?>
@@ -38,9 +39,9 @@
          <?php } ?>
       </div>
  <?php } ?>
-      
+
       <?php if ($user_id !='') { ?>
-      
+
       <div class="event_detail_thumb">
          <p class="event_heading">Share with your Friends</p>
          <p>
@@ -51,9 +52,9 @@
          </p>
       </div>
       <?php } ?>
-      
-      
-     
+
+
+
 <?php
 
 	if (!empty($event_reviews)){ ?>
@@ -87,16 +88,16 @@
         </div>
  <?php
 	}
-	
+
 ?>
 
 	 <?php if ($user_id !='') { ?>
       <div class="event_booking_section">
-        <p><a href="" class="book_tickets" data-toggle="modal" data-target="#myModal">Write a review</a></p>
+        <p class="text-center"><a href="" class="book_tickets " data-toggle="modal" data-target="#myModal">Write a review</a></p>
       </div>
       <?php } ?>
-      
-      
+
+
     </div>
   </div>
 </div>

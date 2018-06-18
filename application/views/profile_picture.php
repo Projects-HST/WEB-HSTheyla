@@ -2,37 +2,16 @@
 <style>
 .card-block{
   background-color: #fff;
-  padding: 30px;
+  padding-bottom: 100px;
+  padding-top: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
+  box-shadow: 3px 11px 15px 0px #959696;
 }
-</style>
-<div class="col-sm-12 col-md-12 " id="content">
-    <h3 class="dashboard_tab">Profile Picture</h3>
-</div>
-
-<?php  foreach($res as $rows){} ?>
-<div class="col-md-12">
-  <div class="card-block">
-<!-- <img src="<?php echo base_url(); ?>assets/front/images/trophy.png" class="img-center"> -->
-<div class="form-group row">
-  <div class="profile-img">
-    <?php if(empty($rows->user_picture)){ ?>
-        <img src="<?php echo base_url(); ?>assets/images/profile/noimage.png" class="img-circle  profile-pic">
-  <?php  }else{ ?>
-      <img src="<?php echo base_url(); ?>assets/users/profile/<?php echo $rows->user_picture; ?>" class="img-circle  profile-pic">
-  <?php  } ?>
-
-  <form  action="<?php echo base_url(); ?>home/change_pic" method="post" id="image_upload_form" enctype="multipart/form-data">
-        <div class="upload-button">Change Picture</div>
-
-          <input class="file-upload" name="profilepic" id="profilepic" type="file"accept="image/x-png,image/jpeg" />
-          <div id="preview"></div>
-      </form>
-
-  </div>
-</div>
-</div>
-</div>
-<style>
+.profile_picture_active{
+  background-color: #92bce0  !important;
+  color: #fff !important;
+}
 #form {
     display: none;
     padding-top: 20px;
@@ -60,9 +39,40 @@
 
 }
 .file-upload{
-  margin-top: 10px;
+  margin-top: 30px;
+}
+.profile-img{
+  text-align: center;
 }
 </style>
+<div class="col-sm-12 col-md-12 " id="content">
+    <h3 class="dashboard_tab"></h3>
+</div>
+
+<?php  foreach($res as $rows){} ?>
+<div class="col-md-12">
+  <div class="card-block">
+<!-- <img src="<?php echo base_url(); ?>assets/front/images/trophy.png" class="img-center"> -->
+<div class="form-group row">
+  <div class="profile-img">
+    <?php if(empty($rows->user_picture)){ ?>
+        <img src="<?php echo base_url(); ?>assets/images/profile/noimage.png" class="img-circle  profile-pic">
+  <?php  }else{ ?>
+      <img src="<?php echo base_url(); ?>assets/users/profile/<?php echo $rows->user_picture; ?>" class="img-circle  profile-pic">
+  <?php  } ?>
+
+  <form  action="<?php echo base_url(); ?>home/change_pic" method="post" id="image_upload_form" enctype="multipart/form-data">
+        <div class="upload-button">Change Picture</div>
+
+        <center>  <input class="file-upload" name="profilepic" id="profilepic" type="file" accept="image/x-png,image/jpeg" /></center>
+          <div id="preview"></div>
+      </form>
+
+  </div>
+</div>
+</div>
+</div>
+
 <script>
 
     var readURL = function(input) {

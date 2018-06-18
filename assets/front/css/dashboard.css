@@ -1,13 +1,16 @@
 body{
   background-color: #f5f5f5;
 }
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus{
+  color: #fff;
+}
 .total_points_font{
-  font-size: 22px;
+  font-size: 28px;
   font-weight: 500;
 }
 .points_font{
   font-size: 18px;
-
+  margin-top: 10px;
 }
 .points_tab{
   margin-top: 100px;
@@ -15,15 +18,18 @@ body{
 }
 .border_gold{
   border-bottom: 3px solid gold;
-  width: 200px;
+  width: 250px;
+  margin-top: 10px;
+}
+.img_trophy{
+  padding-top: 100px;
 }
 .dashboard_tab{
   width: 200px;
-  background-color: #418ecc;
-
   padding: 5px;
   color: #fff;
 }
+
 
 #content{
   padding: 0px;
@@ -40,11 +46,25 @@ body{
     color: #478ecc;
 }
 .navbar-default .navbar-nav>li>a{
-  color: #000;
+  color: #fff;
   font-weight: 500;
   font-size: 18px;
+  margin-top: 8px;
 }
 .plan_details{
   font-size: 12px;
   font-weight: bold;
+}
+.summary_text{
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 450;
+}
+.summary_value{
+  font-size: 16px;
+  font-style: normal;
+}
+.booking_attendees_title{
+  margin-top: 30px;
+  margin-left: 50px;
 }

@@ -2,9 +2,9 @@
     <div class="container">
 
         <div class="row well mobile_leaderboard" id="main" >
-            <div class="col-sm-12 col-md-12 " id="content">
+            <!-- <div class="col-sm-12 col-md-12 " id="content">
                 <h3 class="dashboard_tab"> Dashboard</h3>
-            </div>
+            </div> -->
             	<?php foreach($user_points as $res){ } ?>
             <div class="col-md-12 points_tab">
               <img src="<?php echo base_url(); ?>assets/front/images/trophy.png" class="img-center">

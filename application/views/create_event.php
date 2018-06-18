@@ -6,6 +6,26 @@
 	color:red;
 	font-weight: 400;
 }
+.col-form-label{
+  font-size: 18px;
+  font-weight: 500;
+}
+.form-control{
+  font-size: 16px;
+}
+.createevent_active{
+	background-color: #92bce0  !important;
+	color: #fff !important;
+}
+.card{
+  background-color: #fff;
+  margin-left: 50px;
+  margin-right: 50px;
+  box-shadow: 3px 11px 15px 0px #959696;
+	height: 1100px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
 </style>
 <?php
 function get_times( $default = '10:00', $interval = '+15 minutes' )
@@ -26,7 +46,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 <script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
 <link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
 <div class="col-md-12" id="content">
-	<h3 class="dashboard_tab">Create Event</h3>
+	<h3 class="dashboard_tab"></h3>
 </div>
 <div class="card">
 
@@ -217,13 +237,14 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 						<div class="col-md-12 form_box">
 							<div class="form-group row">
 									<label class="col-sm-2 col-form-label"></label>
-									<div class="col-sm-2">
-										<button type="submit" class="btn btn-primary waves-effect waves-light">
-										Submit </button></div>
-										<div class="col-sm-2">
-										<button type="reset" class="btn btn-secondary waves-effect m-l-5">
+									<div class="col-sm-8 text-center">
+										<button type="submit" class="btn btn-primary waves-effect waves-light" style="font-size:18px;">
+										Submit </button> &nbsp;
+										<button type="reset" class="btn btn-secondary waves-effect m-l-5" style="font-size:18px;">
 										Reset
-										</button></div>
+										</button>
+									</div>
+
 							</div>
 						</div>
    </form>

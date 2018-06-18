@@ -13,6 +13,7 @@
     <!-- Bootstrap core CSS -->
     <link href="<?php echo base_url(); ?>assets/front/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/front/css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i,900" rel="stylesheet">
       <!-- <link href="<?php echo base_url(); ?>assets/front/css/multislider.css" rel="stylesheet"> -->
     <!-- <link href="<?php echo base_url(); ?>assets/front/css/main.css" rel="stylesheet"> -->
     <link href="<?php echo base_url(); ?>assets/css/button.css" rel="stylesheet" type="text/css">
@@ -86,9 +87,9 @@
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark  fixed-top " data-spy="affix" data-offset-top="(scroll value)">
-        <div class="container">
-            <a class="navbar-brand" href="#"><img src="<?php echo base_url(); ?>assets/front/images/heyla_b.png" class="imglogo"></a>
+    <nav class="navbar navbar-expand-lg navbar-dark  fixed-top " data-spy="affix" data-offset-top="(scroll value)" style="background-color:#478ECC;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img src="<?php echo base_url(); ?>assets/front/images/logo.png" class="imglogo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -223,22 +224,22 @@
     <div class="row">
         <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel" style="margin-top:60px;">
             <div class="carousel-inner w-100" role="listbox">
-  
-<?php if (count($adv_event_result)>0){ 
+
+<?php if (count($adv_event_result)>0){
 
 			 $i = 0;
 			foreach($adv_event_result as $res){
 				$event_id = $res->id * 564738;
 				$event_name = strtolower(preg_replace("/[^\w]/", "-", $res->event_name));
 				$enc_event_id = base64_encode($event_id);
-?>                
+?>
 
 				<div class="carousel-item <?php if ($i=='0') echo "active"; ?>">
                 <!--<a href="<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/">--><img class="d-block col-6 img-fluid slider-img" src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>" alt="<?php echo $event_name; ?>"><!--</a><-->
                 </div>
-               
+
                  <?php $i = $i+1; } ?>
-				
+
  <?php } ?>
 
 
@@ -260,34 +261,38 @@
 <div class="container-fluid popular_event_section popular_events">
   <div class="">
   <div class="heading">
-  <p class="text-center popular"><b>Popular Events</b> </p>
+  <p class="text-center popular "><b class="blueline">Popular Events</b> </p>
   </div>
   <div class="row ">
-<?php 
+<?php
 //print_r($popular_events);
 			foreach($popular_events as $pres){
 				$event_id = $pres->id * 564738;
 				//$disp_event_name = $pres->event_name;
 				$event_name = strtolower(preg_replace("/[^\w]/", "-", $pres->event_name));
 				$enc_event_id = base64_encode($event_id);
-				
+
  ?>
     <div class="col-xs-18 col-sm-4 col-md-3 event_box">
-     <div class="thumbnail event_section">
+     <div class="thumbnail event_section" style="height:410px;;">
        <img src="assets/events/banner/<?php echo $pres->event_banner; ?>" alt="<?php echo $event_name; ?>" style="height:204px; width:100%;">
          <div class="event_thumb">
-           <a href="<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/"><p class="event_heading"><?php echo $pres->event_name;?></p></a>
-           <p><img src="<?php echo base_url(); ?>assets/front/images/date.png"><span class="event_thumb"><?php echo date('d/m/Y',strtotime($pres->start_date));?> - <?php echo date('d/m/Y',strtotime($res->end_date));?><span></p>
+           <a href="<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/"><p class="event_heading event_title_heading"><?php echo $pres->event_name; ?></p></a>
+           <p><img src="<?php echo base_url(); ?>assets/front/images/date.png"><span class="event_thumb"><?php echo date('d-M-y',strtotime($pres->start_date));?> - <?php echo date('d-M-y',strtotime($res->end_date));?><span></p>
            <p><img src="<?php echo base_url(); ?>assets/front/images/time.png"><span class="event_thumb"><?php echo $pres->start_time;?> - <?php echo $pres->end_time;?><span></p>
            <p><img src="<?php echo base_url(); ?>assets/front/images/location.png"><span class="event_thumb"><?php echo $pres->event_venue;?><span></p>
+
        </div>
+       <p class="price_section"><img src="<?php echo base_url(); ?>assets/front/images/paid.png" class="pull-left"><img src="<?php echo base_url(); ?>assets/front/images/fav-select.png" class="pull-right"></p>
      </div>
    </div>
  <?php } ?>
 
   </div>
+  <center><a href="" class="btn" style="    background-color: #478ecc;margin-top: 15px;   color: #fff;">View More Events</a></center>
 </div>
 </div>
+
 <?php } ?>
 
 
@@ -430,6 +435,7 @@
             </div>
             <p class="normal-txt white-color">Heyla is a powerhouse of opportunities for event organizers. You can expect the widest visiblity that will translate into big ticket sales. That is not all either - Heyla is punch packed to help your business to build a formidable brand image and a lasting reputation. Start now to experience the power of Heyla.
             </p>
+            <br>
             <p class="text-center">
               <?php
               $user_role=$this->session->userdata('user_role');
@@ -575,10 +581,11 @@
                 </div>
                 <div class="col-md-3">
                   <p class="footer_heading">Follow  Us On</p>
-                  <ul class="fnt-footer ">
-                    <li class="inline"><a href="">India</a></li>
-                    <li class=""><a href="">Singapore</a></li>
-                    <li class=""><a href="">Malaysia</a></li>
+                  <ul class="fnt-footer social_follow">
+                    <li class=""><a href=""><img src="<?php echo base_url(); ?>assets/front/images/fb_follow.png"></a></li>
+                    <li class=""><a href=""><img src="<?php echo base_url(); ?>assets/front/images/in_follow.png"></a></li>
+                    <li class=""><a href=""><img src="<?php echo base_url(); ?>assets/front/images/gp_follow.png"></a></li>
+                    <li class=""><a href=""><img src="<?php echo base_url(); ?>assets/front/images/tw_follow.png"></a></li>
                   </ul>
                 </div>
             </div>
@@ -665,11 +672,11 @@
         $(window).scroll(function() {
             if ($(window).scrollTop() > $(window).height()) {
                 $(".navbar").css({
-                    "background-color": "#fff"
+                    "background-color": "#478ECC"
                 });
             } else {
                 $(".navbar").css({
-                    "background-color": "#fff"
+                    "background-color": "#478ECC"
                 });
             }
 

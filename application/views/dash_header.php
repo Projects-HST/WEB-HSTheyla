@@ -24,7 +24,7 @@
 .navbar-fixed-top {
     top: 0;
     border-width: 0 0 1px;
-    height: 70px;
+    height: 80px;
 }
 
 .navbar-default .navbar-nav #user-profile {
@@ -84,7 +84,7 @@
 
 #sidebar-wrapper .sidebar-nav {
     position: absolute;
-    top: 0;
+    top: 18px;
     width: 225px;
     font-size: 20px;
     margin: 0;
@@ -94,19 +94,17 @@
 
 #sidebar-wrapper .sidebar-nav li {
     text-indent: 0;
-    line-height: 55px;
+    line-height: 60px;
 }
 
 #sidebar-wrapper .sidebar-nav li a {
     display: block;
     text-decoration: none;
-    color: #428bca;
+    color: #fff;
+    font-size: 20px;
 }
 
-.sidebar-nav li:first-child a {
-    background: #92bce0 !important;
-    color: #fff !important;
-}
+
 
 #sidebar-wrapper .sidebar-nav li a .sidebar-icon {
     width: auto;
@@ -161,10 +159,7 @@
 
 
 
-.sidebar-nav li:nth-child(n) a {
-    background-color: #418ecc !important;
-    color: #fff !important;
-}
+
 
 
 .navbar-default{
@@ -173,7 +168,7 @@
 </style>
 <div id="navbar-wrapper">
       <header>
-          <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+          <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color:#478ECC;">
               <div class="container-fluid">
                   <div class="navbar-header">
                       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
@@ -183,7 +178,7 @@
                           <span class="icon-bar"></span>
                       </button>
                       <a class="navbar-brand" href="#">
-                          <img src="<?php echo base_url(); ?>assets/front/images/heyla_b.png" alt="heylaapp" style="width:100px;">
+                          <img src="<?php echo base_url(); ?>assets/front/images/logo.png" alt="heylaapp" style="width:100px;">
                       </a>
                   </div>
                   <div id="navbar-collapse" class="collapse navbar-collapse">
@@ -248,20 +243,20 @@
           <aside id="sidebar">
               <ul id="sidemenu" class="sidebar-nav">
                   <li>
-                      <a href="<?php echo base_url(); ?>leaderboard">
+                      <a href="<?php echo base_url(); ?>leaderboard" class="leaderboard_active">
                           <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/dashboard.png"></span>
                           <span class="sidebar-title">Dashboard</span>
                       </a>
                   </li>
 
                   <li class="side-menu">
-                      <a href="<?php echo base_url(); ?>profile">
+                      <a href="<?php echo base_url(); ?>profile" class="profile_active">
                         <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/profile.png"></span>
                         <span class="sidebar-title">Pofile</span>
                       </a>
                   </li>
                   <li class="side-menu">
-                      <a href="<?php echo base_url(); ?>profile_picture">
+                      <a href="<?php echo base_url(); ?>profile_picture" class="profile_picture_active">
                         <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/display_picture.png"></span>
                         <span class="sidebar-title">Display Picture</span>
                       </a>
@@ -269,25 +264,25 @@
                   <?php $user_role = $this->session->userdata('user_role');
                   if($user_role=='2'){ ?>
                     <li class="side-menu">
-                        <a href="<?php echo base_url(); ?>createevent">
+                        <a href="<?php echo base_url(); ?>createevent" class="createevent_active">
                           <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/create_event.png"></span>
                           <span class="sidebar-title">Create Event</span>
                         </a>
                     </li>
                     <li class="side-menu">
-                          <a href="<?php echo base_url(); ?>viewevents">
+                          <a href="<?php echo base_url(); ?>viewevents" class="viewevents_active">
                             <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/view_events.png"></span>
                             <span class="sidebar-title">View Events</span>
                           </a>
                     </li>
                     <li class="side-menu">
-                        <a href="<?php echo base_url(); ?>bookedevents">
+                        <a href="<?php echo base_url(); ?>bookedevents" class="booked_events_active">
                           <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/booked_events.png"></span>
                           <span class="sidebar-title">Booked events</span>
                         </a>
                     </li>
                     <li class="side-menu">
-                        <a href="<?php echo base_url(); ?>reviewevents">
+                        <a href="<?php echo base_url(); ?>reviewevents" class="review_active">
                           <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/review.png"></span>
                           <span class="sidebar-title">Reviews</span>
                         </a>
@@ -295,13 +290,13 @@
 
                   <?php  } ?>
                   <li class="side-menu">
-                        <a href="<?php echo base_url(); ?>wishlist">
+                        <a href="<?php echo base_url(); ?>wishlist" class="wishlist_active">
                           <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/wishlist.png"></span>
                           <span class="sidebar-title">Wishlist</span>
                         </a>
                   </li>
                   <li class="side-menu">
-                      <a href="<?php echo base_url(); ?>booking_history">
+                      <a href="<?php echo base_url(); ?>booking_history" class="booking_history_active">
                         <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/booking_history.png"></span>
                         <span class="sidebar-title">Booking History</span>
                       </a>

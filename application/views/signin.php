@@ -96,6 +96,9 @@
 .form_box{
   margin-bottom: 10px;
 }
+.left-inner-addon input{
+  padding-left: 30px;
+}
 </style>
 <script src="//connect.facebook.net/en_US/all.js"></script>
 <script type="text/javascript">

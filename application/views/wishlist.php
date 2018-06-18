@@ -1,5 +1,11 @@
+<style>
+.wishlist_active{
+  background-color: #92bce0  !important;
+  color: #fff !important;
+}
+</style>
 <div class="col-sm-12 col-md-12 " id="content">
-    <h3 class="dashboard_tab">Wishlist</h3>
+    <h3 class="dashboard_tab"></h3>
 </div>
 
             <div class="profile_tab">
@@ -20,13 +26,13 @@
 
       <div class="col-xs-18 col-sm-6 col-md-4">
        <div class="thumbnail">
-         <img src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>" alt="" style="height:204px;">
+         <img src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>" alt="" style="height:204px;width:100%;">
            <div class="caption">
              <a href="<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>"><h4><?php echo $res->event_name; ?></h4></a>
              <p><?php echo $string;?></p>
                <p>Last updated on <?php echo $res->wl_updated_at; ?>
                <p class="card-text"><a href="<?php echo base_url(); ?>home/removewishlist/<?php echo $res->wishlist_id; ?>" onclick="return confirm('Are you sure want to Remove?')">Remove</a></p>
-               
+
                <a href="<?php echo base_url(); ?>home/removewishlist/<?php echo $res->wishlist_id; ?>" class="btn btn-default btn-xs pull-right" role="button" onclick="return confirm('Are you sure want to Remove?')"><i class="fa fa-trash-o" aria-hidden="true" ></i></a></p>
          </div>
        </div>

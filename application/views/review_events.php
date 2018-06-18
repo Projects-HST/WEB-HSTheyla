@@ -1,5 +1,11 @@
+<style>
+.review_active{
+  background-color: #92bce0  !important;
+  color: #fff !important;
+}
+</style>
 <div class="col-sm-12 col-md-12 " id="content">
-    <h3 class="dashboard_tab"> Reviews events</h3>
+    <h3 class="dashboard_tab"> </h3>
 </div>
 <div class="col-md-12 ">
   <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">

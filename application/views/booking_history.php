@@ -1,5 +1,11 @@
-<div class="col-sm-12 col-md-12 " id="content">
-    <h3 class="dashboard_tab"> Booking history</h3>
+<style>
+.booking_history_active{
+  background-color: #92bce0  !important;
+  color: #fff !important;
+}
+
+</style><div class="col-sm-12 col-md-12 " id="content">
+    <h3 class="dashboard_tab"></h3>
 </div>
 <div class="col-md-12">
 
@@ -20,7 +26,7 @@
           }  ?>
           <div class="col-xs-18 col-sm-6 col-md-4">
            <div class="thumbnail">
-             <img src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>" alt="" style="height:204px;">
+             <img src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>" alt="" style="height:220px;width:100%;">
                <div class="caption">
                  <a href="<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $res->event_id; ?>/<?php echo $res->event_name; ?>"><h4><?php echo $res->event_name; ?></h4></a>
                  <p  class="plan_details"><?php echo $string;?></p>

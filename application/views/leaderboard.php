@@ -1,17 +1,26 @@
 <style>
 .card-block{
   background-color: #fff;
-  padding-top: 50px;
+
   padding-bottom: 150px;
+  margin-top: 0px;
+  margin-left: 50px;
+  margin-right: 50px;
+  box-shadow: 3px 11px 15px 0px #959696;
 }
+.leaderboard_active{
+    background-color: #92bce0  !important;
+    color: #fff !important;
+}
+
 </style>
 <div class="col-sm-12 col-md-12 " id="content">
-    <h3 class="dashboard_tab"> Dashboard</h3>
+    <h3 class="dashboard_tab"> </h3>
 </div>
 <?php foreach($user_points as $res){ } ?>
 <div class="col-md-12  text-center">
 <div class="card-block">
-<img src="<?php echo base_url(); ?>assets/front/images/trophy.png" class="img-center">
+<img src="<?php echo base_url(); ?>assets/front/images/trophy.png" class="img-center img_trophy">
 <center><p class="total_points_font border_gold">Total Points - <b><?php echo $res->total_points; ?></p></center>
 </div>
 </div>
