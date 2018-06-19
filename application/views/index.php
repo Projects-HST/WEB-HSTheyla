@@ -292,7 +292,9 @@
    </div>
  <?php } ?>
   </div>
-  <center><a href="<?php echo  base_url(); ?>eventlist/" class="btn" style="background-color: #478ecc;margin-top: 15px;color: #fff;">View More Events</a></center>
+
+  <center><a href="<?php echo  base_url(); ?>eventlist/" class="btn" style="background-color: #478ecc;margin-top: 15px;color: #fff;" id="about">View More Events</a></center>
+
 </div>
 </div>
 <?php } ?>
@@ -302,7 +304,7 @@
 
 
     <!-- Page Content -->
-    <section class="about" style="" id="about">
+    <section class="about" style="" id="">
         <div class="container">
             <div>
                 <p class="heading2">WHAT'S HEYLA</p>
@@ -317,14 +319,14 @@
 
                 <p class="whatsheyla">Heyla is your Gateway to the World Outside in your Pocket – Explore, Discover, Share and Enjoy. It is the encyclopaedia of “What, When and Where” of the World of Entertainment, Shopping, Sports, Dining, Travelling and more
                     <p>
-                        <p class="whatsheyla">
+                        <p class="whatsheyla" id="services">
                           The Power of Heyla is just clicks away – Download the app now and embark on a journey to discover the undiscovered World of total Entertainment. Heyla is an everything-for-everybody App – Start Exploring Straightaway.
 
                         </p>
             </div>
         </div>
     </section>
-    <section class="features_section" style="" id="create">
+    <section class="features_section" style="" id="services">
         <div class="container">
             <div class="heading">
             <p class="text-center" style="font-size:35px;">Features You Will Love it </p>
@@ -335,7 +337,7 @@
     </section>
 
 
-    <section class="features" id="services">
+    <section class="features" id="">
         <div class="container">
             <div class="row">
 

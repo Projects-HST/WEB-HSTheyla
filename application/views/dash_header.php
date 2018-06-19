@@ -101,7 +101,7 @@
     display: block;
     text-decoration: none;
     color: #fff;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 
