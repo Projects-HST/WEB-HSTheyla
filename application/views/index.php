@@ -1,15 +1,13 @@
+<?php $user_id = $this->session->userdata('id'); ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="theme-color" content="#478ECC" />
     <title>HEYLA</title>
-
     <!-- Bootstrap core CSS -->
     <link href="<?php echo base_url(); ?>assets/front/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/front/css/style.css" rel="stylesheet">
@@ -27,14 +25,9 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'UA-92904528-2');
     </script>
     <script src="<?php echo base_url(); ?>assets/front/js/popper.min.js"></script>
-
-
-
-
     <script src="<?php echo base_url(); ?>assets/front/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/pages/sweet-alert.init.js"></script>
@@ -268,31 +261,40 @@
 //print_r($popular_events);
 			foreach($popular_events as $pres){
 				$event_id = $pres->id * 564738;
+				$sevent_id = $pres->id;
 				//$disp_event_name = $pres->event_name;
 				$event_name = strtolower(preg_replace("/[^\w]/", "-", $pres->event_name));
 				$enc_event_id = base64_encode($event_id);
-
+				$event_type = $pres->event_type;
+				$hotspot_status = $pres->hotspot_status;
+				$wlstatus = $pres->wlstatus;
+				if ($wlstatus!= '') {
+					$wlstatusstatus = "<span id='wishlist".$sevent_id."'><a href='javascript:void(0);' onclick='editwishlist(".$user_id.",".$sevent_id.");'><img src='".base_url()."assets/front/images/fav-select.png' class='pull-right'></a></span>";
+				} else {
+					$wlstatusstatus = "<span id='wishlist".$sevent_id."'><a href='javascript:void(0);' onclick='editwishlist(".$user_id.",".$sevent_id.");'><img src='".base_url()."assets/front/images/fav-unselect.png' class='pull-right'></a></span>";
+				}
  ?>
     <div class="col-xs-18 col-sm-4 col-md-3 event_box">
      <div class="thumbnail event_section" style="height:410px;;">
-       <img src="assets/events/banner/<?php echo $pres->event_banner; ?>" alt="<?php echo $event_name; ?>" style="height:204px; width:100%;">
+        <a href="<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/"><img src="assets/events/banner/<?php echo $pres->event_banner; ?>" alt="<?php echo $event_name; ?>" style="height:204px; width:100%;"></a>
          <div class="event_thumb">
            <a href="<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/"><p class="event_heading event_title_heading"><?php echo $pres->event_name; ?></p></a>
+           <?php if ($hotspot_status == 'N') { ?>
            <p><img src="<?php echo base_url(); ?>assets/front/images/date.png"><span class="event_thumb"><?php echo date('d-M-y',strtotime($pres->start_date));?> - <?php echo date('d-M-y',strtotime($res->end_date));?><span></p>
+           <?php } ?>
            <p><img src="<?php echo base_url(); ?>assets/front/images/time.png"><span class="event_thumb"><?php echo $pres->start_time;?> - <?php echo $pres->end_time;?><span></p>
            <p><img src="<?php echo base_url(); ?>assets/front/images/location.png"><span class="event_thumb"><?php echo $pres->event_venue;?><span></p>
-
        </div>
-       <p class="price_section"><img src="<?php echo base_url(); ?>assets/front/images/paid.png" class="pull-left"><img src="<?php echo base_url(); ?>assets/front/images/fav-select.png" class="pull-right"></p>
+       <p class="price_section">
+	   <?php if ($event_type== 'Paid') { ?><img src="<?php echo base_url(); ?>assets/front/images/paid.png" class="pull-left"><?php } else { ?><img src="<?php echo base_url(); ?>assets/front/images/free.png" class="pull-left"><?php } ?>
+       <?php if ($user_id!= '') { echo $wlstatusstatus; } ?></p>
      </div>
    </div>
  <?php } ?>
-
   </div>
-  <center><a href="" class="btn" style="    background-color: #478ecc;margin-top: 15px;   color: #fff;">View More Events</a></center>
+  <center><a href="<?php echo  base_url(); ?>eventlist/" class="btn" style="background-color: #478ecc;margin-top: 15px;color: #fff;">View More Events</a></center>
 </div>
 </div>
-
 <?php } ?>
 
 
@@ -790,5 +792,23 @@
 
       });
     }
+	
+function editwishlist(user_id,event_id)
+{
+	//make the ajax call
+	$.ajax({
+	url: '<?php echo base_url(); ?>eventlist/eventwishlist',
+	type: 'POST',
+	data: {user_id : user_id,event_id : event_id},
+	success: function(data) {
+		var dataArray = JSON.parse(data);
+		if (dataArray =='Added'){
+			$('#wishlist' + event_id).html("<span class='pull-right favourite-icon' id='wishlist"+event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+event_id+");'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-select.png' alt=''></a></span>").show();
+		} else {
+			$('#wishlist' + event_id).html("<span class='pull-right favourite-icon' id='wishlist"+event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+event_id+");'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' alt=''></a></span>").show();
+		}
+	}
+	});
+}
 </script>
 </html>

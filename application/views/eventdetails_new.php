@@ -1,10 +1,19 @@
-<?php $user_id = $this->session->userdata('id');
-		foreach($event_details as $res){
+<?php 
+$user_id = $this->session->userdata('id');
+foreach($event_details as $res){
 			$disp_event_id = $res->id;
 			$event_id = $res->id * 564738;
 			$event_name = strtolower(preg_replace("/[^\w]/", "-", $res->event_name));
 			$enc_event_id = base64_encode($event_id);
-		} ?>
+			$wlstatus = $res->wlstatus;
+			$hotspot_status = $res->hotspot_status;
+			if ($wlstatus!= '') {
+					$wlstatusstatus = "<span class='pull-right' id='wishlist".$disp_event_id."'><a href='javascript:void(0);' onclick='editwishlist(".$user_id.",".$disp_event_id.");'><img src='".base_url()."assets/front/images/fav-select.png' class='pull-right'></a></span>";
+			} else {
+					$wlstatusstatus = "<span class='pull-right' id='wishlist".$disp_event_id."'><a href='javascript:void(0);' onclick='editwishlist(".$user_id.",".$disp_event_id.");'><img src='".base_url()."assets/front/images/fav-unselect.png' class='pull-right'></a></span>";
+			}
+} 
+?>
 <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/jquery.galpop.css" media="screen" />
 <script src="<?php echo base_url(); ?>assets/front/js/jquery.galpop.min.js"></script>
 <div class="container-fluid event_details_bg">
@@ -18,9 +27,8 @@
     </div>
     <div class="col-md-4">
       <div class="event_detail_thumb">
-         <p class="event_heading"><?php echo $res->event_name; ?><span class="pull-right"><img src="<?php echo base_url(); ?>assets/front/images/fav-select.png" class="pull-right"></span></p>
-
-         <p><img src="<?php echo base_url(); ?>assets/front/images/date.png"><span class="event_thumb"><?php echo date('d/m/Y',strtotime($res->start_date));?> - <?php echo date('d/m/Y',strtotime($res->end_date));?><span></p>
+         <p class="event_heading"><?php echo $res->event_name; ?><?php if ($user_id!= '') { echo $wlstatusstatus; } ?></p>
+         <?php if ($hotspot_status == 'N') { ?><p><img src="<?php echo base_url(); ?>assets/front/images/date.png"><span class="event_thumb"><?php echo date('d/m/Y',strtotime($res->start_date));?> - <?php echo date('d/m/Y',strtotime($res->end_date));?><span></p><?php } ?>
          <p><img src="<?php echo base_url(); ?>assets/front/images/time.png"><span class="event_thumb"><?php echo $res->start_time;?> - <?php echo $res->end_time;?><span></p>
          <p><img src="<?php echo base_url(); ?>assets/front/images/location.png"><span class="event_thumb"><?php echo $res->event_venue; ?><span></p>
       </div>
@@ -247,6 +255,24 @@ function initMap() {
 		  pause: "false"
 	})
 
+function editwishlist(user_id,event_id)
+{
+	//make the ajax call
+	$.ajax({
+	url: '<?php echo base_url(); ?>eventlist/eventwishlist',
+	type: 'POST',
+	data: {user_id : user_id,event_id : event_id},
+	success: function(data) {
+		var dataArray = JSON.parse(data);
+		if (dataArray =='Added'){
+			$('#wishlist' + event_id).html("<span class='pull-right favourite-icon' id='wishlist"+event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+event_id+");'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-select.png' alt=''></a></span>").show();
+		} else {
+			$('#wishlist' + event_id).html("<span class='pull-right favourite-icon' id='wishlist"+event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+event_id+");'><img class='img-fluid' src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' alt=''></a></span>").show();
+		}
+	}
+	});
+}
+
 function sharepoints(user_id,event_id)
 	{
 		//make the ajax call
@@ -302,14 +328,7 @@ $('#upload').on('click', function() {
     });
 
     $(document).ready(function() {
-
-
-
-
     	$('.galpop-multiple').galpop();
-
-
-
 
     	var callback = function() {
     		var wrapper = $('#galpop-wrapper');
@@ -333,10 +352,6 @@ $('#upload').on('click', function() {
     			$.fn.galpop('openBox',settings,image);
     		}
     	});
-
-
-
-
     });
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZLXcA6pQcEJA_iE0xX5XA_ObPQ4ww1eM&callback=initMap"></script>

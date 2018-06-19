@@ -57,6 +57,16 @@ class Eventlist extends CI_Controller
         echo json_encode($data['event_result']);
     }
 	
+	public function get_type_events()
+    {
+      	$country_id  = $this->input->post('country_id');
+		$city_id  = $this->input->post('city_id');
+		$category_id  = $this->input->post('cat_id');
+		$type_id = $this->input->post('type_id');
+        $data['event_result'] = $this->eventlistmodel->gettype_events($country_id,$city_id,$category_id,$type_id);
+        echo json_encode($data['event_result']);
+    }
+	
 	public function search_term_events()
     {
       	$srch_term  = $this->input->post('srch_term');
@@ -75,6 +85,7 @@ class Eventlist extends CI_Controller
     {
 		$dec_event_id = base64_decode($enc_event_id);
 		$event_id = ($dec_event_id/564738);
+		
 		$data['event_gallery'] = $this->eventlistmodel->getevent_gallery($event_id);
 		$data['event_details'] = $this->eventlistmodel->getevent_details($event_id);
 		$data['event_reviews'] = $this->eventlistmodel->getevent_reviews($event_id);
