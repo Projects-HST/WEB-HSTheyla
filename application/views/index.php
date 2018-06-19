@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta name="description" content="">
-    <meta name="author" content="">
     <meta name="theme-color" content="#478ECC" />
     <title>HEYLA</title>
     <!-- Bootstrap core CSS -->
@@ -794,7 +793,7 @@
 
       });
     }
-	
+
 function editwishlist(user_id,event_id)
 {
 	//make the ajax call

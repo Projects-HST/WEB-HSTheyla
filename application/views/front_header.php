@@ -4,12 +4,9 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-    <meta name="description" content="">
-    <meta name="author" content="">
     <meta name="theme-color" content="#478ECC" />
-    <title>HEYLA </title>
-
-    <!-- Bootstrap core CSS -->
+    <title><?php if(isset($meta_title)){echo $meta_title;}else{echo "Heyla";}?> </title>
+    <meta name="description" content="<?php if(isset($meta_description)){echo $meta_description;}else{echo "Heyla";}?>"/>
     <link href="<?php echo base_url(); ?>assets/front/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/front/css/style.css" rel="stylesheet">
     <!-- <link href="<?php echo base_url(); ?>assets/front/css/main.css" rel="stylesheet"> -->
