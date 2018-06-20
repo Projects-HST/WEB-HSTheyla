@@ -304,7 +304,7 @@ Class Eventlistmodel extends CI_Model
 		} else {
 			$user_id = 0;
 		}
-      	$sql="SELECT e.*, cy.country_name, ci.city_name, uwl.user_id AS wlstatus FROM EVENTS AS e LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id' LEFT JOIN country_master AS cy ON e.event_country = cy.id LEFT JOIN city_master AS ci ON e.event_city = ci.id LEFT JOIN category_master AS ca ON e.category_id = ca.id WHERE e.id = '$event_id' AND e.event_status = 'Y' ORDER BY e.id DESC";
+      	$sql="SELECT e.*, cy.country_name, ci.city_name, uwl.user_id AS wlstatus FROM events AS e LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id' LEFT JOIN country_master AS cy ON e.event_country = cy.id LEFT JOIN city_master AS ci ON e.event_city = ci.id LEFT JOIN category_master AS ca ON e.category_id = ca.id WHERE e.id = '$event_id' AND e.event_status = 'Y' ORDER BY e.id DESC";
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
 	  	return $res;

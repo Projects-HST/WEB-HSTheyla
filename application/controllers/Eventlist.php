@@ -85,15 +85,18 @@ class Eventlist extends CI_Controller
     {
 		$dec_event_id = base64_decode($enc_event_id);
 		$event_id = ($dec_event_id/564738);
-  	$data['event_gallery'] = $this->eventlistmodel->getevent_gallery($event_id);
+  		$data['event_gallery'] = $this->eventlistmodel->getevent_gallery($event_id);
 		$data['event_details'] = $this->eventlistmodel->getevent_details($event_id);
 		$data['event_reviews'] = $this->eventlistmodel->getevent_reviews($event_id);
-    $event_title=$this->uri->segment(4);
-    $data['meta_title']= $event_title;
-    $event_desc= $data['event_details'];
-    foreach($event_desc as $row_des){}
-    $desc=$row_des->description;
-    $data['meta_description']=$desc;
+    	$event_desc = $data['event_details'];
+    	
+		foreach($event_desc as $row_des){}
+		
+		$event_title=$row_des->event_name;
+		$data['meta_title']= $event_title;
+		$desc=$row_des->description;
+		$data['meta_description']=$desc;
+		
 		$this->load->view('front_header', $data);
 		$this->load->view('eventdetails_new', $data);
 		$this->load->view('front_footer');
