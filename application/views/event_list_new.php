@@ -196,7 +196,7 @@ $('#category').select2({
 
 //$(document).ready(function() {
 $(window).on('load', function(){
-		var limit = 8
+		var limit = 20;
 		var offset = 0;
 		var result = '';
 
