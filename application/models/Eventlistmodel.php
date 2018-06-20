@@ -57,7 +57,11 @@ Class Eventlistmodel extends CI_Model
 	function popular_events()
     {
 		$current_date = date("Y-m-d");
-		$user_id = $this->session->userdata('id');
+		if ($this->session->userdata('id') !=''){
+			$user_id = $this->session->userdata('id');
+		} else {
+			$user_id = 0;
+		}
 		
       	$sql = "SELECT * FROM(SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 				FROM events AS e
