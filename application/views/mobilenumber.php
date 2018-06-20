@@ -13,14 +13,10 @@ input[type=text] {
     border: none;
     border-bottom: 1px solid #000000;
 }
-#stickfooter{
-  position: absolute;
-  width: 100%;
-  bottom: 0px;
-}
+
 </style>
 
-    <section class="">
+    <section class="" style="margin-bottom:100px;">
       <div class="container">
         <div class="">
 <center>
@@ -40,8 +36,8 @@ input[type=text] {
 
 
         <div class="form-group">
-            <input type="text" class="form-control" id="mobile" name="mobile" required="" placeholder="Enter New Mobile Number " onkeyup="check_mobile()">
-              <span><button onclick="sendOTP()" id="sendbtn">Send  OTP</button></span>
+            <input type="text" class="form-control" id="mobile" name="mobile" required="" placeholder="Enter New Mobile Number " >
+              <br><span><button onclick="sendOTP()" id="sendbtn">Send  OTP</button></span>
             <p id="mobilenum"></p>
         </div>
         <div class="form-group">
@@ -63,16 +59,30 @@ input[type=text] {
    $('#update_mobile_number').validate({ // initialize the plugin
        rules: {
          mobile : {
-            required: true,  maxlength : 10,
+           required: true,minlength: 10, maxlength: 11, digits: true,
+           remote: {
+                  url: "<?php echo base_url(); ?>home/existmobile",
+                  type: "post",  complete: function(data){
+                          if( data.responseText == "false" ) {
+                            $('#sendbtn').hide();
+                          }else {
+                              $('#sendbtn').show();
+                          }
+                     }
+               }
           },
           mobileotp : {
-             required: true
+             required: true,
+             remote: {
+                    url: "<?php echo base_url(); ?>home/checkotp",
+                    type: "post"
+                 }
            },
 
        },
        messages: {
-           mobile: {   required: "Enter  Mobile Number", maxlength: "Max is 10"},
-            mobileotp: {   required: "Enter  OTP"}
+         mobile: { required:"Enter the Mobile number", minlength: "Min is 10", maxlength: "Max is 11",remote:"Mobile Number Already Exists" },
+         mobileotp: {   required: "Enter  OTP",remote:"Invalid OTP"}
 
 
        },
@@ -100,10 +110,11 @@ input[type=text] {
        }
    });
 
+  $('#sendbtn').hide();
    function sendOTP(){
 
      var mobile=$('#mobile').val();
-
+     alert(mobile);
      $.ajax({
          method: "post",
        url: "<?php echo base_url(); ?>home/sendOTP",
@@ -112,35 +123,35 @@ input[type=text] {
        },
        cache: false,
        success: function(response){
-           $('#sendbtn').prop('disabled', true);
+        //  $('#sendbtn').prop('disabled', true);
 
        }
      });
    }
-   function checkOTP(){
-     var mobileotp = $('#mobileotp').val();
-
-     $.ajax({
-         method: "post",
-         data: {
-             mobileotp: mobileotp
-         },
-         url: 'home/checkotp',
-         success: function(data) {
-             console.log(data);
-             if ((data) == "success") {
-                 $("#submit").removeAttr("disabled");
-                     $('#mobilemsg').html(' ');
-
-                 // $('#mobilemsg').html('Username Available');
-             } else {
-                 $('#submit').prop('disabled', true);
-                 $('#mobilemsg').html(data);
-
-             }
-         }
-     });
-   }
+   // function checkOTP(){
+   //   var mobileotp = $('#mobileotp').val();
+   //
+   //   $.ajax({
+   //       method: "post",
+   //       data: {
+   //           mobileotp: mobileotp
+   //       },
+   //       url: 'home/checkotp',
+   //       success: function(data) {
+   //           console.log(data);
+   //           if ((data) == "success") {
+   //               $("#submit").removeAttr("disabled");
+   //                   $('#mobilemsg').html(' ');
+   //
+   //               // $('#mobilemsg').html('Username Available');
+   //           } else {
+   //               $('#submit').prop('disabled', true);
+   //               $('#mobilemsg').html(data);
+   //
+   //           }
+   //       }
+   //   });
+   // }
    function check_mobile() {
        var mobile = $('#mobile').val();
 

@@ -114,7 +114,7 @@ $('#formsignup').validate({ // initialize the plugin
     messages: {
         name: { required:"Enter the Username", minlength: "Min is 6", maxlength: "Max is 12",remote:"Username Already Exists" },
         email: { required:"Enter the Email id",remote:"Email id Already Exists" },
-          mobile: { required:"Enter the Mobile number", minlength: "Min is 6", maxlength: "Max is 10",remote:"Mobile Number Already Exists" },
+          mobile: { required:"Enter the Mobile number", minlength: "Min is 10", maxlength: "Max is 11",remote:"Mobile Number Already Exists" },
 
         new_password: { required:"Enter the Password", minlength: "Min is 6", maxlength: "Max is 12" }
     },

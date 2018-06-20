@@ -13,14 +13,10 @@ input[type=text] {
     border: none;
     border-bottom: 1px solid #000000;
 }
-#stickfooter{
-  position: absolute;
-  width: 100%;
-  bottom: 0px;
-}
+
 </style>
 
-    <section class="">
+    <section class="" style="margin-bottom:100px;">
       <div class="container">
         <div class="">
 <center>
@@ -32,12 +28,12 @@ input[type=text] {
   <div class="">
     <form class="form" role="form" autocomplete="off" id="update_mobile_number" method="post" enctype="multipart/form-data">
       <?php foreach($res as $rows){} ?>
-      
+
 
 
         <div class="form-group">
             <input type="text" class="form-control" id="mobile" name="mobile" required="" placeholder="Enter New Mobile Number " onkeyup="check_mobile()">
-              <span><button onclick="sendOTP()" id="sendbtn">Send  OTP</button></span>
+              <br><span><button onclick="sendOTP()" id="sendbtn">Send  OTP</button></span>
             <p id="mobilenum"></p>
         </div>
         <div class="form-group">

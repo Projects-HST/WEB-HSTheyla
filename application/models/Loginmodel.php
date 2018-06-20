@@ -227,9 +227,9 @@ Class Loginmodel extends CI_Model
       $check_otp="SELECT * FROM user_master WHERE mobile_otp='$mobileotp' and id='$user_id'";
      $res=$this->db->query($check_otp);
      if($res->num_rows()==0){
-       echo "You have Enter Wrong OTP";
+       echo "false";
      }else{
-       echo "success";
+       echo "true";
      }
    }
 
