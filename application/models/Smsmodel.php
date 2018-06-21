@@ -13,7 +13,7 @@ Class Smsmodel extends CI_Model
   	public function sendOTPtomobile($mob,$mobile_message)
   	{
           //Your authentication key
-          $authKey = "180660Az2FsJQSXGJ259f02b66";
+          $authKey = "191431AStibz285a4f14b4";
 
           //Multiple mobiles numbers separated by comma
           $mobileNumber = "$mob";

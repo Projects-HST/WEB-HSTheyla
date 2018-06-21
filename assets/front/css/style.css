@@ -624,7 +624,21 @@ padding-bottom: 15px;
 .leaderboard-bg{
   top:0px;
 }
+
 }
+@media (max-width:600px)  {
+.organsier{
+  padding-top: 0px;
+  height: auto;
+}
+.text_box{
+  padding: 5px;
+
+}
+.contact_icon{
+  padding: 3px;
+}
+ }
 
 @media (min-width: 320px) and (max-width: 480px){
 .leaderboard-bg{

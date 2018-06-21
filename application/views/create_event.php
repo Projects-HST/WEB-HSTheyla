@@ -22,9 +22,12 @@
   margin-left: 50px;
   margin-right: 50px;
   box-shadow: 3px 11px 15px 0px #959696;
-	height: 1100px;
+
 	margin-top: 20px;
 	margin-bottom: 20px;
+}
+body{
+	background-color: #fff;
 }
 </style>
 <?php

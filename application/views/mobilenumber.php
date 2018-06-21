@@ -41,7 +41,7 @@ input[type=text] {
             <p id="mobilenum"></p>
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" id="mobileotp" name="mobileotp"  placeholder="Enter OTP" onkeyup="checkOTP()">
+            <input type="text" class="form-control" id="mobileotp" name="mobileotp"  placeholder="Enter OTP">
             <p id="mobilemsg"></p>
         </div>
         <button type="submit" id="submit" class="btn btn-event btn-lg">save</button>
@@ -52,7 +52,6 @@ input[type=text] {
         </div>
       </div>
     </section>
-
 
 <script type="text/javascript">
    $('.verify-page').height($(window).height());
@@ -110,11 +109,11 @@ input[type=text] {
        }
    });
 
-  $('#sendbtn').hide();
+   $('#sendbtn').hide();
    function sendOTP(){
 
      var mobile=$('#mobile').val();
-     alert(mobile);
+
      $.ajax({
          method: "post",
        url: "<?php echo base_url(); ?>home/sendOTP",
@@ -177,4 +176,6 @@ input[type=text] {
            }
        });
    }
+
+
 </script>

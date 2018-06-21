@@ -443,7 +443,7 @@
               <?php
               $user_role=$this->session->userdata('user_role');
               if($user_role=="2"){ ?>
-                  <a href="<?php echo base_url(); ?>organizer/createevents" class="btn btn-event">CREATE EVENT</a>
+                  <a href="<?php echo base_url(); ?>createevent" class="btn btn-event">CREATE EVENT</a>
             <?php   }else{
               $user_id=$this->session->userdata('id');
               if(empty($user_id)){ ?>
@@ -715,7 +715,7 @@
                 data: $('#formsignup').serialize(),
                 success: function(response) {
 
-                    if (response == "success") {
+                    if (response == "Thanks for requesting we contact you shortly") {
                         swal({
                             title: "Success",
                             text: response,

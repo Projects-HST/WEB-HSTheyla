@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+
 <title>Heyla</title>
 <meta content="" name="description" />
 <meta content="" name="author" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=1024">
 <head>
 <link href="<?php echo base_url(); ?>assets/front/css/bootstrap3.min.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>assets/front/css/dashboard.css" rel="stylesheet">
@@ -218,7 +216,19 @@
 
                                  <li class="dropdown">
                                      <a id="user-profile" href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                       <img src="<?php echo base_url(); ?>assets/users/profile/1519106717.jpg" class="img-responsive img-thumbnail img-circle"> </a>
+                                <?php
+                                $user_id = $this->session->userdata('id');
+                                $select="SELECT * FROM  user_details  WHERE user_id='$user_id'";
+                                 $res=$this->db->query($select);
+                                 $result=$res->result();
+                                 foreach($result as $rows){}
+                                   if(empty($rows->user_picture)){ ?>
+                                     <img src="<?php echo base_url(); ?>assets/users/profile/noimage.png" class="img-responsive img-thumbnail img-circle">
+                                  <?php }else{ ?>
+<img src="<?php echo base_url(); ?>assets/users/profile/<?php echo $rows->user_picture; ?>" class="img-responsive img-thumbnail img-circle">
+                                  <?php  }
+                                  ?>
+                                        </a>
                                      <ul class="dropdown-menu dropdown-block" role="menu">
                                          <li><a href="<?php echo base_url(); ?>profile">Profile</a></li>
 
