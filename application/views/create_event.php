@@ -28,9 +28,12 @@
   margin-left: 50px;
   margin-right: 50px;
   box-shadow: 3px 11px 15px 0px #959696;
-	height: 1100px;
+
 	margin-top: 20px;
 	margin-bottom: 20px;
+}
+body{
+    background-color: #fff;
 }
 </style>
 
@@ -205,7 +208,7 @@
 									 </div>
 							 </div>
 						</div>
-						
+
 						<div class="col-md-12 form_box">
 							<div class="form-group">
 
@@ -247,7 +250,7 @@
 
 	$('#stime').timepicki();
 	$('#etime').timepicki();
-  
+
 	 window.onload = function () {
 		var mapOptions = {
 					center: new google.maps.LatLng(20.5937, 78.9629),
@@ -270,7 +273,7 @@ $(document).ready(function () {
 
 	$('#datepicker').datetimepicker({format: 'DD-MM-YYYY'});
 	$('#datepicker-autoclose').datetimepicker({format: 'DD-MM-YYYY'});
-	  
+
 	$('#hotspot_sts').on('change', function() {
 	var strdisplay = $(this).val();
     var e = document.getElementById("date_time");
@@ -280,7 +283,7 @@ $(document).ready(function () {
         e.style.display = "block";
     }
   });
-  
+
   $('#file_upload').on('change', function()
         {
           var f=this.files[0]
@@ -371,9 +374,9 @@ $(document).ready(function () {
 				$("#ctname").html(ctitle+cityname).show();
 				$("#cmsg").hide();
 				}else{
-				$("#ctname").html(ctitle+cityname).show();	
-				
-				
+				$("#ctname").html(ctitle+cityname).show();
+
+
 				}
             }
           });
@@ -445,10 +448,10 @@ function check()
         var h = parseInt(d.split(':')[0]);
         if (d.split(':')[1].split(' ')[1] == "PM") {
         h = h + 12;
-		} 
+		}
       return h;
     }
-	
+
 	function GetMinutes(d)
     {
 		return parseInt(d.split(':')[1].split(' ')[0]);

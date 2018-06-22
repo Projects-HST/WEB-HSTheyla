@@ -13,14 +13,10 @@ input[type=text] {
     border: none;
     border-bottom: 1px solid #000000;
 }
-#stickfooter{
-  position: absolute;
-  width: 100%;
-  bottom: 0px;
-}
+
 </style>
 
-    <section class="">
+    <section class="" style="margin-bottom:60px;">
       <div class="container">
         <div class="">
 <center>
