@@ -32,10 +32,10 @@
             <div class="col-md-3">
               <p class="footer_heading">Follow  Us On</p>
               <ul class="fnt-footer social_follow">
-                <li class=""><a href=""><img src="<?php echo base_url(); ?>assets/front/images/fb_follow.png"></a></li>
-                <li class=""><a href=""><img src="<?php echo base_url(); ?>assets/front/images/in_follow.png"></a></li>
-                <li class=""><a href=""><img src="<?php echo base_url(); ?>assets/front/images/gp_follow.png"></a></li>
-                <li class=""><a href=""><img src="<?php echo base_url(); ?>assets/front/images/tw_follow.png"></a></li>
+                <li class=""><a href="https://www.facebook.com/heylaapp/" target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/fb_follow.png"></a></li>
+                <li class=""><a href="https://www.instagram.com/heyla_app/" target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/in_follow.png"></a></li>
+                <!-- <li class=""><a href=""><img src="<?php echo base_url(); ?>assets/front/images/gp_follow.png"></a></li> -->
+                <li class=""><a href="https://twitter.com/heylaapp"  target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/tw_follow.png"></a></li>
               </ul>
             </div>
         </div>

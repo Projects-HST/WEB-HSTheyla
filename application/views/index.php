@@ -519,14 +519,14 @@
                     <p class="getin">Contact Information</p>
                     <p class="address_form">No: 6, Kummalamman Koil Street,<br>
                     3rd Lane Tondiarpet, <br>Chennai - 600081</p>
-                    <p>
+                    <!-- <p>
                       <a href=""><img src="<?php echo base_url(); ?>assets/front/images/facebook.png"></a>
                       <a href=""><img src="<?php echo base_url(); ?>assets/front/images/twitter.png"></a>
-                    </p>
+                    </p> -->
                     <p class="getin">Get Our App</p>
                     <p>
-                      <a href=""><img src="<?php echo base_url(); ?>assets/front/images/play.png" class="img-responsive app_img"></a>
-                      <a href=""><img src="<?php echo base_url(); ?>assets/front/images/app.png" class="img-responsive app_img"></a>
+                      <a href="https://play.google.com/store/apps/details?id=com.palprotech.heylaapp" target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/play.png" class="img-responsive app_img"></a>
+                      <a href="https://itunes.apple.com/us/app/heyla/id1328232644?ls=1&mt=8" target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/app.png" class="img-responsive app_img"></a>
                     </p>
                 </div>
             </div>
@@ -585,10 +585,10 @@
                 <div class="col-md-3">
                   <p class="footer_heading">Follow  Us On</p>
                   <ul class="fnt-footer social_follow">
-                    <li class=""><a href=""><img src="<?php echo base_url(); ?>assets/front/images/fb_follow.png"></a></li>
-                    <li class=""><a href=""><img src="<?php echo base_url(); ?>assets/front/images/in_follow.png"></a></li>
-                    <li class=""><a href=""><img src="<?php echo base_url(); ?>assets/front/images/gp_follow.png"></a></li>
-                    <li class=""><a href=""><img src="<?php echo base_url(); ?>assets/front/images/tw_follow.png"></a></li>
+                    <li class=""><a href="https://www.facebook.com/heylaapp/" target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/fb_follow.png"></a></li>
+                    <li class=""><a href="https://www.instagram.com/heyla_app/" target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/in_follow.png"></a></li>
+                    <!-- <li class=""><a href=""><img src="<?php echo base_url(); ?>assets/front/images/gp_follow.png"></a></li> -->
+                    <li class=""><a href="https://twitter.com/heylaapp"  target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/tw_follow.png"></a></li>
                   </ul>
                 </div>
             </div>

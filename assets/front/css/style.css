@@ -1023,3 +1023,13 @@ a.btn.btn-login.btn-primary.btn-block.review-btn{
 .social_follow li{
   display: inline-block;
 }
+
+
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape) {
+.text_box{
+  margin-left: 20px;
+}
+}
