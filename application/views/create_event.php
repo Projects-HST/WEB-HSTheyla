@@ -1,3 +1,9 @@
+<?php
+  	$dateTime = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
+	$current_time = $dateTime->format("h:i A");
+?>
+<script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
+<link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
 <style>
 .form_box{
 	margin-bottom: 20px;
@@ -22,38 +28,18 @@
   margin-left: 50px;
   margin-right: 50px;
   box-shadow: 3px 11px 15px 0px #959696;
-
+	height: 1100px;
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
-body{
-	background-color: #fff;
-}
 </style>
-<?php
-function get_times( $default = '10:00', $interval = '+15 minutes' )
-	{
-		$output = '';
-		$current = strtotime( '00:00:00' );
-		$end = strtotime( '23:59:00' );
-		while( $current <= $end ) {
-		$time = date( 'H:i:s', $current );
-		$sel = ( $time == $default ) ? ' selected' : '';
-		$output .= "<option value=\"{$time}\">" . date( 'h.i A', $current ) .'</option>';
-		$current = strtotime( $interval, $current );
-		}
-	return $output;
-	}
-?>
 
-<script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
-<link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
 <div class="col-md-12" id="content">
 	<h3 class="dashboard_tab"></h3>
 </div>
 <div class="card">
 
-	<form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>home/insertevents" name="eventform" id="eventform" onSubmit='return check();'>
+<form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>home/insertevents" name="eventform" id="eventform" onSubmit='return check();'>
 <div class="col-md-12 form_box">
 	<div class="form-group">
 			<label for="Category" class="col-sm-2 col-form-label">Select Category</label>
@@ -85,7 +71,8 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 	             <label for="city" class="col-sm-2 col-form-label">Select City</label>
 	            <div class="col-sm-4">
 	               <select class="form-control" name="city"  id="ctname">
-	                </select>
+                   <option value="">Select City</option>
+	               </select>
 	                <div id="cmsg"></div>
 	            </div>
 	        </div>
@@ -119,12 +106,35 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 				</div>
 		</div>
 	</div>
-		<div class="col-md-12 form_box">
+    <div class="col-md-12 form_box">
+							<div class="form-group ">
+									<label for="Status" class="col-sm-2 col-form-label">Advertisement Display</label>
+									<div class="col-sm-4">
+										 <select class="form-control" name="eadv_status">
+													<option value="">Select Status</option>
+													<option value="Y">Yes</option>
+													<option value="N">No</option>
+											</select>
+									</div>
+
+									 <label for="Status" class="col-sm-2 col-form-label">Hotspot Display</label>
+									<div class="col-sm-4">
+										 <select class="form-control" name="hotspot_sts"  id="hotspot_sts">
+													<option value="">Select Status</option>
+													<option value="Y">Yes</option>
+													<option value="N">No</option>
+											</select>
+									</div>
+
+						 </div>
+						</div>
+             <div id = "date_time">
+			<div class="col-md-12 form_box">
 			<div class="form-group">
 					 <label for="sdate" class="col-sm-2 col-form-label">Start Date</label>
 					 <div class="col-sm-4">
 						 <div class="input-group">
-							 <input type="text" class="form-control"  name="start_date" id="datepicker-autoclose">
+							 <input type="text" class="form-control"  name="start_date" id="datepicker-autoclose" value="<?php echo date("d-m-Y"); ?>">
 							 <span class="input-group-addon bg-custom b-0"><i class="far fa-calendar-plus"></i></span>
 					 </div>
 					 </div>
@@ -132,13 +142,14 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 						<label for="edate" class="col-sm-2 col-form-label">End Date</label>
 					 <div class="col-sm-4">
 							<div class="input-group">
-							 <input type="text" class="form-control" name="end_date" id="datepicker">
+							 <input type="text" class="form-control" name="end_date" id="datepicker" value="<?php echo date("d-m-Y"); ?>">
 							 <span class="input-group-addon bg-custom b-0"><i class="far fa-calendar-plus"></i></span>
 
 					 </div>
 					 </div>
 			 </div>
 		</div>
+        </div>
 			<div class="col-md-12 form_box">
 				<div class="form-group">
 				<label for="stime" class="col-sm-2 col-form-label">Start Time</label>
@@ -194,28 +205,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 									 </div>
 							 </div>
 						</div>
-						<div class="col-md-12 form_box">
-							<div class="form-group ">
-									<label for="Status" class="col-sm-2 col-form-label">Advertisement Display</label>
-									<div class="col-sm-4">
-										 <select class="form-control" name="eadv_status">
-													<option value="">Select Status</option>
-													<option value="Y">Yes</option>
-													<option value="N">No</option>
-											</select>
-									</div>
-
-									 <label for="Status" class="col-sm-2 col-form-label">Hotspot Display</label>
-									<div class="col-sm-4">
-										 <select class="form-control" name="hotspot_sts">
-													<option value="">Select Status</option>
-													<option value="Y">Yes</option>
-													<option value="N">No</option>
-											</select>
-									</div>
-
-						 </div>
-						</div>
+						
 						<div class="col-md-12 form_box">
 							<div class="form-group">
 
@@ -253,34 +243,44 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
    </form>
 </div>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByz7sU142AeFwpK3KiFilK0IOoa2GU9tw"></script>
-
 <script type="text/javascript">
 
-   $('#stime').timepicki();
-   $('#etime').timepicki();
-
-window.onload = function () {
-var mapOptions = {
-    center: new google.maps.LatLng(20.5937, 78.9629),
-    zoom:4,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-};
-var infoWindow = new google.maps.InfoWindow();
-var latlngbounds = new google.maps.LatLngBounds();
-var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
-google.maps.event.addListener(map, 'click', function (e)
-{
- var la=e.latLng.lat();
- var lo=e.latLng.lng();
- document.getElementById("latu").value=la;
- document.getElementById("lon").value=lo;
- //alert(la); alert(lo);
-//alert("Latitude: " + e.latLng.lat() + "\r\nLongitude: " + e.latLng.lng());
-});
-}
+	$('#stime').timepicki();
+	$('#etime').timepicki();
+  
+	 window.onload = function () {
+		var mapOptions = {
+					center: new google.maps.LatLng(20.5937, 78.9629),
+					zoom:4,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				var infoWindow = new google.maps.InfoWindow();
+				var latlngbounds = new google.maps.LatLngBounds();
+				var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+				google.maps.event.addListener(map, 'click', function (e)
+				{
+				 var la=e.latLng.lat();
+				 var lo=e.latLng.lng();
+				 document.getElementById("latu").value=la;
+				 document.getElementById("lon").value=lo;
+				});
+	 }
 
 $(document).ready(function () {
 
+	$('#datepicker').datetimepicker({format: 'DD-MM-YYYY'});
+	$('#datepicker-autoclose').datetimepicker({format: 'DD-MM-YYYY'});
+	  
+	$('#hotspot_sts').on('change', function() {
+	var strdisplay = $(this).val();
+    var e = document.getElementById("date_time");
+    if(strdisplay == "Y") {
+        e.style.display = "none";
+    } else {
+        e.style.display = "block";
+    }
+  });
+  
   $('#file_upload').on('change', function()
         {
           var f=this.files[0]
@@ -288,128 +288,116 @@ $(document).ready(function () {
           var orgi=actual/1024;
             if(orgi<1024){
               $("#preview").html('');
-              //$("#preview").html('<img src="<?php echo base_url(); ?>assets/loader.gif" alt="Uploading...."/>');
-              // $("#eventform").ajaxForm({
-              //     target: '#preview'
-              // }).submit();
             }else{
               $("#preview").html('File Size Must be  Lesser than 1 MB');
-              //alert("File Size Must be  Lesser than 1 MB");
               return false;
             }
         });
 
-$('#eventform').validate({ // initialize the plugin
-rules: {
-category:{required:true },
-event_name:{required:true },
-country:{required:true },
-city:{required:true },
-venue:{required:true },
-address:{required:true },
-description:{required:true },
-eventcost:{required:true },
-start_date:{required:true },
-end_date:{ required:true },
-start_time:{required:true },
-end_time:{required:true },
-eadv_status:{required:true},
-hotspot_sts:{required:true},
-pcontact_cell:{required:true },
-contact_person:{required:true },
-email:{required:true },
-event_status:{required:true },
-txtLatitude:{required:true },
-txtLongitude:{required:true }
+    $('#eventform').validate({ // initialize the plugin
+       rules: {
+         category:{required:true },
+         event_name:{required:true },
+         country:{required:true },
+         city:{required:true },
+         venue:{required:true },
+         address:{required:true },
+         description:{required:true },
+         eventcost:{required:true },
+         start_date:{required:true },
+         end_date:{ required:true },
+         start_time:{required:true },
+         end_time:{required:true },
+         eadv_status:{required:true},
+         hotspot_sts:{required:true},
+         pcontact_cell:{required:true },
+         contact_person:{required:true },
+         email:{required:true },
+         event_status:{required:true },
+         txtLatitude:{required:true },
+         txtLongitude:{required:true },
+		 eventbanner:{required:true }
+        },
 
-},
+        messages: {
+        category:"Select Category Name",
+        event_name:"Enter Event Name",
+        country:"Select Country Name",
+        city:"Select City Name",
+        venue:"Enter Venue",
+        address:"Enter Address",
+        description:"Enter Description",
+        eventcost:"Select Event Type",
+        start_date:"Select Start Date",
+        end_date:"Select End Date",
+        start_time:"Select Start Time",
+        end_time:"Select End Time",
+        eadv_status:"Select Advertisement Status ",
+        hotspot_sts:"Select Hotspot Status ",
+        pcontact_cell:"Enter Primary Contact Number",
+        contact_person:"Enter Name",
+        email:"Enter Email",
+        event_status:"Select Status",
+        txtLatitude:"Enter Latitude",
+        txtLongitude:"Enter Longitude",
+		eventbanner:"Select Banner"
+       },
+         });
+   });
 
-messages: {
-category:"Select Category Name",
-event_name:"Enter Event Name",
-country:"Select Country Name",
-city:"Select City Name",
-venue:"Enter Venue",
-address:"Enter Address",
-description:"Enter Description",
-eventcost:"Select Event Type",
-start_date:"Select Start Date",
-end_date:"Select End Date",
-start_time:"Select Start Time",
-end_time:"Select End Time",
-eadv_status:"Select Advertisement Status ",
-hotspot_sts:"Select Hotspot Display Status ",
-pcontact_cell:"Enter Cell Number",
-contact_person:"Enter Name",
-email:"Enter Email",
-event_status:"Select Status",
-txtLatitude:"Enter Latitude",
-txtLongitude:"Enter Longitude",
-},
-});
-});
-
-function getcityname(cid) {
-//alert(cid);
-$.ajax({
-   type: 'post',
-   url: '<?php echo base_url(); ?>events/get_city_name',
-   data: { country_id:cid },
- dataType: "JSON",
- cache: false,
-success:function(test)
-{
-  // alert(test);
-   var len = test.length;
-   //alert(len);
-    var cityname='';
-    var ctitle='<option>Select City</option>';
-    if(test!='')
-     {    //alert(len);
-       for(var i=0; i<len; i++)
-       {
-         var cityid = test[i].id;
-         var city_name = test[i].city_name;
-         //alert(city_name);
-         cityname +='<option value=' + cityid + '> ' + city_name + ' </option>';
-      }
-      $("#ctname").html(ctitle+cityname).show();
-      $("#cmsg").hide();
-      }else{
-      $("#cmsg").html('<p style="color: red;">City Not Found</p>').show();
-      $("#ctname").hide();
-     }
-}
-});
-}
+	function getcityname(cid) {
+			$.ajax({
+			type: 'post',
+			url: '<?php echo base_url(); ?>events/get_city_name',
+			data: { country_id:cid },
+			dataType: "JSON",
+			cache: false,
+			success:function(cty)
+            {
+				// alert(cty);
+				var len = cty.length;
+				//alert(len);
+				var cityname='';
+				var ctitle='<option value="">Select City</option>';
+				if(cty!='')
+				{    //alert(len);
+					for(var i=0; i<len; i++)
+					{
+					 var cityid = cty[i].id;
+					 var city_name = cty[i].city_name;
+					 //alert(city_name);
+					 cityname +='<option value=' + cityid + '> ' + city_name + ' </option>';
+					}
+				$("#ctname").html(ctitle+cityname).show();
+				$("#cmsg").hide();
+				}else{
+				$("#ctname").html(ctitle+cityname).show();	
+				
+				
+				}
+            }
+          });
+       }
 
 function check()
 {
-
-
-
       var fdate = document.getElementById("datepicker-autoclose").value;
       var tdate = document.getElementById("datepicker").value;
 
-       //alert(fdate);alert(tdate);
-
       var chunks = fdate.split('-');
       var formattedDate = chunks[1]+'/'+chunks[0]+'/'+chunks[2];
-       //alert(formattedDate);
+
       var chunks1 = tdate.split('-');
       var formattedDate1 = chunks1[1]+'/'+chunks1[0]+'/'+chunks1[2];
-      //alert(formattedDate1);
-      //alert( Date.parse(formattedDate));
-      //alert( Date.parse(formattedDate1));
+
       if(Date.parse(formattedDate) > Date.parse(formattedDate1) )
       {
-       alert("Startdate should be less than Enddate");
-       return false;
+		alert("Startdate should be less than Enddate");
+		return false;
       }
 
       if(Date.parse(formattedDate)==Date.parse(formattedDate1) )
       {
-
         var strStartTime = document.getElementById("stime").value;
         var strEndTime = document.getElementById("etime").value;
 
@@ -417,7 +405,6 @@ function check()
         var endTime = new Date(startTime)
         endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
 
-        //var timefrom = date1;
          temp =strStartTime.split(":");
          var a = temp[0];
          var b = temp[1];
@@ -431,101 +418,41 @@ function check()
           return false;
         }
     }else{
-        var date1 = new Date(fdate);
-      var date2 = new Date(tdate);
-      var strStartTime = document.getElementById("stime").value;
-      var strEndTime = document.getElementById("etime").value;
-       var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
-       var endTime = new Date(startTime);
-       endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
-      var a=formattedDate + '' + strStartTime;
-      var b=formattedDate1 + '' + strEndTime;
-      //alert(startTime);alert(endTime); alert(a);alert(b);
-      if (a == b || a > b) {
-      alert("Start Date & Time is greater than end Date & Time");
-      return false;
-      }
+        var date1 = new Date(formattedDate);
+        var date2 = new Date(formattedDate1);
+
+         var y1=chunks[2];
+         var y2=chunks1[2];
+        if(y1<y2){
+            //alert(chunks[2]);alert(chunks1[2]);
+        }else{
+          var strStartTime = document.getElementById("stime").value;
+          var strEndTime = document.getElementById("etime").value;
+          var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+          var endTime = new Date(startTime);
+          endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+          var a=formattedDate + '' +startTime;
+          var b=formattedDate1 + ''+endTime;
+          //alert(startTime);alert(endTime); alert(a);alert(b);
+          if (a == b || a > b) {
+          alert("Start Date & Time is greater than end Date & Time");
+          return false;
+          }
+        }
     }
-      function GetHours(d)
-      {
+    function GetHours(d)
+    {
         var h = parseInt(d.split(':')[0]);
         if (d.split(':')[1].split(' ')[1] == "PM") {
-        h = h + 24;
-      }
+        h = h + 12;
+		} 
       return h;
-      }
-      function GetMinutes(d)
-      {
-       return parseInt(d.split(':')[1].split(' ')[0]);
-      }
-
-
-  if(document.eventform.txtLatitude.value!="")
-    {
-            sLatitude = document.eventform.txtLatitude.value
-            if(isNaN(sLatitude) || sLatitude.indexOf(".")<0)
-            {
-                $("#ermsg2").html('<p style="color:red;">Please enter valid Latitude.</p>').show();
-                $("#ermsg").hide();
-                //alert ("Please enter valid Latitude.")
-                document.eventform.txtLatitude.focus();
-                return false;
-            }else{
-                 $("#ermsg").hide();
-                 $("#ermsg2").hide();
-            }
     }
-
-    if(document.eventform.txtLongitude.value!="")
+	
+	function GetMinutes(d)
     {
-            sLongitude = document.eventform.txtLongitude.value
-
-            if(isNaN(sLongitude) || sLongitude.indexOf(".")<0)
-            {
-                //alert ("Please enter valid Longitude.")
-                 $("#ermsg3").html('<p style="color: red;">Please enter valid Longitude.</p>').show();
-                 $("#ermsg1").hide();
-                document.eventform.txtLongitude.focus();
-                return false;
-            }else{
-                 $("#ermsg1").hide();
-                 $("#ermsg3").hide();
-            }
+		return parseInt(d.split(':')[1].split(' ')[0]);
     }
-
-    // if(document.eventform.txtLatitude.value!="")
-
-    // {
-    //     var latitude = document.eventform.txtLatitude.value;
-    //     var longitude = document.eventform.txtLongitude.value;
-
-    //     var reg = new RegExp("^[-+]?[0-9]{1,3}(?:\.[0-9]{1,10})?$");
-
-    //     if( reg.exec(latitude) ) {
-    //      //do nothing
-    //     } else {
-    //          $("#ermsg2").html('<p style="color: red;">Please enter valid Latitude.</p>').show();
-    //          $("#ermsg").hide();
-    //         //alert("Please enter valid Latitude.");
-    //         document.eventform.txtLatitude.focus();
-    //         return false;
-    //     }
-
-    //     if( reg.exec(longitude) ) {
-    //      //do nothing
-    //     } else {
-    //         //alert("Please enter valid Longitude.");
-    //         $("#ermsg3").html('<p style="color: red;">Please enter valid Longitude.</p>').show();
-    //         $("#ermsg1").hide();
-    //         document.eventform.txtLongitude.focus();
-    //         return false;
-    //     }
-    // }
 
 }
-$(document).ready(function() {
-
-    $('#datepicker').datetimepicker({format: 'DD-MM-YYYY'});
-		 $('#datepicker-autoclose').datetimepicker({format: 'DD-MM-YYYY'});
-});
 </script>

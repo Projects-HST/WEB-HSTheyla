@@ -108,6 +108,31 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 				</div>
 		</div>
 	</div>
+    <div class="col-md-12 form_box">
+							<div class="form-group ">
+									<label for="Status" class="col-sm-2 col-form-label">Advertisement Display</label>
+									<div class="col-sm-4">
+										 <select class="form-control" name="eadv_status">
+													<option value="">Select Status</option>
+													<option value="Y">Yes</option>
+													<option value="N">No</option>
+											</select>
+                       <script language="JavaScript">document.eventform.eadv_status.value="<?php echo $rows->adv_status; ?>";</script>
+									</div>
+
+									 <label for="Status" class="col-sm-2 col-form-label">Hotspot Display</label>
+									<div class="col-sm-4">
+										 <select class="form-control" name="hotspot_sts" id="hotspot_sts">
+													<option value="">Select Status</option>
+													<option value="Y">Yes</option>
+													<option value="N">No</option>
+											</select>
+                      <script language="JavaScript">document.eventform.hotspot_sts.value="<?php echo $rows->hotspot_status; ?>";</script>
+									</div>
+
+						 </div>
+						</div>
+                        <div id = "date_time">
 		<div class="col-md-12 form_box">
 			<div class="form-group">
 					 <label for="sdate" class="col-sm-2 col-form-label">Start Date</label>
@@ -128,6 +153,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 					 </div>
 			 </div>
 		</div>
+         </div>
 			<div class="col-md-12 form_box">
 				<div class="form-group">
 				<label for="stime" class="col-sm-2 col-form-label">Start Time</label>
@@ -186,30 +212,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 									 </div>
 							 </div>
 						</div>
-						<div class="col-md-12 form_box">
-							<div class="form-group ">
-									<label for="Status" class="col-sm-2 col-form-label">Advertisement Display</label>
-									<div class="col-sm-4">
-										 <select class="form-control" name="eadv_status">
-													<option value="">Select Status</option>
-													<option value="Y">Yes</option>
-													<option value="N">No</option>
-											</select>
-                       <script language="JavaScript">document.eventform.eadv_status.value="<?php echo $rows->adv_status; ?>";</script>
-									</div>
-
-									 <label for="Status" class="col-sm-2 col-form-label">Hotspot Display</label>
-									<div class="col-sm-4">
-										 <select class="form-control" name="hotspot_sts">
-													<option value="">Select Status</option>
-													<option value="Y">Yes</option>
-													<option value="N">No</option>
-											</select>
-                      <script language="JavaScript">document.eventform.hotspot_sts.value="<?php echo $rows->hotspot_status; ?>";</script>
-									</div>
-
-						 </div>
-						</div>
+						
 						<div class="col-md-12 form_box">
 							<div class="form-group">
 
@@ -254,51 +257,61 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByz7sU142AeFwpK3KiFilK0IOoa2GU9tw"></script>
-
 <script type="text/javascript">
 
-   $('#stime').timepicki();
-   $('#etime').timepicki();
-
-
-    window.onload = function () {
-var mapOptions = {
-    center: new google.maps.LatLng(20.5937, 78.9629),
-    zoom:4,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-};
-var infoWindow = new google.maps.InfoWindow();
-var latlngbounds = new google.maps.LatLngBounds();
-var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
-google.maps.event.addListener(map, 'click', function (e)
-{
- var la=e.latLng.lat();
- var lo=e.latLng.lng();
- document.getElementById("latu").value=la;
- document.getElementById("lon").value=lo;
- //alert(la); alert(lo);
-//alert("Latitude: " + e.latLng.lat() + "\r\nLongitude: " + e.latLng.lng());
-});
-}
+	$('#stime').timepicki();
+	$('#etime').timepicki();
+  
+	 window.onload = function () {
+		var mapOptions = {
+					center: new google.maps.LatLng(20.5937, 78.9629),
+					zoom:4,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				var infoWindow = new google.maps.InfoWindow();
+				var latlngbounds = new google.maps.LatLngBounds();
+				var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+				google.maps.event.addListener(map, 'click', function (e)
+				{
+				 var la=e.latLng.lat();
+				 var lo=e.latLng.lng();
+				 document.getElementById("latu").value=la;
+				 document.getElementById("lon").value=lo;
+				});
+				
+				var hotspot = "<?php echo $rows->hotspot_status; ?>";
+			var ee = document.getElementById("date_time");
+			if(hotspot == "Y") {
+				ee.style.display = "none";
+			} else {
+				ee.style.display = "block";
+			}
+	 }
 
 $(document).ready(function () {
 
-
-
-$('#file_upload').on('change', function()
+	$('#datepicker').datetimepicker({format: 'DD-MM-YYYY'});
+	$('#datepicker-autoclose').datetimepicker({format: 'DD-MM-YYYY'});
+	  
+	$('#hotspot_sts').on('change', function() {
+	var strdisplay = $(this).val();
+    var e = document.getElementById("date_time");
+    if(strdisplay == "Y") {
+        e.style.display = "none";
+    } else {
+        e.style.display = "block";
+    }
+  });
+  
+  $('#file_upload').on('change', function()
         {
           var f=this.files[0]
           var actual=f.size||f.fileSize;
           var orgi=actual/1024;
             if(orgi<1024){
               $("#preview").html('');
-              //$("#preview").html('<img src="<?php echo base_url(); ?>assets/loader.gif" alt="Uploading...."/>');
-              // $("#eventform").ajaxForm({
-              //     target: '#preview'
-              // }).submit();
             }else{
               $("#preview").html('File Size Must be  Lesser than 1 MB');
-              //alert("File Size Must be  Lesser than 1 MB");
               return false;
             }
         });
@@ -314,14 +327,14 @@ $('#file_upload').on('change', function()
          description:{required:true },
          eventcost:{required:true },
          start_date:{required:true },
-         end_date:{required:true },
+         end_date:{ required:true },
          start_time:{required:true },
          end_time:{required:true },
+         eadv_status:{required:true},
+         hotspot_sts:{required:true},
          pcontact_cell:{required:true },
          contact_person:{required:true },
          email:{required:true },
-         eadv_status:{required:true},
-         hotspot_sts:{required:true},
          event_status:{required:true },
          txtLatitude:{required:true },
          txtLongitude:{required:true }
@@ -340,123 +353,67 @@ $('#file_upload').on('change', function()
         end_date:"Select End Date",
         start_time:"Select Start Time",
         end_time:"Select End Time",
-        pcontact_cell:"Enter Cell Number",
+        eadv_status:"Select Advertisement Status ",
+        hotspot_sts:"Select Hotspot Status ",
+        pcontact_cell:"Enter Primary Contact Number",
         contact_person:"Enter Name",
-         eadv_status:"Select Advertisement Status ",
-        hotspot_sts:"Select Hotspot Display Status ",
         email:"Enter Email",
         event_status:"Select Status",
         txtLatitude:"Enter Latitude",
-        txtLongitude:"Enter Longitude",
-
-               },
+        txtLongitude:"Enter Longitude"
+       },
          });
    });
- function getcityname(cid) {
-           //alert(cid);
-            $.ajax({
-               type: 'post',
-               url: '<?php echo base_url(); ?>organizer/get_city_name',
-               data: {
-                   country_id:cid
-               },
-             dataType: "JSON",
-             cache: false,
-            success:function(test)
+
+	function getcityname(cid) {
+			$.ajax({
+			type: 'post',
+			url: '<?php echo base_url(); ?>events/get_city_name',
+			data: { country_id:cid },
+			dataType: "JSON",
+			cache: false,
+			success:function(cty)
             {
-              // alert(test);
-               var len = test.length;
-               //alert(len);
-                var cityname='';
-                if(test!='')
-                 {    //alert(len);
-                   for(var i=0; i<len; i++)
-                   {
-                     var cityid = test[i].id;
-                     var city_name = test[i].city_name;
-                     //alert(city_name);
-                     cityname +='<option value=' + cityid + '> ' + city_name + ' </option>';
-                  }
-                  $("#ctname").html(cityname).show();
-                  $("#cmsg").hide();
-                  $("#cityid").hide();
-                  $("#new").show();
-                  }else{
-                  $("#cmsg").html('<p style="color: red;">City Not Found</p>').show();
-                  $("#ctname").hide();
-                 }
+				// alert(cty);
+				var len = cty.length;
+				//alert(len);
+				var cityname='';
+				var ctitle='<option value="">Select City</option>';
+				if(cty!='')
+				{    //alert(len);
+					for(var i=0; i<len; i++)
+					{
+					 var cityid = cty[i].id;
+					 var city_name = cty[i].city_name;
+					 //alert(city_name);
+					 cityname +='<option value=' + cityid + '> ' + city_name + ' </option>';
+					}
+				$("#ctname").html(ctitle+cityname).show();
+				$("#cmsg").hide();
+				}else{
+				$("#ctname").html(ctitle+cityname).show();	
+				
+				
+				}
             }
           });
        }
 
 function check()
 {
-
-  if(document.eventform.txtLatitude.value=="")
-    {
-            //alert("Please enter Latitude.");
-            $("#ermsg").html('<p style="color: red;">Please enter Latitude.</p>');
-            document.eventform.txtLatitude.focus();
-            return false;
-    }
-
-    if(document.eventform.txtLongitude.value=="")
-    {
-            //alert("Please enter Longitude.");
-            $("#ermsg1").html('<p style="color: red;">Please enter Longitude.</p>');
-            document.eventform.txtLongitude.focus();
-            return false;
-    }
-
-  if(document.eventform.txtLatitude.value!="")
-    {
-            sLatitude = document.eventform.txtLatitude.value
-            if(isNaN(sLatitude) || sLatitude.indexOf(".")<0)
-            {
-                $("#ermsg2").html('<p style="color:red;">Please enter valid Latitude.</p>').show();
-                $("#ermsg").hide();
-                //alert ("Please enter valid Latitude.")
-                document.eventform.txtLatitude.focus();
-                return false;
-            }else{
-                 $("#ermsg").hide();
-                 $("#ermsg2").hide();
-            }
-    }
-
-    if(document.eventform.txtLongitude.value!="")
-    {
-            sLongitude = document.eventform.txtLongitude.value
-
-            if(isNaN(sLongitude) || sLongitude.indexOf(".")<0)
-            {
-                //alert ("Please enter valid Longitude.")
-                 $("#ermsg3").html('<p style="color: red;">Please enter valid Longitude.</p>').show();
-                 $("#ermsg1").hide();
-                document.eventform.txtLongitude.focus();
-                return false;
-            }else{
-                 $("#ermsg1").hide();
-                 $("#ermsg3").hide();
-            }
-    }
-
       var fdate = document.getElementById("datepicker-autoclose").value;
       var tdate = document.getElementById("datepicker").value;
 
-       //alert(fdate);alert(tdate);
       var chunks = fdate.split('-');
       var formattedDate = chunks[1]+'/'+chunks[0]+'/'+chunks[2];
-       //alert(formattedDate);
+
       var chunks1 = tdate.split('-');
       var formattedDate1 = chunks1[1]+'/'+chunks1[0]+'/'+chunks1[2];
-      //alert(formattedDate1);
-      //alert( Date.parse(formattedDate));
-      //alert( Date.parse(formattedDate1));
+
       if(Date.parse(formattedDate) > Date.parse(formattedDate1) )
       {
-       alert("Startdate should be less than Enddate");
-       return false;
+		alert("Startdate should be less than Enddate");
+		return false;
       }
 
       if(Date.parse(formattedDate)==Date.parse(formattedDate1) )
@@ -468,13 +425,12 @@ function check()
         var endTime = new Date(startTime)
         endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
 
-        //var timefrom = date1;
          temp =strStartTime.split(":");
          var a = temp[0];
          var b = temp[1];
          temp1 =b.split(" ");
          var c = temp1[1]
-      // alert(a); alert(c);
+
         if(a==12 && c=='AM'){
 
         }else if (startTime > endTime){
@@ -482,38 +438,41 @@ function check()
           return false;
         }
     }else{
-      var date1 = new Date(fdate);
-      var date2 = new Date(tdate);
-      var strStartTime = document.getElementById("stime").value;
-      var strEndTime = document.getElementById("etime").value;
-      var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
-      var endTime = new Date(startTime);
-      endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
-      var a=formattedDate + '' + strStartTime;
-      var b=formattedDate1 + '' + strEndTime;
-      //alert(startTime);alert(endTime); alert(a);alert(b);
-      if (a == b || a > b) {
-      alert("Start Date & Time is greater than end Date & Time");
-      return false;
-      }
+        var date1 = new Date(formattedDate);
+        var date2 = new Date(formattedDate1);
+
+         var y1=chunks[2];
+         var y2=chunks1[2];
+        if(y1<y2){
+            //alert(chunks[2]);alert(chunks1[2]);
+        }else{
+          var strStartTime = document.getElementById("stime").value;
+          var strEndTime = document.getElementById("etime").value;
+          var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+          var endTime = new Date(startTime);
+          endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+          var a=formattedDate + '' +startTime;
+          var b=formattedDate1 + ''+endTime;
+          //alert(startTime);alert(endTime); alert(a);alert(b);
+          if (a == b || a > b) {
+          alert("Start Date & Time is greater than end Date & Time");
+          return false;
+          }
+        }
     }
-      function GetHours(d)
-      {
+    function GetHours(d)
+    {
         var h = parseInt(d.split(':')[0]);
         if (d.split(':')[1].split(' ')[1] == "PM") {
-        h = h + 24;
-      }
+        h = h + 12;
+		} 
       return h;
-      }
-      function GetMinutes(d)
-      {
-       return parseInt(d.split(':')[1].split(' ')[0]);
-      }
+    }
+	
+	function GetMinutes(d)
+    {
+		return parseInt(d.split(':')[1].split(' ')[0]);
+    }
+
 }
-
-$(document).ready(function() {
-
-    $('#datepicker').datetimepicker({format: 'DD-MM-YYYY'});
-		 $('#datepicker-autoclose').datetimepicker({format: 'DD-MM-YYYY'});
-});
 </script>

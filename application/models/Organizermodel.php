@@ -57,7 +57,7 @@ Class Organizermodel extends CI_Model
         $result = $this->db->query($check_eve);
         	if($result->num_rows()==0)
 			{
-				$query="INSERT INTO events(category_id,event_name,event_venue,event_address,description,start_date,end_date,start_time, end_time,event_banner,event_latitude,event_longitude,event_country,event_city,primary_contact_no, secondary_contact_no,contact_person,contact_email,event_type,adv_status,booking_status,hotspot_status, event_colour_scheme,event_status,created_by,created_at) VALUES('$category','$event_name','$venue','$address','$description','$start_date','$end_date','$start_time','$end_time','$event_banner','$txtLatitude','$txtLongitude','$country','$city','$pcontact_cell','$scontact_cell','$contact_person','$email','$eventcost','$eadv_status','N','$hotspot_sts','$colour_scheme','N','$user_id',NOW())";
+				$query="INSERT INTO events(category_id,event_name,event_venue,event_address,description,start_date,end_date,start_time, end_time,event_banner,event_latitude,event_longitude,event_country,event_city,primary_contact_no, secondary_contact_no,contact_person,contact_email,event_type,adv_status,booking_status,hotspot_status,featured_status ,event_colour_scheme,event_status,created_by,created_at) VALUES('$category','$event_name','$venue','$address','$description','$start_date','$end_date','$start_time','$end_time','$event_banner','$txtLatitude','$txtLongitude','$country','$city','$pcontact_cell','$scontact_cell','$contact_person','$email','$eventcost','$eadv_status','N','$hotspot_sts','N','$colour_scheme','N','$user_id',NOW())";
            		$resultset = $this->db->query($query);
   		     	$data = array("status"=>"success");
   		     	return $data;

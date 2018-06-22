@@ -49,7 +49,7 @@
                                      <?php } ?>
                                 </select>
                             </div>
-                             <label for="city" class="col-sm-2 col-form-label">Select City</label>
+                            <label for="city" class="col-sm-2 col-form-label">Select City</label>
                             <div class="col-sm-4">
                                <select class="form-control" name="city" id="ctname">
 									<option value="">Select City</option>
@@ -269,7 +269,6 @@
 	$( ".datepicker" ).datepicker({
 		format: 'dd-mm-yyyy'
 	});
-
 	  
 	$('#hotspot_sts').on('change', function() {
 	var strdisplay = $(this).val();
