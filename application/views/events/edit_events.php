@@ -200,7 +200,7 @@
                         
 
                         <div class="form-group row">
-							<label class="col-sm-2 col-form-label">Event Banner</label>
+							<label class="col-sm-2 col-form-label">Event Banner <span style="color:#F00;">(985*550px)</span></label>
                               <div class="col-sm-4">
                                  <input type="file" name="eventbanner" class="form-control" accept="image/*" >
                                <input type="hidden" name="currentcpic" class="form-control" value="<?php echo $rows->event_banner;?>" >
@@ -217,9 +217,7 @@
 								echo '<input type="radio" name="featured_sts" value="N"';
 								if ( $sfeatured =="N") { echo "checked"; }
 								echo '> No';
-							  ?>
-                                    
-                                    
+							  ?>  
                               </div>
                         </div>
 

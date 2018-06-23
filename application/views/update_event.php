@@ -228,7 +228,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
                       <script language="JavaScript">document.eventform.colour_scheme.value="<?php echo $rows->event_colour_scheme; ?>";</script>
 									</div>
 
-									 <label class="col-sm-2 col-form-label">Event Banner</label>
+									 <label class="col-sm-2 col-form-label">Event Banner <span style="color:#F00;">(985*550px)</span></label>
 										<div class="col-sm-4">
                       <input type="file" name="eventbanner" id="file_upload" class="form-control" accept="image/*" >
                       <input type="hidden" name="currentcpic" class="form-control" value="<?php echo $rows->event_banner;?>" >

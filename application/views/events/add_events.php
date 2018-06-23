@@ -191,7 +191,7 @@
                                 </select>
                             </div>
 -->
-                            <label class="col-sm-2 col-form-label">Event Banner</label>
+                            <label class="col-sm-2 col-form-label">Event Banner <span style="color:#F00;">(985*550px)</span></label>
                               <div class="col-sm-4">
                                  <input type="file" name="eventbanner" id="file_upload" class="form-control" accept="image/*" >
                                   <div id="preview" style="color: red;"></div>
