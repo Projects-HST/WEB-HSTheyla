@@ -35,7 +35,7 @@ body{
   height: 100%;
 }
 .about{
-  background-color: #478ECC;
+
   padding-top: 20px;
   padding-bottom: 20px;
   background-repeat: no-repeat;
@@ -186,7 +186,7 @@ body{
 .arrowimg{
 
   position: relative;
-  top: -10px;
+  top: -15px;
 }
 .profile{
   background: url("../images/home-bg.jpg")no-repeat;
@@ -271,7 +271,7 @@ body{
   padding-right: 5px;
 }
 .contact_icon{
-  background-color: #478ecc;
+  background-color: #657079;
   padding: 10px;
   margin-bottom: 2px;
 }
@@ -404,7 +404,7 @@ body{
 }
 .heading{
   text-align: center;
-  padding-top: 25px;
+  padding-top: 5px;
   padding-bottom: 5px;
   font-size: 30px;
   color: #fff;
@@ -893,6 +893,11 @@ a.btn.btn-login.btn-primary.btn-block.review-btn{
   padding-bottom:30px;
 }
 .btn-primary{
+  color: #fff;
+  background-color: #478ecc;
+  border-color: #478ecc;
+}
+.btn-primary:hover{
   color: #fff;
   background-color: #478ecc;
   border-color: #478ecc;

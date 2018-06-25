@@ -253,7 +253,9 @@
 <div class="container-fluid popular_event_section popular_events">
   <div class="">
   <div class="heading">
-  <p class="text-center popular "><b class="blueline">Popular Events</b> </p>
+  <p class="text-center popular "><b class="">Popular Events</b> </p>
+  <div class="arrowimg"><img src="<?php echo base_url(); ?>assets/front/images/line.png" class="img-fluid mx-auto d-block"></div>
+
   </div>
   <div class="row ">
 <?php
@@ -305,13 +307,18 @@
     <!-- Page Content -->
     <section class="about" style="" id="">
         <div class="container">
-            <div>
+            <!-- <div>
                 <p class="heading2">WHAT'S HEYLA</p>
+
+            </div> -->
+            <div class="heading">
+            <p class="text-center popular "><b class="">What's Heyla</b> </p>
+            <div class="arrowimg"><img src="<?php echo base_url(); ?>assets/front/images/line.png" class="img-fluid mx-auto d-block"></div>
 
             </div>
         </div>
     </section>
-      <div class="arrowimg"><img src="<?php echo base_url(); ?>assets/front/images/arrow.png" class="img-fluid mx-auto d-block"></div>
+
     <section class="" style="" id="">
         <div class="container">
             <div>
@@ -467,7 +474,8 @@
                   <div class="heading">
                   <p class="text-center popular"><b>Get in Touch</b> </p>
                   </div>
-                    <p class="text-center  cnt"><span class="blueline">Contact Us</span> </p>
+                    <p class="text-center  cnt"><span class="">Contact Us</span> </p>
+                      <div class="arrowimg"><img src="<?php echo base_url(); ?>assets/front/images/line.png" class="img-fluid mx-auto d-block"></div>
                 </div>
             </div>
         </div>

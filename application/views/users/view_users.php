@@ -22,11 +22,11 @@
                         <thead>
                         <tr>
                             <th>S.No</th>
-                            <th>Username</th>
+                            <th>Username/ Email </th>
                             <th>Full Name</th>
-                            <th>Email</th>
+
                             <th>Phone</th>
-                            <th>Role</th>
+
                             <th>City</th>
                             <th>Points</th>
 
@@ -44,11 +44,14 @@
                               ?>
                         <tr>
                             <td><?php echo $i; ?></td>
-                            <td><?php echo $rows->user_name ; ?></td>
+                            <td>
+                              <?php echo $rows->user_name ; ?><br>
+                            <?php echo $rows->email_id; ?>
+                          </td>
                             <td><?php echo $rows->name ; ?></td>
-                            <td><?php echo $rows->email_id; ?></td>
+
                             <td><?php echo $rows->mobile_no; ?></td>
-                            <td><?php echo $rows->user_role_name; ?></td>
+                          
                             <td><?php echo $rows->city_name ; ?></td>
                             <td><?php echo $rows->total_points ; ?></td>
 
