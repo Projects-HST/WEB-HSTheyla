@@ -48,7 +48,7 @@ Class Eventlistmodel extends CI_Model
                         LEFT JOIN city_master AS ci ON ev.event_city = ci.id
                         LEFT JOIN country_master AS cy ON ev.event_country = cy.id
                         LEFT JOIN adv_event_history AS aeh ON aeh.event_id = ev.id
-                        WHERE ev.end_date>= '$current_date' AND ev.event_status  ='Y' AND aeh.date_to >= '$current_date' group by ev.id, aeh.event_id";
+                        WHERE ev.event_status  ='Y' AND aeh.status = 'Y' AND aeh.date_to >= '$current_date' group by ev.id, aeh.event_id";
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
 	  	return $res;
@@ -88,9 +88,9 @@ Class Eventlistmodel extends CI_Model
     {
 		$current_date = date("Y-m-d");
       	$sql="SELECT *FROM(SELECT ev.*,cy.country_name,ci.city_name,ca.category_name FROM country_master AS cy,city_master AS ci,category_master AS ca,events AS ev WHERE ev.category_id=ca.id AND ev.event_country=cy.id AND ev.event_city=ci.id AND ev.hotspot_status = 'N' AND ev.end_date>= '$current_date' AND ev.event_status='Y'
-				UNION
-				SELECT ev.*,cy.country_name,ci.city_name,ca.category_name FROM country_master AS cy,city_master AS ci,category_master AS ca,events AS ev WHERE ev.category_id=ca.id AND ev.event_country=cy.id AND ev.event_city=ci.id AND ev.hotspot_status = 'Y' AND ev.event_status='Y') AS event_list 
-				ORDER BY event_name";
+			UNION
+			SELECT ev.*,cy.country_name,ci.city_name,ca.category_name FROM country_master AS cy,city_master AS ci,category_master AS ca,events AS ev WHERE ev.category_id=ca.id AND ev.event_country=cy.id AND ev.event_city=ci.id AND ev.hotspot_status = 'Y' AND ev.event_status='Y') AS event_list 
+			ORDER BY event_name";
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
 	  	return $res;

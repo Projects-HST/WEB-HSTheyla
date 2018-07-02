@@ -11,7 +11,7 @@
 
         <div class="card-block" style="padding:20px;">
           <?php  foreach($booking_details as $res){
-            $event_id = $res->id * 564738;
+            $event_id = $res->event_id * 564738;
             $event_name = strtolower(preg_replace("/[^\w]/", "-", $res->event_name));
             $enc_event_id = base64_encode($event_id);
 
@@ -28,8 +28,8 @@
            <div class="thumbnail">
              <img src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>" alt="" style="height:220px;width:100%;">
                <div class="caption">
-                 <a href="<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $res->event_id; ?>/<?php echo $res->event_name; ?>"><h4><?php echo $res->event_name; ?></h4></a>
-                 <p  class="plan_details"><?php echo $string;?></p>
+                 <a href="<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $res->event_name; ?>"><h4><?php echo $res->event_name; ?></h4></a>
+               		 <!-- <p class="plan_details"><?php //echo $string;?></p>-->
                       <p class="plan_details">Plan <?php echo $res->plan_name; ?></p>
                       <p class="plan_details">Number of Seats <?php echo $res->number_of_seats; ?></p>
                       <p class="plan_details">Total Amount :  <?php echo $res->total_amount; ?></p>

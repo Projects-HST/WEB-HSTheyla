@@ -29,7 +29,7 @@
          <img src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>" alt="" style="height:204px;width:100%;">
            <div class="caption">
              <a href="<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>"><h4><?php echo $res->event_name; ?></h4></a>
-             <p><?php echo $string;?></p>
+             	<!--<p><?php //echo $string;?></p>-->
                <p>Last updated on <?php echo $res->wl_updated_at; ?>
                <a href="<?php echo base_url(); ?>home/removewishlist/<?php echo $res->wishlist_id; ?>" class="btn btn-default btn-xs pull-right" role="button" onclick="return confirm('Are you sure want to Remove?')"><i class="fa fa-trash-o" aria-hidden="true" ></i></a></p>
          </div>
