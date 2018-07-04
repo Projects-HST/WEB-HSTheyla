@@ -12,6 +12,7 @@ class Tracking extends CI_Controller
 
  public function organiser_events($id)
 	{
+    
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');

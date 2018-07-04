@@ -8,10 +8,12 @@ class Eventlist extends CI_Controller
         $this->load->model('eventlistmodel');
         $this->load->helper('url');
         $this->load->library('session');
+        $this->load->helper('cookie');
     }
 
  public function index()
 	{
+
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
@@ -20,7 +22,8 @@ class Eventlist extends CI_Controller
 			$data['category_list'] = $this->eventlistmodel->getall_category_list();
 			$data['event_resu'] = $this->eventlistmodel->get_events();
 			$data['adv_event_result'] = $this->eventlistmodel->getadv_events();
-
+      $data['country_values'] = get_cookie('country_values');
+      $data['city_values'] = get_cookie('city_values');
 				$this->load->view('front_header');
 				$this->load->view('event_list_new', $data);
 				$this->load->view('front_footer');
@@ -89,14 +92,20 @@ class Eventlist extends CI_Controller
 		$data['event_details'] = $this->eventlistmodel->getevent_details($event_id);
 		$data['event_reviews'] = $this->eventlistmodel->getevent_reviews($event_id);
     	$event_desc = $data['event_details'];
-    	
+
 		foreach($event_desc as $row_des){}
-		
+
 		$event_title=$row_des->event_name;
 		$data['meta_title']= $event_title;
 		$desc=$row_des->description;
+    $event_country=$row_des->event_country;
+    $event_city=$row_des->event_city;
+    set_cookie('country_values',$event_country,'3600');
+    set_cookie('city_values',$event_city,'3600');
+
+
 		$data['meta_description']=$desc;
-		
+
 		$this->load->view('front_header', $data);
 		$this->load->view('eventdetails_new', $data);
 		$this->load->view('front_footer');

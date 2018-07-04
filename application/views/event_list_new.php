@@ -1,3 +1,7 @@
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<!-- <script src="https://raw.githubusercontent.com/carhartl/jquery-cookie/master/src/jquery.cookie.js"></script> -->
+
+
 <?php $user_id = $this->session->userdata('id'); ?>
 <style>
 .field-icon {
@@ -103,7 +107,9 @@ body{background-color: #f5f5f5;}
   </div>
 </div>
 
- <form method="post" class="navbar-form navbar-right search-event-form" role="search" action="">
+
+<!-- <?php  echo $country_values; echo $city_values; ?> -->
+ <form method="post" class="navbar-form navbar-right search-event-form" role="search" action="" name="eventform">
 <div class="container-fluid eventdetail-pge">
   <div class="row search_filter">
     <div class="col-md-3">
@@ -111,49 +117,41 @@ body{background-color: #f5f5f5;}
             <div class="col-sm-12">
             <select class="form-control" name="cnyname" id="cnyname" onChange="getcountryevents(this.value);">
                   <option value="">Select Country</option>
-                  <?php
-
-				  foreach($country_list as $cntry){ ?>
-                  <option value="
-                     <?php echo $cntry->id; ?>">
-                     <?php echo $cntry->country_name; ?>
-                  </option>
+                  <?php foreach($country_list as $cntry){ ?>
+                  <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
                   <?php } ?>
                </select>
+               <script language="JavaScript">document.eventform.cnyname.value="<?php echo $country_values; ?>";</script>
           </div>
       </div>
     </div>
-    
+
     <div class="col-md-3">
       <div class="form-group">
             <div class="col-sm-12">
             <select class="form-control" name="ctyname" id="ctyname" onChange="getcityevents();">
                   <option value="">Select City</option>
                   <?php foreach($city_list as $cty){ ?>
-                  <option value="
-                     <?php echo $cty->id; ?>">
-                     <?php echo $cty->city_name; ?>
-                  </option>
+                  <option value="<?php echo $cty->id; ?>"><?php echo $cty->city_name; ?></option>
                   <?php } ?>
                </select>
+                <script language="JavaScript">document.eventform.ctyname.value="<?php echo $city_values; ?>";</script>
                <div id="cmsg"></div>
           </div>
       </div>
     </div>
-    
+
     <div class="col-md-4">
       <div class="form-group ">
             <div class="col-sm-12">
             <select id="category" size="3" onchange="getsearchevents()" class="form-control"  multiple>
                  <?php foreach($category_list as $res){ ?>
-                 <option value="
-                    <?php echo $res->id; ?>">
-                    <?php echo $res->category_name; ?>
-                 </option>
+                 <option value="<?php echo $res->id; ?>"><?php echo $res->category_name; ?></option>
                  <?php } ?>
 			</select>
           </div>
       </div>
+
     </div>
 
 	<div class="col-md-2">
@@ -171,11 +169,14 @@ body{background-color: #f5f5f5;}
   </div>
 </div>
 </form>
+
 <div class="container-fluid search_filter">
   <div class="row" id="event_list"> </div>
+
 	  <div id='loader_image'><img src='<?php echo base_url(); ?>assets/loader.gif' width='24' height='24'> Loading...please wait</div>
       <div id='loader_message'></div>
 </div>
+
 <script>
 
 // $('#category').multiselect();
@@ -192,7 +193,8 @@ $('#category').select2({
 
 });
 
-
+$("#cnyname").val("<?php  echo $country_values; ?>");
+$("#ctyname").val("<?php   echo $city_values; ?>");
 
 //$(document).ready(function() {
 $(window).on('load', function(){
@@ -201,16 +203,24 @@ $(window).on('load', function(){
 		var result = '';
 
         // start to load the first set of data
-        getAllevents(limit, offset);
-
-        $('#loader_message').click(function() {
-          // if it has no more records no need to fire ajax request
-          var d = $('#loader_message').find("button").attr("data-atr");
-          if (d != "nodata") {
-            offset = limit + offset;
+        var country_values='<?php  echo $country_values ?>';
+        var city_values='<?php  echo $city_values ?>';
+        if(country_values=='' && city_values==''){
             getAllevents(limit, offset);
-          }
-        });
+            $('#loader_message').click(function() {
+              // if it has no more records no need to fire ajax request
+              var d = $('#loader_message').find("button").attr("data-atr");
+              if (d != "nodata") {
+                offset = limit + offset;
+                getAllevents(limit, offset);
+              }
+            });
+        }else{
+          $('#loader_image').hide();
+        }
+
+
+
 });
 
 
@@ -252,21 +262,21 @@ function getAllevents(lim, off) {
 				var sdate = new Date(Date.parse(start_date));
 				var s_date = String (sdate);
 				var disp_from_date = s_date.replace('05:30:00 GMT+0530 (India Standard Time)', '');
-				
+
 				var end_date = dataArray[i].end_date;
 				var edate = new Date(Date.parse(end_date));
 				var e_date = String (sdate);
 				var disp_end_date = e_date.replace('05:30:00 GMT+0530 (India Standard Time)', '');
-				
+
 				var wlstatus = dataArray[i].wlstatus;
 				var hotspot_status = dataArray[i].hotspot_status;
-				
+
 				if (event_type == 'Paid'){
 					var sevent_type = "<img src='<?php echo base_url(); ?>assets/front/images/paid.png' class='pull-left'>";
 				} else {
 					var sevent_type = "<img src='<?php echo base_url(); ?>assets/front/images/free.png' class='pull-left'>";
 				}
-				
+
 				if (hotspot_status=='N'){
 					var display_date = "<p><img src='<?php echo base_url(); ?>assets/front/images/date.png'><span class='event_thumb'>"+disp_from_date+" - "+disp_end_date+"<span></p>";
 				} else {
@@ -277,7 +287,7 @@ function getAllevents(lim, off) {
 				}else{
 					 var wishliststatus="<span id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img src='<?php echo base_url(); ?>assets/front/images/fav-select.png' class='pull-right'></a></span>";
 				}
-				
+
 				 result +="<div class='col-xs-18 col-sm-3 col-md-3 event_box'><div class='thumbnail event_section'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img src='<?php echo base_url();?>assets/events/banner/"+event_banner+"' alt='' style='height:204px; width:100%;'></a><div class='event_thumb'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><p class='event_heading event_title_heading'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></a>"+display_date+"<p><img src='<?php echo base_url(); ?>assets/front/images/time.png'><span class='event_thumb'>"+start_time+" - "+end_time+" <span></p><p><img src='<?php echo base_url(); ?>assets/front/images/location.png'><span class='event_thumb'>"+event_venue+"<span></p></div><p class='price_section'>"+sevent_type+" <?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></div></div>";
 
 			};
@@ -298,9 +308,17 @@ function getAllevents(lim, off) {
 
       }
 
+
+
 function getcountryevents()
 {
-	var country_id=cnyname.value;
+  var country_id_values=cnyname.value;
+  if(country_id_values==''){
+    var country_id='<?php echo $country_values; ?>';
+  }else{
+      var country_id=country_id_values;
+  }
+   //alert(country_id);
 	var result = '';
 
 	//make the ajax call
@@ -332,21 +350,21 @@ function getcountryevents()
 				var sdate = new Date(Date.parse(start_date));
 				var s_date = String (sdate);
 				var disp_from_date = s_date.replace('05:30:00 GMT+0530 (India Standard Time)', '');
-				
+
 				var end_date = dataArray[i].end_date;
 				var edate = new Date(Date.parse(end_date));
 				var e_date = String (sdate);
 				var disp_end_date = e_date.replace('05:30:00 GMT+0530 (India Standard Time)', '');
-				
+
 				var wlstatus = dataArray[i].wlstatus;
 				var hotspot_status = dataArray[i].hotspot_status;
-				
+
 				if (event_type == 'Paid'){
 					var sevent_type = "<img src='<?php echo base_url(); ?>assets/front/images/paid.png' class='pull-left'>";
 				} else {
 					var sevent_type = "<img src='<?php echo base_url(); ?>assets/front/images/free.png' class='pull-left'>";
 				}
-				
+
 				if (hotspot_status=='N'){
 					var display_date = "<p><img src='<?php echo base_url(); ?>assets/front/images/date.png'><span class='event_thumb'>"+disp_from_date+" - "+disp_end_date+"<span></p>";
 				} else {
@@ -357,7 +375,7 @@ function getcountryevents()
 				}else{
 					 var wishliststatus="<span id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img src='<?php echo base_url(); ?>assets/front/images/fav-select.png' class='pull-right'></a></span>";
 				}
-				
+
 				result +="<div class='col-xs-18 col-sm-3 col-md-3 event_box'><div class='thumbnail event_section'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img src='<?php echo base_url();?>assets/events/banner/"+event_banner+"' alt='' style='height:204px; width:100%;'></a><div class='event_thumb'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><p class='event_heading event_title_heading'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></a>"+display_date+"<p><img src='<?php echo base_url(); ?>assets/front/images/time.png'><span class='event_thumb'>"+start_time+" - "+end_time+" <span></p><p><img src='<?php echo base_url(); ?>assets/front/images/location.png'><span class='event_thumb event_address'>"+event_venue+"<span></p></div><p class='price_section'>"+sevent_type+" <?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></div></div>";
 
 
@@ -376,8 +394,19 @@ function getcountryevents()
 
 function getcityevents()
 {
-	var country_id=cnyname.value;
-	var city_id=ctyname.value;
+	var country_id_values=cnyname.value;
+  if(country_id_values==''){
+    var country_id='<?php echo $country_values; ?>';
+  }else{
+      var country_id=country_id_values;
+  }
+	var city_id_value=ctyname.value;
+  if(city_id_value==''){
+    var city_id='<?php echo $city_values; ?>';
+  }else{
+      var city_id=city_id_value;
+  }
+  //alert(city_id);
 	var result = '';
 
 	//make the ajax call
@@ -409,21 +438,21 @@ function getcityevents()
 				var sdate = new Date(Date.parse(start_date));
 				var s_date = String (sdate);
 				var disp_from_date = s_date.replace('05:30:00 GMT+0530 (India Standard Time)', '');
-				
+
 				var end_date = dataArray[i].end_date;
 				var edate = new Date(Date.parse(end_date));
 				var e_date = String (sdate);
 				var disp_end_date = e_date.replace('05:30:00 GMT+0530 (India Standard Time)', '');
-				
+
 				var wlstatus = dataArray[i].wlstatus;
 				var hotspot_status = dataArray[i].hotspot_status;
-				
+
 				if (event_type == 'Paid'){
 					var sevent_type = "<img src='<?php echo base_url(); ?>assets/front/images/paid.png' class='pull-left'>";
 				} else {
 					var sevent_type = "<img src='<?php echo base_url(); ?>assets/front/images/free.png' class='pull-left'>";
 				}
-				
+
 				if (hotspot_status=='N'){
 					var display_date = "<p><img src='<?php echo base_url(); ?>assets/front/images/date.png'><span class='event_thumb'>"+disp_from_date+" - "+disp_end_date+"<span></p>";
 				} else {
@@ -462,7 +491,7 @@ function getsearchevents()
 	if (category_id ==''){
 		$('#event_type').hide();
 	}
-	
+
 	//make the ajax call
 	$.ajax({
 	url: '<?php echo base_url(); ?>eventlist/get_search_events',
@@ -492,21 +521,21 @@ function getsearchevents()
 				var sdate = new Date(Date.parse(start_date));
 				var s_date = String (sdate);
 				var disp_from_date = s_date.replace('05:30:00 GMT+0530 (India Standard Time)', '');
-				
+
 				var end_date = dataArray[i].end_date;
 				var edate = new Date(Date.parse(end_date));
 				var e_date = String (sdate);
 				var disp_end_date = e_date.replace('05:30:00 GMT+0530 (India Standard Time)', '');
-				
+
 				var wlstatus = dataArray[i].wlstatus;
 				var hotspot_status = dataArray[i].hotspot_status;
-				
+
 				if (event_type == 'Paid'){
 					var sevent_type = "<img src='<?php echo base_url(); ?>assets/front/images/paid.png' class='pull-left'>";
 				} else {
 					var sevent_type = "<img src='<?php echo base_url(); ?>assets/front/images/free.png' class='pull-left'>";
 				}
-				
+
 				if (hotspot_status=='N'){
 					var display_date = "<p><img src='<?php echo base_url(); ?>assets/front/images/date.png'><span class='event_thumb'>"+disp_from_date+" - "+disp_end_date+"<span></p>";
 				} else {
@@ -574,21 +603,21 @@ function gettypeevents()
 				var sdate = new Date(Date.parse(start_date));
 				var s_date = String (sdate);
 				var disp_from_date = s_date.replace('05:30:00 GMT+0530 (India Standard Time)', '');
-				
+
 				var end_date = dataArray[i].end_date;
 				var edate = new Date(Date.parse(end_date));
 				var e_date = String (sdate);
 				var disp_end_date = e_date.replace('05:30:00 GMT+0530 (India Standard Time)', '');
-				
+
 				var wlstatus = dataArray[i].wlstatus;
 				var hotspot_status = dataArray[i].hotspot_status;
-				
+
 				if (event_type == 'Paid'){
 					var sevent_type = "<img src='<?php echo base_url(); ?>assets/front/images/paid.png' class='pull-left'>";
 				} else {
 					var sevent_type = "<img src='<?php echo base_url(); ?>assets/front/images/free.png' class='pull-left'>";
 				}
-				
+
 				if (hotspot_status=='N'){
 					var display_date = "<p><img src='<?php echo base_url(); ?>assets/front/images/date.png'><span class='event_thumb'>"+disp_from_date+" - "+disp_end_date+"<span></p>";
 				} else {
@@ -653,21 +682,21 @@ function getsearchtermevents()
 				var sdate = new Date(Date.parse(start_date));
 				var s_date = String (sdate);
 				var disp_from_date = s_date.replace('05:30:00 GMT+0530 (India Standard Time)', '');
-				
+
 				var end_date = dataArray[i].end_date;
 				var edate = new Date(Date.parse(end_date));
 				var e_date = String (sdate);
 				var disp_end_date = e_date.replace('05:30:00 GMT+0530 (India Standard Time)', '');
-				
+
 				var wlstatus = dataArray[i].wlstatus;
 				var hotspot_status = dataArray[i].hotspot_status;
-				
+
 				if (event_type == 'Paid'){
 					var sevent_type = "<img src='<?php echo base_url(); ?>assets/front/images/paid.png' class='pull-left'>";
 				} else {
 					var sevent_type = "<img src='<?php echo base_url(); ?>assets/front/images/free.png' class='pull-left'>";
 				}
-				
+
 				if (hotspot_status=='N'){
 					var display_date = "<p><img src='<?php echo base_url(); ?>assets/front/images/date.png'><span class='event_thumb'>"+disp_from_date+" - "+disp_end_date+"<span></p>";
 				} else {
@@ -678,7 +707,7 @@ function getsearchtermevents()
 				}else{
 					 var wishliststatus="<span id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img src='<?php echo base_url(); ?>assets/front/images/fav-select.png' class='pull-right'></a></span>";
 				}
-				
+
 				result +="<div class='col-xs-18 col-sm-3 col-md-3 event_box'><div class='thumbnail event_section'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img src='<?php echo base_url();?>assets/events/banner/"+event_banner+"' alt='' style='height:204px; width:100%;'></a><div class='event_thumb'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><p class='event_heading event_title_heading'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></a>"+display_date+"<p><img src='<?php echo base_url(); ?>assets/front/images/time.png'><span class='event_thumb'>"+start_time+" - "+end_time+" <span></p><p><img src='<?php echo base_url(); ?>assets/front/images/location.png'><span class='event_thumb event_address'>"+event_venue+"<span></p></div><p class='price_section'>"+sevent_type+" <?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></div></div>";
 			};
 
@@ -761,4 +790,41 @@ $( function() {
       source: availableTags
     });
   } );
+
+$('#reset_cookie').hide();
+window.onload=set_cookies_values();
+
+function set_cookies_values(){
+
+  var country_values='<?php  echo $country_values ?>';
+  var city_values='<?php  echo $city_values ?>';
+
+  if(country_values=='' && city_values==''){
+
+  }else{
+    // $('#reset_cookie').show();
+    if(city_values==''){
+      getcountryevents();
+    }else{
+      getcityevents();
+  }
+
+  }
+
+}
+function reset(){
+<?php
+unset($_COOKIE['country_values']);
+unset($_COOKIE['city_values']);
+
+delete_cookie('country_values');
+delete_cookie('city_values');
+?>
+location.reload();
+}
+
+
+
+
+
 </script>

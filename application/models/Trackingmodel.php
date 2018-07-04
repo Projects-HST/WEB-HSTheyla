@@ -11,6 +11,7 @@
     function get_all_organiser_event($id)
     {
        $u_id=base64_decode($id)/98765;
+
 	   $sql="SELECT cm.city_name,ev.* FROM events AS ev LEFT JOIN user_master AS um ON um.id=ev.created_by LEFT JOIN city_master AS cm ON cm.id=ev.event_city WHERE um.user_role=2 AND  ev.created_by='$u_id' ORDER BY ev.id DESC";
 	  $resu=$this->db->query($sql);
 	  $res=$resu->result();

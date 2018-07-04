@@ -15,7 +15,7 @@
       </div>
       <div class="container attendees-form">
     <div class="row">
-      <div class="col-md-12" style="margin-bottom:100px;">
+      <div class="col-md-12" style="margin-bottom:0px;">
 
         <form id="attendees" name="attendees" class="form-inline" method="post" action="<?php echo base_url(); ?>home/insertattendees" onsubmit="return check();">
 
@@ -62,6 +62,7 @@
             ?>
          	<input type="hidden" name="order_id" id="order_id" value="<?php echo $order_id; ?>" />
             <input type="hidden" name="count" id="count" value="<?php echo $number_of_seats; ?>" />
+            <br>
             <input type="submit" class="btn btn-primary" name="button" id="button" value="Submit" />
          </form>
       </div>
@@ -73,10 +74,8 @@
 
 </div>
 <style>
-#stickfooter{
-  position:fixed;
-      bottom:0;
-      width: 100%;
+.attendees-form{
+  margin-top: 50px;
 }
 
 label {
@@ -88,10 +87,11 @@ label {
 }
 .formrow{
   width: 100%;
+  margin-bottom: 5px;
 }
 body{
   background-color:  #eeeeee;
-  margin-bottom:  70px;
+
 
 }
 </style>
