@@ -4,6 +4,14 @@
 
 <?php $user_id = $this->session->userdata('id'); ?>
 <style>
+.ui-autocomplete {
+          max-height: 200px;
+          overflow-y: auto;
+          /* prevent horizontal scrollbar */
+          overflow-x: hidden;
+          /* add padding to account for vertical scrollbar */
+          padding-right: 20px;
+      }
 .field-icon {
   float: right;
   left:-10px;
@@ -97,7 +105,7 @@ body{background-color: #f5f5f5;}
     </div>
     <div class="col-md-10" style="padding-right:0px;">
       <div class="left-inner-addon">
-      <form class="navbar-form navbar-right search-event-form" role="search" method="post" action="" name="search_form">
+      <form class="navbar-form navbar-right search-event-form" role="search" method="post" action="" name="search_form" id="search_form">
         	<input  type="text" class="form-control btn-block" name="search_term" id="search_term"  placeholder="Search Event by name" value="">
            <a href="#"  onclick="getsearchtermevents()"><span toggle="#password-field" class="fa fa-search field-icon toggle-password"></span></a>
         </form>
@@ -109,10 +117,10 @@ body{background-color: #f5f5f5;}
 
 
 <!-- <?php  echo $country_values; echo $city_values; ?> -->
- <form method="post" class="navbar-form navbar-right search-event-form" role="search" action="" name="eventform">
+ <form method="post" class="navbar-form navbar-right search-event-form" role="search" action="" name="eventform" id="eventform">
 <div class="container-fluid eventdetail-pge">
   <div class="row search_filter">
-    <div class="col-md-3">
+    <!-- <div class="col-md-3">
       <div class="form-group">
             <div class="col-sm-12">
             <select class="form-control" name="cnyname" id="cnyname" onChange="getcountryevents(this.value);">
@@ -124,7 +132,7 @@ body{background-color: #f5f5f5;}
                <script language="JavaScript">document.eventform.cnyname.value="<?php echo $country_values; ?>";</script>
           </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="col-md-3">
       <div class="form-group">
@@ -296,10 +304,10 @@ function getAllevents(lim, off) {
 			}
 
          if (dataArray.length>0) {
-			$("#loader_message").html('<button class="btn btn-default" type="button">Load more data</button>').show();
+			$("#loader_message").html('<button class="btn btn-default" type="button">More Events</button>').show();
 
             } else {
-             $("#loader_message").html('<button data-atr="nodata" class="btn btn-default" type="button">No more records.</button>').show()
+             $("#loader_message").html('<button data-atr="nodata" class="btn btn-default" type="button">No more Events.</button>').show()
             }
 
 
@@ -319,6 +327,8 @@ function getcountryevents()
       var country_id=country_id_values;
   }
    //alert(country_id);
+   $('#ctyname').val('');
+
 	var result = '';
 
 	//make the ajax call
@@ -392,15 +402,19 @@ function getcountryevents()
 	});
 }
 
+
 function getcityevents()
 {
-	var country_id_values=cnyname.value;
-  if(country_id_values==''){
-    var country_id='<?php echo $country_values; ?>';
-  }else{
-      var country_id=country_id_values;
-  }
+	// var country_id_values=cnyname.value;
+  // if(country_id_values==''){
+  //   var country_id='<?php echo $country_values; ?>';
+  // }else{
+  //     var country_id=country_id_values;
+  // }
 	var city_id_value=ctyname.value;
+  var category_id = $("#category").val();
+	cat_id = category_id.toString();
+  //alert(category_id);
   if(city_id_value==''){
     var city_id='<?php echo $city_values; ?>';
   }else{
@@ -409,11 +423,13 @@ function getcityevents()
   //alert(city_id);
 	var result = '';
 
-	//make the ajax call
+
 	$.ajax({
 	url: '<?php echo base_url(); ?>eventlist/get_city_events',
 	type: 'POST',
-	data: {country_id : country_id,city_id:city_id},
+	data: {city_id:city_id,cat_id:cat_id},
+  // dataType: 'json',
+  // cache: false,
 	success: function(data) {
 		var dataArray = JSON.parse(data);
 		if (dataArray.length>0) {
@@ -482,10 +498,11 @@ function getcityevents()
 
 function getsearchevents()
 {
-	var country_id=cnyname.value;
+//	var country_id=cnyname.value;
 	var city_id=ctyname.value;
 	var category_id = $("#category").val();
 	cat_id = category_id.toString();
+  //alert(cat_id);
 	var result = '';
 
 	if (category_id ==''){
@@ -496,7 +513,7 @@ function getsearchevents()
 	$.ajax({
 	url: '<?php echo base_url(); ?>eventlist/get_search_events',
 	type: 'POST',
-	data: {country_id : country_id,city_id:city_id,cat_id:cat_id},
+	data: {city_id:city_id,cat_id:cat_id},
 	success: function(data) {
 		var dataArray = JSON.parse(data);
 		if (dataArray.length>0) {
@@ -567,7 +584,7 @@ function getsearchevents()
 
 function gettypeevents()
 {
-	var country_id=cnyname.value;
+//	var country_id=cnyname.value;
 	var city_id=ctyname.value;
 	var category_id=$("#category").val();
 	var cat_id = category_id.toString();
@@ -578,7 +595,7 @@ function gettypeevents()
 	$.ajax({
 	url: '<?php echo base_url(); ?>eventlist/get_type_events',
 	type: 'POST',
-	data: {country_id : country_id,city_id:city_id,cat_id:cat_id,type_id:type_id},
+	data: {city_id:city_id,cat_id:cat_id,type_id:type_id},
 	success: function(data) {
 		var dataArray = JSON.parse(data);
 		if (dataArray.length>0) {
@@ -786,9 +803,18 @@ $( function() {
 		echo "'";
 		if ($i < $tot_count) echo ",";
 		 $i = $i+1;} ?>];
-    $( "#search_term" ).autocomplete({
-      source: availableTags
-    });
+    // $( "#search_term" ).autocomplete({
+    //   source: availableTags
+    // });
+    $("#search_term").autocomplete({
+  source: availableTags,
+  select: function(event, ui) {
+    $("#search_term").val(ui.item.value);
+    getsearchtermevents();
+    //$("#search_form").submit();
+  }
+});
+
   } );
 
 $('#reset_cookie').hide();

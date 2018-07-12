@@ -40,22 +40,24 @@ class Eventlist extends CI_Controller
 	public function get_country_events()
     {
       	$country_id  = $this->input->post('country_id');
+
         $data['event_result'] = $this->eventlistmodel->get_country_events($country_id);
         echo json_encode($data['event_result']);
     }
 	public function get_city_events()
     {
       	$country_id  = $this->input->post('country_id');
-		$city_id  = $this->input->post('city_id');
-        $data['event_result'] = $this->eventlistmodel->get_city_events($country_id,$city_id);
+		    $city_id  = $this->input->post('city_id');
+        $category_id  = $this->input->post('cat_id');
+        $data['event_result'] = $this->eventlistmodel->get_city_events($country_id,$city_id,$category_id);
         echo json_encode($data['event_result']);
     }
 
 	public function get_search_events()
     {
       	$country_id  = $this->input->post('country_id');
-		$city_id  = $this->input->post('city_id');
-		$category_id  = $this->input->post('cat_id');
+    		$city_id  = $this->input->post('city_id');
+    		$category_id  = $this->input->post('cat_id');
         $data['event_result'] = $this->eventlistmodel->getsearch_events($country_id,$city_id,$category_id);
         echo json_encode($data['event_result']);
     }
@@ -63,9 +65,9 @@ class Eventlist extends CI_Controller
 	public function get_type_events()
     {
       	$country_id  = $this->input->post('country_id');
-		$city_id  = $this->input->post('city_id');
-		$category_id  = $this->input->post('cat_id');
-		$type_id = $this->input->post('type_id');
+    		$city_id  = $this->input->post('city_id');
+    		$category_id  = $this->input->post('cat_id');
+    		$type_id = $this->input->post('type_id');
         $data['event_result'] = $this->eventlistmodel->gettype_events($country_id,$city_id,$category_id,$type_id);
         echo json_encode($data['event_result']);
     }
@@ -86,11 +88,11 @@ class Eventlist extends CI_Controller
 
 	public function eventdetails($enc_event_id,$event_name)
     {
-		$dec_event_id = base64_decode($enc_event_id);
-		$event_id = ($dec_event_id/564738);
-  		$data['event_gallery'] = $this->eventlistmodel->getevent_gallery($event_id);
-		$data['event_details'] = $this->eventlistmodel->getevent_details($event_id);
-		$data['event_reviews'] = $this->eventlistmodel->getevent_reviews($event_id);
+  		$dec_event_id = base64_decode($enc_event_id);
+  		$event_id = ($dec_event_id/564738);
+    	$data['event_gallery'] = $this->eventlistmodel->getevent_gallery($event_id);
+  		$data['event_details'] = $this->eventlistmodel->getevent_details($event_id);
+  		$data['event_reviews'] = $this->eventlistmodel->getevent_reviews($event_id);
     	$event_desc = $data['event_details'];
 
 		foreach($event_desc as $row_des){}
