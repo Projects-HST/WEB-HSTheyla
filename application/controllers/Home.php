@@ -22,6 +22,7 @@ class Home extends CI_Controller {
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
+		
 		$data['country_list'] = $this->eventlistmodel->getall_country_list();
 		$data['city_list'] = $this->eventlistmodel->getall_city_list();
 		$data['category_list'] = $this->eventlistmodel->getall_category_list();
