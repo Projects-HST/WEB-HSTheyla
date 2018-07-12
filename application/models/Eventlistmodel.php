@@ -5,7 +5,7 @@ Class Eventlistmodel extends CI_Model
 	 {
 		  parent::__construct();
 	 }
-  
+
   	function getall_country_list()
     {
       $sql="SELECT id,country_name,event_status FROM country_master WHERE event_status='Y' ORDER BY id ASC";
@@ -13,7 +13,7 @@ Class Eventlistmodel extends CI_Model
       $res=$resu->result();
       return $res;
     }
-	
+
     function getall_city_list()
     {
       $sql="SELECT id,city_name FROM city_master WHERE event_status='Y' ORDER BY id ASC";
@@ -21,7 +21,7 @@ Class Eventlistmodel extends CI_Model
       $res=$resu->result();
       return $res;
     }
-	   
+
     function getall_category_list()
     {
       $sql="SELECT id,category_name FROM category_master  WHERE status='Y' ORDER BY id ASC";
@@ -29,7 +29,7 @@ Class Eventlistmodel extends CI_Model
       $res=$resu->result();
       return $res;
     }
-	
+
     function getcityname($country_id)
     {
         $query="SELECT id,city_name FROM city_master WHERE country_id='$country_id' AND event_status='Y'";
@@ -37,8 +37,8 @@ Class Eventlistmodel extends CI_Model
         $row=$resultset->result();
         return $row;
     }
-      
-	
+
+
 	function getadv_events()
     {
 		$current_date = date("Y-m-d");
@@ -53,7 +53,7 @@ Class Eventlistmodel extends CI_Model
 	  	$res=$resu->result();
 	  	return $res;
     }
-	
+
 	function popular_events()
     {
 		$current_date = date("Y-m-d");
@@ -62,41 +62,42 @@ Class Eventlistmodel extends CI_Model
 		} else {
 			$user_id = 0;
 		}
-		
+
       	$sql = "SELECT * FROM(SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 				FROM events AS e
 				LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
 				LEFT JOIN country_master AS cy ON e.event_country = cy.id
 				LEFT JOIN city_master AS ci ON e.event_city = ci.id
 				LEFT JOIN category_master AS ca ON e.category_id = ca.id
-				WHERE e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.featured_status = 'Y' AND e.event_status = 'Y' 
-				UNION 
+				WHERE e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.featured_status = 'Y' AND e.event_status = 'Y'
+				UNION
 				SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 				FROM events AS e
 				LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
 				LEFT JOIN country_master AS cy ON e.event_country = cy.id
 				LEFT JOIN city_master AS ci ON e.event_city = ci.id
 				LEFT JOIN category_master AS ca ON e.category_id = ca.id
-				WHERE e.hotspot_status = 'Y' AND e.featured_status = 'Y' AND e.event_status = 'Y') AS event_list 
+				WHERE e.hotspot_status = 'Y' AND e.featured_status = 'Y' AND e.event_status = 'Y') AS event_list
 				ORDER BY id DESC LIMIT 4";
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
 	  	return $res;
     }
-	
+
 	function get_events()
     {
 		$current_date = date("Y-m-d");
-      	$sql="SELECT *FROM(SELECT ev.*,cy.country_name,ci.city_name,ca.category_name FROM country_master AS cy,city_master AS ci,category_master AS ca,events AS ev WHERE ev.category_id=ca.id AND ev.event_country=cy.id AND ev.event_city=ci.id AND ev.hotspot_status = 'N' AND ev.end_date>= '$current_date' AND ev.event_status='Y'
+      	$sql="SELECT *FROM(SELECT ev.*,cy.country_name,ci.city_name,ca.category_name FROM country_master AS cy,city_master
+					 AS ci,category_master AS ca,events AS ev WHERE ev.category_id=ca.id AND ev.event_country=cy.id AND ev.event_city=ci.id AND ev.hotspot_status = 'N' AND ev.end_date>= '$current_date' AND ev.event_status='Y'
 			UNION
-			SELECT ev.*,cy.country_name,ci.city_name,ca.category_name FROM country_master AS cy,city_master AS ci,category_master AS ca,events AS ev WHERE ev.category_id=ca.id AND ev.event_country=cy.id AND ev.event_city=ci.id AND ev.hotspot_status = 'Y' AND ev.event_status='Y') AS event_list 
+			SELECT ev.*,cy.country_name,ci.city_name,ca.category_name FROM country_master AS cy,city_master AS ci,category_master AS ca,events AS ev WHERE ev.category_id=ca.id AND ev.event_country=cy.id AND ev.event_city=ci.id AND ev.hotspot_status = 'Y' AND ev.event_status='Y') AS event_list
 			ORDER BY event_name";
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
 	  	return $res;
     }
-	
-	
+
+
 	function getall_events($limit, $offset)
     {
 		$current_date = date("Y-m-d");
@@ -115,8 +116,8 @@ Class Eventlistmodel extends CI_Model
 				LEFT JOIN country_master AS cy ON e.event_country = cy.id
 				LEFT JOIN city_master AS ci ON e.event_city = ci.id
 				LEFT JOIN category_master AS ca ON e.category_id = ca.id
-				WHERE e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y' 
-				UNION 
+				WHERE e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y'
+				UNION
 				SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 				FROM events AS e
 				LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
@@ -128,18 +129,18 @@ Class Eventlistmodel extends CI_Model
 	  	$res=$resu->result();
 	  	return $res;
     }
-	
-	
+
+
 	function get_country_events($country_id)
     {
 		$current_date = date("Y-m-d");
-		
+
 		if ($this->session->userdata('id') !=''){
 			$user_id = $this->session->userdata('id');
 		} else {
 			$user_id = 0;
 		}
-		
+
 		if ($country_id!='') {
       		$sql="SELECT * FROM(SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 				FROM events AS e
@@ -147,15 +148,15 @@ Class Eventlistmodel extends CI_Model
 				LEFT JOIN country_master AS cy ON e.event_country = cy.id
 				LEFT JOIN city_master AS ci ON e.event_city = ci.id
 				LEFT JOIN category_master AS ca ON e.category_id = ca.id
-				WHERE e.event_country='$country_id' AND e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y' 
-				UNION 
+				WHERE e.event_country='$country_id' AND e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y'
+				UNION
 				SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 				FROM events AS e
 				LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
 				LEFT JOIN country_master AS cy ON e.event_country = cy.id
 				LEFT JOIN city_master AS ci ON e.event_city = ci.id
 				LEFT JOIN category_master AS ca ON e.category_id = ca.id
-				WHERE e.event_country='$country_id' AND e.hotspot_status = 'Y' AND e.event_status = 'Y') AS event_list 
+				WHERE e.event_country='$country_id' AND e.hotspot_status = 'Y' AND e.event_status = 'Y') AS event_list
 				ORDER BY id DESC";
 		} else {
 			$sql="SELECT * FROM(SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
@@ -164,98 +165,140 @@ Class Eventlistmodel extends CI_Model
 				LEFT JOIN country_master AS cy ON e.event_country = cy.id
 				LEFT JOIN city_master AS ci ON e.event_city = ci.id
 				LEFT JOIN category_master AS ca ON e.category_id = ca.id
-				WHERE e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y' 
-				UNION 
+				WHERE e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y'
+				UNION
 				SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 				FROM events AS e
 				LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
 				LEFT JOIN country_master AS cy ON e.event_country = cy.id
 				LEFT JOIN city_master AS ci ON e.event_city = ci.id
 				LEFT JOIN category_master AS ca ON e.category_id = ca.id
-				WHERE e.hotspot_status = 'Y' AND e.event_status = 'Y') AS event_list 
+				WHERE e.hotspot_status = 'Y' AND e.event_status = 'Y') AS event_list
 				ORDER BY id DESC";
 		}
 			  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
 	  	return $res;
     }
-	
-	function get_city_events($country_id,$city_id)
+
+	function get_city_events($country_id,$city_id,$category_id)
     {
 		$current_date = date("Y-m-d");
-		
+
 		if ($this->session->userdata('id') !=''){
 			$user_id = $this->session->userdata('id');
 		} else {
 			$user_id = 0;
 		}
-		
-		$sql="SELECT * FROM(SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
-				FROM events AS e
-				LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
-				LEFT JOIN country_master AS cy ON e.event_country = cy.id
-				LEFT JOIN city_master AS ci ON e.event_city = ci.id
-				LEFT JOIN category_master AS ca ON e.category_id = ca.id
-				WHERE e.event_country='$country_id' AND e.event_city='$city_id' AND e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y' 
-				UNION 
-				SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
-				FROM events AS e
-				LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
-				LEFT JOIN country_master AS cy ON e.event_country = cy.id
-				LEFT JOIN city_master AS ci ON e.event_city = ci.id
-				LEFT JOIN category_master AS ca ON e.category_id = ca.id
-				WHERE e.event_country='$country_id' AND e.event_city='$city_id' AND e.hotspot_status = 'Y' AND e.event_status = 'Y') AS event_list ORDER BY id DESC";
-				
+		if(empty($category_id)){
+
+		 	$sql="SELECT * FROM(SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+			FROM events AS e
+			LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
+			LEFT JOIN country_master AS cy ON e.event_country = cy.id
+			LEFT JOIN city_master AS ci ON e.event_city = ci.id
+			LEFT JOIN category_master AS ca ON e.category_id = ca.id
+			WHERE  e.event_city='$city_id' AND e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y'
+			UNION
+			SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+			FROM events AS e
+			LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
+			LEFT JOIN country_master AS cy ON e.event_country = cy.id
+			LEFT JOIN city_master AS ci ON e.event_city = ci.id
+			LEFT JOIN category_master AS ca ON e.category_id = ca.id
+			WHERE  e.event_city='$city_id' AND e.hotspot_status = 'Y' AND e.event_status = 'Y') AS event_list ORDER BY id DESC";
+
+		}else{
+
+		 	$sql="SELECT * FROM(SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+			FROM events AS e
+			LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
+			LEFT JOIN country_master AS cy ON e.event_country = cy.id
+			LEFT JOIN city_master AS ci ON e.event_city = ci.id
+			LEFT JOIN category_master AS ca ON e.category_id = ca.id
+			WHERE  e.category_id IN ($category_id) AND e.event_city='$city_id' AND e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y'
+			UNION
+			SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+			FROM events AS e
+			LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
+			LEFT JOIN country_master AS cy ON e.event_country = cy.id
+			LEFT JOIN city_master AS ci ON e.event_city = ci.id
+			LEFT JOIN category_master AS ca ON e.category_id = ca.id
+			WHERE  e.category_id IN ($category_id) AND e.event_city='$city_id' AND e.category_id IN ($category_id) AND e.hotspot_status = 'Y' AND e.event_status = 'Y') AS event_list ORDER BY id DESC";
+
+
+		}
+
+
 		 //$sql="SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus FROM events AS e LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id' LEFT JOIN country_master AS cy ON e.event_country = cy.id LEFT JOIN city_master AS ci ON e.event_city = ci.id LEFT JOIN category_master AS ca ON e.category_id = ca.id WHERE e.end_date >= '$current_date' AND e.event_country='$country_id' AND e.event_city='$city_id' AND e.event_status = 'Y' AND e.category_id IN ($category_id) ORDER BY e.id DESC";
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
 	  	return $res;
     }
-	
-	
+
+
 	function getsearch_events($country_id,$city_id,$category_id)
     {
 		$current_date = date("Y-m-d");
-		
+
 		if ($this->session->userdata('id') !=''){
 			$user_id = $this->session->userdata('id');
 		} else {
 			$user_id = 0;
 		}
-		
-		$sql="SELECT * FROM(SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
-				FROM events AS e
-				LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
-				LEFT JOIN country_master AS cy ON e.event_country = cy.id
-				LEFT JOIN city_master AS ci ON e.event_city = ci.id
-				LEFT JOIN category_master AS ca ON e.category_id = ca.id
-				WHERE e.event_country='$country_id' AND e.event_city='$city_id' AND e.category_id IN ($category_id) AND e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y' 
-				UNION 
-				SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
-				FROM events AS e
-				LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
-				LEFT JOIN country_master AS cy ON e.event_country = cy.id
-				LEFT JOIN city_master AS ci ON e.event_city = ci.id
-				LEFT JOIN category_master AS ca ON e.category_id = ca.id
-				WHERE e.event_country='$country_id' AND e.event_city='$city_id' AND e.category_id IN ($category_id) AND e.hotspot_status = 'Y' AND e.event_status = 'Y') AS event_list ORDER BY id DESC";
-				
+		if(empty($country_id)){
+			$sql="SELECT * FROM(SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+					FROM events AS e
+					LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
+					LEFT JOIN country_master AS cy ON e.event_country = cy.id
+					LEFT JOIN city_master AS ci ON e.event_city = ci.id
+					LEFT JOIN category_master AS ca ON e.category_id = ca.id
+					WHERE  e.event_city='$city_id' AND e.category_id IN ($category_id) AND e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y'
+					UNION
+					SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+					FROM events AS e
+					LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
+					LEFT JOIN country_master AS cy ON e.event_country = cy.id
+					LEFT JOIN city_master AS ci ON e.event_city = ci.id
+					LEFT JOIN category_master AS ca ON e.category_id = ca.id
+					WHERE  e.event_city='$city_id' AND e.category_id IN ($category_id) AND e.hotspot_status = 'Y' AND e.event_status = 'Y') AS event_list ORDER BY id DESC";
+
+		}else{
+			$sql="SELECT * FROM(SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+					FROM events AS e
+					LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
+					LEFT JOIN country_master AS cy ON e.event_country = cy.id
+					LEFT JOIN city_master AS ci ON e.event_city = ci.id
+					LEFT JOIN category_master AS ca ON e.category_id = ca.id
+					WHERE e.event_country='$country_id' AND e.event_city='$city_id' AND e.category_id IN ($category_id) AND e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y'
+					UNION
+					SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+					FROM events AS e
+					LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
+					LEFT JOIN country_master AS cy ON e.event_country = cy.id
+					LEFT JOIN city_master AS ci ON e.event_city = ci.id
+					LEFT JOIN category_master AS ca ON e.category_id = ca.id
+					WHERE e.event_country='$country_id' AND e.event_city='$city_id' AND e.category_id IN ($category_id) AND e.hotspot_status = 'Y' AND e.event_status = 'Y') AS event_list ORDER BY id DESC";
+
+		}
+
 		 //$sql="SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus FROM events AS e LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id' LEFT JOIN country_master AS cy ON e.event_country = cy.id LEFT JOIN city_master AS ci ON e.event_city = ci.id LEFT JOIN category_master AS ca ON e.category_id = ca.id WHERE e.end_date >= '$current_date' AND e.event_country='$country_id' AND e.event_city='$city_id' AND e.event_status = 'Y' AND e.category_id IN ($category_id) ORDER BY e.id DESC";
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
 	  	return $res;
     }
-	
-	
+
+
 	function gettype_events($country_id,$city_id,$category_id,$type_id)
     {
 		$current_date = date("Y-m-d");
-		
+
 		if ($this->session->userdata('id') !=''){
 			$user_id = $this->session->userdata('id');
 		} else {
 			$user_id = 0;
 		}
-		if ($type_id =='1') 
+		if ($type_id =='1')
 		{
 				 $sql="SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 				FROM events AS e
@@ -263,7 +306,7 @@ Class Eventlistmodel extends CI_Model
 				LEFT JOIN country_master AS cy ON e.event_country = cy.id
 				LEFT JOIN city_master AS ci ON e.event_city = ci.id
 				LEFT JOIN category_master AS ca ON e.category_id = ca.id
-				WHERE e.event_country='$country_id' AND e.event_city='$city_id' AND e.category_id IN ($category_id) AND e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y'";
+				WHERE  e.event_city='$city_id' AND e.category_id IN ($category_id) AND e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y'";
 		} else {
 				 $sql="SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 				FROM events AS e
@@ -271,14 +314,14 @@ Class Eventlistmodel extends CI_Model
 				LEFT JOIN country_master AS cy ON e.event_country = cy.id
 				LEFT JOIN city_master AS ci ON e.event_city = ci.id
 				LEFT JOIN category_master AS ca ON e.category_id = ca.id
-				WHERE e.event_country='$country_id' AND e.event_city='$city_id' AND e.category_id IN ($category_id) AND e.hotspot_status = 'Y' AND e.event_status = 'Y' ORDER BY id DESC";
+				WHERE e.event_city='$city_id' AND e.category_id IN ($category_id) AND e.hotspot_status = 'Y' AND e.event_status = 'Y' ORDER BY id DESC";
 		}
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
 	  	return $res;
     }
-	
-	
+
+
 	function getsearch_term_events($srch_term)
     {
 		$current_date = date("Y-m-d");
@@ -293,11 +336,11 @@ Class Eventlistmodel extends CI_Model
 	  	$res=$resu->result();
 	  	return $res;
     }
-	
+
 	function getevent_details($event_id)
     {
 		$current_date = date("Y-m-d");
-		
+
 		if ($this->session->userdata('id') !=''){
 			$user_id = $this->session->userdata('id');
 		} else {
@@ -308,7 +351,7 @@ Class Eventlistmodel extends CI_Model
 	  	$res=$resu->result();
 	  	return $res;
     }
-	
+
 	function getevent_reviews($event_id)
     {
 		$current_date = date("Y-m-d");
@@ -317,7 +360,7 @@ Class Eventlistmodel extends CI_Model
 	  	$res=$resu->result();
 	  	return $res;
     }
-	
+
 	function getevent_gallery($event_id)
     {
 		$sql="SELECT * FROM event_images WHERE event_id = '$event_id'";
@@ -325,7 +368,7 @@ Class Eventlistmodel extends CI_Model
 	  	$res=$resu->result();
 	  	return $res;
     }
-	
+
 	function eventwishlist($user_id,$event_id)
     {
 		$sql="SELECT event_id FROM user_wish_list WHERE user_id = '$user_id'";
@@ -333,7 +376,7 @@ Class Eventlistmodel extends CI_Model
 	  	$res=$resu->result();
 	  	return $res;
     }
-	
+
 	function update_wishlist($user_id,$event_id)
     {
 		$sql = "SELECT * FROM user_wish_list WHERE user_id = '$user_id' AND event_id = '$event_id'";
@@ -351,20 +394,20 @@ Class Eventlistmodel extends CI_Model
 			}
 	  	return $res;
     }
-	
+
 	function update_sharing($user_id,$event_id)
     {
 				$activity_sql = "INSERT INTO user_activity (date,user_id,event_id,rule_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $event_id . "','2','Sharing')";
 		    	$insert_activity = $this->db->query($activity_sql);
-		    	
+
 		    	$activity_points = "UPDATE user_points_count SET sharing_count = sharing_count+1,sharing_points = sharing_points+5,total_points=total_points+5 WHERE user_id  ='$user_id'";
 		    	$insert_points = $this->db->query($activity_points);
-				
+
 			$res = "Added";
 			return $res;
     }
-	
-	
+
+
 	function booking_plandates($event_id)
     {
 		$sql="SELECT show_date FROM booking_plan_timing WHERE event_id  ='". $event_id . "' AND `show_date` >= CURDATE()  GROUP BY show_date";
@@ -372,7 +415,7 @@ Class Eventlistmodel extends CI_Model
 	  	$res=$resu->result();
 		return $res;
     }
-	
+
 	function booking_plantimes($event_id,$plan_date)
     {
 		$sql="SELECT id,show_time,show_date FROM booking_plan_timing WHERE event_id  = '$event_id' AND show_date='$plan_date' GROUP BY show_time";
@@ -380,7 +423,7 @@ Class Eventlistmodel extends CI_Model
 	  	$res=$resu->result();
 		return $res;
     }
-	
+
 	function booking_plans($event_id,$plan_date,$plan_time)
     {
 		$sql="SELECT B.plan_name,B.seat_rate,A.event_id,A.plan_id,A.id AS plantime_id, A.show_date,A.show_time,A.seat_available FROM booking_plan_timing A,booking_plan B WHERE A.event_id  = '$event_id' AND show_date = '$plan_date' AND show_time = '$plan_time' AND A.seat_available>0 AND A.plan_id = B.id";
@@ -388,7 +431,7 @@ Class Eventlistmodel extends CI_Model
 	  	$res=$resu->result();
 		return $res;
     }
-	
+
 	function booking_seats($event_id,$plan_date,$plan_time,$show_plan)
     {
 		$sql="SELECT B.plan_name,B.seat_rate,A.event_id,A.plan_id,A.id AS plantime_id, A.show_date,A.show_time,A.seat_available FROM booking_plan_timing A,booking_plan B WHERE A.event_id  = '$event_id' AND show_date = '$plan_date' AND show_time = '$plan_time' AND A.seat_available>0 AND B.plan_name='$show_plan' AND A.plan_id = B.id";
@@ -396,29 +439,29 @@ Class Eventlistmodel extends CI_Model
 	  	$res=$resu->result();
 		return $res;
     }
-	
+
 	function booking_process($order_id,$event_id,$plan_id,$plan_time_id,$user_id,$number_of_seats,$total_amount,$booking_date)
     {
-		
+
 		$sQuery = "INSERT INTO booking_process (order_id,event_id,plan_id,plan_time_id,user_id,number_of_seats,total_amount,booking_date) VALUES ('". $order_id . "','". $event_id . "','". $plan_id . "','". $plan_time_id . "','". $user_id . "','". $number_of_seats . "','". $total_amount . "','". $booking_date . "')";
 		$booking_insert = $this->db->query($sQuery);
-		
+
 		$update_seats = "UPDATE booking_plan_timing SET seat_available = seat_available-$number_of_seats WHERE id ='$plan_time_id'";
 		$seatsupdate = $this->db->query($update_seats);
-		
+
 		$_SESSION['booking_start'] = time(); // taking now logged in time
 		$_SESSION['booking_expire'] = $_SESSION['booking_start'] + (300) ; // ending a session in 180 seconds
-		
+
 		$session_seats = "INSERT INTO booking_session (session_expiry,order_id,plan_time_id,number_of_seats) VALUES ('". $_SESSION['booking_expire'] . "','". $order_id . "','". $plan_time_id . "','". $number_of_seats . "')";
 		$session_insert = $this->db->query($session_seats);
-				
+
 		$sql="SELECT A.id,A.order_id,E.category_name,B.id AS event_id,B.event_name,B.event_venue,B.event_address,C.show_date,C.show_time,D.plan_name,A.number_of_seats, A.total_amount FROM booking_process A,events B,booking_plan_timing C,booking_plan D,category_master E WHERE A.order_id  = '$order_id' AND A.event_id = B.id AND A.plan_time_id = C.id AND A.plan_id = D.id AND B.category_id = E.id";
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
 		return $res;
     }
-	
-	
+
+
 	function add_review($event_id,$user_id,$rating,$message)
     {
 		$sQuery = "INSERT INTO event_reviews (user_id,event_id,event_rating,comments,status,created_at) VALUES ('". $user_id . "','". $event_id . "','". $rating . "','". $message . "','N',NOW())";

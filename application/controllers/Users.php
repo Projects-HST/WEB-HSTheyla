@@ -193,68 +193,43 @@ class Users extends CI_Controller
       $datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-
-		if($user_role == 1 || $user_role == 4)
-		{
-			$uid=$this->input->post('uid');
-			$umid=$this->input->post('umid');
-
-			$username=$this->input->post('username');
-
-			//echo $username;
-			$name=$this->input->post('name');
+				if($user_role == 1)
+				{
+					$uid=$this->input->post('uid');
+					$umid=$this->input->post('umid');
+					$username=$this->input->post('username');
+					$name=$this->input->post('name');
 	        $cell=$this->input->post('mobile');
-
 	        $email=$this->input->post('email');
-	        $old_pwd=$this->input->post('old_pwd');
-			 $new_pwd=$this->input->post('new_pwd');
-
-			if(!empty($new_pwd)){
-				  $pwd = md5($new_pwd);
-			}else{
-				  $pwd = $old_pwd;
-			 }
-			//exit;
-	        //$pwd1=$this->db->escape_str($this->input->post('new_pwd'));
-            //echo $new_pwd; echo'<br>'; echo $old_pwd; echo'<br>'; echo md5($new_pwd);
-
-	        //if(empty($pwd1)){
-			//	$pwd=$old_pwd;
-			//}else{ $pwd=md5($pwd1); }
-
 					$sdate=$this->input->post('dob');
 					$dateTime =DateTime::createFromFormat('m-d-Y', $sdate);
 					$dob=$dateTime->format('Y-m-d');
-           //echo $dob; exit;
 	        $gender=$this->input->post('gender');
-
 	        $address1=$this->db->escape_str($this->input->post('address1'));
-	        $address2=$this->db->escape_str($this->input->post('address2'));
-	        $address3=$this->db->escape_str($this->input->post('address3'));
+	        // $address2=$this->db->escape_str($this->input->post('address2'));
+	        // $address3=$this->db->escape_str($this->input->post('address3'));
 	        $occupation=$this->db->escape_str($this->input->post('occupation'));
 	        $country=$this->input->post('country');
-            $statename=$this->input->post('statename');
-            $city=$this->input->post('city');
-            $zip=$this->input->post('zip');
-            $status=$this->input->post('status');
-            $userrole=$this->input->post('role');
-            $display_status=$this->input->post('display_status');
-
-            $old_picture=$this->input->post('old_picture');
-
-            $user_pic=$_FILES['user_picture']['name'];
-            $file_name = time().rand(1,5).rand(6,10);
-			$user_pic1=$file_name.$user_pic;
-			$uploaddir='assets/users/';
-			$profilepic=$uploaddir.$user_pic1;
-			move_uploaded_file($_FILES['user_picture']['tmp_name'],$profilepic);
-
-			if(empty($user_pic=$_FILES['user_picture']['name'])){
-				$user_pic1=$old_picture;
-			}else{ $user_pic1=$user_pic1; }
-              //echo $user_pic1;exit;
-
-		    $datas=$this->usersmodel->update_user_details($uid,$umid,$username,$pwd,$name,$cell,$email,$pwd,$dob,$gender,$address1,$address2,$address3,$occupation,$country,$statename,$city,$zip,$user_pic1,$status,$userrole,$user_id,$display_status);
+          $statename=$this->input->post('statename');
+          $city=$this->input->post('city');
+          $zip=$this->input->post('zip');
+          $status=$this->input->post('status');
+          $userrole=$this->input->post('role');
+					$display_status=$this->input->post('display_status');
+          $old_picture=$this->input->post('old_picture');
+				if(empty($_FILES['user_picture']['name'])){
+					$user_pic1=$old_picture;
+				}else{
+					$user_pic=$_FILES['user_picture']['name'];
+					$file_name = time().rand(1,5).rand(6,10);
+					$user_pic1=$file_name.$user_pic;
+					$uploaddir='assets/users/';
+					$profilepic=$uploaddir.$user_pic1;
+					move_uploaded_file($_FILES['user_picture']['tmp_name'],$profilepic);
+					$user_pic1=$user_pic1;
+				 }
+							
+		   $datas=$this->usersmodel->update_user_details($uid,$umid,$username,$name,$cell,$email,$dob,$gender,$address1,$occupation,$country,$statename,$city,$zip,$user_pic1,$status,$userrole,$user_id,$display_status);
 			 $sta=$datas['status'];
 		     if($sta=="success"){
 		       $this->session->set_flashdata('msg','Updated Successfully');

@@ -281,7 +281,7 @@
          <div class="event_thumb">
            <a href="<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/"><p class="event_heading event_title_heading"><?php echo $pres->event_name; ?></p></a>
            <?php if ($hotspot_status == 'N') { ?>
-           <p><img src="<?php echo base_url(); ?>assets/front/images/date.png"><span class="event_thumb"><?php echo date('d-M-y',strtotime($pres->start_date));?> - <?php echo date('d-M-y',strtotime($res->end_date));?><span></p>
+           <p><img src="<?php echo base_url(); ?>assets/front/images/date.png"><span class="event_thumb"><?php echo date('d-M-y',strtotime($pres->start_date));?> - <?php echo date('d-M-y',strtotime($pres->end_date));?><span></p>
            <?php } ?>
            <p><img src="<?php echo base_url(); ?>assets/front/images/time.png"><span class="event_thumb"><?php echo $pres->start_time;?> - <?php echo $pres->end_time;?><span></p>
            <p><img src="<?php echo base_url(); ?>assets/front/images/location.png"><span class="event_thumb"><?php echo $pres->event_venue;?><span></p>

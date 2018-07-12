@@ -142,7 +142,7 @@
                             </div>
                         </div>
 					</div>
-                        
+
 						<div class="form-group row">
 
                             <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
@@ -197,27 +197,28 @@
                             </div>
                         </div>
 
-                        
+
 
                         <div class="form-group row">
 							<label class="col-sm-2 col-form-label">Event Banner <span style="color:#F00;">(985*550px)</span></label>
                               <div class="col-sm-4">
-                                 <input type="file" name="eventbanner" class="form-control" accept="image/*" >
+                                 <input type="file" name="eventbanner" class="form-control"  id="file_upload" accept="image/*" >
+                                   <div id="preview" style="color: red;"></div>
                                <input type="hidden" name="currentcpic" class="form-control" value="<?php echo $rows->event_banner;?>" >
                               <input type="hidden" name="eventid" class="form-control" value="<?php echo $rows->id; ?>" >
                                <img src="<?php echo base_url(); ?>assets/events/banner/<?php echo $rows->event_banner; ?>" class="img-circle">
                               </div>
-							  
+
                             <label class="col-sm-2 col-form-label">Featured Event</label>
                               <div class="col-sm-4">
                               <?php $sfeatured = $rows->featured_status;
-								echo '<input type="radio" name="featured_sts" value="Y"';  
+								echo '<input type="radio" name="featured_sts" value="Y"';
 								if ( $sfeatured =="Y") { echo "checked"; }
 								echo '> Yes ';
 								echo '<input type="radio" name="featured_sts" value="N"';
 								if ( $sfeatured =="N") { echo "checked"; }
 								echo '> No';
-							  ?>  
+							  ?>
                               </div>
                         </div>
 
@@ -277,7 +278,7 @@
              document.getElementById("latu").value=la;
              document.getElementById("lon").value=lo;
             });
-			
+
 			var hotspot = "<?php echo $rows->hotspot_status; ?>";
 			var ee = document.getElementById("date_time");
 			if(hotspot == "Y") {
@@ -292,7 +293,7 @@
 			format: 'dd-mm-yyyy',
 		  });
 
-		
+
 		$('#hotspot_sts').on('change', function() {
 		var strdisplay = $(this).val();
 		var e = document.getElementById("date_time");
@@ -302,7 +303,10 @@
 				e.style.display = "block";
 			}
 		});
-	  
+    $.validator.addMethod('filesize', function (value, element, param) {
+        return this.optional(element) || (element.files[0].size <= param)
+    }, 'File size must be less than 1 MB');
+
 		$('#eventform').validate({ // initialize the plugin
 		   rules: {
 				 category:{required:true },
@@ -323,6 +327,7 @@
 				 eadv_status:{required:true},
 				 hotspot_sts:{required:true},
 				 event_status:{required:true },
+         eventbanner:{required:false,accept: "jpg,jpeg,png", filesize: 1048576},
 				 txtLatitude:{required:true },
 				 txtLongitude:{required:true }
 
@@ -348,7 +353,12 @@
 				email:"Enter Email",
 				event_status:"Select Status",
 				txtLatitude:"Enter Latitude",
-				txtLongitude:"Enter Longitude"
+				txtLongitude:"Enter Longitude",
+        eventbanner:{
+          required:"Select Banner",
+          accept:"Please upload .jpg or .png .",
+            fileSize:"File must be JPG or PNG, less than 1MB"
+        }
 				},
 			 });
    });
@@ -382,7 +392,7 @@
                   $("#ctname").html(ctitle+cityname).show();
                   $("#cmsg").hide();
                   }else{
-                 $("#ctname").html(ctitle).show();	
+                 $("#ctname").html(ctitle).show();
                  }
             }
           });
@@ -456,12 +466,13 @@ function check()
       }
       return h;
       }
-	  
+
       function GetMinutes(d)
       {
 		return parseInt(d.split(':')[1].split(' ')[0]);
       }
 
 }
+
 
 </script>

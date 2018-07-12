@@ -12,11 +12,7 @@
 	</div>
 </div>
 <style>
-#stickfooter{
-  position: fixed;
-  width: 100%;
-  bottom: 0px;
-}
+
 .payment_msg{
   margin-top: 60px;
 }

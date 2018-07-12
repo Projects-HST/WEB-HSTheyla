@@ -71,11 +71,7 @@ if($user_role_id=='4'){ ?>
                                 <input class="form-control" type="text" id="email" name="email" value="<?php echo $res->email_id;?>" onchange="checkemailfun()" >
                                   <p id="msg" style="color:red;"> </p>
                             </div>
-                              <label for="Name" class="col-sm-2 col-form-label">New Password</label>
-                            <div class="col-sm-4">
-                              <input class="form-control" type="password"  name="new_pwd" >
-                              <input class="form-control" type="hidden"  name="old_pwd"  value="<?php echo $res->password;?>">
-                            </div>
+                    
                         </div>
                         <div class="form-group row">
                             <label for="Venue" class="col-sm-2 col-form-label">DOB</label>

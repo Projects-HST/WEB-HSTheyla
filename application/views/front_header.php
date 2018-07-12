@@ -55,7 +55,7 @@
                         <a class="nav-link" href="<?php echo base_url(); ?>home#services">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo  base_url(); ?>eventlist/">List Events</a>
+                        <a class="nav-link" href="<?php echo  base_url(); ?>eventlist/" id="list_events">List Events</a>
                     </li>
                      <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url(); ?>home#create">Become Organiser</a>

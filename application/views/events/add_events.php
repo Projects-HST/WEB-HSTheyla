@@ -8,7 +8,7 @@
    <div class="page-content-wrapper ">
      <div class="container">
         <div class="row">
-           
+
             <div class="col-12">
                 <div class="card m-b-20">
                     <div class="card-block">
@@ -127,15 +127,15 @@
                             <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
                             <div class="col-sm-4">
                                <input  type="text" class="form-control" id="stime" name="start_time" value="<?php echo $current_time; ?>">
-                                
+
                             </div>
                              <label for="etime" class="col-sm-2 col-form-label">End Time</label>
                             <div class="col-sm-4">
                               <input  type="text" class="form-control" id="etime" name="end_time" value="<?php echo $current_time; ?>">
-                                
+
                             </div>
                         </div>
-					
+
                           <div class="form-group row">
                              <label for="latitude" class="col-sm-2 col-form-label">Select</label>
                             <div id="dvMap" style="width:500px; height:350px"> </div>
@@ -176,7 +176,7 @@
                             </div>
                         </div>
 
-                        
+
 
                         <div class="form-group row">
 <!--
@@ -201,9 +201,9 @@
                                  <input type="radio" name="featured_sts" value="Y"> Yes
                                   <input type="radio" name="featured_sts" value="N" checked> No
                               </div>
-							
+
                         </div>
-						
+
                         <div class="form-group row">
                             <label for="Status" class="col-sm-2 col-form-label">Event Status</label>
                             <div class="col-sm-4">
@@ -214,7 +214,7 @@
                                 </select>
                             </div>
                         </div>
-                        
+
 
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label"></label>
@@ -244,7 +244,7 @@
 
 	$('#stime').timepicki();
 	$('#etime').timepicki();
-  
+
 	 window.onload = function () {
 		var mapOptions = {
 					center: new google.maps.LatLng(20.5937, 78.9629),
@@ -269,7 +269,7 @@
 	$( ".datepicker" ).datepicker({
 		format: 'dd-mm-yyyy'
 	});
-	  
+
 	$('#hotspot_sts').on('change', function() {
 	var strdisplay = $(this).val();
     var e = document.getElementById("date_time");
@@ -291,12 +291,14 @@
 			  target: '#preview'
 		  }).submit();
 		}else{
-		  $("#preview").html('File Size Must be  Lesser than 1 MB');
+		  //$("#preview").html('File Size Must be  Lesser than 1 MB');
 		  //alert("File Size Must be  Lesser than 1 MB");
 		  return false;
 		}
 	});
-
+  $.validator.addMethod('filesize', function (value, element, param) {
+      return this.optional(element) || (element.files[0].size <= param)
+  }, 'File size must be less than 1 MB');
     $('#eventform').validate({ // initialize the plugin
        rules: {
          category:{required:true },
@@ -319,7 +321,7 @@
          event_status:{required:true },
          txtLatitude:{required:true },
          txtLongitude:{required:true },
-		 eventbanner:{required:true }
+		     eventbanner:{required:true,accept: "jpg,jpeg,png", filesize: 1048576  }
         },
 
         messages: {
@@ -343,7 +345,11 @@
         event_status:"Select Status",
         txtLatitude:"Enter Latitude",
         txtLongitude:"Enter Longitude",
-		eventbanner:"Select Banner"
+    		eventbanner:{
+          required:"Select Banner",
+          accept:"Please upload .jpg or .png .",
+          fileSize:"File must be JPG or PNG, less than 1MB"
+        }
        },
          });
    });
@@ -374,9 +380,9 @@
 				$("#ctname").html(ctitle+cityname).show();
 				$("#cmsg").hide();
 				}else{
-				$("#ctname").html(ctitle+cityname).show();	
-				
-				
+				$("#ctname").html(ctitle+cityname).show();
+
+
 				}
             }
           });
@@ -448,10 +454,10 @@ function check()
         var h = parseInt(d.split(':')[0]);
         if (d.split(':')[1].split(' ')[1] == "PM") {
         h = h + 12;
-		} 
+		}
       return h;
     }
-	
+
 	function GetMinutes(d)
     {
 		return parseInt(d.split(':')[1].split(' ')[0]);
