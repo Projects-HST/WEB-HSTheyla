@@ -1,14 +1,17 @@
+<script src="<?php echo base_url(); ?>assets/front/js/jquery.form.js"></script>
 <style>
 .card-block{
-  background-color: #fff;
+
   padding: 30px;
-  margin-left: 50px;
-  margin-right: 50px;
-  box-shadow: 3px 11px 15px 0px #959696;
+  margin-left: 10px;
+  margin-right: 10px;
+
+}
+.footer_section{
+  display: none;
 }
 .profile_active {
-    background-color: #92bce0  !important;
-    color: #fff !important;
+  border-left: 4px solid #458ecc;
 }
 .form-control-label{
   font-size: 18px;
@@ -17,40 +20,76 @@
 .form-control{
   font-size: 16px;
 }
+.profile_tab{
+  margin-top: 50px;
+  margin-bottom:50px;
+}
+
+.upload-button {
+    border: 1px solid black;
+    border-radius: 20px;
+    width: 150px;
+    text-align: center;
+    color: #fff;
+    border-color: #fff;
+    margin-top: 5px;
+    margin-left: 5px;
+    display: none;
+}
+
+.profile-pic {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 50px;
+    margin-top: 10px;
+    margin-left: 20px;
+    height: 200px;
+
+}
+.file-upload{
+  margin-top: 30px;
+}
+.profile-img{
+  text-align: center;
+      margin-top: -200px;
+}
+.change_pic{
+  margin-top: 200px;
+}
 </style>
 <div class="col-sm-12 col-md-12 " id="content">
-    <h3 class="dashboard_tab"></h3>
+    <h3 class="dashboard_tab">Profile Setting</h3>
 </div>
 <?php  foreach($res as $rows){} ?>
-<div class="col-md-12 profile_tab">
-<div class="card-block">
+<div class="container profile_tab">
+<div class="col-md-8">
   <form class="form" role="form" autocomplete="off" method="post" action="" id="profile_form">
       <div class="form-group row">
-          <label class="col-md-2 col-form-label form-control-label">Name</label>
-          <div class="col-md-3">
+          <label class="col-md-3 col-form-label form-control-label">Name</label>
+          <div class="col-md-6">
               <input class="form-control" type="text" name="first_name" value="<?php echo $rows->name; ?>">
           </div>
 
       </div>
 
       <div class="form-group row">
-          <label class="col-md-2 col-form-label form-control-label">Username</label>
-          <div class="col-md-3">
+          <label class="col-md-3 col-form-label form-control-label">Username</label>
+          <div class="col-md-6">
               <input class="form-control" type="text" name="user_name" value="<?php echo $rows->user_name; ?>">
           </div>
       </div>
 
       <div class="form-group row">
-          <label class="col-md-2 col-form-label form-control-label">Email</label>
-          <div class="col-md-3">
+          <label class="col-md-3 col-form-label form-control-label">Email</label>
+          <div class="col-md-6">
             <p>  <?php echo $rows->email_id;  if($rows->email_verify=='N'){ ?><i class="fas fa-exclamation-triangle notverfied" title="Email is Not Verified"></i>
 
           <?php  }else{  } ?> <span class="change-email"><a href="<?php echo  base_url(); ?>changemail"><br><b>Change My Email</b></a></span></p>
           </div>
       </div>
           <div class="form-group row">
-              <label class="col-md-2 col-form-label form-control-label">Gender</label>
-              <div class="col-md-3">
+              <label class="col-md-3 col-form-label form-control-label">Gender</label>
+              <div class="col-md-6">
                 <label class="custom-control custom-radio">
                   <input id="radio1" name="gender" type="radio" class="custom-control-input" value="Male" <?php echo ($rows->gender=='Male')?'checked':'' ?>>
                   <span class="custom-control-indicator"></span>
@@ -62,10 +101,11 @@
                   <span class="custom-control-description">Female</span>
                 </label>
               </div>
+
             </div>
       <div class="form-group row">
-          <label class="col-md-2 col-form-label form-control-label">Mobile number</label>
-          <div class="col-md-3">
+          <label class="col-md-3 col-form-label form-control-label">Mobile number</label>
+          <div class="col-md-6">
             <p>  <?php if(empty($rows->mobile_no)){ echo $rows->mobile_no; ?>
                 <span class="change-email"><a href="<?php echo  base_url(); ?>mobile">Add Mobile number</a></span></p>
           <?php  }else{ echo $rows->mobile_no; ?>
@@ -79,26 +119,23 @@
       <input class="form-control" type="hidden" name="user_id" value="<?php echo $this->session->userdata('id'); ?>">
 
       <div class="form-group row">
-          <label class="col-md-2 col-form-label form-control-label">Address</label>
-          <div class="col-md-3">
-            <textarea class="textarea form-control textarea-form" name="address"><?php echo $rows->address_line1; ?></textarea>
+          <label class="col-md-3 col-form-label form-control-label">Address</label>
+          <div class="col-md-8">
+            <textarea class="textarea form-control textarea-form"  rows="4" name="address"><?php echo $rows->address_line1; ?></textarea>
               </div>
       </div>
 
 
       <div class="form-group row">
-          <label class="col-md-2 col-form-label form-control-label">Occupation</label>
-          <div class="col-md-3">
+          <label class="col-md-3 col-form-label form-control-label">Occupation</label>
+          <div class="col-md-6">
             <input class="form-control" type="text" name="occupation" value="<?php echo $rows->occupation; ?>">
 
           </div>
       </div>
       <div class="form-group row">
-          <label class="col-md-2 col-form-label form-control-label">Subscribe  Newsletter</label>
-          <div class="col-md-3">
-
-
-
+          <label class="col-md-3 col-form-label form-control-label">Subscribe  Newsletter</label>
+          <div class="col-md-6">
               <label class="custom-control custom-radio">
                 <input id="radio1" name="newsletter_status" type="radio" class="custom-control-input" value="Y" <?php echo ($rows->newsletter_status=='Y')?'checked':'' ?>>
                 <span class="custom-control-indicator"></span>
@@ -112,15 +149,34 @@
           </div>
         </div>
       <div class="form-group row">
-          <label class="col-md-2 col-form-label form-control-label"></label>
-          <div class="col-md-3">
-              <input type="reset" class="btn btn-secondary" value="Cancel">&nbsp;
+          <label class="col-md-3 col-form-label form-control-label"></label>
+          <div class="col-md-6">
               <input type="submit" class="btn btn-primary" value="Save Changes">
           </div>
       </div>
   </form>
 </div>
+
+<div class="col-md-4 change_pic">
+<div class="profile-img">
+  <?php if(empty($rows->user_picture)){ ?>
+      <img src="<?php echo base_url(); ?>assets/images/profile/noimage.png" class="img-circle  profile-pic">
+<?php  }else{ ?>
+    <img src="<?php echo base_url(); ?>assets/users/profile/<?php echo $rows->user_picture; ?>" class="img-circle  profile-pic">
+<?php  } ?>
+
+<form  action="<?php echo base_url(); ?>home/change_pic" method="post" id="image_upload_form" enctype="multipart/form-data">
+      <div class="upload-button">Change Picture</div>
+
+      <center>  <input class="file-upload" name="profilepic" id="profilepic" type="file" accept="image/x-png,image/jpeg" /></center>
+        <div id="preview"></div>
+    </form>
+
 </div>
+</div>
+
+</div>
+
 <script>
 $('#profile_form').validate({ // initialize the plugin
     rules: {
@@ -189,4 +245,45 @@ $('#profile_form').validate({ // initialize the plugin
         });
     }
 });
+
+    var readURL = function(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('.profile-pic').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $(".file-upload").on('change', function() {
+        readURL(this);
+    });
+
+    $(".upload-button").on('click', function() {
+        $(".file-upload").click();
+    });
+
+    $(document).ready(function() {
+
+        $('#profilepic').on('change', function() {
+
+          var f=this.files[0]
+			     var actual=f.size||f.fileSize;
+           var orgi=actual/1024;
+            if(orgi<1024){
+              $("#preview").html('');
+              $("#preview").html('<img src="<?php echo base_url(); ?>assets/loader.gif" alt="Uploading...." style="width:10%;"/>');
+              $("#image_upload_form").ajaxForm({
+                  target: '#preview'
+              }).submit();
+            }else{
+              alert("File Size Must be  Lesser than 1 MB");
+            }
+
+
+        });
+    });
 </script>

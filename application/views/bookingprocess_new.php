@@ -1,11 +1,12 @@
 <?php
-$user_id = $this->session->userdata('id'); 
-foreach($booking_process as $res){ 
+$user_id = $this->session->userdata('id');
+foreach($booking_process as $res){
 		$originalDate = $res->show_date;;
-} 
+}
 ?>
 <div class="container-fluid order_summary_page">
   <div class="order_table">
+
 <div class="container summary_tab">
 
 <div class="col-md-12 top_heading_box">
@@ -80,6 +81,7 @@ foreach($booking_process as $res){
 
 
 </div>
+
 </div>
 </div>
 </div>

@@ -13,6 +13,11 @@ input[type=text] {
     border: none;
     border-bottom: 1px solid #000000;
 }
+.footer{
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+}
 
 </style>
 
@@ -58,13 +63,18 @@ input[type=text] {
             required: true,  maxlength : 10
           },
           mobileotp : {
-             required: true
+             required: true,
+             remote: {
+                    url: "<?php echo base_url(); ?>home/checkotp",
+                    type: "post"
+                 }
+
            },
 
        },
        messages: {
            mobile: {   required: "Enter  Mobile Number", maxlength: "Max is 10"},
-            mobileotp: {   required: "Enter  OTP"}
+            mobileotp: {   required: "Enter  OTP",remote:"You have enter invalid OTP "}
 
 
        },
@@ -109,30 +119,30 @@ input[type=text] {
        }
      });
    }
-   function checkOTP(){
-     var mobileotp = $('#mobileotp').val();
-
-     $.ajax({
-         method: "post",
-         data: {
-             mobileotp: mobileotp
-         },
-         url: 'home/checkotp',
-         success: function(data) {
-             console.log(data);
-             if ((data) == "success") {
-                 $("#submit").removeAttr("disabled");
-                     $('#mobilemsg').html(' ');
-
-                 // $('#mobilemsg').html('Username Available');
-             } else {
-                 $('#submit').prop('disabled', true);
-                 $('#mobilemsg').html(data);
-
-             }
-         }
-     });
-   }
+   // function checkOTP(){
+   //   var mobileotp = $('#mobileotp').val();
+   //
+   //   $.ajax({
+   //       method: "post",
+   //       data: {
+   //           mobileotp: mobileotp
+   //       },
+   //       url: 'home/checkotp',
+   //       success: function(data) {
+   //        //   console.log(data);
+   //           if ((data) == "success") {
+   //               $("#submit").removeAttr("disabled");
+   //                   $('#mobilemsg').html(' ');
+   //
+   //               // $('#mobilemsg').html('Username Available');
+   //           } else {
+   //               $('#submit').prop('disabled', true);
+   //               $('#mobilemsg').html(data);
+   //
+   //           }
+   //       }
+   //   });
+   // }
    function check_mobile() {
        var mobile = $('#mobile').val();
 

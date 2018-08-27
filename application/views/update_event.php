@@ -6,6 +6,9 @@
 	color:red;
 	font-weight: 400;
 }
+.footer_section{
+  display: none;
+}
 </style>
 <?php
 function get_times( $default = '10:00', $interval = '+15 minutes' )
@@ -27,7 +30,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 <div class="col-md-12" id="content">
 	<h3 class="dashboard_tab">Update  Event</h3>
 </div>
-<div class="card">
+<div class="container">
 	<?php	foreach($edit as $rows){} $sts=$rows->event_status; ?>
 	<form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>home/updateeventsdetails" name="eventform" id="eventform" onSubmit='return check();'>
 <div class="col-md-12 form_box">
@@ -212,7 +215,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 									 </div>
 							 </div>
 						</div>
-						
+
 						<div class="col-md-12 form_box">
 							<div class="form-group">
 
@@ -261,7 +264,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 
 	$('#stime').timepicki();
 	$('#etime').timepicki();
-  
+
 	 window.onload = function () {
 		var mapOptions = {
 					center: new google.maps.LatLng(20.5937, 78.9629),
@@ -278,7 +281,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 				 document.getElementById("latu").value=la;
 				 document.getElementById("lon").value=lo;
 				});
-				
+
 				var hotspot = "<?php echo $rows->hotspot_status; ?>";
 			var ee = document.getElementById("date_time");
 			if(hotspot == "Y") {
@@ -292,7 +295,7 @@ $(document).ready(function () {
 
 	$('#datepicker').datetimepicker({format: 'DD-MM-YYYY'});
 	$('#datepicker-autoclose').datetimepicker({format: 'DD-MM-YYYY'});
-	  
+
 	$('#hotspot_sts').on('change', function() {
 	var strdisplay = $(this).val();
     var e = document.getElementById("date_time");
@@ -302,7 +305,7 @@ $(document).ready(function () {
         e.style.display = "block";
     }
   });
-  
+
   $('#file_upload').on('change', function()
         {
           var f=this.files[0]
@@ -391,9 +394,9 @@ $(document).ready(function () {
 				$("#ctname").html(ctitle+cityname).show();
 				$("#cmsg").hide();
 				}else{
-				$("#ctname").html(ctitle+cityname).show();	
-				
-				
+				$("#ctname").html(ctitle+cityname).show();
+
+
 				}
             }
           });
@@ -465,10 +468,10 @@ function check()
         var h = parseInt(d.split(':')[0]);
         if (d.split(':')[1].split(' ')[1] == "PM") {
         h = h + 12;
-		} 
+		}
       return h;
     }
-	
+
 	function GetMinutes(d)
     {
 		return parseInt(d.split(':')[1].split(' ')[0]);

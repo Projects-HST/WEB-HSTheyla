@@ -3,11 +3,19 @@
   background-color: #92bce0  !important;
   color: #fff !important;
 }
+.event_section{
+  height: 100vh;
+}
+.footer_section{
+  display: none;
+}
 </style>
-<div class="col-md-12" id="content">
-  <div class="col-sm-12 col-md-12 " id="content">
-      <h3 class="dashboard_tab"></h3>
-  </div>
+<div class="col-sm-12 col-md-12 " id="content">
+    <h3 class="dashboard_tab">View Events</h3>
+</div>
+<div class="container event_section" id="content">
+
+<div class="container ">
   <?php if(empty($result)){ echo "<center><h3>No Events Added</h3></center>"; }else{
     foreach($result as $rows){
 $status=$rows->event_status;
@@ -26,4 +34,5 @@ $status=$rows->event_status;
 
 
 <?php  }} ?>
+</div>
 </div>

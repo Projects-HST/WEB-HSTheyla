@@ -3,11 +3,17 @@
   background-color: #92bce0  !important;
   color: #fff !important;
 }
+.event_section{
+  height: 100vh;
+}
+.footer_section{
+  display: none;
+}
 </style>
 <div class="col-sm-12 col-md-12 " id="content">
-    <h3 class="dashboard_tab"> </h3>
+    <h3 class="dashboard_tab">Event Reviews </h3>
 </div>
-<div class="col-md-12 ">
+<div class="container event_section">
   <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
         <thead>
         <tr>

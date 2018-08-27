@@ -6,10 +6,10 @@
   text-align: center;
   padding-top: 15%;
 }
-#stickfooter{
-  position: absolute;
-  width: 100%;
+.footer{
+  position: fixed;
   bottom: 0px;
+  width: 100%;
 }
 </style>
 

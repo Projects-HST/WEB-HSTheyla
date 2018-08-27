@@ -1,12 +1,14 @@
 body{
-  background-color: #f5f5f5;
+  background-color: #f5f6fa;
 }
+
 .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus{
   color: #fff;
 }
 .total_points_font{
   font-size: 28px;
   font-weight: 500;
+  margin-left: 15px;
 }
 .points_font{
   font-size: 18px;
@@ -21,13 +23,11 @@ body{
   width: 250px;
   margin-top: 10px;
 }
-.img_trophy{
-  padding-top: 100px;
-}
+
 .dashboard_tab{
-  width: 200px;
+  margin-left: 20px;
   padding: 5px;
-  color: #fff;
+  color: #000;
 }
 
 
@@ -46,10 +46,13 @@ body{
     color: #478ecc;
 }
 .navbar-default .navbar-nav>li>a{
-  color: #fff;
+  color: #000;
   font-weight: 500;
   font-size: 18px;
   margin-top: 8px;
+}
+#sidebar-wrapper{
+    background-color: #fff !important;
 }
 .plan_details{
   font-size: 12px;
@@ -67,4 +70,180 @@ body{
 .booking_attendees_title{
   margin-top: 30px;
   margin-left: 50px;
+}
+.navbar-fixed-top {
+    top: 0;
+    border-width: 0 0 1px;
+    height: 80px;
+}
+
+.navbar-default .navbar-nav #user-profile {
+    height: 50px;
+    padding-top: 15px;
+    padding-left: 58px;
+}
+
+.navbar-default .navbar-nav #user-profile img {
+    height: 45px;
+    width: 45px;
+    position: absolute;
+    top: 2px;
+    left: 8px;
+    padding: 1px;
+}
+
+#wrapper {
+    padding-top: 50px;
+    padding-left: 0;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+}
+
+@media (min-width: 992px) {
+    #wrapper {
+        padding-left: 225px;
+    }
+}
+
+@media (min-width: 992px) {
+    #wrapper #sidebar-wrapper {
+        width: 225px;
+    }
+}
+
+#sidebar-wrapper {
+    border-right: 1px solid #e7e7e7;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 225px;
+    width: 0;
+    height: 100%;
+    margin-left: -225px;
+    overflow-y: auto;
+    background-color: #418ecc;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+}
+
+#sidebar-wrapper .sidebar-nav {
+    position: absolute;
+    top: 18px;
+    width: 225px;
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#sidebar-wrapper .sidebar-nav li {
+    text-indent: 0;
+    line-height: 60px;
+}
+
+#sidebar-wrapper .sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #000;
+    font-size: 18px;
+}
+
+
+
+#sidebar-wrapper .sidebar-nav li a .sidebar-icon {
+    width: auto;
+    height: auto;
+    font-size: 14px;
+    padding: 0 2px;
+    display: inline-block;
+    text-indent: 7px;
+    margin-right: 10px;
+    color: #fff;
+    float: left;
+}
+
+#sidebar-wrapper .sidebar-nav li a .caret {
+  position: absolute;
+  right: 23px;
+  top: auto;
+  margin-top: 20px;
+}
+
+#sidebar-wrapper .sidebar-nav li ul.panel-collapse {
+    list-style: none;
+    -moz-padding-start: 0;
+    -webkit-padding-start: 0;
+    -khtml-padding-start: 0;
+    -o-padding-start: 0;
+    padding-start: 0;
+    padding: 0;
+}
+
+#sidebar-wrapper .sidebar-nav li ul.panel-collapse li i {
+    margin-right: 10px;
+}
+
+#sidebar-wrapper .sidebar-nav li ul.panel-collapse li {
+    text-indent: 15px;
+}
+
+@media (max-width: 992px) {
+    #wrapper #sidebar-wrapper {
+        width: 45px;
+    }
+    #wrapper #sidebar-wrapper #sidebar #sidemenu li ul {
+        position: fixed;
+        left: 45px;
+        margin-top: -45px;
+        z-index: 1000;
+        width: 200px;
+        height: 0;
+    }
+}
+.navbar-default{
+  background-color: #fff;
+}
+
+
+    /* Footer design */
+    .footer_heading {
+        color: #fff;
+        font-weight: 500;
+        font-size: 20px;
+        text-transform: uppercase;
+    }
+.footer_section{
+  background-color: #478ECC;
+
+  height: auto;
+  z-index: 1000;
+  width: 100%;
+
+
+}
+.fnt-footer li a {
+    color: #fff;
+    list-style-type: none;
+    margin: 0px;
+}
+.footer-bg {
+
+    padding-top: 30px;
+    padding-bottom: 15px;
+}
+.fnt-footer li {
+    font-size: 16px;
+    list-style-type: none;
+  }
+  .fnt-footer {
+    padding: 0px;
+}
+.social_follow li {
+    display: inline-block;
 }

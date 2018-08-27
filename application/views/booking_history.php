@@ -1,13 +1,18 @@
 <style>
 .booking_history_active{
-  background-color: #92bce0  !important;
-  color: #fff !important;
+border-left: 4px solid #92bce0;
+}
+.profile_tab{
+  height: 100vh;
+}
+.footer_section{
+  display: none;
 }
 
 </style><div class="col-sm-12 col-md-12 " id="content">
-    <h3 class="dashboard_tab"></h3>
+    <h3 class="dashboard_tab">Booking history</h3>
 </div>
-<div class="col-md-12">
+<div class="container profile_tab">
 
         <div class="card-block" style="padding:20px;">
           <?php  foreach($booking_details as $res){

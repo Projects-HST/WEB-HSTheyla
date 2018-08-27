@@ -9,8 +9,7 @@
   box-shadow: 3px 11px 15px 0px #959696;
 }
 .profile_picture_active{
-  background-color: #92bce0  !important;
-  color: #fff !important;
+border-left: 4px solid #92bce0;
 }
 #form {
     display: none;
@@ -50,7 +49,7 @@
 </div>
 
 <?php  foreach($res as $rows){} ?>
-<div class="col-md-12">
+<div class="container">
   <div class="card-block">
 <!-- <img src="<?php echo base_url(); ?>assets/front/images/trophy.png" class="img-center"> -->
 <div class="form-group row">

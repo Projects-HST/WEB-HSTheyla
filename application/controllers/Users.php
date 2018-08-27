@@ -188,6 +188,7 @@ class Users extends CI_Controller
 			 }
 		}
 
+   
     public function update_user_details()
     {
       $datas=$this->session->userdata();

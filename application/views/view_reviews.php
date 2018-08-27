@@ -1,7 +1,15 @@
+<style>
+.event_section{
+  height: 100vh;
+}
+.footer_section{
+  display: none;
+}
+</style>
 <div class="col-sm-12 col-md-12 " id="content">
     <h3 class="dashboard_tab"> Reviews events</h3>
 </div>
-<div class="col-md-12 ">
+<div class="container event_section">
   <div class="card card-outline-secondary" style="padding:5px;">
    <?php if(!empty($views)) {
        foreach ($views as $value) {  ?>

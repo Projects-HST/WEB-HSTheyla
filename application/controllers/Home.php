@@ -18,24 +18,18 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->library('facebook');
+
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
-		$data['country_list'] = $this->eventlistmodel->getall_country_list();
-		$data['city_list'] = $this->eventlistmodel->getall_city_list();
-		$data['category_list'] = $this->eventlistmodel->getall_category_list();
-		$data['event_resu'] = $this->eventlistmodel->get_events();
-		$data['adv_event_result'] = $this->eventlistmodel->getadv_events();
-		$data['popular_events'] = $this->eventlistmodel->popular_events();
 		if($user_role==1){
 			redirect('adminlogin/dashboard');
 		}else if($user_role==2){
-			  $this->load->view('index',$data);
+			$this->load->view('index', $datas);
 		}else if($user_role==3){
-			 $this->load->view('index',$data);
+				$this->load->view('index', $datas);
 		}else{
-		   $this->load->view('index',$data);
+			$this->load->view('index', $datas);
 		}
 
 	}
@@ -167,43 +161,8 @@ class Home extends CI_Controller {
 
 
 	}
-	// public function profile_update()
-	// {
-	// 	$datas=$this->session->userdata();
-	// 	$user_id=$this->session->userdata('id');
-	// 	$user_role=$this->session->userdata('user_role');
-	// 	if($user_role==3 || $user_role==2){
-	// 		$datas['res']=$this->loginmodel->getuserinfo($user_id);
-	// 		$this->load->view('front_header');
-	// 		$this->load->view('profile_update', $datas);
-	// 		$this->load->view('front_footer');
-	// 	}else{
-	// 		redirect('/');
-	// 	}
-	//
-	// }
-	//
-	// public function createevent()
-	// {
-	// 	$datas=$this->session->userdata();
-	// 	$user_id=$this->session->userdata('id');
-	// 	$user_role=$this->session->userdata('user_role');
-	//
-	// 	$datas['res']=$this->loginmodel->getuserinfo($user_id);
-	// 	$datas['country_list'] = $this->organizermodel->get_country();
-	// 	$datas['category_list'] = $this->organizermodel->get_category();
-	//
-	//
-	// 	if($user_role==2)
-	// 	{
-	// 		$this->load->view('front_header');
-	// 		$this->load->view('create_event', $datas);
-	// 		$this->load->view('front_footer');
-	//  	}else{
-	//  			redirect('/');
-	//  		 }
-	//
-	// }
+
+
 
     public function insertevents()
 	 {
@@ -382,6 +341,7 @@ class Home extends CI_Controller {
 		  $this->load->view('front_footer');
 	}
 
+
 	public function home()
 	{
 		$this->load->library('facebook');
@@ -397,11 +357,11 @@ class Home extends CI_Controller {
 			if($user_role==1){
 				redirect('adminlogin/dashboard');
 			}else if($user_role==2){
-				$this->load->view('index',$data);
+				redirect('home/index');
 			}else if($user_role==3){
-				$this->load->view('index',$data);
+				redirect('home/index');
 			}else{
-				$this->load->view('index',$data);
+				redirect('home/index');
 			}
 
 	}

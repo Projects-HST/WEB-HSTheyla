@@ -1,3 +1,18 @@
+<?php
+    function get_times( $default = '10:00', $interval = '+15 minutes' ) 
+	{
+		$output = '';
+		$current = strtotime( '00:00:00' );
+		$end = strtotime( '23:59:00' );
+		while( $current <= $end ) {
+			$time = date( 'H:i:s', $current );
+			$sel = ( $time == $default ) ? ' selected' : '';
+			$output .= "<option value=\"{$time}\">" . date( 'h.i A', $current ) .'</option>';
+			$current = strtotime( $interval, $current );
+		}
+		return $output;
+    }
+?>
 <style type="text/css">
    .img-circle{
           width: 90px;
@@ -5,7 +20,6 @@
          margin-top: 10px;
        }
 </style>
-
 <div class="content-page">
 <!-- Footer Close-->
 <!-- Start content -->
@@ -98,18 +112,13 @@
                             </div>
                              <label for="city" class="col-sm-2 col-form-label">Select City</label>
                             <div class="col-sm-4">
-                             <select class="form-control" name="city" id="ctname">
-							<?php
-								$cntyrid=$rows->event_country;
-								$sql="SELECT id,city_name FROM city_master WHERE country_id='$cntyrid' AND event_status='Y' ORDER BY id ASC";
-								$resu=$this->db->query($sql);
-								$res=$resu->result();
-								foreach ($res as $value) { ?>
-								<option value="<?php echo $value->id; ?>"><?php echo $value->city_name; ?></option>
-								<?php } ?>
-								</select>
-								<script language="JavaScript">document.eventform.city.value="<?php echo $rows->event_city; ?>";</script>
-								 <div id="cmsg"></div>
+                              <input class="form-control" type="text" id="cityid" value="<?php echo $rows->city_name; ?>" required="" >
+                               <input class="form-control" type="hidden" name="oldcityid" value="<?php echo $rows->event_city; ?>" required="">
+                               <div style="display:none;" id="new">
+                               <select class="form-control" name="city" required="" id="ctname">
+                                
+                                </select>
+                                 <div id="cmsg"></div>
                                </div>
                             </div>
                         </div>
@@ -311,109 +320,12 @@
 
 <script type="text/javascript">  
 
-   $('#stime').timepicki();
-   $('#etime').timepicki();
-
-
-    window.onload = function () {
-	var mapOptions = {
-    center: new google.maps.LatLng(20.5937, 78.9629),
-    zoom:4,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-};
-var infoWindow = new google.maps.InfoWindow();
-var latlngbounds = new google.maps.LatLngBounds();
-var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
-google.maps.event.addListener(map, 'click', function (e)
-{
- var la=e.latLng.lat();
- var lo=e.latLng.lng();
- document.getElementById("latu").value=la;
- document.getElementById("lon").value=lo;
- //alert(la); alert(lo);
-//alert("Latitude: " + e.latLng.lat() + "\r\nLongitude: " + e.latLng.lng());
-});
-}
-
-$(document).ready(function () {
-
-  $( ".datepicker" ).datepicker({
-        format: 'dd-mm-yyyy'
-      });
-
-$('#file_upload').on('change', function()
-        {
-          var f=this.files[0]
-          var actual=f.size||f.fileSize;
-          var orgi=actual/1024;
-            if(orgi<1024){
-              $("#preview").html('');
-              //$("#preview").html('<img src="<?php echo base_url(); ?>assets/loader.gif" alt="Uploading...."/>');
-              // $("#eventform").ajaxForm({
-              //     target: '#preview'
-              // }).submit();
-            }else{
-              $("#preview").html('File Size Must be  Lesser than 1 MB');
-              //alert("File Size Must be  Lesser than 1 MB");
-              return false;
-            }
-        });
-
-    $('#eventform').validate({ // initialize the plugin
-       rules: {
-         category:{required:true },
-         event_name:{required:true },
-         country:{required:true },
-         city:{required:true },
-         venue:{required:true },
-         address:{required:true },
-         description:{required:true },
-         eventcost:{required:true },
-         start_date:{required:true },
-         end_date:{required:true },
-         start_time:{required:true },
-         end_time:{required:true },
-         pcontact_cell:{required:true },
-         contact_person:{required:true },
-         email:{required:true },
-         eadv_status:{required:true},
-         hotspot_sts:{required:true},
-         event_status:{required:true },
-         txtLatitude:{required:true },
-         txtLongitude:{required:true }
-        },
-
-        messages: {
-        category:"Select Category Name",
-        event_name:"Enter Event Name",
-        country:"Select Country Name",
-        city:"Select City Name",
-        venue:"Enter Venue",
-        address:"Enter Address",
-        description:"Enter Description",
-        eventcost:"Select Event Type",
-        start_date:"Select Start Date",
-        end_date:"Select End Date",
-        start_time:"Select Start Time",
-        end_time:"Select End Time",
-        pcontact_cell:"Enter Cell Number",
-        contact_person:"Enter Name",
-         eadv_status:"Select Advertisement Status ",
-        hotspot_sts:"Select Hotspot Display Status ",
-        email:"Enter Email",
-        event_status:"Select Status",
-        txtLatitude:"Enter Latitude",
-        txtLongitude:"Enter Longitude",
-
-               },
-         });
-   });
   
-function getcityname(cid) {
+ function getcityname(cid) {
            //alert(cid);
             $.ajax({
                type: 'post',
-               url: '<?php echo base_url(); ?>events/get_city_name',
+               url: '<?php echo base_url(); ?>organizer/get_city_name',
                data: {
                    country_id:cid
                },
@@ -425,7 +337,6 @@ function getcityname(cid) {
                var len = test.length;
                //alert(len);
                 var cityname='';
-				var ctitle='<option value="">Select City</option>';
                 if(test!='')
                  {    //alert(len);
                    for(var i=0; i<len; i++)
@@ -435,137 +346,18 @@ function getcityname(cid) {
                      //alert(city_name);
                      cityname +='<option value=' + cityid + '> ' + city_name + ' </option>';
                   }
-                  $("#ctname").html(ctitle+cityname).show();
+                  $("#ctname").html(cityname).show();
                   $("#cmsg").hide();
+                  $("#cityid").hide();
+                  $("#new").show();
                   }else{
-                 $("#ctname").html(ctitle).show();	
+                  $("#cmsg").html('<p style="color: red;">City Not Found</p>').show();
+                  $("#ctname").hide();
                  }
             }
-          });
+          }); 
        }
-	   
-function check()
-{
 
-  if(document.eventform.txtLatitude.value=="")
-    {
-            //alert("Please enter Latitude.");
-            $("#ermsg").html('<p style="color: red;">Please enter Latitude.</p>');
-            document.eventform.txtLatitude.focus();
-            return false;
-    }
-
-    if(document.eventform.txtLongitude.value=="")
-    {
-            //alert("Please enter Longitude.");
-            $("#ermsg1").html('<p style="color: red;">Please enter Longitude.</p>');
-            document.eventform.txtLongitude.focus();
-            return false;
-    }
-
-  if(document.eventform.txtLatitude.value!="")
-    {
-            sLatitude = document.eventform.txtLatitude.value
-            if(isNaN(sLatitude) || sLatitude.indexOf(".")<0)
-            {
-                $("#ermsg2").html('<p style="color:red;">Please enter valid Latitude.</p>').show();
-                $("#ermsg").hide();
-                //alert ("Please enter valid Latitude.")
-                document.eventform.txtLatitude.focus();
-                return false;
-            }else{
-                 $("#ermsg").hide();
-                 $("#ermsg2").hide();
-            }
-    }
-
-    if(document.eventform.txtLongitude.value!="")
-    {
-            sLongitude = document.eventform.txtLongitude.value
-
-            if(isNaN(sLongitude) || sLongitude.indexOf(".")<0)
-            {
-                //alert ("Please enter valid Longitude.")
-                 $("#ermsg3").html('<p style="color: red;">Please enter valid Longitude.</p>').show();
-                 $("#ermsg1").hide();
-                document.eventform.txtLongitude.focus();
-                return false;
-            }else{
-                 $("#ermsg1").hide();
-                 $("#ermsg3").hide();
-            }
-    }
-
-      var fdate = document.getElementById("datepicker-autoclose").value;
-      var tdate = document.getElementById("datepicker").value;
-
-       //alert(fdate);alert(tdate);
-      var chunks = fdate.split('-');
-      var formattedDate = chunks[1]+'/'+chunks[0]+'/'+chunks[2];
-       //alert(formattedDate);
-      var chunks1 = tdate.split('-');
-      var formattedDate1 = chunks1[1]+'/'+chunks1[0]+'/'+chunks1[2];
-      //alert(formattedDate1);
-      //alert( Date.parse(formattedDate));
-      //alert( Date.parse(formattedDate1));
-      if(Date.parse(formattedDate) > Date.parse(formattedDate1) )
-      {
-       alert("Startdate should be less than Enddate");
-       return false;
-      }
-
-      if(Date.parse(formattedDate)==Date.parse(formattedDate1) )
-      {
-        var strStartTime = document.getElementById("stime").value;
-        var strEndTime = document.getElementById("etime").value;
-
-        var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
-        var endTime = new Date(startTime)
-        endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
-
-        //var timefrom = date1;
-         temp =strStartTime.split(":");
-         var a = temp[0];
-         var b = temp[1];
-         temp1 =b.split(" ");
-         var c = temp1[1]
-      // alert(a); alert(c);
-        if(a==12 && c=='AM'){
-
-        }else if (startTime > endTime){
-          alert("Start Time is greater than end time");
-          return false;
-        }
-    }else{
-      var date1 = new Date(fdate);
-      var date2 = new Date(tdate);
-      var strStartTime = document.getElementById("stime").value;
-      var strEndTime = document.getElementById("etime").value;
-      var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
-      var endTime = new Date(startTime);
-      endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
-      var a=formattedDate + '' + strStartTime;
-      var b=formattedDate1 + '' + strEndTime;
-      //alert(startTime);alert(endTime); alert(a);alert(b);
-      if (a == b || a > b) {
-      alert("Start Date & Time is greater than end Date & Time");
-      return false;
-      }
-    }
-      function GetHours(d)
-      {
-        var h = parseInt(d.split(':')[0]);
-        if (d.split(':')[1].split(' ')[1] == "PM") {
-        h = h + 24;
-      }
-      return h;
-      }
-      function GetMinutes(d)
-      {
-       return parseInt(d.split(':')[1].split(' ')[0]);
-      }
-}
-/*
 function check()
 {
   if(document.eventform.txtLatitude.value=="")
@@ -617,9 +409,37 @@ function check()
             }
     }
 
+    // if(document.eventform.txtLatitude.value!="")
+
+    // {
+    //     var latitude = document.eventform.txtLatitude.value;
+    //     var longitude = document.eventform.txtLongitude.value;
+        
+    //     var reg = new RegExp("^[-+]?[0-9]{1,3}(?:\.[0-9]{1,10})?$");
+        
+    //     if( reg.exec(latitude) ) {
+    //      //do nothing
+    //     } else {
+    //          $("#ermsg2").html('<p style="color: red;">Please enter valid Latitude.</p>').show();
+    //          $("#ermsg").hide();
+    //         //alert("Please enter valid Latitude.");
+    //         document.eventform.txtLatitude.focus();
+    //         return false;
+    //     }
+        
+    //     if( reg.exec(longitude) ) {
+    //      //do nothing
+    //     } else {
+    //         //alert("Please enter valid Longitude.");
+    //         $("#ermsg3").html('<p style="color: red;">Please enter valid Longitude.</p>').show();
+    //         $("#ermsg1").hide();
+    //         document.eventform.txtLongitude.focus();
+    //         return false;
+    //     }
+    // }
     
 }
-*/
+
 </script>
 
 

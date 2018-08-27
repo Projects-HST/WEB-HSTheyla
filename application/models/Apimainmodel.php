@@ -121,11 +121,11 @@ class Apimainmodel extends CI_Model {
         
         //Prepare you post parameters
         $postData = array(
-            'authkey'=> $authKey,
-            'mobiles'=> $mobileNumber,
-            'message'=> $message,
-            'sender'=> $senderId,
-            'route'=> $route
+            'authkey' => $authKey,
+            'mobiles' => $mobileNumber,
+            'message' => $message,
+            'sender' => $senderId,
+            'route' => $route
         );
         
         //API URL
@@ -1488,7 +1488,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                             LEFT JOIN city_master AS ci ON ev.event_city = ci.id
                             LEFT JOIN country_master AS cy ON ev.event_country = cy.id
                             WHERE ev.hotspot_status = 'N' AND $day_query ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
-                            group by ev.id";
+                            group by ev.id LIMIT 50";
 	    } 
 	    if ($event_type == 'Popularity'){
 	         $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
@@ -1497,7 +1497,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                             LEFT JOIN city_master AS ci ON ev.event_city = ci.id
                             LEFT JOIN country_master AS cy ON ev.event_country = cy.id
                             WHERE ev.hotspot_status = 'N' AND $day_query ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
-                            group by ev.id ORDER by popularity DESC";
+                            group by ev.id ORDER by popularity DESC LIMIT 50";
 	    }
 		if ($event_type == 'Hotspot'){
 	        $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
@@ -1506,7 +1506,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                             LEFT JOIN city_master AS ci ON ev.event_city = ci.id
                             LEFT JOIN country_master AS cy ON ev.event_country = cy.id
                             WHERE ev.hotspot_status = 'Y' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
-                            group by ev.id";
+                            group by ev.id LIMIT 50";
 	    } 
 		//echo $event_query;
 		$event_res = $this->db->query($event_query);

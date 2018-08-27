@@ -5,7 +5,7 @@ body{
   font-family: 'Roboto', sans-serif;
 }
 .navbar-dark .navbar-nav .nav-link{
-  color: #fff;
+  color: #000;
   font-weight: 500;
 }
 .loginbtn{
@@ -16,6 +16,12 @@ body{
 }
 .slider-img{
   border-left: 3px solid #fff;
+}
+.become_organiser_text{
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 120px;
+  text-align: justify;
 }
 .fa{
   padding-left: 0px;
@@ -78,9 +84,13 @@ body{
 }
 .menuactive{
 
-  color:#fff !important;
+  color:#000 !important;
   font-weight: 800;
-  border-bottom: 2px solid  #478ECC;
+
+}
+.nav-link:hover{
+  color:#000 !important;
+  font-weight: 800;
 }
 .nav1{
   margin-top: 210px;
@@ -119,9 +129,7 @@ body{
 .nav-tabs{
   border: none;
 }
-.modal-content{
-  border-radius: 25px;
-}
+
 .modalmenu{
   padding-left: 60px;
 }
@@ -211,25 +219,23 @@ body{
 .featureicons{
   width: 75px;
 }
-.organsier{
-      background: url("../images/createevent.jpg")no-repeat;
-     -webkit-background-size: cover;
-     -moz-background-size: cover;
-     -o-background-size: cover;
-     height: 500px;
-     padding-top: 85px;
-     padding-bottom: 60px;
+.organiser_btn{
+  background-color: #ffbb17;
+    color: #fff !important;
+}
+.organiser_btn:hover{
 
+    color: #fff !important;
 }
 
 .features_section{
-      background: url("../images/feature_bg.jpg")no-repeat;
+
      -webkit-background-size: cover;
      -moz-background-size: cover;
      -o-background-size: cover;
 
-     padding-top: 85px;
-     padding-bottom: 60px;
+     padding-top: 60px;
+     padding-bottom: 0px;
 
 }
 .organiserbox{
@@ -253,7 +259,7 @@ body{
 }
 .event_section{
   background-color: #fff;
-  padding-bottom: 10px;
+  padding-bottom: 3px;
 }
 .event_heading{
   color: #000;
@@ -261,9 +267,10 @@ body{
   font-weight: 500;
 }
 .event_thumb{
-  margin-left: 10px;
+  margin-left: 4px;
   font-weight: 500;
   font-size: 14px;
+  margin-bottom: 10px;
 }
 .event_box{
   margin-bottom: 10px;
@@ -299,6 +306,7 @@ body{
 .event_details_bg_row{
   background-color: #fff;
   margin: 7px;
+  margin-top: 80px;
 }
 .book_tickets{
   text-align: center;
@@ -350,13 +358,10 @@ body{
 .confirm_btn{
   margin-top: 20px;
 }
-.event_booking_section{
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
+
 
 .footer-bg{
-  background-color: #478ECC;
+  background-color: #585858;
   padding-top: 30px;
   padding-bottom: 15px;
 }
@@ -381,6 +386,10 @@ body{
 .fnt-footer li{
   font-size: 16px;
   list-style-type: none;
+}
+.footer_container{
+  margin-left: 50px;
+  margin-right: 50px;
 }
 .bottom-footer{
   position: absolute;
@@ -515,25 +524,20 @@ body{
 }
 
 /* Sign in page */
-.signinbg{
-    background: url("../images/signup_bg.jpg") no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  background-size: 100% 100%;
-  background-attachment: fixed;
-  height: 100%;
-}
+
 
 
 .signin-div
 {
-
   margin-top: 100px;
-  margin-bottom: 10%;
   background-color: #fff;
   border-radius: 3px;
+}
+.login_tag{
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    color: #929191;
 }
 .user-text-box{
   line-height: 0px;
@@ -542,7 +546,8 @@ body{
   width:100%;
   text-align: center;
   padding-top: 30px;
-  font-size: 24px;
+  font-size: 26px;
+  font-weight: 500;
 }
 .textarea-form{
   overflow-x: hidden;
@@ -552,7 +557,7 @@ body{
 }
 .formsignin{
   padding-top:50px;
-  padding-bottom: 50px;
+
   padding-left: 30px;
   padding-right: 30px;
 }
@@ -592,7 +597,9 @@ i.fas{
   padding-top: 140px;
   text-align: center;
 }
-
+.store_img{
+  width: 125px;
+}
 .socialmedia-tab{
   text-align: center;
 padding-top: 50px;
@@ -600,11 +607,11 @@ padding-bottom: 15px;
 }
 .formsignup{
   padding-top:40px;
-  padding-bottom: 40px;
+
   padding-left: 15px;
   padding-right: 15px;
 }
-@media (min-width: 320px) and (max-width: 480px){
+@media (min-width: 360px) and (max-width: 480px){
 .or-text{
   padding-top: 10px;
 }
@@ -624,6 +631,14 @@ padding-bottom: 15px;
 .leaderboard-bg{
   top:0px;
 }
+.homeslider{
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+.form_search{
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
 
 }
 @media (max-width:600px)  {
@@ -638,13 +653,12 @@ padding-bottom: 15px;
 .contact_icon{
   padding: 3px;
 }
+
  }
-
-@media (min-width: 320px) and (max-width: 480px){
-.leaderboard-bg{
-
+.address_form{
+  color: #fff;
 }
-}
+
 /*.fixed-top{
       background-color: #478ecc;
 }*/
@@ -880,7 +894,8 @@ a.btn.btn-login.btn-primary.btn-block.review-btn{
   margin-top: 30px;
 }
 .summary_label{
-  text-align: center;
+  text-align: right;
+  margin-right: 15px;
 
 }
 .summary_text{
@@ -1027,6 +1042,7 @@ a.btn.btn-login.btn-primary.btn-block.review-btn{
 
 .social_follow li{
   display: inline-block;
+
 }
 
 
@@ -1037,4 +1053,19 @@ and (orientation : landscape) {
 .text_box{
   margin-left: 20px;
 }
+}
+
+.order_dialog{
+  max-width: 840px !important;
+}
+
+/* About us */
+.about_us{
+  background-color: #f5f5f5;
+  position: relative;
+  margin-top: -60px;
+  padding: 20px;
+  margin-bottom: 10px;
+  margin-left: 100px;
+  margin-right: 100px;
 }

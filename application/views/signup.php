@@ -1,11 +1,10 @@
 <div class="container-fluid signinbg">
     <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6 col-md-auto signin-div">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 col-md-auto signin-div">
             <div class="row">
-                <p class="login-heading">
-                    Sign up Now
-                </p>
+                <p class="login-heading">Sign up Now </p>
+                  <p class="login_tag">Become a part of our community!</p>
                 <div class="col-md-6">
                     <form action="" method="post" class="formsignup" id="formsignup">
                         <div class="col-xs-6 form_box">
@@ -57,15 +56,21 @@
         </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-2">
 
     </div>
+</div>
+<div class="container-fluid">
+<center>  <img src="<?php echo base_url(); ?>assets/front/images/login_bg.png" class="img-responsive"> </center>
 </div>
 
 
 
 </div>
 <style>
+.navbar {
+  border-bottom: 1px solid #dad9d9;
+}
 .error{
   color: red;
 }

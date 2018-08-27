@@ -1,15 +1,19 @@
 <style>
 .wishlist_active{
-  background-color: #92bce0  !important;
-  color: #fff !important;
+  border-left: 4px solid #92bce0;
 }
+.footer_section{
+  display: none;
+}
+
 </style>
+
 <div class="col-sm-12 col-md-12 " id="content">
-    <h3 class="dashboard_tab"></h3>
+    <h3 class="dashboard_tab">Wishlist</h3>
 </div>
 
-            <div class="profile_tab">
-              <?php if(empty($wishlist_details)){ echo "<center><h3>No Wishlist Added</h3></center>"; }else{ foreach($wishlist_details as $res){
+<div class="container profile_tab">
+              <?php if(empty($wishlist_details)){ echo "<style>.profile_tab{height:100vh;} </style><center><h3>No Wishlist Added</h3></center>"; }else{ foreach($wishlist_details as $res){
                   $event_id = $res->id * 564738;
                   $event_name = strtolower(preg_replace("/[^\w]/", "-", $res->event_name));
                   $enc_event_id = base64_encode($event_id);
@@ -23,7 +27,10 @@
                   $string = $endPoint? substr($stringCut, 0, $endPoint):substr($stringCut, 0);
                   $string .= '...';
                 } ?>
+<style>.profile_tab{
+height:100vh;
 
+  }</style>
       <div class="col-xs-18 col-sm-6 col-md-4">
        <div class="thumbnail">
          <img src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>" alt="" style="height:204px;width:100%;">

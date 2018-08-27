@@ -8,6 +8,9 @@
 .form_box{
 	margin-bottom: 20px;
 }
+.footer_section{
+  display: none;
+}
 .error{
 	color:red;
 	font-weight: 400;
@@ -32,15 +35,13 @@
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
-body{
-    background-color: #fff;
-}
+
 </style>
 
 <div class="col-md-12" id="content">
-	<h3 class="dashboard_tab"></h3>
+	<h3 class="dashboard_tab">Create Event</h3>
 </div>
-<div class="card">
+<div class="container">
 
 <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>home/insertevents" name="eventform" id="eventform" onSubmit='return check();'>
 <div class="col-md-12 form_box">

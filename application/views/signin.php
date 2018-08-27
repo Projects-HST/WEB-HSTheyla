@@ -1,11 +1,11 @@
 <div class="container-fluid signinbg">
   <div class="row">
-  <div class="col-md-3"></div>
-  <div class="col-md-6 col-md-auto signin-div">
+  <div class="col-md-2"></div>
+  <div class="col-md-8 col-md-auto signin-div">
     <div class="row">
-    <p class="login-heading">
-      Login to Heyla
-    </p>
+    <p class="login-heading">Login</p>
+      <p class="login_tag">Become a part of our community!</p>
+
     <div class="col-md-6">
       <form action="<?php echo base_url(); ?>adminlogin/home" method="post" class="formsignin">
         <div class="col-xs-6 form_box" >
@@ -45,9 +45,12 @@
   </div>
   </div>
 
-  <div class="col-md-3">
+  <div class="col-md-2">
 
   </div>
+</div>
+<div class="container-fluid">
+<center>  <img src="<?php echo base_url(); ?>assets/front/images/login_bg.png" class="img-responsive"> </center>
 </div>
 
 
@@ -98,6 +101,9 @@
 }
 .left-inner-addon input{
   padding-left: 30px;
+}
+.navbar {
+  border-bottom: 1px solid #dad9d9;
 }
 </style>
 <script src="//connect.facebook.net/en_US/all.js"></script>

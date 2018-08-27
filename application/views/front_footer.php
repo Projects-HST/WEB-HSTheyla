@@ -1,51 +1,77 @@
 <footer class="footer-bg footer" id="stickfooter">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-              <p class="footer_heading">Categories</p>
-              <ul class="fnt-footer ">
-                <li class=""><a href="">Events</a></li>
-                <li class=""><a href="">Hotspot</a></li>
-                <li class=""><a href="">Ads Event</a></li>
-              </ul>
+  <div class="container-fluid">
+      <div class="row footer_container">
+          <div class="col">
+            <p class="footer_heading">Categories</p>
+            <ul class="fnt-footer ">
+              <li class=""><a href="">Events</a></li>
+              <li class=""><a href="">Hotspot</a></li>
+              <li class=""><a href="">Ads Event</a></li>
+            </ul>
+          </div>
+          <div class="col">
+            <p class="footer_heading">Country</p>
+            <ul class="fnt-footer ">
+              <li class=""><a href="">India</a></li>
+              <li class=""><a href="">Singapore</a></li>
+              <li class=""><a href="">Malaysia</a></li>
+            </ul>
 
-            </div>
-            <div class="col-md-3">
-              <p class="footer_heading">Quick links</p>
-              <ul class="fnt-footer ">
-                  <li class=""><a href="#">Events</a></li>
-                  <li class=""><a href="#">Blog</a></li>
-                <li class=""><a href="<?php echo base_url(); ?>privacy">Privacy Policy</a></li>
-                <li class=""><a href="<?php echo base_url(); ?>payment">Payment Policy</a></li>
-                <li class=""><a href="<?php echo base_url(); ?>terms">Terms & Conditions</a></li>
-              </ul>
+          </div>
+          <div class="col">
+            <p class="footer_heading">Quick links</p>
+            <ul class="fnt-footer ">
+                <li class=""><a href="<?php echo base_url(); ?>about-us">About Us</a></li>
+                <li class=""><a href="<?php echo base_url(); ?>">Events</a></li>
+                <li class=""><a href="#">Blog</a></li>
+              <li class=""><a href="<?php echo base_url(); ?>privacy">Privacy Policy</a></li>
+              <li class=""><a href="<?php echo base_url(); ?>payment">Payment Policy</a></li>
+              <li class=""><a href="<?php echo base_url(); ?>terms">Terms & Conditions</a></li>
+            </ul>
 
-            </div>
-            <div class="col-md-3">
-              <p class="footer_heading">Country</p>
-              <ul class="fnt-footer ">
-                <li class=""><a href="">India</a></li>
-                <li class=""><a href="">Singapore</a></li>
-                <li class=""><a href="">Malaysia</a></li>
-              </ul>
-            </div>
-            <div class="col-md-3">
-              <p class="footer_heading">Follow  Us On</p>
-              <ul class="fnt-footer social_follow">
-                <li class=""><a href="https://www.facebook.com/heylaapp/" target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/fb_follow.png"></a></li>
-                <li class=""><a href="https://www.instagram.com/heyla_app/" target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/in_follow.png"></a></li>
-                <!-- <li class=""><a href=""><img src="<?php echo base_url(); ?>assets/front/images/gp_follow.png"></a></li> -->
-                <li class=""><a href="https://twitter.com/heylaapp"  target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/tw_follow.png"></a></li>
-              </ul>
-            </div>
-        </div>
-    </div>
+          </div>
+          <div class="col">
+            <p class="footer_heading">Contact Us</p>
+            <p class="address_form">No: 6, Kummalamman Koil Street,<br>
+                      3rd Lane Tondiarpet, <br>Chennai - 600081</p>
+          </div>
+          <div class="col">
+            <p class="footer_heading">Follow  Us On</p>
+            <ul class="fnt-footer social_follow">
+              <li class=""><a href="https://www.facebook.com/heylaapp/" target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/share_facebook.png"></a></li>
+              <li class=""><a href="https://www.instagram.com/heyla_app/" target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/instagram.png"></a></li>
+              <!-- <li class=""><a href=""><img src="<?php echo base_url(); ?>assets/front/images/gp_follow.png"></a></li> -->
+              <li class=""><a href="https://twitter.com/heylaapp"  target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/share_twitter.png"></a></li>
+                <li class=""><a href="https://twitter.com/heylaapp"  target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/share_googleplus.png"></a></li>
+            </ul>
+            <p class="footer_heading">Download Apps</p>
+            <ul class="fnt-footer social_follow">
+              <li class=""><a href="" target="_blank"><img class="store_img" src="<?php echo base_url(); ?>assets/front/images/app.png"></a></li>
+              <li class=""><a href="" target="_blank"><img class="store_img"  src="<?php echo base_url(); ?>assets/front/images/play.png"></a></li>
+
+            </ul>
+          </div>
+      </div>
+  </div>
     <!-- /.container -->
     <div class="container">
+        <center><img class="text-center" src="<?php echo base_url(); ?>assets/front/images/heyla_white.png"></center>
         <p class=" text-center foot_copyrights">Crafted with <a href="" style="text-decoration:none;"><b style="color:#fff;font-size:20px;">Happiness</b></a></p>
     </div>
 </footer>
-
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="row">
+    <div class="col-md-5"><img src="<?php echo base_url(); ?>assets/front/images/become_organiser.jpg"></div>
+      <div class="col-md-7">
+        <p class="become_organiser_text">When modals become too long for the user’s viewport or device, they scroll independent of the page itself. Try the demo below to see what we mean.</p>
+      <p class="text-center"><a class="btn  btn-primary" href="#" role="button">Request Now</a></p>
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
 </body>
 <script src="<?php echo base_url(); ?>assets/plugins/datatables/dataTables.buttons.min.js"></script>
 
@@ -125,11 +151,11 @@ $(document).ready(function() {
     $(window).scroll(function() {
         if ($(window).scrollTop() > $(window).height()) {
             $(".navbar").css({
-                "background-color": "#478ECC"
+                "background-color": "#fff"
             });
         } else {
             $(".navbar").css({
-                "background-color": "#478ECC"
+                "background-color": "#fff"
             });
         }
 

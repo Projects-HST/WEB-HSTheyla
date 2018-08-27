@@ -1,58 +1,81 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <!-- <script src="https://raw.githubusercontent.com/carhartl/jquery-cookie/master/src/jquery.cookie.js"></script> -->
-
-
 <?php $user_id = $this->session->userdata('id'); ?>
 <style>
 .ui-autocomplete {
-          max-height: 200px;
-          overflow-y: auto;
-          /* prevent horizontal scrollbar */
-          overflow-x: hidden;
-          /* add padding to account for vertical scrollbar */
-          padding-right: 20px;
+    max-height: 200px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+    /* add padding to account for vertical scrollbar */
+    padding-right: 20px;
       }
 .field-icon {
   float: right;
-  left:-10px;
+  left:10px;
   margin-top: -25px;
   position: relative;
   z-index: 2;
 }
-.carousel-inner .carousel-item.active,
-.carousel-inner .carousel-item-next,
-.carousel-inner .carousel-item-prev {
-  display: flex;
+
+/* Carousel base class */
+.event_thumb p{
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+.event_date{
+  font-size: 14px;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  z-index: 10;
+  bottom: 3rem;
 }
 
-.carousel-inner .carousel-item-right.active,
-.carousel-inner .carousel-item-next {
-  transform: translateX(33%);
-}
-
-.carousel-inner .carousel-item-left.active,
-.carousel-inner .carousel-item-prev {
-  transform: translateX(-33%);
-}
-
-.carousel-inner .carousel-item-right,
-.carousel-inner .carousel-item-left{
-  transform: translateX(0);
+/* Declare heights because of positioning of img element */
+.carousel-item {
+  height: 32rem;
 
 }
+.carousel-item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 32rem;
+}
+
+
+
 .slider-img{
   padding-left: 0px;
   padding-right: 0px;
   height: 450px;
 }
-body{background-color: #f5f5f5;}
-.eventdetail-pge{
-  padding-left: 50px;
-  padding-right: 50px;
+body{background-color: #f7f8fa;}
+
+.homeslider{
+  margin-left: 50px;
+  margin-right: 50px;
 }
-.search_filter{
-  padding-left: 40px;
-  padding-right: 40px;
+.slider_form{
+  position:relative;
+  bottom:50px;
+  padding: 30px;
+}
+.form-label{
+  margin-left: 15px;
+}
+.head_text{
+  margin-bottom: 20px;
+}
+.event_list{
+  margin-left: 50px;
+  margin-right: 50px;
+}
+.form_search{
+  margin-left: 100px;
+  margin-right: 100px;
 }
 </style>
 <script src="<?php echo base_url(); ?>assets/front/js/jquery-ui.js"></script>
@@ -62,42 +85,118 @@ body{background-color: #f5f5f5;}
 <!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/multiselect.css"> -->
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/select2.min.css">
 <script src="<?php echo base_url(); ?>assets/front/js/select2.min.js"></script>
+  <div class="container-fluid">
+<div class="homeslider">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner" role="listbox">
+    <div class="carousel-item active">
+      <img class="first-slide" src="https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg" alt="First slide">
+      <div class="container">
+        <div class="carousel-caption d-none d-md-block text-left">
+          <h1>Example headline.</h1>
+          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+          <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img class="second-slide" src="https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg" alt="Second slide">
+      <div class="container">
+        <div class="carousel-caption d-none d-md-block">
+          <h1>Another example headline.</h1>
+          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+          <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img class="third-slide" src="https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg" alt="Third slide">
+      <div class="container">
+        <div class="carousel-caption d-none d-md-block text-right">
+          <h1>One more for good measure.</h1>
+          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+          <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+</div>
+</div>
 
 <div class="container-fluid ">
-  <div class="row">
-      <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
-          <div class="carousel-inner w-100" role="listbox">
-              <?php if (count($adv_event_result)>0){
-
-			 $i = 0;
-			foreach($adv_event_result as $res){
-				$event_id = $res->id * 564738;
-				$event_name = strtolower(preg_replace("/[^\w]/", "-", $res->event_name));
-				$enc_event_id = base64_encode($event_id);
-?>
-
-				<div class="carousel-item <?php if ($i=='0') echo "active"; ?>">
-                <!--<a href="<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/">--><img class="d-block col-6 img-fluid slider-img" src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>" alt="<?php echo $event_name; ?>"><!--</a><-->
-                </div>
-
-                 <?php $i = $i+1; } ?>
-
- <?php } ?>
-
+  <div class="form_search eventdetail-pge slider_form">
+    <div class="text-center head_text"><h2>Find Events near to you</h2></div>
+    <div class="row">
+    <div class="col-md-3">
+      <label class="form-label">Select City</label>
+      <div class="form-group">
+          <div class="col-sm-12">
+            <select class="form-control" name="ctyname" id="ctyname" onChange="getcityevents();">
+                  <option value="">Select City</option>
+                  <?php foreach($city_list as $cty){ ?>
+                  <option value="<?php echo $cty->id; ?>"><?php echo $cty->city_name; ?></option>
+                  <?php } ?>
+               </select>
+                <script language="JavaScript">document.eventform.ctyname.value="<?php echo $city_values; ?>";</script>
+               <div id="cmsg"></div>
           </div>
-          <a class="carousel-control-prev" href="#recipeCarousel" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#recipeCarousel" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-          </a>
+      </div>
+    </div>
+    <div class="col-md-3">
+        <label class="form-label">Select Category</label>
+      <div class="form-group ">
+            <div class="col-sm-12">
+            <select id="category" size="3" onchange="getsearchevents()" class="form-control"  multiple>
+                 <?php foreach($category_list as $res){ ?>
+                 <option value="<?php echo $res->id; ?>"><?php echo $res->category_name; ?></option>
+                 <?php } ?>
+               </select>
+          </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+        <label class="form-label">Preference</label>
+        <div class="form-group">
+              <div class="col-sm-12">
+                <select class="form-control" name="event_type" id="event_type" onchange="gettypeevents();">
+                  <option value="">Select Type</option>
+                  <option value="1">General</option>
+                  <option value="2">Hotspot</option>
+                </select>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">&nbsp;</label>
+          <div class="form-group">
+                <div class="col-sm-12">
+                  <form class="navbar-form navbar-right search-event-form" role="search" method="post" action="" name="search_form" id="search_form">
+                    	<input  type="text" class="form-control btn-block" name="search_term" id="search_term"  placeholder="Search Event by name" value="">
+                       <a href="#"  onclick="getsearchtermevents()"><span toggle="#password-field" class="fa fa-search field-icon toggle-password"></span></a>
+                    </form>
+              </div>
+          </div>
+        </div>
       </div>
   </div>
 </div>
 
-<div class="container-fluid eventdetail-pge">
+
+<!-- <div class="container-fluid eventdetail-pge">
   <div class="container-fluid search_form">
     <div class="row search_events_box">
     <div class="col-md-2">
@@ -113,27 +212,13 @@ body{background-color: #f5f5f5;}
     </div>
     </div>
   </div>
-</div>
+</div> -->
 
 
 <!-- <?php  echo $country_values; echo $city_values; ?> -->
- <form method="post" class="navbar-form navbar-right search-event-form" role="search" action="" name="eventform" id="eventform">
+ <!-- <form method="post" class="navbar-form navbar-right search-event-form" role="search" action="" name="eventform" id="eventform">
 <div class="container-fluid eventdetail-pge">
   <div class="row search_filter">
-    <!-- <div class="col-md-3">
-      <div class="form-group">
-            <div class="col-sm-12">
-            <select class="form-control" name="cnyname" id="cnyname" onChange="getcountryevents(this.value);">
-                  <option value="">Select Country</option>
-                  <?php foreach($country_list as $cntry){ ?>
-                  <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
-                  <?php } ?>
-               </select>
-               <script language="JavaScript">document.eventform.cnyname.value="<?php echo $country_values; ?>";</script>
-          </div>
-      </div>
-    </div> -->
-
     <div class="col-md-3">
       <div class="form-group">
             <div class="col-sm-12">
@@ -176,10 +261,10 @@ body{background-color: #f5f5f5;}
 
   </div>
 </div>
-</form>
+</form> -->
 
-<div class="container-fluid search_filter">
-  <div class="row" id="event_list"> </div>
+<div class="container-fluid">
+  <div class="row event_list" id="event_list"> </div>
 
 	  <div id='loader_image'><img src='<?php echo base_url(); ?>assets/loader.gif' width='24' height='24'> Loading...please wait</div>
       <div id='loader_message'></div>
@@ -286,9 +371,9 @@ function getAllevents(lim, off) {
 				}
 
 				if (hotspot_status=='N'){
-					var display_date = "<p><img src='<?php echo base_url(); ?>assets/front/images/date.png'><span class='event_thumb'>"+disp_from_date+" - "+disp_end_date+"<span></p>";
+					var display_date = "<p><span class=' event_date'>"+disp_from_date+" - "+disp_end_date+"<span></p>";
 				} else {
-					var display_date = "";
+					var display_date = "<p><span class='event_date'>&nbsp;<span></p>";
 				}
 				if(wlstatus==null){
 					 var wishliststatus="<span id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' class='pull-right'><a></span>";
@@ -296,7 +381,10 @@ function getAllevents(lim, off) {
 					 var wishliststatus="<span id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img src='<?php echo base_url(); ?>assets/front/images/fav-select.png' class='pull-right'></a></span>";
 				}
 
-				 result +="<div class='col-xs-18 col-sm-3 col-md-3 event_box'><div class='thumbnail event_section'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img src='<?php echo base_url();?>assets/events/banner/"+event_banner+"' alt='' style='height:204px; width:100%;'></a><div class='event_thumb'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><p class='event_heading event_title_heading'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></a>"+display_date+"<p><img src='<?php echo base_url(); ?>assets/front/images/time.png'><span class='event_thumb'>"+start_time+" - "+end_time+" <span></p><p><img src='<?php echo base_url(); ?>assets/front/images/location.png'><span class='event_thumb'>"+event_venue+"<span></p></div><p class='price_section'>"+sevent_type+" <?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></div></div>";
+				 // result +="<div class='col-xs-18 col-sm-3 col-md-3 event_box'><div class='thumbnail event_section'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img src='<?php echo base_url();?>assets/events/banner/"+event_banner+"' alt='' style='height:204px; width:100%;'></a><div class='event_thumb'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><p class='event_heading event_title_heading'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></a>"+display_date+"<p><img src='<?php echo base_url(); ?>assets/front/images/time.png'><span class='event_thumb'>"+start_time+" - "+end_time+" <span></p><p><img src='<?php echo base_url(); ?>assets/front/images/location.png'><span class='event_thumb'>"+event_venue+"<span></p></div><p class='price_section'>"+sevent_type+" <?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></div></div>";
+
+         result +="<div class='col-xs-18 col-sm-3 col-md-3 event_box'><div class='thumbnail event_section'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img src='<?php echo base_url();?>assets/events/banner/"+event_banner+"' alt='' style='height:204px; width:100%;'></a><div class='event_thumb'>"+display_date+"<p class='event_heading event_title_heading'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></a><p><span class='event_thumb'>"+start_time+" - "+end_time+" <span class='pull-right'>"+sevent_type+" <span></span></p></div><p class='price_section'><span class='event_thumb'>"+event_venue+"<span>"+wishliststatus+"</p></div></div>";
+
 
 			};
 				$("#event_list").append(result);

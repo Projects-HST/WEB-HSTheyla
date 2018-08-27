@@ -31,38 +31,38 @@
     <script src="<?php echo base_url(); ?>assets/js/additional-methods.min.js"></script>
 </head>
 <style>
+.modal-dialog{
+  max-width:700px;
+}
 
 
 </style>
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#478ECC;">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color:#fff;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>assets/front/images/logo.png" class="imglogo"></a>
+            <a class="navbar-brand" href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>assets/front/images/heyla_logo.png" class="imglogo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto topmenu">
-                    <li class="nav-item ">
+                    <!-- <li class="nav-item ">
                         <a class="nav-link" href="<?php echo base_url(); ?>home">Home<span class="sr-only"></span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url(); ?>home#about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url(); ?>home#services">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo  base_url(); ?>eventlist/" id="list_events">List Events</a>
-                    </li>
-                     <li class="nav-item">
+                    </li> -->
+
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="<?php echo  base_url(); ?>eventlist/">List Events</a>
+                    </li> -->
+                     <!-- <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url(); ?>home#create">Become Organiser</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url(); ?>home#contact">Contact</a>
-                    </li>
+                       <a class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become Organiser</a>
+                   </li>
+
+
 
                     <?php
                    	$user_role = $this->session->userdata('user_role');
@@ -84,6 +84,8 @@
                                 <a class="nav-link logout-btn" onclick="logout()">Logout</a>
                             </li>
                      <?php } ?>
+
+
                 </ul>
             </div>
         </div>
