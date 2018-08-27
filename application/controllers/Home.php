@@ -28,7 +28,6 @@ class Home extends CI_Controller {
 		$data['event_resu'] = $this->eventlistmodel->get_events();
 		$data['adv_event_result'] = $this->eventlistmodel->getadv_events();
 		$data['popular_events'] = $this->eventlistmodel->popular_events();
-
 		if($user_role==1){
 			redirect('adminlogin/dashboard');
 		}else if($user_role==2){
