@@ -88,7 +88,6 @@
                             <div class="col-sm-4">
                               <input type="text" class="form-control" readonly="" value=" <?php echo $res->category_name;   ?>">
                             <input type="hidden" class="form-control"  name="category_id" value=" <?php echo $res->category_id;?>" >
-                              
                             </div>
                         </div>
 
@@ -164,6 +163,16 @@
                                  <script language="JavaScript">document.advertisementform.status.value="<?php echo $res->status; ?>";</script>
                             </div>
                         </div>
+                        
+                         <div class="form-group row">
+                             <label for="Banner" class="col-sm-2 col-form-label">Banner</label>
+                            <div class="col-sm-4">
+                                <input type="file" name="eventbanner" id="file_upload" class="form-control" accept="image/*" >
+                                <input type="hidden" name="currentcpic" class="form-control" value="<?php echo $res->banner;?>" >
+                            </div>
+                            <div class="col-sm-4">
+                            </div>
+                        </div
                            <div class="form-group">
                               <label class="col-sm-4 col-form-label"></label>
                               <button type="submit" class="btn btn-primary waves-effect waves-light">

@@ -44,9 +44,6 @@
   min-width: 100%;
   height: 32rem;
 }
-
-
-
 .slider-img{
   padding-left: 0px;
   padding-right: 0px;
@@ -94,36 +91,38 @@ body{background-color: #f7f8fa;}
     <li data-target="#myCarousel" data-slide-to="2"></li>
   </ol>
   <div class="carousel-inner" role="listbox">
-    <div class="carousel-item active">
-      <img class="first-slide" src="https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg" alt="First slide">
+  <?php 
+	if (count($adv_event_result)>0){
+		$i = 0;
+		foreach($adv_event_result as $res){
+			$event_id = $res->id * 564738;
+			$event_name = strtolower(preg_replace("/[^\w]/", "-", $res->event_name));
+			$enc_event_id = base64_encode($event_id);
+			$description  = $res->description ;
+			$num_words = 25;
+			$words = array();
+			$words = explode(" ", $description, $num_words);
+			$shown_string = "";
+			if(count($words) == 25){
+			   $words[24] = " ... ";
+			}
+			$shown_string = implode(" ", $words);
+			$disp_banner_desc  = wordwrap($shown_string, 100, "<br />");
+?>
+    <div class="carousel-item <?php if ($i=='0') echo "active"; ?>">
+      <img class="" src="<?php echo base_url(); ?>assets/events/advertisement/<?php echo $res->banner; ?>" alt="<?php echo $res->event_name; ?>">
       <div class="container">
         <div class="carousel-caption d-none d-md-block text-left">
-          <h1>Example headline.</h1>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-          <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+          <h1><?php echo $res->event_name; ?></h1>
+          <p><?php echo $disp_banner_desc; ?></p>
+          <p><a class="btn btn-lg btn-primary" href="<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/" role="button">Explore Now</a></p>
         </div>
       </div>
     </div>
-    <div class="carousel-item">
-      <img class="second-slide" src="https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg" alt="Second slide">
-      <div class="container">
-        <div class="carousel-caption d-none d-md-block">
-          <h1>Another example headline.</h1>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-          <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-        </div>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img class="third-slide" src="https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg" alt="Third slide">
-      <div class="container">
-        <div class="carousel-caption d-none d-md-block text-right">
-          <h1>One more for good measure.</h1>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-          <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-        </div>
-      </div>
-    </div>
+	<?php $i = $i+1; 
+		} 
+	} ?>
+
   </div>
   <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -160,7 +159,7 @@ body{background-color: #f7f8fa;}
         <label class="form-label">Select Category</label>
       <div class="form-group ">
             <div class="col-sm-12">
-            <select id="category" size="3" onchange="getsearchevents()" class="form-control"  multiple>
+            <select id="category" size="3" onchange="getsearchevents()" class="form-control" multiple>
                  <?php foreach($category_list as $res){ ?>
                  <option value="<?php echo $res->id; ?>"><?php echo $res->category_name; ?></option>
                  <?php } ?>
@@ -195,101 +194,29 @@ body{background-color: #f7f8fa;}
   </div>
 </div>
 
-
-<!-- <div class="container-fluid eventdetail-pge">
-  <div class="container-fluid search_form">
-    <div class="row search_events_box">
-    <div class="col-md-2">
-      <p class="event_heading">Search Events</p>
-    </div>
-    <div class="col-md-10" style="padding-right:0px;">
-      <div class="left-inner-addon">
-      <form class="navbar-form navbar-right search-event-form" role="search" method="post" action="" name="search_form" id="search_form">
-        	<input  type="text" class="form-control btn-block" name="search_term" id="search_term"  placeholder="Search Event by name" value="">
-           <a href="#"  onclick="getsearchtermevents()"><span toggle="#password-field" class="fa fa-search field-icon toggle-password"></span></a>
-        </form>
-       </div>
-    </div>
-    </div>
-  </div>
-</div> -->
-
-
-<!-- <?php  echo $country_values; echo $city_values; ?> -->
- <!-- <form method="post" class="navbar-form navbar-right search-event-form" role="search" action="" name="eventform" id="eventform">
-<div class="container-fluid eventdetail-pge">
-  <div class="row search_filter">
-    <div class="col-md-3">
-      <div class="form-group">
-            <div class="col-sm-12">
-            <select class="form-control" name="ctyname" id="ctyname" onChange="getcityevents();">
-                  <option value="">Select City</option>
-                  <?php foreach($city_list as $cty){ ?>
-                  <option value="<?php echo $cty->id; ?>"><?php echo $cty->city_name; ?></option>
-                  <?php } ?>
-               </select>
-                <script language="JavaScript">document.eventform.ctyname.value="<?php echo $city_values; ?>";</script>
-               <div id="cmsg"></div>
-          </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="form-group ">
-            <div class="col-sm-12">
-            <select id="category" size="3" onchange="getsearchevents()" class="form-control"  multiple>
-                 <?php foreach($category_list as $res){ ?>
-                 <option value="<?php echo $res->id; ?>"><?php echo $res->category_name; ?></option>
-                 <?php } ?>
-			</select>
-          </div>
-      </div>
-
-    </div>
-
-	<div class="col-md-2">
-      <div class="form-group">
-            <div class="col-sm-12">
-              <select class="form-control" name="event_type" id="event_type" style="display:none;" onchange="gettypeevents();">
-                <option value="">Select Type</option>
-                <option value="1">General</option>
-                <option value="2">Hotspot</option>
-              </select>
-          </div>
-      </div>
-    </div>
-
-  </div>
-</div>
-</form> -->
-
 <div class="container-fluid">
   <div class="row event_list" id="event_list"> </div>
-
 	  <div id='loader_image'><img src='<?php echo base_url(); ?>assets/loader.gif' width='24' height='24'> Loading...please wait</div>
       <div id='loader_message'></div>
 </div>
 
 <script>
 
-// $('#category').multiselect();
-		$('.carousel').carousel({
+$('.carousel').carousel({
 		interval:6000,
 		pause: "false"
 });
 
 
 $('#category').select2({
-
     placeholder: 'Select Category',
         "multiple": true,
-
 });
 
 $("#cnyname").val("<?php  echo $country_values; ?>");
 $("#ctyname").val("<?php   echo $city_values; ?>");
 
-//$(document).ready(function() {
+
 $(window).on('load', function(){
 		var limit = 20;
 		var offset = 0;
@@ -311,14 +238,10 @@ $(window).on('load', function(){
         }else{
           $('#loader_image').hide();
         }
-
-
-
 });
 
-
 function getAllevents(lim, off) {
-  	var result = '';
+		var result = '';
         $.ajax({
 		url: '<?php echo base_url(); ?>eventlist/get_all_events',
 		type: 'POST',
@@ -369,7 +292,88 @@ function getAllevents(lim, off) {
 				} else {
 					var sevent_type = "<img src='<?php echo base_url(); ?>assets/front/images/free.png' class='pull-left'>";
 				}
+				if (hotspot_status=='N'){
+					var display_date = "<p><span class=' event_date'>"+disp_from_date+" - "+disp_end_date+"<span></p>";
+				} else {
+					var display_date = "<p><span class='event_date'>&nbsp;<span></p>";
+				}
+				if(wlstatus==null){
+					 var wishliststatus="<span id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' class='pull-right'><a></span>";
+				}else{
+					 var wishliststatus="<span id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img src='<?php echo base_url(); ?>assets/front/images/fav-select.png' class='pull-right'></a></span>";
+				}		
 
+				result +="<div class='col-xs-18 col-sm-3 col-md-3 event_box'><div class='thumbnail event_section'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img src='<?php echo base_url();?>assets/events/banner/"+event_banner+"' alt='' style='height:204px; width:100%;'></a><div class='event_thumb'>"+display_date+"<p class='event_heading event_title_heading'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></a><p><span class='event_thumb'>"+start_time+" - "+end_time+" <span class='pull-right'>"+sevent_type+" <span></span></p></div><p class='price_section'><span class='event_thumb'>"+event_venue+"<span><?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></div></div>";
+			};
+				$("#event_list").append(result);
+			}
+
+			if (dataArray.length>0) {
+				$("#loader_message").html('<button class="btn btn-default" type="button">More Events</button>').show();
+            } else {
+				$("#loader_message").html('<button data-atr="nodata" class="btn btn-default" type="button">No more Events.</button>').show()
+            }
+		}
+        });
+
+      }
+
+
+function getcityevents()
+{
+	var city_id_value=ctyname.value;
+	var category_id = $("#category").val();
+	cat_id = category_id.toString();
+
+	if(city_id_value==''){
+		var city_id='<?php echo $city_values; ?>';
+	  }else{
+		  var city_id=city_id_value;
+	}
+	var result = '';
+
+	$.ajax({
+	url: '<?php echo base_url(); ?>eventlist/get_city_events',
+	type: 'POST',
+	data: {city_id:city_id,cat_id:cat_id},
+	success: function(data) {
+		var dataArray = JSON.parse(data);
+		if (dataArray.length>0) {
+			for (var i = 0; i < dataArray.length; i++){
+				var disp_event_id = dataArray[i].id;
+				var event_id = dataArray[i].id*564738;
+				var enc_event_id = btoa(event_id);
+				var event_name = dataArray[i].event_name;
+				var sm_event_name = event_name.toLowerCase();
+				var eevent_name = sm_event_name.replace(/"/g, "");
+				var sevent_name = eevent_name.replace(/'/g, "");
+				var qevent_name = sevent_name.replace(/,/g, '');
+				var enc_event_name = qevent_name.replace(/\s/g,"-");
+				var event_banner = dataArray[i].event_banner;
+				var event_type = dataArray[i].event_type;
+				var country_name = dataArray[i].country_name;
+				var city_name = dataArray[i].city_name;
+				var event_venue = dataArray[i].event_venue;
+				var start_time = dataArray[i].start_time;
+				var end_time = dataArray[i].end_time;
+				var start_date = dataArray[i].start_date;
+				var sdate = new Date(Date.parse(start_date));
+				var s_date = String (sdate);
+				var disp_from_date = s_date.replace('05:30:00 GMT+0530 (India Standard Time)', '');
+
+				var end_date = dataArray[i].end_date;
+				var edate = new Date(Date.parse(end_date));
+				var e_date = String (sdate);
+				var disp_end_date = e_date.replace('05:30:00 GMT+0530 (India Standard Time)', '');
+
+				var wlstatus = dataArray[i].wlstatus;
+				var hotspot_status = dataArray[i].hotspot_status;
+
+				if (event_type == 'Paid'){
+					var sevent_type = "<img src='<?php echo base_url(); ?>assets/front/images/paid.png' class='pull-left'>";
+				} else {
+					var sevent_type = "<img src='<?php echo base_url(); ?>assets/front/images/free.png' class='pull-left'>";
+				}
 				if (hotspot_status=='N'){
 					var display_date = "<p><span class=' event_date'>"+disp_from_date+" - "+disp_end_date+"<span></p>";
 				} else {
@@ -380,203 +384,13 @@ function getAllevents(lim, off) {
 				}else{
 					 var wishliststatus="<span id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img src='<?php echo base_url(); ?>assets/front/images/fav-select.png' class='pull-right'></a></span>";
 				}
-
-				 // result +="<div class='col-xs-18 col-sm-3 col-md-3 event_box'><div class='thumbnail event_section'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img src='<?php echo base_url();?>assets/events/banner/"+event_banner+"' alt='' style='height:204px; width:100%;'></a><div class='event_thumb'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><p class='event_heading event_title_heading'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></a>"+display_date+"<p><img src='<?php echo base_url(); ?>assets/front/images/time.png'><span class='event_thumb'>"+start_time+" - "+end_time+" <span></p><p><img src='<?php echo base_url(); ?>assets/front/images/location.png'><span class='event_thumb'>"+event_venue+"<span></p></div><p class='price_section'>"+sevent_type+" <?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></div></div>";
-
-         result +="<div class='col-xs-18 col-sm-3 col-md-3 event_box'><div class='thumbnail event_section'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img src='<?php echo base_url();?>assets/events/banner/"+event_banner+"' alt='' style='height:204px; width:100%;'></a><div class='event_thumb'>"+display_date+"<p class='event_heading event_title_heading'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></a><p><span class='event_thumb'>"+start_time+" - "+end_time+" <span class='pull-right'>"+sevent_type+" <span></span></p></div><p class='price_section'><span class='event_thumb'>"+event_venue+"<span>"+wishliststatus+"</p></div></div>";
-
-
-			};
-				$("#event_list").append(result);
-
-			}
-
-         if (dataArray.length>0) {
-			$("#loader_message").html('<button class="btn btn-default" type="button">More Events</button>').show();
-
-            } else {
-             $("#loader_message").html('<button data-atr="nodata" class="btn btn-default" type="button">No more Events.</button>').show()
-            }
-
-
-		}
-        });
-
-      }
-
-
-
-function getcountryevents()
-{
-  var country_id_values=cnyname.value;
-  if(country_id_values==''){
-    var country_id='<?php echo $country_values; ?>';
-  }else{
-      var country_id=country_id_values;
-  }
-   //alert(country_id);
-   $('#ctyname').val('');
-
-	var result = '';
-
-	//make the ajax call
-	$.ajax({
-	url: '<?php echo base_url(); ?>eventlist/get_country_events',
-	type: 'POST',
-	data: {country_id : country_id},
-	success: function(data) {
-		var dataArray = JSON.parse(data);
-		if (dataArray.length>0) {
-			for (var i = 0; i < dataArray.length; i++){
-				var disp_event_id = dataArray[i].id;
-				var event_id = dataArray[i].id*564738;
-				var enc_event_id = btoa(event_id);
-				var event_name = dataArray[i].event_name;
-				var sm_event_name = event_name.toLowerCase();
-				var eevent_name = sm_event_name.replace(/"/g, "");
-				var sevent_name = eevent_name.replace(/'/g, "");
-				var qevent_name = sevent_name.replace(/,/g, '');
-				var enc_event_name = qevent_name.replace(/\s/g,"-");
-				var event_banner = dataArray[i].event_banner;
-				var event_type = dataArray[i].event_type;
-				var country_name = dataArray[i].country_name;
-				var city_name = dataArray[i].city_name;
-				var event_venue = dataArray[i].event_venue;
-				var start_time = dataArray[i].start_time;
-				var end_time = dataArray[i].end_time;
-				var start_date = dataArray[i].start_date;
-				var sdate = new Date(Date.parse(start_date));
-				var s_date = String (sdate);
-				var disp_from_date = s_date.replace('05:30:00 GMT+0530 (India Standard Time)', '');
-
-				var end_date = dataArray[i].end_date;
-				var edate = new Date(Date.parse(end_date));
-				var e_date = String (sdate);
-				var disp_end_date = e_date.replace('05:30:00 GMT+0530 (India Standard Time)', '');
-
-				var wlstatus = dataArray[i].wlstatus;
-				var hotspot_status = dataArray[i].hotspot_status;
-
-				if (event_type == 'Paid'){
-					var sevent_type = "<img src='<?php echo base_url(); ?>assets/front/images/paid.png' class='pull-left'>";
-				} else {
-					var sevent_type = "<img src='<?php echo base_url(); ?>assets/front/images/free.png' class='pull-left'>";
-				}
-
-				if (hotspot_status=='N'){
-					var display_date = "<p><img src='<?php echo base_url(); ?>assets/front/images/date.png'><span class='event_thumb'>"+disp_from_date+" - "+disp_end_date+"<span></p>";
-				} else {
-					var display_date = "";
-				}
-				if(wlstatus==null){
-					 var wishliststatus="<span id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' class='pull-right'><a></span>";
-				}else{
-					 var wishliststatus="<span id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img src='<?php echo base_url(); ?>assets/front/images/fav-select.png' class='pull-right'></a></span>";
-				}
-
-				result +="<div class='col-xs-18 col-sm-3 col-md-3 event_box'><div class='thumbnail event_section'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img src='<?php echo base_url();?>assets/events/banner/"+event_banner+"' alt='' style='height:204px; width:100%;'></a><div class='event_thumb'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><p class='event_heading event_title_heading'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></a>"+display_date+"<p><img src='<?php echo base_url(); ?>assets/front/images/time.png'><span class='event_thumb'>"+start_time+" - "+end_time+" <span></p><p><img src='<?php echo base_url(); ?>assets/front/images/location.png'><span class='event_thumb event_address'>"+event_venue+"<span></p></div><p class='price_section'>"+sevent_type+" <?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></div></div>";
-
-
+				
+				result +="<div class='col-xs-18 col-sm-3 col-md-3 event_box'><div class='thumbnail event_section'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img src='<?php echo base_url();?>assets/events/banner/"+event_banner+"' alt='' style='height:204px; width:100%;'></a><div class='event_thumb'>"+display_date+"<p class='event_heading event_title_heading'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></a><p><span class='event_thumb'>"+start_time+" - "+end_time+" <span class='pull-right'>"+sevent_type+" <span></span></p></div><p class='price_section'><span class='event_thumb'>"+event_venue+"<span><?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></div></div>";
 			};
 			$('#loader_message').hide();
 			 $("#event_list").html(result).show();
 		} else {
 			$('#loader_message').hide();
-      // $("#event_list").css({padding-bottom: "100px;"});
-			result +="No Records found!..";
-			$("#event_list").html(result).show();
-		}
-	}
-	});
-}
-
-
-function getcityevents()
-{
-	// var country_id_values=cnyname.value;
-  // if(country_id_values==''){
-  //   var country_id='<?php echo $country_values; ?>';
-  // }else{
-  //     var country_id=country_id_values;
-  // }
-	var city_id_value=ctyname.value;
-  var category_id = $("#category").val();
-	cat_id = category_id.toString();
-  //alert(category_id);
-  if(city_id_value==''){
-    var city_id='<?php echo $city_values; ?>';
-  }else{
-      var city_id=city_id_value;
-  }
-  //alert(city_id);
-	var result = '';
-
-
-	$.ajax({
-	url: '<?php echo base_url(); ?>eventlist/get_city_events',
-	type: 'POST',
-	data: {city_id:city_id,cat_id:cat_id},
-  // dataType: 'json',
-  // cache: false,
-	success: function(data) {
-		var dataArray = JSON.parse(data);
-		if (dataArray.length>0) {
-			for (var i = 0; i < dataArray.length; i++){
-				var disp_event_id = dataArray[i].id;
-				var event_id = dataArray[i].id*564738;
-				var enc_event_id = btoa(event_id);
-				var event_name = dataArray[i].event_name;
-				var sm_event_name = event_name.toLowerCase();
-				var eevent_name = sm_event_name.replace(/"/g, "");
-				var sevent_name = eevent_name.replace(/'/g, "");
-				var qevent_name = sevent_name.replace(/,/g, '');
-				var enc_event_name = qevent_name.replace(/\s/g,"-");
-				var event_banner = dataArray[i].event_banner;
-				var event_type = dataArray[i].event_type;
-				var country_name = dataArray[i].country_name;
-				var city_name = dataArray[i].city_name;
-				var event_venue = dataArray[i].event_venue;
-				var start_time = dataArray[i].start_time;
-				var end_time = dataArray[i].end_time;
-				var start_date = dataArray[i].start_date;
-				var sdate = new Date(Date.parse(start_date));
-				var s_date = String (sdate);
-				var disp_from_date = s_date.replace('05:30:00 GMT+0530 (India Standard Time)', '');
-
-				var end_date = dataArray[i].end_date;
-				var edate = new Date(Date.parse(end_date));
-				var e_date = String (sdate);
-				var disp_end_date = e_date.replace('05:30:00 GMT+0530 (India Standard Time)', '');
-
-				var wlstatus = dataArray[i].wlstatus;
-				var hotspot_status = dataArray[i].hotspot_status;
-
-				if (event_type == 'Paid'){
-					var sevent_type = "<img src='<?php echo base_url(); ?>assets/front/images/paid.png' class='pull-left'>";
-				} else {
-					var sevent_type = "<img src='<?php echo base_url(); ?>assets/front/images/free.png' class='pull-left'>";
-				}
-
-				if (hotspot_status=='N'){
-					var display_date = "<p><img src='<?php echo base_url(); ?>assets/front/images/date.png'><span class='event_thumb'>"+disp_from_date+" - "+disp_end_date+"<span></p>";
-				} else {
-					var display_date = "";
-				}
-				if(wlstatus==null){
-					 var wishliststatus="<span id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' class='pull-right'><a></span>";
-				}else{
-					 var wishliststatus="<span id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img src='<?php echo base_url(); ?>assets/front/images/fav-select.png' class='pull-right'></a></span>";
-				}
-
-
-				result +="<div class='col-xs-18 col-sm-3 col-md-3 event_box'><div class='thumbnail event_section'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img src='<?php echo base_url();?>assets/events/banner/"+event_banner+"' alt='' style='height:204px; width:100%;'></a><div class='event_thumb'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><p class='event_heading event_title_heading'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></a>"+display_date+"<p><img src='<?php echo base_url(); ?>assets/front/images/time.png'><span class='event_thumb'>"+start_time+" - "+end_time+" <span></p><p><img src='<?php echo base_url(); ?>assets/front/images/location.png'><span class='event_thumb event_address'>"+event_venue+"<span></p></div><p class='price_section'>"+sevent_type+" <?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></div></div>";
-
-			};
-			$('#loader_message').hide();
-			 $("#event_list").html(result).show();
-		} else {
-			$('#loader_message').hide();
-      // $("#event_list").css({padding-bottom: "100px;"});
 			result +="No Records found!..";
 			$("#event_list").html(result).show();
 		}
@@ -586,24 +400,20 @@ function getcityevents()
 
 function getsearchevents()
 {
-//	var country_id=cnyname.value;
 	var city_id=ctyname.value;
 	var category_id = $("#category").val();
 	cat_id = category_id.toString();
-  //alert(cat_id);
+	$('#event_type').prop('selectedIndex',0);
 	var result = '';
 
-	if (category_id ==''){
-		$('#event_type').hide();
-	}
 
-	//make the ajax call
 	$.ajax({
 	url: '<?php echo base_url(); ?>eventlist/get_search_events',
 	type: 'POST',
 	data: {city_id:city_id,cat_id:cat_id},
 	success: function(data) {
 		var dataArray = JSON.parse(data);
+		
 		if (dataArray.length>0) {
 			for (var i = 0; i < dataArray.length; i++){
 				var disp_event_id = dataArray[i].id;
@@ -642,26 +452,23 @@ function getsearchevents()
 				}
 
 				if (hotspot_status=='N'){
-					var display_date = "<p><img src='<?php echo base_url(); ?>assets/front/images/date.png'><span class='event_thumb'>"+disp_from_date+" - "+disp_end_date+"<span></p>";
+					var display_date = "<p><span class=' event_date'>"+disp_from_date+" - "+disp_end_date+"<span></p>";
 				} else {
-					var display_date = "";
+					var display_date = "<p><span class='event_date'>&nbsp;<span></p>";
 				}
+				
 				if(wlstatus==null){
 					 var wishliststatus="<span id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' class='pull-right'><a></span>";
 				}else{
 					 var wishliststatus="<span id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img src='<?php echo base_url(); ?>assets/front/images/fav-select.png' class='pull-right'></a></span>";
 				}
 
-
-				result +="<div class='col-xs-18 col-sm-3 col-md-3 event_box'><div class='thumbnail event_section'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img src='<?php echo base_url();?>assets/events/banner/"+event_banner+"' alt='' style='height:204px; width:100%;'></a><div class='event_thumb'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><p class='event_heading event_title_heading'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></a>"+display_date+"<p><img src='<?php echo base_url(); ?>assets/front/images/time.png'><span class='event_thumb'>"+start_time+" - "+end_time+" <span></p><p><img src='<?php echo base_url(); ?>assets/front/images/location.png'><span class='event_thumb event_address'>"+event_venue+"<span></p></div><p class='price_section'>"+sevent_type+" <?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></div></div>";
-
+				result +="<div class='col-xs-18 col-sm-3 col-md-3 event_box'><div class='thumbnail event_section'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img src='<?php echo base_url();?>assets/events/banner/"+event_banner+"' alt='' style='height:204px; width:100%;'></a><div class='event_thumb'>"+display_date+"<p class='event_heading event_title_heading'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></a><p><span class='event_thumb'>"+start_time+" - "+end_time+" <span class='pull-right'>"+sevent_type+" <span></span></p></div><p class='price_section'><span class='event_thumb'>"+event_venue+"<span><?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></div></div>";
 			};
 			 $('#loader_message').hide();
-			 $('#event_type').show();
 			 $("#event_list").html(result).show();
 		} else {
 			$('#loader_message').hide();
-      // $("#event_list").css({padding-bottom: "100px;"});
 			result +="No Records found!..";
 			$("#event_list").html(result).show();
 		}
@@ -672,14 +479,12 @@ function getsearchevents()
 
 function gettypeevents()
 {
-//	var country_id=cnyname.value;
 	var city_id=ctyname.value;
 	var category_id=$("#category").val();
 	var cat_id = category_id.toString();
 	var type_id = event_type.value;
 	var result = '';
 
-	//make the ajax call
 	$.ajax({
 	url: '<?php echo base_url(); ?>eventlist/get_type_events',
 	type: 'POST',
@@ -724,27 +529,23 @@ function gettypeevents()
 				}
 
 				if (hotspot_status=='N'){
-					var display_date = "<p><img src='<?php echo base_url(); ?>assets/front/images/date.png'><span class='event_thumb'>"+disp_from_date+" - "+disp_end_date+"<span></p>";
+					var display_date = "<p><span class=' event_date'>"+disp_from_date+" - "+disp_end_date+"<span></p>";
 				} else {
-					var display_date = "";
+					var display_date = "<p><span class='event_date'>&nbsp;<span></p>";
 				}
+				
 				if(wlstatus==null){
 					 var wishliststatus="<span id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' class='pull-right'><a></span>";
 				}else{
 					 var wishliststatus="<span id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img src='<?php echo base_url(); ?>assets/front/images/fav-select.png' class='pull-right'></a></span>";
 				}
 
-
-				result +="<div class='col-xs-18 col-sm-3 col-md-3 event_box'><div class='thumbnail event_section'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img src='<?php echo base_url();?>assets/events/banner/"+event_banner+"' alt='' style='height:204px; width:100%;'></a><div class='event_thumb'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><p class='event_heading event_title_heading'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></a>"+display_date+"<p><img src='<?php echo base_url(); ?>assets/front/images/time.png'><span class='event_thumb'>"+start_time+" - "+end_time+" <span></p><p><img src='<?php echo base_url(); ?>assets/front/images/location.png'><span class='event_thumb event_address'>"+event_venue+"<span></p></div><p class='price_section'>"+sevent_type+" <?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></div></div>";
-
+				result +="<div class='col-xs-18 col-sm-3 col-md-3 event_box'><div class='thumbnail event_section'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img src='<?php echo base_url();?>assets/events/banner/"+event_banner+"' alt='' style='height:204px; width:100%;'></a><div class='event_thumb'>"+display_date+"<p class='event_heading event_title_heading'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></a><p><span class='event_thumb'>"+start_time+" - "+end_time+" <span class='pull-right'>"+sevent_type+" <span></span></p></div><p class='price_section'><span class='event_thumb'>"+event_venue+"<span><?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></div></div>";
 			};
 			 $('#loader_message').hide();
-			 $('#event_type').show();
 			 $("#event_list").html(result).show();
 		} else {
 			$('#loader_message').hide();
-      // $("#event_list").css({padding-bottom: "100px;"});
-	  		$('#event_type').hide();
 			result +="No Records found!..";
 			$("#event_list").html(result).show();
 		}
@@ -755,10 +556,14 @@ function gettypeevents()
 
 function getsearchtermevents()
 {
+
+	$('#ctyname').prop('selectedIndex',0);
+	//$('#category').prop('selectedIndex',0);
+	$('#event_type').prop('selectedIndex',0);
+	
 	var srch_term = search_term.value;
 	var result = '';
 
-	//make the ajax call
 	$.ajax({
 	url: '<?php echo base_url(); ?>eventlist/search_term_events',
 	type: 'POST',
@@ -803,17 +608,18 @@ function getsearchtermevents()
 				}
 
 				if (hotspot_status=='N'){
-					var display_date = "<p><img src='<?php echo base_url(); ?>assets/front/images/date.png'><span class='event_thumb'>"+disp_from_date+" - "+disp_end_date+"<span></p>";
+					var display_date = "<p><span class=' event_date'>"+disp_from_date+" - "+disp_end_date+"<span></p>";
 				} else {
-					var display_date = "";
+					var display_date = "<p><span class='event_date'>&nbsp;<span></p>";
 				}
+				
 				if(wlstatus==null){
 					 var wishliststatus="<span id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' class='pull-right'><a></span>";
 				}else{
 					 var wishliststatus="<span id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img src='<?php echo base_url(); ?>assets/front/images/fav-select.png' class='pull-right'></a></span>";
 				}
 
-				result +="<div class='col-xs-18 col-sm-3 col-md-3 event_box'><div class='thumbnail event_section'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img src='<?php echo base_url();?>assets/events/banner/"+event_banner+"' alt='' style='height:204px; width:100%;'></a><div class='event_thumb'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><p class='event_heading event_title_heading'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></a>"+display_date+"<p><img src='<?php echo base_url(); ?>assets/front/images/time.png'><span class='event_thumb'>"+start_time+" - "+end_time+" <span></p><p><img src='<?php echo base_url(); ?>assets/front/images/location.png'><span class='event_thumb event_address'>"+event_venue+"<span></p></div><p class='price_section'>"+sevent_type+" <?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></div></div>";
+				result +="<div class='col-xs-18 col-sm-3 col-md-3 event_box'><div class='thumbnail event_section'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img src='<?php echo base_url();?>assets/events/banner/"+event_banner+"' alt='' style='height:204px; width:100%;'></a><div class='event_thumb'>"+display_date+"<p class='event_heading event_title_heading'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></a><p><span class='event_thumb'>"+start_time+" - "+end_time+" <span class='pull-right'>"+sevent_type+" <span></span></p></div><p class='price_section'><span class='event_thumb'>"+event_venue+"<span><?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></div></div>";
 			};
 
 			$('#loader_message').hide();
@@ -884,61 +690,51 @@ $( function() {
     var availableTags = [<?php
 	 $tot_count = count($event_resu);
 	 $i = 1;
-		foreach($event_resu as $res){
-		echo "'";
-		echo $str = addslashes($res->event_name);
-		//echo str_replace("'", "", $res->event_name);
-		echo "'";
-		if ($i < $tot_count) echo ",";
-		 $i = $i+1;} ?>];
-    // $( "#search_term" ).autocomplete({
-    //   source: availableTags
-    // });
-    $("#search_term").autocomplete({
-  source: availableTags,
-  select: function(event, ui) {
-    $("#search_term").val(ui.item.value);
-    getsearchtermevents();
-    //$("#search_form").submit();
-  }
-});
+	foreach($event_resu as $res){
+	echo "'";
+	echo $str = addslashes($res->event_name);
+	//echo str_replace("'", "", $res->event_name);
+	echo "'";
+	if ($i < $tot_count) echo ",";
+	 $i = $i+1;} ?>];
 
-  } );
+    $("#search_term").autocomplete({
+		source: availableTags,
+		select: function(event, ui) {
+		$("#search_term").val(ui.item.value);
+		getsearchtermevents();
+		//$("#search_form").submit();
+		}
+	});
+
+  });
 
 $('#reset_cookie').hide();
 window.onload=set_cookies_values();
 
 function set_cookies_values(){
-
   var country_values='<?php  echo $country_values ?>';
   var city_values='<?php  echo $city_values ?>';
-
+  
   if(country_values=='' && city_values==''){
-
   }else{
-    // $('#reset_cookie').show();
     if(city_values==''){
       getcountryevents();
     }else{
       getcityevents();
+	}
   }
-
-  }
-
 }
+
 function reset(){
-<?php
-unset($_COOKIE['country_values']);
-unset($_COOKIE['city_values']);
+	<?php
+	unset($_COOKIE['country_values']);
+	unset($_COOKIE['city_values']);
 
-delete_cookie('country_values');
-delete_cookie('city_values');
-?>
-location.reload();
+	delete_cookie('country_values');
+	delete_cookie('city_values');
+	?>
+	location.reload();
 }
-
-
-
-
 
 </script>

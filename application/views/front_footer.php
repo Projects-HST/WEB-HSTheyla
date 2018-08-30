@@ -116,7 +116,7 @@
 
  <!-- Plugins Init js -->
 <script src="<?php echo base_url(); ?>assets/pages/form-advanced.js"></script>
-<script src="<?php echo base_url(); ?>assets/front/js/multislider.js"></script>
+<!--<script src="<?php echo base_url(); ?>assets/front/js/multislider.js"></script>-->
 <script src="<?php echo base_url(); ?>assets/js/app.js"></script>
 <script src="<?php echo base_url(); ?>assets/front/js/jquery.reflection.js"></script>
 <script src="<?php echo base_url(); ?>assets/front/js/jquery.cloud9carousel.js"></script>

@@ -121,11 +121,11 @@ class Apimainmodel extends CI_Model {
         
         //Prepare you post parameters
         $postData = array(
-            'authkey' => $authKey,
-            'mobiles' => $mobileNumber,
-            'message' => $message,
-            'sender' => $senderId,
-            'route' => $route
+            'authkey'=> $authKey,
+            'mobiles'=> $mobileNumber,
+            'message'=> $message,
+            'sender'=> $senderId,
+            'route'=> $route
         );
         
         //API URL

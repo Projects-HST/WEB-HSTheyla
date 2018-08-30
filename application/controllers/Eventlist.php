@@ -13,26 +13,25 @@ class Eventlist extends CI_Controller
 
  public function index()
 	{
-
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
-			$data['country_list'] = $this->eventlistmodel->getall_country_list();
-			$data['city_list'] = $this->eventlistmodel->getall_city_list();
-			$data['category_list'] = $this->eventlistmodel->getall_category_list();
-			$data['event_resu'] = $this->eventlistmodel->get_events();
-			$data['adv_event_result'] = $this->eventlistmodel->getadv_events();
-      $data['country_values'] = get_cookie('country_values');
-      $data['city_values'] = get_cookie('city_values');
-				$this->load->view('front_header');
-				$this->load->view('event_list_new', $data);
-				$this->load->view('front_footer');
+		$data['country_list'] = $this->eventlistmodel->getall_country_list();
+		$data['city_list'] = $this->eventlistmodel->getall_city_list();
+		$data['category_list'] = $this->eventlistmodel->getall_category_list();
+		$data['event_resu'] = $this->eventlistmodel->get_events();
+		$data['adv_event_result'] = $this->eventlistmodel->getadv_events();
+		$data['country_values'] = get_cookie('country_values');
+		$data['city_values'] = get_cookie('city_values');		
+		$this->load->view('front_header');
+		$this->load->view('event_list_new', $data);
+		$this->load->view('front_footer');
 	}
 
      public function get_all_events()
     {
         $limit  = $this->input->post('limit');
-		    $offset  = $this->input->post('offset');
+		$offset  = $this->input->post('offset');
         $data['event_result'] = $this->eventlistmodel->getall_events($limit, $offset);
         echo json_encode($data['event_result']);
     }
@@ -40,14 +39,13 @@ class Eventlist extends CI_Controller
 	public function get_country_events()
     {
       	$country_id  = $this->input->post('country_id');
-
         $data['event_result'] = $this->eventlistmodel->get_country_events($country_id);
         echo json_encode($data['event_result']);
     }
 	public function get_city_events()
     {
       	$country_id  = $this->input->post('country_id');
-		    $city_id  = $this->input->post('city_id');
+		$city_id  = $this->input->post('city_id');
         $category_id  = $this->input->post('cat_id');
         $data['event_result'] = $this->eventlistmodel->get_city_events($country_id,$city_id,$category_id);
         echo json_encode($data['event_result']);
@@ -56,19 +54,19 @@ class Eventlist extends CI_Controller
 	public function get_search_events()
     {
       	$country_id  = $this->input->post('country_id');
-    		$city_id  = $this->input->post('city_id');
-    		$category_id  = $this->input->post('cat_id');
+		$city_id  = $this->input->post('city_id');
+		$category_id  = $this->input->post('cat_id');
         $data['event_result'] = $this->eventlistmodel->getsearch_events($country_id,$city_id,$category_id);
         echo json_encode($data['event_result']);
     }
 
 	public function get_type_events()
     {
-      	$country_id  = $this->input->post('country_id');
-    		$city_id  = $this->input->post('city_id');
-    		$category_id  = $this->input->post('cat_id');
-    		$type_id = $this->input->post('type_id');
-        $data['event_result'] = $this->eventlistmodel->gettype_events($country_id,$city_id,$category_id,$type_id);
+      	//$country_id  = $this->input->post('country_id');
+		$city_id  = $this->input->post('city_id');
+		$category_id  = $this->input->post('cat_id');
+		$type_id = $this->input->post('type_id');
+        $data['event_result'] = $this->eventlistmodel->gettype_events($city_id,$category_id,$type_id);
         echo json_encode($data['event_result']);
     }
 
@@ -93,20 +91,20 @@ class Eventlist extends CI_Controller
     	$data['event_gallery'] = $this->eventlistmodel->getevent_gallery($event_id);
   		$data['event_details'] = $this->eventlistmodel->getevent_details($event_id);
   		$data['event_reviews'] = $this->eventlistmodel->getevent_reviews($event_id);
+		$data['booking_dates'] = $this->eventlistmodel->booking_plandates($event_id);
+		//print_r($data['booking_dates']);
     	$event_desc = $data['event_details'];
 
 		foreach($event_desc as $row_des){}
 
-		$event_title=$row_des->event_name;
-		$data['meta_title']= $event_title;
-		$desc=$row_des->description;
-    $event_country=$row_des->event_country;
-    $event_city=$row_des->event_city;
-    set_cookie('country_values',$event_country,'3600');
-    set_cookie('city_values',$event_city,'3600');
-
-
-		$data['meta_description']=$desc;
+			$event_title=$row_des->event_name;
+			$data['meta_title']= $event_title;
+			$desc=$row_des->description;
+			$event_country=$row_des->event_country;
+			$event_city=$row_des->event_city;
+			set_cookie('country_values',$event_country,'3600');
+			set_cookie('city_values',$event_city,'3600');
+			$data['meta_description']=$desc;
 
 		$this->load->view('front_header', $data);
 		$this->load->view('eventdetails_new', $data);

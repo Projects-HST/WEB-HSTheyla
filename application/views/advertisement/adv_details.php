@@ -105,23 +105,6 @@
                             </div>
                         </div>
 
-                        <!--div class="form-group row">
-                             <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
-                            <div class="col-sm-4">
-                                <select name="start_time"  id="stime" class="form-control" >
-                                     <option value="">Select Start Time</option>
-                            <option value=""><?php echo get_times(); ?></option>
-                        </select>
-                            </div>
-                             <label for="etime" class="col-sm-2 col-form-label">End Time</label>
-                            <div class="col-sm-4">
-                                  <select name="end_time" id="etime" class="form-control" >
-                                    <option value="">Select End Time</option>
-                                    <option value=""><?php echo get_times(); ?></option>
-                                  </select>
-                            </div>
-                        </div-->
-
 
                         <div class="form-group row">
                              <label for="ecost" class="col-sm-2 col-form-label">Plans</label>
@@ -143,6 +126,17 @@
                                 </select>
                             </div>
                         </div>
+                        
+                        
+                        <div class="form-group row">
+                             <label for="Banner" class="col-sm-2 col-form-label">Banner</label>
+                            <div class="col-sm-4">
+                                <input type="file" name="eventbanner" id="file_upload" class="form-control" accept="image/*" >
+                            </div>
+                            <div class="col-sm-4">
+                            </div>
+                        </div
+                        
                            <div class="form-group">
                               <label class="col-sm-4 col-form-label"></label>
                               <button type="submit" class="btn btn-primary waves-effect waves-light">
@@ -151,7 +145,6 @@
                               Reset
                               </button>
                            </div>
-                     </div>
                      </form>
                   </div>
                </div>

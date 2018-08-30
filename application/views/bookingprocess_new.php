@@ -4,8 +4,18 @@ foreach($booking_process as $res){
 		$originalDate = $res->show_date;;
 }
 ?>
-<div class="container-fluid order_summary_page">
-  <div class="order_table">
+
+<div class="container-fluid" style="background-color:#fff;">
+  <div class="homeslider">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner" role="listbox">
+      <div class="carousel-item active">
+        <img class="first-slide" src="https://localhost/heyla/assets/front/images/about_usbanner.jpg" alt="First slide">
+        </div>
+    </div>
+  </div>
+  </div>
+</div>
 
 <div class="container summary_tab">
 
@@ -83,5 +93,4 @@ foreach($booking_process as $res){
 </div>
 
 </div>
-</div>
-</div>
+

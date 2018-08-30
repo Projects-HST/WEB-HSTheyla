@@ -147,8 +147,17 @@ class Advertisement extends CI_Controller
         $start_time  = $this->input->post('start_time');
         $end_time    = $this->input->post('end_time');
         $adv_plan    = $this->input->post('adv_plan');
+		
+		$event_pic      = $_FILES['eventbanner']['name'];
+        $temp = pathinfo($event_pic, PATHINFO_EXTENSION);
+        $file_name      = time() . rand(1, 5) . rand(6, 10);
+        $event_banner   = $file_name. '.' .$temp;
+        $uploaddir      = 'assets/events/advertisement/';
+        $profilepic     = $uploaddir . $event_banner;
+        move_uploaded_file($_FILES['eventbanner']['tmp_name'], $profilepic);
+		
         $status      = $this->input->post('status');
-        $datas       = $this->advertisementmodel->add_advertisement_plan_history($event_id, $category_id, $start_date, $end_date, $start_time, $end_time, $adv_plan, $status, $user_id);
+        $datas       = $this->advertisementmodel->add_advertisement_plan_history($event_id, $category_id, $start_date, $end_date, $start_time, $end_time, $adv_plan, $status, $user_id,$event_banner);
         $sta         = $datas['status'];
         //$id=$datas['eid'];
         //$category_id=$datas['cid'];
@@ -253,9 +262,25 @@ class Advertisement extends CI_Controller
         $end_time     = $this->input->post('end_time');
         $adv_plan     = $this->input->post('adv_plan');
         $status       = $this->input->post('status');
+		
+		$currentcpic    = $this->input->post('currentcpic');
+       	$event_pic      = $_FILES['eventbanner']['name'];
+        $temp = pathinfo($event_pic, PATHINFO_EXTENSION);
+        $file_name      = time() . rand(1, 5) . rand(6, 10);
+        $event_banner   = $file_name. '.' .$temp;
+        $uploaddir      = 'assets/events/advertisement/';
+        $profilepic     = $uploaddir . $event_banner;
+        move_uploaded_file($_FILES['eventbanner']['tmp_name'], $profilepic);
+		
+		if (empty($event_pic)) {
+            $event_banner = $currentcpic;
+        } else {
+            $event_banner = $event_banner;
+        }
+		
         // echo $start_time;
         //echo $end_time; exit;
-        $datas        = $this->advertisementmodel->aupdate_advertisement_plan_history($id, $event_id, $category_id, $start_date, $end_date, $start_time, $end_time, $adv_plan, $status, $user_id);
+        $datas        = $this->advertisementmodel->aupdate_advertisement_plan_history($id, $event_id, $category_id, $start_date, $end_date, $start_time, $end_time, $adv_plan, $status, $user_id,$event_banner);
         $sta          = $datas['status'];
         $eid          = str_replace(' ', '', $event_id);
         $ecategory_id = str_replace(' ', '', $category_id);
