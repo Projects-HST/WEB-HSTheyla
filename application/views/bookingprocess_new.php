@@ -30,9 +30,7 @@ hr{
 <div class="container-fluid">
   <div class="row order_page">
     <div class="col-md-8">
-      <div class="summary_box">
-        Order Summary
-      </div>
+      <div class="summary_box">Order Summary</div>
       <div class="col-md-12 col-sm-12 summary_card">
         <div class="row">
           <div class="col-md-5 col-sm-2"><p class="summary_label summary_text">Order id</p></div>
@@ -80,7 +78,7 @@ hr{
     </div>
     <div class="col-md-4">
       <div class="payment_summary">
-        <p class="payment_heading">Payment Summary</p>
+        <p class="payment_heading" style="font-weight:bold;">Payment Summary</p>
         <hr>
         <div class="row">
           <div class="col-md-7">
@@ -151,7 +149,7 @@ hr{
                     <input type="hidden" name="redirect_url" value="http://hobbistan.com/web/ccavenue/ccavResponseHandler.php"/>
                     <input type="hidden" name="cancel_url" value="https://heylaapp.com/eventlist/"/>
                     <input type="hidden" name="language" value="EN"/>
-                    <INPUT type="submit" value="CheckOut" class="btn btn-primary">
+                    <INPUT type="submit" value="CheckOut" class="btn btn-primary" style="width:200px;">
             </form>
       </div>
     </div>
