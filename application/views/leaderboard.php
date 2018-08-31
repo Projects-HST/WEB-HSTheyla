@@ -77,6 +77,6 @@ padding-right: 150px;
 </div>
 </div>
 
-<div class="container">
-  <img src="<?php echo base_url(); ?>assets/front/images/city_bg.png" class="img-center city_bg">
+<div class="">
+  <center><img src="<?php echo base_url(); ?>assets/front/images/city_bg.png" class="img-center city_bg"></center>
 </div>

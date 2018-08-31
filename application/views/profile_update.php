@@ -61,7 +61,7 @@
     <h3 class="dashboard_tab">Profile Setting</h3>
 </div>
 <?php  foreach($res as $rows){} ?>
-<div class="container profile_tab">
+<div class="col-md-12 profile_tab">
 <div class="col-md-8">
   <form class="form" role="form" autocomplete="off" method="post" action="" id="profile_form">
       <div class="form-group row">

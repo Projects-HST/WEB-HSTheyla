@@ -2,7 +2,7 @@
 
 class Apimain extends CI_Controller {
 
-	
+
 	/**
 	 * Index Page for this controller.
 	 *
@@ -18,7 +18,7 @@ class Apimain extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
-	 
+
 	public function index()
 	{
 		$this->load->view('welcome_message');
@@ -26,7 +26,7 @@ class Apimain extends CI_Controller {
 
 
 	function __construct()
-    { 
+    {
         parent::__construct();
 		$this->load->model("apimainmodel");
 		$this->load->helper("url");
@@ -75,14 +75,14 @@ class Apimain extends CI_Controller {
 		$gcmkey ='';
 		$mobiletype ='';
 		$login_type ='';
-		
+
 		$username = $this->input->post("username");
 		$password = $this->input->post("password");
 		$gcm_key = $this->input->post("gcm_key");
 		$mobile_type = $this->input->post("mobile_type");
-		
+
 		$data['result']=$this->apimainmodel->Login($username,$password,$gcm_key,$mobile_type);
-		
+
 		$response = $data['result'];
 		echo json_encode($response);
 	}
@@ -123,7 +123,7 @@ class Apimain extends CI_Controller {
 		$login_type = $this->input->post("login_type");
 
 		$data['result']=$this->apimainmodel->Fb_gm_login($email_id,$name,$gcm_key,$mobile_type,$login_type);
-		
+
 		$response = $data['result'];
 		echo json_encode($response);
 	}
@@ -193,7 +193,7 @@ class Apimain extends CI_Controller {
 		$gcm_key ='';
 		$signup_type = '';
 		$mobile_type = '';
-		
+
 		$email_id = $this->input->post("email_id");
 		$mobile_no = $this->input->post("mobile_no");
 		$password = $this->input->post("password");
@@ -389,19 +389,19 @@ class Apimain extends CI_Controller {
 public function profilePictureUpload()
 	{
 	  	$_POST = json_decode(file_get_contents("php://input"), TRUE);
-		
-		$user_id = $this->uri->segment(3);		
+
+		$user_id = $this->uri->segment(3);
 		$profile = $_FILES["user_pic"]["name"];
 		$userFileName = time().'-'.$profile;
 		$uploadPicdir = './assets/users/profile/';
 		$profilepic = $uploadPicdir.$userFileName;
 		move_uploaded_file($_FILES['user_pic']['tmp_name'], $profilepic);
-		
+
 		$data['result']=$this->apimainmodel->Update_profilepic($user_id,$userFileName);
 		$response = $data['result'];
 		echo json_encode($response);
 	}
-	
+
 //-----------------------------------------------//
 
 //-----------------------------------------------//
@@ -425,7 +425,7 @@ public function profilePictureUpload()
 			echo json_encode($res);
 			return;
 		}
-        
+
         $user_id = '';
         $full_name = '';
         $username = '';
@@ -440,7 +440,7 @@ public function profilePictureUpload()
         $city_id = '';
         $zip_code = '';
         $news_letter = '';
-        
+
         $user_id = $this->input->post("user_id");
         $full_name = $this->input->post("full_name");
         $username = $this->input->post("username");
@@ -522,7 +522,7 @@ public function profilePictureUpload()
 		$OTP = '';
 	 	$mobile_no = $this->input->post("mobile_no");
 	 	$OTP = $this->input->post("OTP");
-	 	
+
 
 		$data['result']=$this->apimainmodel->Forgot_password_otp($mobile_no,$OTP);
 		$response = $data['result'];
@@ -554,7 +554,7 @@ public function profilePictureUpload()
 
 		$user_id = '';
 		$password = '';
-		
+
 		$user_id = $this->input->post("user_id");
 	 	$password = $this->input->post("password");
 
@@ -722,7 +722,7 @@ public function profilePictureUpload()
 		$user_id = '';
 		$category_ids = '';
 		$user_type ='';
-		
+
 		$user_id = $this->input->post("user_id");
 		$category_ids = $this->input->post("category_ids");
         $user_type = $this->input->post("user_type");
@@ -758,7 +758,7 @@ public function profilePictureUpload()
 
 		$user_id = '';
 		$user_type ='';
-		
+
 		$user_id = $this->input->post("user_id");
         $user_type = $this->input->post("user_type");
 
@@ -795,7 +795,7 @@ public function profilePictureUpload()
 		$title = '';
 		$user_id = $this->input->post("user_id");
 		$title = $this->input->post("title");
-		 
+
 		$data['result']=$this->apimainmodel->Add_wishlistmaster($user_id,$title);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -828,11 +828,11 @@ public function profilePictureUpload()
 		$user_id = '';
 		$wishlist_id ='';
 		$title = '';
-		
+
 		$user_id = $this->input->post("user_id");
 		$wishlist_id = $this->input->post("wishlist_id");
 		$title = $this->input->post("title");
-		 
+
 		$data['result']=$this->apimainmodel->Update_wishlistmaster($user_id,$wishlist_id,$title);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -896,11 +896,11 @@ public function profilePictureUpload()
 
 		$user_id = '';
 		$wishlist_id ='';
-		
+
 		$user_id = $this->input->post("user_id");
 		$wishlist_id = $this->input->post("wishlist_id");
 
-		 
+
 		$data['result']=$this->apimainmodel->Delete_wishlistmaster($user_id,$wishlist_id);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -933,11 +933,11 @@ public function profilePictureUpload()
 		$user_id = '';
 		$wishlist_master_id ='';
 		$event_id ='';
-		
+
 		$user_id = $this->input->post("user_id");
 		$wishlist_master_id = $this->input->post("wishlist_master_id");
 		$event_id = $this->input->post("event_id");
-		
+
 		$data['result']=$this->apimainmodel->Add_wishlist($user_id,$wishlist_master_id,$event_id);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -969,10 +969,10 @@ public function profilePictureUpload()
 
 		$user_id = '';
 		$wishlist_master_id ='';
-		
+
 		$user_id = $this->input->post("user_id");
 		$wishlist_master_id = $this->input->post("wishlist_master_id");
-		
+
 		$data['result']=$this->apimainmodel->View_wishlist($user_id,$wishlist_master_id);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -1004,10 +1004,10 @@ public function profilePictureUpload()
 
 		$user_id = '';
 		$wishlist_id ='';
-		
+
 		$user_id = $this->input->post("user_id");
 		$wishlist_id = $this->input->post("wishlist_id");
-		
+
 		$data['result']=$this->apimainmodel->Delete_wishlist($user_id,$wishlist_id);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -1039,10 +1039,10 @@ public function profilePictureUpload()
 
 		$user_id = '';
 		$event_id ='';
-		
+
 		$user_id = $this->input->post("user_id");
 		$event_id = $this->input->post("event_id");
-		
+
 		$data['result']=$this->apimainmodel->Wishlist_Status($user_id,$event_id);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -1077,20 +1077,48 @@ public function profilePictureUpload()
 		$user_id = '';
 		$user_type ='';
 		$day_type ='';
-		
+
 		$event_type = $this->input->post("event_type");
 		$city_id = $this->input->post("event_city_id");
 		$user_id = $this->input->post("user_id");
 		$user_type = $this->input->post("user_type");
 		$day_type = $this->input->post("day_type");
-		
-		
+
+
 		$data['result']=$this->apimainmodel->View_events($event_type,$city_id,$user_id,$user_type,$day_type);
 		$response = $data['result'];
 		echo json_encode($response);
 	}
 
 //-----------------------------------------------//
+
+	public function search_events(){
+
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
+
+		if(!$this->checkMethod())
+		{
+			return FALSE;
+		}
+
+		if($_POST == FALSE)
+		{
+			$res = array();
+			$res["opn"] = "View Event Images";
+			$res["scode"] = 204;
+			$res["message"] = "Input error";
+
+			echo json_encode($res);
+			return;
+		}
+
+		$event_id = '';
+		$search_event = $this->input->post("search_event");
+
+		$data['result']=$this->apimainmodel->search_events($search_event);
+		$response = $data['result'];
+		echo json_encode($response);
+	}
 
 
 //-----------------------------------------------//
@@ -1117,7 +1145,7 @@ public function profilePictureUpload()
 
 		$event_id = '';
 		$event_id = $this->input->post("event_id");
-	
+
 		$data['result']=$this->apimainmodel->View_eventimages($event_id);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -1151,7 +1179,7 @@ public function profilePictureUpload()
 		$user_id = '';
 		$event_id = $this->input->post("event_id");
 		$user_id = $this->input->post("user_id");
-		
+
 		$data['result']=$this->apimainmodel->Check_review($event_id,$user_id);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -1189,7 +1217,7 @@ public function profilePictureUpload()
 		$user_id = $this->input->post("user_id");
 		$event_rating = $this->input->post("rating");
 		$comments =$this->input->post("comments");
-		
+
 		$data['result']=$this->apimainmodel->Add_review($user_id,$event_id,$event_rating,$comments);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -1224,7 +1252,7 @@ public function profilePictureUpload()
 		$review_id = $this->input->post("review_id");
 		$event_rating = $this->input->post("rating");
 		$comments =$this->input->post("comments");
-		
+
 		$data['result']=$this->apimainmodel->Update_review($review_id,$event_rating,$comments);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -1258,7 +1286,7 @@ public function profilePictureUpload()
 		$user_id = '';
 		$event_id = $this->input->post("event_id");
 		$user_id = $this->input->post("user_id");
-		
+
 		$data['result']=$this->apimainmodel->List_eventreview($user_id,$event_id);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -1287,13 +1315,13 @@ public function profilePictureUpload()
 			echo json_encode($res);
 			return;
 		}
-		
+
         $event_id = '';
 		$review_id = '';
 		$event_id = $this->input->post("event_id");
 		$review_id = $this->input->post("review_id");
-		
-		
+
+
 		$data['result']=$this->apimainmodel->Review_images($event_id,$review_id);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -1368,7 +1396,7 @@ public function profilePictureUpload()
 		$price_range = '';
 
 
-        
+
         $single_date = $this->input->post("single_date");
         $from_date = $this->input->post("from_date");
         $to_date = $this->input->post("to_date");
@@ -1416,7 +1444,7 @@ public function profilePictureUpload()
         $user_type = '';
 		$day_type = '';
 
-        
+
         $event_type = $this->input->post("event_type");
         $city_id = $this->input->post("city_id");
         $user_id = $this->input->post("user_id");
@@ -1454,8 +1482,8 @@ public function profilePictureUpload()
 
 		$event_id = '';
 		$event_id = $this->input->post("event_id");
-		
-		
+
+
 		$data['result']=$this->apimainmodel->Booking_plandates($event_id);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -1489,7 +1517,7 @@ public function profilePictureUpload()
 		$show_date = '';
 		$event_id = $this->input->post("event_id");
 		$show_date = $this->input->post("show_date");
-		
+
 		$data['result']=$this->apimainmodel->Booking_plantimes($event_id,$show_date);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -1525,7 +1553,7 @@ public function profilePictureUpload()
 		$event_id = $this->input->post("event_id");
 		$show_date = $this->input->post("show_date");
 		$show_time = $this->input->post("show_time");
-		
+
 		$data['result']=$this->apimainmodel->Booking_plans($event_id,$show_date,$show_time);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -1558,7 +1586,7 @@ public function profilePictureUpload()
 
 		$user_id = '';
 		$user_id = $this->input->post("user_id");
-		
+
 		$data['result']=$this->apimainmodel->Booking_pricerange($user_id);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -1596,7 +1624,7 @@ public function profilePictureUpload()
         $number_of_seats = '';
         $total_amount = '';
         $booking_date = '';
-        
+
 		$order_id = $this->input->post("order_id");
 		$event_id = $this->input->post("event_id");
         $plan_id = $this->input->post("plan_id");
@@ -1605,7 +1633,7 @@ public function profilePictureUpload()
         $number_of_seats = $this->input->post("number_of_seats");
         $total_amount = $this->input->post("total_amount");
         $booking_date = $this->input->post("booking_date");
-		
+
 		$data['result']=$this->apimainmodel->Bookingprocess($order_id,$event_id,$plan_id,$plan_time_id,$user_id,$number_of_seats,$total_amount,$booking_date);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -1676,9 +1704,9 @@ public function profilePictureUpload()
 
 		$user_id = '';
 		$wishlist_id ='';
-		
+
 		$user_id = $this->input->post("user_id");
-		
+
 		$data['result']=$this->apimainmodel->Booking_history($user_id);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -1710,7 +1738,7 @@ public function profilePictureUpload()
 
 		$order_id = '';
 		$order_id = $this->input->post("order_id");
-		
+
 		$data['result']=$this->apimainmodel->Booking_attendeesdetails($order_id);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -1745,12 +1773,12 @@ public function profilePictureUpload()
 		$user_id = '';
 		$event_id = '';
 		$date = '';
-		
+
 		$rule_id = $this->input->post("rule_id");
 		$user_id = $this->input->post("user_id");
 		$event_id = $this->input->post("event_id");
 		$date = $this->input->post("date");
-		
+
 		$data['result']=$this->apimainmodel->User_activity($rule_id,$user_id,$event_id,$date);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -1812,13 +1840,13 @@ public function profilePictureUpload()
 			echo json_encode($res);
 			return;
 		}
-		
+
 		$user_id = '';
 		$rule_id = '';
 
 		$user_id = $this->input->post("user_id");
 	    $rule_id = $this->input->post("rule_id");
-	
+
 		$data['result']=$this->apimainmodel->Activity_history($user_id,$rule_id);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -1847,7 +1875,7 @@ public function profilePictureUpload()
 			echo json_encode($res);
 			return;
 		}
-		
+
         $event_type ='';
         $user_type ='';
         $user_id ='';
@@ -1864,7 +1892,7 @@ public function profilePictureUpload()
         $longitude =$this->input->post("longitude");
         $nearby_distance =$this->input->post("nearby_distance");
 
-	
+
 		$data['result']=$this->apimainmodel->Nearby_events($event_type,$user_type,$user_id,$city_id,$latitude,$longitude,$nearby_distance);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -1893,14 +1921,14 @@ public function profilePictureUpload()
 			echo json_encode($res);
 			return;
 		}
-		
+
         $user_id ='';
         $message ='';
 
         $user_id = $this->input->post("user_id");
         $message = $this->input->post("message");
-        
-	
+
+
 		$data['result']=$this->apimainmodel->Organizer_request($user_id,$message);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -1908,6 +1936,34 @@ public function profilePictureUpload()
 
 //-----------------------------------------------//
 
+	//------------------User Points-----------------------------//
+
+	public function user_points()
+	{
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
+
+		if(!$this->checkMethod())
+		{
+			return FALSE;
+		}
+
+		if($_POST == FALSE)
+		{
+			$res = array();
+			$res["opn"] = "Input error";
+			$res["scode"] = 204;
+			$res["message"] = "Input error";
+
+			echo json_encode($res);
+			return;
+		}
+  	$user_id = $this->input->post("user_id");
+		$data['result']=$this->apimainmodel->user_points($user_id);
+		$response = $data['result'];
+		echo json_encode($response);
+	}
+
+	//-----------------------------------------------//
 
 
 
@@ -1944,7 +2000,7 @@ public function profilePictureUpload()
 		$mobile_type = $this->input->post("mobile_type");
 
 		$data['result']=$this->apimainmodel->sendNotification($gcm_key,$Title,$Message,$mobile_type);
-		
+
 		//$response = $data['result'];
 		//echo json_encode($response);
 	}
@@ -1960,10 +2016,10 @@ public function profilePictureUpload()
 			 if($event_res->num_rows()>0){
 			     	$event_result= $event_res->result();
 			     	$response = array("status" => "success", "msg" => "View Events","Eventdetails"=>$event_result);
-				 
+
 			}else{
 			        $response = array("status" => "error", "msg" => "Events not found");
-			}  
+			}
 		echo json_encode($response);
 	}
 

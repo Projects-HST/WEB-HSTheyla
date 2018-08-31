@@ -7,6 +7,7 @@ class Home extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('loginmodel');
+		$this->load->model('apimainmodel');
 	//	$this->load->model('facebook');
 		$this->load->model('eventlistmodel');
 		$this->load->model('organizermodel');
@@ -854,6 +855,19 @@ class Home extends CI_Controller {
 			$datas['user_points'] = $this->loginmodel->get_points($user_id);
 			$this->load->view('dash_header');
 			$this->load->view('leaderboard',$datas);
+			$this->load->view('dash_footer');
+			}else{
+				redirect('/');
+			}
+		}
+		public function checkpoints(){
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			if($user_role==3 || $user_role==2){
+			$datas['user_points'] = $this->apimainmodel->user_points($user_id);
+			$this->load->view('dash_header');
+			$this->load->view('points_table',$datas);
 			$this->load->view('dash_footer');
 			}else{
 				redirect('/');

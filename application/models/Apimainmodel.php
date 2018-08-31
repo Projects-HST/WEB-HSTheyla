@@ -30,11 +30,11 @@ class Apimainmodel extends CI_Model {
 		if ($mobiletype =='1'){
 
 		    require_once 'assets/notification/Firebase.php';
-            require_once 'assets/notification/Push.php'; 
-            
+            require_once 'assets/notification/Push.php';
+
             $device_token = explode(",", $gcm_key);
-            $push = null; 
-        
+            $push = null;
+
 //        //first check if the push has an image with it
 		    $push = new Push(
 					$Title,
@@ -50,28 +50,28 @@ class Apimainmodel extends CI_Model {
  			// 	);
 
     		//getting the push from push object
-    		$mPushNotification = $push->getPush(); 
-    
-    		//creating firebase class object 
-    		$firebase = new Firebase(); 
+    		$mPushNotification = $push->getPush();
+
+    		//creating firebase class object
+    		$firebase = new Firebase();
 
     	foreach($device_token as $token) {
     		 $firebase->send(array($token),$mPushNotification);
     	}
 
 		} else {
-            
+
 			$device_token = explode(",", $gcm_key);
 			$passphrase = 'hs123';
 		    $loction ='assets/notification/heylaapp.pem';
-		   
+
 			$ctx = stream_context_create();
 			stream_context_set_option($ctx, 'ssl', 'local_cert', $loction);
 			stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);
-			
+
 			// Open a connection to the APNS server
 			$fp = stream_socket_client('ssl://gateway.sandbox.push.apple.com:2195', $err, $errstr, 60, STREAM_CLIENT_CONNECT|STREAM_CLIENT_PERSISTENT, $ctx);
-			
+
 			if (!$fp)
 				exit("Failed to connect: $err $errstr" . PHP_EOL);
 
@@ -83,16 +83,16 @@ class Apimainmodel extends CI_Model {
 				'badge' => 2,
 				'sound' => 'assets/notification/oven.caf',
 				);
-			
+
 			$payload = json_encode($body);
 
 			foreach($device_token as $token) {
-			
+
 				// Build the binary notification
     			$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $token)) . pack("n", strlen($payload)) . $payload;
         		$result = fwrite($fp, $msg, strlen($msg));
 			}
-							
+
 				fclose($fp);
 		}
 	}
@@ -106,19 +106,19 @@ class Apimainmodel extends CI_Model {
 	{
         //Your authentication key
         $authKey = "191431AStibz285a4f14b4";
-        
+
         //Multiple mobiles numbers separated by comma
         $mobileNumber = "$Phoneno";
-        
+
         //Sender ID,While using route4 sender id should be 6 characters long.
         $senderId = "HEYLAA";
-        
+
         //Your message to send, Add URL encoding here.
         $message = urlencode($Message);
-        
-        //Define route 
+
+        //Define route
         $route = "transactional";
-        
+
         //Prepare you post parameters
         $postData = array(
             'authkey'=> $authKey,
@@ -127,10 +127,10 @@ class Apimainmodel extends CI_Model {
             'sender'=> $senderId,
             'route'=> $route
         );
-        
+
         //API URL
         $url="https://control.msg91.com/api/sendhttp.php";
-        
+
         // init the resource
         $ch = curl_init();
         curl_setopt_array($ch, array(
@@ -140,22 +140,22 @@ class Apimainmodel extends CI_Model {
             CURLOPT_POSTFIELDS => $postData
             //,CURLOPT_FOLLOWLOCATION => true
         ));
-        
-        
+
+
         //Ignore SSL certificate verification
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-        
-        
+
+
         //get response
         $output = curl_exec($ch);
-        
+
         //Print error if any
         if(curl_errno($ch))
         {
             echo 'error:' . curl_error($ch);
         }
-        
+
         curl_close($ch);
 	}
 
@@ -167,12 +167,12 @@ class Apimainmodel extends CI_Model {
 	{
 			$start = microtime(true);
             set_time_limit(10);
-            
+
             for ($i = 0; $i <= 10; ++$i) {
     	        $order_query = "SELECT * FROM booking_history WHERE order_id = '$order_id' LIMIT 1";
     			$order_res = $this->db->query($order_query);
     			//$order_result= $plan_res->result();
-    			
+
     			if($order_res->num_rows()==0){
     			     time_sleep_until($start + $i + 1);
 
@@ -181,8 +181,8 @@ class Apimainmodel extends CI_Model {
     		            $seatsupdate = $this->db->query($update_seats);
     		            $response = array("status" => "error", "msg" => "Time over");
     			    }
-    			} 
- 
+    			}
+
             }
 	}
 
@@ -196,7 +196,7 @@ class Apimainmodel extends CI_Model {
 	    $country_name = '';
 	    $state_name = '';
 	    $city_name = '';
-	    
+
 		$sql = "SELECT * FROM user_master WHERE user_name ='".$username."' AND password = md5('".$password."') AND mobile_verify ='Y' AND email_verify ='Y' AND status='Y'";
 		$user_result = $this->db->query($sql);
 		$ress = $user_result->result();
@@ -207,8 +207,8 @@ class Apimainmodel extends CI_Model {
 			  $user_id = $rows->id;
 			  $login_count = $rows->login_count+1;
 			}
-		} 
-		
+		}
+
 		$sql = "SELECT * FROM user_master WHERE mobile_no ='".$username."' AND password = md5('".$password."') AND mobile_verify ='Y' AND status='Y'";
 		$user_result = $this->db->query($sql);
 		$ress = $user_result->result();
@@ -220,7 +220,7 @@ class Apimainmodel extends CI_Model {
 				  $login_count = $rows->login_count+1;
 
 			}
-		} 
+		}
 
 		$sql = "SELECT * FROM user_master WHERE email_id ='".$username."' AND password = md5('".$password."') AND email_verify ='Y' AND status='Y'";
 		$user_result = $this->db->query($sql);
@@ -232,19 +232,19 @@ class Apimainmodel extends CI_Model {
 				  $user_id = $rows->id;
 				  $login_count = $rows->login_count+1;
 			}
-		} 
-		
-		
-		
+		}
+
+
+
 
 		if ( $user_id != "") {
-			
-			
+
+
 		    $sql = "SELECT A.id as userid, A.user_name, A.mobile_no, A.email_id, A.email_verify, A.login_count, A.user_role, B.name, B.birthdate, B.gender, B.occupation, B.address_line1, B.address_line2, B.address_line3, B.country_id, B. state_id, B.city_id, B.zip, B.user_picture, B.newsletter_status, B.referal_code, C.user_role_name FROM user_master A, user_details B, user_role_master C WHERE A.id=B.user_id AND A.user_role = C.id AND A.id ='".$user_id."'";
-		    
+
 			$user_result = $this->db->query($sql);
 			$ress = $user_result->result();
-			
+
 			if($user_result->num_rows()>0)
 			{
 			    foreach ($user_result->result() as $rows)
@@ -254,7 +254,7 @@ class Apimainmodel extends CI_Model {
     				  $state_id = $rows->state_id;
     				  $city_id = $rows->city_id;
 					  $user_role = $rows->user_role;
-					 
+
 					 if ($user_role =='2') {
 							$organiser_sql = "SELECT * FROM organiser_request WHERE user_id  ='".$user_id."'";
 							$organiser_result = $this->db->query($organiser_sql);
@@ -297,7 +297,7 @@ class Apimainmodel extends CI_Model {
         		} else {
         		          $country_name ='';
         		}
-             
+
                 $state_sql = "SELECT * FROM state_master WHERE id ='".$state_id."'";
         		$state_result = $this->db->query($state_sql);
         		if($state_result->num_rows()>0)
@@ -309,7 +309,7 @@ class Apimainmodel extends CI_Model {
         		} else {
         		          $state_name ='';
         		}
-        		
+
         		$city_sql = "SELECT * FROM city_master WHERE id ='".$city_id."'";
         		$city_result = $this->db->query($city_sql);
         		if($city_result->num_rows()>0)
@@ -321,7 +321,7 @@ class Apimainmodel extends CI_Model {
         		} else {
         		          $city_name ='';
         		}
-                		
+
 				$userData  = array(
 							"user_id" => $ress[0]->userid,
 							"user_name" => $ress[0]->user_name,
@@ -351,23 +351,23 @@ class Apimainmodel extends CI_Model {
 							"event_organizer" => $event_organizer
 				);
 			}
-			
+
 			$update_sql = "UPDATE user_master SET last_login=NOW(),login_count='$login_count' WHERE id='$user_id'";
 			$update_result = $this->db->query($update_sql);
-			
+
 			$activity_sql = "INSERT INTO user_activity (date,user_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $login_type . "')";
 			$insert_activity = $this->db->query($activity_sql);
-			
-			
+
+
 		    $pointsQuery = "SELECT * FROM user_points_count WHERE user_id = '$user_id' LIMIT 1";
 			$points_result = $this->db->query($pointsQuery);
 			$points_ress = $points_result->result();
-			
+
 				if($points_result->num_rows()==0)
 				{
                     $points_sql = "INSERT INTO user_points_count (user_id) VALUES ('". $user_id . "')";
                     $insert_points = $this->db->query($points_sql);
-                    
+
                     $activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+1,total_points=total_points+1 WHERE user_id  ='$user_id'";
                     $insert_points = $this->db->query($activity_points);
 
@@ -380,24 +380,24 @@ class Apimainmodel extends CI_Model {
 			$gcmQuery = "SELECT * FROM push_notification_master WHERE gcm_key like '%" .$gcm_key. "%' LIMIT 1";
 			$gcm_result = $this->db->query($gcmQuery);
 			$gcm_ress = $gcm_result->result();
-			
+
 				if($gcm_result->num_rows()==0)
 				{
 					$sQuery = "INSERT INTO push_notification_master (user_id,gcm_key,mobile_type) VALUES ('". $user_id . "','". $gcm_key . "','". $mobile_type . "')";
 					$update_gcm = $this->db->query($sQuery);
 				}
-		
+
     				$response = array("status" => "Success", "msg" => "Login Successfully", "userData" => $userData);
     				return $response;
 		} else {
-			
+
 					$response = array("status" => "Error", "msg" => "Invalid login");
 					return $response;
 		}
 
 	}
-	
-	
+
+
 //#################### Main Login End ####################//
 
 
@@ -407,7 +407,7 @@ class Apimainmodel extends CI_Model {
 	{
 
         $user_id ="";
-        
+
         if ($login_type = "1") {
             $login_mode = "fb_login";
             $signup_type = "fb_signup";
@@ -415,7 +415,7 @@ class Apimainmodel extends CI_Model {
             $login_mode = "gplus_login";
             $signup_type = "gplus_signup";
         }
-        
+
 		$sql = "SELECT * FROM user_master WHERE email_id ='".$email_id."' AND status='Y'";
 		$user_result = $this->db->query($sql);
 		$ress = $user_result->result();
@@ -429,26 +429,26 @@ class Apimainmodel extends CI_Model {
 
             $activity_sql = "INSERT INTO user_activity (date,user_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $login_mode . "')";
     		$insert_activity = $this->db->query($activity_sql);
-    		
+
 		} else {
-				
+
 				$sQuery = "INSERT INTO user_master (email_id,user_role,email_verify,status) VALUES ('". $email_id . "','3','Y','Y')";
 				$insert_user = $this->db->query($sQuery);
-				$user_id = $this->db->insert_id(); 
-				
+				$user_id = $this->db->insert_id();
+
 				$suserQuery = "INSERT INTO user_details (user_id,name,newsletter_status,referal_code) VALUES ('". $user_id . "','". $name . "','N','HEYLA123')";
 				$insert_user_details = $this->db->query($suserQuery);
-				
+
 				$activity_sql = "INSERT INTO user_activity (date,user_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $signup_type . "')";
     		    $insert_activity = $this->db->query($activity_sql);
 		}
-		
+
 		if ( $user_id != "") {
-		    
+
 		    $sql = "SELECT A.id as userid, A.user_name, A.mobile_no, A.email_id, A.email_verify, A.login_count, A.user_role, B.name, B.birthdate, B.gender, B.occupation, B.address_line1, B.address_line2, B.address_line3, B.country_id, B. state_id, B.city_id, B.zip, B.user_picture, B.newsletter_status, B.referal_code, C.user_role_name FROM user_master A, user_details B, user_role_master C WHERE A.id=B.user_id AND A.user_role = C.id AND A.id ='".$user_id."'";
 			$user_result = $this->db->query($sql);
 			$ress = $user_result->result();
-			
+
 			if($user_result->num_rows()>0)
 			{
 			    foreach ($user_result->result() as $rows)
@@ -458,7 +458,7 @@ class Apimainmodel extends CI_Model {
     				  $state_id = $rows->state_id;
     				  $city_id = $rows->city_id;
 					  $user_role = $rows->user_role;
-					  
+
 					  if ($user_role =='2') {
 						  	$organiser_sql = "SELECT * FROM organiser_request WHERE user_id  ='".$user_id."'";
 							$organiser_result = $this->db->query($organiser_sql);
@@ -483,7 +483,7 @@ class Apimainmodel extends CI_Model {
 						  $event_organizer = 'N';
 					  }
     			}
-			  
+
 			    if ($user_picture != ''){
 			        $picture_url = base_url().'assets/users/profile/'.$user_picture;
 			    }else {
@@ -501,7 +501,7 @@ class Apimainmodel extends CI_Model {
         		} else {
         		          $country_name ='';
         		}
-             
+
                 $state_sql = "SELECT * FROM state_master WHERE id ='".$state_id."'";
         		$state_result = $this->db->query($state_sql);
         		if($state_result->num_rows()>0)
@@ -513,7 +513,7 @@ class Apimainmodel extends CI_Model {
         		} else {
         		          $state_name ='';
         		}
-        		
+
         		$city_sql = "SELECT * FROM city_master WHERE id ='".$city_id."'";
         		$city_result = $this->db->query($city_sql);
         		if($city_result->num_rows()>0)
@@ -525,7 +525,7 @@ class Apimainmodel extends CI_Model {
         		} else {
         		          $city_name ='';
         		}
-        		
+
 				$userData  = array(
 							"user_id" => $ress[0]->userid,
 							"user_name" => $ress[0]->user_name,
@@ -555,49 +555,49 @@ class Apimainmodel extends CI_Model {
 							"event_organizer" => $event_organizer
 				);
 			}
-    		
+
     		$pointsQuery = "SELECT * FROM user_points_count WHERE user_id = '$user_id' LIMIT 1";
     		$points_result = $this->db->query($pointsQuery);
     		$points_ress = $points_result->result();
-    	
+
     			if($points_result->num_rows()==0)
     			{
     				$points_sql = "INSERT INTO user_points_count (user_id) VALUES ('". $user_id . "')";
     				$insert_points = $this->db->query($points_sql);
-    
+
     				$activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+1,total_points=total_points+1 WHERE user_id  ='$user_id'";
     				$insert_points = $this->db->query($activity_points);
-    
+
     			} else {
-    
+
     				 $activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+1,total_points=total_points+1 WHERE user_id  ='$user_id'";
     				 $insert_points = $this->db->query($activity_points);
     			}
-    
+
     		$gcmQuery = "SELECT * FROM push_notification_master WHERE gcm_key like '%" .$gcm_key. "%' LIMIT 1";
     		$gcm_result = $this->db->query($gcmQuery);
     		$gcm_ress = $gcm_result->result();
-    		
+
     				if($gcm_result->num_rows()==0)
     				{
     					$sQuery = "INSERT INTO push_notification_master (user_id,gcm_key,mobile_type) VALUES ('". $user_id . "','". $gcm_key . "','". $mobile_type . "')";
     					$update_gcm = $this->db->query($sQuery);
     				}
-    				
+
     		$update_sql = "UPDATE user_master SET last_login=NOW(),login_count='$login_count' WHERE id='$user_id'";
     		$update_result = $this->db->query($update_sql);
-			
-			
+
+
 					$response = array("status" => "Success", "msg" => "Login Successfully", "userData" => $userData);
 					return $response;
 		} else {
-			
+
 					$response = array("status" => "Error", "msg" => "Invalid login");
 					return $response;
 		}
- 		
+
 	}
-//#################### Facebook and Gmail Login End ####################//	
+//#################### Facebook and Gmail Login End ####################//
 
 
 //#################### Guest Login ####################//
@@ -608,33 +608,33 @@ class Apimainmodel extends CI_Model {
 	    $sql = "SELECT * FROM guest_user_master WHERE unique_id ='".$unique_id."'";
 		$user_result = $this->db->query($sql);
 		$ress = $user_result->result();
-		
+
 		if($user_result->num_rows()>0)
 		{
 			foreach ($user_result->result() as $rows)
 			{
 				  $user_id = $rows->id;
 			}
-		} 
+		}
 
     		if ( $user_id != "") {
-    
+
     			$sQuery = "DELETE FROM guest_user_master WHERE id  = '" .$user_id. "'";
     			$delete_user = $this->db->query($sQuery);
-    			
+
     			$sQuery = "DELETE FROM guest_user_preference WHERE user_id  = '" .$user_id. "'";
-    			$delete_preference = $this->db->query($sQuery);	
-    			
-    		} 
-		
+    			$delete_preference = $this->db->query($sQuery);
+
+    		}
+
 			$sQuery = "INSERT INTO guest_user_master (unique_id,gcm_key,login_type) VALUES ('". $unique_id . "','". $gcm_key . "','". $mobile_type . "')";
 			$insert_user = $this->db->query($sQuery);
-			$nuser_id = $this->db->insert_id(); 
-			
+			$nuser_id = $this->db->insert_id();
+
 			$sql = "SELECT * FROM guest_user_master WHERE id ='".$nuser_id."'";
 			$user_result = $this->db->query($sql);
 			$ress = $user_result->result();
-			
+
 			if($user_result->num_rows()>0)
 			{
 				$userData  = array(
@@ -646,8 +646,8 @@ class Apimainmodel extends CI_Model {
 			return $response;
 
 	}
-	
-	
+
+
 //#################### Guest Login End ####################//
 
 
@@ -656,54 +656,54 @@ class Apimainmodel extends CI_Model {
 	{
 	    $user_id = "";
         $login_type = "normal_signup";
-        
+
 	    $sql = "SELECT * FROM user_master WHERE email_id ='".$email_id."' OR mobile_no = '".$mobile_no."'";
 		$user_result = $this->db->query($sql);
 		$ress = $user_result->result();
-		
+
 		if($user_result->num_rows() == 0)
 		{
 		    $digits = 4;
 			$OTP = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT);
 		    $encrypt_email = base64_encode($email_id);
-		    
+
 			$sQuery = "INSERT INTO user_master (email_id,mobile_no,password,user_role,email_verify,mobile_otp,mobile_verify,status,created_at) VALUES ('". $email_id . "','". $mobile_no . "','". md5($password) . "','3','N','". $OTP . "','N','Y',now())";
 			$insert_user = $this->db->query($sQuery);
-			$user_id = $this->db->insert_id(); 
+			$user_id = $this->db->insert_id();
 
 			$suserQuery = "INSERT INTO user_details (user_id,newsletter_status,referal_code) VALUES ('". $user_id . "','N','HEYLA123')";
 			$insert_user_details = $this->db->query($suserQuery);
-				
+
             $activity_sql = "INSERT INTO user_activity (date,user_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $login_type . "')";
 			$insert_activity = $this->db->query($activity_sql);
-    		
+
             $gcmQuery = "SELECT * FROM push_notification_master WHERE gcm_key like '%" .$gcm_key. "%' LIMIT 1";
 			$gcm_result = $this->db->query($gcmQuery);
 			$gcm_ress = $gcm_result->result();
-			
+
 					if($gcm_result->num_rows()==0)
 					{
 						$sQuery = "INSERT INTO push_notification_master (user_id,gcm_key,mobile_type) VALUES ('". $user_id . "','". $gcm_key . "','". $mobile_type . "')";
 						$update_gcm = $this->db->query($sQuery);
 					}
-					
-			
+
+
 			$mobile_message = 'Verify OTP :'. $OTP;
-            
+
             $subject = "Heyla App - Email Verification";
             $email_message = 'Thanking for Registering with Heyla App <br>To allow us to confirm the validity of your email address, <a href="'. base_url().'home/emailverfiy/'.$encrypt_email.'" target="_blank" style="background-color: #478ECC; font-size:15px; font-weight: bold; padding: 10px; text-decoration: none; color: #fff; border-radius: 5px;">Click this verification link.</a><br><br><br>';
 
             $this->sendSMS($mobile_no,$mobile_message);
             $this->sendMail($email_id,$subject,$email_message);
-            
+
 			$response = array("status" => "Success", "msg" => "Signup Successfully");
 		} else {
 		    $response = array("status" => "Error", "msg" => "User Already Register");
 		}
 	    return $response;
 	}
-	
-	
+
+
 //#################### User Signup End ####################//
 
 
@@ -715,24 +715,24 @@ class Apimainmodel extends CI_Model {
 	    $sql = "SELECT * FROM user_master WHERE mobile_no = '".$mobile_no."' AND mobile_otp = '".$OTP."'";
 		$user_result = $this->db->query($sql);
 		$ress = $user_result->result();
-		
+
 		if($user_result->num_rows() != 0)
 		{
             foreach ($user_result->result() as $rows)
 			{
 				  $user_id = $rows->id;
 			}
-			
+
 			$update_sql = "UPDATE user_master SET mobile_verify = 'Y' WHERE id='$user_id'";
 			$update_result = $this->db->query($update_sql);
-						
+
 			$response = array("status" => "Success", "msg" => "Verification Successfully","user_id"=>$user_id);
 		} else {
 		    $response = array("status" => "Error", "msg" => "Verification Code or Mobile Number Error");
 		}
 	    return $response;
 	}
-	
+
 
 //#################### Mobile Verification End ####################//
 
@@ -745,7 +745,7 @@ class Apimainmodel extends CI_Model {
 	    $sql = "SELECT * FROM user_master WHERE mobile_no = '".$mobile_no."'";
 		$user_result = $this->db->query($sql);
 		$ress = $user_result->result();
-		
+
 		if($user_result->num_rows() != 0)
 		{
             foreach ($user_result->result() as $rows)
@@ -753,18 +753,18 @@ class Apimainmodel extends CI_Model {
 				  $user_id = $rows->id;
 				  $OTP = $rows->mobile_otp;
 			}
-			
+
 			$mobile_message = 'Verify OTP :'. $OTP;
             $this->sendSMS($mobile_no,$mobile_message);
-            
+
 			$response = array("status" => "Success", "msg" => "OTP Send Successfully");
 		} else {
 		    $response = array("status" => "Error", "msg" => "OTP Send Error");
 		}
 	    return $response;
 	}
-	
-	
+
+
 //#################### Resend OTP End ####################//
 
 
@@ -775,30 +775,30 @@ class Apimainmodel extends CI_Model {
 
         $mobile_sql = "SELECT * FROM user_master WHERE mobile_no = '".$new_mobile_no."'";
 		$mobile_result = $this->db->query($mobile_sql);
-		
+
 		if($mobile_result->num_rows() == 0)
 		{
     	    $sql = "SELECT * FROM user_master WHERE mobile_no = '".$old_mobile_no."'";
     		$user_result = $this->db->query($sql);
     		$ress = $user_result->result();
-    		
+
     		if($user_result->num_rows() != 0)
     		{
                 foreach ($user_result->result() as $rows)
     			{
     				  $user_id = $rows->id;
     			}
-    			
+
     			$digits = 4;
     			$OTP = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT);
-    			
+
     			$update_sql = "UPDATE user_master SET mobile_no = '$new_mobile_no',mobile_otp='$OTP',mobile_verify='N' WHERE id='$user_id'";
     			$update_result = $this->db->query($update_sql);
-    			
-    		
+
+
     			$mobile_message = 'Verify OTP :'. $OTP;
                 $this->sendSMS($new_mobile_no,$mobile_message);
-                
+
     			$response = array("status" => "Success", "msg" => "Mobile Updated Successfully");
     		} else {
     		    $response = array("status" => "Error", "msg" => "Old Mobile Number Error");
@@ -808,8 +808,8 @@ class Apimainmodel extends CI_Model {
 		}
 	    return $response;
 	}
-	
-	
+
+
 //#################### Update Mobile End ####################//
 
 //#################### Update Email ####################//
@@ -820,13 +820,13 @@ class Apimainmodel extends CI_Model {
 
         $mobile_sql = "SELECT * FROM user_master WHERE email_id  = '".$new_email_id."'";
 		$mobile_result = $this->db->query($mobile_sql);
-		
+
 		if($mobile_result->num_rows() == 0)
 		{
     	    $sql = "SELECT * FROM user_master WHERE email_id = '".$old_email_id."'";
     		$user_result = $this->db->query($sql);
     		$ress = $user_result->result();
-    		
+
     		if($user_result->num_rows() != 0)
     		{
                 foreach ($user_result->result() as $rows)
@@ -836,13 +836,13 @@ class Apimainmodel extends CI_Model {
 
     			$update_sql = "UPDATE user_master SET email_id = '$new_email_id',email_verify ='N' WHERE id='$user_id'";
     			$update_result = $this->db->query($update_sql);
-    			
+
 				 $subject = "Heyla App - Email Verification";
             	$email_message = 'Thanking for Registering with Heyla App <br>To allow us to confirm the validity of your email address, <a href="'. base_url().'home/emailverfiy/'.$encrypt_email.'" target="_blank" style="background-color: #478ECC; font-size:15px; font-weight: bold; padding: 10px; text-decoration: none; color: #fff; border-radius: 5px;">Click this verification link.</a><br><br><br>';
 
 	            $this->sendMail($email_id,$subject,$email_message);
 
-                
+
     			$response = array("status" => "Success", "msg" => "Email Updated Successfully");
     		} else {
     		    $response = array("status" => "Error", "msg" => "Old Email id Error");
@@ -852,8 +852,8 @@ class Apimainmodel extends CI_Model {
 		}
 	    return $response;
 	}
-	
-	
+
+
 //#################### Update Email End ####################//
 
 
@@ -865,13 +865,13 @@ class Apimainmodel extends CI_Model {
 
         $mobile_sql = "SELECT * FROM user_master WHERE user_name   = '".$new_user_name."'";
 		$mobile_result = $this->db->query($mobile_sql);
-		
+
 		if($mobile_result->num_rows() == 0)
 		{
     	    $sql = "SELECT * FROM user_master WHERE user_name = '".$old_user_name."'";
     		$user_result = $this->db->query($sql);
     		$ress = $user_result->result();
-    		
+
     		if($user_result->num_rows() != 0)
     		{
                 foreach ($user_result->result() as $rows)
@@ -881,7 +881,7 @@ class Apimainmodel extends CI_Model {
 
     			$update_sql = "UPDATE user_master SET user_name = '$new_user_name' WHERE id='$user_id'";
     			$update_result = $this->db->query($update_sql);
-    			
+
     			$response = array("status" => "Success", "msg" => "Username Updated Successfully");
     		} else {
     		    $response = array("status" => "Error", "msg" => "Old Username Error");
@@ -891,8 +891,8 @@ class Apimainmodel extends CI_Model {
 		}
 	    return $response;
 	}
-	
-	
+
+
 //#################### Update Username End ####################//
 
 
@@ -902,7 +902,7 @@ class Apimainmodel extends CI_Model {
             $update_sql= "UPDATE user_details SET user_picture='$userFileName' WHERE user_id='$user_id'";
 			$update_result = $this->db->query($update_sql);
 			$picture_url = base_url().'assets/users/profile/'.$userFileName;
-			
+
 			$response = array("status" => "success", "msg" => "Profile Picture Updated","picture_url" =>$picture_url);
 			return $response;
 	}
@@ -915,15 +915,15 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
  			$sql = "SELECT * FROM user_master WHERE user_name = '".$user_name."' AND id != '$user_id'";
     		$user_result = $this->db->query($sql);
     		$ress = $user_result->result();
-    		
+
     		if($user_result->num_rows() == 0)
     		{
 				$update_query= "UPDATE user_master SET `user_name` ='$user_name' WHERE id='$user_id'";
 				$update_query_result = $this->db->query($update_query);
-				
+
 				$update_sql= "UPDATE user_details SET `name` ='$full_name', `birthdate` ='$date_of_birth', `gender` ='$gender', `occupation` ='$occupation', `address_line1` ='$address_line_1', `address_line2` ='$address_line_2', `address_line3` ='$address_line_3', `country_id` ='$country_id', `state_id` ='$state_id', `city_id` ='$city_id', `zip` ='$zip_code', `newsletter_status` ='$news_letter' WHERE user_id='$user_id'";
 				$update_result = $this->db->query($update_sql);
-				
+
 				$response = array("status" => "success", "msg" => "Profile Updated");
 			} else {
 				$response = array("status" => "error", "msg" => "Username Already Exist");
@@ -939,7 +939,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	{
 	        $user_id = "";
 	        $Message = "User Not Found";
-	        
+
 			$digits = 4;
 			$OTP = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT);
 
@@ -959,7 +959,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                         $sType = "Email";
                         $user_id = '';
                     } else {
-                    
+
                     $encrypt_email = base64_encode($email_id);
 
             		$subject = "Heyla App - Forgot Password URL";
@@ -967,7 +967,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                     $this->sendMail($email_id,$subject,$email_message);
                     $sType = "Email";
                 }
-    		} 
+    		}
 
     		$sql = "SELECT * FROM user_master WHERE mobile_no ='".$user_name."'AND status='Y'";
     		$user_result = $this->db->query($sql);
@@ -980,7 +980,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
     				  $mobile_no = $rows->mobile_no;
     				  $mobile_verify = $rows->mobile_verify;
     			}
-    			
+
     			if ($mobile_verify=='N') {
                     $Message = 'Please verify your Mobile';
                     $sType = "Mobile";
@@ -988,12 +988,12 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                 } else {
         			$update_sql = "UPDATE user_master SET mobile_otp = '$OTP', updated_by = '$user_id', updated_at =NOW() WHERE id='$user_id'";
     			    $update_result = $this->db->query($update_sql);
-    			    
+
             		$mobile_message = 'Verify OTP :'. $OTP;
                     $this->sendSMS($mobile_no,$mobile_message);
                     $sType = "Mobile";
                 }
-    		} 
+    		}
 
 	        if ( $user_id != "") {
                 $response = array("status" => "success", "msg" => "Forgot Password", "type"=>$sType);
@@ -1013,21 +1013,21 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	    $sql = "SELECT * FROM user_master WHERE mobile_no = '".$mobile_no."' AND mobile_otp = '".$OTP."'";
 		$user_result = $this->db->query($sql);
 		$ress = $user_result->result();
-		
+
 		if($user_result->num_rows() != 0)
 		{
             foreach ($user_result->result() as $rows)
 			{
 				  $user_id = $rows->id;
 			}
-	
+
 			$response = array("status" => "Success", "msg" => "Verification Successfully","User_id"=>$user_id);
 		} else {
 		    $response = array("status" => "Error", "msg" => "Verification Code or Mobile Number Error");
 		}
 	    return $response;
 	}
-	
+
 //#################### Forgot Password OTP Check End ####################//
 
 
@@ -1052,11 +1052,11 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			 if($country_res->num_rows()>0){
 			     	$country_result= $country_res->result();
 			     	$response = array("status" => "success", "msg" => "View Countries","Countries"=>$country_result);
-				 
+
 			}else{
 			        $response = array("status" => "error", "msg" => "Countries not found");
-			}  
-						
+			}
+
 			return $response;
 	}
 //#################### Select Country End ####################//
@@ -1070,11 +1070,11 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			 if($state_res->num_rows()>0){
 			     	$state_result= $state_res->result();
 			     	$response = array("status" => "success", "msg" => "View States","States"=>$state_result);
-				 
+
 			}else{
 			        $response = array("status" => "error", "msg" => "States not found");
-			}  
-						
+			}
+
 			return $response;
 	}
 //#################### Select State End ####################//
@@ -1089,10 +1089,10 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			 if($city_res->num_rows()>0){
 			     	$city_result= $city_res->result();
 			     	$response = array("status" => "success", "msg" => "View Cities","Cities"=>$city_result);
-				 
+
 			}else{
 			        $response = array("status" => "error", "msg" => "Cities not found");
-			}  
+			}
 
 			return $response;
 	}
@@ -1108,10 +1108,10 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			 if($city_res->num_rows()>0){
 			     	$city_result= $city_res->result();
 			     	$response = array("status" => "success", "msg" => "View Cities","Cities"=>$city_result);
-				 
+
 			}else{
 			        $response = array("status" => "error", "msg" => "Cities not found");
-			}  
+			}
 
 			return $response;
 	}
@@ -1122,7 +1122,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	public function Update_preferrence($user_id,$category_ids,$user_type)
 	{
         $category_ids = explode(',' , $category_ids);
-        
+
         if ($user_type =='1') {
             $prefQuery = "SELECT * FROM user_preference WHERE user_id = '$user_id' LIMIT 1";
         } else {
@@ -1130,7 +1130,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
         }
 		$pref_result = $this->db->query($prefQuery);
 		$pref_ress = $pref_result->result();
-		
+
 			if($pref_result->num_rows()>0) {
 			    if ($user_type =='1') {
                      $sQuery = "DELETE FROM user_preference WHERE user_id = '" .$user_id. "'";
@@ -1139,9 +1139,9 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                 }
     			$del_Query = $this->db->query($sQuery);
 			}
-			
+
 			foreach($category_ids as $key) {
-			    
+
 			    if ($user_type =='1') {
                      $sQuery = "INSERT INTO user_preference (user_id,category_id) VALUES ('". $user_id . "','". $key . "')";
                 } else {
@@ -1149,8 +1149,8 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                 }
     			$ins_Query = $this->db->query($sQuery);
             }
-		$response = array("status" => "success", "msg" => "Preference Updated");	
-		
+		$response = array("status" => "success", "msg" => "Preference Updated");
+
 		return $response;
 	}
 //#################### User Category End ####################//
@@ -1161,19 +1161,19 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	        $category_query = "SELECT id,category_name,category_image from category_master WHERE status ='Y' ORDER BY order_by";
 			$category_res = $this->db->query($category_query);
             $user_preference ='';
-            
+
 			 if($category_res->num_rows()>0){
-			     
+
 			    foreach ($category_res->result() as $rows)
 			    {
 			        $category_id = $rows->id;
-			        
+
 			         if ($user_type =='1') {
                         $user_query = "SELECT * from user_preference WHERE category_id ='$category_id' AND user_id ='$user_id'";
                     } else {
                         $user_query = "SELECT * from guest_user_preference WHERE category_id ='$category_id' AND user_id ='$user_id'";
                     }
-                
+
 			          $user_res = $this->db->query($user_query);
 
 			            if($user_res->num_rows()>0){
@@ -1181,7 +1181,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			            } else {
 			                $user_preference = 'N';
 			            }
-			        
+
 				     $preferences[] = array(
 							"category_id" => $rows->id,
 							"category_name" => $rows->category_name,
@@ -1191,11 +1191,11 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			    }
 
 			    	$response = array("status" => "success", "msg" => "View Categories","Categories"=>$preferences);
-				 
+
 			}else{
 			        $response = array("status" => "error", "msg" => "Categories not found");
-			}  
-	
+			}
+
 			return $response;
 	}
 //#################### User Category End ####################//
@@ -1206,7 +1206,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
             $wishlistQuery = "SELECT * FROM user_wish_list_master WHERE user_id = '$user_id' AND title like '%" .$title. "%' LIMIT 1";
 			$wishlist_result = $this->db->query($wishlistQuery);
 			$wishlist_ress = $wishlist_result->result();
-			
+
 				if($wishlist_result->num_rows()==0)
 				{
 					$sQuery = "INSERT INTO user_wish_list_master (user_id,title) VALUES ('". $user_id . "','". $title . "')";
@@ -1215,7 +1215,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 				} else {
 				    $response = array("status" => "error", "msg" => "Already Added");
 				}
-        
+
 			return $response;
 	}
 //#################### Wishlist Master End ####################//
@@ -1241,11 +1241,11 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			 if($wishlist_res->num_rows()>0){
 			     	$wishlist_result= $wishlist_res->result();
 			     	$response = array("status" => "success", "msg" => "View Wishlist Master","WishlistMaster"=>$wishlist_result);
-				 
+
 			}else{
 			        $response = array("status" => "error", "msg" => "Wishlist Master not found");
-			}  
-						
+			}
+
 			return $response;
 	}
 //#################### User Category End ####################//
@@ -1253,10 +1253,10 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 //#################### Delete Wishlist Master ####################//
 	public function Delete_wishlistmaster($user_id,$wishlist_id)
 	{
-	    
+
 	        	$sQuery = "DELETE FROM user_wish_list WHERE wish_list_id   = '" .$wishlist_id. "'";
     			$delete_master = $this->db->query($sQuery);
-    			
+
     			$sQuery = "DELETE FROM user_wish_list_master WHERE user_id = '" .$user_id. "' AND id  = '" .$wishlist_id. "'";
     			$delete_list = $this->db->query($sQuery);
 
@@ -1274,7 +1274,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
             $wishlistQuery = "SELECT * FROM user_wish_list WHERE user_id  = '$user_id' AND event_id = '$event_id'  LIMIT 1";
 			$wishlist_result = $this->db->query($wishlistQuery);
 			$wishlist_ress = $wishlist_result->result();
-			
+
 				if($wishlist_result->num_rows()==0)
 				{
 					$sQuery = "INSERT INTO user_wish_list (user_id ,event_id) VALUES ('". $user_id . "','". $event_id . "')";
@@ -1341,11 +1341,11 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
     				    );
     			    }
 			     	$response = array("status" => "success", "msg" => "View Wishlist","Eventdetails"=>$eventData);
-				 
+
 			}else{
 			        $response = array("status" => "error", "msg" => "Wishlist not found");
-			}  
-						
+			}
+
 			return $response;
 	}
 //#################### User Wishlist End ####################//
@@ -1369,7 +1369,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
             $wishlistQuery = "SELECT * FROM user_wish_list WHERE user_id  = '$user_id' AND event_id = '$event_id'  LIMIT 1";
 			$wishlist_result = $this->db->query($wishlistQuery);
 			$wishlist_ress = $wishlist_result->result();
-			
+
 			if($wishlist_result->num_rows()>0)
 			{
 				  foreach ($wishlist_result->result() as $rows)
@@ -1391,22 +1391,22 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	{
 	    $current_date = date("Y-m-d");
 		$tomorrow_date = date("Y-m-d",strtotime("tomorrow"));
-		
+
         if ($user_type ==1){
             $pre_query = "SELECT * FROM user_preference WHERE user_id = '$user_id'";
         } else {
             $pre_query = "SELECT * FROM guest_user_preference WHERE user_id = '$user_id'";
         }
 		    $pre_res = $this->db->query($pre_query);
-      
+
     		 if($pre_res->num_rows()>0){
     		    foreach ($pre_res->result() as $rows)
-    			{	
+    			{
     				   $pref_ids[]  = $rows->category_id;
     			}
     			$preferrence = implode (",", $pref_ids);
     		 }
-			 
+
 			if ($day_type =='All'){
 				$day_query = "";
 			}
@@ -1422,12 +1422,12 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 				$day_query = "ev.start_date <= STR_TO_DATE('" . $end_date . "','%Y-%m-%d') AND  ev.end_date >= STR_TO_DATE('" . $start_date . "','%Y-%m-%d') AND";
 			}
 			if ($day_type =='Month'){
-	
+
 				$start_date = date('Y-m-01', strtotime($current_date));
 				$end_date = date('Y-m-t', strtotime($current_date));
 				$day_query = "ev.start_date <= STR_TO_DATE('" . $end_date . "','%Y-%m-%d') AND  ev.end_date >= STR_TO_DATE('" . $start_date . "','%Y-%m-%d') AND";
 			}
-			
+
             $adv_event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
                         from events as ev
                         left join event_popularity as ep on ep.event_id = ev.id
@@ -1476,7 +1476,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 				    );
 			    }
 			} else {
-			    
+
 			    $adv_eventData = array();
 			}
 
@@ -1489,7 +1489,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                             LEFT JOIN country_master AS cy ON ev.event_country = cy.id
                             WHERE ev.hotspot_status = 'N' AND $day_query ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
                             group by ev.id LIMIT 50";
-	    } 
+	    }
 	    if ($event_type == 'Popularity'){
 	         $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
                             from events as ev
@@ -1507,7 +1507,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                             LEFT JOIN country_master AS cy ON ev.event_country = cy.id
                             WHERE ev.hotspot_status = 'Y' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
                             group by ev.id LIMIT 50";
-	    } 
+	    }
 		//echo $event_query;
 		$event_res = $this->db->query($event_query);
 
@@ -1548,22 +1548,75 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 							"advertisement" => ''
 				    );
 			    }
-			     
+
 
 			     if (!empty($adv_eventData)) {
 			          $output = array_merge($adv_eventData, $eventData);
 		         } else {
 		              $output = $eventData;
 		         }
-				 
+
 			     	$response = array("status" => "success", "msg" => "View Events","Eventdetails"=>$output);
 			}else{
 			        $response = array("status" => "error", "msg" => "Events not found");
-			}  
-						
+			}
+
 			return $response;
 	}
 //#################### View Events End ###############//
+
+
+  function search_events($search_event){
+    $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity FROM events AS ev
+                LEFT join event_popularity AS ep on ep.event_id = ev.id
+                LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+                LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+    LEFT JOIN booking_plan AS bp ON ev.id = bp.event_id
+                WHERE ev.event_name like '%$search_event%' AND ev.end_date >= CURDATE() AND
+                ev.event_status ='Y' group by ev.id";
+	$event_res = $this->db->query($event_query);
+        if($event_res->num_rows()==0){
+            $response = array("status" => "error", "msg" => "Events not found");
+        }else{
+          $res=$event_res->result();
+          foreach($res as $rows){
+            $serach_events[]=array(
+              "event_id" => $rows->id,
+							"popularity" => $rows->popularity,
+							"category_id" => $rows->category_id,
+							"event_name" => $rows->event_name,
+							"event_venue" => $rows->event_venue,
+							"event_address" => $rows->event_address,
+							"description" => $rows->description,
+							"start_date" => $rows->start_date,
+							"end_date" => $rows->end_date,
+							"start_time" => $rows->start_time,
+							"end_time" => $rows->end_time,
+							"event_banner" => base_url().'assets/events/banner/'.$rows->event_banner,
+							"event_latitude" => $rows->event_latitude,
+							"event_longitude" => $rows->event_longitude,
+							"event_country" => $rows->event_country,
+							"country_name" => $rows->country_name,
+							"event_city" => $rows->event_city,
+							"city_name" => $rows->city_name,
+							"primary_contact_no" => $rows->primary_contact_no,
+							"secondary_contact_no" => $rows->secondary_contact_no,
+							"contact_person" => $rows->contact_person,
+							"contact_email" => $rows->contact_email,
+							"event_type" => $rows->event_type,
+							"adv_status" => $rows->adv_status,
+							"booking_status" => $rows->booking_status,
+							"hotspot_status" => $rows->hotspot_status,
+							"event_colour_scheme" => $rows->event_colour_scheme,
+							"event_status" => $rows->event_status,
+							"advertisement" => ''
+            );
+          }
+            $response = array("status" => "error", "msg" => "Events found","events_list"=>$serach_events);
+        }
+        	return $response;
+
+  }
 
 
 //#################### View Event Images ####################//
@@ -1583,11 +1636,11 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 				    );
 			    }
 			     	$response = array("status" => "success", "msg" => "View Event Images","Eventgallery"=>$eventImages);
-				 
+
 			}else{
 			        $response = array("status" => "error", "msg" => "Gallery not found");
-			}  
-						
+			}
+
 			return $response;
 	}
 //#################### View Event Images End ###############//
@@ -1603,8 +1656,8 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			     	$response = array("status" => "exist", "msg" => "Already Exist","Reviewdetails"=>$review_result);
 			}else{
 			        $response = array("status" => "new", "msg" => "Review Not found");
-			}  
-						
+			}
+
 			return $response;
 	}
 //#################### Check Event review End ###############//
@@ -1615,7 +1668,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	        $review_query = "INSERT INTO `event_reviews` (`user_id`, `event_id`, `event_rating`, `comments`,`status`,`created_at`) VALUES ('$user_id', '$event_id', '$event_rating', '$comments','N',NOW())";
 	        $review_res = $this->db->query($review_query);
             $review_id = $this->db->insert_id();
-            
+
 			if($review_res) {
 			    $response = array("status" => "success", "msg" => "Review Added", "review_id"=>$review_id);
 			} else {
@@ -1646,7 +1699,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 //#################### Event review ###############//
 	public function List_eventreview($user_id,$event_id)
 	{
-		
+
 			$ureview_query = "SELECT A.id,A.event_id,C.event_name,A.event_rating,A.comments,B.user_name FROM event_reviews A, user_master B, events C  WHERE A.event_id = '$event_id' AND A.user_id ='$user_id' AND A.status='N' AND A.user_id=B.id AND A.event_id = C.id ORDER by A.id DESC";
 			$ureview_res = $this->db->query($ureview_query);
 			$ureview_res->num_rows();
@@ -1662,13 +1715,13 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			$review_result = $review_res->result();
 
 			 //if($review_res->num_rows()>0){
-				 
+
             if (!empty($ureview_result)) {
                 $output = array_merge($ureview_result, $review_result);
             } else {
                 $output = $review_result;
             }
-            	
+
             if (!empty($output)) {
                 $response = array("status" => "success", "msg" => "View Reviews","Reviewdetails"=>$output);
             }else{
@@ -1695,12 +1748,12 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 							"event_banner" => base_url().'assets/events/gallery/'.$rows->event_image,
 				    );
 			    }
-			    
+
 			     	$response = array("status" => "success", "msg" => "View Review Images","Reviewphotos"=>$reviewImages);
 			}else{
 			        $response = array("status" => "error", "msg" => "Reviews Images not found");
-			}  
-						
+			}
+
 			return $response;
 	}
 //#################### Event review photo End ###############//
@@ -1711,7 +1764,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	        $popularQuery = "SELECT * FROM event_popularity WHERE event_id = '$event_id' AND  user_id = '$user_id' LIMIT 1";
 			$popular_result = $this->db->query($popularQuery);
 			$popular_ress = $popular_result->result();
-			
+
 			if($popular_result->num_rows()==0)
 			{
     			$popular_sql = "INSERT INTO event_popularity (event_id,user_id,view_date) VALUES ('". $event_id . "','". $user_id . "',NOW())";
@@ -1731,7 +1784,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	public function Advance_search($single_date,$from_date,$to_date,$event_type,$event_category,$selected_preference,$selected_city,$price_range)
 	{
 	    $current_date = date("Y-m-d");
-		 
+
 	    $city_query ='';
 	    $preference_query = '';
 	    $event_type_query = '';
@@ -1740,7 +1793,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	    $fromto_date_query ='';
 	    $event_popularity_query ='';
 		$price_range_query = '';
-	    
+
 	    if ($selected_city!='') {
             $city_query = "SELECT * FROM city_master WHERE city_name like '%" .$selected_city. "%' LIMIT 1";
     		$city_res = $this->db->query($city_query);
@@ -1752,11 +1805,11 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
     		 }
     		 $city_query = "ev.event_city = '$city_id' AND";
 	    }
-	    
+
 	    if ($selected_preference != ''){
             $preference_query = "ev.category_id IN ($selected_preference) AND";
         }
-        
+
         if ($event_type =='Paid'){
             $event_type_query = "ev.event_type = 'Paid' AND";
         }
@@ -1777,7 +1830,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
             $event_category_query = "ev.hotspot_status = 'N' AND";
             $event_popularity_query = "ORDER by popularity DESC";
         }
-    
+
          if ($single_date !=''){
              $single_date_query = "'$single_date' BETWEEN ev.start_date AND ev.end_date AND";
         }
@@ -1785,15 +1838,15 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	    if ($from_date !='' &&  $to_date !=''){
 	        $fromto_date_query = "ev.start_date <= STR_TO_DATE('" . $to_date . "','%Y-%m-%d') AND  ev.end_date >= STR_TO_DATE('" . $from_date . "','%Y-%m-%d') AND";
 	   }
-	   
+
 	   if ($price_range !='') {
 			$price_array = explode('-', $price_range);
 			$from_price = $price_array[0];
 			$to_price = $price_array[1];
 			$price_range_query = "bp.seat_rate>='$from_price' AND bp.seat_rate <='$to_price' AND ";
 	   }
-	   
-	   
+
+
 	    if ($event_category == 'Hotspot'){
             $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
                         FROM events AS ev
@@ -1855,28 +1908,28 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			     	$response = array("status" => "success", "msg" => "View Events","Eventdetails"=>$eventData);
 			}else{
 			        $response = array("status" => "error", "msg" => "Events not found");
-			}  
-						
+			}
+
 			return $response;
 	}
 //#################### Advanced Events Search End ###############//
 
 
 
-//#################### Booking Plan Dates###############//  
+//#################### Booking Plan Dates###############//
 	public function Booking_plandates($event_id)
 	{
     		$date_query = "SELECT show_date FROM booking_plan_timing WHERE event_id  = '$event_id' AND `show_date` >= CURDATE()  GROUP BY show_date";
 			$date_res = $this->db->query($date_query);
 			$date_result= $date_res->result();
-    			
+
     		if($date_res->num_rows()>0){
 			     	$response = array("status" => "success", "msg" => "View Booking Dates","Eventdates"=>$date_result);
-				 
+
 			}else{
 			        $response = array("status" => "error", "msg" => "Booking Date not found");
-			}  
-						
+			}
+
 			return $response;
 	}
 //#################### Booking Plan Dates End ###############//
@@ -1887,14 +1940,14 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
     		$time_query = "SELECT id,show_time FROM booking_plan_timing WHERE event_id  = '$event_id' AND show_date='$show_date' GROUP BY show_time";
 			$time_res = $this->db->query($time_query);
 			$time_result= $time_res->result();
-    			
+
     		if($time_res->num_rows()>0){
 			     	$response = array("status" => "success", "msg" => "View Booking Timings","Eventtiming"=>$time_result);
-				 
+
 			}else{
 			        $response = array("status" => "error", "msg" => "Booking Timings not found");
-			}  
-						
+			}
+
 			return $response;
 	}
 //#################### Booking Plan Times End ###############//
@@ -1911,8 +1964,8 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			     	$response = array("status" => "success", "msg" => "Booking Plans","Plandetails"=>$plan_result);
 			}else{
 			        $response = array("status" => "error", "msg" => "Plans not found");
-			}  
-						
+			}
+
 			return $response;
 	}
 //#################### Booking Plan  price End ###############//
@@ -1931,7 +1984,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 		} else {
 			$response = array("status" => "success", "msg" => "Price Range","Pricerange"=>$plan_result);
 		}
-		
+
 	/*
 		$plan_query = "SELECT id, CONCAT(start_price,'-',end_price) AS price_range,disp_price FROM booking_price_range WHERE status = 'y'";
 		$plan_res = $this->db->query($plan_query);
@@ -1941,8 +1994,8 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 				$response = array("status" => "success", "msg" => "Price Range","Pricerange"=>$plan_result);
 		}else{
 				$response = array("status" => "error", "msg" => "Price Range not found");
-		}  
-	*/			
+		}
+	*/
 		return $response;
 	}
 //#################### Booking Plan End ###############//
@@ -1954,13 +2007,13 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 
 	        $sQuery = "INSERT INTO booking_process (order_id,event_id,plan_id,plan_time_id,user_id,number_of_seats,total_amount,booking_date) VALUES ('". $order_id . "','". $event_id . "','". $plan_id . "','". $plan_time_id . "','". $user_id . "','". $number_of_seats . "','". $total_amount . "','". $booking_date . "')";
 			$booking_insert = $this->db->query($sQuery);
-			
+
 			$update_seats = "UPDATE booking_plan_timing SET seat_available = seat_available-$number_of_seats WHERE id ='$plan_time_id'";
 		    $seatsupdate = $this->db->query($update_seats);
-		    
+
 		    $_SESSION['booking_start'] = time(); // taking now logged in time
             $_SESSION['booking_expire'] = $_SESSION['booking_start'] + (300) ; // ending a session in 180 seconds
-		    
+
 		    $session_seats = "INSERT INTO booking_session (session_expiry,order_id,plan_time_id,number_of_seats) VALUES ('". $_SESSION['booking_expire'] . "','". $order_id . "','". $plan_time_id . "','". $number_of_seats . "')";
 			$session_insert = $this->db->query($session_seats);
 
@@ -1975,7 +2028,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	        $sQuery = "INSERT INTO booking_event_attendees (order_id,name,email_id,mobile_no) VALUES ('". $order_id . "','". $name . "','". $email_id . "','". $mobile_no . "')";
 			$booking_insert = $this->db->query($sQuery);
 
-			$response = array("status" => "success", "msg" => "Attendees Added");		
+			$response = array("status" => "success", "msg" => "Attendees Added");
 			return $response;
 	}
 //#################### Booking attendees End ###############//
@@ -1989,13 +2042,13 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 
 			 if($booking_res->num_rows()>0){
 			     	$booking_result= $booking_res->result();
-			     	
+
 			     	$response = array("status" => "success", "msg" => "View Booking History","Bookinghistory"=>$booking_result);
-				 
+
 			}else{
 			        $response = array("status" => "error", "msg" => "Booking not found");
-			}  
-		
+			}
+
 			return $response;
 	}
 //#################### Booking history End ###############//
@@ -2005,15 +2058,15 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	{
     			$attendees_query = "SELECT * FROM booking_event_attendees WHERE  order_id  ='$order_id'";
 			    $attendees_res = $this->db->query($attendees_query);
-			    
+
     			if($attendees_res->num_rows()>0){
     			        $attendees_result= $attendees_res->result();
     			     	$response = array("status" => "success", "msg" => "View Booking attendees","Bookingattendees"=>$attendees_result);
-    				 
+
     			}else{
     			        $response = array("status" => "error", "msg" => "Booking not found");
-    			}  
-						
+    			}
+
 			return $response;
 	}
 //#################### Booking details End ###############//
@@ -2026,34 +2079,34 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                 $activity_query = "SELECT * FROM user_login WHERE user_id = '$user_id' AND login_date ='$date' LIMIT 1";
     	        $activity_res = $this->db->query($activity_query);
             	if($activity_res->num_rows()==0){
-	            
+
                     $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' AND DATE(`login_date`) = DATE( DATE_SUB( NOW() , INTERVAL 1 DAY ) ) ORDER BY id DESC";
     		        $login_res = $this->db->query($login_query);
                 	if($login_res->num_rows()>0){
                 		    foreach ($login_res->result() as $rows)
                 			{
                 				   $day_count  = $rows->cons_login_days;
-                			} 
+                			}
                 			if ($day_count <5){
                 			    $total_count = $day_count +1;
                 			    $activity_sql = "INSERT INTO user_login (user_id,login_date,cons_login_days) VALUES ('". $user_id . "','". $date . "','". $total_count . "')";
     		    	            $insert_activity = $this->db->query($activity_sql);
-    		    	            
+
     		    	            if ($total_count =='5'){
     		    	                $activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+20,total_points=total_points+20 WHERE user_id  ='$user_id'";
     		    	                $insert_points = $this->db->query($activity_points);
     		    	            }
-    		    	            
+
     		    	             if ($total_count =='4'){
     		    	                $activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+4,total_points=total_points+4 WHERE user_id  ='$user_id'";
     		    	                $insert_points = $this->db->query($activity_points);
     		    	            }
-    		    	            
+
     		    	             if ($total_count =='3'){
     		    	                $activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+3,total_points=total_points+3 WHERE user_id  ='$user_id'";
     		    	                $insert_points = $this->db->query($activity_points);
     		    	            }
-    		    	            
+
     		    	             if ($total_count =='2'){
     		    	                $activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+2,total_points=total_points+2 WHERE user_id  ='$user_id'";
     		    	                $insert_points = $this->db->query($activity_points);
@@ -2062,7 +2115,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                 			    $total_count = 1;
                 			    $activity_sql = "INSERT INTO user_login (user_id,login_date,cons_login_days) VALUES ('". $user_id . "','". $date . "','". $total_count . "')";
     		    	            $insert_activity = $this->db->query($activity_sql);
-    		    	            
+
     		    	            $activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+1,total_points=total_points+1 WHERE user_id  ='$user_id'";
     		    	            $insert_points = $this->db->query($activity_points);
                 			}
@@ -2070,39 +2123,39 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                                 $total_count = 1;
                 			    $activity_sql = "INSERT INTO user_login (user_id,login_date,cons_login_days) VALUES ('". $user_id . "','". $date . "','". $total_count . "')";
     		    	            $insert_activity = $this->db->query($activity_sql);
-    		    	            
+
     		    	             $activity_points = "UPDATE user_points_count SET login_count = login_count+1,login_points = login_points+1,total_points=total_points+1 WHERE user_id  ='$user_id'";
     		    	             $insert_points = $this->db->query($activity_points);
                 	}
-                	
-            	    $response = array("status" => "added", "msg" => "User Activity Updated");	
+
+            	    $response = array("status" => "added", "msg" => "User Activity Updated");
             	} else {
             	     $response = array("status" => "exist", "msg" => "Already Exist");
             	}
-            	
+
 	        }
 	    if ($rule_id == '2') //Sharing//
 	        {
 	            $activity_sql = "INSERT INTO user_activity (date,user_id,event_id,rule_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $event_id . "','". $rule_id . "','Sharing')";
 		    	$insert_activity = $this->db->query($activity_sql);
-		    	
+
 		    	$activity_points = "UPDATE user_points_count SET sharing_count = sharing_count+1,sharing_points = sharing_points+5,total_points=total_points+5 WHERE user_id  ='$user_id'";
 		    	$insert_points = $this->db->query($activity_points);
 
-    			$response = array("status" => "success", "msg" => "User Activity Updated");	
+    			$response = array("status" => "success", "msg" => "User Activity Updated");
 	        }
 	   	if ($rule_id == '3') //Checkin//
 	        {
     	       	$activity_sql = "INSERT INTO user_activity (date,user_id,event_id,rule_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $event_id . "','". $rule_id . "','Checkin')";
 		    	$insert_activity = $this->db->query($activity_sql);
-		    	
+
 		    	$activity_points = "UPDATE user_points_count SET checkin_count = checkin_count+1,checkin_points = checkin_points+10,total_points=total_points+10 WHERE user_id  ='$user_id'";
 		    	$insert_points = $this->db->query($activity_points);
 
-    			$response = array("status" => "success", "msg" => "User Activity Updated");	
+    			$response = array("status" => "success", "msg" => "User Activity Updated");
 	        }
 
-			return $response; 
+			return $response;
 	}
 //#################### User activity End ###############//
 
@@ -2118,8 +2171,8 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			     $response = array("status" => "success", "msg" => "View Leaderboard","Leaderboard"=>$leaderboard_result);
 			}else{
 			     $response = array("status" => "error", "msg" => "Leaderboard not found");
-			}  
-						
+			}
+
 			return $response;
 	}
 //#################### Leaderboard End ###############//
@@ -2128,7 +2181,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	public function Activity_history($user_id,$rule_id)
 	{
 	    if ($rule_id =='1') {
-	        
+
 	            $point_query = "SELECT login_points FROM user_points_count WHERE user_id = '$user_id' LIMIT 1";
                 $point_res = $this->db->query($point_query);
                 if($point_res->num_rows()>0){
@@ -2137,7 +2190,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
         		      $total_login_points  = $rows->login_points;
         			}
                 }
-                
+
                 $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' AND DATE(`login_date`) = CURDATE() ORDER BY id DESC";
                 $login_res = $this->db->query($login_query);
                 if($login_res->num_rows()>0){
@@ -2145,7 +2198,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
         			{
         		      $day_count  = $rows->cons_login_days;
         			}
-        			
+
                     if ($day_count =='5'){
                             $login_query = "SELECT * FROM user_login WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 5";
                     } else if ($day_count =='4') {
@@ -2166,7 +2219,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
         				    );
                         }
                     }
-                        
+
             	    $response = array("status" => "success", "msg" => "Login History","Totalpoints"=>$total_login_points,"Data"=>$Data);
                 } else {
                     $response = array("status" => "error", "msg" => "No Records Found.");
@@ -2177,19 +2230,19 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
  	            $activity_res = $this->db->query($sQuery);
 			    $activity_result= $activity_res->result();
 			    $response = array("status" => "success", "msg" => "Sharing History","Data"=>$activity_result);
-			    
+
  	    } else if ($rule_id =='3'){
  	            $sQuery = "SELECT A.user_id,A.rule_id,A.date,B.id AS event_id,B.event_name,B.event_venue FROM user_activity A,events B WHERE A.user_id = '$user_id' AND A.rule_id = '$rule_id' AND A.event_id = B.id ORDER BY A.date DESC";
  	            $activity_res = $this->db->query($sQuery);
 			    $activity_result= $activity_res->result();
 			    $response = array("status" => "success", "msg" => "Checking History","Data"=>$activity_result);
-			    
+
  	    } else if ($rule_id =='4'){
  	            $sQuery = "SELECT A.user_id,A.rule_id,A.date,B.id AS event_id,B.event_name,B.event_venue FROM user_activity A,events B WHERE A.user_id = '$user_id' AND A.rule_id = '$rule_id' AND A.event_id = B.id ORDER BY A.date DESC";
  	            $activity_res = $this->db->query($sQuery);
 			    $activity_result= $activity_res->result();
 			    $response = array("status" => "success", "msg" => "Review History","Data"=>$activity_result);
-			    
+
  	    } else if ($rule_id =='5'){
  	            $sQuery = "SELECT A.user_id,A.rule_id,A.date,B.id AS event_id,B.event_name,B.event_venue FROM user_activity A,events B WHERE A.user_id = '$user_id' AND A.rule_id = '$rule_id' AND A.event_id = B.id ORDER BY A.date DESC";
  	            $activity_res = $this->db->query($sQuery);
@@ -2215,10 +2268,10 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
             $pre_query = "SELECT * FROM guest_user_preference WHERE user_id = '$user_id'";
         }
 		    $pre_res = $this->db->query($pre_query);
-      
+
     		 if($pre_res->num_rows()>0){
     		    foreach ($pre_res->result() as $rows)
-    			{	
+    			{
     				   $pref_ids[]  = $rows->category_id;
     			}
     			$preferrence = implode (",", $pref_ids);
@@ -2234,7 +2287,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                             LEFT JOIN country_master AS cy ON ev.event_country = cy.id
                             WHERE ev.hotspot_status = 'N' AND ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_status  ='Y'
                             group by ev.id HAVING distance <= '$nearby_distance'";
-	    } 
+	    }
 	    if ($event_type == 'Hotspot'){
 	            $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity,
 	                        (3959 * acos( cos( radians('$latitude')) * cos(radians(event_latitude)) * cos(radians(event_longitude) - radians('$longitude') ) + sin( radians('$latitude') ) * sin(radians( event_latitude) ))) AS distance
@@ -2244,7 +2297,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                             LEFT JOIN country_master AS cy ON ev.event_country = cy.id
                             WHERE ev.hotspot_status = 'Y' AND  ev.category_id IN ($preferrence) AND  ev.event_status  ='Y'
                             group by ev.id HAVING distance <= '$nearby_distance'";
-	    } 
+	    }
 	    if ($event_type == 'Popular'){
 	            $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity,
 	                        (3959 * acos( cos( radians('$latitude')) * cos(radians(event_latitude)) * cos(radians(event_longitude) - radians('$longitude') ) + sin( radians('$latitude') ) * sin(radians( event_latitude) ))) AS distance
@@ -2254,7 +2307,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                             LEFT JOIN country_master AS cy ON ev.event_country = cy.id
                             WHERE ev.hotspot_status = 'N' AND ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_status  ='Y'
                             group by ev.id HAVING distance <= '$nearby_distance' ORDER by popularity DESC";
-	    } 
+	    }
 		//echo $event_query;
 		$event_res = $this->db->query($event_query);
 
@@ -2295,12 +2348,12 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 							"advertisement" => ''
 				    );
 			    }
-			     
+
 			     	$response = array("status" => "success", "msg" => "View Events","Eventdetails"=>$eventData);
 			}else{
 			        $response = array("status" => "error", "msg" => "Events not found");
-			}  
-						
+			}
+
 			return $response;
 	}
 //#################### Nearby Events End ###############//
@@ -2320,7 +2373,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 				  $mobile_no = $rows->mobile_no;
 				  $name = $rows->name;
 			}
-			
+
 			echo $activity = "INSERT INTO organiser_request (name,user_id,email_or_phone,message,req_status,created_at ) VALUES ('". $name . "','". $user_id . "','". $email_id . "','". $message . "','Pending',NOW())";
 		    $insert_query = $this->db->query($activity);
 
@@ -2328,12 +2381,42 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			$subject = "Heyla App - Event Organizer Request";
             $email_message = 'Dear Admin<br><br>Event Organizer Reguest from,<br>Name :'.$name.'<br> Email : '.$email_id.'<br>Mobile :'.$mobile_no.'<br>';
             $this->sendMail($email_id,$subject,$email_message);
-			
-    		$response = array("status" => "success", "msg" => "Mail Send to Admin");	
-			
+
+    		$response = array("status" => "success", "msg" => "Mail Send to Admin");
+
 		}
 	}
 //#################### Organizer request End ###############//
+
+      //----- User Points--------//
+
+    function user_points($user_id){
+      $select="SELECT ud.name,um.user_name,um.email_id,upc.user_id,upc.total_points FROM user_points_count as upc
+      left join user_details as ud on ud.user_id=upc.user_id left join user_master as um on um.id= upc.user_id order by upc.total_points desc";
+      $user_result = $this->db->query($select);
+      if($user_result->num_rows()==0){
+        $response = array("status" => "error", "msg" => "no points found");
+
+      }else{
+        foreach ($user_result->result() as $rows)
+  			{
+  				$user_poinst[]=array(
+            "user_name" => $rows->user_name,
+  				  "name" => $rows->name,
+            "email_id" => $rows->email_id,
+  				  "total_points" => $rows->total_points,
+            );
+
+  			}
+          $response = array("status" => "success", "msg" => "Points found","user_points"=>$user_poinst);
+
+      }
+      return $response;
+
+
+    }
+
+
 
 }
 
