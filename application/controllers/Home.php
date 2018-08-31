@@ -81,6 +81,9 @@ class Home extends CI_Controller {
 
 
 	}
+
+
+
 	public function events()
 	{
 		$datas=$this->session->userdata();
@@ -133,21 +136,17 @@ class Home extends CI_Controller {
 		}
 
 	}
-// 	public function leaderboard()
-// 	{
-//
-// 		$datas=$this->session->userdata();
-// 		$user_id=$this->session->userdata('id');
-// 		$user_role=$this->session->userdata('user_role');
-// 		if($user_role==3 || $user_role==2){
-// 		$datas['user_points'] = $this->loginmodel->get_points($user_id);
-// 		$this->load->view('front_header');
-// 		$this->load->view('leaderboard', $datas);
-// 		$this->load->view('front_footer');
-// 	}else{
-// 		redirect('/');
-// 	}
-// }
+	public function order()
+	{
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
+		$user_role=$this->session->userdata('user_role');
+
+			$this->load->view('front_header');
+			$this->load->view('order', $datas);
+			$this->load->view('front_footer');
+		}
+
 
 
 	public function attendees()

@@ -640,6 +640,9 @@ padding-bottom: 15px;
   margin-left: 0px !important;
   margin-right: 0px !important;
 }
+.dot{
+  display: none;
+}
 
 }
 @media (max-width:600px)  {
@@ -886,6 +889,22 @@ a.btn.btn-login.btn-primary.btn-block.review-btn{
   box-shadow: 3px 4px 10px 4px #959696;
 
 }
+.summary_box{
+  background-color: #eeeeee;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+.payment_summary{
+  background-color: #464646;
+  padding: 20px 0px 20px 0px;
+  color: #fff;
+
+}
+.payment_heading{
+  padding-right: 20px;
+  padding-left: 20px;
+}
 .summary_title{
   font-size: 22px;
   color: #fff;
@@ -895,7 +914,7 @@ a.btn.btn-login.btn-primary.btn-block.review-btn{
   margin-top: 30px;
 }
 .summary_label{
-  text-align: right;
+  text-align: left;
   margin-right: 15px;
 
 }
