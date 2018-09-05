@@ -110,7 +110,7 @@ Class Eventlistmodel extends CI_Model
 			$user_id = 0;
 		}
 
-		$sql="SELECT * FROM(SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+		$sql="SELECT * FROM(SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 				FROM events AS e
 				LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
 				LEFT JOIN country_master AS cy ON e.event_country = cy.id
@@ -118,7 +118,7 @@ Class Eventlistmodel extends CI_Model
 				LEFT JOIN category_master AS ca ON e.category_id = ca.id
 				WHERE e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y'
 				UNION
-				SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+				SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 				FROM events AS e
 				LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
 				LEFT JOIN country_master AS cy ON e.event_country = cy.id
@@ -142,7 +142,7 @@ Class Eventlistmodel extends CI_Model
 		}
 
 		if ($country_id!='') {
-      		$sql="SELECT * FROM(SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+      		$sql="SELECT * FROM(SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 				FROM events AS e
 				LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
 				LEFT JOIN country_master AS cy ON e.event_country = cy.id
@@ -150,7 +150,7 @@ Class Eventlistmodel extends CI_Model
 				LEFT JOIN category_master AS ca ON e.category_id = ca.id
 				WHERE e.event_country='$country_id' AND e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y'
 				UNION
-				SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+				SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 				FROM events AS e
 				LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
 				LEFT JOIN country_master AS cy ON e.event_country = cy.id
@@ -159,7 +159,7 @@ Class Eventlistmodel extends CI_Model
 				WHERE e.event_country='$country_id' AND e.hotspot_status = 'Y' AND e.event_status = 'Y') AS event_list
 				ORDER BY id DESC";
 		} else {
-			$sql="SELECT * FROM(SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+			$sql="SELECT * FROM(SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 				FROM events AS e
 				LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
 				LEFT JOIN country_master AS cy ON e.event_country = cy.id
@@ -167,7 +167,7 @@ Class Eventlistmodel extends CI_Model
 				LEFT JOIN category_master AS ca ON e.category_id = ca.id
 				WHERE e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y'
 				UNION
-				SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+				SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 				FROM events AS e
 				LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
 				LEFT JOIN country_master AS cy ON e.event_country = cy.id
@@ -177,8 +177,8 @@ Class Eventlistmodel extends CI_Model
 				ORDER BY id DESC";
 		}
 			  	$resu=$this->db->query($sql);
-	  	$res=$resu->result();
-	  	return $res;
+        	  	$res=$resu->result();
+        	  	return $res;
     }
 
 	function get_city_events($country_id,$city_id,$category_id)
@@ -192,7 +192,7 @@ Class Eventlistmodel extends CI_Model
 		}
 		if(empty($category_id)){
 
-		 	$sql="SELECT * FROM(SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+		 	$sql="SELECT * FROM(SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 			FROM events AS e
 			LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
 			LEFT JOIN country_master AS cy ON e.event_country = cy.id
@@ -200,7 +200,7 @@ Class Eventlistmodel extends CI_Model
 			LEFT JOIN category_master AS ca ON e.category_id = ca.id
 			WHERE  e.event_city='$city_id' AND e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y'
 			UNION
-			SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+			SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 			FROM events AS e
 			LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
 			LEFT JOIN country_master AS cy ON e.event_country = cy.id
@@ -210,7 +210,7 @@ Class Eventlistmodel extends CI_Model
 
 		}else{
 
-		 	$sql="SELECT * FROM(SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+		 	$sql="SELECT * FROM(SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 			FROM events AS e
 			LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
 			LEFT JOIN country_master AS cy ON e.event_country = cy.id
@@ -218,7 +218,7 @@ Class Eventlistmodel extends CI_Model
 			LEFT JOIN category_master AS ca ON e.category_id = ca.id
 			WHERE  e.category_id IN ($category_id) AND e.event_city='$city_id' AND e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y'
 			UNION
-			SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+			SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 			FROM events AS e
 			LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
 			LEFT JOIN country_master AS cy ON e.event_country = cy.id
@@ -247,7 +247,7 @@ Class Eventlistmodel extends CI_Model
 			$user_id = 0;
 		}
 		if(empty($city_id)){
-			   $sql="SELECT * FROM(SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+			   $sql="SELECT * FROM(SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 					FROM events AS e
 					LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
 					LEFT JOIN country_master AS cy ON e.event_country = cy.id
@@ -255,7 +255,7 @@ Class Eventlistmodel extends CI_Model
 					LEFT JOIN category_master AS ca ON e.category_id = ca.id
 					WHERE e.category_id IN ($category_id) AND e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y'
 					UNION
-					SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+					SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 					FROM events AS e
 					LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
 					LEFT JOIN country_master AS cy ON e.event_country = cy.id
@@ -264,7 +264,7 @@ Class Eventlistmodel extends CI_Model
 					WHERE e.category_id IN ($category_id) AND e.hotspot_status = 'Y' AND e.event_status = 'Y') AS event_list ORDER BY id DESC";
 
 		}else{
-			 $sql="SELECT * FROM(SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+			 $sql="SELECT * FROM(SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 					FROM events AS e
 					LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
 					LEFT JOIN country_master AS cy ON e.event_country = cy.id
@@ -272,7 +272,7 @@ Class Eventlistmodel extends CI_Model
 					LEFT JOIN category_master AS ca ON e.category_id = ca.id
 					WHERE e.event_city='$city_id' AND e.category_id IN ($category_id) AND e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y'
 					UNION
-					SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+					SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 					FROM events AS e
 					LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
 					LEFT JOIN country_master AS cy ON e.event_country = cy.id
@@ -312,7 +312,7 @@ Class Eventlistmodel extends CI_Model
 		
 		if ($type_id =='1')
 		{
-				 $sql="SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+				 $sql="SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date, cy.country_name,ci.city_name,uwl.user_id as wlstatus
 				FROM events AS e
 				LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
 				LEFT JOIN country_master AS cy ON e.event_country = cy.id
@@ -320,7 +320,7 @@ Class Eventlistmodel extends CI_Model
 				LEFT JOIN category_master AS ca ON e.category_id = ca.id
 				WHERE $city_query $category_query e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y'";
 		} else {
-				 $sql="SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+				 $sql="SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 				FROM events AS e
 				LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
 				LEFT JOIN country_master AS cy ON e.event_country = cy.id
@@ -345,7 +345,7 @@ Class Eventlistmodel extends CI_Model
 			$user_id = 0;
 		}
 		
-		$sql="SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus FROM events AS e LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id' LEFT JOIN country_master AS cy ON e.event_country = cy.id LEFT JOIN city_master AS ci ON e.event_city = ci.id LEFT JOIN category_master AS ca ON e.category_id = ca.id WHERE e.event_name like '%$srch_term%' AND e.event_status = 'Y' ORDER BY e.id DESC";
+		$sql="SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus FROM events AS e LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id' LEFT JOIN country_master AS cy ON e.event_country = cy.id LEFT JOIN city_master AS ci ON e.event_city = ci.id LEFT JOIN category_master AS ca ON e.category_id = ca.id WHERE e.event_name like '%$srch_term%' AND e.event_status = 'Y' ORDER BY e.id DESC";
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
 	  	return $res;

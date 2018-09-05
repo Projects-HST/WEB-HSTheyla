@@ -113,6 +113,10 @@ foreach($event_details as $res){
 			$enc_event_id = base64_encode($event_id);
 			$wlstatus = $res->wlstatus;
 			$hotspot_status = $res->hotspot_status;
+			$event_latitude =  $res->event_latitude;
+			$event_longitude = $res->event_longitude;
+			$event_type = $res->event_type;
+			
 			if ($wlstatus!= '') {
 					$wlstatusstatus = "<span class='pull-right' id='wishlist".$disp_event_id."'><a href='javascript:void(0);' onclick='editwishlist(".$user_id.",".$disp_event_id.");'><img src='".base_url()."assets/front/images/fav-select.png' class='pull-right'></a></span>";
 			} else {
@@ -130,12 +134,22 @@ foreach($event_details as $res){
     </div>
     <div class="col-md-4">
       <div class="event_detail_thumb">
-				<?php if ($hotspot_status == 'N') { ?><p><span class="event_thumb event_detail_date">
-					<?php echo date('d-M-Y',strtotime($res->start_date));?> - <?php echo date('d-M-Y',strtotime($res->end_date));?><span></p><?php } ?>
-         <p class="event_detail_title  "><?php echo $res->event_name; ?><?php if ($user_id!= '') { echo $wlstatusstatus; } ?></p>
+				<?php if ($hotspot_status == 'N') { ?>
+					<p><span class="event_thumb event_detail_date">
+					<?php echo date('d-M-Y',strtotime($res->start_date));?> - <?php echo date('d-M-Y',strtotime($res->end_date));?></span></p><?php } ?>
+					<?php if ($user_id!= '') { echo "<p>";echo $wlstatusstatus; echo "</p>";} ?>
+					<p class="event_detail_title  "><?php echo $res->event_name; ?></p>
+					
 
-         <p><img src="<?php echo base_url(); ?>assets/front/images/time.png"><span class="event_thumb event_detail_date"><?php echo $res->start_time;?> - <?php echo $res->end_time;?><span></p>
-         <p><img src="<?php echo base_url(); ?>assets/front/images/location.png"><span class="event_thumb event_detail_date event_deetail_venue"><?php echo $res->event_venue; ?><span></p>
+         <p><img src="<?php echo base_url(); ?>assets/front/images/time.png"><span class="event_thumb event_detail_date"><?php echo $res->start_time;?> - <?php echo $res->end_time;?></span></p>
+         <p><img src="<?php echo base_url(); ?>assets/front/images/location.png"><span class="event_thumb event_detail_date event_deetail_venue"><?php echo $res->event_venue; ?></span></p>
+		 <p>
+		 <?php if ($event_type == 'Paid'){ ?>
+			<img src='<?php echo base_url(); ?>assets/front/images/paid.png'>
+		<?php } else { ?>
+			<img src='<?php echo base_url(); ?>assets/front/images/free.png'>
+		<?php } ?>
+		</p>
       </div>
       <div class="event_booking_section">
       <?php if ($res->booking_status =='Y') { ?>
@@ -147,22 +161,22 @@ foreach($event_details as $res){
 
 
 
-      <?php if ($user_id !='') { ?>
+      
       <div class="event_detail_thumb">
          <p class="event_heading">Share with your Friends</p>
          <p>
             <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/" onclick="sharepoints(<?php echo $user_id; ?> ,<?php echo $disp_event_id; ?>)" target="_blank" title="Share on Facebook"><img src="<?php echo base_url(); ?>assets/front/images/share_facebook.png"></a>
             <a href="https://plus.google.com/share?url=<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/" onclick="sharepoints(<?php echo $user_id; ?> ,<?php echo $disp_event_id; ?>)" target="_blank" title="Share on Google+"><img src="<?php echo base_url(); ?>assets/front/images/share_googleplus.png"></a>
             <a href="https://twitter.com/share?&text=<?php echo $res->event_name; ?>&url=<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/" onclick="sharepoints(<?php echo $user_id; ?> ,<?php echo $disp_event_id; ?>)" target="_blank" ><img src="<?php echo base_url(); ?>assets/front/images/share_twitter.png"></a>
-			<a href="https://plus.google.com/share?url=<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/" onclick="sharepoints(<?php echo $user_id; ?> ,<?php echo $disp_event_id; ?>)" target="_blank" title="Share on Google+"><img src="<?php echo base_url(); ?>assets/front/images/share_instagram.png"></a>
+			<!--<a href="https://plus.google.com/share?url=<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/" onclick="sharepoints(<?php echo $user_id; ?> ,<?php echo $disp_event_id; ?>)" target="_blank" title="Share on Google+"><img src="<?php echo base_url(); ?>assets/front/images/share_instagram.png"></a>-->
          </p>
       </div>
-      <?php } ?>
+
 
     </div>
 		<div class="col-md-12">
 			<p class="event_heading">Description</p>
-			<p class="address_form"><?php echo nl2br($res->description); ?></p>
+			<p ><?php echo nl2br($res->description); ?></p>
 			<?php if (!empty($event_gallery)){ ?>
 
 			      <div class="event_detail_thumb">
@@ -181,7 +195,6 @@ foreach($event_details as $res){
 			<?php
 				if (!empty($event_reviews)){ ?>
 			 		<div class="event_detail_thumb">
-			         <p class="event_heading">Review</p>
 			 <?php
 					foreach($event_reviews as $result){
 						 $ratings = $result->event_rating;
@@ -210,11 +223,10 @@ foreach($event_details as $res){
 			 <?php
 				}
 			?>
-			<?php if ($user_id !='') { ?>
 			      <div class="event_booking_section">
-			        <p><img src="<?php echo base_url(); ?>assets/front/images/write_review.png"><?php if (empty($event_reviews)){?> &nbsp; &nbsp; &nbsp; &nbsp;Be the first one to Review ! Share Your experience<?php } ?><a href="" class="review_btn pull-right" data-toggle="modal" data-target="#myModal">Write a review</a></p>
+			        <p><?php if (empty($event_reviews)){?> &nbsp; &nbsp; &nbsp; &nbsp;Be the first one to Review ! Share Your experience<?php } ?><a href="" onclick="session_check()" class="review_btn pull-right" data-toggle="modal" data-target="#myModal">Write a review</a></p>
 			      </div>
-			<?php } ?>
+
 		</div>
   </div>
 </div>
@@ -353,8 +365,9 @@ foreach($event_details as $res){
 				<center><img src="<?php echo base_url(); ?>assets/front/images/heyla_logo.png" style="width:150px;"></center>
 					<center><h2>Book Your Tickets</h2></center>
 		<div class="row booking_form">
+		<?php if (!empty($booking_dates)){ ?>
 				<div class="col-md-3">
-					<?php if (!empty($booking_dates)){ ?>
+					
 					 <label class="form-label">Select Date</label>
 						<select class="form-control" id="show_date" onchange="disp_time()">
 						<option value="">Select Date</option>
@@ -364,15 +377,14 @@ foreach($event_details as $res){
 						   <option value="<?php echo $res->show_date; ?>"><?php echo  date("d-m-Y", strtotime($originalDate)) ?></option>
 						<?php } ?>
 						</select>
-						<?php }  else {
+				</div>
+				<div class="col-md-3" id="plan_time"><label class="form-label">Select Time</label><select class="form-control" id="show_time"><option value="">Select Time</option></select></div>
+				<div class="col-md-3" id="plan_details"><label class="form-label">Select Plan</label><select class="form-control" id="show_time"><option value="">Select Plan</option></select></div>
+				<div class="col-md-3" id="plan_seats"><label class="form-label">Select Seats</label><select class="form-control" id="show_time"><option value="">Select Seats</option></select></div>
+				<div class="row" style="padding-top:20px;" id="plan_summary"></div>
+				<?php }  else {
 						echo "No Dates Found";
 					}?>
-				</div>
-			
-				<div class="col-md-3" id="plan_time"></div>
-				<div class="col-md-3" id="plan_details"></div>
-				<div class="col-md-3" id="plan_seats"></div>
-				<div class="row" style="padding-top:20px;" id="plan_summary"></div>
 		</div>
 	 </form>
   </div>
@@ -382,6 +394,11 @@ foreach($event_details as $res){
  
  
 <script>
+
+	var time_result ="<label class='form-label'>Select Time</label><select class='form-control' id='show_time'><option value=''>Select Time</option>";
+	var plan_result ="<label class='form-label'>Select Plan</label><select class='form-control' id='show_plan'><option value=''>Select Plan</option>";
+	var seat_result ="<label class='form-label'>Select Seats</label><select class='form-control' id='show_seats'><option value=''>Select Seats</option>"; 
+	
 	function session_check()
 	{
 		  var user_id ='<?php echo $this->session->userdata('id');?>';
@@ -390,14 +407,16 @@ foreach($event_details as $res){
 			window.location.replace(redirect_url);
 		  }
 	}
+	
   	function disp_time()
 	{
+		$('#show_plan').prop('selectedIndex',0);
+		$('#show_seats').prop('selectedIndex',0);
+		
+		$('#plan_summary').hide()
 		var plan_date=$('#show_date').val();
-	 	$('#plan_details').hide();
-		$('#plan_seats').hide();
-		$('#plan_summary').hide();
 		var result = '';
-
+		
 		//make the ajax call
 		$.ajax({
 		url: '<?php echo base_url(); ?>eventlist/plantiming',
@@ -408,6 +427,7 @@ foreach($event_details as $res){
 		
 		if (dataArray.length>0) {
 			result +="<label class='form-label'>Select Time</label><select class='form-control' id='show_time' onchange='disp_plan()'><option value=''>Select Time</option>";
+			
 
 			for (var i = 0; i < dataArray.length; i++){
 				var id = dataArray[i].id;
@@ -418,11 +438,14 @@ foreach($event_details as $res){
 				result +="</select>";
 
 			$("#plan_time").html(result).show();
+			$("#show_plan").html(plan_result).show();
+			$("#show_seats").html(seat_result).show();
 		} else {
-			result +="No Records found!..";
-			$("#plan_time").html(result).show();
-			$('#plan_details').hide();
-			$('#plan_seats').hide();
+			//result +="No Records found!..";
+			$("#plan_time").html(time_result).show();
+			$("#show_plan").html(plan_result).show();
+			$("#show_seats").html(seat_result).show();
+
 		}
 		}
 		});  
@@ -430,8 +453,8 @@ foreach($event_details as $res){
 
 	 function disp_plan()
 	{
-		$('#plan_seats').hide();
 		$('#plan_summary').hide()
+		$('#show_seats').prop('selectedIndex',0);
 		
 		var show_date=$('#show_date').val();
 		var show_time=$('#show_time').val();
@@ -444,7 +467,7 @@ foreach($event_details as $res){
 		data: {event_id : <?php echo $disp_event_id; ?>,show_date : show_date,show_time : show_time},
 		success: function(data) {
 		var dataArray = JSON.parse(data);
-
+		
 		if (dataArray.length>0) {
 			
 			result +="<label class='form-label'>Select Plan</label><select class='form-control' id='show_plan' onchange='disp_seats()'><option value=''>Select Plan</option>";
@@ -457,11 +480,11 @@ foreach($event_details as $res){
 			result +="</select>";
 
 			$("#plan_details").html(result).show();
+			$("#show_seats").html(seat_result).show();
 			
 		} else {
-			result +="No Records found!..";
-			$("#plan_details").html(result).show();
-			$('#plan_seats').hide();
+			$("#show_plan").html(plan_result).show();
+			$("#show_seats").html(seat_result).show();;
 		}
 
 		}
@@ -471,6 +494,7 @@ foreach($event_details as $res){
 	 function disp_seats()
 	{
 		$('#plan_summary').hide()
+		$('#show_seats').prop('selectedIndex',0);
 		
 		var show_date=$('#show_date').val();
 		var show_time=$('#show_time').val();
@@ -483,7 +507,6 @@ foreach($event_details as $res){
 		type: 'POST',
 		data: {event_id : <?php echo $disp_event_id; ?>,show_date : show_date,show_time : show_time,show_plan : show_plan},
 		success: function(data) {
-
 		var dataArray = JSON.parse(data);
 		if (dataArray.length>0) {
 			result +="<label class='form-label'>Select Seats</label><select class='form-control' id='show_seats' onchange='plan_summary()'><option value=''>Select Seats</option>";
@@ -504,9 +527,8 @@ foreach($event_details as $res){
 			$("#plan_seats").html(result).show();
 			
 		} else {
-			result +="No Records found!..";
-			$("#plan_seats").html(result).show();
-			$('#plan_summary').hide();
+			$('#plan_summary').hide()
+			$("#show_seats").html(seat_result).show();;
 		}
 
 		}
@@ -533,11 +555,16 @@ foreach($event_details as $res){
 		 $("#plan_summary").html(result).show();
 	} 
 </script>
+<div>
+    
+    
+
+</div>
 
 <script>
 	function initMap() {
 		  //var uluru = {lat: 11.002598, lng: 77.016933};
-		  var uluru = {lat: <?php echo $res->event_latitude; ?>, lng: <?php echo $res->event_longitude; ?>};
+		  var uluru = {lat: <?php echo $event_latitude; ?>, lng: <?php echo $event_longitude; ?>};
 		  var map = new google.maps.Map(document.getElementById('map'), {
 			zoom: 12,
 			center: uluru
@@ -573,14 +600,18 @@ foreach($event_details as $res){
 
 	function sharepoints(user_id,event_id)
 	{
-		$.ajax({
-		url: '<?php echo base_url(); ?>eventlist/eventsharing',
-		type: 'POST',
-		data: {user_id : user_id,event_id : event_id},
-		success: function(data) {
-			var dataArray = JSON.parse(data);
-		}
-		});
+		var user_id ='<?php echo $this->session->userdata('id');?>';
+		  if (user_id !=''){
+			
+			$.ajax({
+			url: '<?php echo base_url(); ?>eventlist/eventsharing',
+			type: 'POST',
+			data: {user_id : user_id,event_id : event_id},
+			success: function(data) {
+				var dataArray = JSON.parse(data);
+			}
+			});
+		  }
 	}
 
 	$('#upload').on('click', function() {

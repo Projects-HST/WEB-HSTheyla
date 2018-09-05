@@ -602,10 +602,18 @@ class Home extends CI_Controller {
 			$msg=$this->db->escape_str($this->input->post('message'));
 			$data=$this->loginmodel->mail_contact_form($name,$email,$subject,$msg);
 		}
+		
+		
 		public function become_organiser(){
+			$user_id=$this->input->post('user_id');
+			$data = $this->loginmodel->save_request_orgainser($user_id);
+		}
+		
+		/* public function become_organiser(){
+		
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
-			$user_role=$this->session->userdata('user_role');
+			$user_role=$this->se/ssion->userdata('user_role');
 			 if($user_id){
 				 $name=$this->db->escape_str($this->input->post('name'));
 				 $email=$this->db->escape_str($this->input->post('email'));
@@ -639,13 +647,10 @@ class Home extends CI_Controller {
 			 }else{
 
 			 }
-
-
-
 		}
-
+ */
 		public function emailverfiy(){
-  	  $email = $this->uri->segment(3);
+			$email = $this->uri->segment(3);
 			$data['res']=$this->loginmodel->email_verify($email);
 			if($data['res']['msg']=='verify'){
 					$this->load->view('email_verification',$data);

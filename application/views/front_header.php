@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta name="theme-color" content="#478ECC" />
-    <title><?php if(isset($meta_title)){echo $meta_title;}else{echo "Heyla";}?> </title>
+    <title><?php if(isset($meta_title)){echo "Heyla - ".$meta_title;}else{echo "Heyla";}?> </title>
     <meta name="description" content="<?php if(isset($meta_description)){echo $meta_description;}else{echo "Heyla";}?>"/>
     <link href="<?php echo base_url(); ?>assets/front/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/front/css/style.css" rel="stylesheet">
@@ -61,8 +61,6 @@
                     <li class="nav-item">
                        <a class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become Organiser</a>
                    </li>
-
-
 
                     <?php
                    	$user_role = $this->session->userdata('user_role');

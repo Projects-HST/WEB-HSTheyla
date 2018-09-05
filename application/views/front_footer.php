@@ -1,3 +1,4 @@
+<?php $user_id = $this->session->userdata('id');?>
 <footer class="footer-bg footer" id="stickfooter">
   <div class="container-fluid">
       <div class="row footer_container">
@@ -66,7 +67,14 @@
     <div class="col-md-5"><img src="<?php echo base_url(); ?>assets/front/images/become_organiser.jpg"></div>
       <div class="col-md-7">
         <p class="become_organiser_text">When modals become too long for the user’s viewport or device, they scroll independent of the page itself. Try the demo below to see what we mean.</p>
-      <p class="text-center"><a class="btn  btn-primary" href="#" role="button">Request Now</a></p>
+		<?php if ($user_id!='') { ?>
+		<form class="form" role="form" autocomplete="off" id="formsignup" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="user_id" id="user_id" value="<?php echo $user_id; ?>">
+			<button type="submit" id="submit" class="btn btn-event btn-lg">Become an organiser</button>
+        </form>
+		<?php } else { ?>
+		<a class="btn btn-lg btn-primary" href="<?php echo base_url(); ?>/signin" role="button">Sign In</a>
+		<?php } ?>
     </div>
     </div>
     </div>
@@ -121,6 +129,35 @@
 <script src="<?php echo base_url(); ?>assets/front/js/jquery.reflection.js"></script>
 <script src="<?php echo base_url(); ?>assets/front/js/jquery.cloud9carousel.js"></script>
 <script type="text/javascript">
+
+$('#formsignup').validate({ // initialize the plugin
+        rules: {
+        },
+        messages: {
+        },
+        submitHandler: function(form) {
+            alert("hi");
+            $.ajax({
+                url: "<?php echo base_url(); ?>home/become_organiser",
+                type: 'POST',
+                data: $('#formsignup').serialize(),
+                success: function(response) {
+                    if (response == "Thanks for requesting we contact you shortly") {
+                        swal({
+                            title: "Success",
+                            text: response,
+                            type: "success"
+                        }).then(function() {
+                            location.href = '<?php echo base_url(); ?>';
+                        });
+                    } else {
+                        sweetAlert("Oops...", response, "error");
+                    }
+                }
+            });
+        }
+    });
+	
 function logout(){
   swal({
       title: 'Are you sure?',
