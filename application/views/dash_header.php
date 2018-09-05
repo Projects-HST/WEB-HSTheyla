@@ -145,7 +145,12 @@
                         <span class="sidebar-title">Booking History</span>
                       </a>
                   </li>
+                  <li class="side-menu">
+                      <a href="<?php echo base_url(); ?>user_points" class="user_points">
+                        <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/user_points.png"></span>
+                        <span class="sidebar-title">User Points</span>
+                      </a>
+                  </li>
               </ul>
           </aside>
       </div>
-    

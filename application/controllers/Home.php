@@ -454,49 +454,7 @@ class Home extends CI_Controller {
 
 						}
 
-			// $datas=$this->session->userdata();
-			// $this->load->library('facebook');
-			// $data['user'] = array();
-			//
-			// // Check if user is logged in
-			// if ($this->facebook->is_authenticated())
-			// {
-			// 	// User logged in, get user details
-			// 	$user = $this->facebook->request('get', '/me?fields=id,name,email');
-			//
-			//
-			// 	if (!isset($user['error']))
-			// 	{
-			// 		$data['user'] = $user;
-			// 		$firstname= $data['user']['name'];
-			// 		$email=$data['user']['email'];
-			//
-			// 		$datas['result'] = $this->loginmodel->getuserfb($firstname,$email);
-			//
-			// 		$user_role=$datas['result']['user_role'];
-			// 		$status=$datas['result']['status'];
-			//
-			//
-			// 		if($status=='Y'){
-			// 			if($user_role==3){
-			// 				redirect('leaderboard');
-			// 			}else if($user_role==2){
-			// 				redirect('leaderboard');
-			// 			}else{
-			// 				redirect('/');
-			// 			}
-			// 		}else{
-			// 		redirect('deactive');
-			//
-			// 		}
-			// 	}else{
-			// 		redirect('/');
-			// 	}
-			//
-			// }else{
-			// 	//echo "out";exit;
-			//  redirect($this->facebook->login_url());
-			// }
+
 
 		}
 

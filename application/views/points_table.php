@@ -1,7 +1,6 @@
 <style>
-.booked_events_active{
-  background-color: #92bce0  !important;
-  color: #fff !important;
+.user_points{
+    border-left: 4px solid #458ecc;
 }
 .event_section{
   height: 100vh;
@@ -9,6 +8,16 @@
 .footer_section{
   display: none;
 }
+table{
+  background-color: #fff;
+}
+.table-striped>tbody>tr:nth-child(odd){
+  background-color: #fff;
+}
+th{
+  width: 150px;
+}
+
 </style>
 <div class="col-sm-12 col-md-12 " id="content">
     <h3 class="dashboard_tab">Points table</h3>

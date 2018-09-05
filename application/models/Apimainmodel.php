@@ -1612,7 +1612,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 							"advertisement" => ''
             );
           }
-            $response = array("status" => "error", "msg" => "Events found","events_list"=>$serach_events);
+            $response = array("status" => "success", "msg" => "Events found","Eventdetails"=>$serach_events);
         }
         	return $response;
 
@@ -2391,7 +2391,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
       //----- User Points--------//
 
     function user_points($user_id){
-      $select="SELECT ud.name,um.user_name,um.email_id,upc.user_id,upc.total_points FROM user_points_count as upc
+      $select="SELECT ud.name,um.user_name,um.email_id,upc.user_id,upc.total_points,ud.user_picture,um.id FROM user_points_count as upc
       left join user_details as ud on ud.user_id=upc.user_id left join user_master as um on um.id= upc.user_id order by upc.total_points desc";
       $user_result = $this->db->query($select);
       if($user_result->num_rows()==0){
@@ -2400,10 +2400,17 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
       }else{
         foreach ($user_result->result() as $rows)
   			{
+          if(empty($rows->user_picture)){
+            $picture='';
+          }else{
+              $picture=base_url().'assets/users/profile/'.$rows->user_picture;
+          }
   				$user_poinst[]=array(
             "user_name" => $rows->user_name,
   				  "name" => $rows->name,
+            "id" => $rows->id,
             "email_id" => $rows->email_id,
+            "user_picture" => $picture,
   				  "total_points" => $rows->total_points,
             );
 

@@ -8,8 +8,7 @@
   box-shadow: 3px 11px 15px 0px #959696;
 }
 .booking_history_active{
-  background-color: #92bce0  !important;
-  color: #fff !important;
+  border-left: 4px solid #458ecc;
 }
 </style>
 

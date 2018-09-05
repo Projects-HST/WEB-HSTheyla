@@ -1,7 +1,6 @@
 <style>
 .booked_events_active{
-  background-color: #92bce0  !important;
-  color: #fff !important;
+  border-left: 4px solid #458ecc;
 }
 .event_section{
   height: 100vh;

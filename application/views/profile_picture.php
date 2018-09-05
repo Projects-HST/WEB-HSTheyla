@@ -9,7 +9,7 @@
   box-shadow: 3px 11px 15px 0px #959696;
 }
 .profile_picture_active{
-border-left: 4px solid #92bce0;
+  border-left: 4px solid #458ecc;
 }
 #form {
     display: none;
