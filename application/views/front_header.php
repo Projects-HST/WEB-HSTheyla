@@ -88,22 +88,22 @@
                                 <li class="nav-item">
                                   <p class="welcome_name">Hi <?php echo $rows->name; ?> !</p>
                                 </li>
-                                <!-- <li class="dropdown keep-open">
-                                  <div id="dLabel" role="button" href="#" class="nav-item" data-toggle="dropdown" data-target="#" >
-                                <?php if(empty($rows->user_picture)){ ?>
-                                       <img src="<?php echo base_url(); ?>assets/users/profile/noimage.png" class="img-circle profile_img_head img-thumbnail img-responsive">
-                                    <?php }else{ ?>
-                                      <img src="<?php echo base_url(); ?>assets/users/profile/<?php echo $rows->user_picture; ?>" class="img-circle profile_img_head img-thumbnail img-responsive">
-                                    <?php  }
-                                    ?>
-                                     <span class="caret"></span>
-                                  </div>
-                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                        <li><a class="nav-link" href="<?php echo base_url(); ?>profile">Profile</a></li>
-                                        <li><a class="nav-link logout-btn" onclick="logout()">Logout</a></li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <?php if(empty($rows->user_picture)){ ?>
+                                             <img src="<?php echo base_url(); ?>assets/users/profile/noimage.png" class="img-circle profile_img_head img-thumbnail img-responsive">
+                                          <?php }else{ ?>
+                                            <img src="<?php echo base_url(); ?>assets/users/profile/<?php echo $rows->user_picture; ?>" class="img-circle profile_img_head img-thumbnail img-responsive">
+                                          <?php  }
+                                          ?>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="margin-left:-60px;">
+                                      <li><a class="nav-link" href="<?php echo base_url(); ?>profile">Profile</a></li>
+                                      <li><a class="nav-link logout-btn" onclick="logout()">Logout</a></li>
 
                                     </ul>
-                                </li> -->
+                                  </li>
+                      
                           <?php  } ?>
 
                      <?php } ?>
@@ -114,3 +114,23 @@
             </div>
         </div>
     </nav>
+    <style>
+    .navbar-nav li:hover > ul.dropdown-menu {
+    display: block;
+}
+.dropdown-submenu {
+    position:relative;
+}
+.dropdown-submenu>.dropdown-menu {
+    top:0;
+    left:100%;
+    margin-top:-6px;
+}
+
+/* rotate caret on hover */
+.dropdown-menu > li > a:hover:after {
+    text-decoration: underline;
+    transform: rotate(-90deg);
+}
+
+    </style>

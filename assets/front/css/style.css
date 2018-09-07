@@ -14,9 +14,7 @@ body{
 .loginbtn{
   padding-left: 30px;
 }
-.navbar-expand-lg .navbar-nav .nav-link{
-  padding-left: 20px;
-}
+
 .slider-img{
   border-left: 3px solid #fff;
 }
@@ -230,6 +228,7 @@ body{
 .organiser_btn{
   background-color: #ffbb17;
     color: #fff !important;
+    margin-top: 8px;
 }
 .organiser_btn:hover{
 
@@ -1112,9 +1111,10 @@ ul.dropdown-menu.show{
 }
 .nav-item{
   margin-left: 10px;
+  margin-top: 0px;
 }
 .welcome_name{
   font-size: 16px;
   font-weight: 600;
-  margin-top: 10px;
+  margin-top:15px;
 }

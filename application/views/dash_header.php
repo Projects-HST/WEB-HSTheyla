@@ -19,7 +19,29 @@
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-datetimepicker.min.css" />
 </head>
 <style>
+.profile_img_head {
+    height: 45px;
+    width: 45px;
+    border-radius: 30px;
+    border: 1px solid #ddd;
+}
+.navbar-nav li:hover > ul.dropdown-menu {
+display: block;
+}
+.dropdown-submenu {
+position:relative;
+}
+.dropdown-submenu>.dropdown-menu {
+top:0;
+left:100%;
+margin-top:-6px;
+}
 
+/* rotate caret on hover */
+.dropdown-menu > li > a:hover:after {
+text-decoration: underline;
+transform: rotate(-90deg);
+}
 </style>
 <body>
 <div id="navbar-wrapper">
@@ -78,6 +100,7 @@
                                           </li>
                                      </ul>
                                  </li>
+                                
                            <?php  } ?>
 
                            <?php } ?>
