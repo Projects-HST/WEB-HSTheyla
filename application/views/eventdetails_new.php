@@ -17,14 +17,7 @@
 		background-color: #478ECC;
 		border-radius: 10px;
 }
-.modal {
 
-  position: absolute;
-  float: left;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
 .event_detail_desc{
 	font-size: 16px;
 
@@ -244,48 +237,7 @@ foreach($event_details as $res){
   </div>
 </div>
 
-<div class="modal fade modal-lg " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
-<div class="modal-dialog">
-<div class="modal-content">
-<div class="modal-header">
-  <h4 class="modal-title">Write Review</h4>
-  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-</div>
-<div class="modal-body" id="modal-body">
-  <center>
-        <form name="frmReview" id="" action="#" method="post" enctype="multipart/form-data" class="form" autocomplete="off">
-      <div class="form-group row">
-      <div class="col-lg-12">
-          <div class="rating">
-            <span class="user-rating">
-            <input type="radio" name="rating" id="rating_1" value="5"><span class="star"></span>
-            <input type="radio" name="rating" id="rating_2" value="4"><span class="star"></span>
-            <input type="radio" name="rating" id="rating_3" value="3"><span class="star"></span>
-            <input type="radio" name="rating" id="rating_4" value="2"><span class="star"></span>
-            <input type="radio" name="rating" id="rating_5" value="1"><span class="star"></span>
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="form-group row">
-        <div class="col-lg-12">
 
-          <textarea type="text" name="message" id="message" placeholder="Message" class="form-control"></textarea>
-        </div>
-      </div>
-      <div class="form-group row">
-        <div class="col-lg-12">
-			<input type="hidden" name="event_id" id="event_id" value="<?php echo $disp_event_id; ?>" />
-			<input type="button" id="upload" value="Submit Review" placeholder="Message" class="btn btn-primary btn-login">
-        </div>
-      </div>
-    </form>
-  </center>
-</div>
-
-</div>
-</div>
-</div>
 
 <!--
 <div class="modal fade" id="ordermodel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -403,7 +355,48 @@ foreach($event_details as $res){
   </div>
    </div>
  </div>
+ <div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+ <div class="modal-dialog">
+ <div class="modal-content">
+ <div class="modal-header">
+   <h4 class="modal-title">Write Review</h4>
+   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+ </div>
+ <div class="modal-body" id="modal-body">
+   <center>
+         <form name="frmReview" id="" action="#" method="post" enctype="multipart/form-data" class="form" autocomplete="off">
+       <div class="form-group row">
+       <div class="col-lg-12">
+           <div class="rating">
+             <span class="user-rating">
+             <input type="radio" name="rating" id="rating_1" value="5"><span class="star"></span>
+             <input type="radio" name="rating" id="rating_2" value="4"><span class="star"></span>
+             <input type="radio" name="rating" id="rating_3" value="3"><span class="star"></span>
+             <input type="radio" name="rating" id="rating_4" value="2"><span class="star"></span>
+             <input type="radio" name="rating" id="rating_5" value="1"><span class="star"></span>
+             </span>
+           </div>
+         </div>
+       </div>
+       <div class="form-group row">
+         <div class="col-lg-12">
 
+           <textarea type="text" name="message" id="message" placeholder="Message" class="form-control"></textarea>
+         </div>
+       </div>
+       <div class="form-group row">
+         <div class="col-lg-12">
+ 			<input type="hidden" name="event_id" id="event_id" value="<?php echo $disp_event_id; ?>" />
+ 			<input type="button" id="upload" value="Submit Review" placeholder="Message" class="btn btn-primary btn-login">
+         </div>
+       </div>
+     </form>
+   </center>
+ </div>
+
+ </div>
+ </div>
+ </div>
 
 
 <script>
