@@ -48,39 +48,56 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto topmenu">
-                    <!-- <li class="nav-item ">
-                        <a class="nav-link" href="<?php echo base_url(); ?>home">Home<span class="sr-only"></span></a>
-                    </li> -->
-
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="<?php echo  base_url(); ?>eventlist/">List Events</a>
-                    </li> -->
-                     <!-- <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url(); ?>home#create">Become Organiser</a>
-                    </li> -->
-                    <li class="nav-item">
-                       <a class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become Organiser</a>
-                   </li>
-
                     <?php
                    	$user_role = $this->session->userdata('user_role');
+                    $user_id = $this->session->userdata('id');
                        if(empty($user_role)){ ?>
                          <li class="nav-item">
-                              <a class="nav-link" href="<?php echo base_url(); ?>signin" >Sign In </a>
+                              <a class="nav-link" href="<?php echo base_url(); ?>signin" >Login / Sign Up </a>
                           </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="<?php echo base_url(); ?>signup" >Sign Up</a>
-                          </li>
+
                     <?php
                        }else{ ?>
-                         <?php  if($user_role=='3' || $user_role=='2'){ ?>
-                           <li class="nav-item">
-                               <a class="nav-link" href="<?php echo base_url(); ?>profile">Profile</a>
-                           </li>
-                     <?php  } ?>
-                            <li class="nav-item">
-                                <a class="nav-link logout-btn" onclick="logout()">Logout</a>
-                            </li>
+
+                             <?php  if($user_role=='3'){ ?>
+                               <li class="nav-item">
+                                   <a class="nav-link organiser_btn" href="<?php echo base_url(); ?>createevent">Create Event</a>
+                               </li>
+                             <?php  }else{?>
+                               <li class="nav-item">
+                                  <a class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become Organiser</a>
+                              </li>
+                            <?php } ?>
+                              <?php  if($user_role=='3' || $user_role=='2'){ ?>
+                                <?php
+                                $user_id = $this->session->userdata('id');
+                                $select="SELECT * FROM  user_details  WHERE user_id='$user_id'";
+                                 $res=$this->db->query($select);
+                                 $result=$res->result();
+                                 foreach($result as $rows){} ?>
+
+
+                                <li class="nav-item">
+                                  <p class="welcome_name">Hi <?php echo $rows->name; ?> !</p>
+                                </li>
+                                <li class="dropdown keep-open">
+                                  <div id="dLabel" role="button" href="#" class="nav-item" data-toggle="dropdown" data-target="#" >
+                                <?php if(empty($rows->user_picture)){ ?>
+                                       <img src="<?php echo base_url(); ?>assets/users/profile/noimage.png" class="img-circle profile_img_head">
+                                    <?php }else{ ?>
+                                      <img src="<?php echo base_url(); ?>assets/users/profile/<?php echo $rows->user_picture; ?>" class="img-circle profile_img_head">
+                                    <?php  }
+                                    ?>
+                                     <span class="caret"></span>
+                                  </div>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <li><a class="nav-link" href="<?php echo base_url(); ?>profile">Profile</a></li>
+                                        <li><a class="nav-link logout-btn" onclick="logout()">Logout</a></li>
+
+                                    </ul>
+                                </li>
+                          <?php  } ?>
+
                      <?php } ?>
 
 

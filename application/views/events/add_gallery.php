@@ -1,7 +1,7 @@
 <style type="text/css">
    .img-circle{
-          width: 90px;
-         border-radius: 30px;
+          width: 100px;
+
        }
 </style>
 
@@ -40,9 +40,10 @@
                   <div class="card m-b-20">
                      <div class="card-block">
                         <h4 class="mt-0 header-title">View Event Gallery</h4>
-                        
+
                            <?php if($this->session->flashdata('msg')): ?>
-                        <div class="alert alert-success">
+                             <div class="alert <?php $msg=$this->session->flashdata('msg');
+                             if($msg=='Added Successfully' || $msg=='Deleted Successfully'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                            ×</button> <?php echo $this->session->flashdata('msg'); ?>
                         </div>
@@ -65,10 +66,10 @@
                               <tr>
                                  <td><?php  echo $i; ?></td>
                                  <td><?php  echo $rows->event_name; ?></td>
-                                 <td> 
+                                 <td>
                                     <img src="<?php echo base_url(); ?>assets/events/gallery/<?php echo $rows->event_image; ?>" class="img-circle">
                                  </td>
-                                 <td> <a href="<?php echo base_url();?>events/delete_events_img/<?php echo $rows->id;?>/<?php echo $rows->eventid;?>">   
+                                 <td> <a href="<?php echo base_url();?>events/delete_events_img/<?php echo $rows->id;?>/<?php echo $rows->eventid;?>">
                               <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a></td>
                               </tr>
                              <?php $i++;  }  ?>
@@ -90,7 +91,7 @@
 
   $('#vieweve').addClass("active");
   $('#events').addClass("has_sub active nav-active");
-  
+
  $(document).ready(function () {
     $('#eventpicform').validate({ // initialize the plugin
        rules: {
@@ -101,7 +102,7 @@
          eventid:"Enter Event Id",
         'eventpicture[]':"Select Picture"
                },
-         }); 
+         });
    });
-  
+
 </script>

@@ -1,7 +1,7 @@
       <div class="page-content-wrapper">
          <div class="container">
            <h4 class="mt-0 header-title"> Send Email</h4>
-           
+
           <form method="post" action="<?php echo base_url();?>emailtemplate/select_users" name="newsletterform" id="newsletterform" style="margin-bottom: 20px;">
          <?php  if(empty($search_view)) { ?>
             <div class="row">
@@ -21,9 +21,7 @@
                   </select>
                  <div id="msg"></div>
               </div>
-              <div class="col-md-6 col-lg-6 col-xl-3">
-                     <input class="form-control"  type="text" name="username" placeholder="Type User Name" id="example-text-input">
-              </div>
+
               <div class="col-md-6 col-lg-6 col-xl-3">
                   <!--div class="mini-stat clearfix bg-primary"-->
                      <button type="submit" class="btn btn-primary waves-effect waves-light">
@@ -33,7 +31,7 @@
                       </button>
                   <!--/div-->
               </div>
-           
+
           </div>
           <?php }else{  foreach($search_view as $res) { } ?>
             <div class="row">
@@ -69,7 +67,7 @@
                       </button>
                   <!--/div-->
               </div>
-           
+
           </div>
          <?php } ?>
            </form>
@@ -84,7 +82,7 @@
                   <div class="card m-b-20">
                      <div class="card-block">
 
-                        <label id="user" style="width: 100%;"><input type="checkbox" class="checkbox" id="checkAll" style="display: inline;" />&nbsp; Select Current Page 
+                        <label id="user" style="width: 100%;"><input type="checkbox" class="checkbox" id="checkAll" style="display: inline;" />&nbsp; Select Current Page
                          <!--div class="text-center">
                             < Large modal-->
                              <button type="button" id="sendSelectedBtn" data-toggle="modal" data-target="#addmodel" class="btn btn-primary waves-effect waves-light" >Send To Selected</button>
@@ -108,8 +106,8 @@
                           if(empty($search_view))
                           {
                             $usr_id = [];
-                           	foreach($view as $rows) { 
-								$usr_id[] = $rows->user_id; 
+                           	foreach($view as $rows) {
+								$usr_id[] = $rows->user_id;
 								$a = implode(',',$usr_id);
 ?>
                             <tr>
@@ -119,13 +117,13 @@
                                 <td><?php  echo $rows->email_id; ?></td>
                                 <td><?php  echo $rows->mobile_no; ?></td>
                             </tr>
-                           <?php $i++;  } ?> 
+                           <?php $i++;  } ?>
                            <div style="display: none;"><input type="text" name="userid[]"  class="demo" value="<?php echo $a; ?>"></div>
-                           <?php  }else{ 
-						   
+                           <?php  }else{
+
 							$usr_id = [];
-                             foreach($search_view as $res){   
-								 $usr_id[] = $res->user_id; 
+                             foreach($search_view as $res){
+								 $usr_id[] = $res->user_id;
 								 $b=implode(',',$usr_id); ?>
                             <tr>
                                <td><?php  echo $i; ?></td>
@@ -136,7 +134,7 @@
                                <td><?php  echo $res->email_id; ?></td>
                                <td><?php  echo $res->mobile_no; ?></td>
                             </tr>
-                       <?php $i++;  } ?> 
+                       <?php $i++;  } ?>
                        		<div style="display: none;"><input type="text" name="userid[]"  class="demo" value="<?php echo $b; ?>"></div>
                        <?php }?>
                      </tbody>
@@ -167,22 +165,36 @@
                <div class="modal-body">
                <!--<form method="post" action="<?php echo base_url();?>emailtemplate/send_email" >-->
                <form method="post" action="<?php echo base_url();?>emailtemplate/send_newsletter" >
-            		<select class="form-control" required="" name="email_temp_id" id="email_temp_id" style="margin-bottom:05%;" >
-                  <option value="">Select Templates</option>
-                    <?php foreach($email_tem as $temp){ ?>
-                        <option value="<?php echo $temp->id; ?>"><?php echo $temp->template_name; ?></option>
-                     <?php } ?>
-                  </select>
-                  	<input type="checkbox" name="email" value="email">Email</input>
-					<input type="checkbox" name="sms" value="sms">SMS</input>
-                    <input type="checkbox" name="notify" value="notify">Notification</input>
-                <input type="hidden" id="user_id" name="user_id" class="form-control"/>
-                <div class="col-md-6 col-lg-6 col-xl-3">
-                  <!--div class="mini-stat clearfix bg-primary"-->
+                 <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Select Template</label>
+                    <div class="col-sm-8">
+                      <select class="form-control" required="" name="email_temp_id" id="email_temp_id" style="margin-bottom:05%;" >
+                        <option value="">Select Templates</option>
+                          <?php foreach($email_tem as $temp){ ?>
+                              <option value="<?php echo $temp->id; ?>"><?php echo $temp->template_name; ?></option>
+                           <?php } ?>
+                        </select>
+                    </div>
+                 </div>
+                 <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Send Via</label>
+                    <div class="col-sm-8">
+                      <input type="checkbox" name="email" value="email">Email</input>
+  					          <input type="checkbox" name="sms" value="sms">SMS</input>
+                      <input type="checkbox" name="notify" value="notify">Notification</input>
+                      <input type="hidden" id="user_id" name="user_id" class="form-control"/>
+
+                    </div>
+                 </div>
+
+                 <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">&nbsp;</label>
+                    <div class="col-sm-8">
                      <button type="submit" class="btn btn-primary waves-effect waves-light">Send</button>
-                    
-                  <!--/div-->
-              </div>
+
+                    </div>
+                 </div>
+
             </form>
                 </div>
                </div>
@@ -196,7 +208,7 @@
  $(document).ready(function () {
    $('#checkAll:checkbox').change(function() {
             $("input:checkbox").prop('checked', $(this).prop("checked"));
-           // var selected_value=[]; // initialize empty array 
+           // var selected_value=[]; // initialize empty array
            // $('#sendnews:checked').each(function(){
            //  selected_value.push($(this).val());
            // });
@@ -204,17 +216,17 @@
             });
      });
 
- $(document).on("click", "#sendSelectedBtn", function () 
-   { 
+ $(document).on("click", "#sendSelectedBtn", function ()
+   {
 	$('#addmodel').modal('show');
      if($('input[name="users_id[]"]:checked').length > 0) {
-        var selected_value=[]; //initialize empty array 
+        var selected_value=[]; //initialize empty array
         $('#sendnews:checked').each(function()
         {
          selected_value.push($(this).val());
         });
       $(".modal-body #user_id").val(selected_value);
-       
+
 
    }else{
          	alert('Please select any one user');
@@ -222,9 +234,9 @@
          }
    });
 
-      $(document).on("click","#sendAll", function() 
-       { 
-           var all_value=[]; 
+      $(document).on("click","#sendAll", function()
+       {
+           var all_value=[];
            $("input:text.demo").each(function()
            {
             //energy=all_value.toString($(this).val());
@@ -232,7 +244,7 @@
            });
           $(".modal-body #user_id").val(all_value);
       });
-  
+
   function getstatename(cid) {
       //alert(cid);
       $.ajax({
@@ -265,7 +277,7 @@
             $("#cityname").hide();
            }
       }
-    }); 
+    });
  }
 
 </script>

@@ -21,38 +21,7 @@
 </style>
 <script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
 <link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
-<!-- Start content ->
-<div class="content-page">
-<div class="content">
-   <!- Top Bar Start ->
-   <div class="topbar">
-      <nav class="navbar-custom">
-         <ul class="list-inline float-right mb-0">
-            <li class="list-inline-item dropdown notification-list">
-            <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
-               aria-haspopup="false" aria-expanded="false">
-            <img src="<?php echo base_url(); ?>assets/images/admin/admin.png" alt="user" class="rounded-circle">
-            </a>
-            <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
 
-            <a class="dropdown-item" href="<?php echo base_url(); ?>adminlogin/logout"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
-            </div>
-            </li>
-         </ul>
-         <ul class="list-inline menu-left mb-0">
-           <li class="list-inline-item">
-           <button type="button" class="button-menu-mobile open-left waves-effect">
-           <i class="ion-navicon"></i>
-           </button>
-           </li>
-           <li class="hide-phone list-inline-item app-search">
-           <h3 class="page-title">Add  Advertisement Details</h3>
-           </li>
-         </ul>
-         <div class="clearfix"></div>
-      </nav>
-      </div>
-      <!- Top Bar End -->
       <div class="page-content-wrapper">
          <div class="container">
 
@@ -67,7 +36,7 @@
                             <label for="sdate" class="col-sm-2 col-form-label">Start Date</label>
                             <div class="col-sm-4">
                               <div class="input-group">
-                                <input type="text" class="form-control datepicker"  name="start_date" id="datepicker-autoclose" >
+                                <input type="text" class="form-control datepicker"  name="start_date" id="datepicker-autoclose" autocomplete="off" >
                                 <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
 
                            <input type="hidden" class="form-control"  name="event_id" value=" <?php echo $event_id;   ?>">
@@ -78,12 +47,12 @@
                              <label for="edate" class="col-sm-2 col-form-label">End Date</label>
                             <div class="col-sm-4">
                                <div class="input-group">
-                                <input type="text" class="form-control datepicker"  name="end_date" id="datepicker">
+                                <input type="text" class="form-control datepicker"  name="end_date" id="datepicker"  autocomplete="off">
                                 <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
                             </div>
                             </div>
                         </div>
-                          
+
                           <div class="form-group row">
                             <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
                             <div class="col-sm-4">
@@ -126,17 +95,18 @@
                                 </select>
                             </div>
                         </div>
-                        
-                        
+
+
                         <div class="form-group row">
                              <label for="Banner" class="col-sm-2 col-form-label">Banner</label>
                             <div class="col-sm-4">
                                 <input type="file" name="eventbanner" id="file_upload" class="form-control" accept="image/*" >
+                                <span style="color: red;">Image Size (985*550px)</span>
                             </div>
                             <div class="col-sm-4">
                             </div>
                         </div
-                        
+
                            <div class="form-group">
                               <label class="col-sm-4 col-form-label"></label>
                               <button type="submit" class="btn btn-primary waves-effect waves-light">
@@ -157,7 +127,8 @@
                         <h4 class="mt-0 header-title">View Advertisement Plans</h4>
 
                            <?php if($this->session->flashdata('msg')): ?>
-                        <div class="alert alert-success">
+                             <div class="alert <?php $msg=$this->session->flashdata('msg');
+                             if($msg=='Added Successfully' || $msg=='Updated Successfully'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                            ×</button> <?php echo $this->session->flashdata('msg'); ?>
                         </div>
@@ -225,7 +196,7 @@
 
   $('#list').addClass("active");
   $('#advertisement').addClass("has_sub active nav-active");
-  
+
   $('#stime').timepicki();
   $('#etime').timepicki();
 function confirmGetMessage(adid)
@@ -258,8 +229,11 @@ function confirmGetMessage(adid)
 
  $(document).ready(function ()
  {
+
     $( ".datepicker" ).datepicker({
-   format: 'dd-mm-yyyy'
+      format: 'dd-mm-yyyy'
+
+
 });
 
     $('#aform').validate({ // initialize the plugin
@@ -304,23 +278,23 @@ function confirmGetMessage(adid)
 
       if(Date.parse(formattedDate)==Date.parse(formattedDate1) )
       {
-      
+
         var strStartTime = document.getElementById("stime").value;
         var strEndTime = document.getElementById("etime").value;
 
         var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
         var endTime = new Date(startTime)
         endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
-         
+
         //var timefrom = date1;
          temp =strStartTime.split(":");
          var a = temp[0];
          var b = temp[1];
          temp1 =b.split(" ");
          var c = temp1[1]
-       
+
         if(a==12 && c=='AM'){
-        
+
         }else if (startTime > endTime){
           alert("Start Time is greater than end time");
           return false;
@@ -329,9 +303,9 @@ function confirmGetMessage(adid)
       var date1 = new Date(formattedDate);
       var date2 = new Date(formattedDate1);
       var y1=chunks[2];
-      var y2=chunks1[2]; 
+      var y2=chunks1[2];
       if(y1<y2){
-            //alert(chunks[2]);alert(chunks1[2]); 
+            //alert(chunks[2]);alert(chunks1[2]);
         }else{
             var strStartTime = document.getElementById("stime").value;
             var strEndTime = document.getElementById("etime").value;
@@ -340,13 +314,13 @@ function confirmGetMessage(adid)
              endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
             var a=formattedDate + '' + strStartTime;
             var b=formattedDate1 + '' + strEndTime;
-            //alert(startTime);alert(endTime); alert(a);alert(b); 
+            //alert(startTime);alert(endTime); alert(a);alert(b);
             if (a == b || a > b) {
             alert("Start Date & Time is greater than end Date & Time");
             return false; }
           }
     }
-      function GetHours(d) 
+      function GetHours(d)
       {
         var h = parseInt(d.split(':')[0]);
         if (d.split(':')[1].split(' ')[1] == "PM") {
@@ -354,7 +328,7 @@ function confirmGetMessage(adid)
       }
       return h;
       }
-      function GetMinutes(d) 
+      function GetMinutes(d)
       {
        return parseInt(d.split(':')[1].split(' ')[0]);
       }

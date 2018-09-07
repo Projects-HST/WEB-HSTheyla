@@ -130,6 +130,18 @@
 <script src="<?php echo base_url(); ?>assets/front/js/jquery.cloud9carousel.js"></script>
 <script type="text/javascript">
 
+$('.keep-open').on({
+    "shown.bs.dropdown": function() { $(this).attr('closable', false); },
+    //"click":             function() { }, // For some reason a click() is sent when Bootstrap tries and fails hide.bs.dropdown
+    "hide.bs.dropdown":  function() { return $(this).attr('closable') == 'true'; }
+});
+
+$('.keep-open').children().first().on({
+  "click": function() {
+    $(this).parent().attr('closable', true );
+  }
+})
+
 $('#formsignup').validate({ // initialize the plugin
         rules: {
         },
@@ -157,7 +169,7 @@ $('#formsignup').validate({ // initialize the plugin
             });
         }
     });
-	
+
 function logout(){
   swal({
       title: 'Are you sure?',

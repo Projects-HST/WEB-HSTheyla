@@ -18,7 +18,7 @@
                <i class="ion-ios7-bell noti-icon"></i>
                <span class="badge badge-success noti-icon-badge">3</span>
               </a>
-         
+
             </li->
 
             <li class="list-inline-item dropdown notification-list">
@@ -31,7 +31,7 @@
             <!-a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
             <a class="dropdown-item" href="#"><span class="badge badge-success pull-right">5</span><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
             <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a->
-              
+
             <a class="dropdown-item" href="<?php echo base_url(); ?>adminlogin/logout"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
             </div>
             </li>
@@ -52,7 +52,7 @@
       <!- Top Bar End -->
       <div class="page-content-wrapper">
          <div class="container">
-            
+
             <div class="row">
                <div class="col-lg-8">
                   <div class="card m-b-20">
@@ -91,9 +91,10 @@
                   <div class="card m-b-20">
                      <div class="card-block">
                         <h4 class="mt-0 header-title">View All Plans</h4>
-                        
+
                            <?php if($this->session->flashdata('msg')): ?>
-                        <div class="alert alert-success">
+                             <div class="alert <?php $msg=$this->session->flashdata('msg');
+                             if($msg=='Added Successfully' || $msg=='Updated Successfully'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                            ×</button> <?php echo $this->session->flashdata('msg'); ?>
                         </div>
@@ -122,7 +123,7 @@
                                 <td>
                                    <a href="<?php echo base_url();?>advertisement/edit_plans/<?php echo $rows->id;?>">
                                    <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
-                                   <!--a onclick="confirmGetMessage(<?php echo $pid;?>)">   
+                                   <!--a onclick="confirmGetMessage(<?php echo $pid;?>)">
                                   <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
                                 </td>
                               </tr>
@@ -160,7 +161,7 @@
                     title: "Success",
                     text: "Deleted Successfully",
                     type: "success"
-                }).then(function() { 
+                }).then(function() {
                     location.href = '<?php echo base_url(); ?>advertisement/home';
                 });
             }else {
@@ -183,8 +184,7 @@
         planname:"Enter Plan Name",
         plan_rate:"Enter Rate"
                },
-         }); 
+         });
    });
-  
-</script>
 
+</script>

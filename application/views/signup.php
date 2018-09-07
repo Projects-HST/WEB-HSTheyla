@@ -180,15 +180,19 @@ function fbAuthUser() {
     FB.login(checkLoginStatus);
 }
 
+
 function checkLoginStatus(response) {
     if(response && response.status == 'connected') {
-      //  document.getElementById("fb").checked = true;
-		FB.api('/me?fields=email,name', function(response)
-	{
 
+//         FB.api('/me', {fields: 'name,email'}, function(response) {
+//     user_email = response.email; //get user email
+//     console.log(response);
+//     alert(response.email);
+// });
 
+	 FB.api('/me', {fields: 'name,email'}, function(response) {
         var fbname=response.name;
-		    var fbemail=response.email;
+		var fbemail=response.email;
 
         swal('Please wait')
         swal.showLoading();
@@ -203,10 +207,10 @@ function checkLoginStatus(response) {
                  window.location.reload(1);
               }, 1000);
               }else{
-                sweetAlert("Oops...", data, "error");
+                sweetAlert("Oops...", "Something wen Wrong", "error");
               }
 
-           }
+          }
 
 
         });
@@ -215,4 +219,5 @@ function checkLoginStatus(response) {
         document.getElementById("fb").checked = false
     }
 }
+
 </script>

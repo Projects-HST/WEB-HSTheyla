@@ -1,11 +1,9 @@
 <script src="<?php echo base_url(); ?>assets/front/js/jquery.form.js"></script>
 <style>
 .card-block{
-
   padding: 30px;
   margin-left: 10px;
   margin-right: 10px;
-
 }
 .footer_section{
   display: none;
@@ -47,7 +45,7 @@
 
 }
 .file-upload{
-  margin-top: 30px;
+  padding-left:140px;
 }
 .profile-img{
   text-align: center;
@@ -168,7 +166,7 @@
 <form  action="<?php echo base_url(); ?>home/change_pic" method="post" id="image_upload_form" enctype="multipart/form-data">
       <div class="upload-button">Change Picture</div>
 
-      <center>  <input class="file-upload" name="profilepic" id="profilepic" type="file" accept="image/x-png,image/jpeg" /></center>
+     <input class="file-upload" name="profilepic" id="profilepic" type="file" accept="image/x-png,image/jpeg" />
         <div id="preview"></div>
     </form>
 

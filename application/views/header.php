@@ -50,7 +50,7 @@
     <div class="topbar-left">
         <div class="text-center">
             <!--<a href="index.html" class="logo">Admiry</a>-->
-            <a href="#" class="logo"><img src="<?php echo base_url(); ?>assets/images/heyla.png" height="" alt="logo"></a>
+            <a href="<?php echo base_url(); ?>adminlogin/dashboard" class="logo"><img src="<?php echo base_url(); ?>assets/images/heyla.png" height="" alt="logo"></a>
         </div>
     </div>
 
@@ -84,7 +84,7 @@
                           <li id="state"><a href="<?php echo base_url();?>state/home">State</a></li>
                           <li id="city"><a href="<?php echo base_url();?>city/home">City</a></li>
                           <li id="category"><a href="<?php echo base_url();?>category/home">Category</a></li>
-                          <li id="userrole"><a href="<?php echo base_url();?>userrole/home">User Role</a></li>
+                          <!-- <li id="userrole"><a href="<?php echo base_url();?>userrole/home">User Role</a></li> -->
                       </ul>
                   </li>
               <?php   } ?>

@@ -34,7 +34,7 @@
                           <span class="icon-bar"></span>
                       </button>
                       <a class="navbar-brand" href="<?php echo base_url(); ?>">
-                          <img src="<?php echo base_url(); ?>assets/front/images/heyla_logo.png" alt="heylaapp" style="width:100px;">
+                          <img src="<?php echo base_url(); ?>assets/front/images/heyla_logo.png" alt="heylaapp" style="width:125px;">
                       </a>
                   </div>
                   <div id="navbar-collapse" class="collapse navbar-collapse">
@@ -51,20 +51,22 @@
                                 </li>
                           <?php
                              }else{ ?>
-                               <?php  if($user_role=='3' || $user_role=='2'){ ?>
-
+                               <?php  if($user_role=='3' || $user_role=='2'){
+                                 $user_id = $this->session->userdata('id');
+                                 $select="SELECT * FROM  user_details  WHERE user_id='$user_id'";
+                                  $res=$this->db->query($select);
+                                  $result=$res->result();
+                                  foreach($result as $rows){} ?>
+                                  <li class="nav-item">
+                                    <p class="welcome_name">Hi <?php echo $rows->name; ?> !</p>
+                                  </li>
                                  <li class="dropdown">
                                      <a id="user-profile" href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <?php
-                                $user_id = $this->session->userdata('id');
-                                $select="SELECT * FROM  user_details  WHERE user_id='$user_id'";
-                                 $res=$this->db->query($select);
-                                 $result=$res->result();
-                                 foreach($result as $rows){}
-                                   if(empty($rows->user_picture)){ ?>
+
+                                <?php   if(empty($rows->user_picture)){ ?>
                                      <img src="<?php echo base_url(); ?>assets/users/profile/noimage.png" class="img-responsive img-thumbnail img-circle">
                                   <?php }else{ ?>
-<img src="<?php echo base_url(); ?>assets/users/profile/<?php echo $rows->user_picture; ?>" class="img-responsive img-thumbnail img-circle">
+                                    <img src="<?php echo base_url(); ?>assets/users/profile/<?php echo $rows->user_picture; ?>" class="img-responsive img-thumbnail img-circle">
                                   <?php  }
                                   ?>
                                         </a>

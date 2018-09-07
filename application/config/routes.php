@@ -78,6 +78,7 @@ $route['about-us'] = 'home/index';
 $route['privacy'] = 'home/privacy';
 $route['payment'] = 'home/payment';
 $route['terms'] = 'home/terms';
+$route['user_points'] = 'home/checkpoints';
 // $route['events/(:any)'] = 'eventslist/index';
 // $route['emailverfiy'] = 'home/emailverfiy';
 $route['deactive'] = 'home/deactive';

@@ -12,9 +12,9 @@
 	</div>
 </div>
 <style>
-
 .payment_msg{
-  margin-top: 60px;
+  margin-top: 150px;
+  margin-bottom: 50px;
 }
 .payment_success{
   width: 600px;

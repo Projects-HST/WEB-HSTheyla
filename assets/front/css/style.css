@@ -1093,3 +1093,19 @@ and (orientation : landscape) {
 .img-thumbnail{
   border: none;
 }
+.profile_img_head{
+    height: 45px;
+    width: 45px;
+    border-radius:30px;
+}
+ul.dropdown-menu.show{
+  margin-left: -100px;
+}
+.nav-item{
+  margin-left: 10px;
+}
+.welcome_name{
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
+}

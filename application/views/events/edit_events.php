@@ -2,8 +2,8 @@
 <link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
 <style type="text/css">
    .img-circle{
-          width: 90px;
-         border-radius: 30px;
+          width: 200px;
+
          margin-top: 10px;
        }
 </style>
@@ -18,7 +18,8 @@
                  <h4 class="mt-0 header-title"></h4>
 
                   <?php if($this->session->flashdata('msg')): ?>
-                        <div class="alert alert-success">
+                    <div class="alert <?php $msg=$this->session->flashdata('msg');
+                    if($msg=='Added Successfully' || $msg=='Update Successfully'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                            ×</button> <?php echo $this->session->flashdata('msg'); ?>
                         </div>
@@ -26,6 +27,34 @@
 
                 <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>events/update_events" name="eventform" id="eventform" onSubmit='return check();'>
                   <?php foreach($edit as $rows){}?>
+                  <div class="form-group row">
+                       <label for="country" class="col-sm-2 col-form-label">Select Country</label>
+                       <div class="col-sm-4">
+                         <select class="form-control" name="country" required="" onchange="getcityname(this.value)">
+                         <option value="">Select Country Name</option>
+                                <?php foreach($country_list as $cntry){ ?>
+                                   <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
+                                <?php } ?>
+                           </select>
+                           <script language="JavaScript">document.eventform.country.value="<?php echo $rows->event_country; ?>";</script>
+                       </div>
+                        <label for="city" class="col-sm-2 col-form-label">Select City</label>
+                       <div class="col-sm-4">
+                         <select class="form-control" name="city" id="ctname">
+                         <?php
+                           $cntyrid=$rows->event_country;
+                           $sql="SELECT id,city_name FROM city_master WHERE country_id='$cntyrid' AND event_status='Y' ORDER BY id ASC";
+                           $resu=$this->db->query($sql);
+                           $res=$resu->result();
+                           foreach ($res as $value) { ?>
+                           <option value="<?php echo $value->id; ?>"><?php echo $value->city_name; ?></option>
+                           <?php } ?>
+                           </select>
+                           <script language="JavaScript">document.eventform.city.value="<?php echo $rows->event_city; ?>";</script>
+                            <div id="cmsg"></div>
+
+                       </div>
+                   </div>
                         <div class="form-group row">
                             <label for="Category" class="col-sm-2 col-form-label">Select Category</label>
                             <div class="col-sm-4">
@@ -44,34 +73,7 @@
                             </div>
 
                         </div>
-                       <div class="form-group row">
-                            <label for="country" class="col-sm-2 col-form-label">Select Country</label>
-                            <div class="col-sm-4">
-                              <select class="form-control" name="country" required="" onchange="getcityname(this.value)">
-                              <option value="">Select Country Name</option>
-                                     <?php foreach($country_list as $cntry){ ?>
-                                        <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
-                                     <?php } ?>
-                                </select>
-                                <script language="JavaScript">document.eventform.country.value="<?php echo $rows->event_country; ?>";</script>
-                            </div>
-                             <label for="city" class="col-sm-2 col-form-label">Select City</label>
-                            <div class="col-sm-4">
-                              <select class="form-control" name="city" id="ctname">
-                              <?php
-                                $cntyrid=$rows->event_country;
-                                $sql="SELECT id,city_name FROM city_master WHERE country_id='$cntyrid' AND event_status='Y' ORDER BY id ASC";
-                                $resu=$this->db->query($sql);
-                                $res=$resu->result();
-                                foreach ($res as $value) { ?>
-                                <option value="<?php echo $value->id; ?>"><?php echo $value->city_name; ?></option>
-                                <?php } ?>
-                                </select>
-                                <script language="JavaScript">document.eventform.city.value="<?php echo $rows->event_city; ?>";</script>
-                                 <div id="cmsg"></div>
 
-                            </div>
-                        </div>
                         <div class="form-group row">
                             <label for="Venue" class="col-sm-2 col-form-label">Venue</label>
                             <div class="col-sm-4">
@@ -84,26 +86,26 @@
 
                         </div>
                         <div class="form-group row">
+                             <label for="latitude" class="col-sm-2 col-form-label">Select</label>
+                            <div id="dvMap" style="width:100%; height:300px"> </div>
 
-                            <label for="" class="col-sm-2 col-form-label">Description</label>
+                          </div>
+                        <div class="form-group row">
+
+                            <label for="latitude" class="col-sm-2 col-form-label">Event Latitude</label>
                             <div class="col-sm-4">
-                                <textarea type="text" id="description"  name="description" class="form-control" maxlength="30000" rows="3" placeholder=""><?php echo $rows->description; ?></textarea>
-
+                                <input class="form-control" type="text" name="txtLatitude" value="<?php echo $rows->event_latitude; ?>" id="latu" >
+                                <div id="ermsg"></div> <div id="ermsg2"></div>
                             </div>
-
-                             <label for="ecost" class="col-sm-2 col-form-label">Event Type</label>
+                              <label for="longitude" class="col-sm-2 col-form-label">Event Longitude</label>
                             <div class="col-sm-4">
-                                 <select class="form-control" required="" name="eventcost">
-                                    <option value="Free">Free</option>
-                                    <option value="Paid">Paid</option>
-                                    <option value="Invite">Invite</option>
-                                </select>
-                                <script language="JavaScript">document.eventform.eventcost.value="<?php echo $rows->event_type; ?>";</script>
+                                <input class="form-control" type="text" value="<?php echo $rows->event_longitude; ?>" name="txtLongitude" id="lon">
+                                 <div id="ermsg1"></div> <div id="ermsg3"></div>
                             </div>
                         </div>
 
-						<div class="form-group row">
 
+						<div class="form-group row">
                             <label for="Status" class="col-sm-2 col-form-label">Advertisement</label>
                             <div class="col-sm-4">
                                <select class="form-control" name="eadv_status">
@@ -158,23 +160,21 @@
 
                         </div>
                         <div class="form-group row">
-                             <label for="latitude" class="col-sm-2 col-form-label">Select</label>
-                            <div id="dvMap" style="width:500px; height:350px"> </div>
-
-                          </div>
-                        <div class="form-group row">
-
-                            <label for="latitude" class="col-sm-2 col-form-label">Event Latitude</label>
+                            <label for="" class="col-sm-2 col-form-label">Description</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" name="txtLatitude" value="<?php echo $rows->event_latitude; ?>" id="latu" >
-                                <div id="ermsg"></div> <div id="ermsg2"></div>
+                                <textarea type="text" id="description"  name="description" class="form-control" maxlength="30000" rows="3" placeholder=""><?php echo $rows->description; ?></textarea>
                             </div>
-                              <label for="longitude" class="col-sm-2 col-form-label">Event Longitude</label>
+                             <label for="ecost" class="col-sm-2 col-form-label">Event Type</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" value="<?php echo $rows->event_longitude; ?>" name="txtLongitude" id="lon">
-                                 <div id="ermsg1"></div> <div id="ermsg3"></div>
+                                 <select class="form-control" required="" name="eventcost">
+                                    <option value="Free">Free</option>
+                                    <option value="Paid">Paid</option>
+                                    <!-- <option value="Invite">Invite</option> -->
+                                </select>
+                                <script language="JavaScript">document.eventform.eventcost.value="<?php echo $rows->event_type; ?>";</script>
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label for="primarycell" class="col-sm-2 col-form-label">Contact Phone</label>
                             <div class="col-sm-4">

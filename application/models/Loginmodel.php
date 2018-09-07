@@ -69,10 +69,62 @@ Class Loginmodel extends CI_Model
            $resultset=$this->db->query($query);
            return $resultset->result();
          }
+         function get_tlt_no_org_user()
+         {
+           $query="SELECT COUNT(*) as users FROM user_master WHERE user_role='2'";
+           $resultset=$this->db->query($query);
+           return $resultset->result();
+         }
+         function get_tlt_no_admin_user()
+         {
+           $query="SELECT COUNT(*) as users FROM user_master WHERE user_role='4'";
+           $resultset=$this->db->query($query);
+           return $resultset->result();
+         }
+
+         function get_no_of_paid_events()
+         {
+           $query="SELECT count(*) as count from events where event_type='Paid' and event_status='Y'";
+           $resultset=$this->db->query($query);
+           return $resultset->result();
+         }
+         function get_no_of_free_events()
+         {
+           $query="SELECT count(*) as count from events where event_type='Free' and event_status='Y'";
+           $resultset=$this->db->query($query);
+           return $resultset->result();
+         }
+         function get_no_of_ad_events()
+         {
+           $query="SELECT count(*) as count FROM adv_event_history where date_to >=CURRENT_DATE and status='Y'";
+           $resultset=$this->db->query($query);
+           return $resultset->result();
+         }
+         function get_no_of_news_letter_subscriber()
+         {
+           $query="SELECT count(*) as count FROM user_details where newsletter_status='Y'";
+           $resultset=$this->db->query($query);
+           return $resultset->result();
+         }
+
+         function get_no_of_hotspot_events()
+         {
+           $query="SELECT count(*) as count FROM events where  hotspot_status='Y' and event_status='Y'";
+           $resultset=$this->db->query($query);
+           return $resultset->result();
+         }
+         function get_no_of_general_events()
+         {
+           $query="SELECT count(*) as count FROM events where end_date >=NOW() and hotspot_status='N' and event_status='Y'";
+           $resultset=$this->db->query($query);
+           return $resultset->result();
+         }
+
+
 
          function get_tlt_no_events()
          {
-           $query="SELECT COUNT(*) as events FROM events WHERE event_status='Y'";
+           $query="SELECT COUNT(*) as events FROM events";
            $resultset=$this->db->query($query);
            return $resultset->result();
          }
@@ -94,6 +146,13 @@ Class Loginmodel extends CI_Model
         function get_tlt_no_reviews()
         {
           $rev="SELECT COUNT(*) AS reviews FROM event_reviews WHERE status='N'";
+          $rev1=$this->db->query($rev);
+          return $rev1->result();
+        }
+
+        function get_total_category()
+        {
+          $rev="SELECT count(*)  as count FROM category_master WHERE status='Y'";
           $rev1=$this->db->query($rev);
           return $rev1->result();
         }
@@ -686,7 +745,7 @@ Class Loginmodel extends CI_Model
     }else{
       echo "You have already requested and waiting for Approval";
   }
-  
+
   /*  $check_email = "SELECT * FROM organiser_request WHERE user_id='$user_id'";
    $res=$this->db->query($check_email);
     if($res->num_rows()==0){

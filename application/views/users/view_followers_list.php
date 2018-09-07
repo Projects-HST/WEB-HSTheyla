@@ -1,4 +1,4 @@
-<!--div class="content-page"> 
+<!--div class="content-page">
 <!- Start content ->
 <div class="content">
     <!-Top Bar Start ->
@@ -43,7 +43,7 @@
     <div class="page-content-wrapper ">
         <div class="container">
             <div class="row">
-      
+
         <div class="col-lg-12">
             <div class="card m-b-20">
                 <div class="card-block">
@@ -51,7 +51,8 @@
                     <h4 class="mt-0 header-title"> View Users Followers List </h4>
 
                      <?php if($this->session->flashdata('msg')): ?>
-                        <div class="alert alert-success">
+                       <div class="alert <?php $msg=$this->session->flashdata('msg');
+                       if($msg=='Added Successfully' || $msg=='Updated Successfully'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                            ×</button> <?php echo $this->session->flashdata('msg'); ?>
                         </div>
@@ -71,16 +72,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php 
+                        <?php
                            $i=1;
-                           foreach($followers as $rows){ 
+                           foreach($followers as $rows){
                               ?>
                         <tr>
                             <td><?php echo $i; ?></td>
                             <td><?php echo $rows->name ; ?></td>
                             <td><?php echo $rows->city_name ; ?></td>
                             <td><?php echo $rows->followers ; ?></td>
-                           
+
                             <td>
                              <a href="<?php echo base_url();?>users/view_followers_details/<?php echo $rows->user_id;?>">
                               <img  title="View Followers Details" src="<?php echo base_url();?>assets/icons/view.png"/></a>
@@ -88,7 +89,7 @@
                              <!--a href="<?php echo base_url();?>users/view_single_events/<?php echo $rows->id;?>">
                               <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a-->
 
-                              <!--a href="<?php echo base_url();?>users/delete/<?php echo $rows->user_id;?>> 
+                              <!--a href="<?php echo base_url();?>users/delete/<?php echo $rows->user_id;?>>
                               <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
 
                             </td>
@@ -98,7 +99,7 @@
                     </table>
                         </div>
 
-                      
+
                     </div>
 
                 </div>
@@ -112,6 +113,6 @@
 </div> <!-- content -->
 <script type="text/javascript">
   $(document).ready(function() {
-   
+
 } );
 </script>

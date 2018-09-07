@@ -32,7 +32,7 @@ class Events extends CI_Controller
         $datas          = $this->session->userdata();
         $user_id        = $this->session->userdata('id');
         $user_role      = $this->session->userdata('user_role');
-		
+
         $event_name     = $this->db->escape_str($this->input->post('event_name'));
         $category       = $this->input->post('category');
         $country        = $this->input->post('country');
@@ -78,7 +78,8 @@ class Events extends CI_Controller
         // print_r($sta);exit;
         if ($sta == "success") {
             $this->session->set_flashdata('msg', 'Added Successfully');
-            redirect('events/add_events_gallery/'.$event_id);
+            //redirect('events/add_events_gallery/'.$event_id);
+            redirect('events/view_events');
         } else if ($sta == "Already Exist") {
             $this->session->set_flashdata('msg', 'Already Exist');
             redirect('events/view_events');
@@ -182,7 +183,7 @@ class Events extends CI_Controller
         $currentcpic    = $this->input->post('currentcpic');
         $eventid        = $this->input->post('eventid');
         $event_pic      = $_FILES['eventbanner']['name'];
-        
+
 		$temp = pathinfo($event_pic, PATHINFO_EXTENSION);
         $file_name      = time() . rand(1, 5) . rand(6, 10);
         $event_banner   = $file_name . '.' .$temp;

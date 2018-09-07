@@ -9,7 +9,8 @@
                     <h4 class="mt-0 header-title"> View Admin Users List </h4>
 
                      <?php if($this->session->flashdata('msg')): ?>
-                        <div class="alert alert-success">
+                       <div class="alert <?php $msg=$this->session->flashdata('msg');
+                       if($msg=='Added Successfully' || $msg=='Updated Successfully'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                            ×</button> <?php echo $this->session->flashdata('msg'); ?>
                         </div>
@@ -51,7 +52,7 @@
                             <td><?php echo $rows->name ; ?></td>
 
                             <td><?php echo $rows->mobile_no; ?></td>
-                          
+
                             <td><?php echo $rows->city_name ; ?></td>
                             <td><?php echo $rows->total_points ; ?></td>
 

@@ -11,7 +11,8 @@
                  <h4 class="mt-0 header-title"> Edit Users Details </h4>
 
                   <?php if($this->session->flashdata('msg')): ?>
-                        <div class="alert alert-success">
+                    <div class="alert <?php $msg=$this->session->flashdata('msg');
+                    if($msg=='Added Successfully' || $msg=='Updated Successfully'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                            ×</button> <?php echo $this->session->flashdata('msg'); ?>
                         </div>
@@ -71,7 +72,7 @@ if($user_role_id=='4'){ ?>
                                 <input class="form-control" type="text" id="email" name="email" value="<?php echo $res->email_id;?>" onchange="checkemailfun()" >
                                   <p id="msg" style="color:red;"> </p>
                             </div>
-                    
+
                         </div>
                         <div class="form-group row">
                             <label for="Venue" class="col-sm-2 col-form-label">DOB</label>

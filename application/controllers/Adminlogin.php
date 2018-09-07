@@ -54,13 +54,21 @@ public function home()
 					$datas= array("user_name"=>$user_name, "msg"=>$msg,"mobile_no"=>$mobile_no,"email_id"=>$email_id,"status"=>$status,"id"=>$id,"user_role"=>$user_role,);
 					//$this->session->userdata($user_name);
 					$session_data=$this->session->set_userdata($datas);
-             $datas['users'] = $this->loginmodel->get_tlt_no_user();
-						 $datas['events'] = $this->loginmodel->get_tlt_no_events();
-						 $datas['org_events'] = $this->loginmodel->get_tlt_no_orgevents();
-						 $datas['booking'] = $this->loginmodel->get_tlt_no_booking();
-						 $datas['reviews'] = $this->loginmodel->get_tlt_no_reviews();
-						 $datas['organiser_request'] = $this->loginmodel->organiser_pending_request();
-
+					$datas['users'] = $this->loginmodel->get_tlt_no_user();
+					$datas['org_users'] = $this->loginmodel->get_tlt_no_org_user();
+					$datas['admin_users'] = $this->loginmodel->get_tlt_no_admin_user();
+					$datas['events'] = $this->loginmodel->get_tlt_no_events();
+					$datas['paid_events'] = $this->loginmodel->get_no_of_paid_events();
+					$datas['free_events'] = $this->loginmodel->get_no_of_free_events();
+					$datas['ad_events'] = $this->loginmodel->get_no_of_ad_events();
+					$datas['newsletter_user'] = $this->loginmodel->get_no_of_news_letter_subscriber();
+					$datas['hotspot_events'] = $this->loginmodel->get_no_of_hotspot_events();
+					$datas['general_events'] = $this->loginmodel->get_no_of_general_events();
+					$datas['total_category'] = $this->loginmodel->get_total_category();
+					$datas['org_events'] = $this->loginmodel->get_tlt_no_orgevents();
+					$datas['booking'] = $this->loginmodel->get_tlt_no_booking();
+					$datas['reviews'] = $this->loginmodel->get_tlt_no_reviews();
+					$datas['organiser_request'] = $this->loginmodel->organiser_pending_request();
 					$this->load->view('header',$datas);
 					$this->load->view('home',$datas);
 					$this->load->view('footer');
@@ -91,13 +99,21 @@ public function home()
 					$datas= array("user_name"=>$user_name, "msg"=>$msg,"mobile_no"=>$mobile_no,"email_id"=>$email_id,"status"=>$status,"id"=>$id,"user_role"=>$user_role,);
 					//$this->session->userdata($user_name);
 					$session_data=$this->session->set_userdata($datas);
-
-						 $datas['users'] = $this->loginmodel->get_tlt_no_user();
-						 $datas['events'] = $this->loginmodel->get_tlt_no_events();
-						 $datas['org_events'] = $this->loginmodel->get_tlt_no_orgevents();
-						 $datas['booking'] = $this->loginmodel->get_tlt_no_booking();
-						 $datas['reviews'] = $this->loginmodel->get_tlt_no_reviews();
-
+					$datas['users'] = $this->loginmodel->get_tlt_no_user();
+			 	 $datas['org_users'] = $this->loginmodel->get_tlt_no_org_user();
+			 	 $datas['admin_users'] = $this->loginmodel->get_tlt_no_admin_user();
+			 	 $datas['events'] = $this->loginmodel->get_tlt_no_events();
+			 	 $datas['paid_events'] = $this->loginmodel->get_no_of_paid_events();
+			 	 $datas['free_events'] = $this->loginmodel->get_no_of_free_events();
+			 	 $datas['ad_events'] = $this->loginmodel->get_no_of_ad_events();
+			 	 $datas['newsletter_user'] = $this->loginmodel->get_no_of_news_letter_subscriber();
+			 	 $datas['hotspot_events'] = $this->loginmodel->get_no_of_hotspot_events();
+			 	 $datas['general_events'] = $this->loginmodel->get_no_of_general_events();
+			 	 $datas['total_category'] = $this->loginmodel->get_total_category();
+			 	 $datas['org_events'] = $this->loginmodel->get_tlt_no_orgevents();
+			 	 $datas['booking'] = $this->loginmodel->get_tlt_no_booking();
+			 	 $datas['reviews'] = $this->loginmodel->get_tlt_no_reviews();
+			 	 $datas['organiser_request'] = $this->loginmodel->organiser_pending_request();
 					$this->load->view('header',$datas);
 					$this->load->view('home',$datas);
 					$this->load->view('footer');
@@ -138,11 +154,21 @@ public function dashboard()
 	 $datas['result'] = $this->loginmodel->getuser($user_id);
 
 	 $datas['users'] = $this->loginmodel->get_tlt_no_user();
+	 $datas['org_users'] = $this->loginmodel->get_tlt_no_org_user();
+	 $datas['admin_users'] = $this->loginmodel->get_tlt_no_admin_user();
 	 $datas['events'] = $this->loginmodel->get_tlt_no_events();
+	 $datas['paid_events'] = $this->loginmodel->get_no_of_paid_events();
+	 $datas['free_events'] = $this->loginmodel->get_no_of_free_events();
+	 $datas['ad_events'] = $this->loginmodel->get_no_of_ad_events();
+	 $datas['newsletter_user'] = $this->loginmodel->get_no_of_news_letter_subscriber();
+	 $datas['hotspot_events'] = $this->loginmodel->get_no_of_hotspot_events();
+	 $datas['general_events'] = $this->loginmodel->get_no_of_general_events();
+	 $datas['total_category'] = $this->loginmodel->get_total_category();
 	 $datas['org_events'] = $this->loginmodel->get_tlt_no_orgevents();
 	 $datas['booking'] = $this->loginmodel->get_tlt_no_booking();
-	  $datas['reviews'] = $this->loginmodel->get_tlt_no_reviews();
-    $datas['organiser_request'] = $this->loginmodel->organiser_pending_request();
+	 $datas['reviews'] = $this->loginmodel->get_tlt_no_reviews();
+	 $datas['organiser_request'] = $this->loginmodel->organiser_pending_request();
+
 	 if($user_role == 1 || $user_role == 4){
 		$this->load->view('header',$datas);
 		$this->load->view('home',$datas);

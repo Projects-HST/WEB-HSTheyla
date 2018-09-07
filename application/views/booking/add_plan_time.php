@@ -56,21 +56,21 @@
                               <label class="col-sm-4 col-form-label">Show Date</label>
                               <div class="col-sm-6">
                                  <select class="form-control" name="showdate">
-                                   <?php  
+                                   <?php
                                    foreach($dates as $rows1) { }
                                     $start_date=$rows1->start_date;
                                     $end_date=$rows1->end_date;
                                     $start_date = date('Y-m-d', strtotime($start_date));
                                     $end_date =  date('Y-m-d', strtotime($end_date));
-                                    $day = 86400; // Day in seconds  
-                                    $format = 'd-m-Y'; // Output format (see PHP date funciton)  
-                                    $sTime = strtotime($start_date); // Start as time  
-                                    $eTime = strtotime($end_date); // End as time  
-                                    $numDays = round(($eTime - $sTime) / $day) + 1;  
-                                    $days = array();  
+                                    $day = 86400; // Day in seconds
+                                    $format = 'd-m-Y'; // Output format (see PHP date funciton)
+                                    $sTime = strtotime($start_date); // Start as time
+                                    $eTime = strtotime($end_date); // End as time
+                                    $numDays = round(($eTime - $sTime) / $day) + 1;
+                                    $days = array();
                                     for ($d = 0; $d < $numDays; $d++)
                                     {  ?>
-                                    <option> 
+                                    <option>
                                     <?php echo $days[] = date($format, ($sTime + ($d * $day))); echo'<br>';?></option>
                                    <?php } ?>
                                  </select>
@@ -92,7 +92,7 @@
                                  <input class="form-control"  type="text" name="seats" >
                               </div>
                            </div>
-                           
+
                            <div class="form-group">
                               <label class="col-sm-4 col-form-label"></label>
                               <button type="submit" class="btn btn-primary waves-effect waves-light">
@@ -168,21 +168,21 @@
 
 <script type="text/javascript">
    $('#timepicker1').timepicki();
-   
+
     $('#vieweve').addClass("active");
   $('#events').addClass("has_sub active nav-active");
-  
+
    $(document).ready(function () {
    $('#plantimeform').validate({ // initialize the plugin
       rules: {
         showtime:{required:true },
-        seats:{required:true }
+        seats:{required:true,number:true }
        },
        messages: {
        showtime:"Enter Show Times",
-       seats:"Enter  Seats"
+
+       required:{ seats:"Enter  Seats",number:"Enter numbers"}
             },
-        }); 
+        });
    });
 </script>
-

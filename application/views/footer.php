@@ -1,6 +1,6 @@
 
         <footer class="footer">
-            ©<?php echo date("Y"); ?> Developed - By Happy Sanz Tech.
+            ©<?php echo date("Y"); ?> Developed - By <span><a href="http://happysanztech.com/" target="_blank"><img src="<?php echo base_url(); ?>assets/happy-logo.png" style="width:100px;"></a></span>.
         </footer>
     </div>
     <!-- End Right content here -->
