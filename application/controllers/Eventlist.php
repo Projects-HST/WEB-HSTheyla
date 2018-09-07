@@ -62,11 +62,11 @@ class Eventlist extends CI_Controller
 
 	public function get_type_events()
     {
-      	//$country_id  = $this->input->post('country_id');
+      	$country_id  = $this->input->post('country_id');
 		$city_id  = $this->input->post('city_id');
 		$category_id  = $this->input->post('cat_id');
 		$type_id = $this->input->post('type_id');
-        $data['event_result'] = $this->eventlistmodel->gettype_events($city_id,$category_id,$type_id);
+        $data['event_result'] = $this->eventlistmodel->gettype_events($country_id,$city_id,$category_id,$type_id);
         echo json_encode($data['event_result']);
     }
 

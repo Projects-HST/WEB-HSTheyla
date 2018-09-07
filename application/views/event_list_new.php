@@ -1,4 +1,5 @@
 <?php $user_id = $this->session->userdata('id'); ?>
+
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <style>
 .ui-autocomplete {
@@ -362,6 +363,7 @@ function getAllevents(lim, off) {
 function getcountryevents()
 {
 	var country_id=cnyname.value;
+	$('#event_type').prop('selectedIndex',0);
 	$('#loader_message').hide();
 	var result = '';
 
@@ -439,6 +441,7 @@ function getcountryevents()
 
 function getcityevents()
 {
+	var country_id=cnyname.value;
 	var city_id_value=ctyname.value;
 	var category_id = $("#category").val();
 	cat_id = category_id.toString();
@@ -858,5 +861,5 @@ function reset(){
 	?>
 	location.reload();
 }
-
 </script>
+

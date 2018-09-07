@@ -289,7 +289,7 @@ Class Eventlistmodel extends CI_Model
     }
 
 
-	function gettype_events($city_id,$category_id,$type_id)
+	function gettype_events($country_id,$city_id,$category_id,$type_id)
     {
 		$current_date = date("Y-m-d");
 
@@ -297,6 +297,11 @@ Class Eventlistmodel extends CI_Model
 			$user_id = $this->session->userdata('id');
 		} else {
 			$user_id = 0;
+		}
+		if ($country_id != ''){
+			$country_query = "e.event_country='".$country_id."' AND ";
+		} else {
+			$country_query = "";
 		}
 		if ($city_id != ''){
 			$city_query = "e.event_city='".$city_id."' AND ";
@@ -318,7 +323,7 @@ Class Eventlistmodel extends CI_Model
 				LEFT JOIN country_master AS cy ON e.event_country = cy.id
 				LEFT JOIN city_master AS ci ON e.event_city = ci.id
 				LEFT JOIN category_master AS ca ON e.category_id = ca.id
-				WHERE $city_query $category_query e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y'";
+				WHERE $country_query $city_query $category_query e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y'";
 		} else {
 				 $sql="SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 				FROM events AS e
@@ -326,7 +331,7 @@ Class Eventlistmodel extends CI_Model
 				LEFT JOIN country_master AS cy ON e.event_country = cy.id
 				LEFT JOIN city_master AS ci ON e.event_city = ci.id
 				LEFT JOIN category_master AS ca ON e.category_id = ca.id
-				WHERE $city_query $category_query e.hotspot_status = 'Y' AND e.event_status = 'Y' ORDER BY id DESC";
+				WHERE $country_query $city_query $category_query e.hotspot_status = 'Y' AND e.event_status = 'Y' ORDER BY id DESC";
 		}
 		//exit;
 	  	$resu=$this->db->query($sql);
