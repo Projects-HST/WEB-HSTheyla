@@ -55,21 +55,19 @@
   margin-top: 200px;
 }
 </style>
-<div class="col-sm-12 col-md-12 " id="content">
+<div class=" col-md-12 " id="content">
     <h3 class="dashboard_tab">Profile Setting</h3>
 </div>
 <?php  foreach($res as $rows){} ?>
 <div class="col-md-12 profile_tab">
-<div class="col-md-8">
+<div class="col-md-7">
   <form class="form" role="form" autocomplete="off" method="post" action="" id="profile_form">
       <div class="form-group row">
           <label class="col-md-3 col-form-label form-control-label">Name</label>
           <div class="col-md-6">
               <input class="form-control" type="text" name="first_name" value="<?php echo $rows->name; ?>">
           </div>
-
       </div>
-
       <div class="form-group row">
           <label class="col-md-3 col-form-label form-control-label">Username</label>
           <div class="col-md-6">
@@ -93,7 +91,7 @@
                   <option value="Female">Female</option>
                 </select>
                 <script>$('#gender').val('<?php echo $rows->gender; ?>');</script>
-              
+
               </div>
 
             </div>
@@ -151,7 +149,7 @@
   </form>
 </div>
 
-<div class="col-md-4 change_pic">
+<div class="col-md-5 change_pic">
 <div class="profile-img">
   <?php if(empty($rows->user_picture)){ ?>
       <img src="<?php echo base_url(); ?>assets/images/profile/noimage.png" class="img-circle  profile-pic">

@@ -387,7 +387,7 @@ body{
 
 
 .footer-bg{
-  background-color: #585858;
+  background-color: #333333;
   padding-top: 30px;
   padding-bottom: 15px;
 }
@@ -624,7 +624,7 @@ i.fas{
   text-align: center;
 }
 .store_img{
-  width: 125px;
+  width: 100px;
 }
 .socialmedia-tab{
   text-align: center;
