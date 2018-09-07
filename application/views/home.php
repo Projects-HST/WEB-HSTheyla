@@ -13,7 +13,7 @@
                         <span class="counter"><?php foreach ($admin_users as $rows_admin) {
                           echo $rows_admin->users;
                         } ?></span>
-                        <b style="font-size:18px;">Admin</b>
+                        <b style="font-size:14px;">Admin</b>
                     </div>
                 </div></a>
             </div>
@@ -32,7 +32,7 @@
                           <span class="counter"><?php foreach ($users as $value) {
                             echo $value->users;
                           } ?></span>
-                          <b style="font-size:18px;">Users</b>
+                          <b style="font-size:14px;">Users</b>
                       </div>
                   </div>
                 </a>
@@ -48,7 +48,7 @@
                           <span class="counter"><?php foreach ($org_users as $rows_org) {
                             echo $rows_org->users;
                           } ?></span>
-                          <b style="font-size:18px;">Orgainser</b>
+                          <b style="font-size:14px;">Orgainser</b>
                       </div>
                   </div></a>
               </div>
@@ -60,7 +60,7 @@
                           <span class="counter"><?php foreach ($total_category as $rows_cat) {
                             echo $rows_cat->count;
                           } ?></span>
-                          <b style="font-size:18px;">Category</b>
+                          <b style="font-size:14px;">Category</b>
                       </div>
                   </div></a>
               </div>
@@ -72,7 +72,7 @@
                           <span class="counter"><?php foreach ($events as $rows) {
                             echo $rows->events;
                           } ?></span>
-                          <b style="font-size:18px;">Total Events</b>
+                          <b style="font-size:14px;">Total Events</b>
                       </div>
                   </div></a>
               </div>
@@ -84,7 +84,7 @@
                           <span class="counter"><?php foreach ($events as $rows) {
                             echo $rows->events;
                           } ?></span>
-                          <b style="font-size:18px;">Active Events</b>
+                          <b style="font-size:14px;">Active Events</b>
                       </div>
                   </div></a>
               </div>
@@ -97,7 +97,7 @@
                           <span class="counter"><?php foreach ($hotspot_events as $row_hotspot) {
                             echo $row_hotspot->count;
                           } ?></span>
-                          <b style="font-size:18px;">Hotspot </b>
+                          <b style="font-size:14px;">Hotspot </b>
                       </div>
                   </div></a>
               </div>
@@ -109,7 +109,7 @@
                           <span class="counter"><?php foreach ($general_events as $row_general) {
                             echo $row_general->count;
                           } ?></span>
-                          <b style="font-size:18px;">General </b>
+                          <b style="font-size:14px;">General </b>
                       </div>
                   </div></a>
               </div>
@@ -121,7 +121,7 @@
                           <span class="counter"><?php foreach ($paid_events as $row_piad) {
                             echo $row_piad->count;
                           } ?></span>
-                          <b style="font-size:18px;">Paid Events </b>
+                          <b style="font-size:14px;">Paid Events </b>
                       </div>
                   </div></a>
               </div>
@@ -133,7 +133,7 @@
                           <span class="counter"><?php foreach ($free_events as $row_free) {
                             echo $row_free->count;
                           } ?></span>
-                          <b style="font-size:18px;">Free Events</b>
+                          <b style="font-size:14px;">Free Events</b>
                       </div>
                   </div></a>
               </div>
@@ -145,7 +145,7 @@
                           <span class="counter"><?php foreach ($ad_events as $row_ad) {
                             echo $row_ad->count;
                           } ?></span>
-                          <b style="font-size:18px;">Ad Events</b>
+                          <b style="font-size:14px;">Ad Events</b>
                       </div>
                   </div></a>
               </div>
@@ -157,7 +157,7 @@
                           <span class="counter"><?php foreach ($org_events as $res) {
                             echo $res->org;
                           } ?></span>
-                        <b style="font-size:18px;"> Organizer Events </b>
+                        <b style="font-size:14px;"> Organizer Events </b>
                       </div></a>
                   </div>
               </div>
@@ -169,7 +169,7 @@
                           <span class="counter"><?php foreach ($booking as $res) {
                             echo $res->booking;
                           } ?></span>
-                          <b style="font-size:18px;">Booking</b>
+                          <b style="font-size:14px;">Booking</b>
                       </div>
                   </div></a>
               </div>
@@ -182,7 +182,7 @@
                           <span class="counter"><?php foreach ($reviews as $res) {
                             echo $res->reviews;
                           } ?></span>
-                         <b style="font-size:18px;"> Pending Reviews </b>
+                         <b style="font-size:14px;"> Pending Reviews </b>
                       </div>
                   </div></a>
               </div>
@@ -196,7 +196,7 @@
                           <span class="counter"><?php foreach ($organiser_request as $res) {
                             echo $res->request_pending;
                           } ?></span>
-                         <b style="font-size:18px;"> Organiser  Request </b>
+                         <b style="font-size:14px;"> Organiser  Request </b>
                       </div>
                   </div></a>
               </div>
@@ -211,7 +211,7 @@
                         <span class="counter"><?php foreach ($newsletter_user as $row_news) {
                           echo $row_news->count;
                         } ?></span>
-                        <b style="font-size:18px;">Subscribed User</b>
+                        <b style="font-size:14px;">Subscribed User</b>
                     </div>
                 </div></a>
             </div>

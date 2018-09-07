@@ -75,7 +75,7 @@
 		  <center><button type="submit" id="submit" class="btn btn-primary btn-lg">Request Now</button></center>
         </form>
 		<?php } else { ?>
-		<a class="btn btn-lg btn-primary" href="<?php echo base_url(); ?>/signin" role="button">Sign In</a>
+		<center><a class="btn btn-lg btn-primary" href="<?php echo base_url(); ?>/signin" role="button">Sign In</a></center>
 		<?php } ?>
     </div>
     </div>
@@ -132,17 +132,7 @@
 <script src="<?php echo base_url(); ?>assets/front/js/jquery.cloud9carousel.js"></script>
 <script type="text/javascript">
 
-$('.keep-open').on({
-    "shown.bs.dropdown": function() { $(this).attr('closable', false); },
-    //"click":             function() { }, // For some reason a click() is sent when Bootstrap tries and fails hide.bs.dropdown
-    "hide.bs.dropdown":  function() { return $(this).attr('closable') == 'true'; }
-});
 
-$('.keep-open').children().first().on({
-  "click": function() {
-    $(this).parent().attr('closable', true );
-  }
-})
 
 $('#formsignup').validate({ // initialize the plugin
         rules: {

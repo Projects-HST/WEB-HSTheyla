@@ -48,27 +48,34 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto topmenu">
+                  <li class="nav-item">
+                     <a class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become A Organiser</a>
+                 </li>
                     <?php
-                   	$user_role = $this->session->userdata('user_role');
+                    $user_role = $this->session->userdata('user_role');
                     $user_id = $this->session->userdata('id');
                        if(empty($user_role)){ ?>
                          <li class="nav-item">
                               <a class="nav-link" href="<?php echo base_url(); ?>signin" >Login / Sign Up </a>
                         </li>
 
+
                     <?php
                        }else{ ?>
 
-                             <?php  if($user_role=='3'){ ?>
-                               <li class="nav-item">
-                                  <a class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become A Organiser</a>
-                              </li>
+                         <?php  if($user_role=='3'){ ?>
 
-                             <?php  }else{?>
-                               <li class="nav-item">
-                                   <a class="nav-link organiser_btn" href="<?php echo base_url(); ?>createevent">Create Event</a>
-                               </li>
-                            <?php } ?>
+                        <?php  }elseif($user_role=='2'){?>
+                          <li class="nav-item">
+                              <a class="nav-link organiser_btn" href="<?php echo base_url(); ?>createevent">Create Event</a>
+                          </li>
+                       <?php }elseif($user_role=='1'){?>
+                         <li class="nav-item">
+                             <a class="nav-link organiser_btn" href="<?php echo base_url(); ?>adminlogin/dashboard">Dashboard</a>
+                         </li>
+                      <?php }else{?>
+
+                        <?php } ?>
                               <?php  if($user_role=='3' || $user_role=='2'){ ?>
                                 <?php
                                 $user_id = $this->session->userdata('id');
@@ -81,7 +88,7 @@
                                 <li class="nav-item">
                                   <p class="welcome_name">Hi <?php echo $rows->name; ?> !</p>
                                 </li>
-                                <li class="dropdown keep-open">
+                                <!-- <li class="dropdown keep-open">
                                   <div id="dLabel" role="button" href="#" class="nav-item" data-toggle="dropdown" data-target="#" >
                                 <?php if(empty($rows->user_picture)){ ?>
                                        <img src="<?php echo base_url(); ?>assets/users/profile/noimage.png" class="img-circle profile_img_head img-thumbnail img-responsive">
@@ -96,10 +103,11 @@
                                         <li><a class="nav-link logout-btn" onclick="logout()">Logout</a></li>
 
                                     </ul>
-                                </li>
+                                </li> -->
                           <?php  } ?>
 
                      <?php } ?>
+
 
 
                 </ul>

@@ -121,6 +121,9 @@ body{background-color: #fff;}
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto topmenu">
+                  <li class="nav-item">
+                     <a class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become A Organiser</a>
+                 </li>
                     <?php
                    	$user_role = $this->session->userdata('user_role');
                     $user_id = $this->session->userdata('id');
@@ -129,19 +132,23 @@ body{background-color: #fff;}
                               <a class="nav-link" href="<?php echo base_url(); ?>signin" >Login / Sign Up </a>
                         </li>
 
+
                     <?php
                        }else{ ?>
 
-                             <?php  if($user_role=='3'){ ?>
-                               <li class="nav-item">
-                                  <a class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become A Organiser</a>
-                              </li>
+                         <?php  if($user_role=='3'){ ?>
 
-                             <?php  }else{?>
-                               <li class="nav-item">
-                                   <a class="nav-link organiser_btn" href="<?php echo base_url(); ?>createevent">Create Event</a>
-                               </li>
-                            <?php } ?>
+                        <?php  }elseif($user_role=='2'){?>
+                          <li class="nav-item">
+                              <a class="nav-link organiser_btn" href="<?php echo base_url(); ?>createevent">Create Event</a>
+                          </li>
+                       <?php }elseif($user_role=='1'){?>
+                         <li class="nav-item">
+                             <a class="nav-link organiser_btn" href="<?php echo base_url(); ?>adminlogin/dashboard">Dashboard</a>
+                         </li>
+                      <?php }else{?>
+
+                        <?php } ?>
                               <?php  if($user_role=='3' || $user_role=='2'){ ?>
                                 <?php
                                 $user_id = $this->session->userdata('id');
@@ -173,6 +180,7 @@ body{background-color: #fff;}
                           <?php  } ?>
 
                      <?php } ?>
+
 
 
                 </ul>
@@ -346,7 +354,7 @@ body{background-color: #fff;}
         <center><button type="submit" id="submit" class="btn btn-primary btn-lg">Request Now</button></center>
           </form>
       <?php } else { ?>
-      <a class="btn btn-lg btn-primary" href="<?php echo base_url(); ?>/signin" role="button">Sign In</a>
+    	<center><a class="btn btn-lg btn-primary" href="<?php echo base_url(); ?>/signin" role="button">Sign In</a></center>
       <?php } ?>
     </div>
     </div>
@@ -427,7 +435,7 @@ $('#formsignup').validate({ // initialize the plugin
             });
         }
     });
-    
+
 function logout(){
   swal({
       title: 'Are you sure?',
