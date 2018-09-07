@@ -222,7 +222,7 @@ body{background-color: #f7f8fa;}
 
 <div class="container-fluid">
   <div class="row event_list" id="event_list"> </div>
-	  <div id='loader_image' style="display:none;"><img src='<?php echo base_url(); ?>assets/loader.gif' width='24' height='24'> Loading...please wait</div>
+	  <div class="col-sm-12 text-center" id='loader_image' style="padding-bottom:20px;"><img src='<?php echo base_url(); ?>assets/ajax-loader.gif'></div>
       <div id='loader_message'></div>
 </div>
 
@@ -236,7 +236,7 @@ $('.carousel').carousel({
 
 $('#category').select2({
     placeholder: 'Select Category',
-        "multiple": true,
+    "multiple": true,
 });
 
 $("#cnyname").val("<?php  echo $country_values; ?>");
@@ -244,14 +244,14 @@ $("#ctyname").val("<?php   echo $city_values; ?>");
 
 
 $(window).on('load', function(){
-		var limit = 20;
+		var limit = 8;
 		var offset = 0;
 		var result = '';
 
         // start to load the first set of data
-        var country_values='<?php  echo $country_values ?>';
-        var city_values='<?php  echo $city_values ?>';
-        if(country_values=='' && city_values==''){
+  //      var country_values='<?php  echo $country_values ?>';
+  //      var city_values='<?php  echo $city_values ?>';
+  //      if(country_values=='' && city_values==''){
             getAllevents(limit, offset);
             $('#loader_message').click(function() {
               // if it has no more records no need to fire ajax request
@@ -261,9 +261,9 @@ $(window).on('load', function(){
                 getAllevents(limit, offset);
               }
             });
-        }else{
-          $('#loader_image').hide();
-        }
+     //   }else{
+      //    $('#loader_image').hide();
+      //  }
 
 });
 
