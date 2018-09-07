@@ -170,10 +170,25 @@ body{background-color: #f7f8fa;}
         <label class="form-label">Select Category</label>
       <div class="form-group ">
             <div class="col-sm-12">
+			
+			   <?php 
+					$tot_count = count($category_list);
+					$str_value = '';
+					$i = 1;
+						foreach($category_list as $res){ 
+						$str = $res->id;
+						if ($i < $tot_count) { $str = $str.',';}
+						$i = $i+1;
+						$str_value = $str_value . $str;
+					} 
+				 ?>
+				 
             <select id="category" size="3" onchange="getsearchevents()" class="form-control" multiple>
-                 <?php foreach($category_list as $res){ ?>
+                 <?php 
+				 foreach($category_list as $res){ ?>
                  <option value="<?php echo $res->id; ?>"><?php echo $res->category_name; ?></option>
                  <?php } ?>
+				 <option value="<?php echo $str_value; ?>"><?php echo "All"; ?></option>
                </select>
           </div>
       </div>
@@ -207,7 +222,7 @@ body{background-color: #f7f8fa;}
 
 <div class="container-fluid">
   <div class="row event_list" id="event_list"> </div>
-	  <div id='loader_image'><img src='<?php echo base_url(); ?>assets/loader.gif' width='24' height='24'> Loading...please wait</div>
+	  <div id='loader_image' style="display:none;"><img src='<?php echo base_url(); ?>assets/loader.gif' width='24' height='24'> Loading...please wait</div>
       <div id='loader_message'></div>
 </div>
 
@@ -373,10 +388,11 @@ function getcountryevents()
 	data: {country_id:country_id},
 	cache: false,
     beforeSend: function() {
+            $("#loader_message").html("").hide();
+			$("#event_list").html("").show();
             $('#loader_image').show();
           },
 	success: function(data) {
-		 $('#loader_image').hide();
 		var dataArray = JSON.parse(data);
 		if (dataArray.length>0) {
 			for (var i = 0; i < dataArray.length; i++){
@@ -428,12 +444,16 @@ function getcountryevents()
 				result +="<div class='col-xs-18 col-sm-3 col-md-3 event_box'><div class='thumbnail event_section'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img src='<?php echo base_url();?>assets/events/banner/"+event_banner+"' alt='' style='height:204px; width:100%;'></a><div class='event_thumb'>"+display_date+"<p class='event_heading event_title_heading'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></a><p><span class='event_thumb'>"+start_time+" - "+end_time+" <span class='pull-right'>"+sevent_type+" <span></span></p></div><p class='price_section'><span class='event_thumb'>"+event_venue+"<span><?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></div></div>";
 			};
 			
-			 $('#loader_message').hide();
+			 
 			 $("#event_list").html(result).show();
+				//$('#loader_message').hide();
+				$('#loader_image').hide();
 		} else {
-			$('#loader_message').hide();
 			result +="No Records found!..";
 			$("#event_list").html(result).show();
+			 //$('#loader_message').hide();
+			 $('#loader_image').hide();
+			
 		}
 	}
 	});
@@ -457,7 +477,13 @@ function getcityevents()
 	$.ajax({
 	url: '<?php echo base_url(); ?>eventlist/get_city_events',
 	type: 'POST',
-	data: {city_id:city_id,cat_id:cat_id},
+	data: {country_id:country_id,city_id:city_id,cat_id:cat_id},
+	cache: false,
+    beforeSend: function() {
+            $("#loader_message").html("").hide();
+			$("#event_list").html("").show();
+            $('#loader_image').show();
+          },
 	success: function(data) {
 		var dataArray = JSON.parse(data);
 		if (dataArray.length>0) {
@@ -509,33 +535,53 @@ function getcityevents()
 				
 				result +="<div class='col-xs-18 col-sm-3 col-md-3 event_box'><div class='thumbnail event_section'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img src='<?php echo base_url();?>assets/events/banner/"+event_banner+"' alt='' style='height:204px; width:100%;'></a><div class='event_thumb'>"+display_date+"<p class='event_heading event_title_heading'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></a><p><span class='event_thumb'>"+start_time+" - "+end_time+" <span class='pull-right'>"+sevent_type+" <span></span></p></div><p class='price_section'><span class='event_thumb'>"+event_venue+"<span><?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></div></div>";
 			};
-			$('#loader_message').hide();
+			
+			 
 			 $("#event_list").html(result).show();
+				//$('#loader_message').hide();
+				$('#loader_image').hide();
 		} else {
-			$('#loader_message').hide();
 			result +="No Records found!..";
 			$("#event_list").html(result).show();
+			 //$('#loader_message').hide();
+			 $('#loader_image').hide();
+			
 		}
 	}
 	});
 }
 
+
 function getsearchevents()
 {
-	var city_id=ctyname.value;
+	var country_id=cnyname.value;
+	var city_id_value=ctyname.value;
 	var category_id = $("#category").val();
 	cat_id = category_id.toString();
 	$('#event_type').prop('selectedIndex',0);
-	var result = '';
 
+	if(city_id_value==''){
+		var city_id='<?php echo $city_values; ?>';
+	  }else{
+		  var city_id=city_id_value;
+	}
+	var result = '';
 
 	$.ajax({
 	url: '<?php echo base_url(); ?>eventlist/get_search_events',
 	type: 'POST',
-	data: {city_id:city_id,cat_id:cat_id},
-	success: function(data) {
+	data: {country_id:country_id,city_id:city_id,cat_id:cat_id},
+	cache: false,
+    beforeSend: function() {
+            $("#loader_message").html("").hide();
+			$("#event_list").html("").show();
+            $('#loader_image').show();
+			if (cat_id == ''){
+				  $('#loader_image').hide();
+			}
+          },
+		success: function(data) {
 		var dataArray = JSON.parse(data);
-		
 		if (dataArray.length>0) {
 			for (var i = 0; i < dataArray.length; i++){
 				var disp_event_id = dataArray[i].id;
@@ -572,31 +618,127 @@ function getsearchevents()
 				} else {
 					var sevent_type = "<img src='<?php echo base_url(); ?>assets/front/images/free.png' class='pull-left'>";
 				}
-
 				if (hotspot_status=='N'){
 					var display_date = "<p><span class=' event_date'>"+start_date+" - "+end_date+"<span></p>";
 				} else {
 					var display_date = "<p><span class='event_date'>&nbsp;<span></p>";
 				}
-				
 				if(wlstatus==null){
 					 var wishliststatus="<span id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' class='pull-right'><a></span>";
 				}else{
 					 var wishliststatus="<span id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img src='<?php echo base_url(); ?>assets/front/images/fav-select.png' class='pull-right'></a></span>";
 				}
-
+				
 				result +="<div class='col-xs-18 col-sm-3 col-md-3 event_box'><div class='thumbnail event_section'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img src='<?php echo base_url();?>assets/events/banner/"+event_banner+"' alt='' style='height:204px; width:100%;'></a><div class='event_thumb'>"+display_date+"<p class='event_heading event_title_heading'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></a><p><span class='event_thumb'>"+start_time+" - "+end_time+" <span class='pull-right'>"+sevent_type+" <span></span></p></div><p class='price_section'><span class='event_thumb'>"+event_venue+"<span><?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></div></div>";
 			};
-			 $('#loader_message').hide();
+			
+			 
 			 $("#event_list").html(result).show();
+				//$('#loader_message').hide();
+				$('#loader_image').hide();
 		} else {
-			$('#loader_message').hide();
 			result +="No Records found!..";
 			$("#event_list").html(result).show();
+			 //$('#loader_message').hide();
+			 $('#loader_image').hide();
+			
 		}
 	}
 	});
-}
+} 
+
+/* function getsearchevents()
+{
+	var country_id=cnyname.value;
+	var city_id_value=ctyname.value;
+	var category_id = $("#category").val();
+	cat_id = category_id.toString();
+	$('#event_type').prop('selectedIndex',0);
+
+	if(city_id_value==''){
+		var city_id='<?php echo $city_values; ?>';
+	  }else{
+		  var city_id=city_id_value;
+	}
+	var result = '';
+
+	$.ajax({
+	url: '<?php echo base_url(); ?>eventlist/get_search_events',
+	type: 'POST',
+	data: {country_id:country_id,city_id:city_id,cat_id:cat_id},
+	cache: false,
+    beforeSend: function() {
+           // $("#loader_message").html("").hide();
+			$("#event_list").html("").show();
+            $('#loader_image').show();
+          },
+	success: function(data) {
+		var dataArray = JSON.parse(data);
+		if (dataArray.length>0) {
+			for (var i = 0; i < dataArray.length; i++){
+				var disp_event_id = dataArray[i].id;
+				var event_id = dataArray[i].id*564738;
+				var enc_event_id = btoa(event_id);
+				var event_name = dataArray[i].event_name;
+				var sm_event_name = event_name.toLowerCase();
+				var eevent_name = sm_event_name.replace(/"/g, "");
+				var sevent_name = eevent_name.replace(/'/g, "");
+				var qevent_name = sevent_name.replace(/,/g, '');
+				var enc_event_name = qevent_name.replace(/\s/g,"-");
+				var event_banner = dataArray[i].event_banner;
+				var event_type = dataArray[i].event_type;
+				var country_name = dataArray[i].country_name;
+				var city_name = dataArray[i].city_name;
+				var event_venue = dataArray[i].event_venue;
+				var start_time = dataArray[i].start_time;
+				var end_time = dataArray[i].end_time;
+				var start_date = dataArray[i].dstart_date;
+				//var sdate = new Date(Date.parse(start_date));
+				//var s_date = String (sdate);
+				//var disp_from_date = s_date.replace('05:30:00 GMT+0530 (India Standard Time)', '');
+
+				var end_date = dataArray[i].dend_date;
+				//var edate = new Date(Date.parse(end_date));
+				//var e_date = String (sdate);
+				//var disp_end_date = e_date.replace('05:30:00 GMT+0530 (India Standard Time)', '');
+
+				var wlstatus = dataArray[i].wlstatus;
+				var hotspot_status = dataArray[i].hotspot_status;
+
+				if (event_type == 'Paid'){
+					var sevent_type = "<img src='<?php echo base_url(); ?>assets/front/images/paid.png' class='pull-left'>";
+				} else {
+					var sevent_type = "<img src='<?php echo base_url(); ?>assets/front/images/free.png' class='pull-left'>";
+				}
+				if (hotspot_status=='N'){
+					var display_date = "<p><span class=' event_date'>"+start_date+" - "+end_date+"<span></p>";
+				} else {
+					var display_date = "<p><span class='event_date'>&nbsp;<span></p>";
+				}
+				if(wlstatus==null){
+					 var wishliststatus="<span id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' class='pull-right'><a></span>";
+				}else{
+					 var wishliststatus="<span id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img src='<?php echo base_url(); ?>assets/front/images/fav-select.png' class='pull-right'></a></span>";
+				}
+				
+				result +="<div class='col-xs-18 col-sm-3 col-md-3 event_box'><div class='thumbnail event_section'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img src='<?php echo base_url();?>assets/events/banner/"+event_banner+"' alt='' style='height:204px; width:100%;'></a><div class='event_thumb'>"+display_date+"<p class='event_heading event_title_heading'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></a><p><span class='event_thumb'>"+start_time+" - "+end_time+" <span class='pull-right'>"+sevent_type+" <span></span></p></div><p class='price_section'><span class='event_thumb'>"+event_venue+"<span><?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></div></div>";
+			};
+			
+			 
+			 $("#event_list").html(result).show();
+				//$('#loader_message').hide();
+				$('#loader_image').hide();
+		} else {
+			result +="No Records found!..";
+			$("#event_list").html(result).show();
+			 //$('#loader_message').hide();
+			 $('#loader_image').hide();
+			
+		}
+	}
+	});
+} */
+
 
 
 function gettypeevents()
@@ -611,6 +753,11 @@ function gettypeevents()
 	url: '<?php echo base_url(); ?>eventlist/get_type_events',
 	type: 'POST',
 	data: {city_id:city_id,cat_id:cat_id,type_id:type_id},
+	cache: false,
+    beforeSend: function() {
+            $("#loader_message").html("").hide();
+            $('#loader_image').show();
+          },
 	success: function(data) {
 		var dataArray = JSON.parse(data);
 		if (dataArray.length>0) {
@@ -668,9 +815,11 @@ function gettypeevents()
 				result +="<div class='col-xs-18 col-sm-3 col-md-3 event_box'><div class='thumbnail event_section'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img src='<?php echo base_url();?>assets/events/banner/"+event_banner+"' alt='' style='height:204px; width:100%;'></a><div class='event_thumb'>"+display_date+"<p class='event_heading event_title_heading'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></a><p><span class='event_thumb'>"+start_time+" - "+end_time+" <span class='pull-right'>"+sevent_type+" <span></span></p></div><p class='price_section'><span class='event_thumb'>"+event_venue+"<span><?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></div></div>";
 			};
 			 $('#loader_message').hide();
+			 $('#loader_image').hide();
 			 $("#event_list").html(result).show();
 		} else {
 			$('#loader_message').hide();
+			$('#loader_image').hide();
 			result +="No Records found!..";
 			$("#event_list").html(result).show();
 		}
