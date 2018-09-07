@@ -620,6 +620,10 @@ padding-bottom: 15px;
   padding-right: 15px;
 }
 @media (min-width: 360px) and (max-width: 480px){
+.about_us{
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
 .or-text{
   padding-top: 10px;
 }
@@ -1117,4 +1121,7 @@ ul.dropdown-menu.show{
   font-size: 16px;
   font-weight: 600;
   margin-top:15px;
+}
+.navbar-toggler-icon{
+  background-color:#458ecc;
 }
