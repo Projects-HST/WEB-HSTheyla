@@ -150,6 +150,7 @@ foreach($event_details as $res){
 			<img src='<?php echo base_url(); ?>assets/front/images/free.png'>
 		<?php } ?>
 		</p>
+		<p><a href="http://maps.google.com/maps?z=12&t=m&q=loc:<?php echo $event_latitude;?>+<?php echo $event_longitude;?>" target="_blank"> View Location</a> </p>
       </div>
       <div class="event_booking_section">
       <?php if ($res->booking_status =='Y') { ?>
@@ -186,9 +187,9 @@ foreach($event_details as $res){
 			         <?php } ?>
 			      </div>
 			 <?php } ?>
-			<p class="event_heading">Location</p>
+			<!--<p class="event_heading">Location</p>
 
-			<div id="map" class="map"></div>
+			<div id="map" class="map"></div>-->
 
 			<p class="event_heading">Review</p>
 			<hr>
@@ -549,7 +550,7 @@ foreach($event_details as $res){
 		var disp_total = stotal.toFixed(2);
 
 		
-		result +="<div class='col-md-6'><p class='event_select_text'>Plan Name</p></div><div class='col-md-6'><p class='event_select_text'>"+disp_plan_name+"</p></div><div class='col-md-6'><p class='event_select_text'>Ticket Price</p></div><div class='col-md-6'><p class='event_select_text'>"+disp_plan_rate+"</p></div><div class='col-md-6'><p class='event_select_text'>No. of Seats</p></div><div class='col-md-6'><p class='event_select_text'>"+no_seats+"</p></div><div class='col-md-6 total_price'><p class='event_select_text'>Total Price</p></div><div class='col-md-6 total_price'><p class='event_select_text'>"+disp_total+"</p></div><div class='col-md-12'><input type='submit' class='btn book_tickets confirm_btn' value='Continue' /></p><input type='hidden' name='no_seats' id='no_seats' value="+no_seats+" /><input type='hidden' name='total_amount' id='total_amount' value="+disp_total+" /><input type='hidden' name='user_id' id='user_id' value='<?php echo $user_id; ?>' /></div>";
+		result +="<div class='col-md-6'><p class='event_select_text'>Plan Name</p></div><div class='col-md-6'><p class='event_select_text'>"+disp_plan_name+"</p></div><div class='col-md-6'><p class='event_select_text'>Ticket Price</p></div><div class='col-md-6'><p class='event_select_text'>₹ "+disp_plan_rate+"</p></div><div class='col-md-6'><p class='event_select_text'>No. of Seats</p></div><div class='col-md-6'><p class='event_select_text'>"+no_seats+"</p></div><div class='col-md-6 total_price'><p class='event_select_text'>Total Price</p></div><div class='col-md-6 total_price'><p class='event_select_text'>₹ "+disp_total+"</p></div><div class='col-md-12'><input type='submit' class='btn book_tickets confirm_btn' value='Continue' /></p><input type='hidden' name='no_seats' id='no_seats' value="+no_seats+" /><input type='hidden' name='total_amount' id='total_amount' value="+disp_total+" /><input type='hidden' name='user_id' id='user_id' value='<?php echo $user_id; ?>' /></div>";
 		
 		 //result +="<div class='col-md-6'><p class='event_select_text'>Plan Name</p></div><div class='col-md-6'><p class='event_select_text'>"+disp_plan_name+"</p></div><div class='col-md-6'><p class='event_select_text'>Ticket Price</p></div><div class='col-md-6'><p class='event_select_text'>"+disp_plan_rate+"</p></div><div class='col-md-6'><p class='event_select_text'>No. of Seats</p></div><div class='col-md-6'><p class='event_select_text'>"+no_seats+"</p></div><div class='col-md-6'><p class='event_select_text'>Internet handling fees</p></div><div class='col-md-6'><p class='event_select_text'>"+IHC.toFixed(2)+"</p></div><div class='col-md-6'><p class='event_select_text'>CGST</p></div><div class='col-md-6'><p class='event_select_text'>"+CGST.toFixed(2)+"</p></div><div class='col-md-6'><p class='event_select_text'>SGST</p></div><div class='col-md-6'><p class='event_select_text'>"+SGST.toFixed(2)+"</p></div><div class='col-md-6 total_price'><p class='event_select_text'>Total Price</p></div><div class='col-md-6 total_price'><p class='event_select_text'>"+disp_total+"</p></div><div class='col-md-12'><input type='submit' class='btn book_tickets confirm_btn' value='Continue' /></p><input type='hidden' name='no_seats' id='no_seats' value="+no_seats+" /><input type='hidden' name='total_amount' id='total_amount' value="+disp_total+" /><input type='hidden' name='user_id' id='user_id' value='<?php echo $user_id; ?>' /></div>";
 		 $("#plan_summary").html(result).show();
@@ -562,6 +563,7 @@ foreach($event_details as $res){
 </div>
 
 <script>
+/*
 	function initMap() {
 		  //var uluru = {lat: 11.002598, lng: 77.016933};
 		  var uluru = {lat: <?php echo $event_latitude; ?>, lng: <?php echo $event_longitude; ?>};
@@ -579,7 +581,7 @@ foreach($event_details as $res){
 		$('#selected-rating').text($('[name="rating"]:checked').val());
 	});
 
-	
+	*/
 	function editwishlist(user_id,event_id)
 	{
 		//make the ajax call
@@ -678,4 +680,4 @@ foreach($event_details as $res){
     	});
     });
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZLXcA6pQcEJA_iE0xX5XA_ObPQ4ww1eM&callback=initMap"></script>
+<!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZLXcA6pQcEJA_iE0xX5XA_ObPQ4ww1eM&callback=initMap"></script>-->

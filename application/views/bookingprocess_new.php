@@ -82,13 +82,13 @@ hr{
         <hr>
         <div class="row">
           <div class="col-md-7">
-            <p class="payment_heading">Booking Price</p>
+            <p class="payment_heading">Price</p>
           </div>
           <div class="col-md-1">
             <p class="payment_heading dot">:</p>
           </div>
           <div class="col-md-4">
-              <p class="payment_heading">₹<?php echo $res->total_amount;?></p>
+              <p class="payment_heading">₹ <?php echo $res->total_amount;?></p>
           </div>
         </div>
 
@@ -100,7 +100,7 @@ hr{
             <p class="payment_heading dot">:</p>
           </div>
           <div class="col-md-4">
-              <p class="payment_heading">₹<?php echo $IHC;?></p>
+              <p class="payment_heading">₹ <?php echo $IHC;?></p>
           </div>
         </div>
 
@@ -112,7 +112,7 @@ hr{
             <p class="payment_heading dot">:</p>
           </div>
           <div class="col-md-4">
-              <p class="payment_heading">₹<?php echo $CGST;?></p>
+              <p class="payment_heading">₹ <?php echo $CGST;?></p>
           </div>
         </div>
         <div class="row">
@@ -123,7 +123,7 @@ hr{
             <p class="payment_heading dot">:</p>
           </div>
           <div class="col-md-4">
-              <p class="payment_heading">₹<?php echo $SGST;?></p>
+              <p class="payment_heading">₹ <?php echo $SGST;?></p>
           </div>
         </div>
           <hr class="total_bor">
@@ -136,7 +136,7 @@ hr{
             <p class="payment_heading dot">:</p>
           </div>
           <div class="col-md-4">
-              <p class="payment_heading">₹<?php echo $res->total_amount;?></p>
+              <p class="payment_heading">₹ <?php echo $res->total_amount;?></p>
           </div>
 
         </div>
