@@ -12,7 +12,7 @@
 </style><div class="col-sm-12 col-md-12 " id="content">
     <h3 class="dashboard_tab">Booking history</h3>
 </div>
-<div class="container profile_tab">
+<div class="col-md-12 profile_tab">
 
         <div class="card-block" style="padding:20px;">
           <?php  foreach($booking_details as $res){

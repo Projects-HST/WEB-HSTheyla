@@ -12,7 +12,7 @@
     <h3 class="dashboard_tab">Wishlist</h3>
 </div>
 
-<div class="container profile_tab">
+<div class="col-md-12 profile_tab">
               <?php if(empty($wishlist_details)){ echo "<style>.profile_tab{height:100vh;} </style><center><h3>No Wishlist Added</h3></center>"; }else{ foreach($wishlist_details as $res){
                   $event_id = $res->id * 564738;
                   $event_name = strtolower(preg_replace("/[^\w]/", "-", $res->event_name));
