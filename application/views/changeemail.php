@@ -13,21 +13,19 @@ input[type=text] {
     border: none;
     border-bottom: 1px solid #000000;
 }
-.footer{
-  position: fixed;
-  bottom: 0px;
-  width: 100%;
+.error{
+  color:red;
 }
 
 </style>
 
-    <section class="" style="margin-bottom:60px;">
+    <section class="" style="margin-bottom:100px;margin-top:100px;">
       <div class="container">
         <div class="">
 <center>
 
 
-  <p style="margin-top:5%;font-size:24px;">If email has changed the verification link has sent to the new email you have entered.</p>
+  <p style="font-size:24px;">If email has changed the verification link has sent to the new email you have entered.</p>
         <div class="reset">
 
   <div class="">

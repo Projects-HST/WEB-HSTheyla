@@ -48,15 +48,23 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto topmenu">
-                  <li class="nav-item">
-                     <a class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become A Organiser</a>
-                 </li>
+                  <?php
+                  $user_role = $this->session->userdata('user_role');
+                  $user_id = $this->session->userdata('id');?>
+                   <?php if($user_role=='2'){
+
+                   }else{ ?>
+                     <li class="nav-item">
+                        <a class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become A Organiser</a>
+                    </li>
+                <?php   }?>
+
                     <?php
                     $user_role = $this->session->userdata('user_role');
                     $user_id = $this->session->userdata('id');
                        if(empty($user_role)){ ?>
                          <li class="nav-item">
-                              <a class="nav-link" href="<?php echo base_url(); ?>signin" >Login / Sign Up </a>
+                                <a class="nav-link" href="<?php echo base_url(); ?>signin" style="margin-top:10px;">Login / Sign Up </a>
                         </li>
 
 
@@ -103,7 +111,7 @@
 
                                     </ul>
                                   </li>
-                      
+
                           <?php  } ?>
 
                      <?php } ?>
@@ -115,22 +123,6 @@
         </div>
     </nav>
     <style>
-    .navbar-nav li:hover > ul.dropdown-menu {
-    display: block;
-}
-.dropdown-submenu {
-    position:relative;
-}
-.dropdown-submenu>.dropdown-menu {
-    top:0;
-    left:100%;
-    margin-top:-6px;
-}
 
-/* rotate caret on hover */
-.dropdown-menu > li > a:hover:after {
-    text-decoration: underline;
-    transform: rotate(-90deg);
-}
 
     </style>
