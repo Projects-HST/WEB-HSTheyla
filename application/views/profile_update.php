@@ -88,16 +88,12 @@
           <div class="form-group row">
               <label class="col-md-3 col-form-label form-control-label">Gender</label>
               <div class="col-md-6">
-                <label class="custom-control custom-radio">
-                  <input id="radio1" name="gender" type="radio" class="custom-control-input" value="Male" <?php echo ($rows->gender=='Male')?'checked':'' ?>>
-                  <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description">Male</span>
-                </label>
-                <label class="custom-control custom-radio">
-                  <input id="radio2" name="gender" type="radio" class="custom-control-input" value="Female" <?php echo ($rows->gender=='Female')?'checked':'' ?>>
-                  <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description">Female</span>
-                </label>
+                <select class="col-form-label" name="gender" id="gender">
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+                <script>$('#gender').val('<?php echo $rows->gender; ?>');</script>
+              
               </div>
 
             </div>

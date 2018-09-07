@@ -121,15 +121,23 @@ body{background-color: #fff;}
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto topmenu">
-                  <li class="nav-item">
-                     <a class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become A Organiser</a>
-                 </li>
+                  <?php
+                  $user_role = $this->session->userdata('user_role');
+                  $user_id = $this->session->userdata('id');?>
+                   <?php if($user_role=='2'){
+
+                   }else{ ?>
+                     <li class="nav-item">
+                        <a class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become A Organiser</a>
+                    </li>
+                <?php   }?>
+
                     <?php
-                   	$user_role = $this->session->userdata('user_role');
+                    $user_role = $this->session->userdata('user_role');
                     $user_id = $this->session->userdata('id');
                        if(empty($user_role)){ ?>
                          <li class="nav-item">
-                              <a class="nav-link" href="<?php echo base_url(); ?>signin" >Login / Sign Up </a>
+                              <a class="nav-link" href="<?php echo base_url(); ?>signin" style="margin-top:10px;">Login / Sign Up </a>
                         </li>
 
 
@@ -161,22 +169,22 @@ body{background-color: #fff;}
                                 <li class="nav-item">
                                   <p class="welcome_name">Hi <?php echo $rows->name; ?> !</p>
                                 </li>
-                                <li class="dropdown keep-open">
-                                  <div id="dLabel" role="button" href="#" class="nav-item" data-toggle="dropdown" data-target="#" >
-                                <?php if(empty($rows->user_picture)){ ?>
-                                       <img src="<?php echo base_url(); ?>assets/users/profile/noimage.png" class="img-circle profile_img_head img-thumbnail img-responsive">
-                                    <?php }else{ ?>
-                                      <img src="<?php echo base_url(); ?>assets/users/profile/<?php echo $rows->user_picture; ?>" class="img-circle profile_img_head img-thumbnail img-responsive">
-                                    <?php  }
-                                    ?>
-                                     <span class="caret"></span>
-                                  </div>
-                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                        <li><a class="nav-link" href="<?php echo base_url(); ?>profile">Profile</a></li>
-                                        <li><a class="nav-link logout-btn" onclick="logout()">Logout</a></li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <?php if(empty($rows->user_picture)){ ?>
+                                             <img src="<?php echo base_url(); ?>assets/users/profile/noimage.png" class="img-circle profile_img_head img-thumbnail img-responsive">
+                                          <?php }else{ ?>
+                                            <img src="<?php echo base_url(); ?>assets/users/profile/<?php echo $rows->user_picture; ?>" class="img-circle profile_img_head img-thumbnail img-responsive">
+                                          <?php  }
+                                          ?>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="margin-left:-60px;">
+                                      <li><a class="nav-link" href="<?php echo base_url(); ?>profile">Profile</a></li>
+                                      <li><a class="nav-link logout-btn" onclick="logout()">Logout</a></li>
 
                                     </ul>
-                                </li>
+                                  </li>
+
                           <?php  } ?>
 
                      <?php } ?>

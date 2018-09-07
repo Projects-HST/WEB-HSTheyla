@@ -17,6 +17,14 @@
 		background-color: #478ECC;
 		border-radius: 10px;
 }
+.modal {
+
+  position: absolute;
+  float: left;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 .event_detail_desc{
 	font-size: 16px;
 
@@ -229,7 +237,7 @@ foreach($event_details as $res){
 				}
 			?>
 			      <div class="event_booking_section">
-			        <p><?php if (empty($event_reviews)){?>Be the first one to Review ! Share Your experience<?php } ?><a href="" onclick="session_check()" class="review_btn pull-right" data-toggle="modal" data-target="#myModal">Write a review</a></p>
+			        <p><?php if (empty($event_reviews)){?>Be the first one to Review ! Share Your experience<?php } ?><a  onclick="session_check()" class="review_btn pull-right" data-toggle="modal" data-target="#myModal">Write a review</a></p>
 			      </div>
 
 		</div>

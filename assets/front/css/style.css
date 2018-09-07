@@ -1,6 +1,24 @@
 .imglogo{
   width: 125px;
 }
+.navbar-nav li:hover > ul.dropdown-menu {
+display: block;
+}
+.dropdown-submenu {
+position:relative;
+}
+.dropdown-submenu>.dropdown-menu {
+top:0;
+left:100%;
+margin-top:-6px;
+}
+
+/* rotate caret on hover */
+.dropdown-menu > li > a:hover:after {
+text-decoration: underline;
+transform: rotate(-90deg);
+}
+
 body{
   font-family: 'Roboto', sans-serif;
 }
@@ -620,6 +638,10 @@ padding-bottom: 15px;
   padding-right: 15px;
 }
 @media (min-width: 360px) and (max-width: 480px){
+.about_us{
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
 .or-text{
   padding-top: 10px;
 }
@@ -1117,4 +1139,7 @@ ul.dropdown-menu.show{
   font-size: 16px;
   font-weight: 600;
   margin-top:15px;
+}
+.navbar-toggler-icon{
+  background-color:#458ecc;
 }
