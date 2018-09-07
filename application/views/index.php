@@ -121,41 +121,60 @@ body{background-color: #fff;}
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto topmenu">
-                    <!-- <li class="nav-item ">
-                        <a class="nav-link" href="<?php echo base_url(); ?>home">Home<span class="sr-only"></span></a>
-                    </li> -->
-
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="<?php echo  base_url(); ?>eventlist/">List Events</a>
-                    </li> -->
-                     <!-- <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url(); ?>home#create">Become Organiser</a>
-                    </li> -->
-                    <li class="nav-item">
-                       <a class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become Organiser</a>
-                   </li>
-
-
                     <?php
                    	$user_role = $this->session->userdata('user_role');
+                    $user_id = $this->session->userdata('id');
                        if(empty($user_role)){ ?>
                          <li class="nav-item">
-                              <a class="nav-link" href="<?php echo base_url(); ?>signin" >Sign In </a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="<?php echo base_url(); ?>signup" >Sign Up</a>
-                          </li>
+                              <a class="nav-link" href="<?php echo base_url(); ?>signin" >Login / Sign Up </a>
+                        </li>
+
                     <?php
                        }else{ ?>
-                         <?php  if($user_role=='3' || $user_role=='2'){ ?>
-                           <li class="nav-item">
-                               <a class="nav-link" href="<?php echo base_url(); ?>profile">Profile</a>
-                           </li>
-                     <?php  } ?>
-                            <li class="nav-item">
-                                <a class="nav-link logout-btn" onclick="logout()">Logout</a>
-                            </li>
+
+                             <?php  if($user_role=='3'){ ?>
+                               <li class="nav-item">
+                                  <a class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become A Organiser</a>
+                              </li>
+
+                             <?php  }else{?>
+                               <li class="nav-item">
+                                   <a class="nav-link organiser_btn" href="<?php echo base_url(); ?>createevent">Create Event</a>
+                               </li>
+                            <?php } ?>
+                              <?php  if($user_role=='3' || $user_role=='2'){ ?>
+                                <?php
+                                $user_id = $this->session->userdata('id');
+                                $select="SELECT * FROM  user_details  WHERE user_id='$user_id'";
+                                 $res=$this->db->query($select);
+                                 $result=$res->result();
+                                 foreach($result as $rows){} ?>
+
+
+                                <li class="nav-item">
+                                  <p class="welcome_name">Hi <?php echo $rows->name; ?> !</p>
+                                </li>
+                                <li class="dropdown keep-open">
+                                  <div id="dLabel" role="button" href="#" class="nav-item" data-toggle="dropdown" data-target="#" >
+                                <?php if(empty($rows->user_picture)){ ?>
+                                       <img src="<?php echo base_url(); ?>assets/users/profile/noimage.png" class="img-circle profile_img_head img-thumbnail img-responsive">
+                                    <?php }else{ ?>
+                                      <img src="<?php echo base_url(); ?>assets/users/profile/<?php echo $rows->user_picture; ?>" class="img-circle profile_img_head img-thumbnail img-responsive">
+                                    <?php  }
+                                    ?>
+                                     <span class="caret"></span>
+                                  </div>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <li><a class="nav-link" href="<?php echo base_url(); ?>profile">Profile</a></li>
+                                        <li><a class="nav-link logout-btn" onclick="logout()">Logout</a></li>
+
+                                    </ul>
+                                </li>
+                          <?php  } ?>
+
                      <?php } ?>
+
+
                 </ul>
             </div>
         </div>
@@ -187,7 +206,7 @@ body{background-color: #fff;}
   <section class="features_section" style="" id="services">
       <div class="container">
           <div class="heading">
-          <p class="text-center" style="font-size:35px;color:#000;margin-bottom: 0px;">Features You Will Love it </p>
+          <p class="text-center" style="font-size:26px;color:#000;margin-bottom: 0px;">Features You Will Love it </p>
           <img src="<?php echo base_url(); ?>assets/front/images/line.png" class="img-center">
           </div>
 
@@ -201,59 +220,47 @@ body{background-color: #fff;}
               <div class="col-md-3">
                   <img src="<?php echo base_url(); ?>assets/front/images/iphone1.png" class="img-fluid">
               </div>
-              <div class="col-9 listfeauture">
+              <div class="col-md-1"></div>
+              <div class="col-md-8 listfeauture">
                   <div class="row">
-                      <div class="col-sm-6 col-md-6 featurebox">
-                          <div class="media mediaobj">
-                              <!-- <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/refer.png" alt="Generic placeholder image">
-                              <div class="media-body">
-                                  <h5 class="mt-0">Refer & Earn</h5> Refer, refer and refer - Redemption for paid events is always exciting </div> -->
-                                  <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/Popular.png" alt="Generic placeholder image">
-                                  <div class="media-body">
-                                      <h5 class="mt-0">Popular</h5>The trending events happening in your city . </div>
-                          </div>
+                    <div class="col-sm-6 col-md-10  featurebox">
+                        <div class="media mediaobj">
+                          <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/favourite.png" alt="Generic placeholder image">
+                          <div class="media-body">
+                              <h5 class="mt-0">Favourite</h5> Tailor fit events for you.<br></div>
+                        </div>
+                    </div>
 
-                      </div>
-                      <div class="col-sm-6 col-md-6  featurebox">
-                          <div class="media mediaobj">
-                            <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/favourite.png" alt="Generic placeholder image">
-                            <div class="media-body">
-                                <h5 class="mt-0">Favourite</h5> Tailor fit events for you.<br></div>
-
-                          </div>
-                      </div>
                   </div>
                   <div class="row">
-                      <div class="col-sm-6 col-md-6 featurebox">
-                          <div class="media mediaobj">
-                              <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/preminum.png" alt="Generic placeholder image">
-                              <div class="media-body">
-                                  <h5 class="mt-0">Hotspot</h5> You can't leave the city without checking in here  </div>
-                          </div>
-                      </div>
-                      <div class="col-sm-6 col-md-6 featurebox">
-                          <div class="media mediaobj">
-                              <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/Rewards.png" alt="Generic placeholder image">
-                              <div class="media-body">
-                                  <h5 class="mt-0">Leaderboard</h5> Let's add to the overall fun by competing with other Heyla App Users. </div>
-                          </div>
-                      </div>
+                    <div class="col-sm-6 col-md-10 featurebox">
+                        <div class="media mediaobj">
+                            <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/Popular.png" alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <h5 class="mt-0">Popular</h5>The trending events happening in your city . </div>
+                        </div>
+                    </div>
+
                   </div>
+
                   <div class="row">
-                      <div class="col-sm-6 col-md-6   featurebox">
-                          <div class="media mediaobj">
-                              <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/hotspot.png" alt="Generic placeholder image">
-                              <div class="media-body">
-                                  <h5 class="mt-0">Premium</h5> Become our Premium member and have access to the hidden treasures.</div>
-                          </div>
-                      </div>
-                      <div class="col-sm-6 col-md-6 featurebox">
-                          <div class="media mediaobj">
-                            <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/Rewards.png" alt="Generic placeholder image">
-                            <div class="media-body">
-                                <h5 class="mt-0">Rewards</h5>Book, Check-in, share and review to win rewards.</div>
-                          </div>
-                      </div>
+                    <div class="col-sm-6 col-md-10 featurebox">
+                        <div class="media mediaobj">
+                          <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/hotspot.png" alt="Generic placeholder image">
+                          <div class="media-body">
+                              <h5 class="mt-0">Hotspot</h5>You can't leave the city without checking in here.</div>
+                        </div>
+                    </div>
+
+                        </div>
+                          <div class="row">
+                        <div class="col-sm-6 col-md-10  featurebox">
+                            <div class="media mediaobj">
+                                <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/leaderboard.png" alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <h5 class="mt-0">Leaderboard</h5> Let's add to the overall fun by competing with other Heyla App Users.</div>
+                            </div>
+                        </div>
                   </div>
               </div>
           </div>
@@ -329,8 +336,18 @@ body{background-color: #fff;}
       <div class="row">
     <div class="col-md-5"><img src="<?php echo base_url(); ?>assets/front/images/become_organiser.jpg"></div>
       <div class="col-md-7">
-        <p class="become_organiser_text">When modals become too long for the user’s viewport or device, they scroll independent of the page itself. Try the demo below to see what we mean.</p>
-      <p class="text-center"><a class="btn  btn-primary" href="#" role="button">Request Now</a></p>
+      <p class="become_organiser_text"> <p class="heading" style="color:#000;font-size:22px;">Become A Event Organiser</p>
+        <p class="popup_txt">When modals become too long for the user’s viewport or device, they scroll independent of the page itself. Try the demo below to see what we mean.</p>
+      </p>
+      <?php $user_id = $this->session->userdata('id');
+       if ($user_id!='') { ?>
+      <form class="form" role="form" autocomplete="off" id="formsignup" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="user_id" id="user_id" value="<?php echo $user_id; ?>">
+        <center><button type="submit" id="submit" class="btn btn-primary btn-lg">Request Now</button></center>
+          </form>
+      <?php } else { ?>
+      <a class="btn btn-lg btn-primary" href="<?php echo base_url(); ?>/signin" role="button">Sign In</a>
+      <?php } ?>
     </div>
     </div>
     </div>
@@ -382,6 +399,35 @@ body{background-color: #fff;}
 <script src="<?php echo base_url(); ?>assets/front/js/jquery.reflection.js"></script>
 <script src="<?php echo base_url(); ?>assets/front/js/jquery.cloud9carousel.js"></script>
 <script type="text/javascript">
+
+$('#formsignup').validate({ // initialize the plugin
+        rules: {
+        },
+        messages: {
+        },
+        submitHandler: function(form) {
+
+            $.ajax({
+                url: "<?php echo base_url(); ?>home/become_organiser",
+                type: 'POST',
+                data: $('#formsignup').serialize(),
+                success: function(response) {
+                    if (response == "Thanks for requesting we contact you shortly") {
+                        swal({
+                            title: "Success",
+                            text: response,
+                            type: "success"
+                        }).then(function() {
+                            location.href = '<?php echo base_url(); ?>';
+                        });
+                    } else {
+                        sweetAlert("Oops...", response, "error");
+                    }
+                }
+            });
+        }
+    });
+    
 function logout(){
   swal({
       title: 'Are you sure?',

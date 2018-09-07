@@ -17,16 +17,19 @@
 		background-color: #478ECC;
 		border-radius: 10px;
 }
+.event_detail_desc{
+	font-size: 16px;
 
+}
 .event_detail_title{
 	color: #000;
-	font-size: 22px;
+	font-size: 20px;
 	font-weight: 500;
 
 }
 .event_detail_date{
 	font-size: 16px;
-
+	color: #8e9398 ;
 }
 .btn-primary{
 	padding: 10px 30px 10px 30px;
@@ -116,7 +119,7 @@ foreach($event_details as $res){
 			$event_latitude =  $res->event_latitude;
 			$event_longitude = $res->event_longitude;
 			$event_type = $res->event_type;
-			
+
 			if ($wlstatus!= '') {
 					$wlstatusstatus = "<span class='pull-right' id='wishlist".$disp_event_id."'><a href='javascript:void(0);' onclick='editwishlist(".$user_id.",".$disp_event_id.");'><img src='".base_url()."assets/front/images/fav-select.png' class='pull-right'></a></span>";
 			} else {
@@ -139,10 +142,11 @@ foreach($event_details as $res){
 					<?php echo date('d-M-Y',strtotime($res->start_date));?> - <?php echo date('d-M-Y',strtotime($res->end_date));?></span></p><?php } ?>
 					<?php if ($user_id!= '') { echo "<p>";echo $wlstatusstatus; echo "</p>";} ?>
 					<p class="event_detail_title  "><?php echo $res->event_name; ?></p>
-					
+
 
          <p><img src="<?php echo base_url(); ?>assets/front/images/time.png"><span class="event_thumb event_detail_date"><?php echo $res->start_time;?> - <?php echo $res->end_time;?></span></p>
          <p><img src="<?php echo base_url(); ?>assets/front/images/location.png"><span class="event_thumb event_detail_date event_deetail_venue"><?php echo $res->event_venue; ?></span></p>
+				 <p><a href="http://maps.google.com/maps?z=12&t=m&q=loc:<?php echo $event_latitude;?>+<?php echo $event_longitude;?>" target="_blank"> View Location</a> </p>
 		 <p>
 		 <?php if ($event_type == 'Paid'){ ?>
 			<img src='<?php echo base_url(); ?>assets/front/images/paid.png'>
@@ -150,7 +154,7 @@ foreach($event_details as $res){
 			<img src='<?php echo base_url(); ?>assets/front/images/free.png'>
 		<?php } ?>
 		</p>
-		<p><a href="http://maps.google.com/maps?z=12&t=m&q=loc:<?php echo $event_latitude;?>+<?php echo $event_longitude;?>" target="_blank"> View Location</a> </p>
+
       </div>
       <div class="event_booking_section">
       <?php if ($res->booking_status =='Y') { ?>
@@ -162,7 +166,7 @@ foreach($event_details as $res){
 
 
 
-      
+
       <div class="event_detail_thumb">
          <p class="event_heading">Share with your Friends</p>
          <p>
@@ -177,7 +181,7 @@ foreach($event_details as $res){
     </div>
 		<div class="col-md-12">
 			<p class="event_heading">Description</p>
-			<p ><?php echo nl2br($res->description); ?></p>
+			<p class="event_detail_desc"><?php echo nl2br($res->description); ?></p>
 			<?php if (!empty($event_gallery)){ ?>
 
 			      <div class="event_detail_thumb">
@@ -225,7 +229,7 @@ foreach($event_details as $res){
 				}
 			?>
 			      <div class="event_booking_section">
-			        <p><?php if (empty($event_reviews)){?> &nbsp; &nbsp; &nbsp; &nbsp;Be the first one to Review ! Share Your experience<?php } ?><a href="" onclick="session_check()" class="review_btn pull-right" data-toggle="modal" data-target="#myModal">Write a review</a></p>
+			        <p><?php if (empty($event_reviews)){?>Be the first one to Review ! Share Your experience<?php } ?><a href="" onclick="session_check()" class="review_btn pull-right" data-toggle="modal" data-target="#myModal">Write a review</a></p>
 			      </div>
 
 		</div>
@@ -257,7 +261,7 @@ foreach($event_details as $res){
       </div>
       <div class="form-group row">
         <div class="col-lg-12">
-        
+
           <textarea type="text" name="message" id="message" placeholder="Message" class="form-control"></textarea>
         </div>
       </div>
@@ -368,11 +372,11 @@ foreach($event_details as $res){
 		<div class="row booking_form">
 		<?php if (!empty($booking_dates)){ ?>
 				<div class="col-md-3">
-					
+
 					 <label class="form-label">Select Date</label>
 						<select class="form-control" id="show_date" onchange="disp_time()">
 						<option value="">Select Date</option>
-						<?php foreach($booking_dates as $res){ 
+						<?php foreach($booking_dates as $res){
 							$originalDate = $res->show_date;
 						?>
 						   <option value="<?php echo $res->show_date; ?>"><?php echo  date("d-m-Y", strtotime($originalDate)) ?></option>
@@ -391,15 +395,15 @@ foreach($event_details as $res){
   </div>
    </div>
  </div>
- 
- 
- 
+
+
+
 <script>
 
 	var time_result ="<label class='form-label'>Select Time</label><select class='form-control' id='show_time'><option value=''>Select Time</option>";
 	var plan_result ="<label class='form-label'>Select Plan</label><select class='form-control' id='show_plan'><option value=''>Select Plan</option>";
-	var seat_result ="<label class='form-label'>Select Seats</label><select class='form-control' id='show_seats'><option value=''>Select Seats</option>"; 
-	
+	var seat_result ="<label class='form-label'>Select Seats</label><select class='form-control' id='show_seats'><option value=''>Select Seats</option>";
+
 	function session_check()
 	{
 		  var user_id ='<?php echo $this->session->userdata('id');?>';
@@ -408,16 +412,16 @@ foreach($event_details as $res){
 			window.location.replace(redirect_url);
 		  }
 	}
-	
+
   	function disp_time()
 	{
 		$('#show_plan').prop('selectedIndex',0);
 		$('#show_seats').prop('selectedIndex',0);
-		
+
 		$('#plan_summary').hide()
 		var plan_date=$('#show_date').val();
 		var result = '';
-		
+
 		//make the ajax call
 		$.ajax({
 		url: '<?php echo base_url(); ?>eventlist/plantiming',
@@ -425,15 +429,15 @@ foreach($event_details as $res){
 		data: {event_id : <?php echo $disp_event_id; ?>,plan_date : plan_date},
 		success: function(data) {
 		var dataArray = JSON.parse(data);
-		
+
 		if (dataArray.length>0) {
 			result +="<label class='form-label'>Select Time</label><select class='form-control' id='show_time' onchange='disp_plan()'><option value=''>Select Time</option>";
-			
+
 
 			for (var i = 0; i < dataArray.length; i++){
 				var id = dataArray[i].id;
 				var show_time = dataArray[i].show_time;
-				
+
 				result +="<option value='"+show_time+"'>"+show_time+"</option>";
 			};
 				result +="</select>";
@@ -449,17 +453,17 @@ foreach($event_details as $res){
 
 		}
 		}
-		});  
+		});
 	}
 
 	 function disp_plan()
 	{
 		$('#plan_summary').hide()
 		$('#show_seats').prop('selectedIndex',0);
-		
+
 		var show_date=$('#show_date').val();
 		var show_time=$('#show_time').val();
-		
+
 		var result = '';
 		//make the ajax call
 		$.ajax({
@@ -468,9 +472,9 @@ foreach($event_details as $res){
 		data: {event_id : <?php echo $disp_event_id; ?>,show_date : show_date,show_time : show_time},
 		success: function(data) {
 		var dataArray = JSON.parse(data);
-		
+
 		if (dataArray.length>0) {
-			
+
 			result +="<label class='form-label'>Select Plan</label><select class='form-control' id='show_plan' onchange='disp_seats()'><option value=''>Select Plan</option>";
 
 			for (var i = 0; i < dataArray.length; i++){
@@ -482,7 +486,7 @@ foreach($event_details as $res){
 
 			$("#plan_details").html(result).show();
 			$("#show_seats").html(seat_result).show();
-			
+
 		} else {
 			$("#show_plan").html(plan_result).show();
 			$("#show_seats").html(seat_result).show();;
@@ -490,17 +494,17 @@ foreach($event_details as $res){
 
 		}
 		});
-	} 
-	
+	}
+
 	 function disp_seats()
 	{
 		$('#plan_summary').hide()
 		$('#show_seats').prop('selectedIndex',0);
-		
+
 		var show_date=$('#show_date').val();
 		var show_time=$('#show_time').val();
 		var show_plan = $('#show_plan').val();
-		
+
 		var result = '';
 		//make the ajax call
 		$.ajax({
@@ -526,7 +530,7 @@ foreach($event_details as $res){
 			result +="</select><input type='hidden' id='booking_date' name='booking_date' value='"+show_date+"' /><input type='hidden' id='event_id' name='event_id' value='"+event_id+"' /><input type='hidden' name='plan_id' id='plan_id' value='"+plan_id+"' /><input type='hidden' id='plan_name' value='"+plan_name+"' /><input type='hidden' name='plantime_id' id='plantime_id' value='"+plantime_id+"' /><input type='hidden' name='seat_rate' id='seat_rate' value='"+seat_rate+"' />";
 
 			$("#plan_seats").html(result).show();
-			
+
 		} else {
 			$('#plan_summary').hide()
 			$("#show_seats").html(seat_result).show();;
@@ -534,8 +538,8 @@ foreach($event_details as $res){
 
 		}
 		});
-	} 
-	
+	}
+
 	 function plan_summary()
 	{
 		var result = '';
@@ -549,16 +553,16 @@ foreach($event_details as $res){
 		var stotal = total + CGST + SGST + IHC;
 		var disp_total = stotal.toFixed(2);
 
-		
+
 		result +="<div class='col-md-6'><p class='event_select_text'>Plan Name</p></div><div class='col-md-6'><p class='event_select_text'>"+disp_plan_name+"</p></div><div class='col-md-6'><p class='event_select_text'>Ticket Price</p></div><div class='col-md-6'><p class='event_select_text'>₹ "+disp_plan_rate+"</p></div><div class='col-md-6'><p class='event_select_text'>No. of Seats</p></div><div class='col-md-6'><p class='event_select_text'>"+no_seats+"</p></div><div class='col-md-6 total_price'><p class='event_select_text'>Total Price</p></div><div class='col-md-6 total_price'><p class='event_select_text'>₹ "+disp_total+"</p></div><div class='col-md-12'><input type='submit' class='btn book_tickets confirm_btn' value='Continue' /></p><input type='hidden' name='no_seats' id='no_seats' value="+no_seats+" /><input type='hidden' name='total_amount' id='total_amount' value="+disp_total+" /><input type='hidden' name='user_id' id='user_id' value='<?php echo $user_id; ?>' /></div>";
-		
+
 		 //result +="<div class='col-md-6'><p class='event_select_text'>Plan Name</p></div><div class='col-md-6'><p class='event_select_text'>"+disp_plan_name+"</p></div><div class='col-md-6'><p class='event_select_text'>Ticket Price</p></div><div class='col-md-6'><p class='event_select_text'>"+disp_plan_rate+"</p></div><div class='col-md-6'><p class='event_select_text'>No. of Seats</p></div><div class='col-md-6'><p class='event_select_text'>"+no_seats+"</p></div><div class='col-md-6'><p class='event_select_text'>Internet handling fees</p></div><div class='col-md-6'><p class='event_select_text'>"+IHC.toFixed(2)+"</p></div><div class='col-md-6'><p class='event_select_text'>CGST</p></div><div class='col-md-6'><p class='event_select_text'>"+CGST.toFixed(2)+"</p></div><div class='col-md-6'><p class='event_select_text'>SGST</p></div><div class='col-md-6'><p class='event_select_text'>"+SGST.toFixed(2)+"</p></div><div class='col-md-6 total_price'><p class='event_select_text'>Total Price</p></div><div class='col-md-6 total_price'><p class='event_select_text'>"+disp_total+"</p></div><div class='col-md-12'><input type='submit' class='btn book_tickets confirm_btn' value='Continue' /></p><input type='hidden' name='no_seats' id='no_seats' value="+no_seats+" /><input type='hidden' name='total_amount' id='total_amount' value="+disp_total+" /><input type='hidden' name='user_id' id='user_id' value='<?php echo $user_id; ?>' /></div>";
 		 $("#plan_summary").html(result).show();
-	} 
+	}
 </script>
 <div>
-    
-    
+
+
 
 </div>
 
@@ -604,7 +608,7 @@ foreach($event_details as $res){
 	{
 		var user_id ='<?php echo $this->session->userdata('id');?>';
 		  if (user_id !=''){
-			
+
 			$.ajax({
 			url: '<?php echo base_url(); ?>eventlist/eventsharing',
 			type: 'POST',
@@ -655,7 +659,7 @@ foreach($event_details as $res){
           });
     });
 
-		
+
     $(document).ready(function() {
     	$('.galpop-multiple').galpop();
     	var callback = function() {

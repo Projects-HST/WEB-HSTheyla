@@ -54,19 +54,20 @@
                        if(empty($user_role)){ ?>
                          <li class="nav-item">
                               <a class="nav-link" href="<?php echo base_url(); ?>signin" >Login / Sign Up </a>
-                          </li>
+                        </li>
 
                     <?php
                        }else{ ?>
 
                              <?php  if($user_role=='3'){ ?>
                                <li class="nav-item">
-                                   <a class="nav-link organiser_btn" href="<?php echo base_url(); ?>createevent">Create Event</a>
-                               </li>
+                                  <a class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become A Organiser</a>
+                              </li>
+
                              <?php  }else{?>
                                <li class="nav-item">
-                                  <a class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become Organiser</a>
-                              </li>
+                                   <a class="nav-link organiser_btn" href="<?php echo base_url(); ?>createevent">Create Event</a>
+                               </li>
                             <?php } ?>
                               <?php  if($user_role=='3' || $user_role=='2'){ ?>
                                 <?php
@@ -83,9 +84,9 @@
                                 <li class="dropdown keep-open">
                                   <div id="dLabel" role="button" href="#" class="nav-item" data-toggle="dropdown" data-target="#" >
                                 <?php if(empty($rows->user_picture)){ ?>
-                                       <img src="<?php echo base_url(); ?>assets/users/profile/noimage.png" class="img-circle profile_img_head">
+                                       <img src="<?php echo base_url(); ?>assets/users/profile/noimage.png" class="img-circle profile_img_head img-thumbnail img-responsive">
                                     <?php }else{ ?>
-                                      <img src="<?php echo base_url(); ?>assets/users/profile/<?php echo $rows->user_picture; ?>" class="img-circle profile_img_head">
+                                      <img src="<?php echo base_url(); ?>assets/users/profile/<?php echo $rows->user_picture; ?>" class="img-circle profile_img_head img-thumbnail img-responsive">
                                     <?php  }
                                     ?>
                                      <span class="caret"></span>

@@ -8,7 +8,7 @@
             <div class="col-md-6 col-lg-6 col-xl-3">
                <a href="<?php echo base_url();?>events/view_events" class="test" data-toggle="tooltip" title="View Events Details">
                 <div class="mini-stat clearfix bg-primary">
-                    <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/event.png" /></span>
+                    <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/admin.png" /></span>
                     <div class="mini-stat-info text-right text-white">
                         <span class="counter"><?php foreach ($admin_users as $rows_admin) {
                           echo $rows_admin->users;
@@ -43,7 +43,7 @@
               <div class="col-md-6 col-lg-6 col-xl-3">
                  <a href="<?php echo base_url();?>events/view_events" class="test" data-toggle="tooltip" title="View Events Details">
                   <div class="mini-stat clearfix bg-primary">
-                      <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/event.png" /></span>
+                      <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/organiser.png" /></span>
                       <div class="mini-stat-info text-right text-white">
                           <span class="counter"><?php foreach ($org_users as $rows_org) {
                             echo $rows_org->users;
@@ -55,7 +55,7 @@
               <div class="col-md-6 col-lg-6 col-xl-3">
                  <a href="<?php echo base_url();?>events/view_events" class="test" data-toggle="tooltip" title="View Events Details">
                   <div class="mini-stat clearfix bg-primary">
-                      <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/event.png" /></span>
+                      <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/category.png" /></span>
                       <div class="mini-stat-info text-right text-white">
                           <span class="counter"><?php foreach ($total_category as $rows_cat) {
                             echo $rows_cat->count;
@@ -67,7 +67,7 @@
               <div class="col-md-6 col-lg-6 col-xl-3">
                  <a href="<?php echo base_url();?>events/view_events" class="test" data-toggle="tooltip" title="View Events Details">
                   <div class="mini-stat clearfix bg-primary">
-                      <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/event.png" /></span>
+                      <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/total_events.png" /></span>
                       <div class="mini-stat-info text-right text-white">
                           <span class="counter"><?php foreach ($events as $rows) {
                             echo $rows->events;
@@ -79,7 +79,7 @@
               <div class="col-md-6 col-lg-6 col-xl-3">
                  <a href="<?php echo base_url();?>events/view_events" class="test" data-toggle="tooltip" title="View Events Details">
                   <div class="mini-stat clearfix bg-primary">
-                      <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/event.png" /></span>
+                      <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/active_events.png" /></span>
                       <div class="mini-stat-info text-right text-white">
                           <span class="counter"><?php foreach ($events as $rows) {
                             echo $rows->events;
@@ -92,7 +92,7 @@
               <div class="col-md-6 col-lg-6 col-xl-3">
                  <a href="<?php echo base_url();?>events/view_events" class="test" data-toggle="tooltip" title="View Events Details">
                   <div class="mini-stat clearfix bg-primary">
-                      <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/event.png" /></span>
+                      <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/hotspot.png" /></span>
                       <div class="mini-stat-info text-right text-white">
                           <span class="counter"><?php foreach ($hotspot_events as $row_hotspot) {
                             echo $row_hotspot->count;
@@ -104,7 +104,7 @@
               <div class="col-md-6 col-lg-6 col-xl-3">
                  <a href="<?php echo base_url();?>events/view_events" class="test" data-toggle="tooltip" title="View Events Details">
                   <div class="mini-stat clearfix bg-primary">
-                      <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/event.png" /></span>
+                      <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/general.png" /></span>
                       <div class="mini-stat-info text-right text-white">
                           <span class="counter"><?php foreach ($general_events as $row_general) {
                             echo $row_general->count;
@@ -116,7 +116,7 @@
               <div class="col-md-6 col-lg-6 col-xl-3">
                  <a href="<?php echo base_url();?>events/view_events" class="test" data-toggle="tooltip" title="View Events Details">
                   <div class="mini-stat clearfix bg-primary">
-                      <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/event.png" /></span>
+                      <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/paid_event.png" /></span>
                       <div class="mini-stat-info text-right text-white">
                           <span class="counter"><?php foreach ($paid_events as $row_piad) {
                             echo $row_piad->count;
@@ -128,7 +128,7 @@
               <div class="col-md-6 col-lg-6 col-xl-3">
                  <a href="<?php echo base_url();?>events/view_events" class="test" data-toggle="tooltip" title="View Events Details">
                   <div class="mini-stat clearfix bg-primary">
-                      <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/event.png" /></span>
+                      <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/free_event.png" /></span>
                       <div class="mini-stat-info text-right text-white">
                           <span class="counter"><?php foreach ($free_events as $row_free) {
                             echo $row_free->count;
@@ -140,7 +140,7 @@
               <div class="col-md-6 col-lg-6 col-xl-3">
                  <a href="<?php echo base_url();?>events/view_events" class="test" data-toggle="tooltip" title="View Events Details">
                   <div class="mini-stat clearfix bg-primary">
-                      <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/event.png" /></span>
+                      <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/ad_event.png" /></span>
                       <div class="mini-stat-info text-right text-white">
                           <span class="counter"><?php foreach ($ad_events as $row_ad) {
                             echo $row_ad->count;
@@ -152,7 +152,7 @@
               <div class="col-md-6 col-lg-6 col-xl-3">
                   <div class="mini-stat clearfix bg-primary">
                      <a href="<?php echo base_url();?>events/organizer_events" class="test" data-toggle="tooltip" title="View Organizer Events Details">
-                      <span class="mini-stat-icon"><img style="padding-bottom:10px; padding-right:2px;" src="<?php echo base_url();?>assets/icons/dashboard/organiser.png" /></span>
+                      <span class="mini-stat-icon"><img style="padding-bottom:10px; padding-right:2px;" src="<?php echo base_url();?>assets/icons/dashboard/organiser_event.png" /></span>
                       <div class="mini-stat-info text-right text-white">
                           <span class="counter"><?php foreach ($org_events as $res) {
                             echo $res->org;
@@ -191,7 +191,7 @@
                  <a href="<?php echo base_url();?>dashboard/get_all_organiser_request" class="test" data-toggle="tooltip" title="View
                   Organiser Request">
                   <div class="mini-stat clearfix bg-primary">
-                      <span class="mini-stat-icon"><img style="padding-bottom:10px; padding-right:2px;" src="<?php echo base_url();?>assets/icons/dashboard/Pending.png" /></span>
+                      <span class="mini-stat-icon"><img style="padding-bottom:10px; padding-right:2px;" src="<?php echo base_url();?>assets/icons/dashboard/organiser_request.png" /></span>
                       <div class="mini-stat-info text-right text-white">
                           <span class="counter"><?php foreach ($organiser_request as $res) {
                             echo $res->request_pending;
@@ -206,7 +206,7 @@
             <div class="col-md-6 col-lg-6 col-xl-3">
                <a href="<?php echo base_url();?>bookinghistory/home" class="test" data-toggle="tooltip" title="View Booking Details">
                 <div class="mini-stat clearfix bg-primary">
-                    <span class="mini-stat-icon"><img style="padding-bottom:10px; padding-right:2px;" src="<?php echo base_url();?>assets/icons/dashboard/booking.png" /></span>
+                    <span class="mini-stat-icon"><img style="padding-bottom:10px; padding-right:2px;" src="<?php echo base_url();?>assets/icons/dashboard/subscribed_user.png" /></span>
                     <div class="mini-stat-info text-right text-white">
                         <span class="counter"><?php foreach ($newsletter_user as $row_news) {
                           echo $row_news->count;

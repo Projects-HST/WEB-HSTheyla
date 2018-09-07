@@ -102,9 +102,7 @@
 .left-inner-addon input{
   padding-left: 30px;
 }
-.navbar {
-  border-bottom: 1px solid #dad9d9;
-}
+
 </style>
 <script src="//connect.facebook.net/en_US/all.js"></script>
 <script type="text/javascript">
@@ -132,7 +130,7 @@ function checkLoginStatus(response) {
 //     console.log(response);
 //     alert(response.email);
 // });
-               
+
 	 FB.api('/me', {fields: 'name,email'}, function(response) {
         var fbname=response.name;
 		var fbemail=response.email;

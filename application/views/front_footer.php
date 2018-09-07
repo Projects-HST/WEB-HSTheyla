@@ -7,7 +7,7 @@
             <ul class="fnt-footer ">
               <li class=""><a href="">Events</a></li>
               <li class=""><a href="">Hotspot</a></li>
-              <li class=""><a href="">Ads Event</a></li>
+              <li class=""><a href="">Ad Event</a></li>
             </ul>
           </div>
           <div class="col">
@@ -56,8 +56,8 @@
   </div>
     <!-- /.container -->
     <div class="container">
-        <center><img class="text-center" src="<?php echo base_url(); ?>assets/front/images/heyla_white.png"></center>
-        <p class=" text-center foot_copyrights">Crafted with <a href="" style="text-decoration:none;"><b style="color:#fff;font-size:20px;">Happiness</b></a></p>
+
+        <p class=" text-center foot_copyrights">Crafted with <a href="" style="text-decoration:none;"><b style="color:#fff;font-size:20px;">Happy Sanz Tech</b></a></p>
     </div>
 </footer>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -66,11 +66,13 @@
       <div class="row">
     <div class="col-md-5"><img src="<?php echo base_url(); ?>assets/front/images/become_organiser.jpg"></div>
       <div class="col-md-7">
-        <p class="become_organiser_text">When modals become too long for the user’s viewport or device, they scroll independent of the page itself. Try the demo below to see what we mean.</p>
+
+        <p class="become_organiser_text"> <p class="heading" style="color:#000;font-size:22px;">Become A Event Organiser</p>
+        <p class="popup_txt">When modals become too long for the user’s viewport or device, they scroll independent of the page itself. Try the demo below to see what we mean.</p></p>
 		<?php if ($user_id!='') { ?>
 		<form class="form" role="form" autocomplete="off" id="formsignup" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="user_id" id="user_id" value="<?php echo $user_id; ?>">
-			<button type="submit" id="submit" class="btn btn-event btn-lg">Become an organiser</button>
+		  <center><button type="submit" id="submit" class="btn btn-primary btn-lg">Request Now</button></center>
         </form>
 		<?php } else { ?>
 		<a class="btn btn-lg btn-primary" href="<?php echo base_url(); ?>/signin" role="button">Sign In</a>
@@ -148,7 +150,7 @@ $('#formsignup').validate({ // initialize the plugin
         messages: {
         },
         submitHandler: function(form) {
-            alert("hi");
+
             $.ajax({
                 url: "<?php echo base_url(); ?>home/become_organiser",
                 type: 'POST',
