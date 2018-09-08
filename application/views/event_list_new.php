@@ -860,8 +860,8 @@ function getCategoryevents()
 				$("#event_list_cat").append(result);
 				$('#loader_image').hide();
 				offset = limit + offset;
-				//$("#loader_message").html('<a class="btn btn-sm btn-primary" onclick="getCategoryeventsresult('+limit+','+offset+')" role="button">More Events</a>').show();
-				$("#loader_message").html('<a onclick="getCategoryeventsresult('+limit+','+offset+')">More Events</a>').show();
+				$("#loader_message").html('<a class="btn btn-sm btn-primary" onclick="getCategoryeventsresult('+limit+','+offset+')" role="button">More Events</a>').show();
+				//$("#loader_message").html('<a onclick="getCategoryeventsresult('+limit+','+offset+')">More Events</a>').show();
 			} else {
 				$('#loader_image').hide();
 				$("#loader_message").html('No more Events').show()
@@ -876,7 +876,6 @@ function getCategoryeventsresult(limit,offset)
 	var country_id=cnyname.value;
 	var city_id_value=ctyname.value;
 	var category_id = $("#category").val();
-  alert(category_id);
 	cat_id = category_id.toString();
 	$('#event_type').prop('selectedIndex',0);
 
@@ -947,7 +946,7 @@ function getCategoryeventsresult(limit,offset)
 
         $("#event_list_cat").append(result);
         $('#loader_image').hide();
-        $("#loader_message").html('<a onclick="getCategoryeventsresult('+limit+','+offset+')">More Events</a>').show();
+        $("#loader_message").html('<a class="btn btn-sm btn-primary" onclick="getCategoryeventsresult('+limit+','+offset+')" role="button">More Events</a>').show();
       } else {
         $('#loader_image').hide();
         $("#loader_message").html('No more Events').show()
