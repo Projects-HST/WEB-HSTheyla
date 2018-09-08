@@ -41,7 +41,7 @@
 
 
               <div class="col-md-6 col-lg-6 col-xl-3">
-                 <a href="<?php echo base_url();?>events/view_events" class="test" data-toggle="tooltip" title="View Events Details">
+                 <a href="#" class="test" data-toggle="tooltip" title="View Events Details">
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/organiser.png" /></span>
                       <div class="mini-stat-info text-right text-white">
@@ -53,7 +53,7 @@
                   </div></a>
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
-                 <a href="<?php echo base_url();?>events/view_events" class="test" data-toggle="tooltip" title="View Events Details">
+                 <a href="#" class="test" data-toggle="tooltip" title="View Events Details">
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/category.png" /></span>
                       <div class="mini-stat-info text-right text-white">
@@ -65,7 +65,7 @@
                   </div></a>
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
-                 <a href="<?php echo base_url();?>events/view_events" class="test" data-toggle="tooltip" title="View Events Details">
+                 <a href="#" class="test" data-toggle="tooltip" title="View Events Details">
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/total_events.png" /></span>
                       <div class="mini-stat-info text-right text-white">
@@ -77,7 +77,7 @@
                   </div></a>
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
-                 <a href="<?php echo base_url();?>events/view_events" class="test" data-toggle="tooltip" title="View Events Details">
+                 <a href="#" class="test" data-toggle="tooltip" title="View Events Details">
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/active_events.png" /></span>
                       <div class="mini-stat-info text-right text-white">
@@ -90,7 +90,7 @@
               </div>
 
               <div class="col-md-6 col-lg-6 col-xl-3">
-                 <a href="<?php echo base_url();?>events/view_events" class="test" data-toggle="tooltip" title="View Events Details">
+                 <a href="#" class="test" data-toggle="tooltip" title="View Events Details">
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/hotspot.png" /></span>
                       <div class="mini-stat-info text-right text-white">
@@ -102,7 +102,7 @@
                   </div></a>
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
-                 <a href="<?php echo base_url();?>events/view_events" class="test" data-toggle="tooltip" title="View Events Details">
+                 <a href="#" class="test" data-toggle="tooltip" title="View Events Details">
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/general.png" /></span>
                       <div class="mini-stat-info text-right text-white">
@@ -114,7 +114,7 @@
                   </div></a>
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
-                 <a href="<?php echo base_url();?>events/view_events" class="test" data-toggle="tooltip" title="View Events Details">
+                 <a href="#" class="test" data-toggle="tooltip" title="View Events Details">
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/paid_event.png" /></span>
                       <div class="mini-stat-info text-right text-white">
@@ -126,7 +126,7 @@
                   </div></a>
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
-                 <a href="<?php echo base_url();?>events/view_events" class="test" data-toggle="tooltip" title="View Events Details">
+                 <a href="#" class="test" data-toggle="tooltip" title="View Events Details">
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/free_event.png" /></span>
                       <div class="mini-stat-info text-right text-white">
@@ -138,7 +138,7 @@
                   </div></a>
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
-                 <a href="<?php echo base_url();?>events/view_events" class="test" data-toggle="tooltip" title="View Events Details">
+                 <a href="#" class="test" data-toggle="tooltip" title="View Events Details">
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/ad_event.png" /></span>
                       <div class="mini-stat-info text-right text-white">
@@ -162,7 +162,7 @@
                   </div>
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
-                 <a href="<?php echo base_url();?>bookinghistory/home" class="test" data-toggle="tooltip" title="View Booking Details">
+                 <a href="#" class="test" data-toggle="tooltip" title="View Booking Details">
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom:10px; padding-right:2px;" src="<?php echo base_url();?>assets/icons/dashboard/booking.png" /></span>
                       <div class="mini-stat-info text-right text-white">
@@ -174,7 +174,7 @@
                   </div></a>
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
-                 <a href="<?php echo base_url();?>reviews/view_reviews" class="test" data-toggle="tooltip" title="View
+                 <a href="#" class="test" data-toggle="tooltip" title="View
                   Pending Reviews Details">
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom:10px; padding-right:2px;" src="<?php echo base_url();?>assets/icons/dashboard/Pending.png" /></span>
@@ -188,7 +188,7 @@
               </div>
               <?php   $user_role=$this->session->userdata('user_role');if($user_role==1){ ?>
               <div class="col-md-6 col-lg-6 col-xl-3">
-                 <a href="<?php echo base_url();?>dashboard/get_all_organiser_request" class="test" data-toggle="tooltip" title="View
+                 <a href="#" class="test" data-toggle="tooltip" title="View
                   Organiser Request">
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom:10px; padding-right:2px;" src="<?php echo base_url();?>assets/icons/dashboard/organiser_request.png" /></span>
@@ -204,7 +204,7 @@
 
             } ?>
             <div class="col-md-6 col-lg-6 col-xl-3">
-               <a href="<?php echo base_url();?>bookinghistory/home" class="test" data-toggle="tooltip" title="View Booking Details">
+               <a href="#" class="test" data-toggle="tooltip" title="View Booking Details">
                 <div class="mini-stat clearfix bg-primary">
                     <span class="mini-stat-icon"><img style="padding-bottom:10px; padding-right:2px;" src="<?php echo base_url();?>assets/icons/dashboard/subscribed_user.png" /></span>
                     <div class="mini-stat-info text-right text-white">

@@ -47,8 +47,8 @@
             </ul>
             <p class="footer_heading">Download Apps</p>
             <ul class="fnt-footer social_follow">
-              <li class=""><a href="" target="_blank"><img class="store_img" src="<?php echo base_url(); ?>assets/front/images/app.png"></a></li>
-              <li class=""><a href="" target="_blank"><img class="store_img"  src="<?php echo base_url(); ?>assets/front/images/play.png"></a></li>
+              <li class=""><a href="https://itunes.apple.com/us/app/heyla/id1328232644?ls=1&mt=8" target="_blank"><img class="store_img" src="<?php echo base_url(); ?>assets/front/images/app.png"></a></li>
+              <li class=""><a href="https://play.google.com/store/apps/details?id=com.palprotech.heylaapp" target="_blank"><img class="store_img"  src="<?php echo base_url(); ?>assets/front/images/play.png"></a></li>
 
             </ul>
           </div>

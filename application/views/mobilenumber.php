@@ -99,7 +99,7 @@ input[type=text] {
                    if (response == "success") {
                      swal({
                 title: "Success",
-                text: " Mobile Number Has been Added Successfully",
+                text: " Mobile Number Has been Updated Successfully",
                 type: "success"
             }).then(function() {
                 location.href = '<?php echo base_url(); ?>profile';
