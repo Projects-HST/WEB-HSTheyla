@@ -249,9 +249,9 @@ $(window).on('load', function(){
 		var result = '';
 
         // start to load the first set of data
-  //      var country_values='<?php  echo $country_values ?>';
-  //      var city_values='<?php  echo $city_values ?>';
-  //      if(country_values=='' && city_values==''){
+        var country_values='<?php  echo $country_values ?>';
+        var city_values='<?php  echo $city_values ?>';
+        if(country_values=='' && city_values==''){
             getAllevents(limit, offset);
             $('#loader_message').click(function() {
               // if it has no more records no need to fire ajax request
@@ -261,9 +261,9 @@ $(window).on('load', function(){
                 getAllevents(limit, offset);
               }
             });
-     //   }else{
-      //    $('#loader_image').hide();
-      //  }
+        }else{
+          $('#loader_image').hide();
+        }
 
 });
 
