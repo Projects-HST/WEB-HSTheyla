@@ -32,41 +32,49 @@ class Eventlist extends CI_Controller
     {
         $limit  = $this->input->post('limit');
 		$offset  = $this->input->post('offset');
-        $data['event_result'] = $this->eventlistmodel->getall_events($limit, $offset);
+        $data['event_result'] = $this->eventlistmodel->getall_events($limit,$offset);
         echo json_encode($data['event_result']);
     }
 
 	public function get_country_events()
     {
+		$limit  = $this->input->post('limit');
+		$offset  = $this->input->post('offset');
       	$country_id  = $this->input->post('country_id');
-        $data['event_result'] = $this->eventlistmodel->get_country_events($country_id);
+        $data['event_result'] = $this->eventlistmodel->get_country_events($country_id,$limit,$offset);
         echo json_encode($data['event_result']);
     }
 	public function get_city_events()
     {
+		$limit  = $this->input->post('limit');
+		$offset  = $this->input->post('offset');
       	$country_id  = $this->input->post('country_id');
 		$city_id  = $this->input->post('city_id');
         $category_id  = $this->input->post('cat_id');
-        $data['event_result'] = $this->eventlistmodel->get_city_events($country_id,$city_id,$category_id);
+        $data['event_result'] = $this->eventlistmodel->get_city_events($country_id,$city_id,$category_id,$limit,$offset);
         echo json_encode($data['event_result']);
     }
 
-	public function get_search_events()
+	public function get_category_events()
     {
+		$limit  = $this->input->post('limit');
+		$offset  = $this->input->post('offset');
       	$country_id  = $this->input->post('country_id');
 		$city_id  = $this->input->post('city_id');
 		$category_id  = $this->input->post('cat_id');
-        $data['event_result'] = $this->eventlistmodel->getsearch_events($country_id,$city_id,$category_id);
+        $data['event_result'] = $this->eventlistmodel->getcategory_events($country_id,$city_id,$category_id,$limit,$offset);
         echo json_encode($data['event_result']);
     }
 
 	public function get_type_events()
     {
+		$limit  = $this->input->post('limit');
+		$offset  = $this->input->post('offset');
       	$country_id  = $this->input->post('country_id');
 		$city_id  = $this->input->post('city_id');
 		$category_id  = $this->input->post('cat_id');
 		$type_id = $this->input->post('type_id');
-        $data['event_result'] = $this->eventlistmodel->gettype_events($country_id,$city_id,$category_id,$type_id);
+        $data['event_result'] = $this->eventlistmodel->gettype_events($country_id,$city_id,$category_id,$type_id,$limit,$offset);
         echo json_encode($data['event_result']);
     }
 
