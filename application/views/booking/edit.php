@@ -37,7 +37,7 @@
          </ul>
          <div class="clearfix"></div>
       </nav>
-	  
+
       </div>
       <!- Top Bar End -->
       <div class="page-content-wrapper">
@@ -56,7 +56,7 @@
                            <input class="form-control"  type="hidden" name="event_id" value="<?php echo $res->event_id ;?>">
                            <input class="form-control"  type="hidden" name="plan_id" value="<?php echo $res->id ;?>">
                               </div>
-                           </div> 
+                           </div>
 
                             <!--div class="form-group row">
                               <label for="example-text-input" class="col-sm-4 col-form-label">Available Seats </label>
@@ -81,7 +81,7 @@
                   </div>
                </div>
             </div>
-       
+
          </div>
 		   <!-- container -->
       </div>
@@ -94,21 +94,21 @@
 
  $('#vieweve').addClass("active");
   $('#events').addClass("has_sub active nav-active");
-  
+
     $(document).ready(function () {
     $('#planform').validate({ // initialize the plugin
        rules: {
          planname:{required:true },
          seats:{required:true },
-         amount:{required:true },         
+         amount:{required:true,number:true }   
         },
 
         messages: {
         planname:"Enter Plan Name",
         seats:"Enter  Seats",
-        amount:"Enter Amount"
+       amount:{required:"Enter Amount",number:"Enter the number"}
                },
-         }); 
+         });
    });
-  
+
 </script>

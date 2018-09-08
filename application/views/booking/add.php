@@ -1,44 +1,4 @@
-<!-- Start content ->
-<div class="content-page">
-   <div class="content">
-      <!- Top Bar Start ->
-      <div class="topbar">
-         <nav class="navbar-custom">
-            <ul class="list-inline float-right mb-0">
-               <!-li class="list-inline-item dropdown notification-list">
-                  <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
-                     aria-haspopup="false" aria-expanded="false">
-                  <i class="ion-ios7-bell noti-icon"></i>
-                  <span class="badge badge-success noti-icon-badge">3</span>
-                  </a>
-               </li!->
-               <li class="list-inline-item dropdown notification-list">
-                  <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
-                     aria-haspopup="false" aria-expanded="false">
-                  <img src="<?php echo base_url(); ?>assets/images/admin/admin.png" alt="user" class="rounded-circle">
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                     <!-a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
-                     <a class="dropdown-item" href="#"><span class="badge badge-success pull-right">5</span><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
-                     <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a!->
-                     <a class="dropdown-item" href="<?php echo base_url(); ?>adminlogin/logout"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
-                  </div>
-               </li>
-            </ul>
-            <ul class="list-inline menu-left mb-0">
-               <li class="list-inline-item">
-                  <button type="button" class="button-menu-mobile open-left waves-effect">
-                  <i class="ion-navicon"></i>
-                  </button>
-               </li>
-               <li class="hide-phone list-inline-item app-search">
-                  <h3 class="page-title">Event Plans</h3>
-               </li>
-            </ul>
-            <div class="clearfix"></div>
-         </nav>
-      </div>
-      <!- Top Bar End -->
+
       <div class="page-content-wrapper">
          <div class="container">
             <div class="row">
@@ -146,13 +106,14 @@
       rules: {
         planname:{required:true },
         seats:{required:true },
-        amount:{required:true }
+        amount:{required:true,number:true }
        },
 
        messages: {
        planname:"Enter Plan Name",
        seats:"Enter  Seats",
-       amount:"Enter Amount"
+       amount:{required:"Enter Amount",number:"Enter the number"}
+
               },
         });
    });

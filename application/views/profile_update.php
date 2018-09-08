@@ -128,16 +128,12 @@
       <div class="form-group row">
           <label class="col-md-3 col-form-label form-control-label">Subscribe  Newsletter</label>
           <div class="col-md-6">
-              <label class="custom-control custom-radio">
-                <input id="radio1" name="newsletter_status" type="radio" class="custom-control-input" value="Y" <?php echo ($rows->newsletter_status=='Y')?'checked':'' ?>>
-                <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">Yes</span>
-              </label>
-              <label class="custom-control custom-radio">
-                <input id="radio2" name="newsletter_status" type="radio" class="custom-control-input" value="N" <?php echo ($rows->newsletter_status=='N')?'checked':'' ?>>
-                <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">No</span>
-              </label>
+            <select class="col-form-label" name="newsletter_status" id="newsletter_status">
+              <option value="Y">Yes</option>
+              <option value="N">No</option>
+            </select>
+            <script>$('#newsletter_status').val('<?php echo $rows->newsletter_status; ?>');</script>
+
           </div>
         </div>
       <div class="form-group row">

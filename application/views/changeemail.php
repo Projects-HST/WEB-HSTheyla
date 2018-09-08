@@ -76,7 +76,7 @@ $.validator.addMethod("user_email_not_same", function(value, element) {
        },
        messages: {
 
-            email: {   required: "Enter New Mail",user_email_not_same:" ",remote:"Email already exist"
+            email: {   required: "Enter new  email",user_email_not_same:" ",remote:"Email already exist"
 
           }
 

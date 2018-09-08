@@ -18,7 +18,9 @@ top:0;
 left:100%;
 margin-top:-6px;
 }
-
+.error{
+  color: red;
+}
 /* rotate caret on hover */
 .dropdown-menu > li > a:hover:after {
 text-decoration: underline;

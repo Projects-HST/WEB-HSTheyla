@@ -37,10 +37,10 @@ th{
                 $i=1;
 
                 foreach($user_points['user_points'] as $rows) {
-                  if(empty($rows['user_name'])){
-                     $name=$rows['name'];
-                  }else{
+                  if(empty($rows['name'])){
                      $name=$rows['user_name'];
+                  }else{
+                     $name=$rows['name'];
                   }
                 ?>
               <tr>

@@ -13,16 +13,19 @@ input[type=text] {
     border: none;
     border-bottom: 1px solid #000000;
 }
+.error{
+  color:red;
+}
 
 </style>
 
-    <section class="" style="margin-bottom:100px;">
+    <section class="" style="margin-top:100px;margin-bottom:100px;">
       <div class="container">
         <div class="">
 <center>
 
 
-  <p style="margin-top:5%;font-size:22px;">Change the Mobile Number</p>
+  <p style="font-size:22px;">Change the Mobile Number</p>
         <div class="reset">
 
   <div class="">

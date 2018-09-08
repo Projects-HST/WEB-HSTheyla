@@ -1,3 +1,8 @@
+<style>
+td{
+  width: 100px;
+}
+</style>
     <div class="page-content-wrapper ">
         <div class="container">
 
@@ -15,18 +20,17 @@
                             <thead>
                             <tr>
                                 <th>Event Name</th>
-                                <th>Event Comments</th>
-
-
+                                <th>Event rating</th>
+                                <th >Event Comments</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                         <tbody>
                       <?php if(!empty($views)) { foreach ($views as $value) {  ?>
                         <tr>
-                            <td><?php echo $value->event_name;?> ( <?php echo $value->event_rating; ?> )</td>
+                          <td><?php echo $value->event_name;?> </td>
+                          <td><?php echo $value->event_rating; ?></td>
                             <td><?php echo $value->comments;?></td>
-
                            <td><a href="<?php echo base_url(); ?>reviews/display/<?php echo $value->id; ?>/Y/<?php echo $value->event_id; ?>/<?php echo $value->user_id; ?>" class="btn btn-primary waves-effect waves-light">
                                Display </a>  </td>
                         </tr>
