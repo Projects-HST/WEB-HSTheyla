@@ -98,9 +98,10 @@ class Eventlist extends CI_Controller
   		$event_id = ($dec_event_id/564738);
     	$data['event_gallery'] = $this->eventlistmodel->getevent_gallery($event_id);
   		$data['event_details'] = $this->eventlistmodel->getevent_details($event_id);
+		$data['event_reviews_users'] = $this->eventlistmodel->getevent_reviews_user($event_id);
   		$data['event_reviews'] = $this->eventlistmodel->getevent_reviews($event_id);
 		$data['booking_dates'] = $this->eventlistmodel->booking_plandates($event_id);
-		//print_r($data['booking_dates']);
+		//print_r($data['event_reviews_users']);
     	$event_desc = $data['event_details'];
 
 		foreach($event_desc as $row_des){}
@@ -246,6 +247,20 @@ class Eventlist extends CI_Controller
 		}
        	echo json_encode($data['reviews']);
 		*/
+    }
+	
+	public function updatereview()
+    {
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
+		
+		$event_id  = $this->input->post('event_id');
+		$review_id  = $this->input->post('review_id');
+		$rating  = $this->input->post('rating');
+		$message  = $this->input->post('message');
+		
+		$data['reviews'] = $this->eventlistmodel->update_review($event_id,$review_id,$user_id,$rating,$message);
+		echo "OK";
     }
 
 

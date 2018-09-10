@@ -230,99 +230,13 @@ foreach($event_details as $res){
 				}
 			?>
 			      <div class="event_booking_section">
-			        <p><?php if (empty($event_reviews)){?>Be the first one to Review ! Share Your experience<?php } ?><a  onclick="session_check()" class="review_btn pull-right" data-toggle="modal" data-target="#myModal">Write a review</a></p>
+			        <p><?php if (empty($event_reviews)){?>Be the first one to Review ! Share Your experience<?php } ?><a  onclick="session_check()" class="review_btn pull-right" data-toggle="modal" data-target="#reviewModal">Write a review</a></p>
 			      </div>
 
 		</div>
   </div>
 </div>
 
-
-
-<!--
-<div class="modal fade" id="ordermodel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog order_dialog" role="document">
-    <div class="modal-content booking_section">
-				<center><img src="<?php echo base_url(); ?>assets/front/images/heyla_logo.png" style="width:150px;"></center>
-					<center><h2>Order Summary</h2></center>
-				<div class="row ">
-
-				<div class="col-md-12 summary_card">
-				  <div class="row">
-				    <div class="col-md-5"><p class="summary_label summary_text">Order id</p></div>
-				    <div class="col-md-1 text-center"><p class="summary_text">:</p></div>
-				    <div class="col-md-6"><p class="summary_text">Order id</p></div>
-				  </div>
-				  <div class="row">
-				    <div class="col-md-5"><p class="summary_label summary_text">Event Name</p></div>
-				    <div class="col-md-1 text-center"><p class="summary_text">:</p></div>
-				    <div class="col-md-6"><p class="summary_text">Event Name</p></div>
-				  </div>
-				  <div class="row">
-				    <div class="col-md-5"><p class="summary_label summary_text">Category Name</p></div>
-				    <div class="col-md-1 text-center"><p class="summary_text">:</p></div>
-				    <div class="col-md-6"><p class="summary_text">Category</p></div>
-				  </div>
-				  <div class="row">
-				    <div class="col-md-5"><p class="summary_label summary_text">Event Venue</p></div>
-				    <div class="col-md-1 text-center"><p class="summary_text">:</p></div>
-				    <div class="col-md-6"><p class="summary_text">Event</p></div>
-				  </div>
-				  <div class="row">
-				    <div class="col-md-5"><p class="summary_label summary_text">Event Address</p></div>
-				    <div class="col-md-1 text-center"><p class="summary_text">:</p></div>
-				    <div class="col-md-6"><p class="summary_text">Address</p></div>
-				  </div>
-				  <div class="row">
-				    <div class="col-md-5"><p class="summary_label summary_text">Event Show date</p></div>
-				    <div class="col-md-1 text-center"><p class="summary_text">:</p></div>
-				    <div class="col-md-6"><p class="summary_text">Show date</p></div>
-				  </div>
-				  <div class="row">
-				    <div class="col-md-5"><p class="summary_label summary_text">Event Show time</p></div>
-				    <div class="col-md-1 text-center"><p class="summary_text">:</p></div>
-				    <div class="col-md-6"><p class="summary_text">Event Show time</p></div>
-				  </div>
-				  <div class="row">
-				    <div class="col-md-5"><p class="summary_label summary_text">Booking Plan</p></div>
-				    <div class="col-md-1 text-center"><p class="summary_text">:</p></div>
-				    <div class="col-md-6"><p class="summary_text">Booking</p></div>
-				  </div>
-				  <div class="row">
-				    <div class="col-md-5"><p class="summary_label summary_text">Booking Seats</p></div>
-				    <div class="col-md-1 text-center"><p class="summary_text">:</p></div>
-				    <div class="col-md-6"><p class="summary_text">Booking</p></div>
-				  </div>
-				  <div class="row">
-				    <div class="col-md-5"><p class="summary_label summary_text">Booking Amount</p></div>
-				    <div class="col-md-1 text-center"><p class="summary_text">:</p></div>
-				    <div class="col-md-6"><p class="summary_text">Booking</p></div>
-				  </div>
-				  <div class="row">
-				    <div class="col-md-12 text-center" style="margin-top:20px;">
-				     <form method="post" name="customerData"  class="confirm_process" action="http://hobbistan.com/web/ccavenue/ccavRequestHandler.php">
-				                    <input type="hidden" name="merchant_id" value="89958"/>
-				                    <input type="hidden" name="order_id" value="order_id"/>
-				                    <input type="hidden" name="amount" value="total_amount"/>
-				                    <input type="hidden" name="currency" value="INR"/>
-				                    <input type="hidden" name="redirect_url" value="http://hobbistan.com/web/ccavenue/ccavResponseHandler.php"/>
-				                    <input type="hidden" name="cancel_url" value="https://heylaapp.com/eventlist/"/>
-				                    <input type="hidden" name="language" value="EN"/>
-				                    <INPUT type="submit" value="CheckOut" class="btn btn-primary">
-					</form>
-				    </div>
-
-				  </div>
-
-
-				</div>
-
-    </div>
-
-    </div>
-  </div>
-</div>
--->
 <div class="modal fade" id="bookingmodel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog booking_dialog" role="document">
     <div class="modal-content booking_section">
@@ -355,7 +269,7 @@ foreach($event_details as $res){
   </div>
    </div>
  </div>
- <div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+ <div class="modal fade " id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="false">
  <div class="modal-dialog">
  <div class="modal-content">
  <div class="modal-header">
@@ -364,7 +278,52 @@ foreach($event_details as $res){
  </div>
  <div class="modal-body" id="modal-body">
    <center>
-         <form name="frmReview" id="" action="#" method="post" enctype="multipart/form-data" class="form" autocomplete="off">
+        
+	<?php if (count($event_reviews_users)>0){
+		foreach($event_reviews_users as $reviewres){
+			$review_id = $reviewres->id;
+			$event_rating = $reviewres->event_rating;
+			$comments = $reviewres->comments;
+		}?>
+		
+	<form name="frmReview" id="" action="#" method="post" enctype="multipart/form-data" class="form" autocomplete="off">
+       <div class="form-group row">
+       <div class="col-lg-12">
+           <div class="rating">
+             <span class="user-rating">
+			 
+			 <?php
+				for ($i=1; $i <6; $i++)
+				//$y = 5;
+				{
+					if ($i <= $event_rating){
+						echo '<input type="radio" name="rating" id="rating_'.$i.'" value="'.$i.'" checked><span class="star"></span>';
+					} else {
+						echo '<input type="radio" name="rating" id="rating_'.$i.'" value="'.$i.'"><span class="star"></span>';
+					}
+				}
+			?>
+             </span>
+           </div>
+         </div>
+       </div>
+       <div class="form-group row">
+         <div class="col-lg-12">
+           <textarea type="text" name="message" id="message" placeholder="Message" class="form-control"><?php echo $comments; ?></textarea>
+         </div>
+       </div>
+       <div class="form-group row">
+         <div class="col-lg-12">
+ 			<input type="hidden" name="event_id" id="event_id" value="<?php echo $disp_event_id; ?>" />
+			<input type="hidden" name="event_id" id="review_id" value="<?php echo $review_id; ?>" />
+ 			<input type="button" id="review_update" value="Update Review" placeholder="Message" class="btn btn-primary btn-login">
+         </div>
+       </div>
+    </form>
+	
+	<?php } else { ?>
+		
+	<form name="frmReview" id="" action="#" method="post" enctype="multipart/form-data" class="form" autocomplete="off">
        <div class="form-group row">
        <div class="col-lg-12">
            <div class="rating">
@@ -380,17 +339,20 @@ foreach($event_details as $res){
        </div>
        <div class="form-group row">
          <div class="col-lg-12">
-
            <textarea type="text" name="message" id="message" placeholder="Message" class="form-control"></textarea>
          </div>
        </div>
        <div class="form-group row">
          <div class="col-lg-12">
  			<input type="hidden" name="event_id" id="event_id" value="<?php echo $disp_event_id; ?>" />
- 			<input type="button" id="upload" value="Submit Review" placeholder="Message" class="btn btn-primary btn-login">
+ 			<input type="button" id="review_add" value="Submit Review" placeholder="Message" class="btn btn-primary btn-login">
          </div>
        </div>
-     </form>
+    </form>
+		
+	<?php } ?>
+		
+ 
    </center>
  </div>
 
@@ -621,12 +583,54 @@ foreach($event_details as $res){
 		  }
 	}
 
-	$('#upload').on('click', function() {
+	
+	
+	$('#review_update').on('click', function() {
 		var result = '';
 		var form_data = new FormData();
 		var rating=$('input[name=rating]:checked').val();
 		var message=$('#message').val();
+		var review_id=$('#review_id').val();
 		var event_id=$('#event_id').val();
+
+		if (message == '') {
+			alert("Enter Message");
+			return false;
+		}
+
+		form_data.append('rating', rating);
+		form_data.append('message', message);
+		form_data.append('event_id', event_id);
+		form_data.append('review_id', review_id);
+		//alert(form_data);
+         $.ajax({
+			 url         : '<?php echo base_url(); ?>eventlist/updatereview',     // point to server-side PHP script
+			 dataType    : 'text',           // what to expect back from the PHP script, if anything
+			 cache       : false,
+			 contentType : false,
+			 processData : false,
+			 data        : form_data,
+			 type        : 'post',
+			 success     : function(result){
+				 if (result=='OK'){
+					  swal({
+						title: "success",
+						text: " Review Updated.",
+						type: "success"
+						}).then(function() {
+						location.reload();
+						});
+				 }
+			}
+          });
+    });
+	
+	
+	$('#review_add').on('click', function() {
+		var result = '';
+		var form_data = new FormData();
+		var rating=$('input[name=rating]:checked').val();
+		var message=$('#message').val();
 		var event_id=$('#event_id').val();
 
 		if (message == '') {
@@ -659,7 +663,6 @@ foreach($event_details as $res){
 			}
           });
     });
-
 
     $(document).ready(function() {
     	$('.galpop-multiple').galpop();
