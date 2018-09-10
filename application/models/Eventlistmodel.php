@@ -368,6 +368,22 @@ Class Eventlistmodel extends CI_Model
 	  	return $res;
     }
 
+	
+	function getevent_reviews_user($event_id)
+    {
+		$current_date = date("Y-m-d");
+		if ($this->session->userdata('id') !=''){
+			$user_id = $this->session->userdata('id');
+		} else {
+			$user_id = 0;
+		}
+		$sql="SELECT * FROM event_reviews WHERE event_id ='$event_id' AND user_id = '$user_id'";
+		//exit;
+	  	$resu=$this->db->query($sql);
+	  	$res=$resu->result();
+	  	return $res;
+    }
+	
 	function getevent_reviews($event_id)
     {
 		$current_date = date("Y-m-d");
@@ -482,6 +498,12 @@ Class Eventlistmodel extends CI_Model
     {
 		$sQuery = "INSERT INTO event_reviews (user_id,event_id,event_rating,comments,status,created_at) VALUES ('". $user_id . "','". $event_id . "','". $rating . "','". $message . "','N',NOW())";
 		$review_insert = $this->db->query($sQuery);
+    }
+	
+	function update_review($event_id,$review_id,$user_id,$rating,$message)
+    {
+		$sQuery = "UPDATE event_reviews SET event_rating='$rating',comments='$message',status='N',updated_at= NOW() WHERE id  ='$review_id'";
+		$review_update = $this->db->query($sQuery);
     }
 }
 ?>
