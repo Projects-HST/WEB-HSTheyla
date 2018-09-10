@@ -33,8 +33,9 @@
           </div>
           <div class="col">
             <p class="footer_heading">Contact Us</p>
-            <p class="address_form">No: 6, Kummalamman Koil Street,<br>
-                      3rd Lane Tondiarpet, <br>Chennai - 600081</p>
+            <p class="address_form">VISION PALPRO STECH LLP
+              No 90/12  <br>Seniamman Koil Street,<br>Tondiarpet,<br>Chennai - 600081</p>
+              <p class="address_form">hello@heylaapp.com <br>+91-944 347 1551</p>
           </div>
           <div class="col">
             <p class="footer_heading">Follow  Us On</p>
