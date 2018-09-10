@@ -1046,7 +1046,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 //#################### Select Country ####################//
 	public function Select_country($user_id)
 	{
-	        $country_query = "SELECT id,country_name from country_master";
+	    $country_query = "SELECT id,country_name from country_master";
 			$country_res = $this->db->query($country_query);
 
 			 if($country_res->num_rows()>0){
@@ -1059,6 +1059,23 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 
 			return $response;
 	}
+
+  public function getEventCountries($user_id)
+  {
+      $country_query = "SELECT id,country_name from country_master WHERE event_status='Y'";
+      $country_res = $this->db->query($country_query);
+
+       if($country_res->num_rows()>0){
+            $country_result= $country_res->result();
+            $response = array("status" => "success", "msg" => "View Countries","Countries"=>$country_result);
+
+      }else{
+              $response = array("status" => "error", "msg" => "Countries not found");
+      }
+
+      return $response;
+  }
+
 //#################### Select Country End ####################//
 
 //#################### Select State ####################//
