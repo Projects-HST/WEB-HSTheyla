@@ -44,7 +44,7 @@
               <li class=""><a href="https://www.instagram.com/heyla_app/" target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/instagram.png"></a></li>
               <!-- <li class=""><a href=""><img src="<?php echo base_url(); ?>assets/front/images/gp_follow.png"></a></li> -->
               <li class=""><a href="https://twitter.com/heylaapp"  target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/share_twitter.png"></a></li>
-                <li class=""><a href="https://twitter.com/heylaapp"  target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/share_googleplus.png"></a></li>
+                <li class=""><a href="https://www.youtube.com/channel/UCrjx62OpVHGhX5UONO8QDmw"  target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/youtube.png"></a></li>
             </ul>
             <p class="footer_heading">Download Apps</p>
             <ul class="fnt-footer social_follow">

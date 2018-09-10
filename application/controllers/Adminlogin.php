@@ -80,13 +80,13 @@ public function home()
 					$datas= array("user_name"=>$user_name, "msg"=>$msg,"mobile_no"=>$mobile_no,"email_id"=>$email_id,"status"=>$status,"id"=>$id,"user_role"=>$user_role,);
 					//$this->session->userdata($user_name);
 					$session_data=$this->session->set_userdata($datas);
-					
+
 					$redirect_url = $this->input->cookie('redirect_url', TRUE);
 					delete_cookie("redirect_url");
 					if ($redirect_url!=''){
 						redirect($redirect_url);
 					} else {
-						redirect('leaderboard');
+						redirect('/');
 					}
 
 				break;
@@ -102,7 +102,7 @@ public function home()
 					if ($redirect_url!=''){
 						redirect($redirect_url);
 					} else {
-						redirect('leaderboard');
+						redirect('/');
 					}
 
 				break;

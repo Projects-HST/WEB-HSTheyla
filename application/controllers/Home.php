@@ -50,9 +50,9 @@ class Home extends CI_Controller {
 		if($user_role==1){
 			redirect('adminlogin/dashboard');
 		}else if($user_role==2){
-			redirect('leaderboard');
+			redirect('/');
 		}else if($user_role==3){
-			redirect('leaderboard');
+			redirect('/');
 		}else{
 			$this->load->view('front_header');
 			$this->load->view('signin', $datas);
@@ -71,9 +71,9 @@ class Home extends CI_Controller {
 		if($user_role==1){
 			redirect('adminlogin/dashboard');
 		}else if($user_role==2){
-			redirect('leaderboard');
+			redirect('/');
 		}else if($user_role==3){
-			redirect('leaderboard');
+			redirect('/');
 		}else{
 			$this->load->view('front_header');
 			$this->load->view('signup', $datas);
@@ -408,9 +408,9 @@ class Home extends CI_Controller {
 		 $status=$datas['result']['status'];
 		 if($status=='Y'){
 			 if($user_role==3){
-					 redirect('leaderboard');
+					 redirect('/');
 			 }else if($user_role==2){
-			     redirect('leaderboard');
+			     redirect('/');
 				//$this->load->view('profile', $datas);
 			 }else{
 				 redirect('/');
