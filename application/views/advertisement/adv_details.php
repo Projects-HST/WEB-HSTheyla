@@ -53,26 +53,18 @@
                             </div>
                         </div>
 
-                          <div class="form-group row">
+                          <!-- <div class="form-group row">
                             <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
                             <div class="col-sm-4">
                                <input  type="text" class="form-control" id="stime" name="start_time">
-                                <!-- select name="start_time" required="" class="form-control"  >
-                                     <option value="">Select Start Time</option>
-                                     <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
-                                </select>
-                                <script language="JavaScript">document.eventform.start_time.value="<?php echo $rows->start_time; ?>";</script-->
+
                             </div>
                              <label for="etime" class="col-sm-2 col-form-label">End Time</label>
                             <div class="col-sm-4">
                               <input  type="text" class="form-control" id="etime" name="end_time" >
-                                <!--select name="end_time" required="" class="form-control" id="etime">
-                                     <option value="">Select End Time</option>
-                                     <option value="<?php echo get_times(); ?>"><?php echo get_times(); ?></option>
-                                </select>
-                                 <script language="JavaScript">document.eventform.end_time.value="<?php echo $rows->end_time; ?>";</script-->
+
                             </div>
-                        </div>
+                        </div> -->
 
 
                         <div class="form-group row">
@@ -142,8 +134,8 @@
                                  <th>Category Name</th>
                                  <th>From Date</th>
                                  <th>To Date</th>
-                                 <th>From Time</th>
-                                 <th>To Time</th>
+                                 <!-- <th>From Time</th>
+                                 <th>To Time</th> -->
                                  <th>Plan Name</th>
                                  <th>Status</th>
                                  <th>Action</th>
@@ -164,8 +156,8 @@
                                        echo date_format($date,"d-m-Y");  ?></td>
                                  <td> <?php $date=date_create($rows->date_to);
                                        echo date_format($date,"d-m-Y");  ?></td>
-                                 <td><?php echo date("g:i a",strtotime("$rows->time_from")); ?></td>
-                                 <td> <?php echo date("g:i a",strtotime("$rows->time_to")); ?></td>
+                                 <!-- <td><?php echo date("g:i a",strtotime("$rows->time_from")); ?></td>
+                                 <td> <?php echo date("g:i a",strtotime("$rows->time_to")); ?></td> -->
                                  <td><?php  echo $rows->plan_name; ?></td>
                                  <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
                                  <td> <a href="<?php echo base_url();?>advertisement/edit_history/<?php echo $rows->id;?>">

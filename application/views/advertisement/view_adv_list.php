@@ -1,4 +1,4 @@
-<!--div class="content-page"> 
+<!--div class="content-page">
 <!- Start content ->
 <div class="content">
     <!- Top Bar Start ->
@@ -43,7 +43,7 @@
     <div class="page-content-wrapper ">
         <div class="container">
             <div class="row">
-      
+
         <div class="col-lg-12">
             <div class="card m-b-20">
                 <div class="card-block">
@@ -71,13 +71,13 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php 
+                        <?php
                           $i=1;
-                           foreach($result as $rows){ 
+                           foreach($result as $rows){
                            $eid=$rows->id;
                            $adv_sts=$rows->adv_status;
                            $etype=$rows->event_type;
-                          if($adv_sts=='Y'){ 
+                          if($adv_sts=='Y'){
                              ?>
                         <tr>
                             <td><?php echo $i ; ?></td>
@@ -90,10 +90,10 @@
 
                              <a href="<?php echo base_url();?>events/view_single_events/<?php echo base64_encode($rows->id);?>">
                               <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a>
-                              <?php if($etype=='Paid'){?>
+
                               <a href="<?php echo base_url();?>advertisement/add_advertisement_details/<?php echo $rows->id;?>/<?php echo $rows->category_id;?>">
                               <img title="Add Advertisement Details" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
-                              <?php  } ?>
+                            
                             </td>
                         </tr>
                        <?php $i++; }   } ?>
@@ -101,7 +101,7 @@
                     </table>
                         </div>
 
-                      
+
                     </div>
 
                 </div>
@@ -130,7 +130,7 @@
                   title: "Success",
                   text: "Deleted Successfully",
                   type: "success"
-              }).then(function() { 
+              }).then(function() {
                   location.href = '<?php echo base_url(); ?>advertisement/view_adv_plan';
               });
           } else {
@@ -144,6 +144,6 @@
  }
 
   $(document).ready(function() {
-   
+
 } );
 </script>

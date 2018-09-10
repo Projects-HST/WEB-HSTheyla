@@ -791,6 +791,7 @@ ORDER BY ogr.id DESC";
     if($req_status=="Approved"){
       $sql = "UPDATE  user_master SET user_role='2' WHERE id='$org_id'";
       $resu=$this->db->query($sql);
+
     }else if($req_status=="Rejected"){
       $sql = "UPDATE  user_master SET user_role='3' WHERE id='$org_id'";
       $resu=$this->db->query($sql);
