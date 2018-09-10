@@ -555,7 +555,7 @@ Class Loginmodel extends CI_Model
 
    function getuserfb($firstname,$email){
      if(empty($email)){
-       $data= array("status"=>"Deactive","msg"=>"Something Went Wrong");
+       $data= array("status"=>"error","msg"=>"Something Went Wrong");
         return $data;
      }else{
        $check_email="SELECT * FROM user_master WHERE email_id='$email'";

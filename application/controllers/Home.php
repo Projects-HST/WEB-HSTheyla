@@ -449,6 +449,9 @@ class Home extends CI_Controller {
 							}else{
 								redirect('/');
 							}
+						}else if($status=='error'){
+							echo "Something Went wrong";
+
 						}else{
 						redirect('deactive');
 
@@ -602,15 +605,15 @@ class Home extends CI_Controller {
 			$msg=$this->db->escape_str($this->input->post('message'));
 			$data=$this->loginmodel->mail_contact_form($name,$email,$subject,$msg);
 		}
-		
-		
+
+
 		public function become_organiser(){
 			$user_id=$this->input->post('user_id');
 			$data = $this->loginmodel->save_request_orgainser($user_id);
 		}
-		
+
 		/* public function become_organiser(){
-		
+
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
 			$user_role=$this->se/ssion->userdata('user_role');

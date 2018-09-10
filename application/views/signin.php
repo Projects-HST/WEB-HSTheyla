@@ -147,8 +147,11 @@ function checkLoginStatus(response) {
                 setTimeout(function(){
                  window.location.reload(1);
               }, 1000);
-              }else{
-                sweetAlert("Oops...", "Something wen Wrong", "error");
+            }else if(data=="error"){
+                sweetAlert("Oops...", "Something went Wrong", "error");
+              }
+              else{
+                sweetAlert("Oops...", "Something went Wrong", "error");
               }
 
           }
