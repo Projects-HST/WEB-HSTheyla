@@ -40,9 +40,29 @@
 <div class="col-md-12" id="content">
 	<h3 class="dashboard_tab">Create Event</h3>
 </div>
-<div class="container">
+<div class="col-md-12">
 
 <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>home/insertevents" name="eventform" id="eventform" onSubmit='return check();'>
+  <div class="col-md-12 form_box">
+  	       <div class="form-group">
+  	            <label for="country" class="col-sm-2 col-form-label">Select Country</label>
+  	            <div class="col-sm-4">
+  	              <select class="form-control" name="country" onchange="getcityname(this.value)">
+  	              <option value="">Select Country Name</option>
+  	                     <?php foreach($country_list as $cntry){ ?>
+  	                        <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
+  	                     <?php } ?>
+  	                </select>
+  	            </div>
+  	             <label for="city" class="col-sm-2 col-form-label">Select City</label>
+  	            <div class="col-sm-4">
+  	               <select class="form-control" name="city"  id="ctname">
+                     <option value="">Select City</option>
+  	               </select>
+  	                <div id="cmsg"></div>
+  	            </div>
+  	        </div>
+  </div>
 <div class="col-md-12 form_box">
 	<div class="form-group">
 			<label for="Category" class="col-sm-2 col-form-label">Select Category</label>
@@ -60,26 +80,7 @@
 			</div>
 	</div>
 </div>
-<div class="col-md-12 form_box">
-	       <div class="form-group">
-	            <label for="country" class="col-sm-2 col-form-label">Select Country</label>
-	            <div class="col-sm-4">
-	              <select class="form-control" name="country" onchange="getcityname(this.value)">
-	              <option value="">Select Country Name</option>
-	                     <?php foreach($country_list as $cntry){ ?>
-	                        <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
-	                     <?php } ?>
-	                </select>
-	            </div>
-	             <label for="city" class="col-sm-2 col-form-label">Select City</label>
-	            <div class="col-sm-4">
-	               <select class="form-control" name="city"  id="ctname">
-                   <option value="">Select City</option>
-	               </select>
-	                <div id="cmsg"></div>
-	            </div>
-	        </div>
-</div>
+
 	<div class="col-md-12 form_box">
 		<div class="form-group">
 				<label for="Venue" class="col-sm-2 col-form-label">Venue</label>
@@ -92,45 +93,25 @@
 				</div>
 		</div>
 	</div>
-	<div class="col-md-12 form_box">
-		<div class="form-group">
-				<label for="Description" class="col-sm-2 col-form-label">Description</label>
-				<div class="col-sm-4">
-						<textarea  id="textarea"  name="description" class="form-control" maxlength="30000" rows="3" placeholder=""> </textarea>
-				</div>
+  <div class="col-md-12 form_box">
+    <label for="latitude" class="col-sm-2 col-form-label">Select</label>
+     <div id="dvMap" style="width:100%; height:250px"> </div>
+  </div>
+  <div class="col-md-12 form_box">
+    <div class="form-group">
+        <label for="latitude" class="col-sm-2 col-form-label">Event Latitude</label>
+        <div class="col-sm-4">
+            <input class="form-control" type="text" name="txtLatitude"  id="latu" >
+            <div id="ermsg"></div> <div id="ermsg2"></div>
+        </div>
+          <label for="longitude" class="col-sm-2 col-form-label">Event Longitude</label>
+        <div class="col-sm-4">
+            <input class="form-control" type="text" name="txtLongitude" id="lon">
+             <div id="ermsg1"></div> <div id="ermsg3"></div>
+        </div>
+    </div>
+  </div>
 
-				 <label for="ecost" class="col-sm-2 col-form-label">Event Type</label>
-				<div class="col-sm-4">
-						 <select class="form-control"  name="eventcost">
-								<option value="Free">Free</option>
-								<option value="Paid">Paid</option>
-								<option value="Invite">Invite</option>
-						</select>
-				</div>
-		</div>
-	</div>
-    <div class="col-md-12 form_box">
-							<div class="form-group ">
-									<label for="Status" class="col-sm-2 col-form-label">Advertisement Display</label>
-									<div class="col-sm-4">
-										 <select class="form-control" name="eadv_status">
-													<option value="">Select Status</option>
-													<option value="Y">Yes</option>
-													<option value="N">No</option>
-											</select>
-									</div>
-
-									 <label for="Status" class="col-sm-2 col-form-label">Hotspot Display</label>
-									<div class="col-sm-4">
-										 <select class="form-control" name="hotspot_sts"  id="hotspot_sts">
-													<option value="">Select Status</option>
-													<option value="Y">Yes</option>
-													<option value="N">No</option>
-											</select>
-									</div>
-
-						 </div>
-						</div>
              <div id = "date_time">
 			<div class="col-md-12 form_box">
 			<div class="form-group">
@@ -165,25 +146,48 @@
 				</div>
 			</div>
 			</div>
+      <div class="col-md-12 form_box">
+        <div class="form-group">
+            <label for="Description" class="col-sm-2 col-form-label">Description</label>
+            <div class="col-sm-4">
+                <textarea  id="textarea"  name="description" class="form-control" maxlength="30000" rows="3" placeholder=""> </textarea>
+            </div>
 
-				<div class="col-md-12 form_box">
-					<label for="latitude" class="col-sm-2 col-form-label">Select</label>
-					 <div id="dvMap" style="width:300px; height:250px"> </div>
-				</div>
-					<div class="col-md-12 form_box">
-						<div class="form-group">
-								<label for="latitude" class="col-sm-2 col-form-label">Event Latitude</label>
-								<div class="col-sm-4">
-										<input class="form-control" type="text" name="txtLatitude"  id="latu" >
-										<div id="ermsg"></div> <div id="ermsg2"></div>
-								</div>
-									<label for="longitude" class="col-sm-2 col-form-label">Event Longitude</label>
-								<div class="col-sm-4">
-										<input class="form-control" type="text" name="txtLongitude" id="lon">
-										 <div id="ermsg1"></div> <div id="ermsg3"></div>
-								</div>
-						</div>
-					</div>
+             <label for="ecost" class="col-sm-2 col-form-label">Event Type</label>
+            <div class="col-sm-4">
+                 <select class="form-control"  name="eventcost">
+                    <option value="Free">Free</option>
+                    <option value="Paid">Paid</option>
+                    <option value="Invite">Invite</option>
+                </select>
+            </div>
+        </div>
+      </div>
+        <div class="col-md-12 form_box">
+                  <div class="form-group ">
+                      <label for="Status" class="col-sm-2 col-form-label">Advertisement Display</label>
+                      <div class="col-sm-4">
+                         <select class="form-control" name="eadv_status">
+                              <option value="">Select Status</option>
+                              <option value="Y">Yes</option>
+                              <option value="N">No</option>
+                          </select>
+                      </div>
+
+                       <label for="Status" class="col-sm-2 col-form-label">Hotspot Display</label>
+                      <div class="col-sm-4">
+                         <select class="form-control" name="hotspot_sts"  id="hotspot_sts">
+                              <option value="">Select Status</option>
+                              <option value="Y">Yes</option>
+                              <option value="N">No</option>
+                          </select>
+                      </div>
+
+                 </div>
+                </div>
+
+
+
 					<div class="col-md-12 form_box">
 						<div class="form-group">
 								<label for="primarycell" class="col-sm-2 col-form-label">Primary Contact Phone</label>

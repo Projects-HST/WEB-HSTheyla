@@ -5,30 +5,39 @@
 .footer_section{
   display: none;
 }
+td{
+  width: 100px;
+}
 </style>
 <div class="col-sm-12 col-md-12 " id="content">
-    <h3 class="dashboard_tab"> Reviews events</h3>
+    <h3 class="dashboard_tab"> Reviews events (  <?php if(empty($views)){ }else{ foreach ($views as $value) {} echo $value->event_name;  }  ?>)  </h3>
 </div>
-<div class="container event_section">
+<div class="col-md-12 event_section">
   <div class="card card-outline-secondary" style="padding:5px;">
-   <?php if(!empty($views)) {
-       foreach ($views as $value) {  ?>
-        <div class="">
-           <div class="col-md-10">
-               <div class="card m-b-20 card-block">
-                   <h3 class="card-title font-20 mt-0"> <?php echo $value->event_name;?> ( <?php echo $value->event_rating; ?> ) </h3>
-                   <p class="card-text">
-                    <?php echo $value->comments;?>
-                 </p>
-             </div>
-           </div>
-       </div>
-     <!-- end row -->
-       <?php }
-     }else{
-     echo "<p class=card-text> No Reviews Found </p>";
-     }?>
+    <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
+          <thead>
+          <tr>
+              <th>User / Name </th>
+              <th>Rating</th>
+              <th>Comments</th>
+
+          </tr>
+          </thead>
+          <tbody>
+           <?php foreach ($views as $value) {  ?>
+          <tr>
+              <td><?php echo $value->name ; ?></td>
+              <td><?php echo $value->event_rating; ?></td>
+              <td>  <?php echo $value->comments;?></td>
+
+          </tr>
+         <?php  } ?>
+          </tbody>
+      </table>
       </div>
-
-
 </div>
+<script>
+$(document).ready(function() {
+  $('table.display').DataTable();
+} );
+</script>

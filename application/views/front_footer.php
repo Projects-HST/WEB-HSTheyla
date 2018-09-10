@@ -57,7 +57,7 @@
     <!-- /.container -->
     <div class="container">
 
-        <p class=" text-center foot_copyrights">Crafted with <a href="" style="text-decoration:none;"><b style="color:#fff;font-size:20px;">Happy Sanz Tech</b></a></p>
+        <p class=" text-center foot_copyrights">Crafted with <a href="https://happysanztech.com" target="_blank" style="text-decoration:none;"><b style="color:#fff;font-size:20px;">Happy Sanz Tech</b></a></p>
     </div>
 </footer>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

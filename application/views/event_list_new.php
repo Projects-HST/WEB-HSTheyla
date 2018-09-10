@@ -107,8 +107,8 @@ body{background-color: #f7f8fa;}
 			$disp_banner_desc  = wordwrap($shown_string, 100, "<br />");
 ?>
 
-    <div class="carousel-item <?php if ($i=='0') echo "active"; ?>" style="background-image: url('<?php echo base_url(); ?>/assets/events/advertisement/<?php echo $res->banner; ?>');">
-      <!--<img src="<?php echo base_url(); ?>assets/events/advertisement/<?php echo $res->banner; ?>" alt="<?php echo $res->event_name; ?>">-->
+<div class="carousel-item <?php if ($i=='0') echo "active"; ?>" style="background-image: url('<?php echo base_url(); ?>/assets/events/advertisement/<?php echo $res->banner; ?>');background-size: cover;background-position: center;background-repeat: no-repeat;">
+  <!--<img src="<?php echo base_url(); ?>assets/events/advertisement/<?php echo $res->banner; ?>" alt="<?php echo $res->event_name; ?>">-->
       <div class="container">
         <div class="carousel-caption d-none d-md-block text-left">
           <h1><?php echo $res->event_name; ?></h1>

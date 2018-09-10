@@ -6,8 +6,8 @@
                         <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
                         <thead>
                         <tr>
-                              <th>S.No</th>
-                            <th>Name</th>
+                            <th>S.No</th>
+                            <th>Name (Email)</th>
                             <th>Message</th>
                             <th>status</th>
 
@@ -18,7 +18,7 @@
                   <?php foreach ($get_all_request as $value) { $i=1;  ?>
                     <tr>
                       <td><?php echo $i; ?></td>
-                        <td><?php echo $value->name;?> ( <?php echo $value->email_or_phone; ?> )</td>
+                        <td><?php echo $value->name;?> ( <?php echo $value->email_id; ?> )</td>
                         <td><?php echo $value->message;?></td>
                           <td><?php if($value->req_status=="Pending"){ ?>
                             <a href="" class="btn btn-primary waves-effect waves-light">Pending</a>

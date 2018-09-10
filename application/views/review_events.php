@@ -12,7 +12,7 @@
 <div class="col-sm-12 col-md-12 " id="content">
     <h3 class="dashboard_tab">Event Reviews </h3>
 </div>
-<div class="container event_section">
+<div class="col-md-12 event_section">
   <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
         <thead>
         <tr>
