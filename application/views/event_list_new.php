@@ -145,7 +145,7 @@ body{background-color: #f7f8fa;}
             <div class="col-sm-12">
               <form class="navbar-form navbar-right search-event-form" role="search" method="post" action="" name="search_form" id="search_form">
                   <input  type="text" class="form-control btn-block" name="search_term" id="search_term"  placeholder="Search Event by name" value="">
-                   <a href="#"  onclick="getsearchtermevents()"><span toggle="#password-field" class="fa fa-search field-icon toggle-password"></span></a>
+                   <a href="#"  onclick="getSearchevents()"><span toggle="#password-field" class="fa fa-search field-icon toggle-password"></span></a>
                 </form>
           </div>
       </div>
@@ -232,6 +232,7 @@ body{background-color: #f7f8fa;}
 		<div class="row event_list" id="event_list_cty"> </div>
 		<div class="row event_list" id="event_list_cat"> </div>
 		<div class="row event_list" id="event_list_type"> </div>
+		<div class="row event_list" id="event_list_search"> </div>
 	  <div class="col-sm-12 text-center" id='loader_image' style="padding-bottom:20px;display:none;"><img src='<?php echo base_url(); ?>assets/ajax-loader.gif'></div>
       <div id='loader_message'><center></center></div>
 </div>
@@ -243,15 +244,23 @@ $('.carousel').carousel({
 		pause: "false"
 });
 
-
 $('#category').select2({
     placeholder: 'Select Category',
     "multiple": true,
 });
 
-$("#cnyname").val("<?php  echo $country_values; ?>");
-$("#ctyname").val("<?php   echo $city_values; ?>");
+$(window).on('load', function(){
+	var country_values ='<?php  echo $country_values ?>';
+	var city_values='<?php  echo $city_values ?>';
 
+	 if(country_values!='' && city_values!=''){
+		$("#cnyname").val("<?php echo $country_values; ?>");
+		$("#ctyname").val("<?php echo $city_values; ?>");
+		  getCityevents();
+	  } else {
+		  getAllevents()
+	  }
+});
 
 function change_country()
 {
@@ -283,8 +292,8 @@ function change_country()
 		});
 }
 
-$(window).on('load', function(){
-
+function getAllevents()
+{
 	$("#event_list_all").html("").show();
 
 	var limit = 12;
@@ -305,6 +314,7 @@ $(window).on('load', function(){
 			$("#event_list_cty").html("").hide();
 			$("#event_list_cat").html("").hide();
 			$("#event_list_type").html("").hide();
+			$("#event_list_search").html("").hide();
             $('#loader_image').show();
           },
 	success: function(data) {
@@ -363,12 +373,10 @@ $(window).on('load', function(){
 	}
 	});
 
-});
+}
 
 function getAlleventsresult(limit,offset)
 {
-	//var country_id=cnyname.value;
-	//$('#event_type').prop('selectedIndex',0);
 	$('#loader_message').hide();
 	var result = '';
 
@@ -441,11 +449,9 @@ function getAlleventsresult(limit,offset)
 	});
 }
 
-
 function getCountryevents()
 {
 	$("#event_list_cny").html("").show();
-	//$("#event_list_cty").html("").show();
 
 	var limit = 12;
 	var offset = 0;
@@ -781,7 +787,7 @@ function getCategoryevents()
 {
 	$("#event_list_cat").html("").show();
 
-	var limit = 4;
+	var limit = 12;
 	var offset = 0;
 
 	var country_id=cnyname.value;
@@ -991,9 +997,10 @@ function getTypeevents()
 			$("#event_list_cny").html("").hide();
 			$("#event_list_cty").html("").hide();
 			$("#event_list_cat").html("").hide();
+			$("#event_list_search").html("").hide();
             $('#loader_image').show();
           },
-	success: function(data) {
+		success: function(data) {
 		var dataArray = JSON.parse(data);
 		if (dataArray.length>0) {
 			for (var i = 0; i < dataArray.length; i++){
@@ -1052,7 +1059,6 @@ function getTypeevents()
 
 function getTypeeventsresult(limit,offset)
 {
-
 	var country_id=cnyname.value;
 	var city_id_value=ctyname.value;
 	var type_id = event_type.value;
@@ -1140,9 +1146,9 @@ function getTypeeventsresult(limit,offset)
 	});
 }
 
-function getsearchtermevents()
+function getSearchevents()
 {
-
+	$('#cnyname').prop('selectedIndex',0);
 	$('#ctyname').prop('selectedIndex',0);
 	//$('#category').prop('selectedIndex',0);
 	$('#event_type').prop('selectedIndex',0);
@@ -1154,6 +1160,16 @@ function getsearchtermevents()
 	url: '<?php echo base_url(); ?>eventlist/search_term_events',
 	type: 'POST',
 	data: {srch_term : srch_term},
+	cache: false,
+    beforeSend: function() {
+            $("#loader_message").html("").hide();
+			$("#event_list_all").html("").hide();
+			$("#event_list_cny").html("").hide();
+			$("#event_list_cty").html("").hide();
+			$("#event_list_cat").html("").hide();
+			$("#event_list_type").html("").hide();
+            $('#loader_image').show();
+          },
 	success: function(data) {
 		var dataArray = JSON.parse(data);
 		if (dataArray.length>0) {
@@ -1207,20 +1223,21 @@ function getsearchtermevents()
 
 				result +="<div class='col-xs-18 col-sm-3 col-md-3 event_box'><div class='thumbnail event_section'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img src='<?php echo base_url();?>assets/events/banner/"+event_banner+"' alt='' style='height:204px; width:100%;'></a><div class='event_thumb'>"+display_date+"<p class='event_heading event_title_heading'><a href='<?php echo base_url(); ?>eventlist/eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></a><p><span class='event_thumb'>"+start_time+" - "+end_time+" <span class='pull-right'>"+sevent_type+" <span></span></p></div><p class='price_section'><span class='event_thumb'>"+event_venue+"<span><?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></div></div>";
 			};
-
+			$('#loader_image').hide();
 			$('#loader_message').hide();
-			$("#event_list").html(result).show();
+			$("#event_list_search").html(result).show();
 		} else {
 			$('#loader_message').hide();
+			$('#loader_image').hide();
 			result +="No Records found!..";
-			$("#event_list").html(result).show();
+			$("#event_list_search").html(result).show();
 		}
 	}
 	});
 }
 
 
-function getcityname(cid) {
+/* function getcityname(cid) {
 	$.ajax({
 	type: 'post',
 	url: '<?php echo base_url(); ?>eventlist/get_city_name',
@@ -1248,7 +1265,7 @@ function getcityname(cid) {
 	}
 	}
 	});
-}
+} */
 
 
 function editwishlist(user_id,event_id)
@@ -1269,9 +1286,6 @@ function editwishlist(user_id,event_id)
 	});
 }
 
-
-
-
 $( function() {
     var availableTags = [<?php
 	 $tot_count = count($event_resu);
@@ -1288,14 +1302,13 @@ $( function() {
 		source: availableTags,
 		select: function(event, ui) {
 		$("#search_term").val(ui.item.value);
-		getsearchtermevents();
-		//$("#search_form").submit();
+			getSearchevents();
 		}
 	});
 
   });
 
-$('#reset_cookie').hide();
+/* $('#reset_cookie').hide();
 window.onload=set_cookies_values();
 
 function set_cookies_values(){
@@ -1321,6 +1334,6 @@ function reset(){
 	delete_cookie('city_values');
 	?>
 	location.reload();
-}
+} */
 
 </script>

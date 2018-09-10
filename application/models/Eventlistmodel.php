@@ -285,8 +285,7 @@ Class Eventlistmodel extends CI_Model
 	  	return $res;
     }
 
-
-	function gettype_events($country_id,$city_id,$category_id,$type_id,$limit, $offset)
+	function gettype_events($country_id,$city_id,$category_id,$type_id,$limit,$offset)
     {
 		$current_date = date("Y-m-d");
 
@@ -314,15 +313,15 @@ Class Eventlistmodel extends CI_Model
 		
 		if ($type_id =='1')
 		{
-				$sql="SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date, cy.country_name,ci.city_name,uwl.user_id as wlstatus
+				 $sql="SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date, cy.country_name,ci.city_name,uwl.user_id as wlstatus
 				FROM events AS e
 				LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
 				LEFT JOIN country_master AS cy ON e.event_country = cy.id
 				LEFT JOIN city_master AS ci ON e.event_city = ci.id
 				LEFT JOIN category_master AS ca ON e.category_id = ca.id
-				WHERE $country_query $city_query $category_query e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y'";
+				WHERE $country_query $city_query $category_query e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y' ORDER BY id DESC LIMIT $limit OFFSET $offset";
 		} else {
-				$sql="SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+				 $sql="SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 				FROM events AS e
 				LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
 				LEFT JOIN country_master AS cy ON e.event_country = cy.id
@@ -418,7 +417,6 @@ Class Eventlistmodel extends CI_Model
 				$sql = "DELETE FROM user_wish_list WHERE user_id='$user_id' AND event_id ='$event_id' ";
        			$result=$this->db->query($sql);
 				$res = "Updated";
-				//$res = "wishlist".$event_id;
 			} else {
 				$sql="INSERT INTO user_wish_list (user_id,event_id) VALUES('$user_id','$event_id')";
         		$result=$this->db->query($sql);
@@ -496,8 +494,15 @@ Class Eventlistmodel extends CI_Model
 
 	function add_review($event_id,$user_id,$rating,$message)
     {
-		$sQuery = "INSERT INTO event_reviews (user_id,event_id,event_rating,comments,status,created_at) VALUES ('". $user_id . "','". $event_id . "','". $rating . "','". $message . "','N',NOW())";
+		
+		$sql = "SELECT * FROM event_reviews WHERE user_id = '$user_id' AND event_id = '$event_id'";
+		$resu=$this->db->query($sql);
+			if($resu->num_rows()==0)
+	        {
+				$sQuery = "INSERT INTO event_reviews (user_id,event_id,event_rating,comments,status,created_at) VALUES ('". $user_id . "','". $event_id . "','". $rating . "','". $message . "','N',NOW())";
 		$review_insert = $this->db->query($sQuery);
+			} 
+	
     }
 	
 	function update_review($event_id,$review_id,$user_id,$rating,$message)

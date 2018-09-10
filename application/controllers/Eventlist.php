@@ -106,14 +106,14 @@ class Eventlist extends CI_Controller
 
 		foreach($event_desc as $row_des){}
 
-			$event_title=$row_des->event_name;
-			$data['meta_title']= $event_title;
-			$desc=$row_des->description;
-			$event_country=$row_des->event_country;
-			$event_city=$row_des->event_city;
-			set_cookie('country_values',$event_country,'3600');
-			set_cookie('city_values',$event_city,'3600');
-			$data['meta_description']=$desc;
+		$event_title=$row_des->event_name;
+		$data['meta_title']= $event_title;
+		$desc=$row_des->description;
+		$event_country=$row_des->event_country;
+		$event_city=$row_des->event_city;
+		set_cookie('country_values',$event_country,'3600');
+		set_cookie('city_values',$event_city,'3600');
+		$data['meta_description']=$desc;
 
 		$this->load->view('front_header', $data);
 		$this->load->view('eventdetails_new', $data);

@@ -1,3 +1,11 @@
+<?php
+	$user_id = $this->session->userdata('id');
+	if ($user_id==''){
+		$redirect = current_url();;
+		set_cookie('redirect_url',$redirect,'3600');
+	}
+?>
+
 <style>
 .review_btn{
 		padding: 10px 20px 10px 20px;
@@ -360,7 +368,6 @@ foreach($event_details as $res){
  </div>
  </div>
 
-
 <script>
 
 	var time_result ="<label class='form-label'>Select Time</label><select class='form-control' id='show_time'><option value=''>Select Time</option>";
@@ -519,7 +526,6 @@ foreach($event_details as $res){
 
 		result +="<div class='col-md-6'><p class='event_select_text'>Plan Name</p></div><div class='col-md-6'><p class='event_select_text'>"+disp_plan_name+"</p></div><div class='col-md-6'><p class='event_select_text'>Ticket Price</p></div><div class='col-md-6'><p class='event_select_text'>₹ "+disp_plan_rate+"</p></div><div class='col-md-6'><p class='event_select_text'>No. of Seats</p></div><div class='col-md-6'><p class='event_select_text'>"+no_seats+"</p></div><div class='col-md-6 total_price'><p class='event_select_text'>Total Price</p></div><div class='col-md-6 total_price'><p class='event_select_text'>₹ "+disp_total+"</p></div><div class='col-md-12'><input type='submit' class='btn book_tickets confirm_btn' value='Continue' /></p><input type='hidden' name='no_seats' id='no_seats' value="+no_seats+" /><input type='hidden' name='total_amount' id='total_amount' value="+disp_total+" /><input type='hidden' name='user_id' id='user_id' value='<?php echo $user_id; ?>' /></div>";
 
-		 //result +="<div class='col-md-6'><p class='event_select_text'>Plan Name</p></div><div class='col-md-6'><p class='event_select_text'>"+disp_plan_name+"</p></div><div class='col-md-6'><p class='event_select_text'>Ticket Price</p></div><div class='col-md-6'><p class='event_select_text'>"+disp_plan_rate+"</p></div><div class='col-md-6'><p class='event_select_text'>No. of Seats</p></div><div class='col-md-6'><p class='event_select_text'>"+no_seats+"</p></div><div class='col-md-6'><p class='event_select_text'>Internet handling fees</p></div><div class='col-md-6'><p class='event_select_text'>"+IHC.toFixed(2)+"</p></div><div class='col-md-6'><p class='event_select_text'>CGST</p></div><div class='col-md-6'><p class='event_select_text'>"+CGST.toFixed(2)+"</p></div><div class='col-md-6'><p class='event_select_text'>SGST</p></div><div class='col-md-6'><p class='event_select_text'>"+SGST.toFixed(2)+"</p></div><div class='col-md-6 total_price'><p class='event_select_text'>Total Price</p></div><div class='col-md-6 total_price'><p class='event_select_text'>"+disp_total+"</p></div><div class='col-md-12'><input type='submit' class='btn book_tickets confirm_btn' value='Continue' /></p><input type='hidden' name='no_seats' id='no_seats' value="+no_seats+" /><input type='hidden' name='total_amount' id='total_amount' value="+disp_total+" /><input type='hidden' name='user_id' id='user_id' value='<?php echo $user_id; ?>' /></div>";
 		 $("#plan_summary").html(result).show();
 	}
 </script>
@@ -543,12 +549,8 @@ foreach($event_details as $res){
 			map: map
 		  });
 	}
+*/
 
-		$('#user-rating-form').on('change','[name="rating"]',function(){
-		$('#selected-rating').text($('[name="rating"]:checked').val());
-	});
-
-	*/
 	function editwishlist(user_id,event_id)
 	{
 		//make the ajax call
@@ -602,7 +604,7 @@ foreach($event_details as $res){
 		form_data.append('message', message);
 		form_data.append('event_id', event_id);
 		form_data.append('review_id', review_id);
-		//alert(form_data);
+		
          $.ajax({
 			 url         : '<?php echo base_url(); ?>eventlist/updatereview',     // point to server-side PHP script
 			 dataType    : 'text',           // what to expect back from the PHP script, if anything
@@ -664,7 +666,7 @@ foreach($event_details as $res){
           });
     });
 
-    $(document).ready(function() {
+	$(document).ready(function() {
     	$('.galpop-multiple').galpop();
     	var callback = function() {
     		var wrapper = $('#galpop-wrapper');
