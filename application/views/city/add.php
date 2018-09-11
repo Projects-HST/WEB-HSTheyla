@@ -41,7 +41,7 @@
                               </div>
                            </div>
 
-                           <!-- <div class="form-group row">
+                           <div class="form-group row">
 
                             <label for="latitude" class="col-sm-4 col-form-label">Event Latitude</label>
                             <div class="col-sm-6">
@@ -55,7 +55,7 @@
                                 <input class="form-control" type="text" name="txtLongitude" id="lon">
                                  <div id="ermsg1"></div> <div id="ermsg3"></div>
                             </div>
-                        </div> -->
+                        </div>
 
 
                            <div class="form-group row">

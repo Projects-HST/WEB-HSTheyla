@@ -37,6 +37,7 @@ transform: rotate(-90deg);
 .points_font{
   font-size: 18px;
   margin-top: 10px;
+  margin-left: 20px;
 }
 .points_tab{
   margin-top: 100px;

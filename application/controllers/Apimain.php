@@ -693,6 +693,35 @@ public function profilePictureUpload()
 						echo json_encode($response);
 					}
 
+
+					public function getEventcities()
+					{
+						$_POST = json_decode(file_get_contents("php://input"), TRUE);
+
+						if(!$this->checkMethod())
+						{
+							return FALSE;
+						}
+
+						if($_POST == FALSE)
+						{
+							$res = array();
+							$res["opn"] = "Select All City";
+							$res["scode"] = 204;
+							$res["message"] = "Input error";
+
+							echo json_encode($res);
+							return;
+						}
+
+						$user_id = '';
+						$country_id = $this->input->post("country_id");
+
+						$data['result']=$this->apimainmodel->getEventcities($country_id);
+						$response = $data['result'];
+						echo json_encode($response);
+					}
+
 //-----------------------------------------------//
 
 	public function selectAllCity()

@@ -11,16 +11,16 @@
 }
 .login_box{
     background-color: #fff;
-    padding: 55px;
+    padding: 38px;
     margin-right: -15px;
 }
 .points_tab_section{
-padding-left: 150px;
-padding-right: 150px;
+padding-left: 50px;
+padding-right: 50px;
 }
 .total_points_tab{
-  margin-left: 150px;
-  margin-right: 150px;
+  margin-left: 50px;
+  margin-right: 50px;
 
 }
 .footer_section{
@@ -49,28 +49,31 @@ padding-right: 150px;
 <div class="card-block">
   <div class="col-md-4  text-center">
       <div class="login_box">
-      <img src="<?php echo base_url(); ?>assets/front/images/login-img.png" class="img-center">
-      <center><p class="points_font">Login (<?php echo $res->login_points ; ?>)</p></center>
-    </div>
-  </div>
-  <div class="col-md-4 text-center">
-    <div class="box">
-      <img src="<?php echo base_url(); ?>assets/front/images/event-share.png" class="img-center">
-      <center><p class="points_font">Event Sharing (<?php echo $res->sharing_points ; ?>)</p></center>
-      </div>
-      <div class="box">
-    <img src="<?php echo base_url(); ?>assets/front/images/event-booking.png" class="img-center">
-    <center><p class="points_font">Booking (<?php echo $res->booking_points ; ?>)</p></center>
+        <img src="<?php echo base_url(); ?>assets/front/images/event-booking.png" class="img-center">
+        <span class="points_font">Booking (<?php echo $res->booking_points ; ?>)</span>
+
     </div>
   </div>
   <div class="col-md-4 text-center">
     <div class="box">
       <img src="<?php echo base_url(); ?>assets/front/images/event-checkin.png" class="img-center">
-      <center><p class="points_font">Event Checkins (<?php echo $res->checkin_points ; ?>)</p></center>
+      <span class="points_font">Event Checkins (<?php echo $res->checkin_points ; ?>)</span>
+
+      </div>
+      <div class="box">
+        <img src="<?php echo base_url(); ?>assets/front/images/review.png" class="img-center">
+        <span class="points_font">Review (<?php echo $res->review_points ; ?>)</span>
+    </div>
+  </div>
+  <div class="col-md-4 text-center">
+    <div class="box">
+      <img src="<?php echo base_url(); ?>assets/front/images/event-share.png" class="img-center">
+    <span class="points_font">Event Sharing (<?php echo $res->sharing_points ; ?>)</span>
         </div>
       <div class="box">
-      <img src="<?php echo base_url(); ?>assets/front/images/review.png" class="img-center">
-      <center><p class="points_font">Review (<?php echo $res->review_points ; ?>)</p></center>
+
+      <img src="<?php echo base_url(); ?>assets/front/images/login-img.png" class="img-center">
+    <span class="points_font">Login (<?php echo $res->login_points ; ?>)</span>
       </div>
   </div>
 

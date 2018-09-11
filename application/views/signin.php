@@ -117,6 +117,10 @@ FB.init({
   cookie: true,
 });
 
+
+
+
+
 function fbAuthUser() {
     FB.login(checkLoginStatus);
 }
@@ -125,13 +129,12 @@ function fbAuthUser() {
 function checkLoginStatus(response) {
     if(response && response.status == 'connected') {
 
-//         FB.api('/me', {fields: 'name,email'}, function(response) {
-//     user_email = response.email; //get user email
-//     console.log(response);
-//     alert(response.email);
-// });
+// FB.api('/me?fields=name,email', function(response) {
+//       console.log(response.name + '---'+response.email);
+//     });
 
-	 FB.api('/me', {fields: 'name,email'}, function(response) {
+	// FB.api('/me', {fields: 'name,email'}, function(response) {
+	FB.api('/me?fields=name,email', function(response) {
         var fbname=response.name;
 		var fbemail=response.email;
 

@@ -38,7 +38,7 @@
 .profile-pic {
     max-width: 200px;
     max-height: 200px;
-    border-radius: 50px;
+
     margin-top: 10px;
     margin-left: 20px;
     height: 200px;
@@ -46,6 +46,7 @@
 }
 .file-upload{
   padding-left:140px;
+  margin-top: 10px;
 }
 .profile-img{
   text-align: center;

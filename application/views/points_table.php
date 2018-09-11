@@ -17,6 +17,11 @@ table{
 th{
   width: 150px;
 }
+.dataTables_filter {
+   width: 50%;
+   float: right;
+   text-align: right;
+}
 
 </style>
 <div class="col-sm-12 col-md-12 " id="content">
@@ -57,4 +62,5 @@ th{
 $(document).ready(function() {
   $('table.display').DataTable();
 } );
+
 </script>

@@ -1076,6 +1076,23 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
       return $response;
   }
 
+
+  public function getEventcities($country_id)
+  {
+      $country_query = "SELECT id,city_name,city_latitude,city_longitude from city_master WHERE event_status='Y' and country_id='$country_id'";
+      $country_res = $this->db->query($country_query);
+
+       if($country_res->num_rows()>0){
+            $city_result= $country_res->result();
+            $response = array("status" => "success", "msg" => "View Cities","cities"=>$city_result);
+
+      }else{
+              $response = array("status" => "error", "msg" => "Cities not found");
+      }
+
+      return $response;
+  }
+
 //#################### Select Country End ####################//
 
 //#################### Select State ####################//

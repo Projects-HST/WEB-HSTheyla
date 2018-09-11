@@ -7,6 +7,11 @@
 ?>
 
 <style>
+.pay_sum{
+		font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
 .review_btn{
 		padding: 10px 20px 10px 20px;
     border: 2px solid black;
@@ -286,20 +291,20 @@ foreach($event_details as $res){
  </div>
  <div class="modal-body" id="modal-body">
    <center>
-        
+
 	<?php if (count($event_reviews_users)>0){
 		foreach($event_reviews_users as $reviewres){
 			$review_id = $reviewres->id;
 			$event_rating = $reviewres->event_rating;
 			$comments = $reviewres->comments;
 		}?>
-		
+
 	<form name="frmReview" id="" action="#" method="post" enctype="multipart/form-data" class="form" autocomplete="off">
        <div class="form-group row">
        <div class="col-lg-12">
            <div class="rating">
              <span class="user-rating">
-			 
+
 			 <?php
 				for ($i=1; $i <6; $i++)
 				//$y = 5;
@@ -328,9 +333,9 @@ foreach($event_details as $res){
          </div>
        </div>
     </form>
-	
+
 	<?php } else { ?>
-		
+
 	<form name="frmReview" id="" action="#" method="post" enctype="multipart/form-data" class="form" autocomplete="off">
        <div class="form-group row">
        <div class="col-lg-12">
@@ -357,10 +362,10 @@ foreach($event_details as $res){
          </div>
        </div>
     </form>
-		
+
 	<?php } ?>
-		
- 
+
+
    </center>
  </div>
 
@@ -524,7 +529,8 @@ foreach($event_details as $res){
 		var disp_total = stotal.toFixed(2);
 
 
-		result +="<div class='col-md-6'><p class='event_select_text'>Plan Name</p></div><div class='col-md-6'><p class='event_select_text'>"+disp_plan_name+"</p></div><div class='col-md-6'><p class='event_select_text'>Ticket Price</p></div><div class='col-md-6'><p class='event_select_text'>₹ "+disp_plan_rate+"</p></div><div class='col-md-6'><p class='event_select_text'>No. of Seats</p></div><div class='col-md-6'><p class='event_select_text'>"+no_seats+"</p></div><div class='col-md-6 total_price'><p class='event_select_text'>Total Price</p></div><div class='col-md-6 total_price'><p class='event_select_text'>₹ "+disp_total+"</p></div><div class='col-md-12'><input type='submit' class='btn book_tickets confirm_btn' value='Continue' /></p><input type='hidden' name='no_seats' id='no_seats' value="+no_seats+" /><input type='hidden' name='total_amount' id='total_amount' value="+disp_total+" /><input type='hidden' name='user_id' id='user_id' value='<?php echo $user_id; ?>' /></div>";
+		// result +="<div class='col-md-6'><p class='event_select_text'>Plan Name</p></div><div class='col-md-6'><p class='event_select_text'>"+disp_plan_name+"</p></div><div class='col-md-6'><p class='event_select_text'>Ticket Price</p></div><div class='col-md-6'><p class='event_select_text'>₹ "+disp_plan_rate+"</p></div><div class='col-md-6'><p class='event_select_text'>No. of Seats</p></div><div class='col-md-6'><p class='event_select_text'>"+no_seats+"</p></div><div class='col-md-6 total_price'><p class='event_select_text'>Total Price</p></div><div class='col-md-6 total_price'><p class='event_select_text'>₹ "+disp_total+"</p></div><div class='col-md-12'><input type='submit' class='btn book_tickets confirm_btn' value='Continue' /></p><input type='hidden' name='no_seats' id='no_seats' value="+no_seats+" /><input type='hidden' name='total_amount' id='total_amount' value="+disp_total+" /><input type='hidden' name='user_id' id='user_id' value='<?php echo $user_id; ?>' /></div>";
+		result +="<div class='row'><div class='col-md-12'><center><p class='pay_sum'>Payment Summary</p></center></div><div class='col-md-3'></div><div class='col-md-3'> <p class='event_select_text'>Plan Name</p></div><div class='col-md-2'> <p class='event_select_text'>"+disp_plan_name+"</p></div><div class='col-md-4'></div><div class='col-md-3'></div><div class='col-md-3'> <p class='event_select_text'>Ticket Price</p></div><div class='col-md-2'> <p class='event_select_text'>₹ "+disp_plan_rate+"</p></div><div class='col-md-4'></div><div class='col-md-3'></div><div class='col-md-3'> <p class='event_select_text'>No. of Seats</p></div><div class='col-md-2'> <p class='event_select_text'>"+no_seats+"</p></div><div class='col-md-4'></div><div class='col-md-3'></div><div class='col-md-3 total_price'> <p class='event_select_text'>Total Price</p></div><div class='col-md-2 total_price'> <p class='event_select_text'>₹ "+disp_total+"</p></div><div class='col-md-4'></div></div><div class='col-md-12'> <center><input type='submit' class='btn book_tickets confirm_btn' value='Continue'/></center> </p><input type='hidden' name='no_seats' id='no_seats' value="+no_seats+"/> <input type='hidden' name='total_amount' id='total_amount' value="+disp_total+"/> <input type='hidden' name='user_id' id='user_id' value='<?php echo $user_id; ?>'/></div>";
 
 		 $("#plan_summary").html(result).show();
 	}
@@ -585,8 +591,8 @@ foreach($event_details as $res){
 		  }
 	}
 
-	
-	
+
+
 	$('#review_update').on('click', function() {
 		var result = '';
 		var form_data = new FormData();
@@ -604,7 +610,7 @@ foreach($event_details as $res){
 		form_data.append('message', message);
 		form_data.append('event_id', event_id);
 		form_data.append('review_id', review_id);
-		
+
          $.ajax({
 			 url         : '<?php echo base_url(); ?>eventlist/updatereview',     // point to server-side PHP script
 			 dataType    : 'text',           // what to expect back from the PHP script, if anything
@@ -626,8 +632,8 @@ foreach($event_details as $res){
 			}
           });
     });
-	
-	
+
+
 	$('#review_add').on('click', function() {
 		var result = '';
 		var form_data = new FormData();

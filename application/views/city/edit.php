@@ -47,7 +47,7 @@
                                   <input class="form-control" type="hidden"  name="cityid" value="<?php echo $res->id; ?>" id="example-text-input">
                               </div>
                            </div>
-                           <!-- <div class="form-group row">
+                           <div class="form-group row">
 
                             <label for="latitude" class="col-sm-4 col-form-label">Event Latitude</label>
                             <div class="col-sm-6">
@@ -61,7 +61,7 @@
                                 <input class="form-control" type="text" name="txtLongitude" id="lon" value="<?php echo $res->city_longitude; ?>">
                                  <div id="ermsg1"></div> <div id="ermsg3"></div>
                             </div>
-                        </div> -->
+                        </div>
                            <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Status</label>
                               <div class="col-sm-6">
