@@ -8,7 +8,7 @@
                         <tr>
                             <th>S.No</th>
                             <th>Name (Email)</th>
-                            <th>Message</th>
+                            <!-- <th>Message</th> -->
                             <th>status</th>
 
                             <th>Action</th>
@@ -19,7 +19,7 @@
                     <tr>
                       <td><?php echo $i; ?></td>
                         <td><?php echo $value->name;?> ( <?php echo $value->email_id; ?> )</td>
-                        <td><?php echo $value->message;?></td>
+                        <!-- <td><?php echo $value->message;?></td> -->
                           <td><?php if($value->req_status=="Pending"){ ?>
                             <a href="" class="btn btn-primary waves-effect waves-light">Pending</a>
                           <?php }else if($value->req_status=="Approved"){ ?>

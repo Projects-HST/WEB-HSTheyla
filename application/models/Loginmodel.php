@@ -775,7 +775,7 @@ Class Loginmodel extends CI_Model
 
 
   function get_all_organiser_request(){
-    $sql = "SELECT ud.name,um.email_id,um.user_name,um.id, ogr.*,ud.user_id FROM organiser_request AS ogr LEFT JOIN user_master AS um ON um.id=ogr.user_id LEFT JOIN user_details AS ud ON ud.user_id=um.id
+    $sql = "SELECT ogr.id as rq_id,ud.name,um.email_id,um.user_name,um.id, ogr.*,ud.user_id FROM organiser_request AS ogr LEFT JOIN user_master AS um ON um.id=ogr.user_id LEFT JOIN user_details AS ud ON ud.user_id=um.id
 ORDER BY ogr.id DESC";
     $resu=$this->db->query($sql);
     $res=$resu->result();

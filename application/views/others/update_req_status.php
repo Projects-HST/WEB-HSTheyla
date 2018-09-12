@@ -8,26 +8,27 @@
                                 <h4 class="mt-0 header-title">Organiser Request </h4>
 
                                 <form method="post" enctype="multipart/form-data" action="" name="organsier_req_form" id="change_req_status" novalidate="novalidate">
-                                   <div class="form-group row">
+                                   <!-- <div class="form-group row">
                                       <label for="example-text-input" class="col-sm-4 col-form-label"> Name</label>
                                       <div class="col-sm-6">
                                         <?php echo $rows->name; ?>
-                                        <input type="hidden" name="req_id" value="<?php echo $rows->rq_id; ?>">
-                                        <input type="hidden" name="org_id" value="<?php echo $rows->user_id; ?>">
+
                                       </div>
-                                   </div>
+                                   </div> -->
                                    <div class="form-group row">
                                       <label for="example-text-input" class="col-sm-4 col-form-label">Email Or Phone</label>
                                       <div class="col-sm-6">
-                                        <?php echo $rows->email_or_phone; ?>
+                                        <?php echo $rows->email_id; ?>
                                       </div>
+                                      <input type="hidden" name="req_id" value="<?php echo $rows->rq_id; ?>">
+                                      <input type="hidden" name="org_id" value="<?php echo $rows->user_id; ?>">
                                    </div>
-                                   <div class="form-group row">
+                                   <!-- <div class="form-group row">
                                       <label class="col-sm-4 col-form-label">Message</label>
                                       <div class="col-sm-8">
                                         <?php echo $rows->message; ?>
                                       </div>
-                                   </div>
+                                   </div> -->
                                    <div class="form-group row">
                                       <label class="col-sm-4 col-form-label">Status</label>
                                       <div class="col-sm-8">
