@@ -310,7 +310,7 @@ function getAllevents()
 {
 	$("#event_list_all").html("").show();
 
-	var limit = 12;
+	var limit = 9;
 	var offset = 0;
 
 	$('#event_type').prop('selectedIndex',0);
@@ -467,7 +467,7 @@ function getCountryevents()
 {
 	$("#event_list_cny").html("").show();
 
-	var limit = 12;
+	var limit = 9;
 	var offset = 0;
 
 	var country_id=cnyname.value;
@@ -626,7 +626,7 @@ function getCityevents()
 {
 	$("#event_list_cty").html("").show();
 
-	var limit = 12;
+	var limit = 9;
 	var offset = 0;
 
 	var country_id=cnyname.value;
@@ -801,7 +801,7 @@ function getCategoryevents()
 {
 	$("#event_list_cat").html("").show();
 
-	var limit = 12;
+	var limit = 9;
 	var offset = 0;
 
 	var country_id=cnyname.value;
@@ -980,7 +980,7 @@ function getTypeevents()
 {
 	$("#event_list_type").html("").show();
 
-	var limit = 12;
+	var limit = 9;
 	var offset = 0;
 
 	var country_id=cnyname.value;
