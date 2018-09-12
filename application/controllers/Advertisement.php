@@ -152,7 +152,7 @@ class Advertisement extends CI_Controller
         $temp = pathinfo($event_pic, PATHINFO_EXTENSION);
         $file_name      = time() . rand(1, 5) . rand(6, 10);
         $event_banner   = $file_name. '.' .$temp;
-        $uploaddir      = 'assets/events/advertisement/';
+        $uploaddir      = 'assets/events/slider/';
         $profilepic     = $uploaddir . $event_banner;
         move_uploaded_file($_FILES['eventbanner']['tmp_name'], $profilepic);
 		
@@ -268,7 +268,7 @@ class Advertisement extends CI_Controller
         $temp = pathinfo($event_pic, PATHINFO_EXTENSION);
         $file_name      = time() . rand(1, 5) . rand(6, 10);
         $event_banner   = $file_name. '.' .$temp;
-        $uploaddir      = 'assets/events/advertisement/';
+        $uploaddir      = 'assets/events/slider/';
         $profilepic     = $uploaddir . $event_banner;
         move_uploaded_file($_FILES['eventbanner']['tmp_name'], $profilepic);
 		

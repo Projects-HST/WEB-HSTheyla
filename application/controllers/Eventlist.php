@@ -20,7 +20,7 @@ class Eventlist extends CI_Controller
 		$data['city_list'] = $this->eventlistmodel->getall_city_list();
 		$data['category_list'] = $this->eventlistmodel->getall_category_list();
 		$data['event_resu'] = $this->eventlistmodel->get_events();
-		$data['adv_event_result'] = $this->eventlistmodel->getadv_events();
+		$data['banner_event_result'] = $this->eventlistmodel->getadv_events();
 		$data['country_values'] = get_cookie('country_values');
 		$data['city_values'] = get_cookie('city_values');
 		$this->load->view('front_header');

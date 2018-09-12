@@ -102,9 +102,9 @@ body{background-color: #f7f8fa;}
   </ol>
   <div class="carousel-inner" role="listbox">
   <?php
-	if (count($adv_event_result)>0){
+	if (count($banner_event_result)>0){
 		$i = 0;
-		foreach($adv_event_result as $res){
+		foreach($banner_event_result as $res){
 			$event_id = $res->id * 564738;
 			$event_name = strtolower(preg_replace("/[^\w]/", "-", $res->event_name));
 			$enc_event_id = base64_encode($event_id);
@@ -120,7 +120,7 @@ body{background-color: #f7f8fa;}
 			$disp_banner_desc  = wordwrap($shown_string, 100, "<br />");
 ?>
 
-<div class="carousel-item <?php if ($i=='0') echo "active"; ?>" style="background-image: url('<?php echo base_url(); ?>/assets/events/advertisement/<?php echo $res->banner; ?>');background-size: cover;background-position: center;background-repeat: no-repeat;">
+<div class="carousel-item <?php if ($i=='0') echo "active"; ?>" style="background-image: url('<?php echo base_url(); ?>assets/events/slider/<?php echo $res->banner; ?>');background-size: cover;background-position: center;background-repeat: no-repeat;">
   <!--<img src="<?php echo base_url(); ?>assets/events/advertisement/<?php echo $res->banner; ?>" alt="<?php echo $res->event_name; ?>">-->
       <div class="container">
         <div class="carousel-caption d-none d-md-block text-left">
