@@ -3,9 +3,9 @@ $user_id = $this->session->userdata('id');
 foreach($booking_process as $res){
 		$originalDate = $res->show_date;;
 }
-$IHC = "0.00";
-$CGST = "0.00";
-$SGST = "0.00";
+//$IHC = "0.00";
+//$CGST = "0.00";
+//$SGST = "0.00";
 ?>
 <style>
 .navbar {
@@ -86,7 +86,7 @@ hr{
             <p class="payment_heading dot">:</p>
           </div>
           <div class="col-md-4">
-              <p class="payment_heading">₹ <?php echo $res->total_amount;?></p>
+              <p class="payment_heading">₹ <?php echo $res->booking_amount;?></p>
           </div>
         </div>
 
@@ -98,7 +98,7 @@ hr{
             <p class="payment_heading dot">:</p>
           </div>
           <div class="col-md-4">
-              <p class="payment_heading">₹ <?php echo $IHC;?></p>
+              <p class="payment_heading">₹ <?php echo $res->IHC;?></p>
           </div>
         </div>
 
@@ -110,7 +110,7 @@ hr{
             <p class="payment_heading dot">:</p>
           </div>
           <div class="col-md-4">
-              <p class="payment_heading">₹ <?php echo $CGST;?></p>
+              <p class="payment_heading">₹ <?php echo $res->CGST;?></p>
           </div>
         </div>
         <div class="row">
@@ -121,7 +121,7 @@ hr{
             <p class="payment_heading dot">:</p>
           </div>
           <div class="col-md-4">
-              <p class="payment_heading">₹ <?php echo $SGST;?></p>
+              <p class="payment_heading">₹ <?php echo $res->SGST;?></p>
           </div>
         </div>
           <hr class="total_bor">
@@ -134,7 +134,8 @@ hr{
             <p class="payment_heading dot">:</p>
           </div>
           <div class="col-md-4">
-              <p class="payment_heading">₹ <?php echo $res->total_amount;?></p>
+              <p class="payment_heading">₹ <?php echo number_format($res->total_amount,2);?></p>
+			  
           </div>
 
         </div>

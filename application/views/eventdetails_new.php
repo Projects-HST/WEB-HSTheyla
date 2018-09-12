@@ -8,12 +8,12 @@
 
 <style>
 .pay_sum{
-		font-size: 20px;
+	font-size: 20px;
     font-weight: 600;
     margin-bottom: 25px;
 }
 .review_btn{
-		padding: 10px 20px 10px 20px;
+	padding: 10px 20px 10px 20px;
     border: 2px solid black;
     color: #2b2424;
     text-decoration: none;
@@ -27,8 +27,8 @@
     font-size: 16px;
     font-weight: 500;
     padding: 10px 25px 10px 25px;
-		background-color: #478ECC;
-		border-radius: 10px;
+	background-color: #478ECC;
+	border-radius: 10px;
 }
 
 .event_detail_desc{
@@ -521,12 +521,12 @@ foreach($event_details as $res){
 		var disp_plan_name=$('#show_plan').val();
 		var disp_plan_rate=$('#seat_rate').val();
 		var no_seats=$('#show_seats').val();
-		var CGST = 0;
-		var SGST = 0;
-		var IHC = 0;
+		//var CGST = 0;
+		//var SGST = 0;
+		//var IHC = 0;
+		//var stotal = total + CGST + SGST + IHC;
 		var total = disp_plan_rate * no_seats;
-		var stotal = total + CGST + SGST + IHC;
-		var disp_total = stotal.toFixed(2);
+		var disp_total = total.toFixed(2);
 
 
 		// result +="<div class='col-md-6'><p class='event_select_text'>Plan Name</p></div><div class='col-md-6'><p class='event_select_text'>"+disp_plan_name+"</p></div><div class='col-md-6'><p class='event_select_text'>Ticket Price</p></div><div class='col-md-6'><p class='event_select_text'>₹ "+disp_plan_rate+"</p></div><div class='col-md-6'><p class='event_select_text'>No. of Seats</p></div><div class='col-md-6'><p class='event_select_text'>"+no_seats+"</p></div><div class='col-md-6 total_price'><p class='event_select_text'>Total Price</p></div><div class='col-md-6 total_price'><p class='event_select_text'>₹ "+disp_total+"</p></div><div class='col-md-12'><input type='submit' class='btn book_tickets confirm_btn' value='Continue' /></p><input type='hidden' name='no_seats' id='no_seats' value="+no_seats+" /><input type='hidden' name='total_amount' id='total_amount' value="+disp_total+" /><input type='hidden' name='user_id' id='user_id' value='<?php echo $user_id; ?>' /></div>";
