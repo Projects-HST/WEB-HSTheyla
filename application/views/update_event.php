@@ -30,9 +30,38 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 <div class="col-md-12" id="content">
 	<h3 class="dashboard_tab">Update  Event</h3>
 </div>
-<div class="container">
+<div class="">
 	<?php	foreach($edit as $rows){} $sts=$rows->event_status; ?>
 	<form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>home/updateeventsdetails" name="eventform" id="eventform" onSubmit='return check();'>
+		<div class="col-md-12 form_box">
+			       <div class="form-group">
+			            <label for="country" class="col-sm-2 col-form-label">Select Country</label>
+			            <div class="col-sm-4">
+			              <select class="form-control" name="country" onchange="getcityname(this.value)">
+			              <option value="">Select Country Name</option>
+			                     <?php foreach($country_list as $cntry){ ?>
+			                        <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
+			                     <?php } ?>
+			                </select>
+		                  <script language="JavaScript">document.eventform.country.value="<?php echo $rows->event_country; ?>";</script>
+			            </div>
+			             <label for="city" class="col-sm-2 col-form-label">Select City</label>
+			            <div class="col-sm-4">
+		                <select class="form-control" name="city" id="ctname">
+		  							<?php
+		  								$cntyrid=$rows->event_country;
+		  								$sql="SELECT id,city_name FROM city_master WHERE country_id='$cntyrid' AND event_status='Y' ORDER BY id ASC";
+		  								$resu=$this->db->query($sql);
+		  								$res=$resu->result();
+		  								foreach ($res as $value) { ?>
+		  								<option value="<?php echo $value->id; ?>"><?php echo $value->city_name; ?></option>
+		  								<?php } ?>
+		  								</select>
+		  								<script language="JavaScript">document.eventform.city.value="<?php echo $rows->event_city; ?>";</script>
+			                <div id="cmsg"></div>
+			            </div>
+			        </div>
+		</div>
 <div class="col-md-12 form_box">
 	<div class="form-group">
 			<label for="Category" class="col-sm-2 col-form-label">Select Category</label>
@@ -51,35 +80,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 			</div>
 	</div>
 </div>
-<div class="col-md-12 form_box">
-	       <div class="form-group">
-	            <label for="country" class="col-sm-2 col-form-label">Select Country</label>
-	            <div class="col-sm-4">
-	              <select class="form-control" name="country" onchange="getcityname(this.value)">
-	              <option value="">Select Country Name</option>
-	                     <?php foreach($country_list as $cntry){ ?>
-	                        <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
-	                     <?php } ?>
-	                </select>
-                  <script language="JavaScript">document.eventform.country.value="<?php echo $rows->event_country; ?>";</script>
-	            </div>
-	             <label for="city" class="col-sm-2 col-form-label">Select City</label>
-	            <div class="col-sm-4">
-                <select class="form-control" name="city" id="ctname">
-  							<?php
-  								$cntyrid=$rows->event_country;
-  								$sql="SELECT id,city_name FROM city_master WHERE country_id='$cntyrid' AND event_status='Y' ORDER BY id ASC";
-  								$resu=$this->db->query($sql);
-  								$res=$resu->result();
-  								foreach ($res as $value) { ?>
-  								<option value="<?php echo $value->id; ?>"><?php echo $value->city_name; ?></option>
-  								<?php } ?>
-  								</select>
-  								<script language="JavaScript">document.eventform.city.value="<?php echo $rows->event_city; ?>";</script>
-	                <div id="cmsg"></div>
-	            </div>
-	        </div>
-</div>
+
 	<div class="col-md-12 form_box">
 		<div class="form-group">
 				<label for="Venue" class="col-sm-2 col-form-label">Venue</label>
@@ -93,6 +94,60 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 				</div>
 		</div>
 	</div>
+	<div class="col-md-12 form_box">
+		<label for="latitude" class="col-sm-2 col-form-label">Select</label>
+		 <div id="dvMap" style="width:100%; height:250px"> </div>
+	</div>
+	<div class="col-md-12 form_box">
+		<div class="form-group">
+				<label for="latitude" class="col-sm-2 col-form-label">Event Latitude</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text" name="txtLatitude" value="<?php echo $rows->event_latitude; ?>" id="latu" >
+						<div id="ermsg"></div> <div id="ermsg2"></div>
+				</div>
+					<label for="longitude" class="col-sm-2 col-form-label">Event Longitude</label>
+				<div class="col-sm-4">
+						<input class="form-control" type="text" name="txtLongitude" id="lon" value="<?php echo $rows->event_longitude; ?>">
+						 <div id="ermsg1"></div> <div id="ermsg3"></div>
+				</div>
+		</div>
+	</div>
+	<div id = "date_time">
+<div class="col-md-12 form_box">
+<div class="form-group">
+<label for="sdate" class="col-sm-2 col-form-label">Start Date</label>
+<div class="col-sm-4">
+<div class="input-group">
+<input type="text" class="form-control" value="<?php $date=date_create($rows->start_date);echo date_format($date,"d-m-Y");  ?>" name="start_date" id="datepicker-autoclose">
+<span class="input-group-addon bg-custom b-0"><i class="far fa-calendar-plus"></i></span>
+</div>
+</div>
+
+<label for="edate" class="col-sm-2 col-form-label">End Date</label>
+<div class="col-sm-4">
+<div class="input-group">
+<input type="text" class="form-control" required="" value="<?php $date=date_create($rows->end_date);echo date_format($date,"d-m-Y");  ?>" name="end_date" id="datepicker">
+<span class="input-group-addon bg-custom b-0"><i class="far fa-calendar-plus"></i></span>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-12 form_box">
+<div class="form-group">
+<label for="stime" class="col-sm-2 col-form-label">Start Time</label>
+<div class="col-sm-4">
+<input  type="text" class="form-control" id="stime" name="start_time" value="<?php echo $rows->start_time; ?>">
+</div>
+<label for="etime" class="col-sm-2 col-form-label">End Time</label>
+<div class="col-sm-4">
+<input  type="text" class="form-control" id="etime" name="end_time" value="<?php echo $rows->end_time; ?>">
+</div>
+</div>
+</div>
+
+
 	<div class="col-md-12 form_box">
 		<div class="form-group">
 				<label for="Description" class="col-sm-2 col-form-label">Description</label>
@@ -135,59 +190,8 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 
 						 </div>
 						</div>
-                        <div id = "date_time">
-		<div class="col-md-12 form_box">
-			<div class="form-group">
-					 <label for="sdate" class="col-sm-2 col-form-label">Start Date</label>
-					 <div class="col-sm-4">
-						 <div class="input-group">
-               <input type="text" class="form-control" value="<?php $date=date_create($rows->start_date);echo date_format($date,"d-m-Y");  ?>" name="start_date" id="datepicker-autoclose">
-               <span class="input-group-addon bg-custom b-0"><i class="far fa-calendar-plus"></i></span>
-					 </div>
-					 </div>
 
-						<label for="edate" class="col-sm-2 col-form-label">End Date</label>
-					 <div class="col-sm-4">
-							<div class="input-group">
-                <input type="text" class="form-control" required="" value="<?php $date=date_create($rows->end_date);echo date_format($date,"d-m-Y");  ?>" name="end_date" id="datepicker">
-                <span class="input-group-addon bg-custom b-0"><i class="far fa-calendar-plus"></i></span>
 
-					 </div>
-					 </div>
-			 </div>
-		</div>
-         </div>
-			<div class="col-md-12 form_box">
-				<div class="form-group">
-				<label for="stime" class="col-sm-2 col-form-label">Start Time</label>
-				<div class="col-sm-4">
-					 <input  type="text" class="form-control" id="stime" name="start_time" value="<?php echo $rows->start_time; ?>">
-				</div>
-				 <label for="etime" class="col-sm-2 col-form-label">End Time</label>
-				<div class="col-sm-4">
-				<input  type="text" class="form-control" id="etime" name="end_time" value="<?php echo $rows->end_time; ?>">
-				</div>
-			</div>
-			</div>
-
-				<div class="col-md-12 form_box">
-					<label for="latitude" class="col-sm-2 col-form-label">Select</label>
-					 <div id="dvMap" style="width:300px; height:250px"> </div>
-				</div>
-					<div class="col-md-12 form_box">
-						<div class="form-group">
-								<label for="latitude" class="col-sm-2 col-form-label">Event Latitude</label>
-								<div class="col-sm-4">
-								  <input class="form-control" type="text" name="txtLatitude" value="<?php echo $rows->event_latitude; ?>" id="latu" >
-										<div id="ermsg"></div> <div id="ermsg2"></div>
-								</div>
-									<label for="longitude" class="col-sm-2 col-form-label">Event Longitude</label>
-								<div class="col-sm-4">
-									  <input class="form-control" type="text" name="txtLongitude" id="lon" value="<?php echo $rows->event_longitude; ?>">
-										 <div id="ermsg1"></div> <div id="ermsg3"></div>
-								</div>
-						</div>
-					</div>
 					<div class="col-md-12 form_box">
 						<div class="form-group">
 								<label for="primarycell" class="col-sm-2 col-form-label">Primary Contact Phone</label>

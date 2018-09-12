@@ -23,9 +23,7 @@ hr{
 .total_bor{
   opacity: 0.5;
 }
-.img-thumbnail{
-  margin-top: -150px;
-}
+
 </style>
 <div class="container-fluid">
   <div class="row order_page">
@@ -72,7 +70,7 @@ hr{
           <div class="col-md-1 text-center"><p class="summary_text  dot">:</p></div>
           <div class="col-md-6"><p class="summary_text"><?php echo $res->event_address;?></p></div>
         </div>
-        
+
       </div>
 
     </div>

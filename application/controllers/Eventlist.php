@@ -22,7 +22,7 @@ class Eventlist extends CI_Controller
 		$data['event_resu'] = $this->eventlistmodel->get_events();
 		$data['adv_event_result'] = $this->eventlistmodel->getadv_events();
 		$data['country_values'] = get_cookie('country_values');
-		$data['city_values'] = get_cookie('city_values');		
+		$data['city_values'] = get_cookie('city_values');
 		$this->load->view('front_header');
 		$this->load->view('event_list_new', $data);
 		$this->load->view('front_footer');
@@ -96,6 +96,7 @@ class Eventlist extends CI_Controller
     {
   		$dec_event_id = base64_decode($enc_event_id);
   		$event_id = ($dec_event_id/564738);
+    
     	$data['event_gallery'] = $this->eventlistmodel->getevent_gallery($event_id);
   		$data['event_details'] = $this->eventlistmodel->getevent_details($event_id);
 		$data['event_reviews_users'] = $this->eventlistmodel->getevent_reviews_user($event_id);
@@ -248,17 +249,17 @@ class Eventlist extends CI_Controller
        	echo json_encode($data['reviews']);
 		*/
     }
-	
+
 	public function updatereview()
     {
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
-		
+
 		$event_id  = $this->input->post('event_id');
 		$review_id  = $this->input->post('review_id');
 		$rating  = $this->input->post('rating');
 		$message  = $this->input->post('message');
-		
+
 		$data['reviews'] = $this->eventlistmodel->update_review($event_id,$review_id,$user_id,$rating,$message);
 		echo "OK";
     }

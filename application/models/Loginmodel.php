@@ -6,6 +6,7 @@ Class Loginmodel extends CI_Model
   public function __construct()
   {
       parent::__construct();
+       $this->load->model('mailmodel');
 
   }
 
@@ -793,13 +794,20 @@ ORDER BY ogr.id DESC";
   function change_req_status($req_status,$rq_id,$org_id){
     $sql = "UPDATE  organiser_request SET req_status='$req_status' WHERE id='$rq_id'";
     $resu=$this->db->query($sql);
+    $get_email="SELECT * FROM user_master WHERE id='$org_id'";
+    $result=$this->db->query($get_email);
+    foreach($result->result() as $get_mail){}
+    $email=$get_mail->email_id;
     if($req_status=="Approved"){
+      $notes="Your Request has been Approved Please Logout from all devices and Login Again";
       $sql = "UPDATE  user_master SET user_role='2' WHERE id='$org_id'";
       $resu=$this->db->query($sql);
-
+      $this->mailmodel->send_mail($email,$notes);
     }else if($req_status=="Rejected"){
+      $notes="Your Request has been Rejected Please Contact us ";
       $sql = "UPDATE  user_master SET user_role='3' WHERE id='$org_id'";
       $resu=$this->db->query($sql);
+      $this->mailmodel->send_mail($email,$notes);
     }else{
       $sql = "UPDATE  user_master SET user_role='3' WHERE id='$org_id'";
       $resu=$this->db->query($sql);
