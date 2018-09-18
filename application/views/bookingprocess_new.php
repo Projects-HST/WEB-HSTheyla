@@ -1,5 +1,6 @@
 <?php
 $user_id = $this->session->userdata('id');
+
 foreach($booking_process as $res){
 		$originalDate = $res->show_date;;
 }
@@ -140,16 +141,24 @@ hr{
 
         </div>
         <hr  class="total_bor">
-        <form method="post" name="customerData"  class="confirm_process" action="http://hobbistan.com/web/ccavenue/ccavRequestHandler.php">
-                    <input type="hidden" name="merchant_id" value="89958"/>
-                    <input type="hidden" name="order_id" value="<?php echo $res->order_id;?>"/>
-                    <input type="hidden" name="amount" value="<?php echo $res->total_amount;?>"/>
-                    <input type="hidden" name="currency" value="INR"/>
-                    <input type="hidden" name="redirect_url" value="http://hobbistan.com/web/ccavenue/ccavResponseHandler.php"/>
-                    <input type="hidden" name="cancel_url" value="https://heylaapp.com/eventlist/"/>
-                    <input type="hidden" name="language" value="EN"/>
-                    <INPUT type="submit" value="CheckOut" class="btn btn-primary" style="width:200px;">
-            </form>
+		
+		<form method="post" name="OrderData" class="confirm_process" action="<?php echo base_url(); ?>eventlist/ccavenue/">
+			<input type="hidden" name="order_id" value="<?php echo $res->order_id;?>"/>
+			<INPUT type="submit" value="CheckOut" class="btn btn-primary" style="width:200px;">
+        </form>
+		
+<!--
+        <form method="post" name="customerData" id='ccaven' class="confirm_process" action="http://hobbistan.com/web/ccavenue/ccavRequestHandler.php">
+			<input type="hidden" name="merchant_id" value="89958"/>
+			<input type="hidden" name="order_id" value="<?php echo $res->order_id;?>"/>
+			<input type="hidden" name="amount" value="<?php echo $res->total_amount;?>"/>
+			<input type="hidden" name="currency" value="INR"/>
+			<input type="hidden" name="redirect_url" value="http://hobbistan.com/web/ccavenue/ccavResponseHandler.php"/>
+			<input type="hidden" name="cancel_url" value="https://heylaapp.com/eventlist/"/>
+			<input type="hidden" name="language" value="EN"/>
+			<INPUT type="submit" value="CheckOut" class="btn btn-primary" style="width:200px;">
+        </form>
+-->
       </div>
     </div>
     <center>  <img src="<?php echo base_url(); ?>assets/front/images/login_bg.png" class="img-thumbnail"> </center>

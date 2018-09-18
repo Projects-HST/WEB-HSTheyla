@@ -219,6 +219,23 @@ class Eventlist extends CI_Controller
 		}
     }
 
+	
+	public function ccavenue()
+    {
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
+		$user_role=$this->session->userdata('user_role');
+
+		if($user_id!=''){
+			$order_id  = $this->input->post('order_id');
+			$data['booking_result'] = $this->eventlistmodel->ccavenue($order_id);
+			$this->load->view('ccavenue', $data);
+		}else{
+			redirect('/signin/');
+		}
+    }
+	
+	
 	public function addreview()
     {
 		$event_id  = $this->input->post('event_id');
