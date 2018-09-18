@@ -1013,7 +1013,7 @@ class Home extends CI_Controller {
 			if($user_role==3 || $user_role==2){
 				$this->load->view('dash_header');
 				$this->load->view('booking_history_details', $datas);
-				$this->load->view('dash_footer');
+				//$this->load->view('dash_footer');
 			}else{
 				redirect('/');
 			}
