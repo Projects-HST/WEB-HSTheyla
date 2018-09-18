@@ -1171,8 +1171,10 @@ public function profilePictureUpload()
 
 		$event_id = '';
 		$search_event = $this->input->post("search_event");
+		$city_id = $this->input->post("city_id");
+		$event_type = $this->input->post("event_type");
 
-		$data['result']=$this->apimainmodel->search_events($search_event);
+		$data['result']=$this->apimainmodel->search_events($search_event,$city_id,$event_type);
 		$response = $data['result'];
 		echo json_encode($response);
 	}

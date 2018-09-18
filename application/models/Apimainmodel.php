@@ -656,8 +656,12 @@ class Apimainmodel extends CI_Model {
 	{
 	    $user_id = "";
         $login_type = "normal_signup";
+        if(empty($email_id)){
+           $sql = "SELECT * FROM user_master WHERE mobile_no = '".$mobile_no."'";
+        }else{
+           $sql = "SELECT * FROM user_master WHERE email_id ='".$email_id."' OR mobile_no = '".$mobile_no."'";
+        }
 
-	    $sql = "SELECT * FROM user_master WHERE email_id ='".$email_id."' OR mobile_no = '".$mobile_no."'";
 		$user_result = $this->db->query($sql);
 		$ress = $user_result->result();
 
@@ -1522,7 +1526,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                             LEFT JOIN city_master AS ci ON ev.event_city = ci.id
                             LEFT JOIN country_master AS cy ON ev.event_country = cy.id
                             WHERE ev.hotspot_status = 'N' AND $day_query ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
-                            group by ev.id LIMIT 50";
+                            group by ev.id";
 	    }
 	    if ($event_type == 'Popularity'){
 	         $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
@@ -1531,7 +1535,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                             LEFT JOIN city_master AS ci ON ev.event_city = ci.id
                             LEFT JOIN country_master AS cy ON ev.event_country = cy.id
                             WHERE ev.hotspot_status = 'N' AND $day_query ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
-                            group by ev.id ORDER by popularity DESC LIMIT 50";
+                            group by ev.id ORDER by popularity DESC";
 	    }
 		if ($event_type == 'Hotspot'){
 	        $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
@@ -1540,7 +1544,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                             LEFT JOIN city_master AS ci ON ev.event_city = ci.id
                             LEFT JOIN country_master AS cy ON ev.event_country = cy.id
                             WHERE ev.hotspot_status = 'Y' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
-                            group by ev.id LIMIT 50";
+                            group by ev.id";
 	    }
 		//echo $event_query;
 		$event_res = $this->db->query($event_query);
@@ -1600,14 +1604,34 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 //#################### View Events End ###############//
 
 
-  function search_events($search_event){
-    $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity FROM events AS ev
-                LEFT join event_popularity AS ep on ep.event_id = ev.id
-                LEFT JOIN city_master AS ci ON ev.event_city = ci.id
-                LEFT JOIN country_master AS cy ON ev.event_country = cy.id
-    LEFT JOIN booking_plan AS bp ON ev.id = bp.event_id
-                WHERE ev.event_name like '%$search_event%' AND ev.end_date >= CURDATE() AND
-                ev.event_status ='Y' group by ev.id";
+  function search_events($search_event,$city_id,$event_type){
+    if($event_type=='Favourite'){
+        $ev_type='N';
+        $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity FROM events AS ev
+                    LEFT join event_popularity AS ep on ep.event_id = ev.id
+                    LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+                    LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+                    LEFT JOIN booking_plan AS bp ON ev.id = bp.event_id
+                    WHERE ev.event_name like '%$search_event%' AND ev.event_city='$city_id' AND ev.hotspot_status  ='$ev_type'  AND  ev.end_date >= CURDATE() AND  ev.event_status ='Y' group by ev.id";
+    }else if($event_type=='Hotspot'){
+        $ev_type='Y';
+        $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity FROM events AS ev
+                    LEFT join event_popularity AS ep on ep.event_id = ev.id
+                    LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+                    LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+                    LEFT JOIN booking_plan AS bp ON ev.id = bp.event_id
+                    WHERE ev.event_name like '%$search_event%' AND ev.event_city='$city_id' AND ev.hotspot_status  ='$ev_type'   AND  ev.event_status ='Y' group by ev.id";
+    }else{
+      $ev_type='Y';
+       $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity FROM events AS ev
+                  LEFT join event_popularity AS ep on ep.event_id = ev.id
+                  LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+                  LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+                  LEFT JOIN booking_plan AS bp ON ev.id = bp.event_id
+                  WHERE ev.event_name like '%$search_event%' AND ev.event_city='$city_id' AND ev.hotspot_status  ='$ev_type'  AND  ev.end_date >= CURDATE() AND
+                  ev.event_status ='Y' group by ev.id ORDER by popularity DESC LIMIT 50";
+    }
+
 	$event_res = $this->db->query($event_query);
         if($event_res->num_rows()==0){
             $response = array("status" => "error", "msg" => "Events not found");
@@ -2425,7 +2449,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
       //----- User Points--------//
 
     function user_points($user_id){
-      $select="SELECT ud.name,um.user_name,um.email_id,upc.user_id,upc.total_points,ud.user_picture,um.id FROM user_points_count as upc
+      $select="SELECT IFNULL(ud.name,'') as name,IFNULL( um.user_name,'') as user_name,IFNULL(um.email_id,'') as email_id,upc.user_id,upc.total_points,IFNULL(ud.user_picture,'') as user_picture ,IFNULL(um.id,'') as id FROM user_points_count as upc
       left join user_details as ud on ud.user_id=upc.user_id left join user_master as um on um.id= upc.user_id order by upc.total_points desc";
       $user_result = $this->db->query($select);
       if($user_result->num_rows()==0){
