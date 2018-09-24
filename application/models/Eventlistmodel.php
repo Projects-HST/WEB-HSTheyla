@@ -498,16 +498,16 @@ Class Eventlistmodel extends CI_Model
 				}
 			}
 		  $samount = $seat_rate * $number_of_seats;
-		  echo $damount = number_format(($seat_rate * $number_of_seats),2);
+		  $damount = number_format(($seat_rate * $number_of_seats),2);
 		  
 		  $sbooking_fees = (20 * $number_of_seats);
-		  echo $dbooking_fees = number_format($sbooking_fees,2);
+		  $dbooking_fees = number_format($sbooking_fees,2);
 		  
 		  $sGST = ($sbooking_fees/100*18);
-		  echo $dGST = number_format($sGST,2);
+		  $dGST = number_format($sGST,2);
 		  
 		  $total_amount = $samount + $sbooking_fees + $sGST;
-		  echo $dtotal_amount = number_format($total_amount,2);
+		  $dtotal_amount = number_format($total_amount,2);
 		  //$CGST = number_format(1.25,2);
 		  //$SGST = number_format(1.75,2);
 		  //$IHC = number_format(1.50,2);

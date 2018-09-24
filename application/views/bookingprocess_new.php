@@ -147,12 +147,14 @@ hr{
 
         </div>
         <hr  class="total_bor">
+		<form method="post" name="OrderData" class="confirm_process" action="">
+			<INPUT type="button" value="CheckOut" class="btn btn-primary" style="width:200px;" onclick="alert('Waiting for Payment Gateway')">
+		</form>
 <!--		
 		<form method="post" name="OrderData" class="confirm_process" action="<?php echo base_url(); ?>eventlist/ccavenue/">
 			<input type="hidden" name="order_id" value="<?php echo $res->order_id;?>"/>
 			<INPUT type="submit" value="CheckOut" class="btn btn-primary" style="width:200px;">
         </form>
-		
 
         <form method="post" name="customerData" id='ccaven' class="confirm_process" action="http://hobbistan.com/web/ccavenue/ccavRequestHandler.php">
 			<input type="hidden" name="merchant_id" value="89958"/>
