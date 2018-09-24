@@ -4,6 +4,14 @@
 		$redirect = current_url();;
 		set_cookie('redirect_url',$redirect,'3600');
 	}
+
+	if (count($booking_planamount)>0){
+		//echo count($booking_planamount);
+		foreach($booking_planamount as $plan_amount_range){
+			$mini_amount_range = $plan_amount_range->mini;
+			$maxi_amount_range = $plan_amount_range->maxi;
+		}
+	}
 ?>
 
 <style>
@@ -123,6 +131,7 @@ span.fa.fa-star.checked{
 </style>
 <?php
 $user_id = $this->session->userdata('id');
+
 foreach($event_details as $res){
 			$disp_event_id = $res->id;
 			$event_id = $res->id * 564738;
@@ -160,7 +169,13 @@ foreach($event_details as $res){
 
          <p><img src="<?php echo base_url(); ?>assets/front/images/time.png"><span class="event_thumb event_detail_date"><?php echo $res->start_time;?> - <?php echo $res->end_time;?></span></p>
          <p><img src="<?php echo base_url(); ?>assets/front/images/location.png"><span class="event_thumb event_detail_date event_deetail_venue"><?php echo $res->event_venue; ?></span></p>
-				 <p><a href="http://maps.google.com/maps?z=12&t=m&q=loc:<?php echo $event_latitude;?>+<?php echo $event_longitude;?>" target="_blank"> View Location</a> </p>
+		 <?php if(is_null($mini_amount_range)){
+				echo "";
+			} else {
+			?>
+				<p><span class="event_thumb event_detail_date event_deetail_venue">₹<?php echo $mini_amount_range; ?> - ₹<?php echo $maxi_amount_range; ?></span></p>
+		<?php } ?>
+		 
 		 <p>
 		 <?php if ($event_type == 'Paid'){ ?>
 			<img src='<?php echo base_url(); ?>assets/front/images/paid.png'>

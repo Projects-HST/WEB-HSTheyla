@@ -102,6 +102,7 @@ class Eventlist extends CI_Controller
 		$data['event_reviews_users'] = $this->eventlistmodel->getevent_reviews_user($event_id);
   		$data['event_reviews'] = $this->eventlistmodel->getevent_reviews($event_id);
 		$data['booking_dates'] = $this->eventlistmodel->booking_plandates($event_id);
+		$data['booking_planamount'] = $this->eventlistmodel->booking_planamount($event_id);
 		//print_r($data['event_reviews_users']);
     	$event_desc = $data['event_details'];
 

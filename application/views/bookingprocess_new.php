@@ -51,6 +51,12 @@ hr{
           <div class="col-md-1 text-center"><p class="summary_text dot">:</p></div>
           <div class="col-md-6"><p class="summary_text"><?php echo $res->show_time;?></p></div>
         </div>
+		<div class="row">
+          <div class="col-md-5"><p class="summary_label summary_text">No.of Seats</p></div>
+          <div class="col-md-1 text-center"><p class="summary_text dot">:</p></div>
+          <div class="col-md-6"><p class="summary_text"><?php echo $res->number_of_seats;?></p></div>
+        </div>
+		
         <div class="row">
           <div class="col-md-5"><p class="summary_label summary_text">Event Name</p></div>
           <div class="col-md-1 text-center"><p class="summary_text dot">:</p></div>
@@ -105,7 +111,7 @@ hr{
 
         <div class="row">
           <div class="col-md-7">
-            <p class="payment_heading">CGST</p>
+            <p class="payment_heading">GST (18%)</p>
           </div>
           <div class="col-md-1">
             <p class="payment_heading dot">:</p>
@@ -113,7 +119,7 @@ hr{
           <div class="col-md-4">
               <p class="payment_heading">₹ <?php echo $res->CGST;?></p>
           </div>
-        </div>
+        </div><!--
         <div class="row">
           <div class="col-md-7">
             <p class="payment_heading">SGST</p>
@@ -124,7 +130,7 @@ hr{
           <div class="col-md-4">
               <p class="payment_heading">₹ <?php echo $res->SGST;?></p>
           </div>
-        </div>
+        </div>-->
           <hr class="total_bor">
         <div class="row">
 

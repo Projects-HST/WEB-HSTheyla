@@ -470,6 +470,22 @@ Class Eventlistmodel extends CI_Model
 		return $res;
     }
 
+	
+	function booking_planamount($event_id)
+    {
+		$sql="SELECT A.event_id,B.show_date,
+				MIN(seat_rate) AS mini,
+				MAX(seat_rate) AS maxi
+			FROM
+				booking_plan A,
+				booking_plan_timing B
+			WHERE
+				A.event_id = '$event_id' AND B.event_id ='$event_id' AND B.show_date >= CURRENT_DATE()";
+	  	$resu=$this->db->query($sql);
+	  	$res=$resu->result();
+		return $res;
+    }
+	
 	function booking_process($order_id,$event_id,$plan_id,$plan_time_id,$user_id,$number_of_seats,$total_amount,$booking_date)
     {
 			$sql = "SELECT seat_rate FROM booking_plan WHERE id = '$plan_id' AND event_id = '$event_id'";
@@ -482,18 +498,28 @@ Class Eventlistmodel extends CI_Model
 				}
 			}
 		  $samount = $seat_rate * $number_of_seats;
-		  $damount = number_format(($seat_rate * $number_of_seats),2);
-		
-		  $CGST = number_format(1.25,2);
-		  $SGST = number_format(1.75,2);
-		  $IHC = number_format(1.50,2);
+		  echo $damount = number_format(($seat_rate * $number_of_seats),2);
+		  
+		  $sbooking_fees = (20 * $number_of_seats);
+		  echo $dbooking_fees = number_format($sbooking_fees,2);
+		  
+		  $sGST = ($sbooking_fees/100*18);
+		  echo $dGST = number_format($sGST,2);
+		  
+		  $total_amount = $samount + $sbooking_fees + $sGST;
+		  echo $dtotal_amount = number_format($total_amount,2);
+		  //$CGST = number_format(1.25,2);
+		  //$SGST = number_format(1.75,2);
+		  //$IHC = number_format(1.50,2);
 		 
-		 $extra = $CGST + $SGST + $IHC;
-		 $total_amount = $samount + $extra;
-
+		 //$extra = $CGST + $SGST + $IHC;
+		 //$total_amount = $samount + $extra;
+		//exit;
 		 $sQuery = "INSERT INTO booking_process (order_id,event_id,plan_id,plan_time_id,user_id,number_of_seats,total_amount,booking_date) VALUES ('". $order_id . "','". $event_id . "','". $plan_id . "','". $plan_time_id . "','". $user_id . "','". $number_of_seats . "','". $total_amount . "','". $booking_date . "')";
 		$booking_insert = $this->db->query($sQuery);
 		//echo "<br>";
+		
+		//exit;
 		$update_seats = "UPDATE booking_plan_timing SET seat_available = seat_available-$number_of_seats WHERE id ='$plan_time_id'";
 		$seatsupdate = $this->db->query($update_seats);
 
@@ -503,7 +529,7 @@ Class Eventlistmodel extends CI_Model
 		$session_seats = "INSERT INTO booking_session (session_expiry,order_id,plan_time_id,number_of_seats) VALUES ('". $_SESSION['booking_expire'] . "','". $order_id . "','". $plan_time_id . "','". $number_of_seats . "')";
 		$session_insert = $this->db->query($session_seats);
 
-		$sql="SELECT A.id,A.order_id,E.category_name,B.id AS event_id,B.event_name,B.event_venue,B.event_address,C.show_date,C.show_time,D.plan_name,A.number_of_seats, A.total_amount, '$damount' AS booking_amount,$CGST AS CGST, $SGST AS SGST, $IHC AS IHC FROM booking_process A,events B,booking_plan_timing C,booking_plan D,category_master E WHERE A.order_id  = '$order_id' AND A.event_id = B.id AND A.plan_time_id = C.id AND A.plan_id = D.id AND B.category_id = E.id";
+		$sql="SELECT A.id,A.order_id,E.category_name,B.id AS event_id,B.event_name,B.event_venue,B.event_address,C.show_date,C.show_time,D.plan_name,A.number_of_seats, A.total_amount, '$damount' AS booking_amount,$dGST AS CGST, $dGST AS SGST, $dbooking_fees AS IHC FROM booking_process A,events B,booking_plan_timing C,booking_plan D,category_master E WHERE A.order_id  = '$order_id' AND A.event_id = B.id AND A.plan_time_id = C.id AND A.plan_id = D.id AND B.category_id = E.id";
 		//exit;
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
