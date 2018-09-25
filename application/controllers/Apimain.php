@@ -1452,18 +1452,18 @@ public function profilePictureUpload()
         $event_category = '';
         $selected_preference = '';
         $selected_city = '';
-		$price_range = '';
+				$price_range = '';
 
 
 
-        $single_date = $this->input->post("single_date");
-        $from_date = $this->input->post("from_date");
-        $to_date = $this->input->post("to_date");
-        $event_type = $this->input->post("event_type");
-        $event_category = $this->input->post("event_category");
-        $selected_preference = $this->input->post("selected_preference");
-        $selected_city = $this->input->post("selected_city");
-		$price_range = $this->input->post("price_range");
+      $single_date = $this->input->post("single_date");
+      $from_date = $this->input->post("from_date");
+      $to_date = $this->input->post("to_date");
+      $event_type = $this->input->post("event_type");
+      $event_category = $this->input->post("event_category");
+      $selected_preference = $this->input->post("selected_preference");
+      $selected_city = $this->input->post("selected_city");
+			$price_range = $this->input->post("price_range");
 
 
 
@@ -2023,6 +2023,7 @@ public function profilePictureUpload()
 	}
 
 	//-----------------------------------------------//
+
 
 
 

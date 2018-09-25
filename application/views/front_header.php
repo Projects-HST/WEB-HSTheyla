@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta name="theme-color" content="#478ECC" />
+    <link rel="icon" href="<?php echo base_url(); ?>assets/fav_icon.png" type="image/gif" sizes="32x32">
     <title><?php if(isset($meta_title)){echo "Heyla - ".$meta_title;}else{echo "Heyla";}?> </title>
     <meta name="description" content="<?php if(isset($meta_description)){echo $meta_description;}else{echo "Heyla";}?>"/>
     <link href="<?php echo base_url(); ?>assets/front/css/bootstrap.min.css" rel="stylesheet">
