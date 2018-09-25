@@ -86,37 +86,37 @@ hr{
         <p class="payment_heading" style="font-weight:bold;">Payment Summary</p>
         <hr>
         <div class="row">
-          <div class="col-md-7">
+          <div class="col-md-6">
             <p class="payment_heading">Price</p>
           </div>
           <div class="col-md-1">
             <p class="payment_heading dot">:</p>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-5">
               <p class="payment_heading">₹ <?php echo $res->booking_amount;?></p>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-7">
-            <p class="payment_heading">Internet Handing Charges</p>
+          <div class="col-md-6">
+            <p class="payment_heading">Booking Fees</p>
           </div>
           <div class="col-md-1">
             <p class="payment_heading dot">:</p>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-5">
               <p class="payment_heading">₹ <?php echo $res->IHC;?></p>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-7">
+          <div class="col-md-6">
             <p class="payment_heading">GST (18%)</p>
           </div>
           <div class="col-md-1">
             <p class="payment_heading dot">:</p>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-5">
               <p class="payment_heading">₹ <?php echo $res->CGST;?></p>
           </div>
         </div><!--
@@ -134,26 +134,28 @@ hr{
           <hr class="total_bor">
         <div class="row">
 
-          <div class="col-md-7">
+          <div class="col-md-6">
             <p class="payment_heading">Total</p>
           </div>
           <div class="col-md-1">
             <p class="payment_heading dot">:</p>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-5">
               <p class="payment_heading">₹ <?php echo number_format($res->total_amount,2);?></p>
 			  
           </div>
 
         </div>
         <hr  class="total_bor">
-		
+		<form method="post" name="OrderData" class="confirm_process" action="">
+			<INPUT type="button" value="CheckOut" class="btn btn-primary" style="width:200px;" onclick="alert('Waiting for Payment Gateway')">
+		</form>
+<!--		
 		<form method="post" name="OrderData" class="confirm_process" action="<?php echo base_url(); ?>eventlist/ccavenue/">
 			<input type="hidden" name="order_id" value="<?php echo $res->order_id;?>"/>
 			<INPUT type="submit" value="CheckOut" class="btn btn-primary" style="width:200px;">
         </form>
-		
-<!--
+
         <form method="post" name="customerData" id='ccaven' class="confirm_process" action="http://hobbistan.com/web/ccavenue/ccavRequestHandler.php">
 			<input type="hidden" name="merchant_id" value="89958"/>
 			<input type="hidden" name="order_id" value="<?php echo $res->order_id;?>"/>

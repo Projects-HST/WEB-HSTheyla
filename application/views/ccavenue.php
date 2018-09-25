@@ -19,7 +19,7 @@ foreach($booking_result as $res){
 		<input type="hidden" name="amount" value="<?php echo $res->total_amount;?>"/>
 		<input type="hidden" name="currency" value="INR"/>
 		<input type="hidden" name="redirect_url" value="http://hobbistan.com/web/ccavenue/ccavResponseHandler.php"/>
-		<input type="hidden" name="cancel_url" value="https://heylaapp.com/testing/"/>
+		<input type="hidden" name="cancel_url" value="https://heylaapp.com/"/>
 		<input type="hidden" name="language" value="EN"/>
 		<!--<INPUT type="submit" value="CheckOut" class="btn btn-primary" style="width:200px;">-->
 	</form>
