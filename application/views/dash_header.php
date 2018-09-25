@@ -6,7 +6,7 @@
 <meta content="" name="description" />
 <meta content="" name="author" />
 <meta name="viewport" content="width=1024">
-
+  <link rel="icon" href="<?php echo base_url(); ?>assets/fav_icon.png" type="image/gif" sizes="32x32">
 <link href="<?php echo base_url(); ?>assets/front/css/bootstrap3.min.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>assets/front/css/dashboard.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">

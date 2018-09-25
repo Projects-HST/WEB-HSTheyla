@@ -1961,6 +1961,8 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 							"hotspot_status" => $rows->hotspot_status,
 							"event_colour_scheme" => $rows->event_colour_scheme,
 							"event_status" => $rows->event_status,
+              "advertisement"=>'',
+
 				    );
 			    }
 			     	$response = array("status" => "success", "msg" => "View Events","Eventdetails"=>$eventData);
@@ -2480,6 +2482,10 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 
 
     }
+
+
+
+
 
 
 

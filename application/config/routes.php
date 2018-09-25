@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'Eventlist';
-$route['404_override'] = '';
+$route['404'] = 'welcome/error';
 $route['translate_uri_dashes'] = FALSE;
 //$route['admin/country/home'] = 'countrymasters/city_home';
 $route['google_login'] = 'home/gmaillogin';
@@ -83,3 +83,5 @@ $route['user_points'] = 'home/checkpoints';
 // $route['emailverfiy'] = 'home/emailverfiy';
 $route['deactive'] = 'home/deactive';
 $route['logout'] = 'home/logout';
+$route['webflow'] = 'eventlist/webflow';
+$route['appflow'] = 'eventlist/appflow';

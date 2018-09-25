@@ -17,8 +17,8 @@
 If the users are booking their tickets through our platform, they hereby consent, express and agree that they have read and fully understood  the Pricing Policy of Heyla in respect to the website/app. The User further consents that the terms of such Pricing Policy are acceptable to him/her.<br><br>
     <p><b><a href="https://heylaapp.com/payment" target="_blank">https://heylaapp.com/payment</a></b></p>
 
-        <p>Service Catalogue for <a href="https://projects.invisionapp.com/share/6RNYP51M7NW#/screens/318977721" target="_blank"><b>Mobile App </b></a> &nbsp; &  &nbsp;
-          <b><a href="https://projects.invisionapp.com/share/6BNYNNSQJRC#/screens/318970679" target="_blank">Website</a></b></p>
+        <p>Service Catalogue for <a href="<?php echo base_url(); ?>appflow" target="_blank"><b>Mobile App </b></a> &nbsp; &  &nbsp;
+          <b><a href="<?php echo base_url(); ?>webflow" target="_blank">Website</a></b></p>
  <br><b>Restrictions on use</b><br>
                       Your use of the website/app is restricted to viewing information of events, booking tickets, giving suggestions or raising queries or complaints. To protect our website, app and other users, we reserve all the rights to delete any content from the website/app. We also reserve the right to restrict the access of the website/app to certain users.
                       <br><br><b>Changes on Terms & Conditions</b><br>
