@@ -371,6 +371,7 @@ Class Eventlistmodel extends CI_Model
 	function getevent_reviews_user($event_id)
     {
 		$current_date = date("Y-m-d");
+		
 		if ($this->session->userdata('id') !=''){
 			$user_id = $this->session->userdata('id');
 		} else {
@@ -386,7 +387,7 @@ Class Eventlistmodel extends CI_Model
 	function getevent_reviews($event_id)
     {
 		$current_date = date("Y-m-d");
-		$sql="SELECT * FROM event_reviews A, user_master B WHERE A.user_id = B.id AND A.event_id ='$event_id' AND A.status ='Y' ";
+		$sql="SELECT * FROM event_reviews A, user_master B WHERE A.user_id = B.id AND A.event_id ='$event_id' AND A.status ='Y'";
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
 	  	return $res;
