@@ -169,13 +169,13 @@ foreach($event_details as $res){
 
          <p><img src="<?php echo base_url(); ?>assets/front/images/time.png"><span class="event_thumb event_detail_date"><?php echo $res->start_time;?> - <?php echo $res->end_time;?></span></p>
          <p><img src="<?php echo base_url(); ?>assets/front/images/location.png"><span class="event_thumb event_detail_date event_deetail_venue"><?php echo $res->event_venue; ?></span></p>
+		 <p><a href="http://maps.google.com/maps?z=12&t=m&q=loc:<?php echo $event_latitude;?>+<?php echo $event_longitude;?>" target="_blank"> View Location</a> </p>
 		 <?php if(is_null($mini_amount_range)){
 				echo "";
 			} else {
 			?>
 				<p><span class="event_thumb event_detail_date event_deetail_venue">₹<?php echo $mini_amount_range; ?> - ₹<?php echo $maxi_amount_range; ?></span></p>
 		<?php } ?>
-		 
 		 <p>
 		 <?php if ($event_type == 'Paid'){ ?>
 			<img src='<?php echo base_url(); ?>assets/front/images/paid.png'>
@@ -183,13 +183,14 @@ foreach($event_details as $res){
 			<img src='<?php echo base_url(); ?>assets/front/images/free.png'>
 		<?php } ?>
 		</p>
-
       </div>
       <div class="event_booking_section">
       <?php if ($res->booking_status =='Y') { ?>
-				<!--<p><a href="<?php echo base_url(); ?>eventlist/booking/<?php echo $enc_event_id; ?>/" class="btn-block book_tickets">Book Your Tickets</a></p>-->
-				<p class="text-center event_book"><a href="#" onclick="session_check()" class="event_book_tickets" data-toggle="modal" data-target="#bookingmodel" >Book Your Tickets</a></p>
-				<!--<p class="text-center"><a  class="btn-block book_tickets" data-toggle="modal" data-target="#ordermodel">Order Summary</a></p>-->
+				<?php if ($user_id==''){ ?>
+					<p class="text-center event_book"><a href="#" onclick="session_check()" class="event_book_tickets">Book Your Tickets</a></p>
+				<?php } else { ?>
+					<p class="text-center event_book"><a href="#" onclick="session_check()" class="event_book_tickets" data-toggle="modal" data-target="#bookingmodel" >Book Your Tickets</a></p>
+				<?php } ?>
 		<?php } ?>
       </div>
 
