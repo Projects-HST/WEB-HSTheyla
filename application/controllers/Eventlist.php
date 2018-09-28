@@ -96,7 +96,7 @@ class Eventlist extends CI_Controller
     {
   		$dec_event_id = base64_decode($enc_event_id);
   		$event_id = ($dec_event_id/564738);
-
+    
     	$data['event_gallery'] = $this->eventlistmodel->getevent_gallery($event_id);
   		$data['event_details'] = $this->eventlistmodel->getevent_details($event_id);
 		$data['event_reviews_users'] = $this->eventlistmodel->getevent_reviews_user($event_id);
@@ -220,7 +220,7 @@ class Eventlist extends CI_Controller
 		}
     }
 
-
+	
 	public function ccavenue()
     {
 		$datas=$this->session->userdata();
@@ -235,8 +235,8 @@ class Eventlist extends CI_Controller
 			redirect('/signin/');
 		}
     }
-
-
+	
+	
 	public function addreview()
     {
 		$event_id  = $this->input->post('event_id');
@@ -281,7 +281,11 @@ class Eventlist extends CI_Controller
 		$data['reviews'] = $this->eventlistmodel->update_review($event_id,$review_id,$user_id,$rating,$message);
 		echo "OK";
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 8d39d9ca19cd0de5868c71bd5cb38bcf3ba8c46d
       public function webflow()
     {
       $this->load->view('front_header');
