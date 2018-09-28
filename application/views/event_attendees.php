@@ -7,15 +7,13 @@
          $mobile_no = $rows->mobile_no;
         }
 ?>
-<div class="container-fluid page-bg">
+<div class="container-fluid">
   <div class="row header-title attendees-bg">
     <div class="col-md-12">
-    <div class="container">
         <p class="add-attendees">Add Attendees</p>
-      </div>
       <div class="container attendees-form">
     <div class="row">
-      <div class="col-md-12" style="margin-bottom:0px;">
+          <div class="col-md-12" style="margin-bottom:0px;">
 
         <form id="attendees" name="attendees" class="form-inline" method="post" action="<?php echo base_url(); ?>home/insertattendees" onsubmit="return check();">
 
@@ -73,28 +71,7 @@
   </div>
 
 </div>
-<style>
-.attendees-form{
-  margin-top: 50px;
-}
 
-label {
-  margin-bottom: 0;
-  margin-left: 1px;
-}
-.form-inline .form-control{
-  width: 100%;
-}
-.formrow{
-  width: 100%;
-  margin-bottom: 5px;
-}
-body{
-  background-color:  #eeeeee;
-
-
-}
-</style>
 
 
 
@@ -122,3 +99,24 @@ function check()
 return true;
 }
 </script>
+<style>
+.attendees-form{
+  margin-top: 50px;
+}
+.header-title{
+  height: auto;
+  padding-bottom: 50px;
+}
+label {
+  margin-bottom: 0;
+  margin-left: 1px;
+}
+.form-inline .form-control{
+  width: 100%;
+}
+.formrow{
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+</style>
