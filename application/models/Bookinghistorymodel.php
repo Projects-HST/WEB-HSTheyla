@@ -33,12 +33,12 @@ function view_booking_process_details()
   $sql="SELECT bp.*,p.plan_name,e.event_name,bt.show_date,bt.show_time,bt.seat_available FROM booking_process AS bp,booking_plan AS p,events AS e,booking_plan_timing AS bt WHERE bp.plan_id=p.id AND bp.event_id=p.event_id AND bp.event_id=e.id AND bp.plan_time_id=bt.id ORDER BY bp.id DESC";
   $resu=$this->db->query($sql);
   $res=$resu->result();
-  return $res;	
+  return $res;
 }
 
 function view_booking_status_details()
 {
-  $sql="SELECT * FROM booking_status ORDER BY id DESC";
+  $sql="SELECT * FROM booking_status_paytm ORDER BY id DESC";
   $resu=$this->db->query($sql);
   $res=$resu->result();
   return $res;
@@ -46,7 +46,7 @@ function view_booking_status_details()
 
 function view_payment_alldetails($booking_id)
 {
-    $sql="SELECT * FROM booking_status WHERE id='$booking_id'";
+    $sql="SELECT * FROM booking_status_paytm WHERE id='$booking_id'";
     $resu=$this->db->query($sql);
     $res=$resu->result();
     return $res;

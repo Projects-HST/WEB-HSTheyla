@@ -45,8 +45,8 @@
                <div class="col-12">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title"> View Booking Status Details </h4>
-                        
+                        <h4 class="mt-0 header-title"> View Booking Status Details From Paytm</h4>
+
                            <?php if($this->session->flashdata('msg')): ?>
                         <div class="alert alert-success">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
@@ -61,7 +61,7 @@
 							     <th>Order Id</th>
                                  <th>Order Status</th>
                                  <th>Payment Mode</th>
-                                 <th>Status Message</th>
+                                 <th>Track Id</th>
                                  <th>Amount</th>
                                  <th>Action</th>
                               </tr>
@@ -76,7 +76,7 @@
                                  <td><?php echo $rows->order_id; ?></td>
                                  <td><?php echo $rows->order_status; ?></td>
                                  <td><?php echo $rows->payment_mode; ?></td>
-                                 <td><?php echo $rows->status_message; ?></td>
+                                 <td><?php echo $rows->track_id; ?></td>
                                  <td><?php echo $rows->amount; ?></td>
                                  <td>
                                   <a href="<?php echo base_url();?>bookinghistory/view_payment_details/<?php echo $rows->id;?>">
@@ -109,7 +109,7 @@
         countryname:"Enter Country Name",
         eventsts:"Select Status"
                },
-         }); 
+         });
    });
-  
+
 </script>

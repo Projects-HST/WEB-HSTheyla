@@ -20,27 +20,27 @@
               <?php foreach($booking_details as $rows){}?>
                   <div class="row" style="padding:5px;">
                         <div class="col-sm-3"><p class="summary_text">Event Name  : </p></div>
-                        <div class="col-sm-6"><p class="summary_value"><?php echo $rows-> event_name; ?></p></div>
+                        <div class="col-sm-6"><p class="summary_value"><?php echo $rows->event_name; ?></p></div>
                         <div class="col-sm-3"></div>
                     </div>
                     <div class="row" style="padding:5px;">
                         <div class="col-sm-3"><p class="summary_text">Event Venue  :</p> </div>
-                        <div class="col-sm-6"><p class="summary_value"><?php echo $rows-> event_venue; ?></p></div>
+                        <div class="col-sm-6"><p class="summary_value"><?php echo $rows->event_venue; ?></p></div>
                         <div class="col-sm-3"></div>
                     </div>
                     <div class="row" style="padding:5px;">
                         <div class="col-sm-3"><p class="summary_text">Event Address  : </p></div>
-                        <div class="col-sm-6"><p class="summary_value"><?php echo $rows-> event_address; ?></p></div>
+                        <div class="col-sm-6"><p class="summary_value"><?php echo $rows->event_address; ?></p></div>
                         <div class="col-sm-3"></div>
                     </div>
                     <div class="row" style="padding:5px;">
                         <div class="col-sm-3"><p class="summary_text">Event Category  : </p></div>
-                        <div class="col-sm-6"><p class="summary_value"><?php echo $rows-> category_name; ?></p></div>
+                        <div class="col-sm-6"><p class="summary_value"><?php echo $rows->category_name; ?></p></div>
                         <div class="col-sm-3"></div>
                     </div>
                     <div class="row" style="padding:5px;">
                         <div class="col-sm-3"><p class="summary_text">Order Id  : </p></div>
-                        <div class="col-sm-6"><p class="summary_value"><?php echo $rows-> order_id; ?></p></div>
+                        <div class="col-sm-6"><p class="summary_value"><?php echo $rows->order_id; ?></p></div>
                         <div class="col-sm-3"></div>
                     </div>
                     <div class="row" style="padding:5px;">
