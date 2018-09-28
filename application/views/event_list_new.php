@@ -264,16 +264,47 @@ $('#category').select2({
 });
 
 $(window).on('load', function(){
-	var country_values ='<?php  echo $country_values ?>';
-	var city_values='<?php  echo $city_values ?>';
 
-	 if(country_values!='' && city_values!=''){
+	var country_val ='<?php  echo $country_values ?>';
+
+	if(country_val!==''){
+	 var country_values ='<?php  echo $country_values ?>';
+
+	 //var city_values='<?php  echo $city_values ?>';
+	// if(country_values!='' && city_values!=''){
+	if(country_values!=''){
 		$("#cnyname").val("<?php echo $country_values; ?>");
-		$("#ctyname").val("<?php echo $city_values; ?>");
-		  getCityevents();
+	//	$("#ctyname").val("<?php echo $city_values; ?>");
+		  //getCityevents();
+		  getCountryevents(country_values);
 	  } else {
-		  getAllevents()
+		 getAllevents()
 	  }
+	}else{
+	    $.ajax({ url: "<?php echo base_url(); ?>eventlist/get_ip_country",
+        context: document.body,
+        success: function(data){
+        var country_values =data;
+
+	if(country_values!=''){
+		$("#cnyname").val("<?php echo $country_values; ?>");
+	//	$("#ctyname").val("<?php echo $city_values; ?>");
+		  //getCityevents();
+		  getCountryevents(country_values);
+	  } else {
+		 getAllevents()
+	  }
+        }});
+	}
+
+
+
+
+
+
+
+
+
 });
 
 function change_country()
@@ -463,14 +494,22 @@ function getAlleventsresult(limit,offset)
 	});
 }
 
-function getCountryevents()
+function getCountryevents(country_values)
 {
 	$("#event_list_cny").html("").show();
 
 	var limit = 9;
 	var offset = 0;
 
-	var country_id=cnyname.value;
+    var c_id=country_values;
+   if(c_id){
+      var country_id=country_values;
+      $('#cnyname').val(country_id);
+    }else{
+        var country_id=cnyname.value;
+    }
+
+
 
 	$('#event_type').prop('selectedIndex',0);
 	$('#loader_message').hide();
@@ -635,11 +674,12 @@ function getCityevents()
 	cat_id = category_id.toString();
 	$('#event_type').prop('selectedIndex',0);
 
-	if(city_id_value==''){
-			var city_id='<?php echo $city_values; ?>';
-	  }else{
+// 	if(city_id_value==''){
+// 			var city_id='<?php echo $city_values; ?>';
+// 	  }else
+// 	  {
 		  var city_id=city_id_value;
-	}
+// 	}
 	var result = '';
 
 	$.ajax({

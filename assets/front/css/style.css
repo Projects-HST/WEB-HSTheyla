@@ -647,6 +647,10 @@ padding-bottom: 15px;
   margin-left: 0px !important;
   margin-right: 0px !important;
 }
+.event_list{
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
 .or-text{
   padding-top: 10px;
 }

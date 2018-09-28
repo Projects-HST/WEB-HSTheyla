@@ -94,10 +94,9 @@ class Eventlist extends CI_Controller
 
 	public function eventdetails($enc_event_id,$event_name)
     {
-		
-  		 $dec_event_id = base64_decode($enc_event_id);
-  		 $event_id = ($dec_event_id/564738);
-    
+  		$dec_event_id = base64_decode($enc_event_id);
+  		$event_id = ($dec_event_id/564738);
+
     	$data['event_gallery'] = $this->eventlistmodel->getevent_gallery($event_id);
   		$data['event_details'] = $this->eventlistmodel->getevent_details($event_id);
 		$data['event_reviews_users'] = $this->eventlistmodel->getevent_reviews_user($event_id);
@@ -219,7 +218,7 @@ class Eventlist extends CI_Controller
 		}
     }
 
-	
+
 	public function ccavenue()
     {
 		$datas=$this->session->userdata();
@@ -234,8 +233,8 @@ class Eventlist extends CI_Controller
 			redirect('/signin/');
 		}
     }
-	
-	
+
+
 	public function addreview()
     {
 		$event_id  = $this->input->post('event_id');
@@ -280,7 +279,7 @@ class Eventlist extends CI_Controller
 		$data['reviews'] = $this->eventlistmodel->update_review($event_id,$review_id,$user_id,$rating,$message);
 		echo "OK";
     }
-    
+
       public function webflow()
     {
       $this->load->view('front_header');
@@ -293,6 +292,25 @@ class Eventlist extends CI_Controller
       $this->load->view('front_header');
       $this->load->view('appflow');
       $this->load->view('front_footer');
+    }
+
+      public function get_ip_country()
+    {
+       $ip=$_SERVER['REMOTE_ADDR'];
+       $access_key = 'ed4a0ff6cd906632c411e531777136e5';
+    // Initialize CURL:
+    $ch = curl_init('http://api.ipstack.com/'.$ip.'?access_key='.$access_key.'');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    // Store the data:
+    $json = curl_exec($ch);
+    curl_close($ch);
+    // Decode JSON response:
+    $api_result = json_decode($json, true);
+    $country=$api_result['country_name'];
+    $data['res']=$this->eventlistmodel->get_ip_country($country);
+    echo $data['res'];
+
+
     }
 
 
