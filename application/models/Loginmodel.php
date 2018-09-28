@@ -677,15 +677,20 @@ Class Loginmodel extends CI_Model
 
 	public function get_booking($user_id)
 	{
-		 $sql="SELECT A.id,A.order_id,E.category_name,B.id AS event_id,B.event_name,B.event_banner,B.description,B.event_venue,B.event_address,C.show_date,C.show_time,D.plan_name,A.number_of_seats, A.total_amount,A.created_at,B.event_colour_scheme FROM booking_history A,events B,booking_plan_timing C,booking_plan D,category_master E WHERE A.user_id  = '$user_id' AND A.event_id = B.id AND A.plan_time_id = C.id AND A.plan_id = D.id AND B.category_id = E.id";
+		 $sql="SELECT A.id,A.payment_gateway,A.order_id,E.category_name,B.id AS event_id,B.event_name,B.event_banner,B.description,B.event_venue,B.event_address,C.show_date,C.show_time,D.plan_name,A.number_of_seats, A.total_amount,A.created_at,B.event_colour_scheme FROM booking_history A,events B,booking_plan_timing C,booking_plan D,category_master E WHERE A.user_id  = '$user_id' AND A.event_id = B.id AND A.plan_time_id = C.id AND A.plan_id = D.id AND B.category_id = E.id";
 		$resu=$this->db->query($sql);
 		$res=$resu->result();
 		return $res;
 	}
 
-	public function get_booking_history($order_id)
+	public function get_booking_history($order_id,$gateway)
 	{
-	 	$sql="SELECT A.id,A.order_id,E.category_name,B.id AS event_id,B.event_name,B.event_banner,B.description,B.event_venue,B.event_address,C.show_date,C.show_time,D.plan_name,A.number_of_seats, A.total_amount,A.created_at, F.* FROM booking_history A,events B,booking_plan_timing C,booking_plan D,category_master E, booking_status F  WHERE A.order_id  = '$order_id' AND F.order_id  = '$order_id' AND A.event_id = B.id AND A.plan_time_id = C.id AND A.plan_id = D.id AND B.category_id = E.id";
+    if($gateway=='Paytm'){
+      	 	$sql="SELECT A.id,A.order_id,E.category_name,B.id AS event_id,B.event_name,B.event_banner,B.description,B.event_venue,B.event_address,C.show_date,C.show_time,D.plan_name,A.number_of_seats, A.total_amount,A.created_at, F.* FROM booking_history A,events B,booking_plan_timing C,booking_plan D,category_master E, booking_status_paytm F  WHERE A.order_id  = '$order_id' AND F.order_id  = '$order_id' AND A.event_id = B.id AND A.plan_time_id = C.id AND A.plan_id = D.id AND B.category_id = E.id";
+    }else{
+      	 	$sql="SELECT A.id,A.order_id,E.category_name,B.id AS event_id,B.event_name,B.event_banner,B.description,B.event_venue,B.event_address,C.show_date,C.show_time,D.plan_name,A.number_of_seats, A.total_amount,A.created_at, F.* FROM booking_history A,events B,booking_plan_timing C,booking_plan D,category_master E, booking_status F  WHERE A.order_id  = '$order_id' AND F.order_id  = '$order_id' AND A.event_id = B.id AND A.plan_time_id = C.id AND A.plan_id = D.id AND B.category_id = E.id";
+    }
+
 		$resu=$this->db->query($sql);
 		$res=$resu->result();
 		return $res;

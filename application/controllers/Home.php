@@ -1004,11 +1004,11 @@ class Home extends CI_Controller {
 
 
 
-		public function user_booking_history($order_id){
+		public function user_booking_history($order_id,$gateway){
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
 			$user_role=$this->session->userdata('user_role');
-			$datas['booking_details'] = $this->loginmodel->get_booking_history($order_id);
+			$datas['booking_details'] = $this->loginmodel->get_booking_history($order_id,$gateway);
 			$datas['event_attendees'] = $this->loginmodel->disp_event_attendees($order_id);
 			if($user_role==3 || $user_role==2){
 				$this->load->view('dash_header');

@@ -50,7 +50,7 @@
                     </div>
                     <div class="row" style="padding:5px;">
                         <div class="col-sm-3"><p class="summary_text">Status  : </p></div>
-                        <div class="col-sm-3"><p class="summary_value"><?php echo $rows-> status_message; ?></p></div>
+                        <div class="col-sm-3"><p class="summary_value"><?php echo $rows->status_message; ?></p></div>
                         <div class="col-sm-3"></div>
                     </div>
                     <div class="row" style="padding:5px;">
