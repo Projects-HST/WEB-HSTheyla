@@ -103,20 +103,18 @@ class Eventlist extends CI_Controller
   		$data['event_reviews'] = $this->eventlistmodel->getevent_reviews($event_id);
 		$data['booking_dates'] = $this->eventlistmodel->booking_plandates($event_id);
 		$data['booking_planamount'] = $this->eventlistmodel->booking_planamount($event_id);
-		//print_r($data['event_reviews_users']);
     	$event_desc = $data['event_details'];
 
-		foreach($event_desc as $row_des){}
-
-		$event_title=$row_des->event_name;
-		$data['meta_title']= $event_title;
-		$desc=$row_des->description;
-		$event_country=$row_des->event_country;
-		$event_city=$row_des->event_city;
-		set_cookie('country_values',$event_country,'3600');
-		set_cookie('city_values',$event_city,'3600');
-		$data['meta_description']=$desc;
-
+		foreach($event_desc as $row_des){
+			$event_title=$row_des->event_name;
+			$data['meta_title']= $event_title;
+			$desc=$row_des->description;
+			$event_country=$row_des->event_country;
+			$event_city=$row_des->event_city;
+			set_cookie('country_values',$event_country,'3600');
+			set_cookie('city_values',$event_city,'3600');
+			$data['meta_description']=$desc;
+		}
 		$this->load->view('front_header', $data);
 		$this->load->view('eventdetails_new', $data);
 		$this->load->view('front_footer');
@@ -221,7 +219,7 @@ class Eventlist extends CI_Controller
     }
 
 
-	public function ccavenue()
+	public function payment_gateway()
     {
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
@@ -229,8 +227,8 @@ class Eventlist extends CI_Controller
 
 		if($user_id!=''){
 			$order_id  = $this->input->post('order_id');
-			$data['booking_result'] = $this->eventlistmodel->ccavenue($order_id);
-			$this->load->view('ccavenue', $data);
+			$data['booking_result'] = $this->eventlistmodel->payment_review($order_id);
+			$this->load->view('payment_gateway', $data);
 		}else{
 			redirect('/signin/');
 		}
@@ -282,38 +280,34 @@ class Eventlist extends CI_Controller
 		echo "OK";
     }
 
-      public function webflow()
+    public function webflow()
     {
       $this->load->view('front_header');
       $this->load->view('webflow');
       $this->load->view('front_footer');
     }
 
-  public function appflow()
+	public function appflow()
     {
       $this->load->view('front_header');
       $this->load->view('appflow');
       $this->load->view('front_footer');
     }
 
-      public function get_ip_country()
+     public function get_ip_country()
     {
-       $ip=$_SERVER['REMOTE_ADDR'];
-       $access_key = 'ed4a0ff6cd906632c411e531777136e5';
-    // Initialize CURL:
-    $ch = curl_init('http://api.ipstack.com/'.$ip.'?access_key='.$access_key.'');
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    // Store the data:
-    $json = curl_exec($ch);
-    curl_close($ch);
-    // Decode JSON response:
-    $api_result = json_decode($json, true);
-    $country=$api_result['country_name'];
-    $data['res']=$this->eventlistmodel->get_ip_country($country);
-    echo $data['res'];
-
-
+		$ip=$_SERVER['REMOTE_ADDR'];
+		$access_key = 'ed4a0ff6cd906632c411e531777136e5';
+		// Initialize CURL:
+		$ch = curl_init('http://api.ipstack.com/'.$ip.'?access_key='.$access_key.'');
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		// Store the data:
+		$json = curl_exec($ch);
+		curl_close($ch);
+		// Decode JSON response:
+		$api_result = json_decode($json, true);
+		$country=$api_result['country_name'];
+		$data['res']=$this->eventlistmodel->get_ip_country($country);
+		echo $data['res'];
     }
-
-
 }
