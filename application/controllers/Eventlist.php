@@ -102,6 +102,7 @@ class Eventlist extends CI_Controller
 		$data['event_reviews_users'] = $this->eventlistmodel->getevent_reviews_user($event_id);
   		$data['event_reviews'] = $this->eventlistmodel->getevent_reviews($event_id);
 		$data['booking_dates'] = $this->eventlistmodel->booking_plandates($event_id);
+		$data['booking_planamount'] = $this->eventlistmodel->booking_planamount($event_id);
 		//print_r($data['event_reviews_users']);
     	$event_desc = $data['event_details'];
 
@@ -281,8 +282,7 @@ class Eventlist extends CI_Controller
 		echo "OK";
     }
 
-
-  public function webflow()
+      public function webflow()
     {
       $this->load->view('front_header');
       $this->load->view('webflow');
@@ -294,6 +294,25 @@ class Eventlist extends CI_Controller
       $this->load->view('front_header');
       $this->load->view('appflow');
       $this->load->view('front_footer');
+    }
+
+      public function get_ip_country()
+    {
+       $ip=$_SERVER['REMOTE_ADDR'];
+       $access_key = 'ed4a0ff6cd906632c411e531777136e5';
+    // Initialize CURL:
+    $ch = curl_init('http://api.ipstack.com/'.$ip.'?access_key='.$access_key.'');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    // Store the data:
+    $json = curl_exec($ch);
+    curl_close($ch);
+    // Decode JSON response:
+    $api_result = json_decode($json, true);
+    $country=$api_result['country_name'];
+    $data['res']=$this->eventlistmodel->get_ip_country($country);
+    echo $data['res'];
+
+
     }
 
 
