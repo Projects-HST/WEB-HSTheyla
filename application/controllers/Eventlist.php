@@ -94,8 +94,9 @@ class Eventlist extends CI_Controller
 
 	public function eventdetails($enc_event_id,$event_name)
     {
-  		$dec_event_id = base64_decode($enc_event_id);
-  		$event_id = ($dec_event_id/564738);
+		
+  		 $dec_event_id = base64_decode($enc_event_id);
+  		 $event_id = ($dec_event_id/564738);
     
     	$data['event_gallery'] = $this->eventlistmodel->getevent_gallery($event_id);
   		$data['event_details'] = $this->eventlistmodel->getevent_details($event_id);
@@ -103,20 +104,18 @@ class Eventlist extends CI_Controller
   		$data['event_reviews'] = $this->eventlistmodel->getevent_reviews($event_id);
 		$data['booking_dates'] = $this->eventlistmodel->booking_plandates($event_id);
 		$data['booking_planamount'] = $this->eventlistmodel->booking_planamount($event_id);
-		//print_r($data['event_reviews_users']);
     	$event_desc = $data['event_details'];
 
-		foreach($event_desc as $row_des){}
-
-		$event_title=$row_des->event_name;
-		$data['meta_title']= $event_title;
-		$desc=$row_des->description;
-		$event_country=$row_des->event_country;
-		$event_city=$row_des->event_city;
-		set_cookie('country_values',$event_country,'3600');
-		set_cookie('city_values',$event_city,'3600');
-		$data['meta_description']=$desc;
-
+		foreach($event_desc as $row_des){
+			$event_title=$row_des->event_name;
+			$data['meta_title']= $event_title;
+			$desc=$row_des->description;
+			$event_country=$row_des->event_country;
+			$event_city=$row_des->event_city;
+			set_cookie('country_values',$event_country,'3600');
+			set_cookie('city_values',$event_city,'3600');
+			$data['meta_description']=$desc;
+		}
 		$this->load->view('front_header', $data);
 		$this->load->view('eventdetails_new', $data);
 		$this->load->view('front_footer');

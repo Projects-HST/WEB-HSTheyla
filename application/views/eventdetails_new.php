@@ -195,8 +195,6 @@ foreach($event_details as $res){
       </div>
 
 
-
-
       <div class="event_detail_thumb">
          <p class="event_heading">Share with your Friends</p>
          <p>

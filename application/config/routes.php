@@ -85,5 +85,6 @@ $route['deactive'] = 'home/deactive';
 $route['logout'] = 'home/logout';
 $route['webflow'] = 'eventlist/webflow';
 $route['appflow'] = 'eventlist/appflow';
+$route['(:any)/eventdetails/(:any)/(:any)'] = 'eventlist/eventdetails/$2/$3';
 $route['eventdetails/(:any)/(:any)'] = 'eventlist/eventdetails/$1/$2';
 
