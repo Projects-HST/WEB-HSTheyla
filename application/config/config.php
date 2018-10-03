@@ -23,11 +23,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-//$config['base_url'] = 'http://heylaapp.com/heylav2/';
-//$config['base_url'] = 'https://'.$_SERVER['SERVER_NAME'].'';
-//$config['base_url'] = 'https://heylaapp.com/';
-$config['base_url'] = 'http://localhost/heyla/';
-
+//$config['base_url'] = 'https://localhost/heyla/';
+//$config['base_url'] = 'https://www.heylaapp.com/';
+$root=(isset($_SERVER['HTTPS']) ? "https://" : "http://").$_SERVER['HTTP_HOST'];
+$root.= str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
+$config['base_url'] = $root;
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -161,7 +161,7 @@ $config['composer_autoload'] = FALSE;
 | DO NOT CHANGE THIS UNLESS YOU FULLY UNDERSTAND THE REPERCUSSIONS!!
 |
 */
-$config['permitted_uri_chars'] = 'a-z 0-9~%,.:_\-@\=|';
+$config['permitted_uri_chars'] = 'a-z 0-9~%.,:_()@&\-!=';
 
 /*
 |--------------------------------------------------------------------------

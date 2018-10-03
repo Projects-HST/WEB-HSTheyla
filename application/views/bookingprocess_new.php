@@ -1,4 +1,5 @@
 <?php
+//$booking_expire = $_SESSION['booking_expire'];
 $user_id = $this->session->userdata('id');
 
 foreach($booking_process as $res){
@@ -24,7 +25,6 @@ hr{
 .total_bor{
   opacity: 0.5;
 }
-
 </style>
 <div class="container-fluid">
   <div class="row order_page">
@@ -147,6 +147,9 @@ hr{
         </div>
         <hr class="total_bor">
 
+    <div id="strclock" style="text-align: center;"></div>
+    <div id="clock" style="text-align: center;"></div>
+
 		<form method="post" name="OrderData" class="confirm_process" action="<?php echo base_url(); ?>eventlist/payment_gateway/">
 			<input type="hidden" name="order_id" value="<?php echo $res->order_id;?>"/>
 			<INPUT type="submit" value="CheckOut" class="btn btn-primary" style="width:200px;">
@@ -171,3 +174,46 @@ hr{
     <center>  <img src="<?php echo base_url(); ?>assets/front/images/login_bg.png" class="img-thumbnail"> </center>
   </div>
 </div>
+<script type="text/javascript">
+    var hour = 0
+    var min = 0;
+    var sec = 55;
+
+    function countdown() {
+    if(sec <= 0 && min > 0) {
+        sec = 60;
+        min -= 1;
+    }
+    else if(min <= 0 && sec <= 0) {
+        min = 0;
+        sec = 0;
+    }
+    else {
+        sec -= 1;
+    }
+    if(min <= 0 && hour > 0) {
+        min = 60;
+        hour -= 1;
+    }
+    var pat = /^[0-9]{1}$/;
+    secs = (pat.test(sec) == true) ? '0'+sec : sec;
+    mins = (pat.test(min) == true) ? '0'+min : min;
+    hours = (pat.test(hour) == true) ? '0'+hour : hour;
+
+    document.getElementById('strclock').innerHTML = hours+":"+mins+":"+secs;
+    if(hour >= 1) { 
+           document.getElementById('clock').innerHTML = hour+1+' hour until timer runs out!';
+    } 
+    else if(min >= 1) {
+           document.getElementById('clock').innerHTML = min+' minute until timer runs out!';
+    }
+    else {
+           document.getElementById('clock').innerHTML = sec+' seconds until timer runs out!';
+    }
+   var time = document.getElementById('strclock').innerHTML;
+   
+    if(time == '00:00:00') {window.location="http://heylaapp.com";}
+        else{ setTimeout("countdown()",1000);}
+    }
+    countdown();
+    </script>
