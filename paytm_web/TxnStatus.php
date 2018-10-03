@@ -119,13 +119,13 @@
                     				<p>Plan Name : '.$plan_name.'</p>
                     				<p>No. of Seats : '.$number_of_seats.'</p>
                     				<p>Booking Date : '.$sbooking_date.' '.$show_time.'</p>
-                    				<p>Transaction Date : '.$transdate.'</p>
+                    				<p>Transaction Date : '.$transaction_date.'</p>
                     				<p>More detail please <a href="https://goo.gl/A6DGuZ">login</a></p>
                     			 </body>
                     			 </html>';
                 
                 
-                $Message = "Hi Customer, Booking Id : ".$order_id. "Seats : ".$plan_name."," .$number_of_seats." for ".$event_name." on ".$sbooking_date." ".$show_time.". Transaction Date : ".$transdate." More detail https://goo.gl/A6DGuZ";
+                $Message = "Hi Customer, Booking Id : ".$order_id. "Seats : ".$plan_name."," .$number_of_seats." for ".$event_name." on ".$sbooking_date." ".$show_time.". Transaction Date : ".$transaction_date." More detail https://goo.gl/A6DGuZ";
               //Your authentication key
                 $authKey = "191431AStibz285a4f14b4";
                 
