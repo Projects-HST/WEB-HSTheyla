@@ -547,6 +547,8 @@ Class Eventlistmodel extends CI_Model
 		return $res;
     }
 
+	
+	
 	function add_review($event_id,$user_id,$rating,$message)
     {
 		$sql = "SELECT * FROM event_reviews WHERE user_id = '$user_id' AND event_id = '$event_id'";

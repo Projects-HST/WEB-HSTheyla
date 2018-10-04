@@ -25,6 +25,7 @@ hr{
 .total_bor{
   opacity: 0.5;
 }
+
 </style>
 <div class="container-fluid">
   <div class="row order_page">
@@ -147,11 +148,12 @@ hr{
         </div>
         <hr class="total_bor">
 
-    <div id="strclock" style="text-align: center;"></div>
-    <div id="clock" style="text-align: center;"></div>
+        <div id="strclock" style="text-align: center;"></div>
+        <div id="clock" style="text-align: center;"></div>
 
 		<form method="post" name="OrderData" class="confirm_process" action="<?php echo base_url(); ?>eventlist/payment_gateway/">
 			<input type="hidden" name="order_id" value="<?php echo $res->order_id;?>"/>
+			<input type="hidden" name="payment_type" value="paytm"/>
 			<INPUT type="submit" value="CheckOut" class="btn btn-primary" style="width:200px;">
         </form>
 <!--
@@ -176,7 +178,7 @@ hr{
 </div>
 <script type="text/javascript">
     var hour = 0
-    var min = 0;
+    var min = 9;
     var sec = 55;
 
     function countdown() {

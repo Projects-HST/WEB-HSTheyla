@@ -227,8 +227,11 @@ class Eventlist extends CI_Controller
 
 		if($user_id!=''){
 			$order_id  = $this->input->post('order_id');
+			$payment_type  = $this->input->post('payment_type');
 			$data['booking_result'] = $this->eventlistmodel->payment_review($order_id);
-			$this->load->view('payment_gateway', $data);
+			if ($payment_type =='paytm'){
+			    $this->load->view('payment_paytm_gateway', $data);
+			}
 		}else{
 			redirect('/signin/');
 		}
