@@ -178,8 +178,8 @@ hr{
 </div>
 <script type="text/javascript">
     var hour = 0
-    var min = 9;
-    var sec = 55;
+    var min = 0;
+    var sec = 59;
 
     function countdown() {
     if(sec <= 0 && min > 0) {
@@ -214,8 +214,12 @@ hr{
     }
    var time = document.getElementById('strclock').innerHTML;
    
-    if(time == '00:00:00') {window.location="http://heylaapp.com";}
-        else{ setTimeout("countdown()",1000);}
+        if(time == '00:00:00') {
+            alert("You have exceeded the time limit and your booking has been released.");
+            window.location="http://heylaapp.com";
+        } else{ 
+            setTimeout("countdown()",1000);
+        }
     }
     countdown();
     </script>

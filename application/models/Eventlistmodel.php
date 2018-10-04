@@ -525,7 +525,7 @@ Class Eventlistmodel extends CI_Model
 		$seatsupdate = $this->db->query($update_seats);
 
 		$_SESSION['booking_start'] = time(); // taking now logged in time
-		$_SESSION['booking_expire'] = $_SESSION['booking_start'] + (300) ; // ending a session in 180 seconds
+		$_SESSION['booking_expire'] = $_SESSION['booking_start'] + (60) ; // ending a session in 10mins
 
 		$session_seats = "INSERT INTO booking_session (session_expiry,order_id,plan_time_id,number_of_seats) VALUES ('". $_SESSION['booking_expire'] . "','". $order_id . "','". $plan_time_id . "','". $number_of_seats . "')";
 		$session_insert = $this->db->query($session_seats);
@@ -547,8 +547,6 @@ Class Eventlistmodel extends CI_Model
 		return $res;
     }
 
-	
-	
 	function add_review($event_id,$user_id,$rating,$message)
     {
 		$sql = "SELECT * FROM event_reviews WHERE user_id = '$user_id' AND event_id = '$event_id'";
