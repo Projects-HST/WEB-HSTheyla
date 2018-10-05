@@ -681,6 +681,9 @@ class Apimainmodel extends CI_Model {
             $activity_sql = "INSERT INTO user_activity (date,user_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $login_type . "')";
 			$insert_activity = $this->db->query($activity_sql);
 
+			$points_sql = "INSERT INTO user_points_count (user_id) VALUES ('". $user_id . "')";
+			$insert_points = $this->db->query($points_sql);
+					
             $gcmQuery = "SELECT * FROM push_notification_master WHERE gcm_key like '%" .$gcm_key. "%' LIMIT 1";
 			$gcm_result = $this->db->query($gcmQuery);
 			$gcm_ress = $gcm_result->result();

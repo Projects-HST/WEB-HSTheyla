@@ -86,6 +86,14 @@ body{background-color: #f7f8fa;}
     margin-bottom: 15px;
     margin-top: 15px;
 }
+.no_event{
+    text-align: center;
+    border: 1px solid #000;
+	color:#fffff;
+	background-color:#4c4c4c;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
 </style>
 <script src="<?php echo base_url(); ?>assets/front/js/jquery-ui.js"></script>
 <script src="<?php echo base_url(); ?>assets/front/js/select2.min.js"></script>
@@ -284,7 +292,7 @@ $(window).on('load', function(){
 	    $.ajax({ url: "<?php echo base_url(); ?>eventlist/get_ip_country",
         context: document.body,
         success: function(data){
-        var country_values =data;
+        var country_values = data;
 
 	if(country_values!=''){
 		$("#cnyname").val("<?php echo $country_values; ?>");
@@ -296,15 +304,6 @@ $(window).on('load', function(){
 	  }
         }});
 	}
-
-
-
-
-
-
-
-
-
 });
 
 function change_country()
@@ -413,7 +412,7 @@ function getAllevents()
 				$("#loader_message").html('<center><a class="btn btn-sm more_event" onclick="getAlleventsresult('+limit+','+offset+')" role="button">More Events</a></center>').show();
 			} else {
 				$('#loader_image').hide();
-				$("#loader_message").html('No more Events').show()
+				$("#loader_message").html('<center><p class="btn btn-sm no_event" style="color:#ffffff;">No more Events</p></center>').show();
             }
 	}
 	});
@@ -488,7 +487,7 @@ function getAlleventsresult(limit,offset)
 				$("#loader_message").html('<center><a class="btn btn-sm more_event" onclick="getAlleventsresult('+limit+','+offset+')" role="button">More Events</a></center>').show();
 			} else {
 				$('#loader_image').hide();
-				$("#loader_message").html('No more Events').show()
+				$("#loader_message").html('<center><p class="btn btn-sm no_event" style="color:#ffffff;">No more Events</p></center>').show();
             }
 	}
 	});
@@ -501,15 +500,13 @@ function getCountryevents(country_values)
 	var limit = 9;
 	var offset = 0;
 
-    var c_id=country_values;
+   var c_id=country_values;
    if(c_id){
       var country_id=country_values;
       $('#cnyname').val(country_id);
     }else{
         var country_id=cnyname.value;
     }
-
-
 
 	$('#event_type').prop('selectedIndex',0);
 	$('#loader_message').hide();
@@ -579,7 +576,7 @@ function getCountryevents(country_values)
 				//$("#loader_message").html('<a onclick="getCountryeventsresult('+limit+','+offset+')">More Events</a>').show();
 			} else {
 				$('#loader_image').hide();
-				$("#loader_message").html('No more Events').show()
+				$("#loader_message").html('<center><p class="btn btn-sm no_event" style="color:#ffffff;">No more Events</p></center>').show();
             }
 	}
 	});
@@ -655,7 +652,7 @@ function getCountryeventsresult(limit,offset)
 				$("#loader_message").html('<center><a class="btn btn-sm more_event" onclick="getCountryeventsresult('+limit+','+offset+')" role="button">More Events</a></center>').show();
 			} else {
 				$('#loader_image').hide();
-				$("#loader_message").html('No more Events').show()
+				$("#loader_message").html('<center><p class="btn btn-sm no_event" style="color:#ffffff;">No more Events</p></center>').show();
             }
 	}
 	});
@@ -746,7 +743,7 @@ function getCityevents()
 
 			} else {
 				$('#loader_image').hide();
-				$("#loader_message").html('No more Events').show()
+				$("#loader_message").html('<center><p class="btn btn-sm no_event" style="color:#ffffff;">No more Events</p></center>').show();
             }
 	}
 	});
@@ -830,7 +827,7 @@ function getCityeventsresult(limit,offset)
 				$("#loader_message").html('<center><a class="btn btn-sm more_event" onclick="getCityeventsresult('+limit+','+offset+')" role="button">More Events</a></center>').show();
 			} else {
 				$('#loader_image').hide();
-				$("#loader_message").html('No more Events').show()
+				$("#loader_message").html('<center><p class="btn btn-sm no_event" style="color:#ffffff;">No more Events</p></center>').show();
             }
 	}
 	});
@@ -924,7 +921,7 @@ function getCategoryevents()
 				//$("#loader_message").html('<a onclick="getCategoryeventsresult('+limit+','+offset+')">More Events</a>').show();
 			} else {
 				$('#loader_image').hide();
-				$("#loader_message").html('No more Events').show()
+				$("#loader_message").html('<center><p class="btn btn-sm no_event" style="color:#ffffff;">No more Events</p></center>').show();
             }
 	}
 	});
@@ -1007,10 +1004,10 @@ function getCategoryeventsresult(limit,offset)
         $("#event_list_cat").append(result);
         $('#loader_image').hide();
         $("#loader_message").html('<center><a class="btn btn-sm more_event" onclick="getCategoryeventsresult('+limit+','+offset+')" role="button">More Events</a><center>').show();
-      } else {
+		} else {
         $('#loader_image').hide();
-        $("#loader_message").html('No more Events').show()
-            }
+        $("#loader_message").html('<center><p class="btn btn-sm no_event" style="color:#ffffff;">No more Events</p></center>').show();
+        }
 	}
 	});
 }
@@ -1105,7 +1102,7 @@ function getTypeevents()
 				//$("#loader_message").html('<a onclick="getTypeeventsresult('+limit+','+offset+')">More Events</a>').show();
 			} else {
 				$('#loader_image').hide();
-				$("#loader_message").html('No more Events').show()
+				$("#loader_message").html('<center><p class="btn btn-sm no_event" style="color:#ffffff;">No more Events</p></center>').show();
             }
 	}
 	});
@@ -1193,7 +1190,7 @@ function getTypeeventsresult(limit,offset)
 				$("#loader_message").html('<center><a class="btn btn-sm more_event" onclick="getTypeeventsresult('+limit+','+offset+')" role="button">More Events</a></center>').show();
 			} else {
 				$('#loader_image').hide();
-				$("#loader_message").html('No more Events').show()
+				$("#loader_message").html('<center><p class="btn btn-sm no_event" style="color:#ffffff;">No more Events</p></center>').show();
             }
 
 	}
