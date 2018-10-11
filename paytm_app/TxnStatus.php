@@ -1,83 +1,35 @@
 <?php
-	header("Pragma: no-cache");
-	header("Cache-Control: no-cache");
-	header("Expires: 0");
-    session_start();
-
-	// following files need to be included
-	require_once("./lib/config_paytm.php");
-	require_once("./lib/encdec_paytm.php");
     require_once("./lib/connection.php");
     
-	$ORDER_ID = "";
-	$requestParamList = array();
-	$responseParamList = array();
-
-	if (isset($_GET["ORDER_ID"]) && $_GET["ORDER_ID"] != "") {
-
-		// In Test Page, we are taking parameters from POST request. In actual implementation these can be collected from session or DB. 
-	 	$ORDER_ID = $_GET["ORDER_ID"];
-
-		// Create an array having all required parameters for status query.
-		$requestParamList = array("MID" => PAYTM_MERCHANT_MID , "ORDERID" => $ORDER_ID);  
-		
-		$StatusCheckSum = getChecksumFromArray($requestParamList,PAYTM_MERCHANT_KEY);
-		$requestParamList['CHECKSUMHASH'] = $StatusCheckSum;
-
-		// Call the PG's getTxnStatusNew() function for verifying the transaction status.
-		$responseParamList = getTxnStatusNew($requestParamList);
-		//echo "<pre>";
-		//print_r ($responseParamList);
-		
-		 $TXNID = $responseParamList["TXNID"];
-		 $BANKTXNID = $responseParamList["BANKTXNID"];
-		 $ORDERID = $responseParamList["ORDERID"];
-		 $TXNAMOUNT = $responseParamList["TXNAMOUNT"];
-		 $STATUS = $responseParamList["STATUS"];
-		 $TXNTYPE = $responseParamList["TXNTYPE"];
-		 $GATEWAYNAME = $responseParamList["GATEWAYNAME"];
-		 $RESPCODE = $responseParamList["RESPCODE"];
-		 $RESPMSG = $responseParamList["RESPMSG"];
-		 $BANKNAME = $responseParamList["BANKNAME"];
-		 $MID = $responseParamList["MID"];
-		 $PAYMENTMODE = $responseParamList["PAYMENTMODE"];
-		 $REFUNDAMT = $responseParamList["REFUNDAMT"];
-		 $TXNDATE = $responseParamList["TXNDATE"];
-	}
-	
-	
-	    $string = $ORDERID;
+        $TXNID = $_POST["TXNID"];
+        $BANKTXNID = $_POST["BANKTXNID"];
+        $ORDERID = $_POST["ORDERID"];
+        $TXNAMOUNT = $_POST["TXNAMOUNT"];
+        $STATUS = $_POST["STATUS"];
+        $TXNTYPE = "SALE";
+        $GATEWAYNAME = $_POST["GATEWAYNAME"];
+        $RESPCODE = $_POST["RESPCODE"];
+        $RESPMSG = $_POST["RESPMSG"];
+        $BANKNAME = $_POST["BANKNAME"];
+        $MID = $_POST["MID"];
+        $PAYMENTMODE = $_POST["PAYMENTMODE"];
+        $REFUNDAMT = "0.00";
+        $TXNDATE = $_POST["TXNDATE"];
+        
+        $string = $ORDERID;
         $result = explode("-", $string);
         $order_id=$result[0];  
         $user_id= $result[1];
     
     
-        $sQuery = "SELECT * FROM user_master WHERE id='" .$user_id. "'";
-        $objRs = mysql_query($sQuery);
-            if (mysql_num_rows($objRs)> 0)
-        	{
-        		while ($row = mysql_fetch_array($objRs))
-        		{
-        		    $id = trim($row['id']);
-        		    $user_name = trim($row['user_name']) ;
-        		    $mobile_no = trim($row['mobile_no']) ;
-        			$email_id = trim($row['email_id']) ;
-        			$user_role = trim($row['user_role']) ;
-        		}
-            }
-        $data =  array("user_name" => $user_name,"mobile_no"=>$mobile_no,"email_id"=>$email_id,"user_role"=>$user_role,"id"=>$id);
-        $_SESSION['userdata'] = $data;
-
+		$sQuery = "INSERT INTO booking_status_paytm (order_id,user_id,track_id,bank_trans_id,amount,order_status,trans_type,gateway,resp_code,resp_msg,bank_name,mid,payment_mode,refunt_amt, trans_date) VALUES ('$ORDERID','$user_id','$TXNID','$BANKTXNID','$TXNAMOUNT','$STATUS','$TXNTYPE','$GATEWAYNAME','$RESPCODE','$RESPMSG','$BANKNAME','$MID','$PAYMENTMODE','$REFUNDAMT','$TXNDATE')";
+		$objRs  = mysql_query($sQuery) or die("Could not select Query ");
+			
+		
+		//$sQuery = "INSERT INTO booking_status (order_id,user_id,track_id,bank_ref_no,order_status,failure_message,payment_mode,card_name,status_code,status_message,currency,amount,billing_name,billing_address, billing_city,billing_state,billing_zip,billing_country,billing_tel,billing_email,delievery_name,delievery_address,delievery_city,delievery_state,delievery_zip,delievery_country,delievery_tel,merch_param1,merch_param2,merch_param3,merch_param4,merch_param5,vault,offer_type,offer_code,discount_value, mer_amt,eci_value,retry,response_code,billing_notes,trans_date,bin_country) VALUES ('$orderid','$user_id','$track_id','$bank_ref_no','$order_status','$failure_message','$payment_mode','$card_name','$status_code','$status_message','$currency','$amount','$billing_name','$billing_address','$billing_city','$billing_state','$billing_zip','$billing_country','$billing_tel','$billing_email','$delievery_name','$delievery_address','$delievery_city','$delievery_state','$delievery_zip','$delievery_country','$delievery_tel','$merch_param1','$merch_param2','$merch_param3','$merch_param4','$merch_param5','$vault','$offer_type','$offer_code','$discount_value','$mer_amt','$eci_value','$retry','$response_code','$billing_notes','$transdate','$bin_country')";
+		//$objRs  = mysql_query($sQuery) or die("Could not select Query ");
     
-    $sQuery = "SELECT * FROM booking_status_paytm WHERE order_id ='" .$ORDERID. "'";
-    $objRs = mysql_query($sQuery);
-            if (mysql_num_rows($objRs) == 0)
-        	{
-        	
-        	$sQuery = "INSERT INTO booking_status_paytm (order_id,user_id,track_id,bank_trans_id,amount,order_status,trans_type,gateway,resp_code,resp_msg,bank_name,mid,payment_mode,refunt_amt, trans_date) VALUES ('$ORDERID','$user_id','$TXNID','$BANKTXNID','$TXNAMOUNT','$STATUS','$TXNTYPE','$GATEWAYNAME','$RESPCODE','$RESPMSG','$BANKNAME','$MID','$PAYMENTMODE','$REFUNDAMT','$TXNDATE')";
-		    $objRs  = mysql_query($sQuery) or die("Could not select Query ");
-    
-            $sQuery = "SELECT
+         $sQuery = "SELECT
                         A.*,
                         B.mobile_no,
                         B.email_id,
@@ -90,43 +42,43 @@
                         booking_plan_timing D
                     WHERE
                         A.user_id = B.id AND A.plan_id = C.id AND A.plan_time_id = D.id AND A.order_id = '" .$ORDERID. "'";
-            $objRs = mysql_query($sQuery);
-            if (mysql_num_rows($objRs)> 0)
-            	{
-            		while ($row = mysql_fetch_array($objRs))
-            		{
-            			$order_id = trim($row['order_id']) ;
-            			$event_id = trim($row['event_id']) ;
-            			$plan_id = trim($row['plan_id']) ;
-            			$plan_name = trim($row['plan_name']) ;
-            		    $plan_time_id = trim($row['plan_time_id']) ;
-            		    $show_time = trim($row['show_time']) ;
-            			$user_id = trim($row['user_id']) ;
-            			$user_email = trim($row['email_id']) ;
-            			$user_mobile = trim($row['mobile_no']) ;
-            			$number_of_seats = trim($row['number_of_seats']) ;
-            			$total_amount = trim($row['total_amount']) ;
-            			$booking_date = trim($row['booking_date']) ;
-            			$created_at  = date('Y-m-d H:i:s');
-            			
-            		}
-                }
+        $objRs = mysql_query($sQuery);
+        if (mysql_num_rows($objRs)> 0)
+        	{
+        		while ($row = mysql_fetch_array($objRs))
+        		{
+        			$order_id = trim($row['order_id']) ;
+        			$event_id = trim($row['event_id']) ;
+        			$plan_id = trim($row['plan_id']) ;
+        			$plan_name = trim($row['plan_name']) ;
+        		    $plan_time_id = trim($row['plan_time_id']) ;
+        		    $show_time = trim($row['show_time']) ;
+        			$user_id = trim($row['user_id']) ;
+        			$user_email = trim($row['email_id']) ;
+        			$user_mobile = trim($row['mobile_no']) ;
+        			$number_of_seats = trim($row['number_of_seats']) ;
+        			$total_amount = trim($row['total_amount']) ;
+        			$booking_date = trim($row['booking_date']) ;
+        			$created_at  = date('Y-m-d H:i:s');
+        			
+        		}
+            }
          
-            $sQuery = "SELECT A.id,A.event_name, A.created_by,B.id AS user_id, B.email_id,B.mobile_no FROM events A,user_master B WHERE A.created_by = B.id AND A.id   = '" .$event_id. "'";
-            $objRs = mysql_query($sQuery);
-                if (mysql_num_rows($objRs)> 0)
-            	{
-            		while ($row = mysql_fetch_array($objRs))
-            		{
-            		    $event_name = trim($row['event_name']) ;
-            			$created_email = trim($row['email_id']) ;
-            			$created_mobile = trim($row['mobile_no']) ;
-            		}
-                }
+        $sQuery = "SELECT A.id,A.event_name, A.created_by,B.id AS user_id, B.email_id,B.mobile_no FROM events A,user_master B WHERE A.created_by = B.id AND A.id   = '" .$event_id. "'";
+        $objRs = mysql_query($sQuery);
+            if (mysql_num_rows($objRs)> 0)
+        	{
+        		while ($row = mysql_fetch_array($objRs))
+        		{
+        		    $event_name = trim($row['event_name']) ;
+        			$created_email = trim($row['email_id']) ;
+        			$created_mobile = trim($row['mobile_no']) ;
+        		}
+            }
         
 
-    	    if($STATUS=="TXN_SUCCESS")
-    	    {
+    	if($STATUS=="TXN_SUCCESS")
+    	{
                 $enc_order_id = base64_encode($order_id);
                 $sbooking_date = date("d-m-Y", strtotime($booking_date));
                 $transaction_date = date("d-m-Y H:i:s"); 
@@ -219,19 +171,15 @@
                 $activity_points = "UPDATE user_points_count SET booking_count  = booking_count+1,booking_points=booking_points+20,total_points=total_points+20 WHERE user_id ='$user_id'";
                 $insert_points = mysql_query($activity_points) or die("Could not select Query ");
                 
-                header("Location: https://heylaapp.com/home/eventattendees/".$enc_order_id."");
+                $res = array();
+			    $res["message"] = "Success";
+			    echo json_encode($res);
+               // echo "Success";
                 
-    	    }
+    	} else {
+    	    $res = array();
+    	        $res["message"] = "Error";
+			    echo json_encode($res);
+    	}
 
-        	if($STATUS=="TXN_FAILURE")
-        	{
-        	   header("Location: https://heylaapp.com/home/paymenterror/");
-        	}
-        	
-        	if($STATUS=="PENDING")
-        	{
-        	   header("Location: https://heylaapp.com/home/paymenterror/");
-        	}
-  	
-    }
 ?>

@@ -105,7 +105,7 @@ class Apimainmodel extends CI_Model {
 	public function sendSMS($Phoneno,$Message)
 	{
         //Your authentication key
-        $authKey = "191431AStibz285a4f14b4";
+        $authKey = "242202ALE69fBMks5bbee06b";
 
         //Multiple mobiles numbers separated by comma
         $mobileNumber = "$Phoneno";
