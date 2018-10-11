@@ -311,24 +311,24 @@ class Home extends CI_Controller {
 		  $this->load->view('front_header');
 		  $this->load->view('event_attendees',$datas);
 		  $this->load->view('front_footer');
-		 }
-
-
+	}
 
 	 public function insertattendees()
      {
         $datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-
  		$order_id=$this->input->post('order_id');
 		$count=$this->input->post('count');
-		for ($i=1; $i<=$count; $i++)
-		{
-			$name=$this->input->post('name'.$i);
-			$email=$this->input->post('email'.$i);
-			$phone=$this->input->post('phone'.$i);
-			$datas=$this->loginmodel->insert_attendees($order_id,$name,$email,$phone);
+		$result=$this->loginmodel->check_attendees($order_id);
+		if ($result == 'Nil') {
+			for ($i=1; $i<=$count; $i++)
+			{
+				$name=$this->input->post('name'.$i);
+				$email=$this->input->post('email'.$i);
+				$phone=$this->input->post('phone'.$i);
+				$datas=$this->loginmodel->insert_attendees($order_id,$name,$email,$phone);
+			}
 		}
 		 	redirect('/home/paymentsuccess');
      }

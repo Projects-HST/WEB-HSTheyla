@@ -718,6 +718,7 @@ Class Loginmodel extends CI_Model
 
 	public function event_attendees($sorder_id)
 	{
+		
 	 	$sql = "SELECT A.`order_id`,A.`number_of_seats`,B.user_name,B.mobile_no,B.email_id,C.name FROM `booking_history` A,user_master B,user_details C WHERE A.user_id = B.id AND A.user_id = C.user_id AND A.`order_id` = '$sorder_id'";
 		$resu=$this->db->query($sql);
 		$res=$resu->result();
@@ -732,10 +733,26 @@ Class Loginmodel extends CI_Model
 		return $res;
 	}
 
+	public function check_attendees($order_id)
+	{
+		
+		$sQuery = "SELECT * FROM booking_event_attendees WHERE order_id='" .$order_id. "'";
+		$attendees_result = $this->db->query($sQuery);
+		$ress = $attendees_result->result();
+
+		if($attendees_result->num_rows() > 0)
+		{
+			$message = "Exist";
+		} else {
+			$message = "Nil";
+		}
+			return $message;
+	}
+	
 	public function insert_attendees($order_id,$name,$email,$phone)
 	{
 		$query = "INSERT INTO booking_event_attendees (order_id,name,email_id,mobile_no) VALUES('$order_id','$name','$email','$phone')";
-    $resultset = $this->db->query($query);
+		$resultset = $this->db->query($query);
 	}
 
 
