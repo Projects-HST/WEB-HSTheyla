@@ -29,6 +29,14 @@
     <!--  Forms Validations Plugin -->
     <script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/additional-methods.min.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-92904528-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-92904528-2');
+    </script>
 </head>
 <style>
 .modal-dialog{
