@@ -59,8 +59,8 @@
                         <div class="col-sm-3"></div>
                     </div>
         <div class="row" style="padding:5px;">
-                        <div class="col-sm-3"><p class="summary_text">No. of Seats  : </p></div>
-                        <div class="col-sm-3"><p class="summary_value"><?php echo $rows->number_of_seats; ?> Seats</p></div>
+                        <div class="col-sm-3"><p class="summary_text">No. of Tickets  : </p></div>
+                        <div class="col-sm-3"><p class="summary_value"><?php echo $rows->number_of_seats; ?> Ticket</p></div>
                         <div class="col-sm-3"></div>
                     </div>
         <div class="row" style="padding:5px;">

@@ -330,18 +330,28 @@ class Home extends CI_Controller {
 			$phone=$this->input->post('phone'.$i);
 			$datas=$this->loginmodel->insert_attendees($order_id,$name,$email,$phone);
 		}
-		 	redirect('/home/paymentsuccess');
+		 	redirect('home/paymentsuccess');
      }
 
 	public function paymentsuccess()
 	 {
-		  $this->load->view('front_header');
-		  $this->load->view('payment_success');
-		  $this->load->view('front_footer');
+		 	$datas=$this->session->userdata();
+	 		$user_id=$this->session->userdata('id');
+	 		$user_role=$this->session->userdata('user_role');
+				if($user_role==3 || $user_role==2){
+			  $this->load->view('front_header');
+			  $this->load->view('payment_success');
+			  $this->load->view('front_footer');
+				}else{
+					redirect('/');
+				}
 	}
 
 	public function paymenterror()
 	 {
+		 	$datas=$this->session->userdata();
+	 		$user_id=$this->session->userdata('id');
+	 		$user_role=$this->session->userdata('user_role');
 		  $this->load->view('front_header');
 		  $this->load->view('payment_error');
 		  $this->load->view('front_footer');
