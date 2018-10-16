@@ -16,7 +16,7 @@ class Apimainmodel extends CI_Model {
 		$headers = "MIME-Version: 1.0" . "\r\n";
 		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 		// Additional headers
-		$headers .= 'From: Heyla App<hello@heylaapp.com>' . "\r\n";
+		$headers .= 'From: Heyla App<admin@heylaapp.com>' . "\r\n";
 		mail($to,$subject,$email_message,$headers);
 	}
 

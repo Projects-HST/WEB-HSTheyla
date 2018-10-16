@@ -852,7 +852,7 @@ ORDER BY ogr.id DESC";
 				$query="INSERT INTO refund_request(user_id,order_id,status,created_at) VALUES ('$user_id','$order_id','Pending',NOW())";
 				$resultset=$this->db->query($query);
 			
-				$subject = "Heyla App Refund Request";
+				$subject = "Heyla App - Refund Request";
 				$email_message ='<html>
 								 <body>
 									<p>Order Id : '.$order_id.'</p>
