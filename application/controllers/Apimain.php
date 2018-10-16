@@ -1995,7 +1995,7 @@ public function profilePictureUpload()
 
 //-----------------------------------------------//
 
-	//------------------User Points-----------------------------//
+//------------------User Points-----------------------------//
 
 	public function user_points()
 	{
@@ -2022,7 +2022,37 @@ public function profilePictureUpload()
 		echo json_encode($response);
 	}
 
-	//-----------------------------------------------//
+//-----------------------------------------------//
+
+//------------------Refund Request-----------------------------//
+
+	public function refund_request()
+	{
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
+
+		if(!$this->checkMethod())
+		{
+			return FALSE;
+		}
+
+		if($_POST == FALSE)
+		{
+			$res = array();
+			$res["opn"] = "Input error";
+			$res["scode"] = 204;
+			$res["message"] = "Input error";
+
+			echo json_encode($res);
+			return;
+		}
+		$user_id = $this->input->post("user_id");
+		$order_id = $this->input->post("order_id");
+		$data['result']=$this->apimainmodel->Refund_request($user_id,$order_id);
+		$response = $data['result'];
+		echo json_encode($response);
+	}
+
+//-----------------------------------------------//
 
 
 
