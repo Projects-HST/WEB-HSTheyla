@@ -225,7 +225,7 @@
 
         	if($STATUS=="TXN_FAILURE")
         	{
-        	   header("Location: https://heylaapp.com/home/paymenterror/");
+        	   header("Location: https://heylaapp.com/home/paymenterror/".$enc_order_id."");
         	}
         	
         	if($STATUS=="PENDING")

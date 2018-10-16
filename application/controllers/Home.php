@@ -346,12 +346,47 @@ class Home extends CI_Controller {
 					redirect('/');
 				}
 	}
-
-	public function paymenterror()
+	
+ 
+	public function paymentrefund($order_id)
 	 {
+			$sorder_id = base64_decode($order_id);
 		 	$datas=$this->session->userdata();
 	 		$user_id=$this->session->userdata('id');
 	 		$user_role=$this->session->userdata('user_role');
+			if($user_role==3 || $user_role==2){
+			  $this->load->view('front_header');
+			  $this->load->view('payment_refund',$sorder_id);
+			  $this->load->view('front_footer');
+			}else{
+				redirect('/');
+			}
+	}
+
+	
+	public function requestrefund()
+     {
+		
+        $datas=$this->session->userdata();
+	    $user_id=$this->session->userdata('id');
+	    $user_role=$this->session->userdata('user_role');
+ 		$order_id=$this->input->post('order_id');
+		$sorder_id = base64_decode($order_id);
+		$result = $this->loginmodel->request_refund($sorder_id);
+		if($user_role==3 || $user_role==2){
+			  $this->load->view('front_header');
+			  $this->load->view('refund_sucess');
+			  $this->load->view('front_footer');
+			}else{
+				redirect('/');
+			}
+     }
+	 
+	public function paymenterror()
+	 {
+		 $datas=$this->session->userdata();
+		 $user_id=$this->session->userdata('id');
+	 	 $user_role=$this->session->userdata('user_role');
 		  $this->load->view('front_header');
 		  $this->load->view('payment_error');
 		  $this->load->view('front_footer');

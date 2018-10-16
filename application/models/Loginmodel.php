@@ -835,10 +835,38 @@ ORDER BY ogr.id DESC";
       $resu=$this->db->query($sql);
     }
     if($resu){
-      echo "success";
+		echo "success";
     }else{
         echo "failure";
     }
   }
+  
+  
+	public function request_refund($order_id)
+	{
+		$user_id= $this->session->userdata('id');
+		$check_eve="SELECT * FROM refund_request WHERE order_id='$order_id'";
+		$result=$this->db->query($check_eve);
+		  if($result->num_rows()==0)
+		   {
+					$query="INSERT INTO refund_request(user_id,order_id,status,created_at) VALUES ('$user_id','$order_id','Pending',NOW())";
+					$resultset=$this->db->query($query);
+		   }
+		
+		$subject = "Heyla App Refund Request";
+		$email_message ='<html>
+						 <body>
+							<p>Order Id : '.$order_id.'</p>
+							<p>User Id : '.$user_id.'</p>
+						 </body>
+						 </html>';
+		$sender_emails = "hello@heylaapp.com";
+		// Set content-type header for sending HTML email
+		$headers = "MIME-Version: 1.0" . "\r\n";
+		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+		// Additional headers
+		$headers .= 'From: Heyla App<admin@heylaapp.com>' . "\r\n";
+		mail($sender_emails,$subject,$email_message,$headers);
+	}
 
 }
