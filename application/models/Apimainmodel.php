@@ -2489,17 +2489,16 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 //#################### Refund request ###############//
 	public function Refund_request($user_id,$order_id)
 	{
-		$sql = "SELECT * FROM refund_request WHERE order_id='$order_id'";
-		$user_result = $this->db->query($sql);
-		$ress = $user_result->result();
-		if($user_result->num_rows()==0)
-		{
-			$query="INSERT INTO refund_request(user_id,order_id,status,created_at) VALUES ('$user_id','$order_id','Pending',NOW())";
-			$resultset=$this->db->query($query);
+	    $check_eve="SELECT * FROM refund_request WHERE order_id='$order_id'";
+		$result=$this->db->query($check_eve);
+		  if($result->num_rows()==0)
+		   {
+				$query="INSERT INTO refund_request(user_id,order_id,status,created_at) VALUES ('$user_id','$order_id','Pending',NOW())";
+				$resultset=$this->db->query($query);
 
-			$email_id = 'info@heylaapp.com';
-			$subject = "Heyla App - Refund Request";
-            $email_message = '<html>
+    			$email_id = 'info@heylaapp.com';
+    			$subject = "Heyla App - Refund Request";
+                $email_message = '<html>
 						 <body>
 							<p>Order Id : '.$order_id.'</p>
 							<p>User Id : '.$user_id.'</p>
@@ -2508,8 +2507,10 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
             $this->sendMail($email_id,$subject,$email_message);
 
     		$response = array("status" => "success", "msg" => "Mail Send to Admin");
-
+		} else {
+		    $response = array("status" => "error", "msg" => "Already Request");
 		}
+		return $response;
 	}
 //#################### Refund request End ###############//
 
