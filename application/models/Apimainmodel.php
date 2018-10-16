@@ -2075,10 +2075,10 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 		    $seatsupdate = $this->db->query($update_seats);
 
 		    $_SESSION['booking_start'] = time(); // taking now logged in time
-            $_SESSION['booking_expire'] = $_SESSION['booking_start'] + (300) ; // ending a session in 180 seconds
+            $_SESSION['booking_expire'] = $_SESSION['booking_start'] + (900) ; // ending a session in 180 seconds
 
-		    $session_seats = "INSERT INTO booking_session (session_expiry,order_id,plan_time_id,number_of_seats) VALUES ('". $_SESSION['booking_expire'] . "','". $order_id . "','". $plan_time_id . "','". $number_of_seats . "')";
-			$session_insert = $this->db->query($session_seats);
+		    $session_seats = "INSERT INTO booking_session (session_expiry,order_id,plan_time_id,number_of_seats,status) VALUES ('". $_SESSION['booking_expire'] . "','". $order_id . "','". $plan_time_id . "','". $number_of_seats . "','Start')";
+		$session_insert = $this->db->query($session_seats);
 
         	$response = array("status" => "success", "msg" => "Bookingprocess");
 			return $response;
@@ -2486,7 +2486,32 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 
     }
 
+//#################### Refund request ###############//
+	public function Refund_request($user_id,$order_id)
+	{
+		$sql = "SELECT * FROM refund_request WHERE order_id='$order_id'";
+		$user_result = $this->db->query($sql);
+		$ress = $user_result->result();
+		if($user_result->num_rows()==0)
+		{
+			$query="INSERT INTO refund_request(user_id,order_id,status,created_at) VALUES ('$user_id','$order_id','Pending',NOW())";
+			$resultset=$this->db->query($query);
 
+			$email_id = 'info@heylaapp.com';
+			$subject = "Heyla App - Refund Request";
+            $email_message = '<html>
+						 <body>
+							<p>Order Id : '.$order_id.'</p>
+							<p>User Id : '.$user_id.'</p>
+						 </body>
+						 </html>';
+            $this->sendMail($email_id,$subject,$email_message);
+
+    		$response = array("status" => "success", "msg" => "Mail Send to Admin");
+
+		}
+	}
+//#################### Refund request End ###############//
 
 
 

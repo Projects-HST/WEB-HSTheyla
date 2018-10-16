@@ -31,8 +31,11 @@ if ($con) {
                                     $update_seats = "UPDATE booking_plan_timing SET seat_available = seat_available+$number_of_seats WHERE id ='$plan_time_id'";
                                     $objRs2 = mysql_query($update_seats);
                                     
-                                    $delete_session = "DELETE FROM booking_session WHERE id = '$session_id'";
-                                    $objRs3 = mysql_query($delete_session);
+                                    $update_session = "UPDATE booking_session SET status = 'Expiry' WHERE id = '$session_id'";
+                                    $objRs3 = mysql_query($update_session);
+                                    
+                                   // $delete_session = "DELETE FROM booking_session WHERE id = '$session_id'";
+                                    //$objRs3 = mysql_query($delete_session);
                                 }
                     }
         		}

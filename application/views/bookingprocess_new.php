@@ -178,8 +178,8 @@ hr{
 </div>
 <script type="text/javascript">
     var hour = 0
-    var min = 0;
-    var sec = 59;
+    var min = 5;
+    var sec = 00;
 
     function countdown() {
     if(sec <= 0 && min > 0) {

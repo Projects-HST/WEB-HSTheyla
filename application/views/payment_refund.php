@@ -1,4 +1,4 @@
-<?php echo $order_id = $this->uri->segment(3); ?>
+<?php $order_id = $this->uri->segment(3); ?>
 <div class="container-fluid">
     <div class="row">
       <div class="container">

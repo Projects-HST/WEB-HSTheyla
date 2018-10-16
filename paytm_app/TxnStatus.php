@@ -1,6 +1,7 @@
 <?php
     require_once("./lib/connection.php");
     
+		$current_time = time(); 
         $TXNID = $_POST["TXNID"];
         $BANKTXNID = $_POST["BANKTXNID"];
         $ORDERID = $_POST["ORDERID"];
@@ -79,6 +80,11 @@
 
     	if($STATUS=="TXN_SUCCESS")
     	{
+			$sQuery = "SELECT * FROM booking_session WHERE order_id = '" .$order_id. "' AND session_expiry <= '" .$current_time. "' AND status = 'Expiry' ";
+			$objRs = mysql_query($sQuery);
+			if (mysql_num_rows($objRs)== 0)
+			{
+					
                 $enc_order_id = base64_encode($order_id);
                 $sbooking_date = date("d-m-Y", strtotime($booking_date));
                 $transaction_date = date("d-m-Y H:i:s"); 
@@ -174,7 +180,11 @@
                 $res = array();
 			    $res["message"] = "Success";
 			    echo json_encode($res);
-               // echo "Success";
+			} else {
+				$res = array();
+				$res["message"] = "Refund";
+				echo json_encode($res);
+				}
                 
     	} else {
     	    $res = array();
