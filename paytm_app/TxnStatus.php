@@ -84,7 +84,6 @@
 			$objRs = mysql_query($sQuery);
 			if (mysql_num_rows($objRs)== 0)
 			{
-					
                 $enc_order_id = base64_encode($order_id);
                 $sbooking_date = date("d-m-Y", strtotime($booking_date));
                 $transaction_date = date("d-m-Y H:i:s"); 
@@ -185,7 +184,6 @@
 				$res["message"] = "Refund";
 				echo json_encode($res);
 				}
-                
     	} else {
     	    $res = array();
     	        $res["message"] = "Error";
