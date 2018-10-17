@@ -5,14 +5,14 @@
         <div class="card m-b-20">
                              <div class="card-block">
                                <?php foreach($refund_track as $rows){} ?>
-                                <h4 class="mt-0 header-title">Organiser Request </h4>
+                                <h4 class="mt-0 header-title">Refund  Request </h4>
 
                                 <form method="post" enctype="multipart/form-data" action="" name="organsier_req_form" id="change_req_status" novalidate="novalidate">
 
                                    <div class="form-group row">
                                       <label for="example-text-input" class="col-sm-4 col-form-label">Email / Phone / username</label>
                                       <div class="col-sm-6">
-                                        <?php echo $rows->email_id; ?>  <?php echo $rows->mobile_no; ?>
+                                        <?php echo $rows->email_id; ?> <br> <?php echo $rows->mobile_no; ?><br>
                                               <?php echo $rows->user_name; ?>
                                       </div>
                                       <input type="hidden" name="refund_id" value="<?php echo base64_encode($rows->refund_id*98765); ?>">
