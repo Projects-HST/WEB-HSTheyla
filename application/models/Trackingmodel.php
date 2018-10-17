@@ -58,4 +58,31 @@ LEFT JOIN user_master AS um ON um.id=ev.created_by WHERE um.user_role=2 GROUP BY
     }
 
 
+    function refund_request(){
+      $sql="SELECT um.id,rr.id as refund_id,rr.order_id,um.email_id,um.mobile_no,um.user_name,rr.status,rr.created_at from refund_request as rr
+      left join user_master as um on um.id=rr.user_id order by rr.id DESC";
+      $resu=$this->db->query($sql);
+      return $resu->result();
+    }
+
+    function get_refund_request_id($ref_id){
+      $id=base64_decode($ref_id)/98765;
+     $sql="SELECT um.id,rr.id as refund_id,rr.order_id,um.email_id,um.mobile_no,um.user_name,rr.status,rr.created_at from refund_request as rr
+    left join user_master as um on um.id=rr.user_id Where rr.id='$id'";
+      $resu=$this->db->query($sql);
+      return $resu->result();
+    }
+
+    function update_refund_status($refund_id,$req_status){
+      $id=base64_decode($refund_id)/98765;
+      $sql="UPDATE refund_request SET status='$req_status',updated_at=NOW() WHERE id='$id'";
+      $result=$this->db->query($sql);
+      if($result){
+         echo "success";
+      }else{
+         echo "failed";
+      }
+    }
+
+
 }?>
