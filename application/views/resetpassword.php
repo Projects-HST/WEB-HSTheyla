@@ -1,7 +1,7 @@
     <section class="">
       <div class="container">
         <div class="">
-          <div class="verify-text">
+          <div class="verify-text" style="    margin-bottom: 200px;">
             <center>
                 <img src="<?php echo base_url(); ?>assets/front/images/email.png" class="img-fluid">
               <form action="" method="post" id="resetform">
@@ -47,11 +47,7 @@
       text-align: left;
       vertical-align: middle;
     }
-    #stickfooter{
-      position: absolute;
-      width: 100%;
-      bottom: 0px;
-    }
+
     </style>
 
 <script type="text/javascript">

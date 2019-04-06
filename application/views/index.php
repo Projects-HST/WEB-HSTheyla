@@ -208,7 +208,7 @@ body{background-color: #fff;}
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner" role="listbox">
       <div class="carousel-item active">
-        <img class="first-slide" src="<?php echo base_url(); ?>assets/front/images/about_usbanner.jpg" alt="First slide">
+        <img class="first-slide" src="<?php echo base_url(); ?>assets/front/images/about_usbanner.jpg" alt="First slide" style="width:100%;height:auto;">
         </div>
     </div>
   </div>
@@ -217,13 +217,14 @@ body{background-color: #fff;}
   <div class="">
     <div class="container-fluid">
 
-        <div class="about_us">
+        <div class="about_us" style="margin-top:-130px;">
             <center><h3>About Us</h3></center>
-            <p class="whatsheyla">Heyla is your Gateway to the World Outside in your Pocket – Explore, Discover, Share and Enjoy. It is the encyclopaedia of “What, When and Where” of the World of Entertainment, Shopping, Sports, Dining, Travelling and more
-            <p><p class="whatsheyla" id="services">
-                      The Power of Heyla is just clicks away – Download the app now and embark on a journey to discover the undiscovered World of total Entertainment. Heyla is an everything-for-everybody App – Start Exploring Straightaway.
-
-                    </p>
+            <p class="whatsheyla">Heyla acts as the connecting link between event organizers and event seekers. It is your gateway to the World outside in your pocket, waiting to be explored, shared and enjoyed. Know what the buzzing events in Singapore are, today.
+            </p>
+              <p class="whatsheyla" id="services">
+                  Heyla is like the encyclopaedia of “What, When and Where” of the World of Events, from Entertainment, Shopping, Sports, Dining, Travelling, Business and many more. You can organize events or attend them, or choose to do both if you wish.</p>
+                  <p class="whatsheyla" id="services">
+                     It’s an everything-for-everybody App and exploring is just a few clicks away.</p>
         </div>
     </div>
   </div>
@@ -251,7 +252,7 @@ body{background-color: #fff;}
                         <div class="media mediaobj">
                           <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/favourite.png" alt="Generic placeholder image">
                           <div class="media-body">
-                              <h5 class="mt-0">Favourite</h5> Tailor fit events for you.<br></div>
+                              <h5 class="mt-0">Favourite</h5> Tailor made events for you.<br></div>
                         </div>
                     </div>
 
@@ -261,7 +262,7 @@ body{background-color: #fff;}
                         <div class="media mediaobj">
                             <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/Popular.png" alt="Generic placeholder image">
                                 <div class="media-body">
-                                    <h5 class="mt-0">Popular</h5>The trending events happening in your city . </div>
+                                    <h5 class="mt-0">Popular</h5>The Trending events happening in your city.</div>
                         </div>
                     </div>
 
@@ -282,7 +283,7 @@ body{background-color: #fff;}
                             <div class="media mediaobj">
                                 <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/leaderboard.png" alt="Generic placeholder image">
                                 <div class="media-body">
-                                    <h5 class="mt-0">Leaderboard</h5> Let's add to the overall fun by competing with other Heyla App Users.</div>
+                                    <h5 class="mt-0">Leaderboard</h5>Let's add to the overall fun by competing with other Heyla App Users.</div>
                             </div>
                         </div>
                   </div>
