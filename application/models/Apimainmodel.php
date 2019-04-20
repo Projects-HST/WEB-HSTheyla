@@ -681,9 +681,9 @@ class Apimainmodel extends CI_Model {
             $activity_sql = "INSERT INTO user_activity (date,user_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $login_type . "')";
 			$insert_activity = $this->db->query($activity_sql);
 
-			$points_sql = "INSERT INTO user_points_count (user_id) VALUES ('". $user_id . "')";
+            $points_sql = "INSERT INTO user_points_count (user_id) VALUES ('". $user_id . "')";
 			$insert_points = $this->db->query($points_sql);
-					
+			
             $gcmQuery = "SELECT * FROM push_notification_master WHERE gcm_key like '%" .$gcm_key. "%' LIMIT 1";
 			$gcm_result = $this->db->query($gcmQuery);
 			$gcm_ress = $gcm_result->result();
@@ -1067,6 +1067,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			return $response;
 	}
 
+//#################### get Event Countries####################//
   public function getEventCountries($user_id)
   {
       $country_query = "SELECT id,country_name from country_master WHERE event_status='Y'";
@@ -1083,7 +1084,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
       return $response;
   }
 
-
+//#################### get Event cities####################//
   public function getEventcities($country_id)
   {
       $country_query = "SELECT id,city_name,city_latitude,city_longitude from city_master WHERE event_status='Y' and country_id='$country_id'";
@@ -1529,7 +1530,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                             LEFT JOIN city_master AS ci ON ev.event_city = ci.id
                             LEFT JOIN country_master AS cy ON ev.event_country = cy.id
                             WHERE ev.hotspot_status = 'N' AND $day_query ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
-                            group by ev.id";
+                            group by ev.id order by ev.start_date";
 	    }
 	    if ($event_type == 'Popularity'){
 	         $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
@@ -2075,10 +2076,11 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 		    $seatsupdate = $this->db->query($update_seats);
 
 		    $_SESSION['booking_start'] = time(); // taking now logged in time
-            $_SESSION['booking_expire'] = $_SESSION['booking_start'] + (900) ; // ending a session in 180 seconds
+            $_SESSION['booking_expire'] = $_SESSION['booking_start'] + (600) ; // ending a session in 10mins
 
-		    $session_seats = "INSERT INTO booking_session (session_expiry,order_id,plan_time_id,number_of_seats,status) VALUES ('". $_SESSION['booking_expire'] . "','". $order_id . "','". $plan_time_id . "','". $number_of_seats . "','Start')";
-		$session_insert = $this->db->query($session_seats);
+		     $session_seats = "INSERT INTO booking_session (session_expiry,order_id,plan_time_id,number_of_seats,status) VALUES ('". $_SESSION['booking_expire'] . "','". $order_id . "','". $plan_time_id . "','". $number_of_seats . "','Start')";
+		    $session_insert = $this->db->query($session_seats);
+
 
         	$response = array("status" => "success", "msg" => "Bookingprocess");
 			return $response;
@@ -2451,7 +2453,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	}
 //#################### Organizer request End ###############//
 
-      //----- User Points--------//
+//----- User Points--------//
 
     function user_points($user_id){
       $select="SELECT IFNULL(ud.name,'') as name,IFNULL( um.user_name,'') as user_name,IFNULL(um.email_id,'') as email_id,upc.user_id,upc.total_points,IFNULL(ud.user_picture,'') as user_picture ,IFNULL(um.id,'') as id FROM user_points_count as upc
@@ -2496,7 +2498,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 				$query="INSERT INTO refund_request(user_id,order_id,status,created_at) VALUES ('$user_id','$order_id','Pending',NOW())";
 				$resultset=$this->db->query($query);
 
-    			$email_id = 'info@heylaapp.com';
+    			$email_id = 'ganesh.happysanz@gmail.com';
     			$subject = "Heyla App - Refund Request";
                 $email_message = '<html>
 						 <body>
@@ -2514,8 +2516,37 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	}
 //#################### Refund request End ###############//
 
+//#################### Report Abuse ###############//
+	public function Report_Abuse($review_id)
+	{
+	    $check_eve="SELECT A.id, A.event_id, C.event_name, A.event_rating, A.comments, B.user_name FROM event_reviews A, user_master B, events C WHERE A.user_id = B.id AND A.event_id = C.id AND A.id='$review_id'";
+		$result=$this->db->query($check_eve);
+		if($result->num_rows()>0)
+		   {
+			   foreach ($result->result() as $rows)
+				{
+				  $event_name = $rows->event_name;
+				  $comments = $rows->comments;
+				  $user_name = $rows->user_name;
+				}
+    			$email_id = 'ganesh.happysanz@gmail.com';
+    			$subject = "Heyla App - Review Report Abuse";
+                $email_message = '<html>
+						 <body>
+							<p>Event Name : '.$event_name.'</p>
+							<p>Comments : '.$comments.'</p>
+							<p>Posted By : '.$user_name.'</p>
+						 </body>
+						 </html>';
+            $this->sendMail($email_id,$subject,$email_message);
 
-
+    		$response = array("status" => "success", "msg" => "Mail Send to Admin");
+		} else {
+		    $response = array("status" => "error", "msg" => "Review No Found");
+		}
+		return $response;
+	}
+//#################### Report Abuse End ###############//
 
 
 }

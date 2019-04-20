@@ -386,7 +386,7 @@ class Apimain extends CI_Controller {
 
 //-----------------------------------------------//
 
-public function profilePictureUpload()
+    public function profilePictureUpload()
 	{
 	  	$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
@@ -665,62 +665,63 @@ public function profilePictureUpload()
 
 //-----------------------------------------------//
 
-					public function getEventCountries()
-					{
-						$_POST = json_decode(file_get_contents("php://input"), TRUE);
+	public function getEventCountries()
+	{
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
-						if(!$this->checkMethod())
-						{
-							return FALSE;
-						}
+		if(!$this->checkMethod())
+		{
+			return FALSE;
+		}
 
-						if($_POST == FALSE)
-						{
-							$res = array();
-							$res["opn"] = "Select All City";
-							$res["scode"] = 204;
-							$res["message"] = "Input error";
+		if($_POST == FALSE)
+		{
+			$res = array();
+			$res["opn"] = "Select All City";
+			$res["scode"] = 204;
+			$res["message"] = "Input error";
 
-							echo json_encode($res);
-							return;
-						}
+			echo json_encode($res);
+			return;
+		}
 
-						$user_id = '';
-						$user_id = $this->input->post("user_id");
+		$user_id = '';
+		$user_id = $this->input->post("user_id");
 
-						$data['result']=$this->apimainmodel->getEventCountries($user_id);
-						$response = $data['result'];
-						echo json_encode($response);
-					}
+		$data['result']=$this->apimainmodel->getEventCountries($user_id);
+		$response = $data['result'];
+		echo json_encode($response);
+	}
 
+//-----------------------------------------------//
 
-					public function getEventcities()
-					{
-						$_POST = json_decode(file_get_contents("php://input"), TRUE);
+	public function getEventcities()
+	{
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
-						if(!$this->checkMethod())
-						{
-							return FALSE;
-						}
+		if(!$this->checkMethod())
+		{
+			return FALSE;
+		}
 
-						if($_POST == FALSE)
-						{
-							$res = array();
-							$res["opn"] = "Select All City";
-							$res["scode"] = 204;
-							$res["message"] = "Input error";
+		if($_POST == FALSE)
+		{
+			$res = array();
+			$res["opn"] = "Select All City";
+			$res["scode"] = 204;
+			$res["message"] = "Input error";
 
-							echo json_encode($res);
-							return;
-						}
+			echo json_encode($res);
+			return;
+		}
 
-						$user_id = '';
-						$country_id = $this->input->post("country_id");
+		$user_id = '';
+		$country_id = $this->input->post("country_id");
 
-						$data['result']=$this->apimainmodel->getEventcities($country_id);
-						$response = $data['result'];
-						echo json_encode($response);
-					}
+		$data['result']=$this->apimainmodel->getEventcities($country_id);
+		$response = $data['result'];
+		echo json_encode($response);
+	}
 
 //-----------------------------------------------//
 
@@ -830,7 +831,7 @@ public function profilePictureUpload()
 
 	public function addWishListMaster()
 	{
-		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
@@ -864,7 +865,7 @@ public function profilePictureUpload()
 
 	public function updateWishListMaster()
 	{
-		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
@@ -901,7 +902,7 @@ public function profilePictureUpload()
 
 	public function viewWishListMaster()
 	{
-		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
@@ -933,7 +934,7 @@ public function profilePictureUpload()
 
 	public function deleteWishListMaster()
 	{
-		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
@@ -1452,18 +1453,18 @@ public function profilePictureUpload()
         $event_category = '';
         $selected_preference = '';
         $selected_city = '';
-				$price_range = '';
+		$price_range = '';
 
 
 
-      $single_date = $this->input->post("single_date");
-      $from_date = $this->input->post("from_date");
-      $to_date = $this->input->post("to_date");
-      $event_type = $this->input->post("event_type");
-      $event_category = $this->input->post("event_category");
-      $selected_preference = $this->input->post("selected_preference");
-      $selected_city = $this->input->post("selected_city");
-			$price_range = $this->input->post("price_range");
+        $single_date = $this->input->post("single_date");
+        $from_date = $this->input->post("from_date");
+        $to_date = $this->input->post("to_date");
+        $event_type = $this->input->post("event_type");
+        $event_category = $this->input->post("event_category");
+        $selected_preference = $this->input->post("selected_preference");
+        $selected_city = $this->input->post("selected_city");
+		$price_range = $this->input->post("price_range");
 
 
 
@@ -1995,7 +1996,7 @@ public function profilePictureUpload()
 
 //-----------------------------------------------//
 
-//------------------User Points-----------------------------//
+	//------------------User Points-----------------------------//
 
 	public function user_points()
 	{
@@ -2022,7 +2023,7 @@ public function profilePictureUpload()
 		echo json_encode($response);
 	}
 
-//-----------------------------------------------//
+	//-----------------------------------------------//
 
 //------------------Refund Request-----------------------------//
 
@@ -2054,13 +2055,39 @@ public function profilePictureUpload()
 
 //-----------------------------------------------//
 
+//------------------Report Abuse-----------------------------//
 
+	public function report_abuse()
+	{
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
+		if(!$this->checkMethod())
+		{
+			return FALSE;
+		}
+
+		if($_POST == FALSE)
+		{
+			$res = array();
+			$res["opn"] = "Input error";
+			$res["scode"] = 204;
+			$res["message"] = "Input error";
+
+			echo json_encode($res);
+			return;
+		}
+		$review_id = $this->input->post("review_id");
+		$data['result']=$this->apimainmodel->Report_Abuse($review_id);
+		$response = $data['result'];
+		echo json_encode($response);
+	}
+
+//-----------------------------------------------//
 
 /*//-----------------------------------------------//
 	public function notification()
 	{
-	   //$_POST = json_decode(file_get_contents("php://input"), TRUE);
+	   $_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
