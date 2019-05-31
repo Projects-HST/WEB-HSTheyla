@@ -793,7 +793,7 @@ class Home extends CI_Controller {
 		public function change_pic(){
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
-			 $user_role=$this->session->userdata('user_role');
+			$user_role=$this->session->userdata('user_role');
 			$profilepic = $_FILES['profilepic']['name'];
 			$temp = pathinfo($profilepic, PATHINFO_EXTENSION);
 			$userFileName = round(microtime(true)) . '.' . $temp;
@@ -1044,10 +1044,6 @@ class Home extends CI_Controller {
 				redirect('/');
 			}
 		}
-
-
-
-
 
 		public function user_booking_history($order_id,$gateway){
 			$datas=$this->session->userdata();

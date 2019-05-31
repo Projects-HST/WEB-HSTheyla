@@ -166,7 +166,7 @@ body{background-color: #f7f8fa;}
       <div class="form-group">
             <div class="col-sm-12">
               <form class="navbar-form navbar-right search-event-form" role="search" method="post" action="" name="search_form" id="search_form">
-                  <input  type="text" class="form-control btn-block" name="search_term" id="search_term"  placeholder="Search Event by name" value="">
+                  <input  type="text" class="form-control btn-block" name="search_term" id="search_term"  placeholder="Search Event by name" value="" autocomplete="off">
                    <a href="#"  onclick="getSearchevents()"><span toggle="#password-field" class="fa fa-search field-icon toggle-password"></span></a>
                 </form>
           </div>
@@ -304,6 +304,7 @@ $(window).on('load', function(){
 	  }
         }});
 	}
+
 });
 
 function change_country()
@@ -346,7 +347,7 @@ function getAllevents()
 	$('#event_type').prop('selectedIndex',0);
 	$('#loader_message').hide();
 	var result = '';
-
+	
 	$.ajax({
 	url: '<?php echo base_url(); ?>eventlist/get_all_events',
 	type: 'POST',
@@ -1203,7 +1204,7 @@ function getSearchevents()
 	$('#ctyname').prop('selectedIndex',0);
 	//$('#category').prop('selectedIndex',0);
 	$('#event_type').prop('selectedIndex',0);
-
+	
 	var srch_term = search_term.value;
 	var result = '';
 
