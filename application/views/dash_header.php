@@ -81,10 +81,8 @@
                                         </a>
                                      <ul class="dropdown-menu dropdown-block" role="menu">
                                          <li><a href="<?php echo base_url(); ?>profile">Profile</a></li>
-
-                                         <li>
-                                            <a class="nav-link logout-btn" onclick="logout()">Logout</a>
-                                          </li>
+										  <li><a href="<?php echo base_url(); ?>change_password">Change Password</a></li>
+                                         <li><a class="nav-link logout-btn" onclick="logout()">Logout</a></li>
                                      </ul>
                                  </li>
 
@@ -113,7 +111,7 @@
                   <li class="side-menu">
                       <a href="<?php echo base_url(); ?>profile" class="profile_active">
                         <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/profile.png"></span>
-                        <span class="sidebar-title">Pofile</span>
+                        <span class="sidebar-title">Profile</span>
                       </a>
                   </li>
 

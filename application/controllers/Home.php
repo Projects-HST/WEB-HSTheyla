@@ -858,6 +858,35 @@ class Home extends CI_Controller {
 
 		}
 
+
+
+		public function change_password()
+		{
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			if($user_role==3 || $user_role==2){
+				$this->load->view('dash_header');
+				$this->load->view('change_password');
+				$this->load->view('dash_footer');
+			}else{
+				redirect('/');
+			}
+
+		}
+		
+		public function password_change(){
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			 $user_role=$this->session->userdata('user_role');
+			if($user_id){
+				$confirm_password = $this->input->post('confirm_password');
+				$datas['res']=$this->loginmodel->password_change($confirm_password,$user_id);
+			}else{
+				redirect('/');
+			}
+		}
+		
 		public function leaderboard(){
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');

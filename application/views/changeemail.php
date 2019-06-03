@@ -36,8 +36,6 @@ input[type=text] {
 
         </div>
 
-
-
         <div class="form-group">
             <input type="text" class="form-control" id="email" name="email" required="" placeholder="Enter New Email_id " >
 

@@ -56,6 +56,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['google_login'] = 'home/gmaillogin';
 $route['facebook_login'] = 'home/facebook_login';
 $route['profile'] = 'home/profile_update';
+$route['change_password'] = 'home/change_password';
 $route['verify'] = 'home/verify';
 $route['signin'] = 'home/signin';
 $route['signup'] = 'home/signup';

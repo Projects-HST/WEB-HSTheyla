@@ -479,6 +479,19 @@ Class Loginmodel extends CI_Model
 					  echo "failed";
 				 }
    }
+   
+   
+   function password_change($confirm_password,$user_id){
+		$change_password = md5($confirm_password);
+		$update_user_master="UPDATE user_master SET password='$change_password' WHERE id='$user_id'";
+		$result=$this->db->query($update_user_master);
+		 if($result){
+			  echo "success";
+		 }else{
+			  echo "failed";
+		 }
+   }
+   
 
    function sendOTPmobilechange($mobile,$user_id){
       $mob=$mobile;

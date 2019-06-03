@@ -17,7 +17,7 @@
         <div class="card-block" style="padding:20px;">
           <?php  
 		  if (empty($booking_details)) {
-				echo "Sorry!.. Booking not found.";
+				echo "<center><h3>Sorry!.. Booking not found.</h3></center>";
 			} else {
 			
 			  foreach($booking_details as $res){
