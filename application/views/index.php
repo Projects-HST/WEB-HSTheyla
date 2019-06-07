@@ -222,9 +222,9 @@ body{background-color: #fff;}
             <p class="whatsheyla">Heyla acts as the connecting link between event organizers and event seekers. It is your gateway to the World outside in your pocket, waiting to be explored, shared and enjoyed. Know what the buzzing events in Singapore are, today.
             </p>
               <p class="whatsheyla" id="services">
-                  Heyla is like the encyclopaedia of “What, When and Where” of the World of Events, from Entertainment, Shopping, Sports, Dining, Travelling, Business and many more. You can organize events or attend them, or choose to do both if you wish.</p>
+                 Heyla is like the encyclopaedia of “What, When and Where” of the World of Events, from Entertainment, Shopping, Sports, Dining, Travelling, Business and many more. You can organize events or attend them, or choose to do both if you wish.</p>
                   <p class="whatsheyla" id="services">
-                     It’s an everything-for-everybody App and exploring is just a few clicks away.</p>
+                  It’s an everything-for-everybody App and exploring is just a few clicks away.</p>
         </div>
     </div>
   </div>
@@ -262,7 +262,7 @@ body{background-color: #fff;}
                         <div class="media mediaobj">
                             <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/Popular.png" alt="Generic placeholder image">
                                 <div class="media-body">
-                                    <h5 class="mt-0">Popular</h5>The Trending events happening in your city.</div>
+                                    <h5 class="mt-0">Popular</h5>Trending events happening in your city.</div>
                         </div>
                     </div>
 
@@ -328,8 +328,9 @@ body{background-color: #fff;}
           </div>
           <div class="col">
             <p class="footer_heading">Contact Us</p>
-            <p class="address_form">No: 6, Kummalamman Koil Street,<br>
-                      3rd Lane Tondiarpet, <br>Chennai - 600081</p>
+            <p class="address_form">Happy Sanz Tech <br>
+               #3, Perks campus, <br> Uppilipalayam,<br> Coimbatore-641015</p>
+               <p class="address_form">hello@heylaapp.com</p>
           </div>
           <div class="col">
             <p class="footer_heading">Follow  Us On</p>

@@ -10,7 +10,7 @@
 
 
                  <br><br><b>The Website & App</b><br>
-                This Website and the App take a proactive approach to users’ privacy and ensures the necessary steps are taken to protect the privacy of its  users throughout their visiting experience
+                This Website and the App take a proactive approach to users’ privacy and ensures that the necessary steps are taken to protect the privacy of its  users throughout their visiting experience
 
                  <br><br><b>Personal Information</b><br>
                  We collect information directly from you when you register for an event or buy tickets. We also collect information if you post a comment on our app, website or social media pages or ask us a question through phone or email. We also collect information about you through third parties. If you use, Facebook   & Gmail to login then we obtain information about you through the third party sites.<br>
@@ -37,12 +37,12 @@ The owners of this website/App cannot guarantee or verify the contents of any ex
                 <br> <br><b>Social Media Platforms</b><br>
                 Any communication, engagement or action taken by the website or the App through an external social media platform are in custom to the terms and conditions, and privacy policies held with each social media platform.
 
-Users are advised to use social media platforms wisely and communicate or engage upon them with due care and caution in regard to their own privacy and personal details. The Website or the App will never ask for personal or sensitive information through any social media platform. It encourages the users who wish to discuss sensitive details, to contact them though primary communication channels, such as, by telephone or email.
+Users are advised to use social media platforms wisely and communicate or engage upon them with due care and caution in regard to their own privacy and personal details. The Website or the App will never ask for personal or sensitive information through any social media platform. It encourages the users who wish to discuss sensitive details, to contact them through  primary communication channels, such as, by telephone or email.
 
 This Website or the App may use social sharing buttons, which help to share web content directly from web pages to the respective social media platform. Users are advised before using the social sharing buttons that, they do it at their own discretion, and also note that the social media platform may track and save your request to share a web page respectively through your social media platform account.
 
                 <br> <br><b>Shortened Links in Social Media</b><br>
-                The website and the App may share links to relevant pages on their social media accounts. Some social media platforms, by default, shorten the length of the URL’s. Users are advised to take caution before clicking on the shortened URLs published on social media platforms by this website or the App. Team Heyla will puts  all efforts to ensure only genuine URL’s are published, but many social media platforms are prone to spam as well as hacking. Thus, the website, the App or it's owners cannot be held liable for any damage or implication caused by visiting any shortened URL’s.
+                The website and the App may share links to relevant pages on their social media accounts. Some social media platforms, by default, shorten the length of the URL’s. Users are advised to take caution before clicking on the shortened URLs published on social media platforms by this website or the App. Team Heyla will put   all efforts to ensure only genuine URL’s are published, but many social media platforms are prone to spam as well as hacking. Thus, the website, the App or it's owners cannot be held liable for any damage or implication caused by visiting any shortened URL’s.
 
                  <br><br><b>Updates to this policy</b></br>
                  This Privacy Policy was last updated on  08.09.2018. From time to time we may change or make additions to our privacy policy. We will notify you of any material changes to this policy as required by law. We will also post an updated copy on our website and during App updates.

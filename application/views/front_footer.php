@@ -33,9 +33,9 @@
           </div>
           <div class="col">
             <p class="footer_heading">Contact Us</p>
-            <p class="address_form">VISION PALPRO STECH LLP
-              No 90/12  <br>Seniamman Koil Street,<br>Tondiarpet,<br>Chennai - 600081</p>
-              <p class="address_form">hello@heylaapp.com <br>+91-944 347 1551</p>
+            <p class="address_form">Happy Sanz Tech <br>
+                 #3, Perks campus, <br> Uppilipalayam,<br> Coimbatore-641015</p>
+                 <p class="address_form">hello@heylaapp.com</p>
           </div>
           <div class="col">
             <p class="footer_heading">Follow  Us On</p>
