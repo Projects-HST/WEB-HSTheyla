@@ -1,4 +1,6 @@
 <script src="<?php echo base_url(); ?>assets/front/js/jquery.form.js"></script>
+<script src="<?php  echo base_url(); ?>assets/js/croppie.js"></script>
+<link rel="stylesheet" href="<?php  echo base_url(); ?>assets/css/croppie.css" />
 <style>
 .card-block{
   padding: 30px;
@@ -54,6 +56,15 @@
 }
 .change_pic{
   margin-top: 200px;
+}
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
 }
 </style>
 <div class=" col-md-12 " id="content">
@@ -154,19 +165,133 @@
     <img src="<?php echo base_url(); ?>assets/users/profile/<?php echo $rows->user_picture; ?>" class="img-circle  profile-pic">
 <?php  } ?>
 
-<form  action="<?php echo base_url(); ?>home/change_pic" method="post" id="image_upload_form" enctype="multipart/form-data">
-      <div class="upload-button">Change Picture</div>
-
-     <input class="file-upload" name="profilepic" id="profilepic" type="file" accept="image/x-png,image/jpeg" />
-        <div id="preview"></div>
-    </form>
 
 </div>
+<br>
+<div class="">
+  <!-- <input type="file" name="upload_image" class="btn btn-primary" id="upload_image" style="margin-left:150px;" /> -->
+  <label for="upload_image" class="custom-file-upload"  style="margin-left:150px;">
+    <i class="fa fa-cloud-upload"></i>Profile Picture
+</label>
+<input id="upload_image" type="file" name="upload_image" />
+</div>
+    <br>
+    <?php if(empty($rows->user_picture)){ ?>
+
+  <?php  }else{ ?>
+    <b class="" style="margin-left:150px;"><a onclick="remove_img()" style="cursor: pointer;">Remove Picture</a></b>
+  <?php  } ?>
+
+
 </div>
 
 </div>
+
+<div id="uploadimageModal" class="modal" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+      		<div class="modal-header">
+        		<button type="button" class="close" data-dismiss="modal">&times;</button>
+        		<h4 class="modal-title">Upload & Crop Image</h4>
+      		</div>
+      		<div class="modal-body">
+        		<div class="row">
+  					<div class="col-md-8 text-center">
+						  <div id="image_demo" style="width:350px; margin-top:30px"></div>
+  					</div>
+  					<div class="col-md-4" style="padding-top:30px;">
+  						<br />
+  						<br />
+  						<br/>
+						  <button class="btn btn-success crop_image">Crop & Upload Image</button>
+					</div>
+				</div>
+      		</div>
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      		</div>
+    	</div>
+    </div>
+</div>
+
 
 <script>
+function remove_img(){
+  $.ajax({
+    url:"<?php  echo base_url();  ?>home/remove_img",
+    type: "POST",
+    data:{"hi": "response"},
+    success:function(data)
+    {
+      if(data=="success"){
+          alert("Picture Removed");
+          window.setTimeout(function(){location.reload()},1000)
+      }else{
+          alert("Something Went Wrong");
+      }
+    }
+  });
+}
+
+$(document).ready(function(){
+
+	$image_crop = $('#image_demo').croppie({
+    enableExif: true,
+    viewport: {
+      width:200,
+      height:200,
+      type:'square' //circle
+    },
+    boundary:{
+      width:300,
+      height:300
+    }
+  });
+
+  $('#upload_image').on('change', function(){
+    var reader = new FileReader();
+    reader.onload = function (event) {
+      $image_crop.croppie('bind', {
+        url: event.target.result
+      }).then(function(){
+        console.log('jQuery bind complete');
+      });
+    }
+    reader.readAsDataURL(this.files[0]);
+    $('#uploadimageModal').modal('show');
+  });
+
+  $('.crop_image').click(function(event){
+    $image_crop.croppie('result', {
+      type: 'canvas',
+      size: 'viewport'
+    }).then(function(response){
+      $.ajax({
+        url:"<?php  echo base_url();  ?>home/change_pic",
+        type: "POST",
+        data:{"image": response},
+        success:function(data)
+        {
+          if(data=="success"){
+            swal({
+                title: "success",
+                text: " Profile Picture Updated.",
+                type: "success"
+            }).then(function() {
+               location.reload();
+            });
+          }else{
+              sweetAlert("Oops...", response, "error");
+          }
+        }
+      });
+    })
+  });
+
+});
+
+
+
 $('#profile_form').validate({ // initialize the plugin
     rules: {
         // mobile_no: {
@@ -212,8 +337,7 @@ $('#profile_form').validate({ // initialize the plugin
         address: "Enter Address "
     },
     submitHandler: function(form) {
-        //alert("hi");
-        $.ajax({
+            $.ajax({
             url: "<?php echo base_url(); ?>home/save_profile",
             type: 'POST',
             data: $('#profile_form').serialize(),
@@ -235,44 +359,5 @@ $('#profile_form').validate({ // initialize the plugin
     }
 });
 
-    var readURL = function(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
 
-            reader.onload = function(e) {
-                $('.profile-pic').attr('src', e.target.result);
-            }
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-    $(".file-upload").on('change', function() {
-        readURL(this);
-    });
-
-    $(".upload-button").on('click', function() {
-        $(".file-upload").click();
-    });
-
-    $(document).ready(function() {
-
-        $('#profilepic').on('change', function() {
-
-          var f=this.files[0]
-			     var actual=f.size||f.fileSize;
-           var orgi=actual/1024;
-            if(orgi<1024){
-              $("#preview").html('');
-              $("#preview").html('<img src="<?php echo base_url(); ?>assets/loader.gif" alt="Uploading...." style="width:10%;"/>');
-              $("#image_upload_form").ajaxForm({
-                  target: '#preview'
-              }).submit();
-            }else{
-              alert("File Size Must be  Lesser than 1 MB");
-            }
-
-
-        });
-    });
 </script>

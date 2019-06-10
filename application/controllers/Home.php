@@ -346,8 +346,8 @@ class Home extends CI_Controller {
 					redirect('/');
 				}
 	}
-	
- 
+
+
 	public function paymentrefund($order_id)
 	 {
 			$sorder_id = base64_decode($order_id);
@@ -363,10 +363,10 @@ class Home extends CI_Controller {
 			}
 	}
 
-	
+
 	public function requestrefund()
      {
-		
+
         $datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
@@ -381,7 +381,7 @@ class Home extends CI_Controller {
 				redirect('/');
 			}
      }
-	 
+
 	public function paymenterror()
 	 {
 		 $datas=$this->session->userdata();
@@ -794,15 +794,42 @@ class Home extends CI_Controller {
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
 			$user_role=$this->session->userdata('user_role');
-			$profilepic = $_FILES['profilepic']['name'];
-			$temp = pathinfo($profilepic, PATHINFO_EXTENSION);
-			$userFileName = round(microtime(true)) . '.' . $temp;
-			$uploaddir = 'assets/users/profile/';
-			$profilepic = $uploaddir.$userFileName;
-			move_uploaded_file($_FILES['profilepic']['tmp_name'], $profilepic);
-
-			$data['res']=$this->loginmodel->changeprofileimage($user_id,$userFileName);
+			if($user_id){
+				$data=$_POST["image"];
+				$image_array_1 = explode(";", $data);
+				$image_array_2 = explode(",", $image_array_1[1]);
+				$data = base64_decode($image_array_2[1]);
+				$userFileName = time() . '.png';
+				file_put_contents('assets/users/profile/'.$userFileName, $data);
+				$datas=$this->loginmodel->changeprofileimage($user_id,$userFileName);
+				if($datas['status']=="success"){
+							echo "success";
+						}else{
+							echo "failed";
+						}
+			}else{
+					redirect('/');
+			}
 		}
+
+
+			public function remove_img(){
+		 $datas=$this->session->userdata();
+		 $user_id=$this->session->userdata('id');
+		 $user_type=$this->session->userdata('user_type');
+		 if($user_id)
+		 {
+
+			 $datas=$this->loginmodel->remove_img($user_id);
+			 if($datas['status']=="success"){
+				 echo "success";
+			 }else{
+				 echo "failed";
+			 }
+		 }else{
+			 redirect('/');
+		 }
+	}
 
 		public function create_profile(){
 			$name=$this->input->post('name');
@@ -874,7 +901,7 @@ class Home extends CI_Controller {
 			}
 
 		}
-		
+
 		public function password_change(){
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
@@ -886,7 +913,7 @@ class Home extends CI_Controller {
 				redirect('/');
 			}
 		}
-		
+
 		public function leaderboard(){
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');

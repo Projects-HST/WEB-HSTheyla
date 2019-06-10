@@ -26,6 +26,9 @@ body{
   color: #000;
   font-weight: 500;
 }
+.no_banner{
+  margin-top: 150px;
+}
 .navbar {
   border-bottom: 1px solid #dad9d9;
 }
@@ -35,6 +38,11 @@ body{
 
 .slider-img{
   border-left: 3px solid #fff;
+}
+
+.form_search{
+  margin-left: 100px;
+  margin-right: 100px;
 }
 .become_organiser_text{
   padding-left: 10px;
@@ -1065,11 +1073,11 @@ a.btn.btn-login.btn-primary.btn-block.review-btn{
     height: 234px;
     width: 100%;
   }
-/* .carousel-fade .carousel-inner, .carousel-fade .carousel-item {
-  height: 320px;
-} */
+  .event_fee{
+    margin-top: 20px;
+  }
 .or-text{
-  padding-top: 0px;
+display: none;
 }
 .socialmedia-tab{
     padding-top: 0px;
@@ -1077,6 +1085,10 @@ a.btn.btn-login.btn-primary.btn-block.review-btn{
 .formsignin{
   padding-top: 30px;
   padding-bottom: 30px;
+}
+.form_search{
+  margin-left: 0px;
+  margin-right: 0px;
 }
 }
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {

@@ -297,11 +297,32 @@ Class Loginmodel extends CI_Model
      $update="UPDATE user_details SET user_picture='$userFileName' WHERE user_id='$user_id'";
      $res=$this->db->query($update);
      if($res){
-       echo "";
+       $data= array("status" => "success");
+       return $data;
      }else{
-       echo "failed";
+       $data= array("status" => "Failed to Update");
+       return $data;
      }
    }
+
+   function remove_img($user_id){
+    $select="SELECT * from user_details where user_id='$user_id'";
+    $get_all=$this->db->query($select);
+    $result=$get_all->result();
+    foreach($result as $rows){}
+    $filename='./assets/users/profile/'.$rows->user_picture;
+    unlink($filename);
+    $get_all_gallery_img="UPDATE user_details SET user_picture='' WHERE user_id='$user_id' ";
+    $get_all=$this->db->query($get_all_gallery_img);
+    if ($get_all) {
+      $data= array("status" => "success");
+      return $data;
+    } else {
+      $data= array("status" => "Failed to Update");
+      return $data;
+    }
+  }
+
 
    function save_mobile_number($mobile,$user_id){
      $update="UPDATE user_master SET mobile_no='$mobile' WHERE id='$user_id'";
@@ -479,8 +500,8 @@ Class Loginmodel extends CI_Model
 					  echo "failed";
 				 }
    }
-   
-   
+
+
    function password_change($confirm_password,$user_id){
 		$change_password = md5($confirm_password);
 		$update_user_master="UPDATE user_master SET password='$change_password' WHERE id='$user_id'";
@@ -491,7 +512,7 @@ Class Loginmodel extends CI_Model
 			  echo "failed";
 		 }
    }
-   
+
 
    function sendOTPmobilechange($mobile,$user_id){
       $mob=$mobile;
@@ -731,7 +752,7 @@ Class Loginmodel extends CI_Model
 
 	public function event_attendees($sorder_id)
 	{
-		
+
 	 	$sql = "SELECT A.`order_id`,A.`number_of_seats`,B.user_name,B.mobile_no,B.email_id,C.name FROM `booking_history` A,user_master B,user_details C WHERE A.user_id = B.id AND A.user_id = C.user_id AND A.`order_id` = '$sorder_id'";
 		$resu=$this->db->query($sql);
 		$res=$resu->result();
@@ -748,7 +769,7 @@ Class Loginmodel extends CI_Model
 
 	public function check_attendees($order_id)
 	{
-		
+
 		$sQuery = "SELECT * FROM booking_event_attendees WHERE order_id='" .$order_id. "'";
 		$attendees_result = $this->db->query($sQuery);
 		$ress = $attendees_result->result();
@@ -761,7 +782,7 @@ Class Loginmodel extends CI_Model
 		}
 			return $message;
 	}
-	
+
 	public function insert_attendees($order_id,$name,$email,$phone)
 	{
 		$query = "INSERT INTO booking_event_attendees (order_id,name,email_id,mobile_no) VALUES('$order_id','$name','$email','$phone')";
@@ -853,8 +874,8 @@ ORDER BY ogr.id DESC";
         echo "failure";
     }
   }
-  
-  
+
+
 	public function request_refund($order_id)
 	{
 		$user_id= $this->session->userdata('id');
@@ -864,7 +885,7 @@ ORDER BY ogr.id DESC";
 		   {
 				$query="INSERT INTO refund_request(user_id,order_id,status,created_at) VALUES ('$user_id','$order_id','Pending',NOW())";
 				$resultset=$this->db->query($query);
-			
+
 				$subject = "Heyla App - Refund Request";
 				$email_message ='<html>
 								 <body>

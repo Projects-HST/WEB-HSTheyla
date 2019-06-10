@@ -1,12 +1,12 @@
 <div class="container-fluid signinbg">
   <div class="row">
   <div class="col-md-2"></div>
-  <div class="col-md-8 col-md-auto signin-div">
+  <div class="col-md-8  col-md-auto signin-div">
     <div class="row">
     <p class="login-heading">Login</p>
       <p class="login_tag">Become a part of our community!</p>
 
-    <div class="col-md-6">
+    <div class="col-lg-6 col-sm-12">
       <form action="<?php echo base_url(); ?>adminlogin/home" method="post" class="formsignin">
         <div class="col-xs-6 form_box" >
           <div class="left-inner-addon">
@@ -36,7 +36,7 @@
 <div class="col-md-1">
   <p class="or-text">OR</p>
 </div>
-    <div class="col-md-5">
+    <div class="col-lg-5 col-sm-12">
       <div class="socialmedia-tab">
         <a class="social-link-img" onclick="fbAuthUser(function(response){},{perms:'email,publish_stream'})" scope="public_profile,email"><img src="<?php echo base_url(); ?>assets/front/images/login-facebook.png" class="img-responsive social-img"></a><br>
       <a href="<?php echo base_url(); ?>google_login" class="social-link-img"><img src="<?php echo base_url(); ?>assets/front/images/login-google.png" class="img-responsive social-img"></a>
@@ -127,44 +127,45 @@ function fbAuthUser() {
 
 
 function checkLoginStatus(response) {
-    if(response && response.status == 'connected') {
+  console.log(response);
+    // if(response && response.status == 'connected') {
 
 // FB.api('/me?fields=name,email', function(response) {
 //       console.log(response.name + '---'+response.email);
 //     });
 
 	// FB.api('/me', {fields: 'name,email'}, function(response) {
-	FB.api('/me?fields=name,email', function(response) {
-        var fbname=response.name;
-		var fbemail=response.email;
-
-        swal('Please wait')
-        swal.showLoading();
-         $.ajax({
-              url:'<?php echo base_url(); ?>home/facebook_login',
-              data: { 'fbname' : fbname, 'fbemail' : fbemail },
-              type: "POST",
-              crossDomain: true,
-              success: function (data) {
-              if(data=="success"){
-                setTimeout(function(){
-                 window.location.reload(1);
-              }, 1000);
-            }else if(data=="error"){
-                sweetAlert("Oops...", "Something went Wrong", "error");
-              }
-              else{
-                sweetAlert("Oops...", "Something went Wrong", "error");
-              }
-
-          }
-
-
-        });
-    });
-    } else {
-        document.getElementById("fb").checked = false
-    }
+	// FB.api('/me?fields=name,email', function(response) {
+  //       var fbname=response.name;
+	// 	var fbemail=response.email;
+  //
+  //       swal('Please wait')
+  //       swal.showLoading();
+  //        $.ajax({
+  //             url:'<?php echo base_url(); ?>home/facebook_login',
+  //             data: { 'fbname' : fbname, 'fbemail' : fbemail },
+  //             type: "POST",
+  //             crossDomain: true,
+  //             success: function (data) {
+  //             if(data=="success"){
+  //               setTimeout(function(){
+  //                window.location.reload(1);
+  //             }, 1000);
+  //           }else if(data=="error"){
+  //               sweetAlert("Oops...", "Something went Wrong", "error");
+  //             }
+  //             else{
+  //               sweetAlert("Oops...", "Something went Wrong", "error");
+  //             }
+  //
+  //         }
+  //
+  //
+  //       });
+  //   });
+  //   } else {
+  //       document.getElementById("fb").checked = false
+  //   }
 }
 
 $(".toggle-password").click(function() {

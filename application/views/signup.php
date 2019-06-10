@@ -1,11 +1,11 @@
 <div class="container-fluid signinbg">
     <div class="row">
         <div class="col-md-2"></div>
-        <div class="col-md-8 col-md-auto signin-div">
+        <div class="col-md-8 col-sm-12 col-md-auto signin-div">
             <div class="row">
                 <p class="login-heading">Sign up Now </p>
                   <p class="login_tag">Become a part of our community!</p>
-                <div class="col-md-6">
+                <div class="col-lg-6 col-sm-12">
                     <form action="" method="post" class="formsignup" id="formsignup">
                         <div class="col-xs-6 form_box">
                             <div class="left-inner-addon">
@@ -27,8 +27,7 @@
                         </div>
                         <div class="col-xs-6 form_box">
                             <div class="left-inner-addon">
-                                <!-- <i class="fas fa-lock"></i>
-                                <input type="password" class="form-control" name="new_password" placeholder="Password" /> -->
+
                                 <i class="fas fa-lock"></i>
                                 <input id="password-field" type="password" class="form-control"  name="new_password"  placeholder="Password" value="" required>
                                  <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
@@ -43,10 +42,10 @@
       </form>
 
     </div>
-<div class="col-md-1">
+<div class="col-lg-1 co-sm-12">
   <p class="or-text">OR</p>
 </div>
-    <div class="col-md-5">
+    <div class="col-lg-5 col-sm-12">
       <div class="socialmedia-tab">
 
         <a class="social-link-img" onclick="fbAuthUser(function(response){},{perms:'email,publish_stream'})" scope="public_profile,email"><img src="<?php echo base_url(); ?>assets/front/images/login-facebook.png" class="img-responsive social-img"></a><br>
