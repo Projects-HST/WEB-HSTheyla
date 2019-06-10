@@ -171,7 +171,7 @@ input[type="file"] {
 <div class="">
   <!-- <input type="file" name="upload_image" class="btn btn-primary" id="upload_image" style="margin-left:150px;" /> -->
   <label for="upload_image" class="custom-file-upload"  style="margin-left:150px;">
-    <i class="fa fa-cloud-upload"></i>Profile Picture
+    <i class="fa fa-cloud-upload"></i> Profile Picture
 </label>
 <input id="upload_image" type="file" name="upload_image" />
 </div>
