@@ -48,7 +48,7 @@
     <div class="col-lg-5 col-sm-12">
       <div class="socialmedia-tab">
 
-        <a class="social-link-img" onclick="fbAuthUser(function(response){},{perms:'email,publish_stream'})" scope="public_profile,email"><img src="<?php echo base_url(); ?>assets/front/images/login-facebook.png" class="img-responsive social-img"></a><br>
+        <a class="social-link-img" onclick="checkLoginState()" scope="public_profile,email"><img src="<?php echo base_url(); ?>assets/front/images/login-facebook.png" class="img-responsive social-img"></a><br>
           <a href="<?php echo base_url(); ?>google_login" class="social-link-img"><img src="<?php echo base_url(); ?>assets/front/images/login-google.png" class="img-responsive social-img"></a>
                 </div>
             </div>
@@ -159,64 +159,118 @@ $(".toggle-password").click(function() {
 });
 
 
+window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '386225678654929',
+    cookie     : true,
+    xfbml      : true,
+    version    : '3.3'
+  });
 
+  FB.AppEvents.logPageView();
+
+};
+
+(function(d, s, id){
+   var js, fjs = d.getElementsByTagName(s)[0];
+   if (d.getElementById(id)) {return;}
+   js = d.createElement(s); js.id = id;
+   js.src = "https://connect.facebook.net/en_US/sdk.js";
+   fjs.parentNode.insertBefore(js, fjs);
+ }(document, 'script', 'facebook-jssdk'));
+
+
+FB.getLoginStatus(function(response) {
+  statusChangeCallback(response);
+
+});
+function checkLoginState() {
+FB.getLoginStatus(function(response) {
+  statusChangeCallback(response);
+});
+}
+
+function statusChangeCallback(response) {
+ if (response.status === 'connected') {
+        FB.api('/me?fields=name,email', function (response) {
+            var fbemail=response.email;
+            var fbname=response.name;
+            swal('Please wait');
+            swal.showLoading();
+             $.ajax({
+                  url:'<?php echo base_url(); ?>home/facebook_login',
+                  data: { 'fbname' : fbname, 'fbemail' : fbemail },
+                  type: "POST",
+                  crossDomain: true,
+                  success: function (data) {
+                  if(data=="success"){
+                    setTimeout(function(){
+                     window.location.reload(1);
+                  }, 1000);
+                }else if(data=="error"){
+                    sweetAlert("Oops...", "Something went Wrong", "error");
+                  }
+                  else{
+                    sweetAlert("Oops...", "Something went Wrong", "error");
+                  }
+
+              }
+
+
+            });
+        });
+      } else {
+         sweetAlert("Oops...", "Something went Wrong", "error");
+      }
+}
 
 </script>
 
 <script src="//connect.facebook.net/en_US/all.js"></script>
 <script type="text/javascript">
-
-// Initialize the Facebook JavaScript SDK
-FB.init({
-  appId: '323814224809825', // Your app id
-  channelUrl : '', // Your channel url
-  xfbml: true,
-  status: true,
-  cookie: true,
-});
-
-function fbAuthUser() {
-    FB.login(checkLoginStatus);
-}
-
-
-function checkLoginStatus(response) {
-    if(response && response.status == 'connected') {
-
-//         FB.api('/me', {fields: 'name,email'}, function(response) {
-//     user_email = response.email; //get user email
-//     console.log(response);
-//     alert(response.email);
+// FB.init({
+//   appId: '323814224809825',
+//   channelUrl : '',
+//   xfbml: true,
+//   status: true,
+//   cookie: true,
 // });
-
-	 FB.api('/me', {fields: 'name,email'}, function(response) {
-        var fbname=response.name;
-		var fbemail=response.email;
-
-        swal('Please wait')
-        swal.showLoading();
-         $.ajax({
-              url:'<?php echo base_url(); ?>home/facebook_login',
-              data: { 'fbname' : fbname, 'fbemail' : fbemail },
-              type: "POST",
-              crossDomain: true,
-              success: function (data) {
-              if(data=="success"){
-                setTimeout(function(){
-                 window.location.reload(1);
-              }, 1000);
-              }else{
-                sweetAlert("Oops...", "Something wen Wrong", "error");
-              }
-
-          }
-
-
-        });
-    });
-    } else {
-        document.getElementById("fb").checked = false
-    }
-}
+//
+// function fbAuthUser() {
+//     FB.login(checkLoginStatus);
+// }
+//
+//
+// function checkLoginStatus(response) {
+//     if(response && response.status == 'connected') {
+// 	 FB.api('/me', {fields: 'name,email'}, function(response) {
+//         var fbname=response.name;
+// 		var fbemail=response.email;
+//
+//         swal('Please wait')
+//         swal.showLoading();
+//          $.ajax({
+//               url:'<?php echo base_url(); ?>home/facebook_login',
+//               data: { 'fbname' : fbname, 'fbemail' : fbemail },
+//               type: "POST",
+//               crossDomain: true,
+//               success: function (data) {
+//               if(data=="success"){
+//                 setTimeout(function(){
+//                  window.location.reload(1);
+//               }, 1000);
+//               }else{
+//                 sweetAlert("Oops...", "Something wen Wrong", "error");
+//               }
+//
+//           }
+//
+//
+//         });
+//     });
+//     } else {
+//         document.getElementById("fb").checked = false
+//     }
+// }
 
 </script>

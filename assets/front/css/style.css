@@ -630,7 +630,7 @@ i.fas{
   width:250px;
   margin-bottom: 25px;
   margin-top: 15px;
-
+      cursor: pointer;
 }
 .or-text{
   padding-top: 140px;
