@@ -38,10 +38,19 @@
 </div>
     <div class="col-lg-5 col-sm-12">
       <div class="socialmedia-tab">
-        <a class="social-link-img" onclick="checkLoginState()" scope="public_profile,email"><img src="<?php echo base_url(); ?>assets/front/images/login-facebook.png" class="img-responsive social-img"></a><br>
-        <br>
-      <a href="<?php echo base_url(); ?>google_login" class="social-link-img"><img src="<?php echo base_url(); ?>assets/front/images/login-google.png" class="img-responsive social-img"></a>
-    </div>
+        <!-- <a class="social-link-img" onclick="checkLoginState()" scope="public_profile,email"><img src="<?php echo base_url(); ?>assets/front/images/login-facebook.png" class="img-responsive social-img"></a><br> -->
+
+        <fb:login-button size="large" class="fb_btn" scope="public_profile,email"
+                         onlogin="checkLoginState();">
+          Connect with Facebook
+        </fb:login-button>
+  <br>
+  <a href="<?php echo base_url(); ?>google_login" class="social-link-img"><img src="<?php echo base_url(); ?>assets/front/images/login-google.png" class="img-responsive social-img"></a>
+</div>
+
+   </div>
+<br>
+
     </div>
   </div>
   </div>
@@ -115,7 +124,7 @@
       appId      : '386225678654929',
       cookie     : true,
       xfbml      : true,
-      version    : '3.3'
+      version    : 'V3.3'
     });
 
     FB.AppEvents.logPageView();
@@ -164,14 +173,12 @@ function checkLoginState() {
                     else{
                       sweetAlert("Oops...", "Something went Wrong", "error");
                     }
-
                 }
-
-
               });
           });
         } else {
-           sweetAlert("Oops...", "Something went Wrong", "error");
+
+           // sweetAlert("Oops...", "Something went Wrong", "error");
         }
  }
 </script>

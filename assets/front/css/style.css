@@ -26,6 +26,10 @@ body{
   color: #000;
   font-weight: 500;
 }
+.error{
+  color: red;
+
+}
 .no_banner{
   margin-top: 150px;
 }
@@ -627,7 +631,7 @@ i.fas{
     border-color:  #478ECC;
 }
 .social-img{
-  width:250px;
+  width:180px;
   margin-bottom: 25px;
   margin-top: 15px;
       cursor: pointer;
@@ -640,7 +644,7 @@ i.fas{
   width: 100px;
 }
 .socialmedia-tab{
-  text-align: center;
+  text-align: left;
 padding-top: 50px;
 padding-bottom: 15px;
 }
@@ -1074,14 +1078,16 @@ a.btn.btn-login.btn-primary.btn-block.review-btn{
     width: 100%;
   }
   .event_fee{
-    margin-top: 20px;
+    margin-top: 35px;
   }
 .or-text{
 display: none;
 }
 .socialmedia-tab{
-    padding-top: 0px;
+    padding-top: 30px;
+      text-align: center;
 }
+
 .formsignin{
   padding-top: 30px;
   padding-bottom: 30px;
@@ -1093,8 +1099,9 @@ display: none;
 }
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
 .social-img{
-  width: 160px;
+  width: 185px;
 }
+
 }
 
 .navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .logout-btn:hover{
