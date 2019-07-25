@@ -2,9 +2,6 @@
 //$booking_expire = $_SESSION['booking_expire'];
 $user_id = $this->session->userdata('id');
 
-foreach($booking_process as $res){
-		$originalDate = $res->show_date;;
-}
 //$IHC = "0.00";
 //$CGST = "0.00";
 //$SGST = "0.00";
@@ -29,6 +26,18 @@ hr{
 </style>
 <div class="container-fluid">
   <div class="row order_page">
+<?php
+
+if(empty($booking_process)){
+
+		echo "ERROR";
+} else { 
+
+		foreach($booking_process as $res){
+			$originalDate = $res->show_date;;
+		}
+?>  
+
     <div class="col-md-8">
       <div class="summary_box">Order Summary</div>
       <div class="col-md-12 col-sm-12 summary_card">
@@ -174,6 +183,8 @@ hr{
       </div>
     </div>
     <center>  <img src="<?php echo base_url(); ?>assets/front/images/login_bg.png" class="img-thumbnail"> </center>
+	
+<?php } ?>
   </div>
 </div>
 <script type="text/javascript">
