@@ -91,6 +91,9 @@ body{background-color: #f7f8fa;}
     margin-bottom: 15px;
     margin-top: 15px;
 }
+.carousel-caption{
+  display: none !important;
+}
 </style>
 <script src="<?php echo base_url(); ?>assets/front/js/jquery-ui.js"></script>
 <script src="<?php echo base_url(); ?>assets/front/js/select2.min.js"></script>
