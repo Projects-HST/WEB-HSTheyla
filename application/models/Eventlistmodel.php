@@ -176,7 +176,6 @@ Class Eventlistmodel extends CI_Model
 				WHERE e.hotspot_status = 'Y' AND e.event_status = 'Y') AS event_list
 				ORDER BY id DESC  LIMIT $limit OFFSET $offset";
 		}
-				//exit;
 			  	$resu=$this->db->query($sql);
         	  	$res=$resu->result();
         	  	return $res;
@@ -207,7 +206,7 @@ Class Eventlistmodel extends CI_Model
 			$category_query = "";
 		}
 
-		 	 $sql="SELECT * FROM(SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+		$sql="SELECT * FROM(SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 			FROM events AS e
 			LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
 			LEFT JOIN country_master AS cy ON e.event_country = cy.id
@@ -222,10 +221,6 @@ Class Eventlistmodel extends CI_Model
 			LEFT JOIN city_master AS ci ON e.event_city = ci.id
 			LEFT JOIN category_master AS ca ON e.category_id = ca.id
 			WHERE $country_query $city_query $category_query e.hotspot_status = 'Y' AND e.event_status = 'Y') AS event_list ORDER BY id DESC LIMIT $limit OFFSET $offset";
-
-
-		 //$sql="SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus FROM events AS e LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id' LEFT JOIN country_master AS cy ON e.event_country = cy.id LEFT JOIN city_master AS ci ON e.event_city = ci.id LEFT JOIN category_master AS ca ON e.category_id = ca.id WHERE e.end_date >= '$current_date' AND e.event_country='$country_id' AND e.event_city='$city_id' AND e.event_status = 'Y' AND e.category_id IN ($category_id) ORDER BY e.id DESC";
-
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
 	  	return $res;
@@ -263,7 +258,7 @@ Class Eventlistmodel extends CI_Model
 			$category_query = "";
 		}
 
-			$sql="SELECT * FROM(SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+		$sql="SELECT * FROM(SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 				FROM events AS e
 				LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
 				LEFT JOIN country_master AS cy ON e.event_country = cy.id
@@ -278,8 +273,6 @@ Class Eventlistmodel extends CI_Model
 				LEFT JOIN city_master AS ci ON e.event_city = ci.id
 				LEFT JOIN category_master AS ca ON e.category_id = ca.id
 				WHERE $country_query $city_query $category_query e.hotspot_status = 'Y' AND e.event_status = 'Y') AS event_list ORDER BY id DESC LIMIT $limit OFFSET $offset";
-
-		 //$sql="SELECT e.*,cy.country_name,ci.city_name,uwl.user_id as wlstatus FROM events AS e LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id' LEFT JOIN country_master AS cy ON e.event_country = cy.id LEFT JOIN city_master AS ci ON e.event_city = ci.id LEFT JOIN category_master AS ca ON e.category_id = ca.id WHERE e.end_date >= '$current_date' AND e.event_country='$country_id' AND e.event_city='$city_id' AND e.event_status = 'Y' AND e.category_id IN ($category_id) ORDER BY e.id DESC";
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
 	  	return $res;
@@ -329,7 +322,6 @@ Class Eventlistmodel extends CI_Model
 				LEFT JOIN category_master AS ca ON e.category_id = ca.id
 				WHERE $country_query $city_query $category_query e.hotspot_status = 'Y' AND e.event_status = 'Y' ORDER BY id DESC LIMIT $limit OFFSET $offset";
 		}
-		//exit;
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
 	  	return $res;
@@ -378,7 +370,6 @@ Class Eventlistmodel extends CI_Model
 			$user_id = 0;
 		}
 		$sql="SELECT * FROM event_reviews WHERE event_id ='$event_id' AND user_id = '$user_id'";
-		//exit;
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
 	  	return $res;
@@ -515,33 +506,38 @@ Class Eventlistmodel extends CI_Model
 
 		 //$extra = $CGST + $SGST + $IHC;
 		 //$total_amount = $samount + $extra;
-		//exit;
-		 $sQuery = "INSERT INTO booking_process (order_id,event_id,plan_id,plan_time_id,user_id,number_of_seats,total_amount,booking_date) VALUES ('". $order_id . "','". $event_id . "','". $plan_id . "','". $plan_time_id . "','". $user_id . "','". $number_of_seats . "','". $total_amount . "','". $booking_date . "')";
-		$booking_insert = $this->db->query($sQuery);
-		//echo "<br>";
 
-		//exit;
-		$update_seats = "UPDATE booking_plan_timing SET seat_available = seat_available-$number_of_seats WHERE id ='$plan_time_id'";
-		$seatsupdate = $this->db->query($update_seats);
 
-		$_SESSION['booking_start'] = time(); // taking now logged in time
-		$_SESSION['booking_expire'] = $_SESSION['booking_start'] + (900) ; // ending a session in 10mins
 
-		$session_seats = "INSERT INTO booking_session (session_expiry,order_id,plan_time_id,number_of_seats,status) VALUES ('". $_SESSION['booking_expire'] . "','". $order_id . "','". $plan_time_id . "','". $number_of_seats . "','Start')";
-		$session_insert = $this->db->query($session_seats);
+		$sql = "SELECT * FROM booking_plan_timing WHERE seat_available >= '$number_of_seats' AND id = '$plan_time_id'";
+		$resu=$this->db->query($sql);
+			if($resu->num_rows()>0)
+	        {
+				$sQuery = "INSERT INTO booking_process (order_id,event_id,plan_id,plan_time_id,user_id,number_of_seats,total_amount,booking_date) VALUES ('". $order_id . "','". $event_id . "','". $plan_id . "','". $plan_time_id . "','". $user_id . "','". $number_of_seats . "','". $total_amount . "','". $booking_date . "')";
+				$booking_insert = $this->db->query($sQuery);
 
-		$sql="SELECT A.id,A.order_id,E.category_name,B.id AS event_id,B.event_name,B.event_venue,B.event_address,C.show_date,C.show_time,D.plan_name,A.number_of_seats, A.total_amount, '$damount' AS booking_amount,$dGST AS CGST, $dGST AS SGST, $dbooking_fees AS IHC FROM booking_process A,events B,booking_plan_timing C,booking_plan D,category_master E WHERE A.order_id  = '$order_id' AND A.event_id = B.id AND A.plan_time_id = C.id AND A.plan_id = D.id AND B.category_id = E.id";
-		//exit;
-	  	$resu=$this->db->query($sql);
-	  	$res=$resu->result();
-		return $res;
+				$update_seats = "UPDATE booking_plan_timing SET seat_available = seat_available-$number_of_seats WHERE id ='$plan_time_id'";
+				$seatsupdate = $this->db->query($update_seats);
+
+				$_SESSION['booking_start'] = time(); // taking now logged in time
+				$_SESSION['booking_expire'] = $_SESSION['booking_start'] + (900) ; // ending a session in 10mins
+
+				$session_seats = "INSERT INTO booking_session (session_expiry,order_id,plan_time_id,number_of_seats,status) VALUES ('". $_SESSION['booking_expire'] . "','". $order_id . "','". $plan_time_id . "','". $number_of_seats . "','Start')";
+				$session_insert = $this->db->query($session_seats);
+
+				$sql="SELECT A.id,A.order_id,E.category_name,B.id AS event_id,B.event_name,B.event_venue,B.event_address,C.show_date,C.show_time,D.plan_name,A.number_of_seats, A.total_amount, '$damount' AS booking_amount,$dGST AS CGST, $dGST AS SGST, $dbooking_fees AS IHC FROM booking_process A,events B,booking_plan_timing C,booking_plan D,category_master E WHERE A.order_id  = '$order_id' AND A.event_id = B.id AND A.plan_time_id = C.id AND A.plan_id = D.id AND B.category_id = E.id";
+
+				$resu=$this->db->query($sql);
+				$res=$resu->result();
+				return $res;
+			}
+			
     }
 
 
 	function payment_review($order_id)
     {
 		$sql="SELECT A.id,A.order_id,E.category_name,B.id AS event_id,B.event_name,B.event_venue,B.event_address,C.show_date,C.show_time,D.plan_name,A.number_of_seats, A.total_amount FROM booking_process A,events B,booking_plan_timing C,booking_plan D,category_master E WHERE A.order_id  = '$order_id' AND A.event_id = B.id AND A.plan_time_id = C.id AND A.plan_id = D.id AND B.category_id = E.id";
-		//exit;
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
 		return $res;
@@ -554,7 +550,7 @@ Class Eventlistmodel extends CI_Model
 			if($resu->num_rows()==0)
 	        {
 				$sQuery = "INSERT INTO event_reviews (user_id,event_id,event_rating,comments,status,created_at) VALUES ('". $user_id . "','". $event_id . "','". $rating . "','". $message . "','N',NOW())";
-		$review_insert = $this->db->query($sQuery);
+				$review_insert = $this->db->query($sQuery);
 			}
 
     }

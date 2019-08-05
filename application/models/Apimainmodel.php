@@ -2471,13 +2471,13 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
               $picture=base_url().'assets/users/profile/'.$rows->user_picture;
           }
   				$user_poinst[]=array(
-            "user_name" => $rows->user_name,
-  				  "name" => $rows->name,
-            "id" => $rows->id,
-            "email_id" => $rows->email_id,
-            "user_picture" => $picture,
-  				  "total_points" => $rows->total_points,
-            );
+							"user_name" => $rows->user_name,
+							"name" => $rows->name,
+							"id" => $rows->id,
+							"email_id" => $rows->email_id,
+							"user_picture" => $picture,
+							"total_points" => $rows->total_points,
+					);
 
   			}
           $response = array("status" => "success", "msg" => "Points found","user_points"=>$user_poinst);
