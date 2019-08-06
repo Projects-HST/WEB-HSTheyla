@@ -16,13 +16,15 @@ class Eventlist extends CI_Controller
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
-		$data['country_list'] = $this->eventlistmodel->getall_country_list();
+		//$data['country_list'] = $this->eventlistmodel->getall_country_list();
 		$data['city_list'] = $this->eventlistmodel->getall_city_list();
 		$data['category_list'] = $this->eventlistmodel->getall_category_list();
 		$data['event_resu'] = $this->eventlistmodel->get_events();
 		$data['banner_event_result'] = $this->eventlistmodel->getadv_events();
-		$data['country_values'] = get_cookie('country_values');
+		//$data['country_values'] = get_cookie('country_values');
 		$data['city_values'] = get_cookie('city_values');
+		$data['search_values'] = get_cookie('search_values');
+		//print_r($data);
 		$this->load->view('front_header');
 		$this->load->view('event_list_new', $data);
 		$this->load->view('front_footer');
@@ -51,6 +53,8 @@ class Eventlist extends CI_Controller
       	$country_id  = $this->input->post('country_id');
 		$city_id  = $this->input->post('city_id');
         $category_id  = $this->input->post('cat_id');
+		set_cookie('city_values',$city_id,'3600');
+		delete_cookie("search_values");
         $data['event_result'] = $this->eventlistmodel->get_city_events($country_id,$city_id,$category_id,$limit,$offset);
         echo json_encode($data['event_result']);
     }
@@ -81,6 +85,8 @@ class Eventlist extends CI_Controller
 	public function search_term_events()
     {
       	$srch_term  = $this->input->post('srch_term');
+		set_cookie('search_values',$srch_term,'3600');
+		delete_cookie("city_values");
         $data['event_result'] = $this->eventlistmodel->getsearch_term_events($srch_term);
         echo json_encode($data['event_result']);
     }
@@ -111,8 +117,8 @@ class Eventlist extends CI_Controller
 			$desc=$row_des->description;
 			$event_country=$row_des->event_country;
 			$event_city=$row_des->event_city;
-			set_cookie('country_values',$event_country,'3600');
-			set_cookie('city_values',$event_city,'3600');
+			//set_cookie('country_values',$event_country,'3600');
+			//set_cookie('city_values',$event_city,'3600');
 			$data['meta_description']=$desc;
 		}
 		$this->load->view('front_header', $data);

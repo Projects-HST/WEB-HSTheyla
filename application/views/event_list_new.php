@@ -168,36 +168,24 @@ body{background-color: #f7f8fa;}
       <div class="col-md-8">
       <div class="form-group">
             <div class="col-sm-12">
-              <form class="navbar-form navbar-right search-event-form" role="search" method="post" action="" name="search_form" id="search_form">
+              <!--<form class="navbar-form navbar-right search-event-form" role="search" method="post" action="" name="search_form" id="search_form">-->
                   <input  type="text" class="form-control btn-block" name="search_term" id="search_term"  placeholder="Search Event by name" value="" autocomplete="off">
-                   <a href="#"  onclick="getSearchevents()"><span toggle="#password-field" class="fa fa-search field-icon toggle-password"></span></a>
-                </form>
+				  <input type="button" onclick="getSearchevents()" value="Search">
+                   <!--<a href="#" onclick="getSearchevents()"><span toggle="#password-field" class="fa fa-search field-icon toggle-password"></span></a>
+                </form>-->
           </div>
       </div>
       </div>
     </div>
 
     <div class="row">
+    
     <div class="col-md-3">
-      <label class="form-label">Select Country</label>
-      <div class="form-group">
-          <div class="col-sm-12">
-            <select class="form-control" name="cnyname" id="cnyname" onChange="change_country();getCountryevents();">
-                  <option value="">Select Country</option>
-                  <?php foreach($country_list as $cny){ ?>
-                  <option value="<?php echo $cny->id; ?>"><?php echo $cny->country_name; ?></option>
-                  <?php } ?>
-               </select>
-                <script language="JavaScript">document.eventform.cnyname.value="<?php echo $country_values; ?>";</script>
-          </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <label class="form-label">Select City</label>
+      <label class="form-label">Select Location</label>
       <div class="form-group">
           <div class="col-sm-12" id="select_city">
             <select class="form-control" name="ctyname" id="ctyname" onChange="getCityevents();">
-                  <option value="">Select City</option>
+                  <option value="">Select Location</option>
                   <?php foreach($city_list as $cty){ ?>
                   <option value="<?php echo $cty->id; ?>"><?php echo $cty->city_name; ?></option>
                   <?php } ?>
@@ -275,70 +263,22 @@ $('#category').select2({
 });
 
 $(window).on('load', function(){
-
-	var country_val ='<?php  echo $country_values ?>';
-
-	if(country_val!==''){
-	 var country_values ='<?php  echo $country_values ?>';
-
-	 //var city_values='<?php  echo $city_values ?>';
-	// if(country_values!='' && city_values!=''){
-	if(country_values!=''){
-		$("#cnyname").val("<?php echo $country_values; ?>");
-	//	$("#ctyname").val("<?php echo $city_values; ?>");
-		  //getCityevents();
-		  getCountryevents(country_values);
+	var city_values = '<?php  echo $city_values ?>';
+	var search_values = '<?php  echo $search_values ?>';
+	
+	if(city_values!=''){
+			$("#ctyname").val("<?php echo $city_values; ?>");
+			$("#search_term").val("");
+			getCityevents();
+	  } else if (search_values!=''){
+			$("#search_term").val("<?php echo $search_values; ?>");
+			getSearchevents();
 	  } else {
-		 getAllevents()
+		 getAllevents();
 	  }
-	}else{
-	    $.ajax({ url: "<?php echo base_url(); ?>eventlist/get_ip_country",
-        context: document.body,
-        success: function(data){
-        var country_values = data;
-
-	if(country_values!=''){
-		$("#cnyname").val("<?php echo $country_values; ?>");
-	//	$("#ctyname").val("<?php echo $city_values; ?>");
-		  //getCityevents();
-		  getCountryevents(country_values);
-	  } else {
-		 getAllevents()
-	  }
-        }});
-	}
-
 });
 
-function change_country()
-{
-	var country_id=cnyname.value;
-	var result = '';
-	var city_result = "<select class='form-control' id='ctyname' name='ctyname' onchange='getCityevents()'><option value=''>Select City</option></select>";
 
-	//make the ajax call
-		$.ajax({
-		url: '<?php echo base_url(); ?>eventlist/get_city_name',
-		type: 'POST',
-		data: {country_id : country_id},
-		success: function(data) {
-		var dataArray = JSON.parse(data);
-			if (dataArray.length>0) {
-
-				result +="<select class='form-control' id='ctyname' name='ctyname' onchange='getCityevents()'><option value=''>Select City</option>";
-				for (var i = 0; i < dataArray.length; i++){
-					var id = dataArray[i].id;
-					var city_name = dataArray[i].city_name;
-					result +="<option value='"+id+"'>"+city_name+"</option>";
-				};
-					result +="</select>";
-					$("#select_city").html(result).show();
-			} else {
-					$("#select_city").html(city_result).show();
-			}
-		}
-		});
-}
 
 function getAllevents()
 {
@@ -358,7 +298,6 @@ function getAllevents()
 	cache: false,
     beforeSend: function() {
             $("#loader_message").html("").hide();
-			$("#event_list_cny").html("").hide();
 			$("#event_list_cty").html("").hide();
 			$("#event_list_cat").html("").hide();
 			$("#event_list_type").html("").hide();
@@ -435,7 +374,6 @@ function getAlleventsresult(limit,offset)
 	cache: false,
     beforeSend: function() {
             $("#loader_message").html("").hide();
-			$("#event_list_cny").html("").hide();
 			$("#event_list_cty").html("").hide();
 			$("#event_list_cat").html("").hide();
 			$("#event_list_type").html("").hide();
@@ -497,203 +435,32 @@ function getAlleventsresult(limit,offset)
 	});
 }
 
-function getCountryevents(country_values)
-{
-	$("#event_list_cny").html("").show();
-
-	var limit = 9;
-	var offset = 0;
-
-   var c_id=country_values;
-   if(c_id){
-      var country_id=country_values;
-      $('#cnyname').val(country_id);
-    }else{
-        var country_id=cnyname.value;
-    }
-
-	$('#event_type').prop('selectedIndex',0);
-	$('#loader_message').hide();
-	var result = '';
-
-	$.ajax({
-	url: '<?php echo base_url(); ?>eventlist/get_country_events',
-	type: 'POST',
-	data: {country_id:country_id,limit:limit,offset:offset},
-	cache: false,
-    beforeSend: function() {
-            $("#loader_message").html("").hide();
-			$("#event_list_all").html("").hide();
-			$("#event_list_cty").html("").hide();
-			$("#event_list_cat").html("").hide();
-			$("#event_list_type").html("").hide();
-            $('#loader_image').show();
-          },
-	success: function(data) {
-		var dataArray = JSON.parse(data);
-		if (dataArray.length>0) {
-			for (var i = 0; i < dataArray.length; i++){
-				var disp_event_id = dataArray[i].id;
-				var event_id = dataArray[i].id*564738;
-				var enc_event_id = btoa(event_id);
-				var event_name = dataArray[i].event_name;
-				var sm_event_name = event_name.toLowerCase();
-				var eevent_name = sm_event_name.replace(/"/g, "");
-				var sevent_name = eevent_name.replace(/'/g, "");
-				var qevent_name = sevent_name.replace(/,/g, '');
-				var enc_event_name = qevent_name.replace(/\s/g,"-");
-				var event_banner = dataArray[i].event_banner;
-				var event_type = dataArray[i].event_type;
-				var country_name = dataArray[i].country_name;
-				var city_name = dataArray[i].city_name;
-				var event_venue = dataArray[i].event_venue;
-				var start_time = dataArray[i].start_time;
-				var end_time = dataArray[i].end_time;
-				var start_date = dataArray[i].dstart_date;
-				var end_date = dataArray[i].dend_date;
-				var wlstatus = dataArray[i].wlstatus;
-				var hotspot_status = dataArray[i].hotspot_status;
-
-				if (event_type == 'Paid'){
-					var sevent_type = "<img src='<?php echo base_url(); ?>assets/front/images/paid.png' class='pull-left pf_btn'>";
-				} else {
-					var sevent_type = "<img src='<?php echo base_url(); ?>assets/front/images/free.png' class='pull-left pf_btn'>";
-				}
-				if (hotspot_status=='N'){
-					var display_date = "<p><span class=' event_date'>"+start_date+" - "+end_date+"<span></p>";
-				} else {
-					var display_date = "<p><span class='event_date'>&nbsp;<span></p>";
-				}
-				if(wlstatus==null){
-					 var wishliststatus="<span id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' class='pull-right'><a></span>";
-				}else{
-					 var wishliststatus="<span id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img src='<?php echo base_url(); ?>assets/front/images/fav-select.png' class='pull-right'></a></span>";
-				}
-
-				result +="<div class='col-xs-18 col-sm-4 col-md-4 event_box'><div class='thumbnail event_section'><a href='<?php echo base_url(); ?>eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img src='<?php echo base_url();?>assets/events/banner/"+event_banner+"' alt='' style='height:204px; width:100%;'></a><div class='event_thumb'>"+display_date+"<p class='event_heading event_title_heading'><a href='<?php echo base_url(); ?>eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></a><p><span class='event_thumb'>"+start_time+" - "+end_time+" <span class='pull-right event_fee'>"+sevent_type+" <span></span></p></div><p class='price_section'><span class='event_thumb'>"+event_venue+"<span><?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></div></div>";
-			};
-
-				$("#event_list_cny").append(result);
-				$('#loader_image').hide();
-				offset = limit + offset;
-				$("#loader_message").html('<center><a class="btn btn-sm more_event" onclick="getCountryeventsresult('+limit+','+offset+')" role="button">More Events</a></center>').show();
-				//$("#loader_message").html('<a onclick="getCountryeventsresult('+limit+','+offset+')">More Events</a>').show();
-			} else {
-				$('#loader_image').hide();
-				$("#loader_message").html('<center><p class="btn btn-sm no_event" style="color:#ffffff;">No more Events</p></center>').show();
-            }
-	}
-	});
-}
-
-function getCountryeventsresult(limit,offset)
-{
-	var country_id=cnyname.value;
-	$('#event_type').prop('selectedIndex',0);
-	$('#loader_message').hide();
-	var result = '';
-
-	$.ajax({
-	url: '<?php echo base_url(); ?>eventlist/get_country_events',
-	type: 'POST',
-	data: {country_id:country_id,limit:limit,offset:offset},
-	cache: false,
-    beforeSend: function() {
-            $("#loader_message").html("").hide();
-			$("#event_list_all").html("").hide();
-			$("#event_list_cty").html("").hide();
-			$("#event_list_cat").html("").hide();
-			$("#event_list_type").html("").hide();
-            $('#loader_image').show();
-          },
-	success: function(data) {
-		var dataArray = JSON.parse(data);
-		if (dataArray.length>0) {
-			for (var i = 0; i < dataArray.length; i++){
-				var disp_event_id = dataArray[i].id;
-				var event_id = dataArray[i].id*564738;
-				var enc_event_id = btoa(event_id);
-				var event_name = dataArray[i].event_name;
-				var sm_event_name = event_name.toLowerCase();
-				var eevent_name = sm_event_name.replace(/"/g, "");
-				var sevent_name = eevent_name.replace(/'/g, "");
-				var qevent_name = sevent_name.replace(/,/g, '');
-				var enc_event_name = qevent_name.replace(/\s/g,"-");
-				var event_banner = dataArray[i].event_banner;
-				var event_type = dataArray[i].event_type;
-				var country_name = dataArray[i].country_name;
-				var city_name = dataArray[i].city_name;
-				var event_venue = dataArray[i].event_venue;
-				var start_time = dataArray[i].start_time;
-				var end_time = dataArray[i].end_time;
-				var start_date = dataArray[i].dstart_date;
-				var end_date = dataArray[i].dend_date;
-				var wlstatus = dataArray[i].wlstatus;
-				var hotspot_status = dataArray[i].hotspot_status;
-
-				if (event_type == 'Paid'){
-					var sevent_type = "<img src='<?php echo base_url(); ?>assets/front/images/paid.png' class='pull-left pf_btn'>";
-				} else {
-					var sevent_type = "<img src='<?php echo base_url(); ?>assets/front/images/free.png' class='pull-left pf_btn'>";
-				}
-				if (hotspot_status=='N'){
-					var display_date = "<p><span class=' event_date'>"+start_date+" - "+end_date+"<span></p>";
-				} else {
-					var display_date = "<p><span class='event_date'>&nbsp;<span></p>";
-				}
-				if(wlstatus==null){
-					 var wishliststatus="<span id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img src='<?php echo base_url(); ?>assets/front/images/fav-unselect.png' class='pull-right'><a></span>";
-				}else{
-					 var wishliststatus="<span id='wishlist"+disp_event_id+"'><a href='javascript:void(0);' onclick='editwishlist(<?php echo $user_id; ?> ,"+disp_event_id+");'><img src='<?php echo base_url(); ?>assets/front/images/fav-select.png' class='pull-right'></a></span>";
-				}
-
-				result +="<div class='col-xs-18 col-sm-4 col-md-4 event_box'><div class='thumbnail event_section'><a href='<?php echo base_url(); ?>eventdetails/"+enc_event_id+"/"+enc_event_name+"/'><img src='<?php echo base_url();?>assets/events/banner/"+event_banner+"' alt='' style='height:204px; width:100%;'></a><div class='event_thumb'>"+display_date+"<p class='event_heading event_title_heading'><a href='<?php echo base_url(); ?>eventdetails/"+enc_event_id+"/"+enc_event_name+"/'>"+event_name+"</a></p></a><p><span class='event_thumb'>"+start_time+" - "+end_time+" <span class='pull-right event_fee'>"+sevent_type+" <span></span></p></div><p class='price_section'><span class='event_thumb'>"+event_venue+"<span><?php if ($user_id !=''){?>"+wishliststatus+"<?php } ?></p></div></div>";
-			};
-
-				$("#event_list_cny").append(result);
-				$('#loader_image').hide();
-				offset = limit + offset;
-				$("#loader_message").html('<center><a class="btn btn-sm more_event" onclick="getCountryeventsresult('+limit+','+offset+')" role="button">More Events</a></center>').show();
-			} else {
-				$('#loader_image').hide();
-				$("#loader_message").html('<center><p class="btn btn-sm no_event" style="color:#ffffff;">No more Events</p></center>').show();
-            }
-	}
-	});
-}
-
 function getCityevents()
 {
 	$("#event_list_cty").html("").show();
+	$("#search_term").val("");
+	$('#event_type').prop('selectedIndex',0);
 
 	var limit = 9;
 	var offset = 0;
 
-	var country_id=cnyname.value;
 	var city_id_value=ctyname.value;
 	var category_id = $("#category").val();
 	cat_id = category_id.toString();
-	$('#event_type').prop('selectedIndex',0);
-
-// 	if(city_id_value==''){
-// 			var city_id='<?php echo $city_values; ?>';
-// 	  }else
-// 	  {
-		  var city_id=city_id_value;
-// 	}
+	var city_id = city_id_value;
 	var result = '';
 
 	$.ajax({
 	url: '<?php echo base_url(); ?>eventlist/get_city_events',
 	type: 'POST',
-	data: {country_id:country_id,city_id:city_id,cat_id:cat_id,limit:limit,offset:offset},
+	data: {city_id:city_id,cat_id:cat_id,limit:limit,offset:offset},
 	cache: false,
     beforeSend: function() {
             $("#loader_message").html("").hide();
 			$("#event_list_all").html("").hide();
-			$("#event_list_cny").html("").hide();
 			$("#event_list_cat").html("").hide();
 			$("#event_list_type").html("").hide();
+			$("#event_list_search").html("").hide();
             $('#loader_image').show();
           },
 	success: function(data) {
@@ -755,7 +522,7 @@ function getCityevents()
 
 function getCityeventsresult(limit,offset)
 {
-	var country_id=cnyname.value;
+	$("#search_term").val("");
 	var city_id_value=ctyname.value;
 	var category_id = $("#category").val();
 	cat_id = category_id.toString();
@@ -771,14 +538,14 @@ function getCityeventsresult(limit,offset)
 	$.ajax({
 	url: '<?php echo base_url(); ?>eventlist/get_city_events',
 	type: 'POST',
-	data: {country_id:country_id,city_id:city_id,cat_id:cat_id,limit:limit,offset:offset},
+	data: {city_id:city_id,cat_id:cat_id,limit:limit,offset:offset},
 	cache: false,
     beforeSend: function() {
             $("#loader_message").html("").hide();
 			$("#event_list_all").html("").hide();
-			$("#event_list_cny").html("").hide();
 			$("#event_list_cat").html("").hide();
 			$("#event_list_type").html("").hide();
+			$("#event_list_search").html("").hide();
             $('#loader_image').show();
           },
 	success: function(data) {
@@ -841,11 +608,11 @@ function getCityeventsresult(limit,offset)
 function getCategoryevents()
 {
 	$("#event_list_cat").html("").show();
-
+	$("#search_term").val("");
+	
 	var limit = 9;
 	var offset = 0;
 
-	var country_id=cnyname.value;
 	var city_id_value=ctyname.value;
 	var category_id = $("#category").val();
 	cat_id = category_id.toString();
@@ -861,7 +628,7 @@ function getCategoryevents()
 	$.ajax({
 	url: '<?php echo base_url(); ?>eventlist/get_category_events',
 	type: 'POST',
-	data: {country_id:country_id,city_id:city_id,cat_id:cat_id,limit:limit,offset:offset},
+	data: {city_id:city_id,cat_id:cat_id,limit:limit,offset:offset},
 	cache: false,
     beforeSend: function() {
 		if (cat_id == ''){
@@ -869,9 +636,9 @@ function getCategoryevents()
 			}
             $("#loader_message").html("").hide();
 			$("#event_list_all").html("").hide();
-			$("#event_list_cny").html("").hide();
 			$("#event_list_cty").html("").hide();
 			$("#event_list_type").html("").hide();
+			$("#event_list_search").html("").hide();
             $('#loader_image').show();
           },
 	success: function(data) {
@@ -922,7 +689,6 @@ function getCategoryevents()
 				$('#loader_image').hide();
 				offset = limit + offset;
 				$("#loader_message").html('<center><a class="btn btn-sm more_event" onclick="getCategoryeventsresult('+limit+','+offset+')" role="button">More Events</a></center>').show();
-				//$("#loader_message").html('<a onclick="getCategoryeventsresult('+limit+','+offset+')">More Events</a>').show();
 			} else {
 				$('#loader_image').hide();
 				$("#loader_message").html('<center><p class="btn btn-sm no_event" style="color:#ffffff;">No more Events</p></center>').show();
@@ -933,8 +699,7 @@ function getCategoryevents()
 
 function getCategoryeventsresult(limit,offset)
 {
-
-	var country_id=cnyname.value;
+	$("#search_term").val("");
 	var city_id_value=ctyname.value;
 	var category_id = $("#category").val();
 	cat_id = category_id.toString();
@@ -950,14 +715,14 @@ function getCategoryeventsresult(limit,offset)
 	$.ajax({
 	url: '<?php echo base_url(); ?>eventlist/get_category_events',
 	type: 'POST',
-	data: {country_id:country_id,city_id:city_id,cat_id:cat_id,limit:limit,offset:offset},
+	data: {city_id:city_id,cat_id:cat_id,limit:limit,offset:offset},
 	cache: false,
     beforeSend: function() {
             $("#loader_message").html("").hide();
 			$("#event_list_all").html("").hide();
-			$("#event_list_cny").html("").hide();
 			$("#event_list_cty").html("").hide();
 			$("#event_list_type").html("").hide();
+			$("#event_list_search").html("").hide();
             $('#loader_image').show();
           },
 	success: function(data) {
@@ -1019,17 +784,16 @@ function getCategoryeventsresult(limit,offset)
 
 function getTypeevents()
 {
+	$("#search_term").val("");
 	$("#event_list_type").html("").show();
 
 	var limit = 9;
 	var offset = 0;
 
-	var country_id=cnyname.value;
 	var city_id_value=ctyname.value;
 	var type_id = event_type.value;
 	var category_id = $("#category").val();
 	cat_id = category_id.toString();
-	//$('#event_type').prop('selectedIndex',0);
 
 	if(city_id_value==''){
 			var city_id='<?php echo $city_values; ?>';
@@ -1041,7 +805,7 @@ function getTypeevents()
 	$.ajax({
 	url: '<?php echo base_url(); ?>eventlist/get_type_events',
 	type: 'POST',
-	data: {country_id:country_id,city_id:city_id,cat_id:cat_id,type_id:type_id,limit:limit,offset:offset},
+	data: {city_id:city_id,cat_id:cat_id,type_id:type_id,limit:limit,offset:offset},
 	cache: false,
     beforeSend: function() {
 		if (cat_id == ''){
@@ -1049,7 +813,6 @@ function getTypeevents()
 			}
             $("#loader_message").html("").hide();
 			$("#event_list_all").html("").hide();
-			$("#event_list_cny").html("").hide();
 			$("#event_list_cty").html("").hide();
 			$("#event_list_cat").html("").hide();
 			$("#event_list_search").html("").hide();
@@ -1103,7 +866,6 @@ function getTypeevents()
 				$('#loader_image').hide();
 				offset = limit + offset;
 				$("#loader_message").html('<center><a class="btn btn-sm more_event" onclick="getTypeeventsresult('+limit+','+offset+')" role="button">More Events</a></center>').show();
-				//$("#loader_message").html('<a onclick="getTypeeventsresult('+limit+','+offset+')">More Events</a>').show();
 			} else {
 				$('#loader_image').hide();
 				$("#loader_message").html('<center><p class="btn btn-sm no_event" style="color:#ffffff;">No more Events</p></center>').show();
@@ -1114,12 +876,11 @@ function getTypeevents()
 
 function getTypeeventsresult(limit,offset)
 {
-	var country_id=cnyname.value;
+	$("#search_term").val("");
 	var city_id_value=ctyname.value;
 	var type_id = event_type.value;
 	var category_id = $("#category").val();
 	cat_id = category_id.toString();
-	//$('#event_type').prop('selectedIndex',0);
 
 	if(city_id_value==''){
 			var city_id='<?php echo $city_values; ?>';
@@ -1131,7 +892,7 @@ function getTypeeventsresult(limit,offset)
 	$.ajax({
 	url: '<?php echo base_url(); ?>eventlist/get_type_events',
 	type: 'POST',
-	data: {country_id:country_id,city_id:city_id,cat_id:cat_id,type_id:type_id,limit:limit,offset:offset},
+	data: {city_id:city_id,cat_id:cat_id,type_id:type_id,limit:limit,offset:offset},
 	cache: false,
     beforeSend: function() {
 		if (cat_id == ''){
@@ -1142,6 +903,7 @@ function getTypeeventsresult(limit,offset)
 			$("#event_list_cny").html("").hide();
 			$("#event_list_cty").html("").hide();
 			$("#event_list_cat").html("").hide();
+			$("#event_list_search").html("").hide();
             $('#loader_image').show();
           },
 	success: function(data) {
@@ -1203,14 +965,13 @@ function getTypeeventsresult(limit,offset)
 
 function getSearchevents()
 {
-	$('#cnyname').prop('selectedIndex',0);
 	$('#ctyname').prop('selectedIndex',0);
-	//$('#category').prop('selectedIndex',0);
+	$('#category').prop('selectedIndex',0);
 	$('#event_type').prop('selectedIndex',0);
 
 	var srch_term = search_term.value;
 	var result = '';
-
+	
 	$.ajax({
 	url: '<?php echo base_url(); ?>eventlist/search_term_events',
 	type: 'POST',
@@ -1246,15 +1007,7 @@ function getSearchevents()
 				var start_time = dataArray[i].start_time;
 				var end_time = dataArray[i].end_time;
 				var start_date = dataArray[i].dstart_date;
-				//var sdate = new Date(Date.parse(start_date));
-				//var s_date = String (sdate);
-				//var disp_from_date = s_date.replace('05:30:00 GMT+0530 (India Standard Time)', '');
-
 				var end_date = dataArray[i].dend_date;
-				//var edate = new Date(Date.parse(end_date));
-				//var e_date = String (sdate);
-				//var disp_end_date = e_date.replace('05:30:00 GMT+0530 (India Standard Time)', '');
-
 				var wlstatus = dataArray[i].wlstatus;
 				var hotspot_status = dataArray[i].hotspot_status;
 
@@ -1280,10 +1033,12 @@ function getSearchevents()
 			};
 			$('#loader_image').hide();
 			$('#loader_message').hide();
+			$("#category").val("");
 			$("#event_list_search").html(result).show();
 		} else {
 			$('#loader_message').hide();
 			$('#loader_image').hide();
+			$("#category").val("");
 			result +="No Records found!..";
 			$("#event_list_search").html(result).show();
 		}
@@ -1292,40 +1047,8 @@ function getSearchevents()
 }
 
 
-/* function getcityname(cid) {
-	$.ajax({
-	type: 'post',
-	url: '<?php echo base_url(); ?>eventlist/get_city_name',
-	data: { country_id:cid },
-	dataType: "JSON",
-	cache: false,
-	success:function(cty)
-	{
-	var len = cty.length;
-	var cityname='';
-	var ctitle='<option>Select City</option>';
-	if(cty!='')
-	 {    //alert(len);
-		for(var i=0; i<len; i++)
-		{
-			var cityid = cty[i].id;
-			var city_name = cty[i].city_name;
-			cityname +='<option value=' + cityid + '> ' + city_name + ' </option>';
-		}
-		$("#ctyname").html(ctitle+cityname).show();
-		$("#cmsg").hide();
-	}else{
-	  $("#cmsg").html('<p style="color: red;">City Not Found</p>').show();
-	  $("#ctyname").hide();
-	}
-	}
-	});
-} */
-
-
 function editwishlist(user_id,event_id)
 {
-	//make the ajax call
 	$.ajax({
 	url: '<?php echo base_url(); ?>eventlist/eventwishlist',
 	type: 'POST',
@@ -1341,54 +1064,6 @@ function editwishlist(user_id,event_id)
 	});
 }
 
-$( function() {
-    var availableTags = [<?php
-	 $tot_count = count($event_resu);
-	 $i = 1;
-	foreach($event_resu as $res){
-	echo "'";
-	echo $str = addslashes($res->event_name);
-	//echo str_replace("'", "", $res->event_name);
-	echo "'";
-	if ($i < $tot_count) echo ",";
-	 $i = $i+1;} ?>];
 
-    $("#search_term").autocomplete({
-		source: availableTags,
-		select: function(event, ui) {
-		$("#search_term").val(ui.item.value);
-			getSearchevents();
-		}
-	});
-
-  });
-
-/* $('#reset_cookie').hide();
-window.onload=set_cookies_values();
-
-function set_cookies_values(){
-  var country_values='<?php  echo $country_values ?>';
-  var city_values='<?php  echo $city_values ?>';
-
-  if(country_values=='' && city_values==''){
-  }else{
-    if(city_values==''){
-      getcountryevents();
-    }else{
-      getcityevents();
-	}
-  }
-}
-
-function reset(){
-	<?php
-	unset($_COOKIE['country_values']);
-	unset($_COOKIE['city_values']);
-
-	delete_cookie('country_values');
-	delete_cookie('city_values');
-	?>
-	location.reload();
-} */
 
 </script>

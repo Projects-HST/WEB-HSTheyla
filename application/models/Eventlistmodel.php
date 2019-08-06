@@ -184,7 +184,7 @@ Class Eventlistmodel extends CI_Model
 	function get_city_events($country_id,$city_id,$category_id,$limit,$offset)
     {
 		$current_date = date("Y-m-d");
-
+		
 		if ($this->session->userdata('id') !=''){
 			$user_id = $this->session->userdata('id');
 		} else {
@@ -205,7 +205,8 @@ Class Eventlistmodel extends CI_Model
 		}else {
 			$category_query = "";
 		}
-
+	
+		
 		$sql="SELECT * FROM(SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 			FROM events AS e
 			LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
@@ -258,7 +259,7 @@ Class Eventlistmodel extends CI_Model
 			$category_query = "";
 		}
 
-		$sql="SELECT * FROM(SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+		 $sql="SELECT * FROM(SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 				FROM events AS e
 				LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
 				LEFT JOIN country_master AS cy ON e.event_country = cy.id
@@ -332,6 +333,7 @@ Class Eventlistmodel extends CI_Model
     {
 		$current_date = date("Y-m-d");
 		$srch_term = addslashes($srch_term);
+		
 		if ($this->session->userdata('id') !=''){
 			$user_id = $this->session->userdata('id');
 		} else {
