@@ -1476,7 +1476,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                         LEFT JOIN city_master AS ci ON ev.event_city = ci.id
                         LEFT JOIN country_master AS cy ON ev.event_country = cy.id
                         LEFT JOIN adv_event_history AS aeh ON aeh.event_id = ev.id
-                        WHERE ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y' AND aeh.date_to >= '$current_date' group by ev.id, aeh.event_id";
+                        WHERE ev.end_date>= '$current_date' AND  ev.event_city = '$city_id' AND ev.event_status  ='Y' AND aeh.date_to >= '$current_date' group by ev.id, aeh.event_id";
     	    //echo $event_query;
 		    $adv_event_res = $this->db->query($adv_event_query);
 
@@ -1523,7 +1523,17 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			}
 
 
-	    if ($event_type == 'General'){
+	    if ($event_type == 'All'){
+	         $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
+                            from events as ev
+                            left join event_popularity as ep on ep.event_id = ev.id
+                            LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+                            LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+                            WHERE ev.hotspot_status = 'N' AND $day_query ev.end_date>= '$current_date' AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
+                            group by ev.id order by ev.start_date";
+	    }
+		
+		if ($event_type == 'General'){
 	         $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
                             from events as ev
                             left join event_popularity as ep on ep.event_id = ev.id
@@ -1532,22 +1542,24 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                             WHERE ev.hotspot_status = 'N' AND $day_query ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
                             group by ev.id order by ev.start_date";
 	    }
+		
 	    if ($event_type == 'Popularity'){
 	         $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
                             from events as ev
                             left join event_popularity as ep on ep.event_id = ev.id
                             LEFT JOIN city_master AS ci ON ev.event_city = ci.id
                             LEFT JOIN country_master AS cy ON ev.event_country = cy.id
-                            WHERE ev.hotspot_status = 'N' AND $day_query ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
+                            WHERE ev.hotspot_status = 'N' AND $day_query ev.end_date>= '$current_date' AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
                             group by ev.id ORDER by popularity DESC";
 	    }
+		
 		if ($event_type == 'Hotspot'){
 	        $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
                             from events as ev
                             left join event_popularity as ep on ep.event_id = ev.id
                             LEFT JOIN city_master AS ci ON ev.event_city = ci.id
                             LEFT JOIN country_master AS cy ON ev.event_country = cy.id
-                            WHERE ev.hotspot_status = 'Y' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
+                            WHERE ev.hotspot_status = 'Y' AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
                             group by ev.id";
 	    }
 		//echo $event_query;
@@ -1580,6 +1592,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 							"primary_contact_no" => $rows->primary_contact_no,
 							"secondary_contact_no" => $rows->secondary_contact_no,
 							"contact_person" => $rows->contact_person,
+							"sec_contact_person" => $rows->sec_contact_person,
 							"contact_email" => $rows->contact_email,
 							"event_type" => $rows->event_type,
 							"adv_status" => $rows->adv_status,
@@ -1664,6 +1677,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 							"primary_contact_no" => $rows->primary_contact_no,
 							"secondary_contact_no" => $rows->secondary_contact_no,
 							"contact_person" => $rows->contact_person,
+							"sec_contact_person" => $rows->sec_contact_person,
 							"contact_email" => $rows->contact_email,
 							"event_type" => $rows->event_type,
 							"adv_status" => $rows->adv_status,
