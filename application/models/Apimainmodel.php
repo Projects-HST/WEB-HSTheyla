@@ -1052,7 +1052,12 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 							"user_login_count" => $ress[0]->login_count,
 							"event_organizer" => $event_organizer
 				);
-			}
+					$response = array("status" => "Success", "msg" => "User Details", "userData" => $userData);
+    				return $response;
+		} else {
+
+					$response = array("status" => "Error");
+					return $response;
 	}
 //#################### Profile Details End ####################//
 
