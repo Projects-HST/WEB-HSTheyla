@@ -45,27 +45,19 @@
 <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>home/insertevents" name="eventform" id="eventform" onSubmit='return check();'>
   <div class="col-md-12 form_box">
   	       <div class="form-group">
-  	            <label for="country" class="col-sm-2 col-form-label">Select Country</label>
-  	            <div class="col-sm-4">
-  	              <select class="form-control" name="country" onchange="getcityname(this.value)">
-  	              <option value="">Select Country Name</option>
-  	                     <?php foreach($country_list as $cntry){ ?>
-  	                        <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
-  	                     <?php } ?>
-  	                </select>
-  	            </div>
-  	             <label for="city" class="col-sm-2 col-form-label">Select City</label>
+  	            
+				
+  	             <label for="city" class="col-sm-2 col-form-label">Select Location</label>
   	            <div class="col-sm-4">
   	               <select class="form-control" name="city"  id="ctname">
-                     <option value="">Select City</option>
-  	               </select>
-  	                <div id="cmsg"></div>
+                     <option value="">Select Location</option>
+  	                     <?php foreach($city_list as $cty){ ?>
+  	                        <option value="<?php echo $cty->id; ?>"><?php echo $cty->city_name; ?></option>
+  	               <?php } ?>
+				    </select>
   	            </div>
-  	        </div>
-  </div>
-<div class="col-md-12 form_box">
-	<div class="form-group">
-			<label for="Category" class="col-sm-2 col-form-label">Select Category</label>
+				
+				<label for="Category" class="col-sm-2 col-form-label">Select Category</label>
 			<div class="col-sm-4">
 					<select class="form-control" name="category">
 						<option value="">Select Category Name</option>
@@ -74,23 +66,34 @@
 							 <?php } ?>
 					</select>
 			</div>
+				
+  	        </div>
+  </div>
+<div class="col-md-12 form_box">
+	<div class="form-group">
+			
 			<label for="Name" class="col-sm-2 col-form-label">Event Name</label>
 			<div class="col-sm-4">
 					<input class="form-control" type="text"  name="event_name">
 			</div>
-	</div>
+	
+	<label for="Venue" class="col-sm-2 col-form-label">Venue</label>
+				<div class="col-sm-4">
+						<input class="form-control" type="text"  name="venue"  >
+				</div>
+	</div> 
 </div>
 
 	<div class="col-md-12 form_box">
 		<div class="form-group">
-				<label for="Venue" class="col-sm-2 col-form-label">Venue</label>
-				<div class="col-sm-4">
-						<input class="form-control" type="text"  name="venue"  >
-				</div>
-				 <label for="Address" class="col-sm-2 col-form-label">Address</label>
+				<label for="Address" class="col-sm-2 col-form-label">Address</label>
 				<div class="col-sm-4">
 					 <textarea id="textarea" name="address"  class="form-control" maxlength="240" rows="3" placeholder=""></textarea>
 				</div>
+				 <label for="Description" class="col-sm-2 col-form-label">Description</label>
+            <div class="col-sm-4">
+                <textarea  id="textarea"  name="description" class="form-control" maxlength="30000" rows="3" placeholder=""> </textarea>
+            </div>
 		</div>
 	</div>
   <div class="col-md-12 form_box">
@@ -148,12 +151,45 @@
 			</div>
       <div class="col-md-12 form_box">
         <div class="form-group">
-            <label for="Description" class="col-sm-2 col-form-label">Description</label>
-            <div class="col-sm-4">
-                <textarea  id="textarea"  name="description" class="form-control" maxlength="30000" rows="3" placeholder=""> </textarea>
-            </div>
+           
 
-             <label for="ecost" class="col-sm-2 col-form-label">Event Type</label>
+
+			
+			<label for="Person" class="col-sm-2 col-form-label">Contact Person</label>
+			 <div class="col-sm-4">
+					 <input class="form-control" type="text"  name="contact_person" value="">
+			 </div>
+			 <label for="Person" class="col-sm-2 col-form-label">Secondary Contact Person</label>
+			 <div class="col-sm-4">
+					 <input class="form-control" type="text"  name="sec_contact_person" value="">
+			 </div>
+			 
+        </div>
+      </div>
+	  
+	  
+	  					<div class="col-md-12 form_box">
+						<div class="form-group">
+								<label for="primarycell" class="col-sm-2 col-form-label">Primary Contact Phone</label>
+								<div class="col-sm-4">
+										<input class="form-control" type="text"  name="pcontact_cell" maxlength="10" value="">
+								</div>
+								<label for="seccell" class="col-sm-2 col-form-label">Secondary Contact Phone</label>
+								<div class="col-sm-4">
+										<input class="form-control" type="text" name="scontact_cell" value="" >
+								</div>
+						</div>
+					</div>
+					
+					<div class="col-md-12 form_box">
+							<div class="form-group">
+									 
+									 <label for="Email" class="col-sm-2 col-form-label">Contact Email</label>
+									 <div class="col-sm-4">
+											 <input class="form-control" type="text"  name="email" value="" >
+									 </div>
+									 
+									              <label for="ecost" class="col-sm-2 col-form-label">Event Type</label>
             <div class="col-sm-4">
                  <select class="form-control"  name="eventcost">
                     <option value="Free">Free</option>
@@ -161,8 +197,8 @@
                     <option value="Invite">Invite</option>
                 </select>
             </div>
-        </div>
-      </div>
+							 </div>
+						</div>
         <div class="col-md-12 form_box">
                   <div class="form-group ">
                       <label for="Status" class="col-sm-2 col-form-label">Advertisement Display</label>
@@ -188,30 +224,8 @@
 
 
 
-					<div class="col-md-12 form_box">
-						<div class="form-group">
-								<label for="primarycell" class="col-sm-2 col-form-label">Primary Contact Phone</label>
-								<div class="col-sm-4">
-										<input class="form-control" type="text"  name="pcontact_cell" maxlength="10" value="">
-								</div>
-								<label for="seccell" class="col-sm-2 col-form-label">Secondary Contact Phone</label>
-								<div class="col-sm-4">
-										<input class="form-control" type="text" name="scontact_cell" value="" >
-								</div>
-						</div>
-					</div>
-						<div class="col-md-12 form_box">
-							<div class="form-group">
-									 <label for="Person" class="col-sm-2 col-form-label">Contact Person</label>
-									 <div class="col-sm-4">
-											 <input class="form-control" type="text"  name="contact_person" value="">
-									 </div>
-									 <label for="Email" class="col-sm-2 col-form-label">Contact Email</label>
-									 <div class="col-sm-4">
-											 <input class="form-control" type="text"  name="email" value="" >
-									 </div>
-							 </div>
-						</div>
+
+						
 
 						<div class="col-md-12 form_box">
 							<div class="form-group">
@@ -330,7 +344,7 @@ $(document).ready(function () {
         category:"Select Category Name",
         event_name:"Enter Event Name",
         country:"Select Country Name",
-        city:"Select City Name",
+        city:"Select Location",
         venue:"Enter Venue",
         address:"Enter Address",
         description:"Enter Description",

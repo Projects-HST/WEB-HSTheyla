@@ -772,6 +772,7 @@ function getCategoryeventsresult(limit,offset)
 
         $("#event_list_cat").append(result);
         $('#loader_image').hide();
+		offset = limit + offset;
         $("#loader_message").html('<center><a class="btn btn-sm more_event" onclick="getCategoryeventsresult('+limit+','+offset+')" role="button">More Events</a><center>').show();
 		} else {
         $('#loader_image').hide();

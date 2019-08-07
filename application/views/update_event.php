@@ -1,14 +1,40 @@
+<?php
+  	$dateTime = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
+	$current_time = $dateTime->format("h:i A");
+?>
+<script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
+<link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
 <style>
 .form_box{
 	margin-bottom: 20px;
+}
+.footer_section{
+  display: none;
 }
 .error{
 	color:red;
 	font-weight: 400;
 }
-.footer_section{
-  display: none;
+.col-form-label{
+  font-size: 18px;
+  font-weight: 500;
 }
+.form-control{
+  font-size: 16px;
+}
+.createevent_active{
+  border-left: 4px solid #458ecc;
+}
+.card{
+  background-color: #fff;
+  margin-left: 50px;
+  margin-right: 50px;
+  box-shadow: 3px 11px 15px 0px #959696;
+
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
 </style>
 <?php
 function get_times( $default = '10:00', $interval = '+15 minutes' )
@@ -25,46 +51,27 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 	return $output;
 	}
 ?>
-<script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
-<link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
+
 <div class="col-md-12" id="content">
 	<h3 class="dashboard_tab">Update  Event</h3>
 </div>
-<div class="">
+<div class="col-md-12">
 	<?php	foreach($edit as $rows){} $sts=$rows->event_status; ?>
 	<form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>home/updateeventsdetails" name="eventform" id="eventform" onSubmit='return check();'>
 		<div class="col-md-12 form_box">
 			       <div class="form-group">
-			            <label for="country" class="col-sm-2 col-form-label">Select Country</label>
+			            
+			             <label for="city" class="col-sm-2 col-form-label">Select Location</label>
 			            <div class="col-sm-4">
-			              <select class="form-control" name="country" onchange="getcityname(this.value)">
-			              <option value="">Select Country Name</option>
-			                     <?php foreach($country_list as $cntry){ ?>
-			                        <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
-			                     <?php } ?>
-			                </select>
-		                  <script language="JavaScript">document.eventform.country.value="<?php echo $rows->event_country; ?>";</script>
+		                <select class="form-control" name="city"  id="ctname">
+                     <option value="">Select Location</option>
+  	                     <?php foreach($city_list as $cty){ ?>
+  	                        <option value="<?php echo $cty->id; ?>"><?php echo $cty->city_name; ?></option>
+  	               <?php } ?>
+				    </select><script language="JavaScript">document.eventform.city.value="<?php echo $rows->event_city; ?>";</script>
 			            </div>
-			             <label for="city" class="col-sm-2 col-form-label">Select City</label>
-			            <div class="col-sm-4">
-		                <select class="form-control" name="city" id="ctname">
-		  							<?php
-		  								$cntyrid=$rows->event_country;
-		  								$sql="SELECT id,city_name FROM city_master WHERE country_id='$cntyrid' AND event_status='Y' ORDER BY id ASC";
-		  								$resu=$this->db->query($sql);
-		  								$res=$resu->result();
-		  								foreach ($res as $value) { ?>
-		  								<option value="<?php echo $value->id; ?>"><?php echo $value->city_name; ?></option>
-		  								<?php } ?>
-		  								</select>
-		  								<script language="JavaScript">document.eventform.city.value="<?php echo $rows->event_city; ?>";</script>
-			                <div id="cmsg"></div>
-			            </div>
-			        </div>
-		</div>
-<div class="col-md-12 form_box">
-	<div class="form-group">
-			<label for="Category" class="col-sm-2 col-form-label">Select Category</label>
+						
+						<label for="Category" class="col-sm-2 col-form-label">Select Category</label>
 			<div class="col-sm-4">
 					<select class="form-control" name="category">
 						<option value="">Select Category Name</option>
@@ -74,24 +81,36 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 					</select>
            <script language="JavaScript">document.eventform.category.value="<?php echo $rows->category_id; ?>";</script>
 			</div>
+			        </div>
+		</div>
+	<div class="col-md-12 form_box">
+	<div class="form-group">
+			
 			<label for="Name" class="col-sm-2 col-form-label">Event Name</label>
 			<div class="col-sm-4">
 				  <input class="form-control" type="text"  name="event_name" value="<?php echo $rows->event_name; ?>">
 			</div>
+			
+			<label for="Venue" class="col-sm-2 col-form-label">Venue</label>
+				<div class="col-sm-4">
+					  <input class="form-control" type="text"  name="venue"  value="<?php echo $rows->event_venue; ?>">
+				</div>
 	</div>
 </div>
 
 	<div class="col-md-12 form_box">
 		<div class="form-group">
-				<label for="Venue" class="col-sm-2 col-form-label">Venue</label>
-				<div class="col-sm-4">
-					  <input class="form-control" type="text"  name="venue"  value="<?php echo $rows->event_venue; ?>">
-				</div>
+				
 				 <label for="Address" class="col-sm-2 col-form-label">Address</label>
 				<div class="col-sm-4">
-          <textarea id="textarea" name="address" required="" class="form-control" maxlength="240" rows="3" placeholder="">
+			<textarea id="textarea" name="address" required="" class="form-control" maxlength="240" rows="3" placeholder="">
             <?php echo $rows->event_address; ?></textarea>
 				</div>
+				
+				<label for="Description" class="col-sm-2 col-form-label">Description</label>
+				<div class="col-sm-4">
+          <textarea  id="textarea" required="" name="description" class="form-control" maxlength="30000" rows="3" placeholder=""><?php echo $rows->description; ?></textarea>
+      	</div>
 		</div>
 	</div>
 	<div class="col-md-12 form_box">
@@ -150,12 +169,47 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 
 	<div class="col-md-12 form_box">
 		<div class="form-group">
-				<label for="Description" class="col-sm-2 col-form-label">Description</label>
-				<div class="col-sm-4">
-          <textarea  id="textarea" required="" name="description" class="form-control" maxlength="30000" rows="3" placeholder=""><?php echo $rows->description; ?></textarea>
-      	</div>
+				<label for="Person" class="col-sm-2 col-form-label">Contact Person</label>
+									 <div class="col-sm-4">
+                     <input class="form-control" type="text" required="" value="<?php echo $rows->contact_person; ?>" name="contact_person" value="">
+					</div>
+					
+					<label for="Person" class="col-sm-2 col-form-label">Secondary Contact Person</label>
+									 <div class="col-sm-4">
+                     <input class="form-control" type="text" required="" value="<?php echo $rows->sec_contact_person; ?>" name="sec_contact_person" value="">
+					</div>
+					
+				 
+		</div>
+	</div>
+    
 
-				 <label for="ecost" class="col-sm-2 col-form-label">Event Type</label>
+
+					<div class="col-md-12 form_box">
+						<div class="form-group">
+								<label for="primarycell" class="col-sm-2 col-form-label">Primary Contact Phone</label>
+								<div class="col-sm-4">
+                  <input class="form-control" type="text" required="" value="<?php echo $rows->primary_contact_no; ?>" name="pcontact_cell" maxlength="10" value="">
+
+								</div>
+								<label for="seccell" class="col-sm-2 col-form-label">Secondary Contact Phone</label>
+								<div class="col-sm-4">
+                  <input class="form-control" type="text" value="<?php echo $rows->secondary_contact_no; ?>" name="scontact_cell" value="" >
+
+								</div>
+						</div>
+					</div>
+						<div class="col-md-12 form_box">
+							<div class="form-group">
+									 
+
+
+									 <label for="Email" class="col-sm-2 col-form-label">Contact Email</label>
+									 <div class="col-sm-4">
+										<input class="form-control" type="text" value="<?php echo $rows->contact_email; ?>" required="" name="email" value="" >
+									 </div>
+									 
+									 <label for="ecost" class="col-sm-2 col-form-label">Event Type</label>
 				<div class="col-sm-4">
 						 <select class="form-control"  name="eventcost">
 								<option value="Free">Free</option>
@@ -164,9 +218,9 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 						</select>
             <script language="JavaScript">document.eventform.eventcost.value="<?php echo $rows->event_type; ?>";</script>
 				</div>
-		</div>
-	</div>
-    <div class="col-md-12 form_box">
+							 </div>
+						</div>
+<div class="col-md-12 form_box">
 							<div class="form-group ">
 									<label for="Status" class="col-sm-2 col-form-label">Advertisement Display</label>
 									<div class="col-sm-4">
@@ -190,36 +244,6 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 
 						 </div>
 						</div>
-
-
-					<div class="col-md-12 form_box">
-						<div class="form-group">
-								<label for="primarycell" class="col-sm-2 col-form-label">Primary Contact Phone</label>
-								<div class="col-sm-4">
-                  <input class="form-control" type="text" required="" value="<?php echo $rows->primary_contact_no; ?>" name="pcontact_cell" maxlength="10" value="">
-
-								</div>
-								<label for="seccell" class="col-sm-2 col-form-label">Secondary Contact Phone</label>
-								<div class="col-sm-4">
-                  <input class="form-control" type="text" value="<?php echo $rows->secondary_contact_no; ?>" name="scontact_cell" value="" >
-
-								</div>
-						</div>
-					</div>
-						<div class="col-md-12 form_box">
-							<div class="form-group">
-									 <label for="Person" class="col-sm-2 col-form-label">Contact Person</label>
-									 <div class="col-sm-4">
-                     <input class="form-control" type="text" required="" value="<?php echo $rows->contact_person; ?>" name="contact_person" value="">
-
-									 </div>
-									 <label for="Email" class="col-sm-2 col-form-label">Contact Email</label>
-									 <div class="col-sm-4">
-										<input class="form-control" type="text" value="<?php echo $rows->contact_email; ?>" required="" name="email" value="" >
-									 </div>
-							 </div>
-						</div>
-
 						<div class="col-md-12 form_box">
 							<div class="form-group">
 

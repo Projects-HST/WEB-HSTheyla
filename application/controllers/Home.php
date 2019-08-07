@@ -178,7 +178,7 @@ class Home extends CI_Controller {
 
 	    $event_name = $this->db->escape_str($this->input->post('event_name'));
         $category = $this->input->post('category');
-        $country = $this->input->post('country');
+        //$country = $this->input->post('country');
         $city = $this->input->post('city');
         $venue = $this->input->post('venue');
         $address = $this->db->escape_str($this->input->post('address'));
@@ -197,6 +197,7 @@ class Home extends CI_Controller {
         $pcontact_cell = $this->input->post('pcontact_cell');
         $scontact_cell = $this->input->post('scontact_cell');
         $contact_person = $this->input->post('contact_person');
+		$sec_contact_person = $this->input->post('sec_contact_person');
         $email = $this->input->post('email');
 
 		$event_pic      = $_FILES['eventbanner']['name'];
@@ -211,7 +212,7 @@ class Home extends CI_Controller {
 		$hotspot_sts = $this->input->post('hotspot_sts');
         $colour_scheme = $this->input->post('colour_scheme');
 
-        $datas = $this->organizermodel->create_events($event_name,$category,$country,$city,$venue,$address,$description,$eventcost,$start_date,$end_date,$start_time,$end_time,$txtLatitude,$txtLongitude,$pcontact_cell,$scontact_cell,$contact_person,$email,$event_banner,$colour_scheme,$eadv_status,$hotspot_sts,$user_id,$user_role);
+        $datas = $this->organizermodel->create_events($event_name,$category,$country,$city,$venue,$address,$description,$eventcost,$start_date,$end_date,$start_time,$end_time,$txtLatitude,$txtLongitude,$pcontact_cell,$scontact_cell,$contact_person,$sec_contact_person,$email,$event_banner,$colour_scheme,$eadv_status,$hotspot_sts,$user_id,$user_role);
 
 		$sta = $datas['status'];
 		redirect('/viewevents');
@@ -229,7 +230,7 @@ class Home extends CI_Controller {
 	    $user_role=$this->session->userdata('user_role');
  	    $event_name=$this->db->escape_str($this->input->post('event_name'));
         $category=$this->input->post('category');
-        $country=$this->input->post('country');
+       // $country=$this->input->post('country');
         $city=$this->input->post('city');
         $oldcityid=$this->input->post('oldcityid');
         $venue=$this->input->post('venue');
@@ -249,6 +250,7 @@ class Home extends CI_Controller {
         $pcontact_cell=$this->input->post('pcontact_cell');
         $scontact_cell=$this->input->post('scontact_cell');
         $contact_person=$this->input->post('contact_person');
+		$sec_contact_person=$this->input->post('sec_contact_person');
         $email=$this->input->post('email');
         $currentcpic=$this->input->post('currentcpic');
         $eventid=$this->input->post('eventid');
@@ -275,7 +277,7 @@ class Home extends CI_Controller {
          	$city=$city;
          }
 
-        $datas=$this->organizermodel->update_events_details($eventid,$event_name,$category,$country,$city,$venue,$address,$description,$eventcost,$start_date,$end_date,$start_time,$end_time,$txtLatitude,$txtLongitude,$pcontact_cell,$scontact_cell,$contact_person,$email,$event_banner,$colour_scheme,$event_status,$eadv_status,$booking_sts,$hotspot_sts,$user_id,$user_role);
+        $datas=$this->organizermodel->update_events_details($eventid,$event_name,$category,$country,$city,$venue,$address,$description,$eventcost,$start_date,$end_date,$start_time,$end_time,$txtLatitude,$txtLongitude,$pcontact_cell,$scontact_cell,$contact_person,$sec_contact_person,$email,$event_banner,$colour_scheme,$event_status,$eadv_status,$booking_sts,$hotspot_sts,$user_id,$user_role);
       	$sta=$datas['status'];
 		   	redirect('/viewevents');
      }
@@ -978,6 +980,7 @@ class Home extends CI_Controller {
 			if($user_role==2){
 				$datas['res']=$this->loginmodel->getuserinfo($user_id);
 				$datas['country_list'] = $this->organizermodel->get_country();
+				$datas['city_list'] = $this->organizermodel->get_city_list();
 				$datas['category_list'] = $this->organizermodel->get_category();
 				$this->load->view('dash_header');
 				$this->load->view('create_event', $datas);
@@ -1013,7 +1016,7 @@ class Home extends CI_Controller {
 			$user_role=$this->session->userdata('user_role');
 			if($user_role==2){
 			$id = base64_decode($id);
-			$datas['country_list'] = $this->organizermodel->get_country();
+			//$datas['country_list'] = $this->organizermodel->get_country();
 			$datas['category_list'] = $this->organizermodel->get_category();
 			$datas['city_list'] = $this->organizermodel->get_city_list();
 			$datas['edit'] = $this->organizermodel->events_details($id);

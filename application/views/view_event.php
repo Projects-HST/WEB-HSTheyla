@@ -25,7 +25,7 @@ $enc_event_id=$rows->id;
 <div class="thumbnail">
 <img src="<?php echo base_url(); ?>assets/events/banner/<?php echo $rows->event_banner; ?>" alt="" style="height:204px;">
 <div class="caption">
-<h4><a target="_blank" href="<?php echo base_url(); ?>eventlist/eventdetails/<?php  echo base64_encode($enc_event_id*564738); ?>/<?php  echo $rows->event_name; ?>"><?php  echo $rows->event_name; ?></a></h4>
+<h4><?php $stat=$rows->event_status; if($stat=='Y'){ ?><a target="_blank" href="<?php echo base_url(); ?>eventlist/eventdetails/<?php  echo base64_encode($enc_event_id*564738); ?>/<?php  echo $rows->event_name; ?>"><?php } ?><?php  echo $rows->event_name; ?></a></h4>
  <p><?php echo $rows->category_name;?></p>
 
    <p>City <?php echo $rows->city_name; ?>
