@@ -463,7 +463,40 @@ class Apimain extends CI_Controller {
 
 //-----------------------------------------------//
 
+//-----------------------------------------------//
 
+	public function profileDetails()
+	{
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
+
+		if(!$this->checkMethod())
+		{
+			return FALSE;
+		}
+
+		if($_POST == FALSE)
+		{
+			$res = array();
+			$res["opn"] = "Profile Update";
+			$res["scode"] = 204;
+			$res["message"] = "Input error";
+
+			echo json_encode($res);
+			return;
+		}
+
+        $user_id = '';
+        $user_id = $this->input->post("user_id");
+
+		$data['result']=$this->apimainmodel->Profile_details($user_id);
+		$response = $data['result'];
+		echo json_encode($response);
+	}
+
+//-----------------------------------------------//
+
+
+//-----------------------------------------------//
 	public function forgotPassword()
 	{
 		$_POST = json_decode(file_get_contents("php://input"), TRUE);

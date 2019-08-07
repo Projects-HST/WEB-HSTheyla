@@ -916,6 +916,7 @@ class Apimainmodel extends CI_Model {
 //#################### Profile Pic Update End ####################//
 
 
+
 //#################### Profile Update ####################//
 public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$gender,$occupation,$address_line_1,$address_line_2,$address_line_3,$country_id,$state_id,$city_id,$zip_code,$news_letter)
 	{
@@ -939,6 +940,121 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	}
 //#################### Profile Update End ####################//
 
+//#################### Profile Details ####################//
+	public function Profile_details($user_id)
+	{
+            $sql = "SELECT A.id as userid, A.user_name, A.mobile_no, A.email_id, A.email_verify, A.login_count, A.user_role, B.name, B.birthdate, B.gender, B.occupation, B.address_line1, B.address_line2, B.address_line3, B.country_id, B. state_id, B.city_id, B.zip, B.user_picture, B.newsletter_status, B.referal_code, C.user_role_name FROM user_master A, user_details B, user_role_master C WHERE A.id=B.user_id AND A.user_role = C.id AND A.id ='".$user_id."'";
+			$user_result = $this->db->query($sql);
+			$ress = $user_result->result();
+
+			if($user_result->num_rows()>0)
+			{
+			    foreach ($user_result->result() as $rows)
+    			{
+    				  $user_picture = $rows->user_picture;
+    				  $country_id = $rows->country_id;
+    				  $state_id = $rows->state_id;
+    				  $city_id = $rows->city_id;
+					  $user_role = $rows->user_role;
+
+					  if ($user_role =='2') {
+						  	$organiser_sql = "SELECT * FROM organiser_request WHERE user_id  ='".$user_id."'";
+							$organiser_result = $this->db->query($organiser_sql);
+							$organiser_ress = $organiser_result->result();
+							if($organiser_result->num_rows()>0)
+							{
+								foreach ($organiser_result->result() as $orgs)
+    							{
+									$req_status = $orgs->req_status;
+								}
+								if ($req_status =='Pending'){
+									$event_organizer = 'P';
+								}
+								if($req_status =='Approved'){
+									$event_organizer = 'Y';
+								}
+								if($req_status =='Rejected'){
+									$event_organizer = 'R';
+								}
+							}
+					  } else {
+						  $event_organizer = 'N';
+					  }
+    			}
+
+			    if ($user_picture != ''){
+			        $picture_url = base_url().'assets/users/profile/'.$user_picture;
+			    }else {
+			         $picture_url = '';
+			    }
+
+                $country_sql = "SELECT * FROM country_master WHERE id ='".$country_id."'";
+        		$country_result = $this->db->query($country_sql);
+        		if($country_result->num_rows()>0)
+        		{
+        			foreach ($country_result->result() as $rows)
+        			{
+        				  $country_name = $rows->country_name;
+        			}
+        		} else {
+        		          $country_name ='';
+        		}
+
+                $state_sql = "SELECT * FROM state_master WHERE id ='".$state_id."'";
+        		$state_result = $this->db->query($state_sql);
+        		if($state_result->num_rows()>0)
+        		{
+        			foreach ($state_result->result() as $rows)
+        			{
+        				  $state_name = $rows->state_name;
+        			}
+        		} else {
+        		          $state_name ='';
+        		}
+
+        		$city_sql = "SELECT * FROM city_master WHERE id ='".$city_id."'";
+        		$city_result = $this->db->query($city_sql);
+        		if($city_result->num_rows()>0)
+        		{
+        			foreach ($city_result->result() as $rows)
+        			{
+        				  $city_name = $rows->city_name;
+        			}
+        		} else {
+        		          $city_name ='';
+        		}
+
+				$userData  = array(
+							"user_id" => $ress[0]->userid,
+							"user_name" => $ress[0]->user_name,
+							"mobile_no" => $ress[0]->mobile_no,
+							"email_id" => $ress[0]->email_id,
+							"full_name" => $ress[0]->name,
+							"birth_date" => $ress[0]->birthdate,
+							"gender" => $ress[0]->gender,
+							"occupation" => $ress[0]->occupation,
+							"address_line_1" => $ress[0]->address_line1,
+							"address_line_2" => $ress[0]->address_line2,
+							"address_line_3" => $ress[0]->address_line3,
+							"country_id" => $ress[0]->country_id,
+							"country_name" => $country_name,
+							"state_id" => $ress[0]->state_id,
+							"state_name" => $state_name,
+							"city_id" => $ress[0]->city_id,
+							"city_name" => $city_name,
+							"zip" => $ress[0]->zip,
+							"picture_url" => $picture_url,
+							"newsletter_status" => $ress[0]->newsletter_status,
+							"email_verify_status" => $ress[0]->email_verify,
+							"user_role" => $ress[0]->user_role,
+							"user_role_name" => $ress[0]->user_role_name,
+							"referal_code" => $ress[0]->referal_code,
+							"user_login_count" => $ress[0]->login_count,
+							"event_organizer" => $event_organizer
+				);
+			}
+	}
+//#################### Profile Details End ####################//
 
 
 //#################### Forgot Password ####################//
@@ -1532,7 +1648,6 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                             WHERE ev.hotspot_status = 'N' AND $day_query ev.end_date>= '$current_date' AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
                             group by ev.id order by ev.start_date";
 	    }
-		
 		if ($event_type == 'General'){
 	         $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
                             from events as ev
