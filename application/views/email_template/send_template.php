@@ -3,21 +3,18 @@
            <h4 class="mt-0 header-title"> View list users</h4>
 
           <form method="post" action="<?php echo base_url();?>emailtemplate/select_users" name="newsletterform" id="newsletterform" style="margin-bottom: 20px;">
-         <?php  if(empty($search_view)) { ?>
-            <!-- <div class="row">
-              <div class="col-md-6 col-lg-6 col-xl-3">
-                  <select class="form-control" name="countryid"   onchange="getstatename(this.value)">
-                   <option value="">Select Country Name</option>
-                     <?php foreach($countyr_list as $cntry){ ?>
-                        <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
-                     <?php } ?>
-                  </select>
-              </div>
+
+            <div class="row">
+
               <div class="col-md-6 col-lg-6 col-xl-3">
                   <select class="form-control" name="cityid" id="cityname" >
                     <option value="">Select City Name</option>
+                    <?php  foreach($city_list as $rows_city){ ?>
+                      <option value="<?php echo $rows_city->id; ?>"><?php echo $rows_city->city_name; ?></option>
+                      <?php  } ?>
                   </select>
-                 <div id="msg"></div>
+                  <script>$('#cityname').val('<?php echo $city_id; ?>');</script>
+
               </div>
 
               <div class="col-md-6 col-lg-6 col-xl-3">
@@ -27,44 +24,8 @@
                       Reset
                       </button>
               </div>
-          </div> -->
-          <?php }else{  foreach($search_view as $res) { } ?>
-            <div class="row">
-              <div class="col-md-6 col-lg-6 col-xl-3">
-                  <!--div class="mini-stat clearfix bg-primary"-->
-                  <select class="form-control" name="countryid"   onchange="getstatename(this.value)">
-                   <option value="">Select Country Name</option>
-                     <?php foreach($countyr_list as $cntry){ ?>
-                        <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
-                     <?php } ?>
-                  </select>
-                  <script language="JavaScript">document.newsletterform.countryid.value="<?php echo $res->country_id; ?>";</script>
-                  <!--/div-->
-              </div>
-              <div class="col-md-6 col-lg-6 col-xl-3">
-                  <select class="form-control" name="cityid" id="cityname" >
-                     <?php foreach($city_list as $city){ ?>
-                        <option value="<?php echo $city->id; ?>"><?php echo $city->city_name; ?></option>
-                     <?php } ?>
-                  </select>
-                  <script language="JavaScript">document.newsletterform.cityid.value="<?php echo $res->city_id; ?>";</script>
-                 <div id="msg"></div>
-              </div>
-              <div class="col-md-6 col-lg-6 col-xl-3">
-                     <input class="form-control"  type="text" name="username" placeholder="Type User Name" id="example-text-input" value="<?php //echo $res->user_name; ?>">
-              </div>
-              <div class="col-md-6 col-lg-6 col-xl-3">
-                  <!--div class="mini-stat clearfix bg-primary"-->
-                     <button type="submit" class="btn btn-primary waves-effect waves-light">
-                      Submit </button>
-                      <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                      Reset
-                      </button>
-                  <!--/div-->
-              </div>
-
           </div>
-         <?php } ?>
+
            </form>
                <?php if($this->session->flashdata('msg')): ?>
                         <div class="alert alert-success">
@@ -80,9 +41,10 @@
                         <label id="user"><input type="checkbox" class="checkbox" id="checkAll" style="display: inline;" />&nbsp; Select Current Page
                          <!--div class="text-center">
                             < Large modal-->
-                             <button type="button" id="sendSelectedBtn" data-toggle="modal" data-target="#addmodel" class="btn btn-primary waves-effect waves-light" >Send To Selected</button> &nbsp;
+                             <button type="button" id="sendSelectedBtn" data-toggle="modal" data-target="#addmodel"
+                             class="btn btn-primary waves-effect waves-light">Send To Selected</button> &nbsp;
 
-                             <button type="button" style="float: right;" data-toggle="modal" id="sendAll" data-target="#addmodel" class="btn btn-primary waves-effect waves-light" >Send To All</button>
+                             <button type="button" style="float: right;" data-toggle="modal" id="sendAll" data-target="#addmodel" class="btn btn-primary waves-effect waves-light">Send To All</button>
                         <!--/div-->
                       </label>
                         <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -113,7 +75,9 @@
                                 <td><?php  echo $rows->mobile_no; ?></td>
                             </tr>
                            <?php $i++;  } ?>
-                           <div style="display: none;"><input type="text" name="userid[]"  class="demo" value="<?php echo $a; ?>"></div>
+                           <div style="display: none;">
+                             <input type="text" name="userid[]"  class="demo" value="<?php echo $a; ?>">
+                           </div>
                            <?php  }else{
 
 							$usr_id = [];
