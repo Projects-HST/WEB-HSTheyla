@@ -563,7 +563,7 @@ Class Eventlistmodel extends CI_Model
 		$review_update = $this->db->query($sQuery);
     }
 
-    function get_ip_country($country){
+    /* function get_ip_country($country){
         $select="SELECT id  FROM country_master WHERE country_name LIKE '%$country' and event_status='Y'";
         $res=$this->db->query($select);
          if($res->num_rows()==0){
@@ -575,6 +575,6 @@ Class Eventlistmodel extends CI_Model
         }
         	return $c_id;
 
-    }
+    } */
 }
 ?>

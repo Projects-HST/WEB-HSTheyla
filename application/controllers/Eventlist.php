@@ -303,7 +303,7 @@ class Eventlist extends CI_Controller
       $this->load->view('front_footer');
     }
 
-     public function get_ip_country()
+    /*  public function get_ip_country()
     {
 		$ip=$_SERVER['REMOTE_ADDR'];
 		$access_key = 'ed4a0ff6cd906632c411e531777136e5';
@@ -318,5 +318,5 @@ class Eventlist extends CI_Controller
 		$country=$api_result['country_name'];
 		$data['res']=$this->eventlistmodel->get_ip_country($country);
 		echo $data['res'];
-    }
+    } */
 }
