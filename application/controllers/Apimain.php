@@ -2122,7 +2122,7 @@ class Apimain extends CI_Controller {
 
 	public function user_feedback()
 	{
-		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
