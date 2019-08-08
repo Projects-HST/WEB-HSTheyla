@@ -227,7 +227,7 @@ if(empty($booking_process)){
    
         if(time == '00:00:00') {
             alert("You have exceeded the time limit and your booking has been released.");
-            window.location="http://heylaapp.com";
+            window.location="http://heylaapp.com/testing";
         } else{ 
             setTimeout("countdown()",1000);
         }
