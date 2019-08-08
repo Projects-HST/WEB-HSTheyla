@@ -39,7 +39,7 @@ class Apimainmodel extends CI_Model {
 		     $push = new Push(
 					$Title,
 					$Message,
-					'http://heylaapp.com/assets/notification/images/heyla.png'
+					'http://heylaapp.com/assets/notification/images/event.jpg'
 				); 
 
 // 			//if the push don't have an image give null in place of image
