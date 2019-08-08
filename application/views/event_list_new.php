@@ -1,5 +1,6 @@
 <?php $user_id = $this->session->userdata('id'); ?>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
 <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js"></script> -->
 <style>
 .ui-autocomplete {
@@ -164,7 +165,6 @@ body{background-color: #f7f8fa;}
       <div class="col-md-4">
         <div class="head_text"><h2>Find Events Near You</h2></div>
       </div>
-
       <div class="col-md-8">
       <div class="form-group">
             <div class="col-sm-12">
@@ -250,6 +250,7 @@ body{background-color: #f7f8fa;}
       <div id='loader_message'><center></center></div>
 </div>
 
+
 <script>
 
 $('.carousel').carousel({
@@ -263,6 +264,13 @@ $('#category').select2({
 });
 
 $(window).on('load', function(){
+	
+	document.getElementById("search_term").onkeypress = function(event){
+    if (event.keyCode == 13 || event.which == 13){
+       getSearchevents();
+    }
+};
+
 	var city_values = '<?php  echo $city_values ?>';
 	var search_values = '<?php  echo $search_values ?>';
 	
