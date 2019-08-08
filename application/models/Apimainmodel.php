@@ -39,7 +39,7 @@ class Apimainmodel extends CI_Model {
 		    $push = new Push(
 					$Title,
 					$Message,
-					'http://heylaapp.com/assets/notification/images/events.jpg'
+					'http://heylaapp.com/assets/notification/images/heyla.png'
 				);
 
 // 			//if the push don't have an image give null in place of image
@@ -387,6 +387,10 @@ class Apimainmodel extends CI_Model {
 					$update_gcm = $this->db->query($sQuery);
 				}
 
+					$Title = "Testing Title";
+					$Message = "Testing Message";
+					$mobiletype = "1";
+					$this->sendNotification($gcm_key,$Title,$Message,$mobiletype)
     				$response = array("status" => "Success", "msg" => "Login Successfully", "userData" => $userData);
     				return $response;
 		} else {
@@ -693,8 +697,6 @@ class Apimainmodel extends CI_Model {
 						$sQuery = "INSERT INTO push_notification_master (user_id,gcm_key,mobile_type) VALUES ('". $user_id . "','". $gcm_key . "','". $mobile_type . "')";
 						$update_gcm = $this->db->query($sQuery);
 					}
-
-
 			$mobile_message = 'Verify OTP :'. $OTP;
 
             $subject = "Heyla App - Email Verification";
@@ -2574,7 +2576,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 				  $name = $rows->name;
 			}
 
-			echo $activity = "INSERT INTO organiser_request (name,user_id,email_or_phone,message,req_status,created_at ) VALUES ('". $name . "','". $user_id . "','". $email_id . "','". $message . "','Pending',NOW())";
+			$activity = "INSERT INTO organiser_request (name,user_id,email_or_phone,message,req_status,created_at ) VALUES ('". $name . "','". $user_id . "','". $email_id . "','". $message . "','Pending',NOW())";
 		    $insert_query = $this->db->query($activity);
 
 			$email_id = 'hello@heylaapp.com';
@@ -2588,7 +2590,8 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	}
 //#################### Organizer request End ###############//
 
-//----- User Points--------//
+
+//#################### User Points ###############//
 
     function user_points($user_id){
       $select="SELECT IFNULL(ud.name,'') as name,IFNULL( um.user_name,'') as user_name,IFNULL(um.email_id,'') as email_id,upc.user_id,upc.total_points,IFNULL(ud.user_picture,'') as user_picture ,IFNULL(um.id,'') as id FROM user_points_count as upc
@@ -2622,6 +2625,9 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 
 
     }
+
+
+//#################### User Points End ###############//
 
 //#################### Refund request ###############//
 	public function Refund_request($user_id,$order_id)
