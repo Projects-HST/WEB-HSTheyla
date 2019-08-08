@@ -36,18 +36,18 @@ class Apimainmodel extends CI_Model {
             $push = null;
 
 //        //first check if the push has an image with it
-		    /* $push = new Push(
+		     $push = new Push(
 					$Title,
 					$Message,
 					'http://heylaapp.com/assets/notification/images/heyla.png'
-				); */
+				); 
 
 // 			//if the push don't have an image give null in place of image
- 			 $push = new Push(
+ 			 /* $push = new Push(
  			 		'HEYLA',
  			 		'Hi Testing from maran',
  			 		null
- 			 	);
+ 			 	); */
 
     		//getting the push from push object
     		$mPushNotification = $push->getPush();
