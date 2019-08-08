@@ -2694,7 +2694,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 //#################### User Feedback ###############//
 	public function User_Feedback($name,$email,$comments)
 	{
-		$email_id = 'admin@heylaapp.com';
+		$email_id = 'maran.happysanz@gmail.com';
 		$subject = "Heyla App - User Feedback";
 		$email_message = '<html>
 				 <body>
