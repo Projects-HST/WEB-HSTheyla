@@ -2431,3 +2431,17 @@ File: Responsive
     margin-left: 0 !important; } }
 
 /*# sourceMappingURL=style.css.map */
+
+
+.txt_label{
+
+}
+.txt_value{
+  color: #f71010;
+  font-size: 15px;
+  font-weight: 600;
+}
+.bor{
+  border: 1px solid #000;
+  padding-top: 10px;
+}

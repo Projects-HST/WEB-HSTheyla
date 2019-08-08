@@ -25,12 +25,8 @@
                             <th>S.No</th>
                             <th>Username/ Email </th>
                             <th>Full Name</th>
-
                             <th>Phone</th>
-
-                            <th>City</th>
-                            <th>Points</th>
-
+                            <th>User Picture</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -52,13 +48,13 @@
                             <td><?php echo $rows->name ; ?></td>
 
                             <td><?php echo $rows->mobile_no; ?></td>
+                            <td><img src="<?php  echo base_url(); ?>assets/users/<?php echo $rows->user_picture; ?>" class="img-responsive" style="width:100px;"></td>
 
-                            <td><?php echo $rows->city_name ; ?></td>
-                            <td><?php echo $rows->total_points ; ?></td>
 
-                            <td><?php if($sts=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
+
+                            <td><?php if($sts=='Y'){ echo'<p class="btn btn-secondary btn-success btn-sm"> Active </p>'; }else{ echo'<p class="btn btn-secondary btn-primary btn-sm"> Deactive </p>'; }?></td>
                             <td>
-                             <a href="<?php echo base_url();?>users/edit/<?php echo $rows->id;?>">
+                             <a href="<?php echo base_url();?>users/edit_admin/<?php echo $rows->id;?>">
                               <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
                             </td>
                         </tr>
