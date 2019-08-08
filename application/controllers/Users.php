@@ -55,19 +55,9 @@ class Users extends CI_Controller
 					$username=$this->input->post('username');
 	        $cell=$this->input->post('mobile');
 	        $email=$this->input->post('email');
-	        $sdate=$this->input->post('dob');
-					$dateTime = new DateTime($sdate);
-					$dob=date_format($dateTime,'Y-m-d');
-	        $gender=$this->input->post('gender');
-	        $address1=$this->db->escape_str($this->input->post('address1'));
-	        $occupation=$this->db->escape_str($this->input->post('occupation'));
-	        $country=$this->input->post('country');
-          $statename=$this->input->post('statename');
-          $city=$this->input->post('city');
-          $zip=$this->input->post('zip');
-          $status=$this->input->post('status');
           $userrole=$this->input->post('userrole');
           $display_status=$this->input->post('display_status');
+					$address1=$this->input->post('address1');
 					$student_pic = $_FILES["user_picture"]["name"];
 					if(empty($student_pic)){
 						$user_pic1=' ';
@@ -78,8 +68,8 @@ class Users extends CI_Controller
 					$profilepic = $uploaddir.$user_pic1;
 					move_uploaded_file($_FILES['user_picture']['tmp_name'], $profilepic);
 				}
-					$datas=$this->usersmodel->add_user_details($name,$username,$cell,$email,$dob,$gender,$address1,$occupation,$country,$statename,$city,$zip,$user_pic1,$status,$userrole,$user_id,$display_status);
-			 $sta=$datas['status'];
+					$datas=$this->usersmodel->add_user_details($name,$username,$cell,$email,$address1,$user_pic1,$user_id,$display_status);
+			 		$sta=$datas['status'];
 		     if($sta=="success"){
 		       $this->session->set_flashdata('msg','Added Successfully');
 			   redirect('users/view');
@@ -158,16 +148,46 @@ class Users extends CI_Controller
 	    $datas['country_list'] = $this->usersmodel->getall_country_list();
 	    $datas['users_role'] = $this->usersmodel->getall_users_role_list();
 	    $datas['users_view'] = $this->usersmodel->getall_users_details1($id);
-       // echo'<pre>';print_r($datas['users_view']);exit;
-		if($user_role == 1 || $user_role == 4)
-		{
-		  $this->load->view('header');
-		  $this->load->view('users/edit_users',$datas);
-		  $this->load->view('footer');
-	 	}else{
-	 			redirect('/');
-	 		 }
+			if($user_role == 1 || $user_role == 4)
+			{
+			  $this->load->view('header');
+			  $this->load->view('users/view_user_details',$datas);
+			  $this->load->view('footer');
+		 	}else{
+		 			redirect('/');
+		 		 }
     }
+
+
+		public function update_password(){
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			$datas['users_view'] = $this->usersmodel->getall_users_details1($user_id);
+		if($user_role == 1 || $user_role == 4)
+			{
+				$this->load->view('header');
+				$this->load->view('users/update_password',$datas);
+				$this->load->view('footer');
+			}else{
+					redirect('/');
+				 }
+		}
+
+		public function change_password(){
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			if($user_role == 1 || $user_role == 4)
+			{
+				$new_password=$this->input->post('new_password');
+				$confrim_password=$this->input->post('confrim_password');
+				$data['res']=$this->usersmodel->change_password($new_password,$confrim_password,$user_id);
+				echo json_encode($data['res']);
+			}else{
+					redirect('/');
+				 }
+		}
 
 		public function edit_noraml_users($id)
 		{
@@ -188,7 +208,23 @@ class Users extends CI_Controller
 			 }
 		}
 
-   
+		public function edit_admin($id){
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			$datas['res'] = $this->usersmodel->getall_users_details1($id);
+			// echo "<pre>";print_r($datas['users_view']);exit;
+			if($user_role == 1)
+			{
+				$this->load->view('header');
+				$this->load->view('users/edit_admin_user',$datas);
+				$this->load->view('footer');
+			}else{
+					redirect('/');
+				 }
+			}
+
+
     public function update_user_details()
     {
       $datas=$this->session->userdata();
@@ -196,41 +232,27 @@ class Users extends CI_Controller
 	    $user_role=$this->session->userdata('user_role');
 				if($user_role == 1)
 				{
-					$uid=$this->input->post('uid');
-					$umid=$this->input->post('umid');
+					$uid=$this->input->post('user_id');
 					$username=$this->input->post('username');
 					$name=$this->input->post('name');
 	        $cell=$this->input->post('mobile');
 	        $email=$this->input->post('email');
-					$sdate=$this->input->post('dob');
-					$dateTime =DateTime::createFromFormat('m-d-Y', $sdate);
-					$dob=$dateTime->format('Y-m-d');
-	        $gender=$this->input->post('gender');
-	        $address1=$this->db->escape_str($this->input->post('address1'));
-	        // $address2=$this->db->escape_str($this->input->post('address2'));
-	        // $address3=$this->db->escape_str($this->input->post('address3'));
-	        $occupation=$this->db->escape_str($this->input->post('occupation'));
-	        $country=$this->input->post('country');
-          $statename=$this->input->post('statename');
-          $city=$this->input->post('city');
-          $zip=$this->input->post('zip');
-          $status=$this->input->post('status');
-          $userrole=$this->input->post('role');
+					$address1=$this->input->post('address1');
 					$display_status=$this->input->post('display_status');
           $old_picture=$this->input->post('old_picture');
 				if(empty($_FILES['user_picture']['name'])){
 					$user_pic1=$old_picture;
 				}else{
 					$user_pic=$_FILES['user_picture']['name'];
-					$file_name = time().rand(1,5).rand(6,10);
-					$user_pic1=$file_name.$user_pic;
-					$uploaddir='assets/users/';
-					$profilepic=$uploaddir.$user_pic1;
+					$temp = pathinfo($user_pic, PATHINFO_EXTENSION);
+					$user_pic = time().'.'.$temp;
+					$uploadPicdir = './assets/users/';
+					$profilepic = $uploadPicdir.$user_pic;
 					move_uploaded_file($_FILES['user_picture']['tmp_name'],$profilepic);
-					$user_pic1=$user_pic1;
+
 				 }
-							
-		   $datas=$this->usersmodel->update_user_details($uid,$umid,$username,$name,$cell,$email,$dob,$gender,$address1,$occupation,$country,$statename,$city,$zip,$user_pic1,$status,$userrole,$user_id,$display_status);
+
+		   $datas=$this->usersmodel->update_user_details($uid,$username,$name,$cell,$email,$address1,$user_pic,$user_id,$display_status);
 			 $sta=$datas['status'];
 		     if($sta=="success"){
 		       $this->session->set_flashdata('msg','Updated Successfully');
@@ -249,33 +271,26 @@ class Users extends CI_Controller
 	 		 }
     }
 
-    public function delete()
+    public function update_user_login_status()
     {
-    	$datas=$this->session->userdata();
-	    $user_id=$this->session->userdata('id');
-	    $user_role=$this->session->userdata('user_role');
-
-	    if($user_role == 1 || $user_role == 4)
-		{
-		   $id=$this->input->post('uaid');
-	       $users_id=$this->input->post('userid');
-
-	       //echo $id; echo $users_id; exit;
-
-	     $datas= $this->usersmodel->delete($id,$users_id);
-         $sta=$datas['status'];
-		  if($sta=="success"){
-		   //$this->session->set_flashdata('msg','Deleted Successfully');
-		  //redirect('users/view');
-		  	echo "success";
-		   }else{
-		     //$this->session->set_flashdata('msg','Faild To Delete');
-			 //redirect('users/view');
-		   	echo "Faild";
-		     }
-	 	}else{
-	 			redirect('/');
-	 		 }
+				$datas=$this->session->userdata();
+				$user_id=$this->session->userdata('id');
+				$user_role=$this->session->userdata('user_role');
+						if($user_role == 1){
+						$uid=$this->input->post('user_id');
+						$login_status=$this->input->post('login_status');
+						$datas=$this->usersmodel->update_user_login_status($uid,$login_status,$user_id);
+						$sta=$datas['status'];
+								if($sta=="success"){
+								$this->session->set_flashdata('msg','Updated Successfully');
+								redirect('users/view_normal_users');
+								}else{
+								$this->session->set_flashdata('msg','Faild To Update');
+								redirect('users/view_normal_users');
+								}
+						}else{
+						redirect('/');
+						}
     }
 
     public function view_followers_details($usersid)

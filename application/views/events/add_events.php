@@ -95,7 +95,7 @@
                             <div class="col-sm-4">
                               <div class="input-group">
                                 <input type="text" class="form-control datepicker"  name="start_date" id="datepicker-autoclose" value="<?php echo date("d-m-Y"); ?>">
-                                <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
+
                             </div>
                             </div>
 
@@ -103,7 +103,7 @@
                             <div class="col-sm-4">
                                <div class="input-group">
                                 <input type="text" class="form-control datepicker" name="end_date" id="datepicker" value="<?php echo date("d-m-Y"); ?>">
-                                <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
+                              
 
                             </div>
                             </div>

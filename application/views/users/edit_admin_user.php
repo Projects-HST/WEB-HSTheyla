@@ -4,7 +4,7 @@
             <div class="col-12">
                 <div class="card m-b-20">
                     <div class="card-block">
-                        <h4 class="mt-0 header-title"> Add Users Details </h4>
+                        <h4 class="mt-0 header-title"> Update Users Details </h4>
                         <?php if($this->session->flashdata('msg')): ?>
                             <div class="alert <?php $msg=$this->session->flashdata('msg');
                             if($msg=='Added Successfully' || $msg=='Updated Successfully'){ echo " alert-success "; }else{ echo "alert-danger "; } ?>">
@@ -13,28 +13,31 @@
                                 <?php echo $this->session->flashdata('msg'); ?>
                             </div>
                             <?php endif; ?>
-                                <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>users/add_user_details" name="usersform" id="usersform" onSubmit='return check();'>
+                            <?php  foreach($res as $rows) {} ?>
+                                <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>users/update_user_details" name="usersform" id="usersform">
                                     <div class="form-group row">
                                         <label for="Category" class="col-sm-2 col-form-label">Username</label>
                                         <div class="col-sm-4">
-                                            <input class="form-control" type="text" id="ufun" name="username">
+                                            <input class="form-control" type="text" id="ufun" name="username" value="<?php  echo $rows->user_name; ?>">
+                                              <input class="form-control" type="hidden" name="user_id" value="<?php echo $rows->user_id; ?>">
+                                              <input type="hidden" name="old_picture" class="form-control" value="<?php echo $rows->user_picture; ?>" >
 
                                         </div>
                                         <label for="Category" class="col-sm-2 col-form-label">Full Name</label>
                                         <div class="col-sm-4">
-                                            <input class="form-control" type="text" name="name">
+                                            <input class="form-control" type="text" name="name" value="<?php  echo $rows->name; ?>">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="Name" class="col-sm-2 col-form-label">Mobile Number</label>
                                         <div class="col-sm-4">
-                                            <input class="form-control" type="text" name="mobile" id="mfun">
+                                            <input class="form-control" type="text" name="mobile" id="mfun" value="<?php  echo $rows->mobile_no; ?>">
 
                                         </div>
                                         <label for="Name" class="col-sm-2 col-form-label">Email Id</label>
                                         <div class="col-sm-4">
-                                            <input class="form-control" type="text" id="efun" name="email">
+                                            <input class="form-control" type="text" id="efun" name="email"  value="<?php  echo $rows->email_id; ?>">
 
                                         </div>
 
@@ -44,7 +47,7 @@
                                     <div class="form-group row">
                                         <label for="ecost" class="col-sm-2 col-form-label">Address</label>
                                         <div class="col-sm-4">
-                                            <textarea id="textarea" name="address1" class="form-control" maxlength="100" rows="3"></textarea>
+                                            <textarea id="textarea" name="address1" class="form-control" maxlength="100" rows="3"><?php  echo $rows->address_line1; ?></textarea>
                                         </div>
                                         <label class="col-sm-2 col-form-label">User Picture</label>
                                         <div class="col-sm-4">
@@ -55,11 +58,16 @@
                                     <div class="form-group row">
                                         <label for="Status" class="col-sm-2 col-form-label">Display Status</label>
                                         <div class="col-sm-4">
-                                            <select class="form-control" name="display_status">
+                                            <select class="form-control" name="display_status" id="display_status">
                                                 <option value="">Select Status</option>
                                                 <option value="Y">Yes</option>
                                                 <option value="N">No</option>
                                             </select>
+                                            <script>$('#display_status').val('<?php echo $rows->status; ?>');</script>
+                                        </div>
+                                        <div class="col-sm-2">Current Pic</div>
+                                        <div class="col-sm-4">
+                                          <img src="<?php  echo base_url(); ?>assets/users/<?php echo $rows->user_picture; ?>" class="img-responsive" style="width:100px;">
                                         </div>
 
                                     </div>
@@ -69,7 +77,7 @@
                                         <label class="col-sm-2 col-form-label"></label>
                                         <div class="col-sm-2">
                                             <button type="submit" id="save" class="btn btn-primary waves-effect waves-light">
-                                                Submit </button>
+                                                Update </button>
                                         </div>
 
                                     </div>
@@ -95,7 +103,7 @@
                 username: {
                     required: true,
                     remote: {
-                        url: "<?php echo base_url(); ?>users/username_checker",
+                        url: "<?php echo base_url(); ?>users/username_checker_exist/<?php echo $rows->id ?>",
                         type: "post"
                     }
                 },
@@ -105,14 +113,14 @@
                 mobile: {
                     required: true,
                     remote: {
-                        url: "<?php echo base_url(); ?>users/mobile_checker",
+                       url: "<?php echo base_url(); ?>users/mobile_checker_exist/<?php echo $rows->id ?>",
                         type: "post"
                     }
                 },
                 email: {
                     required: true,
                     remote: {
-                        url: "<?php echo base_url(); ?>users/mail_checker",
+                       url: "<?php echo base_url(); ?>users/mail_checker_exist/<?php echo $rows->id ?>",
                         type: "post"
                     }
                 },

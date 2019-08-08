@@ -44,12 +44,43 @@ FROM user_details AS ud LEFT JOIN user_master AS um ON ud.user_id=um.id LEFT JOI
 	    return $fres;
     }
 
-    function getall_users_details1($id)
+    function getall_users_details1($user_id)
     {
-    	$query="SELECT ud.*,um.user_name,um.mobile_no,um.email_id,um.password,um.user_role,um.status FROM user_details AS ud,user_master AS um WHERE um.id=ud.user_id AND ud.id='$id'";
-	  $udresu=$this->db->query($query);
-	  $udres=$udresu->result();
-	  return $udres;
+    	$query="SELECT um.*,ud.*,urm.user_role_name,cm.city_name from user_master as um
+      left join user_details as ud on ud.user_id=um.id
+      left join user_role_master as urm on urm.id=um.user_role
+      left join city_master as cm on cm.id=ud.city_id
+      where um.id='$user_id'";
+  	  $udresu=$this->db->query($query);
+  	  $udres=$udresu->result();
+  	  return $udres;
+    }
+
+
+    function update_user_login_status($uid,$login_status,$user_id){
+       $query="UPDATE user_master  SET status='$login_status',updated_at=NOW(),updated_by='$user_id' WHERE id='$uid'";
+
+      $res=$this->db->query($query);
+      if($res){
+        $data=array("status"=>"success");
+      }else{
+        $data=array("status"=>"error");
+      }
+      return $data;
+    }
+
+
+    function change_password($new_password,$confrim_password,$user_id){
+      $pwd=md5($new_password);
+      $query="UPDATE user_master  SET password='$pwd' WHERE id='$user_id'";
+      $res=$this->db->query($query);
+      if($res){
+        $data=array("status"=>"success");
+      }else{
+        $data=array("status"=>"error");
+      }
+      return $data;
+
     }
 
     function getall_country_list()
@@ -76,7 +107,7 @@ FROM user_details AS ud LEFT JOIN user_master AS um ON ud.user_id=um.id LEFT JOI
       return $res;
     }
 
-    function add_user_details($name,$username,$cell,$email,$dob,$gender,$address1,$occupation,$country,$statename,$city,$zip,$user_pic1,$status,$userrole,$user_id,$display_status)
+    function add_user_details($name,$username,$cell,$email,$address1,$user_pic1,$user_id,$display_status)
     {
     $check_user="SELECT * FROM user_master WHERE user_name='$username'";
     $result=$this->db->query($check_user);
@@ -89,7 +120,7 @@ FROM user_details AS ud LEFT JOIN user_master AS um ON ud.user_id=um.id LEFT JOI
         $uinsert="INSERT INTO user_master(user_name,mobile_no,email_id,user_role,status,created_by,created_at,email_verify,mobile_verify) VALUES ('$username','$cell','$email','4','$display_status','$user_id',NOW(),'Y','Y')";
     	  $uresu=$this->db->query($uinsert);
         $insert_id = $this->db->insert_id();
-        $userdetails="INSERT INTO user_details(user_id,name,birthdate,gender,occupation,address_line1,country_id,state_id,city_id,zip,user_picture,newsletter_status) VALUES ('$insert_id','$name','$dob','$gender','$occupation','$address1','$country','$statename','$city','$zip','$user_pic1','$status')";
+        $userdetails="INSERT INTO user_details(user_id,name,user_picture,address_line1) VALUES ('$insert_id','$name','$user_pic1','$address1')";
         $udetails=$this->db->query($userdetails);
         $data= array("status"=>"success");
   		  return $data;
@@ -104,14 +135,20 @@ FROM user_details AS ud LEFT JOIN user_master AS um ON ud.user_id=um.id LEFT JOI
 
     }
 
-    function update_user_details($uid,$umid,$username,$name,$cell,$email,$dob,$gender,$address1,$occupation,$country,$statename,$city,$zip,$user_pic1,$status,$userrole,$user_id,$display_status)
+    function update_user_details($uid,$username,$name,$cell,$email,$address1,$user_pic,$user_id,$display_status)
     {
-    	  $umupdate="UPDATE user_master SET user_name='$username',mobile_no='$cell',email_id='$email',user_role='$userrole',status='$display_status',updated_by='$user_id',updated_at=NOW() WHERE  id='$umid' ";
+    	   $umupdate="UPDATE user_master SET user_name='$username',mobile_no='$cell',email_id='$email',status='$display_status',updated_by='$user_id',updated_at=NOW() WHERE  id='$uid'";
     	 $umdetails=$this->db->query($umupdate);
-        $usupdate="UPDATE user_details SET name='$name',birthdate='$dob',gender='$gender',occupation='$occupation',address_line1='$address1',address_line2='$address2',address_line3='$address3',country_id='$country',state_id='$statename',city_id='$city',zip='$zip',user_picture='$user_pic1',newsletter_status='$status' WHERE id='$uid' AND user_id='$umid'";
+         $usupdate="UPDATE user_details SET name='$name',address_line1='$address1',user_picture='$user_pic' WHERE  user_id='$uid'";
+
         $usdetails=$this->db->query($usupdate);
-        $data= array("status"=>"success");
-  		  return $data;
+        if($usdetails){
+          $data= array("status"=>"success");
+        }else{
+          $data= array("status"=>"failure");
+        }
+        return $data;
+
 
     }
 

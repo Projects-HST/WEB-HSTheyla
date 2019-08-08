@@ -193,13 +193,19 @@
                     ?>
 
               <li class="list-inline-item dropdown notification-list">
+                
+                <a class="nav-link  arrow-none waves-effect nav-user" data-toggle="tooltip" data-placement="bottom"  title="Change Password" href="<?php echo base_url(); ?>users/update_password/">
+                   Change Password
+                </a>
                 <?php $user_role=$this->session->userdata('user_role');
                 if($user_role==4){
 
                 }else{ ?>
+
                   <a class="nav-link  arrow-none waves-effect nav-user" data-toggle="tooltip" data-placement="bottom" title="Edit Profile" href="<?php echo base_url(); ?>users/edit/<?php echo $id;?>">
                      Profile
                   </a>
+
               <?php  }
                  ?>
 
