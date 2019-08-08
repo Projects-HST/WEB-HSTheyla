@@ -1,19 +1,17 @@
       <div class="page-content-wrapper">
          <div class="container">
-           <h4 class="mt-0 header-title"> Send Email</h4>
+           <h4 class="mt-0 header-title"> View list users</h4>
 
           <form method="post" action="<?php echo base_url();?>emailtemplate/select_users" name="newsletterform" id="newsletterform" style="margin-bottom: 20px;">
          <?php  if(empty($search_view)) { ?>
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-md-6 col-lg-6 col-xl-3">
-                  <!--div class="mini-stat clearfix bg-primary"-->
                   <select class="form-control" name="countryid"   onchange="getstatename(this.value)">
                    <option value="">Select Country Name</option>
                      <?php foreach($countyr_list as $cntry){ ?>
                         <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
                      <?php } ?>
                   </select>
-                  <!--/div-->
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
                   <select class="form-control" name="cityid" id="cityname" >
@@ -23,16 +21,13 @@
               </div>
 
               <div class="col-md-6 col-lg-6 col-xl-3">
-                  <!--div class="mini-stat clearfix bg-primary"-->
                      <button type="submit" class="btn btn-primary waves-effect waves-light">
                       Submit </button>
                       <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                       Reset
                       </button>
-                  <!--/div-->
               </div>
-
-          </div>
+          </div> -->
           <?php }else{  foreach($search_view as $res) { } ?>
             <div class="row">
               <div class="col-md-6 col-lg-6 col-xl-3">
@@ -82,10 +77,10 @@
                   <div class="card m-b-20">
                      <div class="card-block">
 
-                        <label id="user" style="width: 100%;"><input type="checkbox" class="checkbox" id="checkAll" style="display: inline;" />&nbsp; Select Current Page
+                        <label id="user"><input type="checkbox" class="checkbox" id="checkAll" style="display: inline;" />&nbsp; Select Current Page
                          <!--div class="text-center">
                             < Large modal-->
-                             <button type="button" id="sendSelectedBtn" data-toggle="modal" data-target="#addmodel" class="btn btn-primary waves-effect waves-light" >Send To Selected</button>
+                             <button type="button" id="sendSelectedBtn" data-toggle="modal" data-target="#addmodel" class="btn btn-primary waves-effect waves-light" >Send To Selected</button> &nbsp;
 
                              <button type="button" style="float: right;" data-toggle="modal" id="sendAll" data-target="#addmodel" class="btn btn-primary waves-effect waves-light" >Send To All</button>
                         <!--/div-->
@@ -179,7 +174,7 @@
                  <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Send Via</label>
                     <div class="col-sm-8">
-                      <input type="checkbox" name="email" value="email">Email</input>
+                      <!-- <input type="checkbox" name="email" value="email">Email</input> -->
   					          <input type="checkbox" name="sms" value="sms">SMS</input>
                       <input type="checkbox" name="notify" value="notify">Notification</input>
                       <input type="hidden" id="user_id" name="user_id" class="form-control"/>

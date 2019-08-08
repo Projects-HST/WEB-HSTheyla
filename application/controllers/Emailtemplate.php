@@ -122,7 +122,7 @@ class Emailtemplate extends CI_Controller
 
 		    $datas = $this->emailtemplatemodel->update_templates_details($id,$tempname,$tempdetails,$user_id);
 	        $sta=$datas['status'];
-	        
+
 	        //print_r($sta);exit;
 	        if($sta=="success"){
 		       $this->session->set_flashdata('msg','Updated Successfully');
@@ -145,7 +145,7 @@ class Emailtemplate extends CI_Controller
         $datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-		
+
         if($user_role == 1 || $user_role == 4)
 		{
 			$countryid=$this->input->post('countryid');
@@ -158,11 +158,11 @@ class Emailtemplate extends CI_Controller
           $datas['city_list'] = $this->emailtemplatemodel->getall_city_list();
           $datas['search_view'] = $this->emailtemplatemodel->getall_search_users_details($countryid,$cityid,$username);
            //echo'<pre>';print_r($datas['search_view'] );exit;
-        } 
+        }
 			$datas['view'] = $this->emailtemplatemodel->getall_users_details();
 			$datas['email_tem'] = $this->emailtemplatemodel->getall_email_template();
 			$datas['countyr_list'] = $this->citymodel->getall_country_list();
-		
+
 		  $this->load->view('header');
 		  $this->load->view('email_template/send_template',$datas);
 		  $this->load->view('footer');
@@ -210,28 +210,29 @@ public function send_newsletter()
 		$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-        if($user_role == 1 || $user_role == 4)
-		{
-			
+        if($user_role == 1 || $user_role == 4){
 			$user_ids = $this->input->post('user_id');
-	        $email_temp_id=$this->input->post('email_temp_id');
+	    $email_temp_id=$this->input->post('email_temp_id');
 			$email = $this->input->post('email');
 			$sms = $this->input->post('sms');
 			$notify = $this->input->post('notify');
-	        
-			if ($email!=""){
-				$datas1 =$this->mailmodel->send_mail_to_users($user_ids,$email_temp_id);
+
+			if(empty($user_ids)){
+				$this->session->set_flashdata('msg','No User Selected');
+	      redirect('emailtemplate/select_users');
+			}else{
+				if ($sms !=""){
+					$datas2 =$this->mailmodel->send_sms_to_users($user_ids,$email_temp_id);
+				}
+				if ($notify !=""){
+					$datas3 =$this->mailmodel->send_nofify_to_users($user_ids,$email_temp_id);
+				}
+				$this->session->set_flashdata('msg','Send Successfully');
+				redirect('emailtemplate/select_users');
 			}
-			if ($sms !=""){
-				$datas2 =$this->mailmodel->send_sms_to_users($user_ids,$email_temp_id);
-			}
-			
-			if ($notify !=""){
-				$datas3 =$this->mailmodel->send_nofify_to_users($user_ids,$email_temp_id);
-			}
-		
-	        $this->session->set_flashdata('msg','Send Successfully');
-	        redirect('emailtemplate/select_users');
+
+
+
 	    }else{
 	    	redirect('/');
 	    }

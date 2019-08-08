@@ -38,7 +38,7 @@
                             <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
                         <thead>
                         <tr>
-
+                            <th>S.No</th>
                             <th>Event Name</th>
                             <!--th>Event Category</th-->
                             <th>City</th>
@@ -48,7 +48,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach($result as $rows){
+                        <?php $i=1; foreach($result as $rows){
                            $eid=$rows->id;
                            $adv_sts=$rows->adv_status;
                            $etype=$rows->event_type;
@@ -57,7 +57,7 @@
                           if($adv_sts=='Y'){
                              ?>
                         <tr>
-
+                            <td><?php echo $i; ?></td>
                             <td><?php echo $rows->event_name ; ?></td>
                             <!--td><?php //echo $rows->category_name ; ?></td-->
                             <td><?php echo $rows->city_name ; ?></td>
@@ -88,7 +88,7 @@
 
                             </td>
                         </tr>
-                       <?php }  } ?>
+                      <?php $i++; }  }  ?>
                         </tbody>
                     </table>
                         </div>
@@ -97,6 +97,7 @@
                       <table class="table table-striped table-bordered display" cellspacing="0" width="100%">
                         <thead>
                         <tr>
+                          <th>S.No</th>
                            <th>Event Name</th>
                             <!--th>Event Category</th-->
                             <th>City</th>
@@ -106,7 +107,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach($result as $rows){
+                        <?php $i=1; foreach($result as $rows){
                             $eid=$rows->id;
                             $hotspot_sts=$rows->hotspot_status;
                             $etype=$rows->event_type;
@@ -115,6 +116,7 @@
                           if($hotspot_sts=='Y'){
                               ?>
                         <tr>
+                          <td><?php echo $i; ?></td>
                             <td><?php echo $rows->event_name ; ?></td>
                             <!--td><?php //echo $rows->category_name ; ?></td-->
                             <td><?php echo $rows->city_name ; ?></td>
@@ -144,7 +146,7 @@
 
                             </td>
                         </tr>
-                       <?php } }  ?>
+                       <?php $i++; } }  ?>
                         </tbody>
                     </table>
                         </div>
@@ -153,6 +155,7 @@
                       <table class="table table-striped table-bordered display" cellspacing="0" width="100%">
                         <thead>
                         <tr>
+                            <th>S.No</th>
                             <th>Event Name</th>
                             <!--th>Event Category</th-->
                             <th>City</th>
@@ -162,7 +165,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach($result as $rows){
+                        <?php $i=1; foreach($result as $rows){
                            $eid=$rows->id;
                            $adv_sts=$rows->adv_status;
                            $hotspot_sts=$rows->hotspot_status;
@@ -172,6 +175,7 @@
                           {
                            ?>
                         <tr>
+                              <td><?php echo $i; ?></td>
                             <td><?php echo $rows->event_name ; ?></td>
                             <!--td><?php // echo $rows->category_name ; ?></td-->
                             <td><?php echo $rows->city_name ; ?></td>
@@ -198,7 +202,7 @@
                             </a>
                             </td>
                         </tr>
-                       <?php } }  ?>
+                       <?php $i++; } }  ?>
                         </tbody>
                     </table>
                   </div>
@@ -206,6 +210,7 @@
                       <table class="table table-striped table-bordered display" cellspacing="0" width="100%">
                         <thead>
                         <tr>
+                            <th>S.No</th>
                            <th>Event Name</th>
                             <!--th>Event Category</th-->
                             <th>City</th>
@@ -215,13 +220,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach($sts as $rows){
+                        <?php $i=1; foreach($sts as $rows){
                            $eid=$rows->id;
                            $evn_sts=$rows->event_status;
                            //$hotspot_sts=$rows->hotspot_status;
                            //$etype=$rows->event_type;
                            ?>
                         <tr>
+                              <td><?php echo $i; ?></td>
                           <td><?php echo $rows->event_name ; ?></td>
                           <!--td><?php // echo $rows->category_name ; ?></td-->
                           <td><?php echo $rows->city_name ; ?></td>
@@ -249,7 +255,7 @@
                           </a>
                           </td>
                         </tr>
-                       <?php }  ?>
+                       <?php $i++; }  ?>
                         </tbody>
                     </table>
                   </div>

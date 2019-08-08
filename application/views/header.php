@@ -163,11 +163,10 @@
               <?php  } ?>
 
                 <li class="has_sub" id="email">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-envelope" aria-hidden="true"></i>
-<span> Newsletter </span></a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-envelope" aria-hidden="true"></i><span> Notification </span></a>
                     <ul class="list-unstyled">
-                        <li id="newsletter"><a href="<?php echo base_url();?>emailtemplate/home"> Newsletter Template</a></li>
-                        <li id="sendemail"><a href="<?php echo base_url();?>emailtemplate/select_users"> Send Newsletter </a></li>
+                        <li id="newsletter"><a href="<?php echo base_url();?>emailtemplate/home"> Notification Template</a></li>
+                        <li id="sendemail"><a href="<?php echo base_url();?>emailtemplate/select_users"> Send Notification </a></li>
                     </ul>
                 </li>
 
@@ -193,7 +192,7 @@
                     ?>
 
               <li class="list-inline-item dropdown notification-list">
-                
+
                 <a class="nav-link  arrow-none waves-effect nav-user" data-toggle="tooltip" data-placement="bottom"  title="Change Password" href="<?php echo base_url(); ?>users/update_password/">
                    Change Password
                 </a>

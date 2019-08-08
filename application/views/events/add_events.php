@@ -26,16 +26,16 @@
                        <label for="country" class="col-sm-2 col-form-label">Select Country</label>
                        <div class="col-sm-4">
                          <select class="form-control" name="country" onchange="getcityname(this.value)">
-                         <option value="">Select Country</option>
+                           <option value="">Select Country</option>
                                 <?php foreach($country_list as $cntry){ ?>
                                    <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
                                 <?php } ?>
                            </select>
                        </div>
-                       <label for="city" class="col-sm-2 col-form-label">Select City</label>
+                       <label for="city" class="col-sm-2 col-form-label">Select Location</label>
                        <div class="col-sm-4">
                           <select class="form-control" name="city" id="ctname">
-                                     <option value="">Select City</option>
+                                     <option value="">Select Location</option>
                            </select>
                            <div id="cmsg"></div>
                        </div>
@@ -103,7 +103,7 @@
                             <div class="col-sm-4">
                                <div class="input-group">
                                 <input type="text" class="form-control datepicker" name="end_date" id="datepicker" value="<?php echo date("d-m-Y"); ?>">
-                              
+
 
                             </div>
                             </div>
@@ -183,33 +183,28 @@
 
 
                         <div class="form-group row">
-<!--
-                            <label for="Colour" class="col-sm-2 col-form-label">Colour</label>
+
+                            <label for="Colour" class="col-sm-2 col-form-label">Secondary Contact Person</label>
                             <div class="col-sm-4">
-                                input class="form-control" type="text" name="colour_scheme" value=""
-                                 <select class="form-control" name="colour_scheme">
-                                    <option value="">Select Colour</option>
-                                    <option value="green">Green</option>
-                                    <option value="blue">Blue</option>
-                                    <option value="red">Red</option>
-                                </select>
+                              <input class="form-control" type="text"  name="sec_contact_person" value="" id="sec_contact_person">
                             </div>
--->
-                            <label class="col-sm-2 col-form-label">Event Banner <span style="color:#F00;">(985*550px)</span></label>
+
+                            <label class="col-sm-2 col-form-label">Event Banner
+                              <span style="color:#F00;">(985*550px)</span></label>
                               <div class="col-sm-4">
                                  <input type="file" name="eventbanner" id="file_upload" class="form-control" accept="image/*" >
                                   <div id="preview" style="color: red;"></div>
                               </div>
-							    <label class="col-sm-2 col-form-label">Featured Event</label>
+							                 <!-- <label class="col-sm-2 col-form-label">Featured Event</label>
                               <div class="col-sm-4">
                                  <input type="radio" name="featured_sts" value="Y"> Yes
                                   <input type="radio" name="featured_sts" value="N" checked> No
-                              </div>
+                              </div> -->
 
                         </div>
 
                         <div class="form-group row">
-                            <label for="Status" class="col-sm-2 col-form-label">Event Status</label>
+                            <label for="Status" class="col-sm-2 col-form-label">Display Status</label>
                             <div class="col-sm-4">
                                <select class="form-control"  name="event_status">
                                     <option value="">Select Status</option>
@@ -319,7 +314,7 @@
          end_time:{required:true },
          eadv_status:{required:true},
          hotspot_sts:{required:true},
-         pcontact_cell:{required:true },
+         pcontact_cell:{required:true,digits:true,maxlength:12,minlength:12 },
          contact_person:{required:true },
          email:{required:true },
          event_status:{required:true },
@@ -343,7 +338,10 @@
         end_time:"Select End Time",
         eadv_status:"Select Advertisement Status ",
         hotspot_sts:"Select Hotspot Status ",
-        pcontact_cell:"Enter Primary Contact Number",
+        pcontact_cell:{
+          required:"Enter Primary Contact Number",
+          digits:"Only numbers",
+        },
         contact_person:"Enter Name",
         email:"Enter Email",
         event_status:"Select Status",

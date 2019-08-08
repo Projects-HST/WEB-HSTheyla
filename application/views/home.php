@@ -6,7 +6,7 @@
 
           <?php  }else{ ?>
             <div class="col-md-6 col-lg-6 col-xl-3">
-               <a href="<?php echo base_url();?>events/view_events" class="test" data-toggle="tooltip" title="View Events Details">
+               <!-- <a href="<?php echo base_url();?>events/view_events" class="test" data-toggle="tooltip" title="View Events Details"> -->
                 <div class="mini-stat clearfix bg-primary">
                     <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/admin.png" /></span>
                     <div class="mini-stat-info text-right text-white">
@@ -15,15 +15,16 @@
                         } ?></span>
                         <b style="font-size:14px;">Admin</b>
                     </div>
-                </div></a>
+                </div>
+              <!-- </a> -->
             </div>
           <?php  } ?>
               <div class="col-md-6 col-lg-6 col-xl-3">
                 <?php  $user_role=$this->session->userdata('user_role');
                 if($user_role==4){ ?>
-                    <a href="#" class="test" data-toggle="tooltip" title="View Users Details">
+                    <!-- <a href="#" class="test" data-toggle="tooltip" title="View Users Details"> -->
               <?php  }else{ ?>
-                    <a href="<?php echo base_url();?>users/view" class="test" data-toggle="tooltip" title="View Users Details">
+                    <!-- <a href="<?php echo base_url();?>users/view" class="test" data-toggle="tooltip" title="View Users Details"> -->
               <?php  } ?>
 
                   <div class="mini-stat clearfix bg-primary">
@@ -35,13 +36,13 @@
                           <b style="font-size:14px;">Users</b>
                       </div>
                   </div>
-                </a>
+                <!-- </a> -->
 
               </div>
 
 
               <div class="col-md-6 col-lg-6 col-xl-3">
-                 <a href="#" class="test" data-toggle="tooltip" title="View Events Details">
+                 <!-- <a href="#" class="test" data-toggle="tooltip" title="View Events Details"> -->
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/organiser.png" /></span>
                       <div class="mini-stat-info text-right text-white">
@@ -50,10 +51,11 @@
                           } ?></span>
                           <b style="font-size:14px;">Orgainser</b>
                       </div>
-                  </div></a>
+                  </div>
+                <!-- </a> -->
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
-                 <a href="#" class="test" data-toggle="tooltip" title="View Events Details">
+                 <!-- <a href="#" class="test" data-toggle="tooltip" title="View Events Details"> -->
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/category.png" /></span>
                       <div class="mini-stat-info text-right text-white">
@@ -62,10 +64,11 @@
                           } ?></span>
                           <b style="font-size:14px;">Category</b>
                       </div>
-                  </div></a>
+                  </div>
+                <!-- </a> -->
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
-                 <a href="#" class="test" data-toggle="tooltip" title="View Events Details">
+                 <!-- <a href="#" class="test" data-toggle="tooltip" title="View Events Details"> -->
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/total_events.png" /></span>
                       <div class="mini-stat-info text-right text-white">
@@ -74,10 +77,11 @@
                           } ?></span>
                           <b style="font-size:14px;">Total Events</b>
                       </div>
-                  </div></a>
+                  </div>
+                <!-- </a> -->
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
-                 <a href="#" class="test" data-toggle="tooltip" title="View Events Details">
+                 <!-- <a href="#" class="test" data-toggle="tooltip" title="View Events Details"> -->
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/active_events.png" /></span>
                       <div class="mini-stat-info text-right text-white">
@@ -86,11 +90,12 @@
                           } ?></span>
                           <b style="font-size:14px;">Active Events</b>
                       </div>
-                  </div></a>
+                  </div>
+                <!-- </a> -->
               </div>
 
               <div class="col-md-6 col-lg-6 col-xl-3">
-                 <a href="#" class="test" data-toggle="tooltip" title="View Events Details">
+                 <!-- <a href="#" class="test" data-toggle="tooltip" title="View Events Details"> -->
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/hotspot.png" /></span>
                       <div class="mini-stat-info text-right text-white">
@@ -99,10 +104,11 @@
                           } ?></span>
                           <b style="font-size:14px;">Hotspot </b>
                       </div>
-                  </div></a>
+                  </div>
+                <!-- </a> -->
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
-                 <a href="#" class="test" data-toggle="tooltip" title="View Events Details">
+                 <!-- <a href="#" class="test" data-toggle="tooltip" title="View Events Details"> -->
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/general.png" /></span>
                       <div class="mini-stat-info text-right text-white">
@@ -111,10 +117,11 @@
                           } ?></span>
                           <b style="font-size:14px;">General </b>
                       </div>
-                  </div></a>
+                  </div>
+                <!-- </a> -->
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
-                 <a href="#" class="test" data-toggle="tooltip" title="View Events Details">
+                 <!-- <a href="#" class="test" data-toggle="tooltip" title="View Events Details"> -->
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/paid_event.png" /></span>
                       <div class="mini-stat-info text-right text-white">
@@ -123,10 +130,11 @@
                           } ?></span>
                           <b style="font-size:14px;">Paid Events </b>
                       </div>
-                  </div></a>
+                  </div>
+                <!-- </a> -->
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
-                 <a href="#" class="test" data-toggle="tooltip" title="View Events Details">
+                 <!-- <a href="#" class="test" data-toggle="tooltip" title="View Events Details"> -->
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/free_event.png" /></span>
                       <div class="mini-stat-info text-right text-white">
@@ -135,10 +143,11 @@
                           } ?></span>
                           <b style="font-size:14px;">Free Events</b>
                       </div>
-                  </div></a>
+                  </div>
+                <!-- </a> -->
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
-                 <a href="#" class="test" data-toggle="tooltip" title="View Events Details">
+                 <!-- <a href="#" class="test" data-toggle="tooltip" title="View Events Details"> -->
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/ad_event.png" /></span>
                       <div class="mini-stat-info text-right text-white">
@@ -147,22 +156,24 @@
                           } ?></span>
                           <b style="font-size:14px;">Ad Events</b>
                       </div>
-                  </div></a>
+                  </div>
+                <!-- </a> -->
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
                   <div class="mini-stat clearfix bg-primary">
-                     <a href="<?php echo base_url();?>events/organizer_events" class="test" data-toggle="tooltip" title="View Organizer Events Details">
+                     <!-- <a href="<?php echo base_url();?>events/organizer_events" class="test" data-toggle="tooltip" title="View Organizer Events Details"> -->
                       <span class="mini-stat-icon"><img style="padding-bottom:10px; padding-right:2px;" src="<?php echo base_url();?>assets/icons/dashboard/organiser_event.png" /></span>
                       <div class="mini-stat-info text-right text-white">
                           <span class="counter"><?php foreach ($org_events as $res) {
                             echo $res->org;
                           } ?></span>
                         <b style="font-size:14px;"> Organizer Events </b>
-                      </div></a>
+                      </div>
+                    <!-- </a> -->
                   </div>
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
-                 <a href="#" class="test" data-toggle="tooltip" title="View Booking Details">
+                 <!-- <a href="#" class="test" data-toggle="tooltip" title="View Booking Details"> -->
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom:10px; padding-right:2px;" src="<?php echo base_url();?>assets/icons/dashboard/booking.png" /></span>
                       <div class="mini-stat-info text-right text-white">
@@ -171,11 +182,11 @@
                           } ?></span>
                           <b style="font-size:14px;">Booking</b>
                       </div>
-                  </div></a>
+                  </div>
+                <!-- </a> -->
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
-                 <a href="#" class="test" data-toggle="tooltip" title="View
-                  Pending Reviews Details">
+                 <!-- <a href="#" class="test" data-toggle="tooltip" title="View                  Pending Reviews Details"> -->
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom:10px; padding-right:2px;" src="<?php echo base_url();?>assets/icons/dashboard/Pending.png" /></span>
                       <div class="mini-stat-info text-right text-white">
@@ -184,12 +195,12 @@
                           } ?></span>
                          <b style="font-size:14px;"> Pending Reviews </b>
                       </div>
-                  </div></a>
+                  </div>
+                <!-- </a> -->
               </div>
               <?php   $user_role=$this->session->userdata('user_role');if($user_role==1){ ?>
               <div class="col-md-6 col-lg-6 col-xl-3">
-                 <a href="#" class="test" data-toggle="tooltip" title="View
-                  Organiser Request">
+                 <!-- <a href="#" class="test" data-toggle="tooltip" title="View                  Organiser Request"> -->
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom:10px; padding-right:2px;" src="<?php echo base_url();?>assets/icons/dashboard/organiser_request.png" /></span>
                       <div class="mini-stat-info text-right text-white">
@@ -198,13 +209,14 @@
                           } ?></span>
                          <b style="font-size:14px;"> Organiser  Request </b>
                       </div>
-                  </div></a>
+                  </div>
+                <!-- </a> -->
               </div>
             <?php }else{
 
             } ?>
             <div class="col-md-6 col-lg-6 col-xl-3">
-               <a href="#" class="test" data-toggle="tooltip" title="View Booking Details">
+               <!-- <a href="#" class="test" data-toggle="tooltip" title="View Booking Details"> -->
                 <div class="mini-stat clearfix bg-primary">
                     <span class="mini-stat-icon"><img style="padding-bottom:10px; padding-right:2px;" src="<?php echo base_url();?>assets/icons/dashboard/subscribed_user.png" /></span>
                     <div class="mini-stat-info text-right text-white">
@@ -213,7 +225,8 @@
                         } ?></span>
                         <b style="font-size:14px;">Subscribed User</b>
                     </div>
-                </div></a>
+                </div>
+              <!-- </a> -->
             </div>
 
 

@@ -209,16 +209,9 @@
                                <img src="<?php echo base_url(); ?>assets/events/banner/<?php echo $rows->event_banner; ?>" class="img-circle">
                               </div>
 
-                            <label class="col-sm-2 col-form-label">Featured Event</label>
+                            <label class="col-sm-2 col-form-label">Secondary  Contact Person</label>
                               <div class="col-sm-4">
-                              <?php $sfeatured = $rows->featured_status;
-								echo '<input type="radio" name="featured_sts" value="Y"';
-								if ( $sfeatured =="Y") { echo "checked"; }
-								echo '> Yes ';
-								echo '<input type="radio" name="featured_sts" value="N"';
-								if ( $sfeatured =="N") { echo "checked"; }
-								echo '> No';
-							  ?>
+                                <input class="form-control" type="text" value="<?php echo $rows->sec_contact_person; ?>" required="" name="sec_contact_person" value="" >
                               </div>
                         </div>
 

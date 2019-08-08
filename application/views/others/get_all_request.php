@@ -21,11 +21,11 @@
                         <td><?php echo $value->name;?> ( <?php echo $value->email_id; ?> )</td>
                         <!-- <td><?php echo $value->message;?></td> -->
                           <td><?php if($value->req_status=="Pending"){ ?>
-                            <a href="" class="btn btn-primary waves-effect waves-light">Pending</a>
+                            <p class="btn btn-danger waves-effect waves-light">Pending</p>
                           <?php }else if($value->req_status=="Approved"){ ?>
-                              <a href="" class="btn btn-primary waves-effect waves-light">Approved</a>
+                              <p class="btn btn-success waves-effect waves-light">Approved</p>
                         <?php  }else{ ?>
-                            <a href="" class="btn btn-primary waves-effect waves-light">Rejected</a>
+                            <p class="btn btn-primary waves-effect waves-light">Rejected</p>
                       <?php  }?></td>
 
                        <td><a href="<?php echo base_url(); ?>dashboard/update_req_status/<?php echo $value->rq_id*9876; ?>"><img title="View Request" src="<?php echo base_url(); ?>assets/icons/view.png"></a>  </td>
