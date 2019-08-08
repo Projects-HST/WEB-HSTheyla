@@ -387,10 +387,10 @@ class Apimainmodel extends CI_Model {
 					$update_gcm = $this->db->query($sQuery);
 				}
 
-				//$Title = "Testing Title";
-				//$Message = "Testing Message";
-				//$mobiletype = "1";
-				//$this->sendNotification($gcm_key,$Title,$Message,$mobiletype);
+				$Title = "Testing Title";
+				$Message = "Testing Message";
+				$mobiletype = "1";
+				$this->sendNotification($gcm_key,$Title,$Message,$mobiletype);
 					
     				$response = array("status" => "Success", "msg" => "Login Successfully", "userData" => $userData);
     				return $response;
@@ -2689,6 +2689,8 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 		return $response;
 	}
 //#################### Report Abuse End ###############//
+
+
 
 
 }
