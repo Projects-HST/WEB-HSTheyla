@@ -2117,6 +2117,44 @@ class Apimain extends CI_Controller {
 
 //-----------------------------------------------//
 
+
+//------------------User Feedback-----------------------------//
+
+	public function user_feedback()
+	{
+		//$_POST = json_decode(file_get_contents("php://input"), TRUE);
+
+		if(!$this->checkMethod())
+		{
+			return FALSE;
+		}
+
+		if($_POST == FALSE)
+		{
+			$res = array();
+			$res["opn"] = "Input error";
+			$res["scode"] = 204;
+			$res["message"] = "Input error";
+
+			echo json_encode($res);
+			return;
+		}
+		
+		$name = "";
+		$email = "";
+		$comments = "";
+		
+		$name = $this->input->post("name");
+		$email = $this->input->post("email");
+		$comments = $this->input->post("comments");
+		
+		$data['result']=$this->apimainmodel->User_Feedback($name,$email,$comments);
+		$response = $data['result'];
+		echo json_encode($response);
+	}
+
+//-----------------------------------------------//
+
 /*//-----------------------------------------------//
 	public function notification()
 	{
