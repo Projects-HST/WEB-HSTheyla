@@ -522,7 +522,7 @@ Class Eventlistmodel extends CI_Model
 				$seatsupdate = $this->db->query($update_seats);
 
 				$_SESSION['booking_start'] = time(); // taking now logged in time
-				$_SESSION['booking_expire'] = $_SESSION['booking_start'] + (900) ; // ending a session in 10mins
+				$_SESSION['booking_expire'] = $_SESSION['booking_start'] + (300) ; // ending a session in 10mins
 
 				$session_seats = "INSERT INTO booking_session (session_expiry,order_id,plan_time_id,number_of_seats,status) VALUES ('". $_SESSION['booking_expire'] . "','". $order_id . "','". $plan_time_id . "','". $number_of_seats . "','Start')";
 				$session_insert = $this->db->query($session_seats);
