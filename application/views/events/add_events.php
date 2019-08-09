@@ -161,7 +161,7 @@
                         <div class="form-group row">
                             <label for="primarycell" class="col-sm-2 col-form-label">Contact Phone</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text"  name="pcontact_cell" maxlength="10" value="">
+                                <input class="form-control" type="text"  name="pcontact_cell"  value="">
                             </div>
                             <label for="seccell" class="col-sm-2 col-form-label">Sec. Contact Phone</label>
                             <div class="col-sm-4">
