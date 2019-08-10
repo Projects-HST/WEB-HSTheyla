@@ -1,12 +1,12 @@
 <?php
 Class Emailtemplatemodel extends CI_Model
-{ 
+{
 
    public function __construct()
    {
       parent::__construct();
    }
-  
+
 //--------------------------------Emailtemplatemodel Query-------------------------------------
 
    function getall_email_template_details()
@@ -16,7 +16,7 @@ Class Emailtemplatemodel extends CI_Model
     $res=$resu->result();
     return $res;
    }
-   
+
    function add_templates_details($tempname,$tempdetails,$user_id)
    {
    	 $check_tmp="SELECT * FROM email_template WHERE template_name='$tempname' AND template_content='$tempdetails'";
@@ -78,24 +78,20 @@ Class Emailtemplatemodel extends CI_Model
    function getall_users_details()
    {
    	//$sel="SELECT id,name,user_name,mobile_no,email_id FROM user_master WHERE status='Y'";
-	$sel="SELECT ud.user_id,ud.name,ud.country_id,ud.city_id,um.id,um.email_id,um.mobile_no FROM user_details AS ud, user_master AS um WHERE um.id=ud.user_id";
+	$sel="SELECT ud.user_id,ud.name,ud.country_id,ud.city_id,um.id,um.email_id,um.mobile_no FROM user_details AS ud, user_master AS um WHERE um.id=ud.user_id and ud.newsletter_status='Y'";
    	$sel1=$this->db->query($sel);
     $sel2=$sel1->result();
     return $sel2;
    }
-   
-   function getall_search_users_details($countryid,$cityid,$username)
-   { if(empty($username)){
-        $search="SELECT ud.user_id,ud.name,ud.country_id,ud.city_id,um.id,um.email_id,um.mobile_no,ci.city_name FROM user_details AS ud, user_master AS um,city_master AS ci WHERE um.id=ud.user_id AND ud.country_id='$countryid' AND ud.city_id='$cityid' AND ud.city_id=ci.id";
-        $search1=$this->db->query($search);
-        $search2=$search1->result();
-	 return $search2;
-	}else{
-		 $search="SELECT ud.user_id,ud.name,ud.country_id,ud.city_id,um.id,um.user_name,um.email_id,um.mobile_no,ci.city_name FROM user_details AS ud, user_master AS um,city_master AS ci WHERE um.id=ud.user_id AND ud.country_id='$countryid' AND ud.city_id='$cityid' AND um.user_name='$username' AND ud.city_id=ci.id";
-	     $search1=$this->db->query($search);
-	     $search2=$search1->result();
+
+   function getall_search_users_details($cityid)
+   {
+
+		 $search="SELECT ud.user_id,ud.name,ud.country_id,ud.city_id,um.id,um.user_name,um.email_id,um.mobile_no,ci.city_name FROM user_details AS ud, user_master AS um,city_master AS ci WHERE um.id=ud.user_id AND  ud.city_id='$cityid'  AND ud.city_id=ci.id and um.status='Y'";
+     $search1=$this->db->query($search);
+     $search2=$search1->result();
 		 return $search2;
-	}
+
    }
 
    function getall_email_template()
