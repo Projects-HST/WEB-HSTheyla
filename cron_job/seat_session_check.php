@@ -3,7 +3,7 @@
 $con = @mysql_connect("localhost","root","O+E7vVgBr#{}");
 
 if ($con) {
-		mysql_select_db('heylaapp_app');
+		mysql_select_db('heylaapp_apptest');
     } else {
 		die("Connection failed");
 }
