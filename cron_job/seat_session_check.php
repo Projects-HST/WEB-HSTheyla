@@ -10,7 +10,7 @@ if ($con) {
 
         $now = time(); // checking the time now when home page starts
 
-        $sQuery = "SELECT * FROM booking_session";
+        $sQuery = "SELECT * FROM booking_session WHERE status = 'Start'";
         $objRs = mysql_query($sQuery);
         if (mysql_num_rows($objRs)> 0)
         	{
