@@ -60,7 +60,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 	<form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>home/updateeventsdetails" name="eventform" id="eventform" onSubmit='return check();'>
 		<div class="col-md-12 form_box">
 			       <div class="form-group">
-			            
+
 			             <label for="city" class="col-sm-2 col-form-label">Select Location</label>
 			            <div class="col-sm-4">
 		                <select class="form-control" name="city"  id="ctname">
@@ -70,7 +70,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
   	               <?php } ?>
 				    </select><script language="JavaScript">document.eventform.city.value="<?php echo $rows->event_city; ?>";</script>
 			            </div>
-						
+
 						<label for="Category" class="col-sm-2 col-form-label">Select Category</label>
 			<div class="col-sm-4">
 					<select class="form-control" name="category">
@@ -85,12 +85,12 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 		</div>
 	<div class="col-md-12 form_box">
 	<div class="form-group">
-			
+
 			<label for="Name" class="col-sm-2 col-form-label">Event Name</label>
 			<div class="col-sm-4">
 				  <input class="form-control" type="text"  name="event_name" value="<?php echo $rows->event_name; ?>">
 			</div>
-			
+
 			<label for="Venue" class="col-sm-2 col-form-label">Venue</label>
 				<div class="col-sm-4">
 					  <input class="form-control" type="text"  name="venue"  value="<?php echo $rows->event_venue; ?>">
@@ -100,13 +100,12 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 
 	<div class="col-md-12 form_box">
 		<div class="form-group">
-				
+
 				 <label for="Address" class="col-sm-2 col-form-label">Address</label>
 				<div class="col-sm-4">
-			<textarea id="textarea" name="address" required="" class="form-control" maxlength="240" rows="3" placeholder="">
-            <?php echo trim($rows->event_address); ?></textarea>
+			<textarea id="textarea" name="address" required="" class="form-control" maxlength="240" rows="3" placeholder=""><?php echo trim($rows->event_address); ?></textarea>
 				</div>
-				
+
 				<label for="Description" class="col-sm-2 col-form-label">Description</label>
 				<div class="col-sm-4">
           <textarea  id="textarea" required="" name="description" class="form-control" maxlength="30000" rows="3" placeholder=""><?php echo $rows->description; ?></textarea>
@@ -136,19 +135,16 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 <div class="form-group">
 <label for="sdate" class="col-sm-2 col-form-label">Start Date</label>
 <div class="col-sm-4">
-<div class="input-group">
+
 <input type="text" class="form-control" value="<?php $date=date_create($rows->start_date);echo date_format($date,"d-m-Y");  ?>" name="start_date" id="datepicker-autoclose">
-<span class="input-group-addon bg-custom b-0"><i class="far fa-calendar-plus"></i></span>
-</div>
+
 </div>
 
 <label for="edate" class="col-sm-2 col-form-label">End Date</label>
 <div class="col-sm-4">
-<div class="input-group">
-<input type="text" class="form-control" required="" value="<?php $date=date_create($rows->end_date);echo date_format($date,"d-m-Y");  ?>" name="end_date" id="datepicker">
-<span class="input-group-addon bg-custom b-0"><i class="far fa-calendar-plus"></i></span>
 
-</div>
+<input type="text" class="form-control" required="" value="<?php $date=date_create($rows->end_date);echo date_format($date,"d-m-Y");  ?>" name="end_date" id="datepicker">
+
 </div>
 </div>
 </div>
@@ -173,16 +169,16 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 									 <div class="col-sm-4">
                      <input class="form-control" type="text" required="" value="<?php echo $rows->contact_person; ?>" name="contact_person" value="">
 					</div>
-					
+
 					<label for="Person" class="col-sm-2 col-form-label">Secondary Contact Person</label>
 									 <div class="col-sm-4">
                      <input class="form-control" type="text" required="" value="<?php echo $rows->sec_contact_person; ?>" name="sec_contact_person" value="">
 					</div>
-					
-				 
+
+
 		</div>
 	</div>
-    
+
 
 
 					<div class="col-md-12 form_box">
@@ -201,14 +197,14 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 					</div>
 						<div class="col-md-12 form_box">
 							<div class="form-group">
-									 
+
 
 
 									 <label for="Email" class="col-sm-2 col-form-label">Contact Email</label>
 									 <div class="col-sm-4">
 										<input class="form-control" type="text" value="<?php echo $rows->contact_email; ?>" required="" name="email" value="" >
 									 </div>
-									 
+
 									 <label for="ecost" class="col-sm-2 col-form-label">Event Type</label>
 				<div class="col-sm-4">
 						 <select class="form-control"  name="eventcost">
@@ -320,8 +316,8 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 
 $(document).ready(function () {
 
-	$('#datepicker').datetimepicker({format: 'DD-MM-YYYY'});
-	$('#datepicker-autoclose').datetimepicker({format: 'DD-MM-YYYY'});
+  $('#datepicker').datetimepicker({format: 'DD-MM-YYYY',minDate : moment()});
+  $('#datepicker-autoclose').datetimepicker({format: 'DD-MM-YYYY',minDate: moment()});
 
 	$('#hotspot_sts').on('change', function() {
 	var strdisplay = $(this).val();

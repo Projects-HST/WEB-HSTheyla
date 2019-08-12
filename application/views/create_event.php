@@ -93,7 +93,7 @@
 				</div>
 				 <label for="Description" class="col-sm-2 col-form-label">Description</label>
             <div class="col-sm-4">
-                <textarea  id="textarea"  name="description" class="form-control" maxlength="30000" rows="3" placeholder=""> </textarea>
+                <textarea  id="textarea"  name="description" class="form-control" maxlength="30000" rows="3" placeholder=""></textarea>
             </div>
 		</div>
 	</div>
