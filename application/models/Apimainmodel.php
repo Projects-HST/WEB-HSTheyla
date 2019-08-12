@@ -1470,7 +1470,9 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 				{
 					$sQuery = "INSERT INTO user_wish_list (user_id ,event_id) VALUES ('". $user_id . "','". $event_id . "')";
 					$update_gcm = $this->db->query($sQuery);
-					$response = array("status" => "success", "msg" => "Wishlist Added");
+					$wishlist_id = $this->db->insert_id();
+					
+					$response = array("status" => "success", "msg" => "Wishlist Added","wishlist_id"=>$wishlist_id );
 				} else {
 				    $response = array("status" => "exist", "msg" => "Already Added");
 				}
