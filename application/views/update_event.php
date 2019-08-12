@@ -104,7 +104,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 				 <label for="Address" class="col-sm-2 col-form-label">Address</label>
 				<div class="col-sm-4">
 			<textarea id="textarea" name="address" required="" class="form-control" maxlength="240" rows="3" placeholder="">
-            <?php echo $rows->event_address; ?></textarea>
+            <?php echo trim($rows->event_address); ?></textarea>
 				</div>
 				
 				<label for="Description" class="col-sm-2 col-form-label">Description</label>
@@ -247,17 +247,16 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 						<div class="col-md-12 form_box">
 							<div class="form-group">
 
-									<label for="Colour" class="col-sm-2 col-form-label">Colour</label>
+									<!--<label for="Colour" class="col-sm-2 col-form-label">Colour</label>
 									<div class="col-sm-4">
-											<!--input class="form-control" type="text" name="colour_scheme" value=""-->
 											 <select class="form-control" name="colour_scheme">
 													<option value="">Select Colour</option>
 													<option value="green">Green</option>
 													<option value="blue">Blue</option>
 													<option value="red">Red</option>
 											</select>
-                      <script language="JavaScript">document.eventform.colour_scheme.value="<?php echo $rows->event_colour_scheme; ?>";</script>
-									</div>
+									<script language="JavaScript">document.eventform.colour_scheme.value="<?php //echo $rows->event_colour_scheme; ?>";</script>
+									</div>-->
 
 									 <label class="col-sm-2 col-form-label">Event Banner <span style="color:#F00;">(985*550px)</span></label>
 										<div class="col-sm-4">

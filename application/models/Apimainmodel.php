@@ -1296,6 +1296,17 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	}
 //#################### Update User City End ####################//
 
+//#################### Update User City ####################//
+	public function Update_notification($user_id,$status)
+	{
+		$updQuery = "UPDATE user_details SET newsletter_status = '$status' WHERE user_id  ='$user_id'";
+		$updResult = $this->db->query($updQuery);
+		
+		$response = array("status" => "success", "msg" => "Notification Updated");
+		return $response;
+	}
+//#################### Update User City End ####################//
+
 
 
 //#################### Add User Category ####################//
@@ -1459,7 +1470,9 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 				{
 					$sQuery = "INSERT INTO user_wish_list (user_id ,event_id) VALUES ('". $user_id . "','". $event_id . "')";
 					$update_gcm = $this->db->query($sQuery);
-					$response = array("status" => "success", "msg" => "Wishlist Added");
+					$wishlist_id = $this->db->insert_id();
+					
+					$response = array("status" => "success", "msg" => "Wishlist Added","wishlist_id"=>$wishlist_id );
 				} else {
 				    $response = array("status" => "exist", "msg" => "Already Added");
 				}

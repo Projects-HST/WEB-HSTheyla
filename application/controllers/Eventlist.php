@@ -289,6 +289,14 @@ class Eventlist extends CI_Controller
 		echo "OK";
     }
 
+	public function clear_all()
+    {
+		delete_cookie("search_values");
+		delete_cookie("city_values");
+		
+		echo "Success";
+    }
+		
     public function webflow()
     {
       $this->load->view('front_header');

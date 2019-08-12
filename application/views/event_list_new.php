@@ -183,7 +183,7 @@ body{background-color: #f7f8fa;}
           </div>
 
       </div>
-        <p><a href="" class="clear_btn">Clear all</a></p>
+        <p><a href="" onclick="clear_all()" class="clear_btn">Clear all</a></p>
       </div>
     </div>
 
@@ -1084,6 +1084,18 @@ function editwishlist(user_id,event_id)
 	});
 }
 
-
-
+function clear_all()
+{
+	 $.get("<?php echo base_url(); ?>eventlist/clear_all", function(data, status){
+		 //alert("Data: " + data + "\nStatus: " + status);
+		if (data =='Success'){
+			$("#search_term").val("");
+			$('#ctyname').prop('selectedIndex',0);
+			$('#category').prop('selectedIndex',0);
+			$('#event_type').prop('selectedIndex',0);
+		}
+		
+	  });
+	  alert("Clear all search?");
+}
 </script>
