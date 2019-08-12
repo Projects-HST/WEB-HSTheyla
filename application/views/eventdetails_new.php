@@ -26,6 +26,7 @@
     color: #2b2424;
     text-decoration: none;
     font-size: 16px;
+		cursor: pointer;
 }
 .event_book{
 	margin-top: 50px;
@@ -336,7 +337,7 @@ foreach($event_details as $res){
        </div>
        <div class="form-group row">
          <div class="col-lg-12">
-           <textarea type="text" name="message" id="message" placeholder="Message" class="form-control"><?php echo $comments; ?></textarea>
+           <textarea type="text" name="message" id="message"  class="form-control" maxlength="240" placeholder="Max 240 Characters"><?php echo $comments; ?></textarea>
          </div>
        </div>
        <div class="form-group row">
@@ -366,7 +367,7 @@ foreach($event_details as $res){
        </div>
        <div class="form-group row">
          <div class="col-lg-12">
-           <textarea type="text" name="message" id="message" placeholder="Message" class="form-control"></textarea>
+           <textarea type="text" name="message" id="message" maxlength="240" placeholder="Max 240 Characters" class="form-control"></textarea>
          </div>
        </div>
        <div class="form-group row">

@@ -6,7 +6,7 @@
                 <img src="<?php echo base_url(); ?>assets/front/images/email.png" class="img-fluid">
               <form action="" method="post" id="resetform">
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Enter the Registered Email to Reset. </label>
+                  <label for="exampleInputPassword1">Enter the Registered Email to Reset </label>
                   <input type="email" class="form-control" id="email" name="email" placeholder="Registered Email Id.">
                 </div>
                 <div class="form-group">

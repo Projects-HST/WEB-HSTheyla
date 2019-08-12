@@ -34,6 +34,7 @@
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
+.ui-datepicker-trigger{cursor:pointer}
 
 </style>
 
@@ -45,8 +46,8 @@
 <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>home/insertevents" name="eventform" id="eventform" onSubmit='return check();'>
   <div class="col-md-12 form_box">
   	       <div class="form-group">
-  	            
-				
+
+
   	             <label for="city" class="col-sm-2 col-form-label">Select Location</label>
   	            <div class="col-sm-4">
   	               <select class="form-control" name="city"  id="ctname">
@@ -56,7 +57,7 @@
   	               <?php } ?>
 				    </select>
   	            </div>
-				
+
 				<label for="Category" class="col-sm-2 col-form-label">Select Category</label>
 			<div class="col-sm-4">
 					<select class="form-control" name="category">
@@ -66,22 +67,22 @@
 							 <?php } ?>
 					</select>
 			</div>
-				
+
   	        </div>
   </div>
 <div class="col-md-12 form_box">
 	<div class="form-group">
-			
+
 			<label for="Name" class="col-sm-2 col-form-label">Event Name</label>
 			<div class="col-sm-4">
 					<input class="form-control" type="text"  name="event_name">
 			</div>
-	
+
 	<label for="Venue" class="col-sm-2 col-form-label">Venue</label>
 				<div class="col-sm-4">
 						<input class="form-control" type="text"  name="venue"  >
 				</div>
-	</div> 
+	</div>
 </div>
 
 	<div class="col-md-12 form_box">
@@ -120,19 +121,16 @@
 			<div class="form-group">
 					 <label for="sdate" class="col-sm-2 col-form-label">Start Date</label>
 					 <div class="col-sm-4">
-						 <div class="input-group">
+
 							 <input type="text" class="form-control"  name="start_date" id="datepicker-autoclose" value="<?php echo date("d-m-Y"); ?>">
-							 <span class="input-group-addon bg-custom b-0"><i class="far fa-calendar-plus"></i></span>
-					 </div>
+
 					 </div>
 
 						<label for="edate" class="col-sm-2 col-form-label">End Date</label>
 					 <div class="col-sm-4">
-							<div class="input-group">
-							 <input type="text" class="form-control" name="end_date" id="datepicker" value="<?php echo date("d-m-Y"); ?>">
-							 <span class="input-group-addon bg-custom b-0"><i class="far fa-calendar-plus"></i></span>
 
-					 </div>
+							 <input type="text" class="form-control" name="end_date" id="datepicker" value="<?php echo date("d-m-Y"); ?>">
+
 					 </div>
 			 </div>
 		</div>
@@ -151,10 +149,10 @@
 			</div>
       <div class="col-md-12 form_box">
         <div class="form-group">
-           
 
 
-			
+
+
 			<label for="Person" class="col-sm-2 col-form-label">Contact Person</label>
 			 <div class="col-sm-4">
 					 <input class="form-control" type="text"  name="contact_person" value="">
@@ -163,11 +161,11 @@
 			 <div class="col-sm-4">
 					 <input class="form-control" type="text"  name="sec_contact_person" value="">
 			 </div>
-			 
+
         </div>
       </div>
-	  
-	  
+
+
 	  					<div class="col-md-12 form_box">
 						<div class="form-group">
 								<label for="primarycell" class="col-sm-2 col-form-label">Primary Contact Phone</label>
@@ -180,15 +178,15 @@
 								</div>
 						</div>
 					</div>
-					
+
 					<div class="col-md-12 form_box">
 							<div class="form-group">
-									 
+
 									 <label for="Email" class="col-sm-2 col-form-label">Contact Email</label>
 									 <div class="col-sm-4">
 											 <input class="form-control" type="text"  name="email" value="" >
 									 </div>
-									 
+
 									              <label for="ecost" class="col-sm-2 col-form-label">Event Type</label>
             <div class="col-sm-4">
                  <select class="form-control"  name="eventcost">
@@ -225,7 +223,7 @@
 
 
 
-						
+
 
 						<div class="col-md-12 form_box">
 							<div class="form-group">
@@ -289,8 +287,8 @@
 
 $(document).ready(function () {
 
-	$('#datepicker').datetimepicker({format: 'DD-MM-YYYY'});
-	$('#datepicker-autoclose').datetimepicker({format: 'DD-MM-YYYY'});
+	$('#datepicker').datetimepicker({format: 'DD-MM-YYYY',minDate : moment()});
+	$('#datepicker-autoclose').datetimepicker({format: 'DD-MM-YYYY',minDate: moment()});
 
 	$('#hotspot_sts').on('change', function() {
 	var strdisplay = $(this).val();

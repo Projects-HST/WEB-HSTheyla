@@ -140,7 +140,7 @@
 					</div>
 					<div class="form-group row">
 						<div class="col-lg-12">
-							<textarea type="text" name="message" id="message" placeholder="Message" class="form-control"></textarea>
+							<textarea type="text" name="message" id="message" maxlength="240" placeholder="Max 240 Characters" class="form-control" ></textarea>
 						</div>
 					</div>
                     <!--<div class="form-group row">

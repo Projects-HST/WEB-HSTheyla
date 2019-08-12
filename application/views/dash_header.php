@@ -14,9 +14,12 @@
 <script src="<?php echo base_url(); ?>assets/front/js/bootstrap3.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script> -->
 <script src="<?php echo base_url(); ?>assets/js/additional-methods.min.js"></script>
+
 <script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-datetimepicker.min.css" />
+<script src="<?php echo base_url(); ?>assets/front/js/moment.js"></script>
+
+
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-92904528-2"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -28,7 +31,9 @@
 </head>
 
 <style>
-
+.logout-btn{
+  cursor: pointer;
+}
 </style>
 <body>
 <div id="navbar-wrapper">
@@ -81,7 +86,7 @@
                                         </a>
                                      <ul class="dropdown-menu dropdown-block" role="menu">
                                          <li><a href="<?php echo base_url(); ?>profile">Profile</a></li>
-										  <li><a href="<?php echo base_url(); ?>change_password">Change Password</a></li>
+										                      <li><a href="<?php echo base_url(); ?>change_password">Change Password</a></li>
                                          <li><a class="nav-link logout-btn" onclick="logout()">Logout</a></li>
                                      </ul>
                                  </li>

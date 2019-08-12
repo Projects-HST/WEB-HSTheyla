@@ -355,7 +355,7 @@ body{
   padding: 13px;
   color: #fff;
   text-decoration: none;
-
+  cursor: pointer;
   font-size: 18px;
   font-weight: 500;
   background-color: #478ECC;
@@ -625,6 +625,7 @@ i.fas{
 .btn-login{
   background-color: #478ECC;
   border-color:  #478ECC;
+      cursor: pointer;
 }
 .btn-login:hover{
   background-color: #478ECC;
@@ -693,7 +694,13 @@ padding-bottom: 15px;
 .dot{
   display: none;
 }
+.form_search_line{
 
+}
+
+.head_text h2{
+  border-right: none !important;
+}
 }
 @media (max-width:600px)  {
 .organsier{
@@ -981,6 +988,7 @@ a.btn.btn-login.btn-primary.btn-block.review-btn{
   color: #fff;
   background-color: #478ecc;
   border-color: #478ecc;
+  cursor: pointer;
 }
 .btn-primary:hover{
   color: #fff;

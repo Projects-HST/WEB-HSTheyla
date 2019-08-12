@@ -92,7 +92,7 @@ input[type="file"] {
           <div class="col-md-6">
             <p>  <?php echo $rows->email_id;  if($rows->email_verify=='N'){ ?><i class="fas fa-exclamation-triangle notverfied" title="Email is Not Verified"></i>
 
-          <?php  }else{  } ?> <span class="change-email"><a href="<?php echo  base_url(); ?>changemail"><br><b>Change My Email</b></a></span></p>
+          <?php  }else{  } ?> <span class="change-email"><a href="<?php echo  base_url(); ?>changemail"><br><small>Change my email</small></a></span></p>
           </div>
       </div>
           <div class="form-group row">
@@ -113,7 +113,7 @@ input[type="file"] {
             <p>  <?php if(empty($rows->mobile_no)){ echo $rows->mobile_no; ?>
                 <span class="change-email"><a href="<?php echo  base_url(); ?>mobile">Add Mobile number</a></span></p>
           <?php  }else{ echo $rows->mobile_no; ?>
-              <span class="change-email"><a href="<?php echo  base_url(); ?>mobilenumber">&nbsp; <b>Change Mobile number</b></a></span></p>
+              <span class="change-email"><a href="<?php echo  base_url(); ?>mobilenumber">&nbsp; <small>Change Mobile number</small></a></span></p>
           <?php   } ?>
           <!-- <input class="form-control" type="text" name="mobile_no" id="mobile_no" value="<?php echo $rows->mobile_no; ?>"> -->
 

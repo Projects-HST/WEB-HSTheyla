@@ -44,6 +44,8 @@
                          onlogin="checkLoginState();">
           Connect with Facebook
         </fb:login-button>
+
+    <!-- <a onclick="checkLoginState();" class="social-link-img" scope="public_profile,email"><img src="<?php echo base_url(); ?>assets/front/images/fb-login.png" class="img-responsive social-img"></a> -->
   <br>
   <a href="<?php echo base_url(); ?>google_login" class="social-link-img"><img src="<?php echo base_url(); ?>assets/front/images/login-google.png" class="img-responsive social-img"></a>
 </div>
