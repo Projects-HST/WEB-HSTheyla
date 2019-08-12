@@ -790,6 +790,40 @@ class Apimain extends CI_Controller {
 
 //-----------------------------------------------//
 
+	public function updateUsercity()
+	{
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
+
+		if(!$this->checkMethod())
+		{
+			return FALSE;
+		}
+
+		if($_POST == FALSE)
+		{
+			$res = array();
+			$res["opn"] = "Select All City";
+			$res["scode"] = 204;
+			$res["message"] = "Input error";
+
+			echo json_encode($res);
+			return;
+		}
+
+		$user_id = '';
+		$city_id = '';
+		$user_id = $this->input->post("user_id");
+		$city_id = $this->input->post("city_id");
+
+		$data['result']=$this->apimainmodel->Update_usercity($user_id,$city_id);
+		$response = $data['result'];
+		echo json_encode($response);
+	}
+
+//-----------------------------------------------//
+
+//-----------------------------------------------//
+
 	public function updatePreference()
 	{
 		$_POST = json_decode(file_get_contents("php://input"), TRUE);

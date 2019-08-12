@@ -1282,7 +1282,20 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 
 			return $response;
 	}
-//#################### Select State End ####################//
+//#################### Select City End ####################//
+
+
+//#################### Update User City ####################//
+	public function Update_usercity($user_id,$city_id)
+	{
+		$updQuery = "UPDATE user_details SET city_id = '$city_id' WHERE user_id  ='$user_id'";
+		$updResult = $this->db->query($updQuery);
+		
+		$response = array("status" => "success", "msg" => "City Updated","User_cityid"=>$city_id);
+		return $response;
+	}
+//#################### Update User City End ####################//
+
 
 
 //#################### Add User Category ####################//

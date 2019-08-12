@@ -3,14 +3,14 @@
 $con = @mysql_connect("localhost","root","O+E7vVgBr#{}");
 
 if ($con) {
-		mysql_select_db('heylaapp_app');
+		mysql_select_db('heylaapp_apptest');
     } else {
 		die("Connection failed");
 }
 
         $now = time(); // checking the time now when home page starts
 
-        $sQuery = "SELECT * FROM booking_session";
+        $sQuery = "SELECT * FROM booking_session WHERE status = 'Start'";
         $objRs = mysql_query($sQuery);
         if (mysql_num_rows($objRs)> 0)
         	{
