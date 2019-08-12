@@ -104,7 +104,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 				 <label for="Address" class="col-sm-2 col-form-label">Address</label>
 				<div class="col-sm-4">
 			<textarea id="textarea" name="address" required="" class="form-control" maxlength="240" rows="3" placeholder="">
-            <?php echo $rows->event_address; ?></textarea>
+            <?php echo trim($rows->event_address); ?></textarea>
 				</div>
 				
 				<label for="Description" class="col-sm-2 col-form-label">Description</label>
