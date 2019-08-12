@@ -223,12 +223,12 @@ class Events extends CI_Controller
     }
     public function view_single_events($id)
     {
-        $id            = base64_decode($id);
+        $id            = base64_decode($id);    
         $datas         = $this->session->userdata();
         $user_id       = $this->session->userdata('id');
         $user_role     = $this->session->userdata('user_role');
         $datas['view'] = $this->eventsmodel->view_single_events_plans($id);
-        //print_r($datas['edit']);exit;
+      // print_r($datas['view']);exit;
         if ($user_role == 1 || $user_role == 4) {
             $this->load->view('header');
             $this->load->view('events/events_details', $datas);

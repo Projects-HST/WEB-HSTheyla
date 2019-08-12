@@ -11,26 +11,26 @@ Class Emailtemplatemodel extends CI_Model
 
    function getall_email_template_details()
    {
-   	$email="SELECT id,template_name,template_content FROM email_template ORDER BY id DESC";
+   	$email="SELECT * FROM email_template ORDER BY id DESC";
    	$resu=$this->db->query($email);
     $res=$resu->result();
     return $res;
    }
 
-   function add_templates_details($tempname,$tempdetails,$user_id)
+   function add_templates_details($tempname,$tempdetails,$img,$user_id)
    {
    	 $check_tmp="SELECT * FROM email_template WHERE template_name='$tempname' AND template_content='$tempdetails'";
      $result=$this->db->query($check_tmp);
      if($result->num_rows()==0)
      {
-	   	$insert="INSERT INTO email_template(template_name,template_content,created_by,created_at)VALUES('$tempname','$tempdetails','$user_id',NOW())";
+	   	$insert="INSERT INTO email_template(template_name,template_content,notification_img,created_by,created_at)VALUES('$tempname','$tempdetails','$img','$user_id',NOW())";
 	   	$resu1=$this->db->query($insert);
 	   	$data = array("status"=>"success");
 	   	return $data;
-	 }else{
-	 	$data= array("status"=>"AE");
-        return $data;
-	 }
+    	 }else{
+    	 	$data= array("status"=>"AE");
+            return $data;
+    	 }
    }
 
    function delete_templates_details($id,$user_id)
@@ -43,15 +43,15 @@ Class Emailtemplatemodel extends CI_Model
 
    function edit_email_template_details($id)
    {
-   	$email="SELECT id,template_name,template_content FROM email_template WHERE id='$id'";
+   	$email="SELECT * FROM email_template WHERE id='$id'";
    	$resu=$this->db->query($email);
     $res=$resu->result();
     return $res;
    }
 
-   function update_templates_details($id,$tempname,$tempdetails,$user_id)
+   function update_templates_details($id,$tempname,$tempdetails,$img,$user_id)
    {
-   	$update="UPDATE email_template SET template_name='$tempname',template_content='$tempdetails',updated_by='$user_id',updated_at=NOW() WHERE id='$id'";
+   	$update="UPDATE email_template SET template_name='$tempname',template_content='$tempdetails',notification_img='$img',updated_by='$user_id',updated_at=NOW() WHERE id='$id'";
    	$resu1=$this->db->query($update);
     $data = array("status"=>"success");
 	return $data;

@@ -1171,3 +1171,18 @@ ul.dropdown-menu.show{
 .navbar-toggler-icon{
   background-color:#458ecc;
 }
+
+
+.search_box{
+  border: none;
+
+}
+.search_box:focus{
+  outline: none;
+
+}
+.form_search_line{
+  border:1px solid grey;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  margin-bottom: 0px;

@@ -110,7 +110,7 @@ Class Eventsmodel extends CI_Model
 
   function view_single_events_plans($id)
    {
-     $sql="SELECT e.*,ca.category_name,ci.city_name,cn.country_name FROM events AS e,category_master AS ca,city_master AS ci,country_master AS cn WHERE e.id='$id' AND e.category_id=ca.id AND e.event_country=cn.id AND e.event_city=ci.id ";
+      $sql="SELECT e.*,ca.category_name,ci.city_name,cn.country_name FROM events AS e,category_master AS ca,city_master AS ci,country_master AS cn WHERE e.id='$id' AND e.category_id=ca.id  AND e.event_city=ci.id ";
      $resu=$this->db->query($sql);
      $res=$resu->result();
      return $res;

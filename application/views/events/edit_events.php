@@ -28,22 +28,13 @@
                 <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>events/update_events" name="eventform" id="eventform" onSubmit='return check();'>
                   <?php foreach($edit as $rows){}?>
                   <div class="form-group row">
-                       <label for="country" class="col-sm-2 col-form-label">Select Country</label>
-                       <div class="col-sm-4">
-                         <select class="form-control" name="country" required="" onchange="getcityname(this.value)">
-                         <option value="">Select Country Name</option>
-                                <?php foreach($country_list as $cntry){ ?>
-                                   <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
-                                <?php } ?>
-                           </select>
-                           <script language="JavaScript">document.eventform.country.value="<?php echo $rows->event_country; ?>";</script>
-                       </div>
+
                         <label for="city" class="col-sm-2 col-form-label">Select City</label>
                        <div class="col-sm-4">
                          <select class="form-control" name="city" id="ctname">
                          <?php
                            $cntyrid=$rows->event_country;
-                           $sql="SELECT id,city_name FROM city_master WHERE country_id='$cntyrid' AND event_status='Y' ORDER BY id ASC";
+                           $sql="SELECT id,city_name FROM city_master WHERE event_status='Y' ORDER BY id ASC";
                            $resu=$this->db->query($sql);
                            $res=$resu->result();
                            foreach ($res as $value) { ?>

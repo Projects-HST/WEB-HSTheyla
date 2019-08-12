@@ -41,8 +41,7 @@
                         <label id="user"><input type="checkbox" class="checkbox" id="checkAll" style="display: inline;" />&nbsp; Select Current Page
                          <!--div class="text-center">
                             < Large modal-->
-                             <button type="button" id="sendSelectedBtn" data-toggle="modal" data-target="#addmodel"
-                             class="btn btn-primary waves-effect waves-light">Send To Selected</button> &nbsp;
+                             <button type="button" id="sendSelectedBtn" class="btn btn-primary waves-effect waves-light">Send To Selected</button> &nbsp;
 
                              <button type="button" style="float: right;" data-toggle="modal" id="sendAll" data-target="#addmodel" class="btn btn-primary waves-effect waves-light">Send To All</button>
                         <!--/div-->
@@ -167,18 +166,15 @@
  $(document).ready(function () {
    $('#checkAll:checkbox').change(function() {
             $("input:checkbox").prop('checked', $(this).prop("checked"));
-           // var selected_value=[]; // initialize empty array
-           // $('#sendnews:checked').each(function(){
-           //  selected_value.push($(this).val());
-           // });
-           // console.log(selected_value);
+
             });
      });
 
  $(document).on("click", "#sendSelectedBtn", function ()
    {
-	$('#addmodel').modal('show');
+
      if($('input[name="users_id[]"]:checked').length > 0) {
+       	$('#addmodel').modal('show');
         var selected_value=[]; //initialize empty array
         $('#sendnews:checked').each(function()
         {
@@ -188,6 +184,7 @@
 
 
    }else{
+
          	alert('Please select any one user');
         	$('#addmodel').modal('hide');
          }

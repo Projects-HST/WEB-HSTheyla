@@ -16,7 +16,13 @@
                            <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Template Content</label>
                               <div class="col-sm-8">
-                                  <textarea class="form-control" rows="5" name="templatecontent" maxlength="240" placeholder="Max 240 Characters"></textarea>
+                                  <textarea class="form-control" rows="5" name="templatecontent" maxlength="140" placeholder="Max 140 Characters"></textarea>
+                              </div>
+                           </div>
+                           <div class="form-group row">
+                              <label class="col-sm-4 col-form-label">Image(Optional)</label>
+                              <div class="col-sm-8">
+                                   <input class="form-control" type="file" name="notification_img"  id="notification_img" >
                               </div>
                            </div>
                            <div class="form-group">
@@ -52,6 +58,7 @@
 							                 <th>S.No</th>
                                <th style="width:200px;">Title</th>
                                 <th>Message</th>
+                                <th>Image</th>
                                <th>Action</th>
                               </tr>
                            </thead>
@@ -63,6 +70,13 @@
                                  <td><?php  echo $i; ?></td>
                                  <td><?php  echo $rows->template_name; ?></td>
                                  <td><?php  echo $rows->template_content; ?></td>
+                                 <td><?php if(empty($rows->notification_img)){
+
+                                 }else{ ?>
+                                   <img src="<?php echo base_url(); ?>assets/notification/images/<?php  echo $rows->notification_img; ?>" style="width:100px;">
+                              <?php   } ?>
+
+                                 </td>
 								                 <td>
                                     <a href="<?php echo base_url();?>emailtemplate/edit_template/<?php echo $rows->id;?>"><img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
                                      <!--a href="<?php echo base_url();?>emailtemplate/delete_template/<?php echo $rows->id;?>"><img title="Edit" src="<?php echo base_url();?>assets/icons/delete.png" /></a-->
@@ -90,11 +104,13 @@
     $('#templateform').validate({ // initialize the plugin
        rules: {
          templatename:{required:true },
+         notification_img:{required:false,extension: "jpg|JPG|jpeg|png" },
          templatecontent:{required:true }
         },
         messages: {
         templatename:"Enter Template Name",
-        templatecontent:"Enter Template Details"
+        templatecontent:"Enter Template Details",
+        notification_img:{extension: "Upload only PNG or  JPEG" },
          },
          });
    });

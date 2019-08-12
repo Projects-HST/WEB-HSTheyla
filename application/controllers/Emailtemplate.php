@@ -44,7 +44,18 @@ class Emailtemplate extends CI_Controller
 	   {
 		    $tempname=$this->db->escape_str($this->input->post('templatename'));
 		    $tempdetails=$this->db->escape_str($this->input->post('templatecontent'));
-		    $datas = $this->emailtemplatemodel->add_templates_details($tempname,$tempdetails,$user_id);
+				$pic = $_FILES["notification_img"]["name"];
+				if(empty($pic)){
+					$img=' ';
+				}else{
+				$temp = pathinfo($pic, PATHINFO_EXTENSION);
+				$img = round(microtime(true)) . '.' . $temp;
+				$uploaddir = 'assets/notification/images/';
+				$profilepic = $uploaddir.$img;
+				move_uploaded_file($_FILES['notification_img']['tmp_name'], $profilepic);
+			}
+
+		    $datas = $this->emailtemplatemodel->add_templates_details($tempname,$tempdetails,$img,$user_id);
 	        $sta=$datas['status'];
 	        //print_r($sta);exit;
 	        if($sta=="success"){
@@ -109,7 +120,18 @@ class Emailtemplate extends CI_Controller
 	   	  $id=$this->db->escape_str($this->input->post('tid'));
 		    $tempname=$this->db->escape_str($this->input->post('templatename'));
 		    $tempdetails=$this->db->escape_str($this->input->post('templatecontent'));
-		    $datas = $this->emailtemplatemodel->update_templates_details($id,$tempname,$tempdetails,$user_id);
+				$old_notification_img=$this->db->escape_str($this->input->post('old_notification_img'));
+				$pic = $_FILES["notification_img"]["name"];
+				if(empty($pic)){
+					$img=$old_notification_img;
+				}else{
+				$temp = pathinfo($pic, PATHINFO_EXTENSION);
+				$img = round(microtime(true)) . '.' . $temp;
+				$uploaddir = 'assets/notification/images/';
+				$profilepic = $uploaddir.$img;
+				move_uploaded_file($_FILES['notification_img']['tmp_name'], $profilepic);
+			}
+		    $datas = $this->emailtemplatemodel->update_templates_details($id,$tempname,$tempdetails,$img,$user_id);
 	        $sta=$datas['status'];
 	        if($sta=="success"){
 		       $this->session->set_flashdata('msg','Updated Successfully');

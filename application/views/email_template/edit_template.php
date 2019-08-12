@@ -2,7 +2,7 @@
       <div class="page-content-wrapper">
          <div class="container">
             <div class="row">
-               <div class="col-lg-8">
+               <div class="col-lg-9">
                   <div class="card m-b-20">
                      <div class="card-block">
                         <h4 class="mt-0 header-title"> Edit Template </h4>
@@ -15,10 +15,26 @@
                                   <input class="form-control" type="hidden" name="tid"   value="<?php echo $res->id;?>">
                               </div>
                            </div>
+
                            <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Template Content</label>
                               <div class="col-sm-8">
                                   <textarea class="form-control" rows="5" name="templatecontent" maxlength="240" placeholder="Max 240 Characters"><?php echo $res->template_content;?></textarea>
+                              </div>
+                           </div>
+                           <div class="form-group row">
+                              <label class="col-sm-4 col-form-label">Change Image(Optional)</label>
+                              <div class="col-sm-6">
+                                   <input class="form-control" type="file" name="notification_img"  id="notification_img" >
+                              </div>
+                              <div class="col-sm-2">
+                                <?php if(empty($res->notification_img)){
+
+                                }else{ ?>
+                                  <input class="form-control" type="hidden" name="old_notification_img" maxlength="30" id="old_notification_img" value="<?php echo $res->notification_img;  ?>">
+                                  <img src="<?php echo base_url(); ?>assets/notification/images/<?php  echo $res->notification_img; ?>" style="width:100px;">
+                             <?php   } ?>
+
                               </div>
                            </div>
                            <div class="form-group">
@@ -48,30 +64,17 @@
     $('#templateform').validate({ // initialize the plugin
        rules: {
          templatename:{required:true },
+          notification_img:{required:false,extension: "jpg|JPG|jpeg|png" },
          templatecontent:{required:true }
         },
         messages: {
         templatename:"Enter Template Name",
-        templatecontent:"Enter Template Details"
+        templatecontent:"Enter Template Details",
+          notification_img:{extension: "Upload only PNG or  JPEG" },
          },
          });
    });
 
-jQuery(document).ready(function(){
-    $('.summernote').summernote({
-        height: 200,                 // set editor height
-        minHeight: null,             // set minimum height of editor
-        maxHeight: null,             // set maximum height of editor
-        focus: true,                // set focus to editable area after initializing summernote
-    });
-     $('.summernote').validate({ // initialize the plugin
-       rules: {
-         templatecontent:{required:true }
-        },
-        messages: {
-        templatecontent:"Enter Template Details"
-         },
-         });
-});
+
 
 </script>

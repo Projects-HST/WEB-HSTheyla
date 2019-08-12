@@ -12,11 +12,11 @@
     padding-right: 20px;
 }
 .field-icon {
-  float: right;
-  left:10px;
-  margin-top: -25px;
+  left: 70px;
   position: relative;
-  z-index: 2;
+  z-index: 10000;
+  top: 5px;
+  outline:none;
 }
 /* Carousel base class */
 .event_thumb p{
@@ -27,13 +27,11 @@
 .event_date{
   font-size: 14px;
 }
-/* Since positioning the image, we need to help out the caption */
 .carousel-caption {
   z-index: 10;
   bottom: 3rem;
 }
 
-/* Declare heights because of positioning of img element */
 .carousel-item {
   height: 32rem;
 
@@ -94,6 +92,10 @@ body{background-color: #f7f8fa;}
 }
 .carousel-caption{
   display: none !important;
+}
+.clear_btn{
+  float: right;
+  font-size: 12px;
 }
 </style>
 <script src="<?php echo base_url(); ?>assets/front/js/jquery-ui.js"></script>
@@ -166,20 +168,27 @@ body{background-color: #f7f8fa;}
         <div class="head_text"><h2>Find Events Near You</h2></div>
       </div>
       <div class="col-md-8">
-      <div class="form-group">
-            <div class="col-sm-12">
+      <div class="form-group row form_search_line">
+
+            <div class="col-sm-10">
               <!--<form class="navbar-form navbar-right search-event-form" role="search" method="post" action="" name="search_form" id="search_form">-->
-                  <input  type="text" class="form-control btn-block" name="search_term" id="search_term"  placeholder="Search Event by name" value="" autocomplete="off">
-				  <input type="button" onclick="getSearchevents()" value="Search">
+                  <input  type="text" class="form-control search_box btn-block" name="search_term" id="search_term"  placeholder="Search Event by name" value="" autocomplete="off">
+				  <!-- <input type="button" onclick="getSearchevents()" value="Search"> -->
+        </div>
+        <div class="col-sm-2">
+            <button type="button" onclick="getSearchevents()" style="border: 0; background: transparent;  outline:none;" ><i  class="fa fa-search field-icon toggle-password"></i></button>
+
                    <!--<a href="#" onclick="getSearchevents()"><span toggle="#password-field" class="fa fa-search field-icon toggle-password"></span></a>
                 </form>-->
           </div>
+
       </div>
+        <p><a href="" class="clear_btn">Clear all</a></p>
       </div>
     </div>
 
     <div class="row">
-    
+
     <div class="col-md-3">
       <label class="form-label">Select Location</label>
       <div class="form-group">
@@ -264,7 +273,7 @@ $('#category').select2({
 });
 
 $(window).on('load', function(){
-	
+
 	document.getElementById("search_term").onkeypress = function(event){
     if (event.keyCode == 13 || event.which == 13){
        getSearchevents();
@@ -273,7 +282,7 @@ $(window).on('load', function(){
 
 	var city_values = '<?php  echo $city_values ?>';
 	var search_values = '<?php  echo $search_values ?>';
-	
+
 	if(city_values!=''){
 			$("#ctyname").val("<?php echo $city_values; ?>");
 			$("#search_term").val("");
@@ -617,7 +626,7 @@ function getCategoryevents()
 {
 	$("#event_list_cat").html("").show();
 	$("#search_term").val("");
-	
+
 	var limit = 9;
 	var offset = 0;
 
@@ -980,7 +989,7 @@ function getSearchevents()
 
 	var srch_term = search_term.value;
 	var result = '';
-	
+
 	$.ajax({
 	url: '<?php echo base_url(); ?>eventlist/search_term_events',
 	type: 'POST',
@@ -1047,9 +1056,11 @@ function getSearchevents()
 		} else {
 			$('#loader_message').hide();
 			$('#loader_image').hide();
-			$("#category").val("");
-			result +="No Records found!..";
-			$("#event_list_search").html(result).show();
+			// $("#category").val("");
+			// var result="<div class='row'><center><p class='btn btn-sm no_event' style='color:#ffffff;''>No more Events</p></center></div>";
+			// $("#event_list_search").html(result).show();
+      $('#loader_image').hide();
+      $("#loader_message").html('<center><p class="btn btn-sm no_event" style="color:#ffffff;">No more Events</p></center>').show();
 		}
 	}
 	});
