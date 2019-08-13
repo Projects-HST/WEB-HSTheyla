@@ -116,10 +116,15 @@
                                           <?php  }
                                           ?>
                                     </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="margin-left:-60px;">
+                                    <!-- <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="margin-left:-60px;">
                                       <li><a class="nav-link" href="<?php echo base_url(); ?>profile">Profile</a></li>
                                       <li><a class="nav-link logout-btn" onclick="logout()">Logout</a></li>
 
+                                    </ul> -->
+                                    <ul class="dropdown-menu dropdown-block" role="menu" style="margin-left:-60px;">
+                                        <li><a href="<?php echo base_url(); ?>profile">Profile</a></li>
+                                         <li><a href="<?php echo base_url(); ?>change_password">Change Password</a></li>
+                                        <li><a class="cursor_link" onclick="logout()">Logout</a></li>
                                     </ul>
                                   </li>
 
