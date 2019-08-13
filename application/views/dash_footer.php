@@ -70,7 +70,8 @@ function logout(){
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Confirm!'
+      confirmButtonText: 'Yes!',
+      cancelButtonText: 'No'
   }).then(function(){
     window.location.href='<?php echo base_url(); ?>logout';
   }).catch(function(reason){

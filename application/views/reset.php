@@ -81,7 +81,7 @@ input[type=password] {
                    if (response == "success") {
                      swal({
                 title: "Success",
-                text: " Password Has been Changed Successfully Login Now",
+                text: " Password has been changed successfully. Login now.",
                 type: "success"
             }).then(function() {
                 location.href = '<?php echo base_url(); ?>';

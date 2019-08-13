@@ -379,13 +379,12 @@ Class Loginmodel extends CI_Model
          </head>
          <body style="background-color:#E4F1F7;"><div style="background-image: url('.base_url().'assets/front/images/email_1.png);height:700px;margin: auto;width: 100%;background-repeat: no-repeat;">
             <div  style="padding:50px;width:400px;"><p>Dear '.$email.'</p>
-           <p style="font-size:20px;">Welcome to
-            <center><img src="'.base_url().'assets/front/images/heyla_b.png" style="width:120px;"></center>
-           </p>
-           <p style="margin-left:50px;"> <br>
-           To allow us to confirm the validity of your email address,click this verification link. <center>   <a href="'. base_url().'home/emailverfiy/'.$encrypt_email.'" target="_blank"style="background-color: #478ECC;    padding: 12px;    text-decoration: none;    color: #fff;    border-radius: 20px;">Verfiy  Here</a></center>  </p>
-           <p style="font-size:20px;">Thank you and enjoy, <br>
-             The Heyla Team
+           <p style="font-size:20px;">Welcome to Heyla!</p>
+           <p style="font-size:20px;">We’re glad you signed up.</p>
+           <p style="margin-left:50px;"> <br>We wish you to make cheerful memories with each event! </p>
+           <p style="font-size:20px;">With love,<br>Team Heyla<br>
+               <p>To confirm your email address, click the verification link below
+               <br><br><a href="'. base_url().'home/emailverfiy/'.$encrypt_email.'" target="_blank"style="background-color: #478ECC;    padding: 12px;    text-decoration: none;    color: #fff;    border-radius: 20px;">Click here</a>
              </p>
            </body>
         </html>';
@@ -462,14 +461,13 @@ Class Loginmodel extends CI_Model
           <title></title>
              </head>
              <body style="background-color:#E4F1F7;"><div style="background-image: url('.base_url().'assets/front/images/email_1.png);height:700px;margin: auto;width: 100%;background-repeat: no-repeat;">
-                <div  style="padding:50px;width:400px;"><p>Dear '.$name.'</p>
-               <p style="font-size:20px;">Welcome to
-                <center><img src="'.base_url().'assets/front/images/heyla_b.png" style="width:120px;"></center>
-               </p>
-               <p style="margin-left:50px;"> <br>
-               To allow us to confirm the validity of your email address,click this verification link. <center>   <a href="'. base_url().'home/emailverfiy/'.$encrypt_email.'" target="_blank"style="background-color: #478ECC;    padding: 12px;    text-decoration: none;    color: #fff;    border-radius: 20px;">Verfiy  Here</a></center>  </p>
-               <p style="font-size:20px;">Thank you and enjoy, <br>
-                 The Heyla Team
+                <div  style="padding:50px;width:400px;"><p>Dear '.$email.'</p>
+               <p style="font-size:20px;">Welcome to Heyla!</p>
+               <p style="font-size:20px;">We’re glad you signed up.</p>
+               <p style="margin-left:50px;"> <br>We wish you to make cheerful memories with each event! </p>
+               <p style="font-size:20px;">With love,<br>Team Heyla<br>
+                   <p>To confirm your email address, click the verification link below
+                   <br><br><a href="'. base_url().'home/emailverfiy/'.$encrypt_email.'" target="_blank"style="background-color: #478ECC;    padding: 12px;    text-decoration: none;    color: #fff;    border-radius: 20px;">Click here</a>
                  </p>
                </body>
             </html>';
