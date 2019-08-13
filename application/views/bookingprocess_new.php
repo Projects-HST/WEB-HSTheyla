@@ -188,6 +188,11 @@ if(empty($booking_process)){
   </div>
 </div>
 <script type="text/javascript">
+
+	window.onbeforeunload = function() {
+	  return "Data will be lost if you leave the page, are you sure?";
+	};
+
     var hour = 0
     var min = 5;
     var sec = 00;
@@ -224,7 +229,6 @@ if(empty($booking_process)){
            document.getElementById('clock').innerHTML = sec+' seconds until timer runs out!';
     }
    var time = document.getElementById('strclock').innerHTML;
-   
         if(time == '00:00:00') {
             alert("You have exceeded the time limit and your booking has been released.");
             window.location="http://heylaapp.com/testing";

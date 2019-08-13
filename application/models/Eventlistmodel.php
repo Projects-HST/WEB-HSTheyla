@@ -509,29 +509,33 @@ Class Eventlistmodel extends CI_Model
 		 //$extra = $CGST + $SGST + $IHC;
 		 //$total_amount = $samount + $extra;
 
-
-
-		$sql = "SELECT * FROM booking_plan_timing WHERE seat_available >= '$number_of_seats' AND id = '$plan_time_id'";
-		$resu=$this->db->query($sql);
-			if($resu->num_rows()>0)
-	        {
-				$sQuery = "INSERT INTO booking_process (order_id,event_id,plan_id,plan_time_id,user_id,number_of_seats,total_amount,booking_date) VALUES ('". $order_id . "','". $event_id . "','". $plan_id . "','". $plan_time_id . "','". $user_id . "','". $number_of_seats . "','". $total_amount . "','". $booking_date . "')";
-				$booking_insert = $this->db->query($sQuery);
-
-				$update_seats = "UPDATE booking_plan_timing SET seat_available = seat_available-$number_of_seats WHERE id ='$plan_time_id'";
-				$seatsupdate = $this->db->query($update_seats);
-
-				$_SESSION['booking_start'] = time(); // taking now logged in time
-				$_SESSION['booking_expire'] = $_SESSION['booking_start'] + (300) ; // ending a session in 10mins
-
-				$session_seats = "INSERT INTO booking_session (session_expiry,order_id,plan_time_id,number_of_seats,status) VALUES ('". $_SESSION['booking_expire'] . "','". $order_id . "','". $plan_time_id . "','". $number_of_seats . "','Start')";
-				$session_insert = $this->db->query($session_seats);
-
-				$sql="SELECT A.id,A.order_id,E.category_name,B.id AS event_id,B.event_name,B.event_venue,B.event_address,C.show_date,C.show_time,D.plan_name,A.number_of_seats, A.total_amount, '$damount' AS booking_amount,$dGST AS CGST, $dGST AS SGST, $dbooking_fees AS IHC FROM booking_process A,events B,booking_plan_timing C,booking_plan D,category_master E WHERE A.order_id  = '$order_id' AND A.event_id = B.id AND A.plan_time_id = C.id AND A.plan_id = D.id AND B.category_id = E.id";
-
+			$squery = "SELECT * FROM booking_process A, booking_session B WHERE A.user_id >= '$user_id' AND A.order_id = B.order_id AND B.status = 'Start'";
+			$resul_set =$this->db->query($squery);
+			if($resul_set->num_rows()==0)
+			{
+				$sql = "SELECT * FROM booking_plan_timing WHERE seat_available >= '$number_of_seats' AND id = '$plan_time_id'";
 				$resu=$this->db->query($sql);
-				$res=$resu->result();
-				return $res;
+				
+				if($resu->num_rows()>0)
+				{
+					$sQuery = "INSERT INTO booking_process (order_id,event_id,plan_id,plan_time_id,user_id,number_of_seats,total_amount,booking_date) VALUES ('". $order_id . "','". $event_id . "','". $plan_id . "','". $plan_time_id . "','". $user_id . "','". $number_of_seats . "','". $total_amount . "','". $booking_date . "')";
+					$booking_insert = $this->db->query($sQuery);
+
+					$update_seats = "UPDATE booking_plan_timing SET seat_available = seat_available-$number_of_seats WHERE id ='$plan_time_id'";
+					$seatsupdate = $this->db->query($update_seats);
+
+					$_SESSION['booking_start'] = time(); // taking now logged in time
+					$_SESSION['booking_expire'] = $_SESSION['booking_start'] + (300) ; // ending a session in 10mins
+
+					$session_seats = "INSERT INTO booking_session (session_expiry,order_id,plan_time_id,number_of_seats,status) VALUES ('". $_SESSION['booking_expire'] . "','". $order_id . "','". $plan_time_id . "','". $number_of_seats . "','Start')";
+					$session_insert = $this->db->query($session_seats);
+
+					$sql = "SELECT A.id,A.order_id,E.category_name,B.id AS event_id,B.event_name,B.event_venue,B.event_address,C.show_date,C.show_time,D.plan_name,A.number_of_seats, A.total_amount, '$damount' AS booking_amount,$dGST AS CGST, $dGST AS SGST, $dbooking_fees AS IHC FROM booking_process A,events B,booking_plan_timing C,booking_plan D,category_master E WHERE A.order_id  = '$order_id' AND A.event_id = B.id AND A.plan_time_id = C.id AND A.plan_id = D.id AND B.category_id = E.id";
+
+					$resu=$this->db->query($sql);
+					$res=$resu->result();
+					return $res;
+				}
 			}
 			
     }
