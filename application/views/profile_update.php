@@ -171,15 +171,14 @@ input[type="file"] {
 <div class="">
   <!-- <input type="file" name="upload_image" class="btn btn-primary" id="upload_image" style="margin-left:150px;" /> -->
   <label for="upload_image" class="custom-file-upload"  style="margin-left:150px;">
-    <i class="fa fa-cloud-upload"></i> Profile Picture
+    <i class="fa fa-cloud-upload"></i> Upload Pciture
 </label>
 <input id="upload_image" type="file" name="upload_image" />
 </div>
-    <br>
+  
     <?php if(empty($rows->user_picture)){ ?>
-
   <?php  }else{ ?>
-    <b class="" style="margin-left:150px;"><a onclick="remove_img()" style="cursor: pointer;">Remove Picture</a></b>
+    <small class="" style="margin-left:150px;"><a onclick="remove_img()" style="cursor: pointer;">Remove Picture</a></small>
   <?php  } ?>
 
 
