@@ -66,7 +66,7 @@
 
                    }else{ ?>
                      <li class="nav-item">
-                        <a class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become A Organiser</a>
+                        <a class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become An Organiser</a>
                     </li>
                 <?php   }?>
 

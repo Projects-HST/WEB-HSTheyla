@@ -136,7 +136,7 @@ body{background-color: #fff;}
 
                    }else{ ?>
                      <li class="nav-item">
-                        <a class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become A Organiser</a>
+                        <a class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become An Organiser</a>
                     </li>
                 <?php   }?>
 
@@ -186,10 +186,10 @@ body{background-color: #fff;}
                                           <?php  }
                                           ?>
                                     </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="margin-left:-60px;">
-                                      <li><a class="nav-link" href="<?php echo base_url(); ?>profile">Profile</a></li>
-                                      <li><a class="nav-link logout-btn" onclick="logout()">Logout</a></li>
-
+                                    <ul class="dropdown-menu dropdown-block" role="menu" style="margin-left:-60px;">
+                                        <li><a href="<?php echo base_url(); ?>profile">Profile</a></li>
+                                         <li><a href="<?php echo base_url(); ?>change_password">Change Password</a></li>
+                                        <li><a class="cursor_link" onclick="logout()">Logout</a></li>
                                     </ul>
                                   </li>
 
@@ -219,10 +219,11 @@ body{background-color: #fff;}
 
         <div class="about_us" style="margin-top:-130px;">
             <center><h3>About Us</h3></center>
+            <p class="whatsheyla" id="services">
+               Heyla is like the encyclopaedia of “What, When and Where” of the World of Events, from Entertainment, Shopping, Sports, Dining, Travelling, Business and many more. You can organize events or attend them, or choose to do both if you wish.</p>
             <p class="whatsheyla">Heyla acts as the connecting link between event organizers and event seekers. It is your gateway to the World outside in your pocket, waiting to be explored, shared and enjoyed. Know what the buzzing events in Singapore are, today.
             </p>
-              <p class="whatsheyla" id="services">
-                 Heyla is like the encyclopaedia of “What, When and Where” of the World of Events, from Entertainment, Shopping, Sports, Dining, Travelling, Business and many more. You can organize events or attend them, or choose to do both if you wish.</p>
+
                   <p class="whatsheyla" id="services">
                   It’s an everything-for-everybody App and exploring is just a few clicks away.</p>
         </div>
@@ -262,7 +263,7 @@ body{background-color: #fff;}
                         <div class="media mediaobj">
                             <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/Popular.png" alt="Generic placeholder image">
                                 <div class="media-body">
-                                    <h5 class="mt-0">Popular</h5>Trending events happening in your city.</div>
+                                    <h5 class="mt-0">The </h5>Trending events happening in your city.</div>
                         </div>
                     </div>
 
