@@ -32,10 +32,7 @@
   bottom: 3rem;
 }
 
-.carousel-item {
-  height: 32rem;
 
-}
 .carousel-item > img {
   position: absolute;
   top: 0;
@@ -103,63 +100,65 @@ body{background-color: #f7f8fa;}
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/jquery-ui.css">
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/select2.min.css">
 
-<div class="container-fluid">
-<div class="homeslider">
-  <div id="myCarousel" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner" role="listbox">
-  <?php
-	if (count($banner_event_result)>0){
-		$i = 0;
-		foreach($banner_event_result as $res){
-			$event_id = $res->id * 564738;
-			$event_name = strtolower(preg_replace("/[^\w]/", "-", $res->event_name));
-			$enc_event_id = base64_encode($event_id);
-			$description  = $res->description ;
-			$num_words = 25;
-			$words = array();
-			$words = explode(" ", $description, $num_words);
-			$shown_string = "";
-			if(count($words) == 25){
-			   $words[24] = " ... ";
-			}
-			$shown_string = implode(" ", $words);
-			$disp_banner_desc  = wordwrap($shown_string, 100, "<br />");
-?>
 
-<div class="carousel-item <?php if ($i=='0') echo "active"; ?>" style="background-image: url('<?php echo base_url(); ?>assets/events/slider/<?php echo $res->banner; ?>');background-size: cover;background-position: center;background-repeat: no-repeat;">
-  <!--<img src="<?php echo base_url(); ?>assets/events/advertisement/<?php echo $res->banner; ?>" alt="<?php echo $res->event_name; ?>">-->
-      <div class="container">
-        <div class="carousel-caption d-none d-md-block text-left">
-          <h1><?php echo $res->event_name; ?></h1>
-          <p><?php echo $disp_banner_desc; ?></p>
-          <p><a class="btn btn-lg btn-primary" href="<?php echo base_url(); ?>eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/" role="button">Explore Now</a></p>
+
+
+  <div class="container-fluid">
+        <div class="homeslider">
+          <div id="myCarousel" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner" role="listbox">
+          <?php
+        	if (count($banner_event_result)>0){
+        		$i = 0;
+        		foreach($banner_event_result as $res){
+        			$event_id = $res->id * 564738;
+        			$event_name = strtolower(preg_replace("/[^\w]/", "-", $res->event_name));
+        			$enc_event_id = base64_encode($event_id);
+        			$description  = $res->description ;
+        			$num_words = 25;
+        			$words = array();
+        			$words = explode(" ", $description, $num_words);
+        			$shown_string = "";
+        			if(count($words) == 25){
+        			   $words[24] = " ... ";
+        			}
+        			$shown_string = implode(" ", $words);
+        			$disp_banner_desc  = wordwrap($shown_string, 100, "<br />");
+        ?>
+
+        <div class="carousel-item <?php if ($i=='0') echo "active"; ?>" style="background-image: url('<?php echo base_url(); ?>assets/events/slider/<?php echo $res->banner; ?>');background-size: cover;background-position: center;background-repeat: no-repeat;">
+              <div class="container">
+                <div class="carousel-caption d-none d-md-block text-left">
+                  <h1><?php echo $res->event_name; ?></h1>
+                  <p><?php echo $disp_banner_desc; ?></p>
+                  <p><a class="btn btn-lg btn-primary" href="<?php echo base_url(); ?>eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/" role="button">Explore Now</a></p>
+                </div>
+              </div>
+            </div>
+        	<?php $i = $i+1;
+        		}
+        	}else{ ?>
+            <div class="no_banner"></div>
+
+        <?php  } ?>
+
+          </div>
+          <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
         </div>
-      </div>
-    </div>
-	<?php $i = $i+1;
-		}
-	}else{ ?>
-    <div class="no_banner"></div>
-
-<?php  } ?>
-
+        </div>
   </div>
-  <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-</div>
-</div>
 
 <div class="container-fluid ">
   <div class="form_search eventdetail-pge slider_form">
@@ -1094,7 +1093,7 @@ function clear_all()
 			$('#category').prop('selectedIndex',0);
 			$('#event_type').prop('selectedIndex',0);
 		}
-		
+
 	  });
 	  alert("Clear all search?");
 }

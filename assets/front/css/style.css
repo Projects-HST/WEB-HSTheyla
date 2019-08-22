@@ -51,7 +51,10 @@ body{
 .slider-img{
   border-left: 3px solid #fff;
 }
+.carousel-item {
+  height: 32rem;
 
+}
 .form_search{
   margin-left: 100px;
   margin-right: 100px;
@@ -668,10 +671,17 @@ padding-bottom: 15px;
   margin-left: 0px !important;
   margin-right: 0px !important;
 }
+.carousel-item{
+  height:350px;
+}
 .event_list{
   margin-left: 0px !important;
   margin-right: 0px !important;
 }
+.event_detail_img{
+  height:200px !important;
+}
+
 .or-text{
   padding-top: 10px;
 }
@@ -796,6 +806,10 @@ padding-bottom: 15px;
 }
 .event-desc{
   font-size: 28px;
+}
+.event_detail_img{
+  height:500px;
+  width:100%;
 }
 .booking-section{
     background: rgba(0, 0, 0, 0.5);
@@ -1089,6 +1103,10 @@ a.btn.btn-login.btn-primary.btn-block.review-btn{
       background-color: #000;
 
   }
+  .carousel-item{
+    height:350px;
+  }
+
   .event-banner-img{
     height: 234px;
     width: 100%;
@@ -1146,6 +1164,9 @@ and (orientation : landscape) {
 .text_box{
   margin-left: 20px;
 }
+.carousel-item{
+  height:450px;
+}
 }
 
 .order_dialog{
@@ -1202,3 +1223,4 @@ ul.dropdown-menu.show{
   padding-top: 3px;
   padding-bottom: 3px;
   margin-bottom: 0px;
+}
