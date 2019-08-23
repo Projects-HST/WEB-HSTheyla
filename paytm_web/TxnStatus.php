@@ -136,6 +136,27 @@
 					$sbooking_date = date("d-m-Y", strtotime($booking_date));
 					$transaction_date = date("d-m-Y H:i:s"); 
 					$subject = "Heyla App Ticket Booking";
+/*
+							Hi <Name>, 
+								Bravo!
+								Your booking for <Event name> has been confirmed. 
+								Booking ID – 9462961-116
+								Event name:
+								Ticket: Platinum
+								Seats: <Seat Numbers>
+								Admit: 1 for Clowns, Puppets and more
+								Event Date and time : 28/04/2019 at 05:30 P.M.
+								Transaction date and time: 25/03/2019 at 04:42:04
+								Find more details on 
+								<link>
+
+								We wish you to make Cheerful Memories with each event!
+								Or
+								We wish you for an event that is memorable and enjoyable!
+
+								Regards,
+								Team Heyla
+*/
 					$email_message ='<html>
 									 <body>
 										<p>Order Id : '.$order_id.'</p>
