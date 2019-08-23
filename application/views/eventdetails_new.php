@@ -155,11 +155,11 @@ foreach($event_details as $res){
 <script src="<?php echo base_url(); ?>assets/front/js/jquery.galpop.min.js"></script>
 <div class="container-fluid event_details_bg">
   <div class="row event_details_bg_row">
-    <div class="col-md-8">
-    	<img class="d-block w-100" src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>" style="height:500px;width:100%;">
+    <div class="col-md-8 col-lg-8">
+    	<img class="d-block event_detail_img" src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>" style="">
 
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 col-lg-4">
       <div class="event_detail_thumb">
 				<?php if ($hotspot_status == 'N') { ?>
 					<p><span class="event_thumb event_detail_date">

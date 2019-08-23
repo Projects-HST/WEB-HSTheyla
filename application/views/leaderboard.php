@@ -50,19 +50,19 @@ padding-right: 50px;
   <div class="col-md-4  text-center">
       <div class="login_box">
         <img src="<?php echo base_url(); ?>assets/front/images/event-booking.png" class="img-center">
-        <span class="points_font">Booking (<?php echo $res->booking_points ; ?>)</span>
+        <span class="points_font">Bookings (<?php echo $res->booking_points ; ?>)</span>
 
     </div>
   </div>
   <div class="col-md-4 text-center">
     <div class="box">
       <img src="<?php echo base_url(); ?>assets/front/images/event-checkin.png" class="img-center">
-      <span class="points_font">Event Checkins (<?php echo $res->checkin_points ; ?>)</span>
+      <span class="points_font">Event Check-ins (<?php echo $res->checkin_points ; ?>)</span>
 
       </div>
       <div class="box">
         <img src="<?php echo base_url(); ?>assets/front/images/review.png" class="img-center">
-        <span class="points_font">Review (<?php echo $res->review_points ; ?>)</span>
+        <span class="points_font">Reviews (<?php echo $res->review_points ; ?>)</span>
     </div>
   </div>
   <div class="col-md-4 text-center">
@@ -73,7 +73,7 @@ padding-right: 50px;
       <div class="box">
 
       <img src="<?php echo base_url(); ?>assets/front/images/login-img.png" class="img-center">
-    <span class="points_font">Login (<?php echo $res->login_points ; ?>)</span>
+    <span class="points_font">Logins (<?php echo $res->login_points ; ?>)</span>
       </div>
   </div>
 

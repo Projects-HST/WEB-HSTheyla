@@ -29,7 +29,7 @@
         <div class="col-xs-12" >
             <input type="submit" class="btn btn-primary btn-block btn-login" placeholder="Password" value="Login" />
         </div>
-        <p>Dont have a Heyla account yet?<br><a href="<?php echo base_url(); ?>signup">Create your account now</a> </p>
+        <p>Don’t have a Heyla account yet?<br><a href="<?php echo base_url(); ?>signup">Create your account now</a> </p>
       </form>
 
     </div>
