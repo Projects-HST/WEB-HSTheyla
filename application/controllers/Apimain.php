@@ -1264,7 +1264,7 @@ class Apimain extends CI_Controller {
 		if($_POST == FALSE)
 		{
 			$res = array();
-			$res["opn"] = "View Event Images";
+			$res["opn"] = "search events";
 			$res["scode"] = 204;
 			$res["message"] = "Input error";
 
@@ -1276,8 +1276,10 @@ class Apimain extends CI_Controller {
 		$search_event = $this->input->post("search_event");
 		$city_id = $this->input->post("city_id");
 		$event_type = $this->input->post("event_type");
+		$user_id = $this->input->post("user_id");
+		$user_type = $this->input->post("user_type");
 
-		$data['result']=$this->apimainmodel->search_events($search_event,$city_id,$event_type);
+		$data['result']=$this->apimainmodel->search_events($search_event,$city_id,$event_type,$user_id,$user_type);
 		$response = $data['result'];
 		echo json_encode($response);
 	}

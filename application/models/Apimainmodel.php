@@ -1771,33 +1771,86 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 //#################### View Events End ###############//
 
 
-  function search_events($search_event,$city_id,$event_type){
-    if($event_type=='Favourite'){
-        $ev_type='N';
+  function search_events($search_event,$city_id,$event_type,$user_id,$user_type){
+	  
+	   if ($user_type ==1){
+            $pre_query = "SELECT * FROM user_preference WHERE user_id = '$user_id'";
+        } else {
+            $pre_query = "SELECT * FROM guest_user_preference WHERE user_id = '$user_id'";
+        }
+		    $pre_res = $this->db->query($pre_query);
+
+    		 if($pre_res->num_rows()>0){
+    		    foreach ($pre_res->result() as $rows)
+    			{
+    				   $pref_ids[]  = $rows->category_id;
+    			}
+    			$preferrence = implode (",", $pref_ids);
+    		 }
+   
+  
+  if ($event_type == 'All'){
+	         $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
+                            from events as ev
+                            left join event_popularity as ep on ep.event_id = ev.id
+                            LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+                            LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+                            WHERE ev.event_name like '%$search_event%' AND ev.hotspot_status = 'N' AND ev.event_status  ='Y'
+                            group by ev.id order by ev.start_date";
+	    }
+		if ($event_type == 'General'){
+	         $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
+                            from events as ev
+                            left join event_popularity as ep on ep.event_id = ev.id
+                            LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+                            LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+                            WHERE ev.event_name like '%$search_event%' AND ev.hotspot_status = 'N' AND ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
+                            group by ev.id order by ev.start_date";
+	    }
+	    if ($event_type == 'Popularity'){
+	         $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
+                            from events as ev
+                            left join event_popularity as ep on ep.event_id = ev.id
+                            LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+                            LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+                            WHERE ev.event_name like '%$search_event%' AND ev.hotspot_status = 'N' AND ev.end_date>= '$current_date' AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
+                            group by ev.id ORDER by popularity DESC";
+	    }
+		
+		if ($event_type == 'Hotspot'){
+	        $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
+                            from events as ev
+                            left join event_popularity as ep on ep.event_id = ev.id
+                            LEFT JOIN city_master AS ci ON ev.event_city = ci.id
+                            LEFT JOIN country_master AS cy ON ev.event_country = cy.id
+                            WHERE ev.event_name like '%$search_event%' AND ev.hotspot_status = 'Y' AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
+                            group by ev.id";
+	    }
+		
+		
+    /* if($event_type=='Favourite'){
         $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity FROM events AS ev
                     LEFT join event_popularity AS ep on ep.event_id = ev.id
                     LEFT JOIN city_master AS ci ON ev.event_city = ci.id
                     LEFT JOIN country_master AS cy ON ev.event_country = cy.id
                     LEFT JOIN booking_plan AS bp ON ev.id = bp.event_id
-                    WHERE ev.event_name like '%$search_event%' AND ev.event_city='$city_id' AND ev.hotspot_status  ='$ev_type'  AND  ev.end_date >= CURDATE() AND  ev.event_status ='Y' group by ev.id";
+                    WHERE ev.event_name like '%$search_event%' AND ev.event_city='$city_id' AND ev.hotspot_status  ='N'  AND  ev.end_date >= CURDATE() AND  ev.event_status ='Y' group by ev.id";
     }else if($event_type=='Hotspot'){
-        $ev_type='Y';
         $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity FROM events AS ev
                     LEFT join event_popularity AS ep on ep.event_id = ev.id
                     LEFT JOIN city_master AS ci ON ev.event_city = ci.id
                     LEFT JOIN country_master AS cy ON ev.event_country = cy.id
                     LEFT JOIN booking_plan AS bp ON ev.id = bp.event_id
-                    WHERE ev.event_name like '%$search_event%' AND ev.event_city='$city_id' AND ev.hotspot_status  ='$ev_type'   AND  ev.event_status ='Y' group by ev.id";
+                    WHERE ev.event_name like '%$search_event%' AND ev.event_city='$city_id' AND ev.hotspot_status  ='Y'   AND  ev.event_status ='Y' group by ev.id";
     }else{
-      $ev_type='Y';
        $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity FROM events AS ev
                   LEFT join event_popularity AS ep on ep.event_id = ev.id
                   LEFT JOIN city_master AS ci ON ev.event_city = ci.id
                   LEFT JOIN country_master AS cy ON ev.event_country = cy.id
                   LEFT JOIN booking_plan AS bp ON ev.id = bp.event_id
-                  WHERE ev.event_name like '%$search_event%' AND ev.event_city='$city_id' AND ev.hotspot_status  ='$ev_type'  AND  ev.end_date >= CURDATE() AND
+                  WHERE ev.event_name like '%$search_event%' AND ev.event_city='$city_id' AND ev.hotspot_status  ='Y'  AND  ev.end_date >= CURDATE() AND
                   ev.event_status ='Y' group by ev.id ORDER by popularity DESC LIMIT 50";
-    }
+    } */
 
 	$event_res = $this->db->query($event_query);
         if($event_res->num_rows()==0){
