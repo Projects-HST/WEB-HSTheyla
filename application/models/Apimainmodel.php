@@ -1773,6 +1773,8 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 
   function search_events($search_event,$city_id,$event_type,$user_id,$user_type){
 	  
+	   $current_date = date("Y-m-d");
+	   
 	   if ($user_type ==1){
             $pre_query = "SELECT * FROM user_preference WHERE user_id = '$user_id'";
         } else {
