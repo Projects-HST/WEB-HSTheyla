@@ -1795,7 +1795,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                             left join event_popularity as ep on ep.event_id = ev.id
                             LEFT JOIN city_master AS ci ON ev.event_city = ci.id
                             LEFT JOIN country_master AS cy ON ev.event_country = cy.id
-                            WHERE ev.event_name like '%$search_event%' AND ev.hotspot_status = 'N' AND ev.event_status  ='Y'
+                            WHERE ev.event_name like '%$search_event%' AND ev.end_date>= '$current_date' AND ev.hotspot_status = 'N' AND ev.event_status  ='Y'
                             group by ev.id order by ev.start_date";
 	    }
 		if ($event_type == 'General'){
