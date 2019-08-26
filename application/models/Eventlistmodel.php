@@ -482,6 +482,8 @@ Class Eventlistmodel extends CI_Model
 
 	function booking_process($order_id,$event_id,$plan_id,$plan_time_id,$user_id,$number_of_seats,$total_amount,$booking_date)
     {
+		
+		
 			$sql = "SELECT seat_rate FROM booking_plan WHERE id = '$plan_id' AND event_id = '$event_id'";
 			$resu=$this->db->query($sql);
 			if($resu->num_rows()>0)
@@ -509,7 +511,9 @@ Class Eventlistmodel extends CI_Model
 		 //$extra = $CGST + $SGST + $IHC;
 		 //$total_amount = $samount + $extra;
 
-			$squery = "SELECT * FROM booking_process A, booking_session B WHERE A.user_id >= '$user_id' AND A.order_id = B.order_id AND B.status = 'Start'";
+			//$squery = "SELECT * FROM booking_process A, booking_session B WHERE A.user_id >= '$user_id' AND A.order_id = B.order_id AND B.plan_time_id ='$plan_time_id' AND  B.status = 'Start'";
+			
+			$squery = "SELECT * FROM booking_process A, booking_session B WHERE A.user_id = '$user_id' AND A.order_id = B.order_id AND B.plan_time_id ='$plan_time_id' AND  B.status = 'Start'";
 			$resul_set =$this->db->query($squery);
 			if($resul_set->num_rows()==0)
 			{
@@ -531,7 +535,6 @@ Class Eventlistmodel extends CI_Model
 					$session_insert = $this->db->query($session_seats);
 
 					$sql = "SELECT A.id,A.order_id,E.category_name,B.id AS event_id,B.event_name,B.event_venue,B.event_address,C.show_date,C.show_time,D.plan_name,A.number_of_seats, A.total_amount, '$damount' AS booking_amount,$dGST AS CGST, $dGST AS SGST, $dbooking_fees AS IHC FROM booking_process A,events B,booking_plan_timing C,booking_plan D,category_master E WHERE A.order_id  = '$order_id' AND A.event_id = B.id AND A.plan_time_id = C.id AND A.plan_id = D.id AND B.category_id = E.id";
-
 					$resu=$this->db->query($sql);
 					$res=$resu->result();
 					return $res;
