@@ -175,7 +175,7 @@ input[type="file"] {
 </label>
 <input id="upload_image" type="file" name="upload_image" />
 </div>
-  
+
     <?php if(empty($rows->user_picture)){ ?>
   <?php  }else{ ?>
     <small class="" style="margin-left:150px;"><a onclick="remove_img()" style="cursor: pointer;">Remove Picture</a></small>
@@ -195,14 +195,13 @@ input[type="file"] {
       		</div>
       		<div class="modal-body">
         		<div class="row">
-  					<div class="col-md-8 text-center">
-						  <div id="image_demo" style="width:350px; margin-top:30px"></div>
+  					<div class="col-md-12 text-center">
+						  <center><div id="image_demo" style="width:450px; margin-top:30px"></div></center>
   					</div>
-  					<div class="col-md-4" style="padding-top:30px;">
-  						<br />
-  						<br />
-  						<br/>
-						  <button class="btn btn-success crop_image">Crop & Upload Image</button>
+            	</div>
+          	<div class="row">
+  					<div class="col-md-12 text-center" style="padding-top:30px;">
+  										  <button class="btn btn-success crop_image">Crop & Upload Image</button>
 					</div>
 				</div>
       		</div>

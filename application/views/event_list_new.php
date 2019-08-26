@@ -1,7 +1,5 @@
 <?php $user_id = $this->session->userdata('id'); ?>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-
-<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js"></script> -->
 <style>
 .ui-autocomplete {
     max-height: 200px;
@@ -99,10 +97,6 @@ body{background-color: #f7f8fa;}
 <script src="<?php echo base_url(); ?>assets/front/js/select2.min.js"></script>
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/jquery-ui.css">
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/select2.min.css">
-
-
-
-
   <div class="container-fluid">
         <div class="homeslider">
           <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -136,7 +130,7 @@ body{background-color: #f7f8fa;}
                 <div class="carousel-caption d-none d-md-block text-left">
                   <h1><?php echo $res->event_name; ?></h1>
                   <p><?php echo $disp_banner_desc; ?></p>
-                  <p><a class="btn btn-lg btn-primary" href="<?php echo base_url(); ?>eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/" role="button">Explore Now</a></p>
+                  <p><a class="btn btn-lg btn-primary cursor_link" href="<?php echo base_url(); ?>eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/" role="button">Explore Now</a></p>
                 </div>
               </div>
             </div>
@@ -241,6 +235,20 @@ body{background-color: #f7f8fa;}
                 </select>
             </div>
         </div>
+      </div>
+
+      <div class="col-md-3">
+        <!-- <label class="form-label">Search</label>
+        <div class="form-group">
+              <div class="col-sm-12">
+                <input  type="text" class="form-control search_box btn-block" name="search_term" id="search_term"  placeholder="Search Event by name" value="" autocomplete="off">
+                <span>
+                  <button type="button" onclick="getSearchevents()" style="border: 0; background: transparent;  outline:none;" >
+                    <i  class="fa fa-search field-icon toggle-password"></i></button>
+                  </span>
+
+            </div>
+        </div> -->
       </div>
 
       </div>
