@@ -85,9 +85,9 @@ body{background-color: #f7f8fa;}
     margin-bottom: 15px;
     margin-top: 15px;
 }
-.carousel-caption{
+/* .carousel-caption{
   display: none !important;
-}
+} */
 .clear_btn{
   float: right;
   font-size: 12px;
