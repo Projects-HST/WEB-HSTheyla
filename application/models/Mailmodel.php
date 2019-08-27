@@ -74,9 +74,6 @@ Class Mailmodel extends CI_Model
 
   function send_sms_to_users($user_ids,$email_temp_id)
   {
-      //echo "<br>";
-       //echo "SMS";
-       //echo "<br>";
   	 $tsql="SELECT id,template_name,template_content FROM email_template WHERE id='$email_temp_id'";
 	 $res=$this->db->query($tsql);
 	 $result1=$res->result();
@@ -193,9 +190,10 @@ Class Mailmodel extends CI_Model
 				$mobile_type = $rows->mobile_type;
 				$user_id = $rows->user_id;
 
-				$query ="INSERT INTO notification_history(template_id,user_master_id,view_status,created_at) VALUES('$temp_id','$user_id','0',NOW())";
+				echo $query ="INSERT INTO notification_history(template_id,user_master_id,view_status,created_at) VALUES('$temp_id','$user_id','0',NOW())";
 				$resultset=$this->db->query($query);
 
+exit;
     			if ($mobile_type =='1'){
 						if ($i< $count){
 							if ($temp_key!=""){
