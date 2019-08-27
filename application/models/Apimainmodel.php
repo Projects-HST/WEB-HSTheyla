@@ -387,10 +387,10 @@ class Apimainmodel extends CI_Model {
 					$update_gcm = $this->db->query($sQuery);
 				}
 
-				$Title = "Testing Title";
+				/* $Title = "Testing Title";
 				$Message = "Testing Message";
 				$mobiletype = "1";
-				$this->sendNotification($gcm_key,$Title,$Message,$mobiletype);
+				$this->sendNotification($gcm_key,$Title,$Message,$mobiletype); */
 					
     				$response = array("status" => "Success", "msg" => "Login Successfully", "userData" => $userData);
     				return $response;
@@ -2789,6 +2789,27 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
     	$response = array("status" => "success", "msg" => "Mail Send to Admin");
 		
 		return $response;
+	}
+//#################### User Feedback End ###############//
+
+
+//#################### User Feedback ###############//
+	public function User_notification($user_id)
+	{
+		/* $email_id = 'maran.happysanz@gmail.com';
+		$subject = "Heyla App - User Feedback";
+		$email_message = '<html>
+				 <body>
+					<p>Name : '.$name.'</p>
+					<p>Email : '.$email.'</p>
+					<p>Comments : '.$comments.'</p>
+				 </body>
+				 </html>';
+		$this->sendMail($email_id,$subject,$email_message);
+
+    	$response = array("status" => "success", "msg" => "Mail Send to Admin");
+		
+		return $response */;
 	}
 //#################### User Feedback End ###############//
 
