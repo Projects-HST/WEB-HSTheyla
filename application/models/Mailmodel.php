@@ -165,24 +165,148 @@ Class Mailmodel extends CI_Model
 
   function send_nofify_to_users($user_ids,$email_temp_id)
   {
-  	 $tsql="SELECT id,template_name,template_content FROM email_template WHERE id='$email_temp_id'";
-	 $res=$this->db->query($tsql);
-	 $result1=$res->result();
-	 foreach($result1 as $rows){ }
-	  $subject = $rows->template_name;
-	  $cnotes = $rows->template_content;
+		$tsql = "SELECT id,template_name,template_content,notification_img FROM email_template WHERE id='$email_temp_id'";
+		$res = $this->db->query($tsql);
+		$result1 = $res->result();
+		foreach($result1 as $rows){ 
+			$temp_id = $rows->id;
+			$subject = $rows->template_name;
+			$cnotes = $rows->template_content;
+			$notification_img = $rows->notification_img;
+			if ($notification_img!=""){
+				$img_url = "http://heylaapp.com/notification/images/".$notification_img;
+			} else {
+				$img_url = "null";
+			}
+		}
 
-	  $sql="SELECT * FROM push_notification_master WHERE user_id IN ($user_ids)";
+		$check_user = "SELECT * FROM push_notification_master WHERE user_id IN ($user_ids)";
+		$res=$this->db->query($check_user);
+		
+		if($res->num_rows()>0){
+			$i = 1;
+			$gcm_key ='';
+			$count = $res->num_rows();
+			
+			foreach($res->result() as $rows){
+				$temp_key = $rows->gcm_key;
+				$mobile_type = $rows->mobile_type;
+				$user_id = $rows->user_id;
+
+				$query ="INSERT INTO notification_history(template_id,user_master_id,view_status,created_at) VALUES('$temp_id','$user_id','0',NOW())";
+				$resultset=$this->db->query($query);
+
+    			if ($mobile_type =='1'){
+						if ($i< $count){
+							if ($temp_key!=""){
+								$gcm_key .= $temp_key.",";
+							}
+						} else {
+							$gcm_key .= $temp_key;
+						}
+						
+						require_once 'assets/notification/Firebase.php';
+						require_once 'assets/notification/Push.php';
+
+						$device_token = explode(",", $gcm_key);
+						$push = null;
+
+			//        //first check if the push has an image with it
+						$push = new Push(
+								$subject,
+								$cnotes,
+								$img_url
+							);
+
+			// 			//if the push don't have an image give null in place of image
+						// $push = new Push(
+						// 		'HEYLA',
+						// 		'Hi Testing from maran',
+						// 		null
+						// 	);
+
+						//getting the push from push object
+						$mPushNotification = $push->getPush();
+
+						//creating firebase class object
+						$firebase = new Firebase();
+						//$firebase->send($gcm_key,$mPushNotification);
+
+						foreach($device_token as $token) {
+							 $firebase->send(array($token),$mPushNotification);
+						}
+
+					
+				} else {
+					
+						if ($i< $count){
+            				if ($temp_key!=""){
+            					$gcm_key .= $temp_key.",";
+            				}
+            			} else {
+            				$gcm_key .= $temp_key;
+            			}
+			
+						/* $device_token = explode(",", $gcm_key);
+						$passphrase = 'hs123';
+						$loction ='assets/notification/heylaapp.pem';
+
+						$ctx = stream_context_create();
+						stream_context_set_option($ctx, 'ssl', 'local_cert', $loction);
+						stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);
+
+						// Open a connection to the APNS server
+						$fp = stream_socket_client('ssl://gateway.sandbox.push.apple.com:2195', $err, $errstr, 60, STREAM_CLIENT_CONNECT|STREAM_CLIENT_PERSISTENT, $ctx);
+
+						if (!$fp)
+							exit("Failed to connect: $err $errstr" . PHP_EOL);
+
+						$body['aps'] = array(
+							'alert' => array(
+								'body' => $subject,
+								'action-loc-key' => 'Heyla App',
+							),
+							'badge' => 2,
+							'sound' => 'assets/notification/oven.caf',
+							);
+
+						$payload = json_encode($body);
+
+							$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $gcm_key)) . pack("n", strlen($payload)) . $payload;
+							//$result = fwrite($fp, $msg, strlen($msg));
+
+						foreach($device_token as $token) {
+
+							// Build the binary notification
+							$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $token)) . pack("n", strlen($payload)) . $payload;
+							$result = fwrite($fp, $msg, strlen($msg));
+						}
+
+							fclose($fp);
+							$i = $i+1;
+					} */
+					
+				}
+
+			}
+			$data3= array("status"=>"Notify");
+            return $data3;
+		}
+
+  
+	  /* $sql="SELECT * FROM push_notification_master WHERE user_id IN ($user_ids)";
 	  $result=$this->db->query($sql);
 	  $user_result=$result->result();
 	  $count = $result->num_rows();
+
 	  if($count>0) {
 	       $i = 1;
 	       $gcm_key ='';
 
 		  foreach($user_result as $row){
-			$temp_key = $row->gcm_key;
-			$mobile_type = $row->mobile_type;
+			 //echo $temp_key = $row->gcm_key;
+			  $mobile_type = $row->mobile_type;
+			  $user_id = $row->user_id;
 
     			if ($mobile_type =='1'){
 
@@ -194,7 +318,8 @@ Class Mailmodel extends CI_Model
             				$gcm_key .= $temp_key;
             			}
 
-            			//echo $gcm_key;
+            	echo $gcm_key;
+
 
     				require_once 'assets/notification/Firebase.php';
     				require_once 'assets/notification/Push.php';
@@ -236,7 +361,10 @@ Class Mailmodel extends CI_Model
             			} else {
             				$gcm_key .= $temp_key;
             			}
+			
+				//echo $gcm_key;
 
+				
     			$device_token = explode(",", $gcm_key);
     			$passphrase = 'hs123';
     		    $loction ='assets/notification/heylaapp.pem';
@@ -279,7 +407,7 @@ Class Mailmodel extends CI_Model
 		}
 			 $data3= array("status"=>"Notify");
             return $data3;
-	  }
+	  } */
 
   }
 

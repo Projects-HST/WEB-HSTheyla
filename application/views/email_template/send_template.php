@@ -42,7 +42,6 @@
                          <!--div class="text-center">
                             < Large modal-->
                              <button type="button" id="sendSelectedBtn" class="btn btn-primary waves-effect waves-light">Send To Selected</button> &nbsp;
-
                              <button type="button" style="float: right;" data-toggle="modal" id="sendAll" data-target="#addmodel" class="btn btn-primary waves-effect waves-light">Send To All</button>
                         <!--/div-->
                       </label>
@@ -173,20 +172,17 @@
  $(document).on("click", "#sendSelectedBtn", function ()
    {
 
-     if($('input[name="users_id[]"]:checked').length > 0) {
+    if($('input[name="users_id[]"]:checked').length > 0) {
        	$('#addmodel').modal('show');
         var selected_value=[]; //initialize empty array
         $('#sendnews:checked').each(function()
         {
          selected_value.push($(this).val());
         });
-      $(".modal-body #user_id").val(selected_value);
-
-
+		$(".modal-body #user_id").val(selected_value);
    }else{
-
-         	alert('Please select any one user');
-        	$('#addmodel').modal('hide');
+         	alert('Please Select Any One User');
+        	//$('#addmodel').modal('hide');
          }
    });
 
