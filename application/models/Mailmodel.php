@@ -171,7 +171,7 @@ Class Mailmodel extends CI_Model
 			$cnotes = $rows->template_content;
 			$notification_img = $rows->notification_img;
 			if ($notification_img!=""){
-				$img_url = "https://heylaapp.com/notification/images/".$notification_img;
+				$img_url = "https://heylaapp.com/testing/assets/notification/images/".$notification_img;
 			} else {
 				$img_url = "null";
 			}
