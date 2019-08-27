@@ -215,7 +215,7 @@ Class Mailmodel extends CI_Model
 						$push = new Push(
 								$subject,
 								$cnotes,
-								'https://heylaapp.com/testing/assets/notification/images/heyla.png'
+								$img_url
 							);
 					
 			// 			//if the push don't have an image give null in place of image
