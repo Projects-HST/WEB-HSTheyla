@@ -217,7 +217,7 @@ Class Mailmodel extends CI_Model
 								$cnotes,
 								$img_url
 							);
-					echo $push;
+					print_r($push);
 			// 			//if the push don't have an image give null in place of image
 						// $push = new Push(
 						// 		'HEYLA',
