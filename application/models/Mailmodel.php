@@ -177,9 +177,9 @@ Class Mailmodel extends CI_Model
 			}
 		}
 
-		echo $check_user = "SELECT * FROM push_notification_master WHERE user_id IN ($user_ids)";
+		$check_user = "SELECT * FROM push_notification_master WHERE user_id IN ($user_ids)";
 		$res=$this->db->query($check_user);
-	exit;	
+
 		if($res->num_rows()>0){
 			$i = 1;
 			$gcm_key ='';
@@ -190,7 +190,7 @@ Class Mailmodel extends CI_Model
 				$mobile_type = $rows->mobile_type;
 				$user_id = $rows->user_id;
 
-				echo $query ="INSERT INTO notification_history(template_id,user_master_id,view_status,created_at) VALUES('$temp_id','$user_id','0',NOW())";
+				$query ="INSERT INTO notification_history(template_id,user_master_id,view_status,created_at) VALUES('$temp_id','$user_id','0',NOW())";
 				$resultset=$this->db->query($query);
 
 
