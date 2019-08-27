@@ -203,7 +203,7 @@ Class Mailmodel extends CI_Model
 							$gcm_key .= $temp_key;
 						}
 						
-						echo $gcm_key;
+						//echo $gcm_key;
 						
 						require_once 'assets/notification/Firebase.php';
 						require_once 'assets/notification/Push.php';
@@ -217,7 +217,7 @@ Class Mailmodel extends CI_Model
 								$cnotes,
 								$img_url
 							);
-					print_r($push);
+					
 			// 			//if the push don't have an image give null in place of image
 						// $push = new Push(
 						// 		'HEYLA',
