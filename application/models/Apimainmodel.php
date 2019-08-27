@@ -2793,25 +2793,33 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 //#################### User Feedback End ###############//
 
 
-//#################### User Feedback ###############//
+//#################### User Notification ###############//
 	public function User_notification($user_id)
 	{
-		/* $email_id = 'maran.happysanz@gmail.com';
-		$subject = "Heyla App - User Feedback";
-		$email_message = '<html>
-				 <body>
-					<p>Name : '.$name.'</p>
-					<p>Email : '.$email.'</p>
-					<p>Comments : '.$comments.'</p>
-				 </body>
-				 </html>';
-		$this->sendMail($email_id,$subject,$email_message);
-
-    	$response = array("status" => "success", "msg" => "Mail Send to Admin");
+		$notify_query = "SELECT
+							B.template_name,
+							B.template_content,
+							A.view_status
+						FROM
+							notification_history A,
+							email_template B
+						WHERE
+							A.user_master_id = '$user_id' AND A.template_id = B.id
+						GROUP BY
+							A.template_id ORDER BY A.created_at DESC";
+		$notify_res = $this->db->query($notify_query);
+		$notify_result = $notify_res->result();
 		
-		return $response */;
+
+		 if($notify_res->num_rows()>0){
+			 $response = array("status" => "success", "msg" => "View Notification","Notification"=>$notify_result);
+		}else{
+			 $response = array("status" => "error", "msg" => "Notification not found");
+		}
+		return $response;
 	}
-//#################### User Feedback End ###############//
+	
+//#################### User Notification End ###############//
 
 
 }
