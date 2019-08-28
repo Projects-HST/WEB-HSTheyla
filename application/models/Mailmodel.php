@@ -268,7 +268,8 @@ Class Mailmodel extends CI_Model
 								'title' => $subject,
 								'body' => $cnotes,
 								'action-loc-key' => 'Heyla App',
-							);
+							)
+						);
 						$body['data'] = array(
 							'mediaUrl' => "$img_url",
 							'mediaType' => "jpg"
