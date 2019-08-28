@@ -263,30 +263,17 @@ Class Mailmodel extends CI_Model
 						if (!$fp)
 							exit("Failed to connect: $err $errstr" . PHP_EOL);
 
-
 						$body['aps'] = array(
 							'alert' => array(
 								'title' => $subject,
 								'body' => $cnotes,
 								'action-loc-key' => 'Heyla App',
-							)
-							 'mutable-content' => 1,
-							 'category'=> "pusher"
 							);
 						$body['data'] = array(
 							'mediaUrl' => "$img_url",
 							'mediaType' => "jpg"
-						);
-
-						/* $body['aps'] = array(
-							'alert' => array(
-								'title' => $subject,
-								'body' => $cnotes,
-								'action-loc-key' => 'Heyla App',
-							),
-							'media-url' =>$img_url
-							); */
-
+						); 
+						
 						$payload = json_encode($body);
 
 							//$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $gcm_key)) . pack("n", strlen($payload)) . $payload;
