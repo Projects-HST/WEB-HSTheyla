@@ -77,6 +77,7 @@ class Apimainmodel extends CI_Model {
 
 			$body['aps'] = array(
 				'alert' => array(
+					'title' => $Title,
 					'body' => $Message,
 					'action-loc-key' => 'Heyla App',
 				),
