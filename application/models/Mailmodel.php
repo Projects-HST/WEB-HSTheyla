@@ -241,13 +241,13 @@ Class Mailmodel extends CI_Model
 					
 						if ($i< $count){
             				if ($temp_key!=""){
-            					echo $gcm_key .= $temp_key.",";
+            					 $gcm_key .= $temp_key.",";
             				}
             			} else {
-            				echo $gcm_key .= $temp_key;
+            				 $gcm_key .= $temp_key;
             			}
 			
-			//echo $gcm_key;
+			echo $gcm_key;
 			
 						$device_token = explode(",", $gcm_key);
 						$passphrase = 'hs123';
