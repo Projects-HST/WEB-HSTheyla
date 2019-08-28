@@ -269,8 +269,7 @@ Class Mailmodel extends CI_Model
 								'body' => $cnotes,
 								'action-loc-key' => 'Heyla App',
 							),
-							'badge' => 2,
-							'sound' => 'assets/notification/oven.caf',
+							'urlImageString' =>$img_url
 							);
 
 						$payload = json_encode($body);
@@ -283,9 +282,6 @@ Class Mailmodel extends CI_Model
 							// Build the binary notification
 							$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $token)) . pack("n", strlen($payload)) . $payload;
 							$result = fwrite($fp, $msg, strlen($msg));
-							
-							//echo $token;
-							//echo "<br>";
 						}
 
 							fclose($fp);
