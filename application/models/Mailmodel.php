@@ -247,7 +247,7 @@ Class Mailmodel extends CI_Model
             				$gcm_key .= $temp_key;
             			}
 			
-						/* $device_token = explode(",", $gcm_key);
+						 $device_token = explode(",", $gcm_key);
 						$passphrase = 'hs123';
 						$loction ='assets/notification/heylaapp.pem';
 
@@ -284,7 +284,7 @@ Class Mailmodel extends CI_Model
 
 							fclose($fp);
 							$i = $i+1;
-					} */
+					
 					
 				}
 
