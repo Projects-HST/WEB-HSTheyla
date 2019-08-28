@@ -1,7 +1,7 @@
 <?php
 
 // Put your device token here (without spaces):
-  $deviceToken = '59ee229e a0741d1f dd5525a3 2bb9f482 e6a94291 900ccca0 e0f9cb1e c1acf71b';
+  $deviceToken = '59ee229ea0741d1fdd5525a32bb9f482e6a94291900ccca0e0f9cb1ec1acf71b';
 // Put your private key's passphrase here:
 $passphrase = 'mypassphase';
 // Put your alert message here:
