@@ -12,7 +12,7 @@
             <div class="col-12">
                 <div class="card m-b-20">
                     <div class="card-block">
-                 <h4 class="mt-0 header-title"> Add Events </h4>
+                 <h4 class="mt-0 header-title"> Create Event </h4>
                   <?php if($this->session->flashdata('msg')): ?>
                     <div class="alert <?php $msg=$this->session->flashdata('msg');
                     if($msg=='Added Successfully' || $msg=='Update Successfully'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
@@ -26,25 +26,25 @@
                        <label for="country" class="col-sm-2 col-form-label">Select Country</label>
                        <div class="col-sm-4">
                          <select class="form-control" name="country" onchange="getcityname(this.value)">
-                           <option value="">Select Country</option>
+                           <option value="">Select country</option>
                                 <?php foreach($country_list as $cntry){ ?>
                                    <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
                                 <?php } ?>
                            </select>
                        </div>
-                       <label for="city" class="col-sm-2 col-form-label">Select Location</label>
+                       <label for="city" class="col-sm-2 col-form-label">Select City/Area</label>
                        <div class="col-sm-4">
                           <select class="form-control" name="city" id="ctname">
-                                     <option value="">Select Location</option>
+                                     <option value="">Select city/area</option>
                            </select>
                            <div id="cmsg"></div>
                        </div>
                    </div>
                         <div class="form-group row">
-                            <label for="Category" class="col-sm-2 col-form-label">Select Category</label>
+                            <label for="Category" class="col-sm-2 col-form-label">Event Category</label>
                             <div class="col-sm-4">
                                 <select class="form-control" name="category">
-                                  <option value="">Select Category Name</option>
+                                  <option value="">Select category</option>
                                      <?php foreach($category_list as $res){ ?>
                                         <option value="<?php echo $res->id; ?>"><?php echo $res->category_name; ?></option>
                                      <?php } ?>
@@ -70,7 +70,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                           <label for="latitude" class="col-sm-2 col-form-label">Mark Location</label>
+                           <label for="latitude" class="col-sm-12 col-form-label">Choose the latitude and longitude by clicking on the map</label>
                           <div id="dvMap" style="width:100%; height:300px"> </div>
 
                         </div>
@@ -122,19 +122,19 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                           <label for="Status" class="col-sm-2 col-form-label">Advertisement </label>
+                           <label for="Status" class="col-sm-2 col-form-label">Event Advertisement </label>
                            <div class="col-sm-4">
                               <select class="form-control" name="eadv_status">
-                                   <option value="">Select Status</option>
-                                   <option value="Y">Yes</option>
-                                   <option value="N">No</option>
+                                   <option value="">Select</option>
+                                   <option value="Y">Enable</option>
+                                   <option value="N">Disable</option>
                                </select>
                            </div>
 
-                            <label for="Status" class="col-sm-2 col-form-label">Hotspot </label>
+                            <label for="Status" class="col-sm-2 col-form-label">Is this place a hotspot? </label>
                            <div class="col-sm-4">
                               <select class="form-control" name="hotspot_sts" id="hotspot_sts">
-                                   <option value="">Select Status</option>
+                                   <option value="">Select</option>
                                    <option value="Y">Yes</option>
                                    <option value="N">No</option>
                                </select>
@@ -159,11 +159,11 @@
 
 
                         <div class="form-group row">
-                            <label for="primarycell" class="col-sm-2 col-form-label">Contact Phone</label>
+                            <label for="primarycell" class="col-sm-2 col-form-label">Phone Number</label>
                             <div class="col-sm-4">
                                 <input class="form-control" type="text"  name="pcontact_cell"  value="">
                             </div>
-                            <label for="seccell" class="col-sm-2 col-form-label">Sec. Contact Phone</label>
+                            <label for="seccell" class="col-sm-2 col-form-label">Alternate Phone Number</label>
                             <div class="col-sm-4">
                                 <input class="form-control" type="text" name="scontact_cell" value="" >
                             </div>
@@ -174,7 +174,7 @@
                             <div class="col-sm-4">
                                 <input class="form-control" type="text"  name="contact_person" value="">
                             </div>
-                            <label for="Email" class="col-sm-2 col-form-label">Contact Email</label>
+                            <label for="Email" class="col-sm-2 col-form-label">Email ID</label>
                             <div class="col-sm-4">
                                 <input class="form-control" type="text"  name="email" value="" >
                             </div>
@@ -184,7 +184,7 @@
 
                         <div class="form-group row">
 
-                            <label for="Colour" class="col-sm-2 col-form-label">Secondary Contact Person</label>
+                            <label for="Colour" class="col-sm-2 col-form-label">Alternate Contact Person</label>
                             <div class="col-sm-4">
                               <input class="form-control" type="text"  name="sec_contact_person" value="" id="sec_contact_person">
                             </div>
@@ -204,12 +204,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="Status" class="col-sm-2 col-form-label">Display Status</label>
+                            <label for="Status" class="col-sm-2 col-form-label">Event Status</label>
                             <div class="col-sm-4">
                                <select class="form-control"  name="event_status">
-                                    <option value="">Select Status</option>
-                                    <option value="Y">Yes</option>
-                                    <option value="N">No</option>
+                                    <option value="">Select status</option>
+                                    <option value="Y">Active</option>
+                                    <option value="N">Inactive</option>
                                 </select>
                             </div>
                         </div>
@@ -218,11 +218,11 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label"></label>
                             <div class="col-sm-2">
-                              <button type="submit" class="btn btn-primary waves-effect waves-light">
-                              Submit </button></div>
+                              <button type="submit" class="btn btn-success waves-effect waves-light">
+                              Create </button></div>
                               <div class="col-sm-2">
                               <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                              Reset
+                              Clear
                               </button></div>
                         </div>
 
@@ -324,31 +324,31 @@
         },
 
         messages: {
-        category:"Select Category Name",
-        event_name:"Enter Event Name",
-        country:"Select Country Name",
-        city:"Select City Name",
-        venue:"Enter Venue",
-        address:"Enter Address",
-        description:"Enter Description",
-        eventcost:"Select Event Type",
-        start_date:"Select Start Date",
-        end_date:"Select End Date",
-        start_time:"Select Start Time",
-        end_time:"Select End Time",
-        eadv_status:"Select Advertisement Status ",
-        hotspot_sts:"Select Hotspot Status ",
+        category:"Select category",
+        event_name:"This field cannot be empty!",
+        country:"Select country",
+        city:"Select city/area",
+        venue:"This field cannot be empty!",
+        address:"This field cannot be empty!",
+        description:"This field cannot be empty!",
+        eventcost:"Select event type",
+        start_date:"Select start date",
+        end_date:"Select end date",
+        start_time:"Select start time",
+        end_time:"Select end time",
+        eadv_status:"Selection required!",
+        hotspot_sts:"Selection required!",
         pcontact_cell:{
-          required:"Enter Primary Contact Number",
+          required:"This field cannot be empty!",
           digits:"Only numbers",
         },
-        contact_person:"Enter Name",
-        email:"Enter Email",
-        event_status:"Select Status",
-        txtLatitude:"Enter Latitude",
-        txtLongitude:"Enter Longitude",
+        contact_person:"This field cannot be empty!",
+        email:"This field cannot be empty!",
+        event_status:"Select status",
+        txtLatitude:"This field cannot be empty!",
+        txtLongitude:"This field cannot be empty!",
     		eventbanner:{
-          required:"Select Banner",
+          required:"Select banner",
           accept:"Please upload .jpg or .png .",
           fileSize:"File must be JPG or PNG, less than 1MB"
         }

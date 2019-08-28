@@ -58,13 +58,13 @@
                         <?php foreach($edit as $res){ }?>
                         <form  method="post" action="<?php echo base_url();?>category/update_category" name="categoryform" enctype="multipart/form-data" id="categoryform">
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-4 col-form-label">Category Name</label>
+                              <label for="example-text-input" class="col-sm-4 col-form-label">Category</label>
                               <div class="col-sm-6">
                                  <input class="form-control" type="text" name="categoryname" value="<?php echo $res->category_name; ?>" readonly>
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Picture</label>
+                              <label class="col-sm-4 col-form-label">Image</label>
                            <div class="col-sm-6">
                               <input type="file" name="categorypic" id="file_upload" class="form-control" accept="image/*">
                                  <div id="preview" style="color: red;"></div>
@@ -89,17 +89,17 @@
                               <label class="col-sm-4 col-form-label"> Status</label>
                               <div class="col-sm-6">
                                  <select class="form-control"  name="eventsts">
-                                    <option value="">Select Status</option>
-                                    <option value="Y">Yes</option>
-                                    <option value="N">No</option>
+                                    <option value="">Select status</option>
+                                    <option value="Y">Active</option>
+                                    <option value="N">Inactive</option>
                                  </select>
                                   <script language="JavaScript">document.categoryform.eventsts.value="<?php echo $res->status; ?>";</script>
                               </div>
                            </div>
                            <div class="form-group">
                               <label class="col-sm-4 col-form-label"></label>
-                              <button type="submit" class="btn btn-primary waves-effect waves-light">
-                              Update </button>
+                              <button type="submit" class="btn btn-success waves-effect waves-light">
+                              Save </button>
                            </div>
                      </div>
                      </form>
@@ -161,10 +161,10 @@
 
         },
         messages: {
-        categoryname:"Enter Category Name",
+        categoryname:"Enter category",
         //categorypic:"Select Category Picture",
-        eventsts:"Select Status",
-        disp_order:"Select Display Order"
+        eventsts:"Select status",
+        disp_order:"Select display order"
                },
          });
    });

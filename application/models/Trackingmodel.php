@@ -80,7 +80,7 @@ LEFT JOIN user_master AS um ON um.id=ev.created_by WHERE um.user_role=2 GROUP BY
       if($result){
          echo "success";
       }else{
-         echo "failed";
+         echo "Something went wrong! Please try again later.";
       }
     }
 

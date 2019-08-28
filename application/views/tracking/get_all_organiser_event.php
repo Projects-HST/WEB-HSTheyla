@@ -1,18 +1,20 @@
 <div class="page-content-wrapper ">
     <div class="container">
       <div class="row">
+
       <div class="col-lg-12">
+          <h4 class="mt-0 header-title">Events Details </h4>
           <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                <th>S.No</th>
-                <th>Event Name</th>
-                <th>Event City</th>
-                <th>Start date</th>
-                  <th>End date</th>
+                <th>S. No</th>
+                <th style="width:200px;">Event</th>
+                <th>City/Area</th>
+                <th>Start Date</th>
+                  <th>End Date</th>
+                <th>Type</th>
                 <th>Status</th>
-                <th>Action</th>
-                <th>View</th>
+                <th>Actions</th>
             </tr>
             </thead>
               <tbody>
@@ -23,8 +25,8 @@
                   <td><?php echo $rows_event->city_name; ?></td>
                   <td><?php echo $rows_event->start_date; ?></td><td><?php  echo $rows_event->end_date; ?></td>
                   <td><?php echo $rows_event->event_type; ?></td>
-                <td><?php  if($rows_event->event_status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
-                  <td><a href="<?php echo base_url(); ?>events/edit_events/<?php echo base64_encode($rows_event->id); ?>"><img title="View Events" src="<?php echo base_url(); ?>assets/icons/edit.png"></a></td>
+                <td><?php  if($rows_event->event_status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Inactive </button>'; }?></td>
+                  <td><a href="<?php echo base_url(); ?>events/edit_events/<?php echo base64_encode($rows_event->id); ?>"><img title="Edit" src="<?php echo base_url(); ?>assets/icons/edit.png"></a></td>
 
                 </tr>
               <?php $i++; }  ?>

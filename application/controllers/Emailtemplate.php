@@ -59,13 +59,13 @@ class Emailtemplate extends CI_Controller
 	        $sta=$datas['status'];
 	        //print_r($sta);exit;
 	        if($sta=="success"){
-		       $this->session->set_flashdata('msg','Added Successfully');
+		       $this->session->set_flashdata('msg','Content created for notification');
 			   redirect('emailtemplate/home');
 		    }else if($sta=="AE"){
-		    	 $this->session->set_flashdata('msg','Already Exist');
+		    	 $this->session->set_flashdata('msg','Title already exists!');
 			   redirect('emailtemplate/home');
 		    }else{
-		     	 $this->session->set_flashdata('msg','Faild To Add');
+		     	 $this->session->set_flashdata('msg','Something went wrong! Please try again later.');
 			     redirect('emailtemplate/home');
 		    }
 		}else{
@@ -134,10 +134,10 @@ class Emailtemplate extends CI_Controller
 		    $datas = $this->emailtemplatemodel->update_templates_details($id,$tempname,$tempdetails,$img,$user_id);
 	        $sta=$datas['status'];
 	        if($sta=="success"){
-		       $this->session->set_flashdata('msg','Updated Successfully');
+		       $this->session->set_flashdata('msg','Changes made are saved');
 			   redirect('emailtemplate/home');
 		    }else{
-		     	 $this->session->set_flashdata('msg','Faild To Update');
+		     	 $this->session->set_flashdata('msg','Something went wrong! Please try again later.');
 			     redirect('emailtemplate/home');
 		    }
 		}else{
@@ -154,10 +154,10 @@ class Emailtemplate extends CI_Controller
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
 			$user_role=$this->session->userdata('user_role');
-			
+
 			if($user_role == 1 || $user_role == 4){
 				$cityid=$this->input->post('cityid');
-				
+
 				if($cityid!=''){
 					$datas['city_id']=$cityid;
 				 $datas['view'] = $this->emailtemplatemodel->getall_search_users_details($cityid);
@@ -167,7 +167,7 @@ class Emailtemplate extends CI_Controller
 
 					$datas['email_tem'] = $this->emailtemplatemodel->getall_email_template();
 					$datas['city_list'] = $this->emailtemplatemodel->getall_city_list();
-					
+
 					//print_r ($datas);
 						$this->load->view('header');
 						$this->load->view('email_template/send_template',$datas);
@@ -199,7 +199,7 @@ class Emailtemplate extends CI_Controller
 							$this->session->set_flashdata('msg','Send Successfully');
 							redirect('emailtemplate/select_users');
 							}else{
-							$this->session->set_flashdata('msg','Faild To Send');
+							$this->session->set_flashdata('msg','Something went wrong! Please try again later.');
 							redirect('emailtemplate/select_users');
 							}
 								}else{
@@ -221,7 +221,7 @@ class Emailtemplate extends CI_Controller
 					$notify = $this->input->post('notify');
 
 					if(empty($user_ids)){
-						$this->session->set_flashdata('msg','Please Select Any One User');
+						$this->session->set_flashdata('msg','Please select atleast one user');
 						redirect('emailtemplate/select_users');
 					}else{
 						if ($sms !=""){
@@ -230,7 +230,7 @@ class Emailtemplate extends CI_Controller
 						if ($notify !=""){
 							$datas3 =$this->mailmodel->send_nofify_to_users($user_ids,$email_temp_id);
 						}
-						$this->session->set_flashdata('msg','Notification Send Successfully');
+						$this->session->set_flashdata('msg','Notification sent successfully');
 						redirect('emailtemplate/select_users');
 					}
 			    }else{

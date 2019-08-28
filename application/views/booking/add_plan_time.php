@@ -1,4 +1,8 @@
-
+<style>
+th{
+  width: 100px;
+}
+</style>
 <script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
 <link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
 
@@ -8,11 +12,11 @@
                <div class="col-lg-8">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title"> Plan Show Time </h4>
+                        <h4 class="mt-0 header-title"> Create  Show Timings </h4>
                         <form  method="post"  enctype="multipart/form-data" action="<?php echo base_url();?>booking/add_show_times_details" name="plantimeform" id="plantimeform">
 
                             <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Show Date</label>
+                              <label class="col-sm-4 col-form-label">Date</label>
                               <div class="col-sm-6">
                                  <select class="form-control" name="showdate">
                                    <?php
@@ -37,7 +41,7 @@
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Show Time</label>
+                              <label class="col-sm-4 col-form-label">Time</label>
                               <div class="col-sm-6">
                                  <input id="timepicker1" type="text" class="form-control"  name="showtime"/>
                                  <!--input class="form-control"   type="text" name="showtime"-->
@@ -54,11 +58,9 @@
 
                            <div class="form-group">
                               <label class="col-sm-4 col-form-label"></label>
-                              <button type="submit" class="btn btn-primary waves-effect waves-light">
-                              Submit </button>
-                              <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                              Reset
-                              </button>
+                              <button type="submit" class="btn btn-success waves-effect waves-light">
+                              Create </button>
+
                            </div>
                      </div>
                      </form>
@@ -70,7 +72,7 @@
                <div class="col-12">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title"></h4>
+                        <h4 class="mt-0 header-title">Show Timings</h4>
                         <?php if($this->session->flashdata('msg')): ?>
                         <div class="alert alert-success">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
@@ -80,14 +82,14 @@
                         <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
-                                 <th>S.No</th>
+                                 <th>S. No</th>
                                  <th>Event Name</th>
                                  <th>Plan Name</th>
                                  <th>Show Date</th>
                                  <th>Show Time</th>
                                  <th>Available Seats</th>
                                  <th>Amount</th>
-                                 <th>Action</th>
+                                 <th>Actions</th>
                               </tr>
                            </thead>
                            <tbody>
@@ -138,9 +140,8 @@
         seats:{required:true,number:true }
        },
        messages: {
-       showtime:"Enter Show Times",
-
-       required:{ seats:"Enter  Seats",number:"Enter numbers"}
+       showtime:"When does the show start?",
+       seats:{ required:"Seat count required!",number:"This doesn't seem to be a number!"}
             },
         });
    });

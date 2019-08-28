@@ -5,7 +5,7 @@
                <div class="col-lg-8">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title"> Event Plans </h4>
+                        <h4 class="mt-0 header-title">Create Ticket Plan </h4>
                         <form  method="post"  enctype="multipart/form-data" action="<?php echo base_url();?>booking/add_plans" name="planform" id="planform">
                            <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Plan Name</label>
@@ -28,11 +28,9 @@
                            </div>
                            <div class="form-group">
                               <label class="col-sm-4 col-form-label"></label>
-                              <button type="submit" class="btn btn-primary waves-effect waves-light">
-                              Submit </button>
-                              <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                              Reset
-                              </button>
+                              <button type="submit" class="btn btn-success waves-effect waves-light">
+                              Create </button>
+
                            </div>
                      </div>
                      </form>
@@ -44,7 +42,7 @@
                <div class="col-12">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title">Plan Details</h4>
+                        <h4 class="mt-0 header-title">Ticket Plans</h4>
                         <?php if($this->session->flashdata('msg')): ?>
                         <div class="alert alert-success">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
@@ -54,11 +52,11 @@
                         <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
-                                 <th>S.No</th>
+                                 <th>S. No</th>
                                  <th>Plan Name</th>
                                  <th>Event  Name</th>
                                  <th>Amount</th>
-                                 <th>Action</th>
+                                 <th>Actions</th>
                               </tr>
                            </thead>
                            <tbody>
@@ -76,7 +74,7 @@
                                  <td>
                                     <a href="<?php echo base_url();?>booking/edit_plan/<?php echo $rows->id;?>"><img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
                                     <a href="<?php echo base_url();?>booking/add_show_time/<?php echo $plaid;?>/<?php echo $eveid;?>">
-                              <img title="Show Times" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
+                              <img title="Show Timings" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
                                <!--a href="<?php echo base_url();?>booking/delete_plan/<?php echo $plaid;?>/<?php echo $eveid;?>">
                               <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
                                  </td>
@@ -110,9 +108,9 @@
        },
 
        messages: {
-       planname:"Enter Plan Name",
+       planname:"Plan name cannot be empty",
        seats:"Enter  Seats",
-       amount:{required:"Enter Amount",number:"Enter the number"}
+       amount:{required:"Amount cannot be empty",number:"This doesn't seem to be an amount!"}
 
               },
         });

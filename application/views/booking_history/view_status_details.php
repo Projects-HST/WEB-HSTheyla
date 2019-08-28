@@ -5,7 +5,7 @@
                <div class="col-12">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title"> View Booking Status Details From Paytm</h4>
+                        <h4 class="mt-0 header-title"> Booking Status</h4>
 
                            <?php if($this->session->flashdata('msg')): ?>
                         <div class="alert alert-success">
@@ -18,12 +18,12 @@
                            <thead>
                               <tr>
 							     <th>S.No</th>
-							     <th>Order Id</th>
+							     <th>Order ID</th>
                                  <th>Order Status</th>
                                  <th>Payment Mode</th>
-                                 <th>Track Id</th>
+                                 <th>Transaction ID</th>
                                  <th>Amount</th>
-                                 <th>View</th>
+                                 <th>Actions</th>
                               </tr>
                            </thead>
                            <tbody>
@@ -40,7 +40,7 @@
                                  <td><?php echo $rows->amount; ?></td>
                                  <td>
                                   <a href="<?php echo base_url();?>bookinghistory/view_payment_details/<?php echo $rows->id;?>">
-                                  <img title="View Attendees" src="<?php echo base_url();?>assets/icons/view.png" /> </a>
+                                  <img title="View Booking Details" src="<?php echo base_url();?>assets/icons/view.png" /> </a>
                                 </td>
                               </tr>
                              <?php $i++;  }  ?>

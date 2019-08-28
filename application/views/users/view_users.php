@@ -6,11 +6,11 @@
             <div class="card m-b-20">
                 <div class="card-block">
 
-                    <h4 class="mt-0 header-title"> View Admin Users List </h4>
+                    <h4 class="mt-0 header-title">Sub-admins </h4>
 
                      <?php if($this->session->flashdata('msg')): ?>
                        <div class="alert <?php $msg=$this->session->flashdata('msg');
-                       if($msg=='Added Successfully' || $msg=='Updated Successfully'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
+                       if($msg=='Added Successfully' || $msg=='Changes made are saved'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                            ×</button> <?php echo $this->session->flashdata('msg'); ?>
                         </div>
@@ -22,13 +22,13 @@
                             <table  id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                         <tr>
-                            <th>S.No</th>
-                            <th>Username/ Email </th>
+                            <th>S. No</th>
+                            <th>Username/Email ID </th>
                             <th>Full Name</th>
-                            <th>Phone</th>
-                            <th>User Picture</th>
+                            <th>Phone Number</th>
+                            <th>Profile Picture</th>
                             <th>Status</th>
-                            <th>Action</th>
+                            <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>

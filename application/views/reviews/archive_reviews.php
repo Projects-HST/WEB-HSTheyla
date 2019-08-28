@@ -19,22 +19,24 @@ td{
                             <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>Event Name</th>
-                                <th>Event rating</th>
-                                <th >Event Comments</th>
-                                <th>Action</th>
+                              <th>S. No</th>
+                                <th style="width:200px;">Event</th>
+                                <th>Rating</th>
+                                <th >Comments</th>
+                                <th>Actions</th>
                             </tr>
                             </thead>
                         <tbody>
-                      <?php if(!empty($views)) { foreach ($views as $value) {  ?>
+                      <?php $i=1; if(!empty($views)) { foreach ($views as $value) {  ?>
                         <tr>
+                          <td><?php  echo $i; ?></td>
                           <td><?php echo $value->event_name;?> </td>
                           <td><?php echo $value->event_rating; ?></td>
                             <td><?php echo $value->comments;?></td>
                            <td><a href="<?php echo base_url(); ?>reviews/display/<?php echo $value->id; ?>/Y/<?php echo $value->event_id; ?>/<?php echo $value->user_id; ?>" class="btn btn-primary waves-effect waves-light">
                                Display </a>  </td>
                         </tr>
-                          <?php } }else{ echo "<p class=card-text> No Reviews Found </p>";}?>
+                      <?php $i++; }  }else{ echo "<p class=card-text> No Reviews Found </p>";}?>
                         </tbody>
                     </table>
                           </div>

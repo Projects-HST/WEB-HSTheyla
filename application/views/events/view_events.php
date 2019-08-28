@@ -1,3 +1,8 @@
+<style>
+th{
+  width:200px;
+}
+</style>
     <div class="page-content-wrapper ">
         <div class="container">
         <div class="row">
@@ -9,7 +14,7 @@
 
                      <?php if($this->session->flashdata('msg')): ?>
                        <div class="alert <?php $msg=$this->session->flashdata('msg');
-                       if($msg=='Added Successfully' || $msg=='Update Successfully'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
+                       if($msg=='Event created successfully' || $msg=='Changes made are saved'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                            ×</button> <?php echo $this->session->flashdata('msg'); ?>
                         </div>
@@ -19,10 +24,10 @@
                     <!-- Nav tabs -->
                     <ul class="nav nav-pills nav-justified" role="tablist" style="width:70%;margin-left:3%;">
                         <li class="nav-item waves-effect waves-light">
-                            <a class="nav-link active" data-toggle="tab" href="#home-1" role="tab">Advertisement</a>
+                            <a class="nav-link active" data-toggle="tab" href="#home-1" role="tab">Advertisements</a>
                         </li>
                         <li class="nav-item waves-effect waves-light">
-                            <a class="nav-link" data-toggle="tab" href="#profile-1" role="tab">Hotspot </a>
+                            <a class="nav-link" data-toggle="tab" href="#profile-1" role="tab">Hotspots </a>
                         </li>
                          <li class="nav-item waves-effect waves-light">
                             <a class="nav-link" data-toggle="tab" href="#messages-1" role="tab">General Events</a>
@@ -38,13 +43,12 @@
                             <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
                         <thead>
                         <tr>
-                            <th>S.No</th>
-                            <th>Event Name</th>
-                            <!--th>Event Category</th-->
-                            <th>City</th>
-                            <th>Popularity</th>
+                            <th>S. No</th>
+                            <th>Event</th>
+                            <th>City/Area</th>
+                            <th>Views</th>
                             <th>Status</th>
-                            <th>Action</th>
+                            <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -70,21 +74,21 @@
                               <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
 
                              <a href="<?php echo base_url();?>events/view_single_events/<?php echo base64_encode($rows->id);?>">
-                              <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a>
+                              <img  title="Event details" src="<?php echo base_url();?>assets/icons/view.png"/></a>
 
                               <!--a onclick="confirmGetMessage(<?php echo $eid;?>)" >
                               <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
 
                               <?php if($etype=='Paid'){?>
                               <a href="<?php echo base_url();?>booking/home/<?php echo base64_encode($rows->id);?>">
-                              <img title="Booking Events" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
+                              <img title="Ticket plans" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
                               <?php } ?>
 
                               <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo $rows->id;?>">
-                              <img title="Add Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/></a>
+                              <img title="Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/></a>
 
                               <a href="<?php echo base_url();?>events/view_events_reviews/<?php echo base64_encode($rows->id);?>">
-                              <img title="View Reviews" src="<?php echo base_url();?>assets/icons/review.png"/></a>
+                              <img title="Reviews" src="<?php echo base_url();?>assets/icons/review.png"/></a>
 
                             </td>
                         </tr>
@@ -97,13 +101,12 @@
                       <table class="table table-striped table-bordered display" cellspacing="0" width="100%">
                         <thead>
                         <tr>
-                          <th>S.No</th>
-                           <th>Event Name</th>
-                            <!--th>Event Category</th-->
-                            <th>City</th>
-                            <th>Popularity</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                          <th>S. No</th>
+                          <th>Event</th>
+                          <th>City/Area</th>
+                          <th>Views</th>
+                          <th>Status</th>
+                          <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -128,21 +131,21 @@
                               <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
 
                              <a href="<?php echo base_url();?>events/view_single_events/<?php echo base64_encode($rows->id);?>">
-                              <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a>
+                              <img  title="Event details" src="<?php echo base_url();?>assets/icons/view.png"/></a>
                              <!--href="<?php echo base_url();?>events/delete_events/<?php echo $rows->id;?>" -->
                               <!--a onclick="confirmGetMessage(<?php echo $eid;?>)">
                               <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
 
                               <?php if($etype=='Paid'){?>
                               <a href="<?php echo base_url();?>booking/home/<?php echo base64_encode($rows->id);?>">
-                              <img title="Booking Events" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
+                              <img title="Ticket plans" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
                               <?php } ?>
 
                               <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo $rows->id;?>">
-                              <img title="Add Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/></a>
+                              <img title="Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/></a>
 
                               <a href="<?php echo base_url();?>events/view_events_reviews/<?php echo base64_encode($rows->id);?>">
-                              <img title="View Reviews" src="<?php echo base_url();?>assets/icons/review.png"/></a>
+                              <img title="Reviews" src="<?php echo base_url();?>assets/icons/review.png"/></a>
 
                             </td>
                         </tr>
@@ -155,13 +158,12 @@
                       <table class="table table-striped table-bordered display" cellspacing="0" width="100%">
                         <thead>
                         <tr>
-                            <th>S.No</th>
-                            <th>Event Name</th>
-                            <!--th>Event Category</th-->
-                            <th>City</th>
-                            <th>Popularity</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                          <th>S. No</th>
+                          <th>Event</th>
+                          <th>City/Area</th>
+                          <th>Views</th>
+                          <th>Status</th>
+                          <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -186,19 +188,19 @@
                              <a href="<?php echo base_url();?>events/edit_events/<?php echo base64_encode($rows->id);?>">
                               <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
                              <a href="<?php echo base_url();?>events/view_single_events/<?php echo base64_encode($rows->id);?>">
-                              <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a>
+                              <img  title="Event details" src="<?php echo base_url();?>assets/icons/view.png"/></a>
                               <!--a onclick="confirmGetMessage(<?php echo $eid;?>)">
                               <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
                               <?php if($etype=='Paid'){ ?>
                               <a href="<?php echo base_url();?>booking/home/<?php echo base64_encode($rows->id);?>">
-                                <img title="Booking Events" src="<?php echo base_url();?>assets/icons/booking.png"/>
+                                <img title="Ticket plans" src="<?php echo base_url();?>assets/icons/booking.png"/>
                              </a>
                               <?php } ?>
                               <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo $rows->id;?>">
-                              <img title="Add Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/>
+                              <img title="Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/>
                             </a>
                             <a href="<?php echo base_url();?>events/view_events_reviews/<?php echo base64_encode($rows->id);?>">
-                              <img title="View Reviews" src="<?php echo base_url();?>assets/icons/review.png"/>
+                              <img title="Reviews" src="<?php echo base_url();?>assets/icons/review.png"/>
                             </a>
                             </td>
                         </tr>
@@ -210,13 +212,12 @@
                       <table class="table table-striped table-bordered display" cellspacing="0" width="100%">
                         <thead>
                         <tr>
-                            <th>S.No</th>
-                           <th>Event Name</th>
-                            <!--th>Event Category</th-->
-                            <th>City</th>
-                            <th>Popularity</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                          <th>S. No</th>
+                          <th>Event</th>
+                          <th>City/Area</th>
+                          <th>Views</th>
+                          <th>Status</th>
+                          <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -239,19 +240,19 @@
                             <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
 
                            <a href="<?php echo base_url();?>events/view_single_events/<?php echo base64_encode($rows->id);?>">
-                            <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a>
+                            <img  title="Event details" src="<?php echo base_url();?>assets/icons/view.png"/></a>
                             <!--a onclick="confirmGetMessage(<?php echo $eid;?>)">
                             <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
                             <?php if($etype=='Paid'){ ?>
                             <a href="<?php echo base_url();?>booking/home/<?php echo base64_encode($rows->id);?>">
-                              <img title="Booking Events" src="<?php echo base_url();?>assets/icons/booking.png"/>
+                              <img title="Ticket plans" src="<?php echo base_url();?>assets/icons/booking.png"/>
                            </a>
                             <?php } ?>
                             <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo $rows->id;?>">
-                            <img title="Add Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/>
+                            <img title="Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/>
                           </a>
                           <a href="<?php echo base_url();?>events/view_events_reviews/<?php echo base64_encode($rows->id);?>">
-                            <img title="View Reviews" src="<?php echo base_url();?>assets/icons/review.png"/>
+                            <img title="Reviews" src="<?php echo base_url();?>assets/icons/review.png"/>
                           </a>
                           </td>
                         </tr>

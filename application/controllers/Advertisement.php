@@ -34,13 +34,13 @@ class Advertisement extends CI_Controller
         $datas     = $this->advertisementmodel->add_advertisement_plan_details($user_id, $planname, $planrate);
         $sta       = $datas['status'];
         if ($sta == "success") {
-            $this->session->set_flashdata('msg', 'Added Successfully');
+            $this->session->set_flashdata('msg', 'Advertisement plan created successfully');
             redirect('advertisement/home');
         } else if ($sta == "Already Exist") {
-            $this->session->set_flashdata('msg', 'Already Exist');
+            $this->session->set_flashdata('msg', 'Advertisement plan already exists!');
             redirect('advertisement/home');
         } else {
-            $this->session->set_flashdata('msg', 'Faild To Add');
+            $this->session->set_flashdata('msg', 'Something went wrong! Please try again later.');
             redirect('advertisement/home');
         }
     }
@@ -69,13 +69,13 @@ class Advertisement extends CI_Controller
         $datas     = $this->advertisementmodel->update_advertisement_plan_details($planid, $planname, $planrate, $user_id);
         $sta       = $datas['status'];
         if ($sta == "success") {
-            $this->session->set_flashdata('msg', 'Updated Successfully');
+            $this->session->set_flashdata('msg', 'Changes made are saved');
             redirect('advertisement/home');
         } else if ($sta == "Already Exist") {
-            $this->session->set_flashdata('msg', 'Already Exist');
+            $this->session->set_flashdata('msg', 'Advertisement plan already exists!');
             redirect('advertisement/home');
         } else {
-            $this->session->set_flashdata('msg', 'Faild To Update');
+            $this->session->set_flashdata('msg', 'Something went wrong! Please try again later.');
             redirect('advertisement/home');
         }
     }
@@ -147,7 +147,7 @@ class Advertisement extends CI_Controller
         $start_time  = $this->input->post('start_time');
         $end_time    = $this->input->post('end_time');
         $adv_plan    = $this->input->post('adv_plan');
-		
+
 		$event_pic      = $_FILES['eventbanner']['name'];
         $temp = pathinfo($event_pic, PATHINFO_EXTENSION);
         $file_name      = time() . rand(1, 5) . rand(6, 10);
@@ -155,7 +155,7 @@ class Advertisement extends CI_Controller
         $uploaddir      = 'assets/events/slider/';
         $profilepic     = $uploaddir . $event_banner;
         move_uploaded_file($_FILES['eventbanner']['tmp_name'], $profilepic);
-		
+
         $status      = $this->input->post('status');
         $datas       = $this->advertisementmodel->add_advertisement_plan_history($event_id, $category_id, $start_date, $end_date, $start_time, $end_time, $adv_plan, $status, $user_id,$event_banner);
         $sta         = $datas['status'];
@@ -165,14 +165,14 @@ class Advertisement extends CI_Controller
         $category_id = str_replace(' ', '', $datas['cid']);
         //print_r($sta);exit;
         if ($sta == "success") {
-            $this->session->set_flashdata('msg', 'Added Successfully');
+            $this->session->set_flashdata('msg', 'Advertisement details added');
             //redirect('examinationresult/exam_mark_details?var1='.$clsmastid.'&var2='.$exam_id.'',$datas);
             redirect('advertisement/add_advertisement_details/' . $id . '/' . $category_id . '', $datas);
         } else if ($sta == "AE") {
-            $this->session->set_flashdata('msg', 'Already Plans Running On That Betwen Dates Kindly Check It ');
+            $this->session->set_flashdata('msg', 'Dates are occupied! Please re-schedule your plan to some other dates. ');
             redirect('advertisement/add_advertisement_details/' . $id . '/' . $category_id . '', $datas);
         } else {
-            $this->session->set_flashdata('msg', 'Faild To Add');
+            $this->session->set_flashdata('msg', 'Something went wrong! Please try again later.');
             redirect('advertisement/add_advertisement_details/' . $id . '/' . $category_id . '', $datas);
         }
     }
@@ -262,7 +262,7 @@ class Advertisement extends CI_Controller
         $end_time     = $this->input->post('end_time');
         $adv_plan     = $this->input->post('adv_plan');
         $status       = $this->input->post('status');
-		
+
 		$currentcpic    = $this->input->post('currentcpic');
        	$event_pic      = $_FILES['eventbanner']['name'];
         $temp = pathinfo($event_pic, PATHINFO_EXTENSION);
@@ -271,13 +271,13 @@ class Advertisement extends CI_Controller
         $uploaddir      = 'assets/events/slider/';
         $profilepic     = $uploaddir . $event_banner;
         move_uploaded_file($_FILES['eventbanner']['tmp_name'], $profilepic);
-		
+
 		if (empty($event_pic)) {
             $event_banner = $currentcpic;
         } else {
             $event_banner = $event_banner;
         }
-		
+
         // echo $start_time;
         //echo $end_time; exit;
         $datas        = $this->advertisementmodel->aupdate_advertisement_plan_history($id, $event_id, $category_id, $start_date, $end_date, $start_time, $end_time, $adv_plan, $status, $user_id,$event_banner);
@@ -285,14 +285,14 @@ class Advertisement extends CI_Controller
         $eid          = str_replace(' ', '', $event_id);
         $ecategory_id = str_replace(' ', '', $category_id);
         if ($sta == "success") {
-            $this->session->set_flashdata('msg', 'Updated Successfully');
+            $this->session->set_flashdata('msg', 'Changes made are saved');
             //redirect('examinationresult/exam_mark_details?var1='.$clsmastid.'&var2='.$exam_id.'',$datas);
             redirect('advertisement/add_advertisement_details/' . $eid . '/' . $ecategory_id . '', $datas);
         } else if ($sta == "AE") {
-            $this->session->set_flashdata('msg', 'Already Plans Running On That Betwen Dates Kindly Check It ');
+            $this->session->set_flashdata('msg', 'Dates are occupied! Please re-schedule your plan to some other dates. ');
             redirect('advertisement/add_advertisement_details/' . $eid . '/' . $ecategory_id . '', $datas);
         } else {
-            $this->session->set_flashdata('msg', 'Faild To Update');
+            $this->session->set_flashdata('msg', 'Something went wrong! Please try again later.');
             redirect('advertisement/add_advertisement_details/' . $eid . '/' . $ecategory_id . '', $datas);
         }
     }
@@ -319,13 +319,13 @@ class Advertisement extends CI_Controller
         $datas       = $this->advertisementmodel->aupdate_advertisement_plan_history($id, $event_id, $category_id, $start_date, $end_date, $start_time, $end_time, $adv_plan, $status, $user_id);
         $sta         = $datas['status'];
         if ($sta == "success") {
-            $this->session->set_flashdata('msg', 'Updated Successfully');
+            $this->session->set_flashdata('msg', 'Changes made are saved');
             redirect('advertisement/view_adv_history', $datas);
         } else if ($sta == "Already Exist") {
             $this->session->set_flashdata('msg', 'Already Exist');
             redirect('advertisement/view_adv_history', $datas);
         } else {
-            $this->session->set_flashdata('msg', 'Faild To Update');
+            $this->session->set_flashdata('msg', 'Something went wrong! Please try again later.');
             redirect('advertisement/view_adv_history', $datas);
         }
     }

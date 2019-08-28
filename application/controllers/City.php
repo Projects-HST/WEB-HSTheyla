@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class City extends CI_Controller 
+class City extends CI_Controller
 {
 
 
-	function __construct() 
+	function __construct()
 	   {
 		  parent::__construct();
 		  $this->load->model('citymodel');
@@ -52,14 +52,14 @@ class City extends CI_Controller
          $sta=$datas['status'];
 	     //print_r($sta);exit;
 	     if($sta=="success"){
-	       $this->session->set_flashdata('msg','Added Successfully');
+	       $this->session->set_flashdata('msg','City/area added successfully');
 		   redirect('city/home');
 	     }else if($sta=="Already Exist"){
-             $this->session->set_flashdata('msg','Already Exist');
+             $this->session->set_flashdata('msg','City/area already exists!');
 		     redirect('city/home');
 	     }
 	     else{
-	     	 $this->session->set_flashdata('msg','Faild To Add');
+	     	 $this->session->set_flashdata('msg','Something went wrong! Please try again later.');
 		     redirect('city/home');
 	     }
 
@@ -91,8 +91,8 @@ class City extends CI_Controller
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-        
-        $countryid=$this->input->post("countryid"); 
+
+        $countryid=$this->input->post("countryid");
         //$stateid=$this->input->post("stateid");
         $stateid=$this->input->post("newstateid");
         $cityname=$this->input->post("cityname");
@@ -108,13 +108,13 @@ class City extends CI_Controller
         $sta=$datas['status'];
 	     //print_r($sta);exit;
 	     if($sta=="success"){
-	       $this->session->set_flashdata('msg','Update Successfully');
+	       $this->session->set_flashdata('msg','Changes made are saved');
 		   redirect('city/home');
 	     }else if($sta=="Already Exist"){
-	     	 $this->session->set_flashdata('msg','Already Exist');
+	     	 $this->session->set_flashdata('msg','City/area already exists!');
 		     redirect('city/home');
 	     }else{
-	     	 $this->session->set_flashdata('msg','Faild To Update');
+	     	 $this->session->set_flashdata('msg','Something went wrong! Please try again later.');
 		     redirect('city/home');
 	     }
     }

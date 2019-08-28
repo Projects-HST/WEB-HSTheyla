@@ -1,6 +1,6 @@
       <div class="page-content-wrapper">
          <div class="container">
-           <h4 class="mt-0 header-title"> View list users</h4>
+           <h4 class="mt-0 header-title"> Search User by City/Area</h4>
 
           <form method="post" action="<?php echo base_url();?>emailtemplate/select_users" name="newsletterform" id="newsletterform" style="margin-bottom: 20px;">
 
@@ -8,7 +8,7 @@
 
               <div class="col-md-6 col-lg-6 col-xl-3">
                   <select class="form-control" name="cityid" id="cityname" >
-                    <option value="">Select City Name</option>
+                    <option value="">Select City/Area</option>
                     <?php  foreach($city_list as $rows_city){ ?>
                       <option value="<?php echo $rows_city->id; ?>"><?php echo $rows_city->city_name; ?></option>
                       <?php  } ?>
@@ -18,11 +18,9 @@
               </div>
 
               <div class="col-md-6 col-lg-6 col-xl-3">
-                     <button type="submit" class="btn btn-primary waves-effect waves-light">
-                      Submit </button>
-                      <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                      Reset
-                      </button>
+                     <button type="submit" class="btn btn-success waves-effect waves-light">
+                      Search </button>
+
               </div>
           </div>
 
@@ -34,25 +32,26 @@
                         </div>
                         <?php endif; ?>
             <div class="row">
+               <h4 class="mt-0 header-title">User List</h4>
                <div class="col-12">
                   <div class="card m-b-20">
                      <div class="card-block">
 
-                        <label id="user"><input type="checkbox" class="checkbox" id="checkAll" style="display: inline;" />&nbsp; Select Current Page
+                        <label id="user"><input type="checkbox" class="checkbox" id="checkAll" style="display: inline;" />&nbsp; Select current page &nbsp;&nbsp;
                          <!--div class="text-center">
                             < Large modal-->
-                             <button type="button" id="sendSelectedBtn" class="btn btn-primary waves-effect waves-light">Send To Selected</button> &nbsp;
-                             <button type="button" style="float: right;" data-toggle="modal" id="sendAll" data-target="#addmodel" class="btn btn-primary waves-effect waves-light">Send To All</button>
+                             <button type="button" id="sendSelectedBtn" class="btn btn-success waves-effect waves-light">Send To Selected</button> &nbsp;
+                             <button type="button" style="float: right;" data-toggle="modal" id="sendAll" data-target="#addmodel" class="btn btn-success waves-effect waves-light">Send To All</button>
                         <!--/div-->
                       </label>
                         <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                       <thead>
                         <tr>
-                          <th>S.No</th>
+                          <th>S. No</th>
                           <th></th>
                           <th>Name</th>
-                          <th>Email</th>
-                          <th>Mobile</th>
+                          <th>Email ID</th>
+                          <th>Mobile Number</th>
                         </tr>
                      </thead>
                      <tbody>
@@ -116,17 +115,17 @@
                <!-- Modal content-->
                <div class="modal-content">
                    <div class="modal-header">
-                      <h5 class="modal-title mt-0" id="myLargeModalLabel">Email Templates</h5>
+                      <h5 class="modal-title mt-0" id="myLargeModalLabel">Inform User</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                   </div>
                <div class="modal-body">
                <!--<form method="post" action="<?php echo base_url();?>emailtemplate/send_email" >-->
                <form method="post" action="<?php echo base_url();?>emailtemplate/send_newsletter" >
                  <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Select Template</label>
-                    <div class="col-sm-8">
+                    <label class="col-sm-3 col-form-label">Title</label>
+                    <div class="col-sm-6">
                       <select class="form-control" required="" name="email_temp_id" id="email_temp_id" style="margin-bottom:05%;" >
-                        <option value="">Select Templates</option>
+                        <option value="">Select title</option>
                           <?php foreach($email_tem as $temp){ ?>
                               <option value="<?php echo $temp->id; ?>"><?php echo $temp->template_name; ?></option>
                            <?php } ?>
@@ -134,10 +133,10 @@
                     </div>
                  </div>
                  <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Send Via</label>
-                    <div class="col-sm-8">
+                    <label class="col-sm-3 col-form-label">Send as</label>
+                    <div class="col-sm-6">
                       <!-- <input type="checkbox" name="email" value="email">Email</input> -->
-  					          <input type="checkbox" name="sms" value="sms">SMS</input>
+  					          <input type="checkbox" name="sms" value="sms">SMS</input> &nbsp;&nbsp;
                       <input type="checkbox" name="notify" value="notify">Notification</input>
                       <input type="hidden" id="user_id" name="user_id" class="form-control"/>
 
@@ -147,7 +146,7 @@
                  <div class="form-group row">
                     <label class="col-sm-2 col-form-label">&nbsp;</label>
                     <div class="col-sm-8">
-                     <button type="submit" class="btn btn-primary waves-effect waves-light">Send</button>
+                     <button type="submit" class="btn btn-success waves-effect waves-light">Send</button>
 
                     </div>
                  </div>
@@ -181,7 +180,7 @@
         });
 		$(".modal-body #user_id").val(selected_value);
    }else{
-         	alert('Please Select Any One User');
+         	alert('Please select atleast one user');
         	//$('#addmodel').modal('hide');
          }
    });

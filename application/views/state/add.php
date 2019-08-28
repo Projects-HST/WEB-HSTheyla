@@ -11,10 +11,10 @@
                         <form class="" method="post" action="<?php echo base_url();?>state/add_state" id="stateform" name="stateform">
 
                             <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Country Name</label>
+                              <label class="col-sm-4 col-form-label">Country </label>
                               <div class="col-sm-6">
                                  <select class="form-control" name="countryid"  >
-                                     <option value="">Select Country Name</option>
+                                     <option value="">Select country </option>
                                      <?php foreach($countyr_list as $cntry){ ?>
                                           <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
                                      <?php } ?>
@@ -33,19 +33,17 @@
                               <label class="col-sm-4 col-form-label">Status</label>
                               <div class="col-sm-6">
                                  <select class="form-control"  name="eventsts">
-                                    <option value="">Select Status</option>
-                                    <option value="Y">Yes</option>
-                                    <option value="N">No</option>
+                                    <option value="">Select status</option>
+                                    <option value="Y">Active</option>
+                                    <option value="N">Inactive</option>
                                  </select>
                               </div>
                            </div>
                            <div class="form-group">
                               <label class="col-sm-4 col-form-label"></label>
-                              <button type="submit" class="btn btn-primary waves-effect waves-light">
-                              Submit </button>
-                              <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                              Reset
-                              </button>
+                              <button type="submit" class="btn btn-success waves-effect waves-light">
+                              Add </button>
+
                            </div>
                      </div>
                      </form>
@@ -61,7 +59,7 @@
 
                            <?php if($this->session->flashdata('msg')): ?>
                           <div class="alert <?php $msg=$this->session->flashdata('msg');
-                          if($msg=='Added Successfully' || $msg=='Update Successfully'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
+                          if($msg=='State added successfully' || $msg=='Changes made are saved'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                            ×</button> <?php echo $this->session->flashdata('msg'); ?>
                           </div>
@@ -70,11 +68,11 @@
                         <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
-							            <th>S.No</th>
-                                 <th>Country Name</th>
-                                 <th>State Name</th>
+							            <th>S. No</th>
+                                 <th>Country </th>
+                                 <th>State </th>
                                  <th> Status</th>
-                                 <th>Action</th>
+                                 <th>Actions</th>
                               </tr>
                            </thead>
                            <tbody>
@@ -117,9 +115,9 @@
 
         },
         messages: {
-        countryid:"Select Country Name",
-        statename:"Enter State Name",
-        eventsts:"Select Status"
+        countryid:"Select country ",
+        statename:"Enter state ",
+        eventsts:"Select status"
                },
          });
    });

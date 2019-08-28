@@ -1,21 +1,31 @@
 <?php $user_id = $this->session->userdata('id');?>
+<?php    $sql="SELECT id,category_name FROM category_master  WHERE status='Y' ORDER BY order_by ASC";
+  $resu=$this->db->query($sql);
+  $res=$resu->result();
+$len = count($res);
+$firsthalf = array_slice($res, 0, $len / 2);
+$secondhalf = array_slice($res, $len / 2);
+   ?>
 <footer class="footer-bg footer" id="stickfooter">
-  <div class="container-fluid">
+  <div class="container-fluid no_padding">
       <div class="row footer_container">
-          <div class="col">
+
+
+          <div class="col-lg-3 col-md-3 col-sm-6">
             <p class="footer_heading">Categories</p>
             <ul class="fnt-footer ">
-              <li class=""><a href="">Events</a></li>
-              <li class=""><a href="">Hotspot</a></li>
-              <li class=""><a href="">Ad Event</a></li>
+              <?php  foreach($firsthalf as $row_cat){  ?>
+                  <li class=""><a href=""><?php echo $row_cat->category_name; ?></a></li>
+              <?php } ?>
+
             </ul>
           </div>
-          <div class="col">
-            <p class="footer_heading">Country</p>
+          <div class="col-lg-3 col-md-3 col-sm-6">
+            <p class="footer_heading">&nbsp;</p>
             <ul class="fnt-footer ">
-              <li class=""><a href="">India</a></li>
-              <li class=""><a href="">Singapore</a></li>
-              <li class=""><a href="">Malaysia</a></li>
+              <?php  foreach($secondhalf as $row_sec_cat){  ?>
+                  <li class=""><a href=""><?php echo $row_sec_cat->category_name; ?></a></li>
+              <?php } ?>
             </ul>
 
           </div>

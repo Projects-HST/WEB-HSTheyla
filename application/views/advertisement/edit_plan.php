@@ -24,15 +24,15 @@
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Plan Rate</label>
+                              <label class="col-sm-4 col-form-label">Plan Price</label>
                               <div class="col-sm-6">
                                  <input type="text" name="plan_rate" class="form-control" value="<?php echo $res->plan_rate;?>" id="example-text-input">
                               </div>
                            </div>
                            <div class="form-group">
                               <label class="col-sm-4 col-form-label"></label>
-                              <button type="submit" class="btn btn-primary waves-effect waves-light">
-                              Update </button>
+                              <button type="submit" class="btn btn-success waves-effect waves-light">
+                              Save </button>
 
                            </div>
                      </div>
@@ -62,8 +62,8 @@
         plan_rate:{required:true,number:true }
        },
        messages: {
-       planname:"Enter Plan Name",
-       plan_rate:{required:"Enter Rate",number:"Enter the numbers"}
+         planname:"Enter plan name",
+         plan_rate:{required:"Enter plan price",number:"This doesn't seem to be a price!"}
               },
          });
    });

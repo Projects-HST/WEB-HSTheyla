@@ -1,22 +1,26 @@
 <div class="page-content-wrapper">
     <div class="container">
     <div class="col-12">
+        <h4 class="mt-0 header-title"> Heyla Users </h4>
       <div class="card m-b-20">
+        <?php if($this->session->flashdata('msg')): ?>
+          <div class="alert <?php $msg=$this->session->flashdata('msg');
+          if($msg=='Added Successfully' || $msg=='Changes made are saved'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+              ×</button> <?php echo $this->session->flashdata('msg'); ?>
+           </div>
+           <?php endif; ?>
 
-                <h4 class="mt-0 header-title"> View Normal Users List </h4>
                 <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
                     <thead>
                     <tr>
-                        <th>S.No</th>
-                        <th>Username / Email </th>
-                        <th>Full Name</th>
-
-                        <th>Phone</th>
-
-                        <th>City</th>
+                        <th>S. No</th>
+                        <th style="width:200px;">Username/Email ID/Phone Number</th>
+                        <th style="width:100px;">Full Name</th>
+                        <th>City/Area</th>
                         <th>Points</th>
                         <th>Status</th>
-                        <th>View </th>
+                        <th>Actions </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -30,17 +34,17 @@
                     <tr>
                         <td><?php echo $i; ?></td>
                         <td><?php echo $rows->user_name ; ?><br>
-                        <?php echo $rows->email_id; ?>
+                        <?php echo $rows->email_id; ?><br><?php echo $rows->mobile_no; ?>
                         </td>
                         <td><?php echo $rows->name ; ?></td>
-                        <td><?php echo $rows->mobile_no; ?></td>
+
 
                         <td><?php echo $rows->city_name ; ?></td>
                         <td><?php echo $rows->total_points ; ?></td>
                         <td><?php if($sts=='Y'){ echo'<p class="btn btn-secondary btn-success btn-sm"> Active </p>'; }else{ echo'<p class="btn btn-secondary btn-primary btn-sm"> Deactive </p>'; }?></td>
                         <td>
                           <a href="<?php echo base_url();?>users/edit_noraml_users/<?php echo $rows->id;?>">
-                          <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
+                          <img title="Edit details" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
                         </td>
                     </tr>
                    <?php $i++; }  ?>

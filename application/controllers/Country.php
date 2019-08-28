@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Country extends CI_Controller 
+class Country extends CI_Controller
 {
-	function __construct() 
+	function __construct()
 	   {
 		  parent::__construct();
 		  $this->load->model('countrymodel');
@@ -43,14 +43,14 @@ class Country extends CI_Controller
          $sta=$datas['status'];
 	     //print_r($sta);exit;
 	     if($sta=="success"){
-	       $this->session->set_flashdata('msg','Added Successfully');
+	       $this->session->set_flashdata('msg',''.$cname.' added successfully');
 		   redirect('country/home');
 	     }else if($sta=="Already Exist"){
-             $this->session->set_flashdata('msg','Already Exist');
+             $this->session->set_flashdata('msg','Country already exists!');
 		     redirect('country/home');
 	     }
 	     else{
-	     	 $this->session->set_flashdata('msg','Faild To Add');
+	     	 $this->session->set_flashdata('msg','Something went wrong! Please try again later.');
 		     redirect('country/home');
 	     }
 
@@ -81,8 +81,8 @@ class Country extends CI_Controller
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-        
-        $cnid=$this->input->post("cnid"); 
+
+        $cnid=$this->input->post("cnid");
         $cname=$this->input->post("countryname");
 	    $estatus=$this->input->post("eventsts");
 
@@ -90,10 +90,10 @@ class Country extends CI_Controller
         $sta=$datas['status'];
 	     //print_r($sta);exit;
 	     if($sta=="success"){
-	       $this->session->set_flashdata('msg','Update Successfully');
+	       $this->session->set_flashdata('msg','Changes made are saved');
 		   redirect('country/home');
 	     }else{
-	     	 $this->session->set_flashdata('msg','Faild To Update');
+	     	 $this->session->set_flashdata('msg','Something went wrong! Please try again later.');
 		     redirect('country/home');
 	     }
     }

@@ -1,16 +1,16 @@
 <div class="page-content-wrapper ">
     <div class="container">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-8">
         <div class="card m-b-20">
                              <div class="card-block">
                                <?php foreach($refund_track as $rows){} ?>
-                                <h4 class="mt-0 header-title">Refund  Request </h4>
+                                <h4 class="mt-0 header-title">Refund  Details </h4>
 
                                 <form method="post" enctype="multipart/form-data" action="" name="organsier_req_form" id="change_req_status" novalidate="novalidate">
 
                                    <div class="form-group row">
-                                      <label for="example-text-input" class="col-sm-4 col-form-label">Email / Phone / username</label>
+                                      <label for="example-text-input" class="col-sm-4 col-form-label">Username/Email ID/Mobile Number</label>
                                       <div class="col-sm-6">
                                         <?php echo $rows->email_id; ?> <br> <?php echo $rows->mobile_no; ?><br>
                                               <?php echo $rows->user_name; ?>
@@ -20,7 +20,7 @@
                                       <!-- <input type="hidden" name="org_id" value="<?php echo $rows->user_id; ?>"> -->
                                    </div>
                                    <div class="form-group row">
-                                      <label for="example-text-input" class="col-sm-4 col-form-label">Order id</label>
+                                      <label for="example-text-input" class="col-sm-4 col-form-label">Order ID</label>
                                       <div class="col-sm-6">
                                         <?php echo $rows->order_id; ?>
                                       </div>
@@ -29,10 +29,10 @@
 
                                    <div class="form-group row">
                                       <label class="col-sm-4 col-form-label">Refund Status</label>
-                                      <div class="col-sm-8">
+                                      <div class="col-sm-4">
                                         <select name="req_status" class="form-control">
-                                          <option  value="Rejected">Rejected</option>
-                                          <option  value="Onhold">Onhold</option>
+                                          <option  value="No Refund">No Refund</option>
+                                          <!-- <option  value="Onhold">Onhold</option> -->
                                           <option  value="Pending">Pending</option>
                                           <option  value="Approved">Approved</option>
                                         </select>
@@ -41,8 +41,8 @@
                                    </div>
                                    <div class="form-group">
                                       <label class="col-sm-4 col-form-label"></label>
-                                      <button type="submit" class="btn btn-primary waves-effect waves-light">
-                                      Update  </button>
+                                      <button type="submit" class="btn btn-success waves-effect waves-light">
+                                      Save  </button>
 
                                    </div>
                              </form>
@@ -71,8 +71,8 @@ $('#change_req_status').validate({ // initialize the plugin
             success: function(response) {
                 if (response == "success") {
                     swal({
-                        title: "Success",
-                        text: "Update Successfully",
+                        title: "",
+                        text: "Refund details updated",
                         type: "success"
                     }).then(function() {
                         location.href = '<?php echo base_url(); ?>tracking/refund_request';

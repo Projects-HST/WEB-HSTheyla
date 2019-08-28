@@ -5,7 +5,7 @@
                <div class="col-12">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title"> View Booking History </h4>
+                        <h4 class="mt-0 header-title"> Booking History </h4>
 
                            <?php if($this->session->flashdata('msg')): ?>
                         <div class="alert alert-success">
@@ -17,16 +17,16 @@
                         <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
-							     <th>S.No</th>
-							     <th style="width: 70px;">Order Id</th>
-                                 <th>Event Name</th>
+							     <th>S. No</th>
+							     <th style="width: 70px;">Order ID</th>
+                                 <th style="width:150px;">Event</th>
                                  <th>Plan</th>
-                                 <th>Show Date & Time</th>
+                                 <th>Date & Time</th>
                                  <th>Seats</th>
-                                 <th>Booking Date</th>
+                                 <th>Date Booked</th>
                                  <th>Amount</th>
                                  <!--th>Status</th-->
-                                 <th>View</th>
+                                 <th>Actions</th>
                               </tr>
                            </thead>
                            <tbody>

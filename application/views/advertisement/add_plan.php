@@ -12,7 +12,7 @@
                <div class="col-lg-8">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title"> Add Plan </h4>
+                        <h4 class="mt-0 header-title"> Create Advertisement Plan </h4>
 
                         <form method="post" action="<?php echo base_url();?>advertisement/add_plans" name="advertisementform" id="advertisementform" enctype="multipart/form-data">
                            <div class="form-group row">
@@ -22,18 +22,16 @@
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Plan Rate</label>
+                              <label class="col-sm-4 col-form-label">Plan Price</label>
                               <div class="col-sm-6">
                                  <input type="text" name="plan_rate" class="form-control">
                               </div>
                            </div>
                            <div class="form-group">
                               <label class="col-sm-4 col-form-label"></label>
-                              <button type="submit" class="btn btn-primary waves-effect waves-light">
-                              Submit </button>
-                              <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                              Reset
-                              </button>
+                              <button type="submit" class="btn btn-success waves-effect waves-light">
+                              Create </button>
+
                            </div>
                      </div>
                      </form>
@@ -49,7 +47,7 @@
 
                            <?php if($this->session->flashdata('msg')): ?>
                              <div class="alert <?php $msg=$this->session->flashdata('msg');
-                             if($msg=='Added Successfully' || $msg=='Updated Successfully'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
+                             if($msg=='Added Successfully' || $msg=='Changes made are saved'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                            ×</button> <?php echo $this->session->flashdata('msg'); ?>
                         </div>
@@ -58,10 +56,10 @@
                         <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
-							                  <th>S.No</th>
-                                <th>Plan Name</th>
-                                <th>Plan Rate</th>
-                                <th>Action</th>
+							                  <th>S. No</th>
+                                <th>Advertisement Plan</th>
+                                <th>Plan Price</th>
+                                <th>Actions</th>
                               </tr>
                            </thead>
                            <tbody>
@@ -136,8 +134,8 @@
          plan_rate:{required:true,number:true }
         },
         messages: {
-        planname:"Enter Plan Name",
-        plan_rate:{required:"Enter Rate",number:"Enter the numbers"}
+        planname:"Enter plan name",
+        plan_rate:{required:"Enter plan price",number:"This doesn't seem to be a price!"}
                },
          });
    });

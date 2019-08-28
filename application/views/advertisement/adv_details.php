@@ -35,21 +35,21 @@
                        <div class="form-group row">
                             <label for="sdate" class="col-sm-2 col-form-label">Start Date</label>
                             <div class="col-sm-4">
-                              <div class="input-group">
+
                                 <input type="text" class="form-control datepicker"  name="start_date" id="datepicker-autoclose" autocomplete="off" >
-                                <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
+
 
                            <input type="hidden" class="form-control"  name="event_id" value=" <?php echo $event_id;   ?>">
                             <input type="hidden" class="form-control"  name="category_id" value=" <?php echo $category_id;?>" >
-                            </div>
+
                             </div>
 
                              <label for="edate" class="col-sm-2 col-form-label">End Date</label>
                             <div class="col-sm-4">
-                               <div class="input-group">
+
                                 <input type="text" class="form-control datepicker"  name="end_date" id="datepicker"  autocomplete="off">
-                                <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
-                            </div>
+
+
                             </div>
                         </div>
 
@@ -68,7 +68,7 @@
 
 
                         <div class="form-group row">
-                             <label for="ecost" class="col-sm-2 col-form-label">Plans</label>
+                             <label for="ecost" class="col-sm-2 col-form-label">Plan</label>
                             <div class="col-sm-4">
                                  <select name="adv_plan" class="form-control">
                                     <?php foreach ($plans as $values) { ?>
@@ -78,22 +78,22 @@
 
                                 </select>
                             </div>
-                            <label for="Status" class="col-sm-2 col-form-label">Status</label>
+                            <label for="Status" class="col-sm-2 col-form-label">Banner Status</label>
                             <div class="col-sm-4">
                                <select class="form-control" name="status">
-                                    <option value="">Select Status</option>
-                                    <option value="Y">Yes</option>
-                                    <option value="N">No</option>
+                                    <option value="">Select status</option>
+                                    <option value="Y">Active</option>
+                                    <option value="N">Inactive</option>
                                 </select>
                             </div>
                         </div>
 
 
                         <div class="form-group row">
-                             <label for="Banner" class="col-sm-2 col-form-label">Banner</label>
+                             <label for="Banner" class="col-sm-2 col-form-label">Banner </label>
                             <div class="col-sm-4">
                                 <input type="file" name="eventbanner" id="file_upload" class="form-control" accept="image/*" >
-                                <span style="color: red;">Image Size (985*550px)</span>
+                                <span style="color: red;">Size: 985*550px</span>
                             </div>
                             <div class="col-sm-4">
                             </div>
@@ -101,11 +101,9 @@
 
                            <div class="form-group">
                               <label class="col-sm-4 col-form-label"></label>
-                              <button type="submit" class="btn btn-primary waves-effect waves-light">
-                              Submit </button>
-                              <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                              Reset
-                              </button>
+                              <button type="submit" class="btn btn-success waves-effect waves-light">
+                              Add </button>
+
                            </div>
                      </form>
                   </div>
@@ -120,7 +118,7 @@
 
                            <?php if($this->session->flashdata('msg')): ?>
                              <div class="alert <?php $msg=$this->session->flashdata('msg');
-                             if($msg=='Added Successfully' || $msg=='Updated Successfully'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
+                             if($msg=='Advertisement details added' || $msg=='Changes made are saved'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                            ×</button> <?php echo $this->session->flashdata('msg'); ?>
                         </div>
@@ -159,7 +157,7 @@
                                  <!-- <td><?php echo date("g:i a",strtotime("$rows->time_from")); ?></td>
                                  <td> <?php echo date("g:i a",strtotime("$rows->time_to")); ?></td> -->
                                  <td><?php  echo $rows->plan_name; ?></td>
-                                 <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
+                                 <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Inactive </button>'; }?></td>
                                  <td> <a href="<?php echo base_url();?>advertisement/edit_history/<?php echo $rows->id;?>">
                                   <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
                                  <!--a onclick="confirmGetMessage(<?php echo $adid;?>)">
@@ -238,12 +236,12 @@ function confirmGetMessage(adid)
          status:{required:true }
         },
         messages: {
-        start_date:"Select Start Date",
-        start_time:"Select Start Time",
-        end_date:"Select End Date",
-        end_time:"Select End Time",
-        adv_plan:"Select Plan ",
-        status:"Select Status",
+        start_date:"This field cannot be empty!",
+        start_time:"Select start time",
+        end_date:"This field cannot be empty!",
+        end_time:"Select end time",
+        adv_plan:"Select plan ",
+        status:"Select status",
                },
          });
    });

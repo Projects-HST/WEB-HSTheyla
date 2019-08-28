@@ -7,16 +7,16 @@
              <div class="card m-b-20">
                  <div class="card-block">
 
-              <h4 class="mt-0 header-title"> View Attendees  list </h4>
+              <h4 class="mt-0 header-title"> Event Attendees  </h4>
 
 
                <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                   <thead>
                      <tr>
-                        <th>S.No</th>
+                        <th>S. No</th>
                         <th>Name</th>
-                        <th>Email</th>
-                        <th>Mobile number</th>
+                        <th>Email ID</th>
+                        <th>Mobile Number</th>
 
                      </tr>
                   </thead>

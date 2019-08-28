@@ -2,14 +2,15 @@
     <div class="container">
       <div class="row">
       <div class="col-lg-12">
+        <h4 class="mt-0 header-title">Events by Date </h4>
           <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                <th>S.No</th>
-                <th>Username/ Email / Mobile No </th>
+                <th>S. No</th>
+                <th>Username/Email ID/Mobile Number </th>
                 <th>Date </th>
                 <th>Event Count</th>
-                <th>View</th>
+                <th>Actions</th>
             </tr>
             </thead>
               <tbody>

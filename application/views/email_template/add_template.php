@@ -4,34 +4,32 @@
                <div class="col-lg-8">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title"> Add Template </h4>
+                        <h4 class="mt-0 header-title"> Create Notification </h4>
 
                         <form  method="post" enctype="multipart/form-data" action="<?php echo base_url();?>emailtemplate/add_template" name="templateform" id="templateform">
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-4 col-form-label">Template Name</label>
+                              <label for="example-text-input" class="col-sm-4 col-form-label">Title</label>
                               <div class="col-sm-6">
-                                 <input class="form-control" type="text" name="templatename" maxlength="30" id="example-text-input" placeholder="Title">
+                                 <input class="form-control" type="text" name="templatename" maxlength="30" id="example-text-input" placeholder="">
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Template Content</label>
+                              <label class="col-sm-4 col-form-label">Message</label>
                               <div class="col-sm-8">
                                   <textarea class="form-control" rows="5" name="templatecontent" maxlength="140" placeholder="Max 140 Characters"></textarea>
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Image(Optional)</label>
+                              <label class="col-sm-4 col-form-label">Image(optional)</label>
                               <div class="col-sm-8">
                                    <input class="form-control" type="file" name="notification_img"  id="notification_img" >
                               </div>
                            </div>
                            <div class="form-group">
                               <label class="col-sm-4 col-form-label"></label>
-                              <button type="submit" class="btn btn-primary waves-effect waves-light">
-                              Submit </button>
-                              <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                              Reset
-                              </button>
+                              <button type="submit" class="btn btn-success waves-effect waves-light">
+                              Create </button>
+
                            </div>
                      </form>
                   </div>
@@ -43,7 +41,7 @@
                <div class="col-12">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title">View All Templates</h4>
+                        <h4 class="mt-0 header-title">Notifications</h4>
 
                            <?php if($this->session->flashdata('msg')): ?>
                         <div class="alert alert-success">
@@ -55,11 +53,11 @@
                         <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
-							                 <th>S.No</th>
+							                 <th>S. No</th>
                                <th style="width:200px;">Title</th>
                                 <th>Message</th>
                                 <th>Image</th>
-                               <th>Action</th>
+                               <th>Actions</th>
                               </tr>
                            </thead>
                            <tbody>
@@ -108,8 +106,8 @@
          templatecontent:{required:true }
         },
         messages: {
-        templatename:"Enter Template Name",
-        templatecontent:"Enter Template Details",
+        templatename:"Enter title",
+        templatecontent:"What do you want to convey?",
         notification_img:{extension: "Upload only PNG or  JPEG" },
          },
          });

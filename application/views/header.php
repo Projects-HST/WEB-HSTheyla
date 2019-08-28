@@ -78,11 +78,11 @@
 
                 }else{ ?>
                   <li class="has_sub" id="master">
-                      <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-apps"></i> <span> Masters </span> </a>
+                      <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-apps"></i> <span> Master </span> </a>
                       <ul class="list-unstyled">
                           <li id="country"><a href="<?php echo base_url();?>country/home">Country</a></li>
                           <li id="state"><a href="<?php echo base_url();?>state/home">State</a></li>
-                          <li id="city"><a href="<?php echo base_url();?>city/home">City</a></li>
+                          <li id="city"><a href="<?php echo base_url();?>city/home">City/Area</a></li>
                           <li id="category"><a href="<?php echo base_url();?>category/home">Category</a></li>
                           <!-- <li id="userrole"><a href="<?php echo base_url();?>userrole/home">User Role</a></li> -->
                       </ul>
@@ -101,11 +101,11 @@
                 </li>
 
                 <li class="has_sub" id="advertisement">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-calendar-clock"></i> <span> Advertisements </span> </a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-calendar-clock"></i> <span> Advertisement </span> </a>
                     <ul class="list-unstyled">
                         <li id="plan"><a href="<?php echo base_url();?>advertisement/home"> Add Plan</a></li>
-                        <li id="list"><a href="<?php echo base_url();?>advertisement/view_adv_plan">Add Banner Adv. </a></li>
-                        <li id="history"><a href="<?php echo base_url();?>advertisement/view_adv_history">Banner Adv. History</a></li>
+                        <li id="list"><a href="<?php echo base_url();?>advertisement/view_adv_plan">Banner Advertisement</a></li>
+                        <li id="history"><a href="<?php echo base_url();?>advertisement/view_adv_history">History</a></li>
                         <!-- <li id="popup"><a href="#">Add Popup Adv. </a></li>
                         <li id="offers"><a href="#">Add Offers </a></li> -->
                     </ul>
@@ -122,9 +122,9 @@
                 <li class="has_sub" id="booking">
                     <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-calendar-check-o" aria-hidden="true"></i><span> Booking </span></a>
                     <ul class="list-unstyled">
-                        <li id="org_request"><a href="<?php echo base_url();?>tracking/refund_request">Refund Tracking</a></li>
-                        <li><a href="<?php echo base_url();?>bookinghistory/process_details">Process</a></li>
-                        <li id="booking_status"><a href="<?php echo base_url();?>bookinghistory/status_details">Status</a></li>
+                        <li id="org_request"><a href="<?php echo base_url();?>tracking/refund_request">Refund Details</a></li>
+                        <li><a href="<?php echo base_url();?>bookinghistory/process_details">Booking Process</a></li>
+                        <li id="booking_status"><a href="<?php echo base_url();?>bookinghistory/status_details">Booking Status</a></li>
                         <li id="booking_history"><a href="<?php echo base_url();?>bookinghistory/home">History</a></li>
                     </ul>
                 </li>
@@ -136,9 +136,9 @@
                     <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-users" aria-hidden="true"></i>
                 <span> User Management</span></a>
                     <ul class="list-unstyled">
-                        <li id="createuser"><a href="<?php echo base_url();?>users/home">New User</a></li>
-                        <li id="adminuser"><a href="<?php echo base_url();?>users/view">View Admin User</a></li>
-                          <li id="normaluser"><a href="<?php echo base_url();?>users/view_normal_users">View Normal User</a></li>
+                        <li id="createuser"><a href="<?php echo base_url();?>users/home">Create Sub-admin</a></li>
+                        <li id="adminuser"><a href="<?php echo base_url();?>users/view">View Sub-admin</a></li>
+                          <li id="normaluser"><a href="<?php echo base_url();?>users/view_normal_users">Heyla Users</a></li>
                         <!-- <li id="followers"><a href="<?php echo base_url();?>users/view_followers">View User Followers</a></li> -->
                         <!--li id="guestuser"><a href="<?php echo base_url();?>guestuser/home">Guest User</a></li-->
 
@@ -147,14 +147,14 @@
 
                 <li class="has_sub" id="track">
                     <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-users" aria-hidden="true"></i>
-                <span> Tracking</span></a>
+                <span> Events Record</span></a>
                     <ul class="list-unstyled">
 
-                        <li id="org_request"><a href="<?php echo base_url();?>dashboard/get_all_organiser_request">Organizer Request</a></li>
-                        <li id="org_track"><a href="<?php echo base_url();?>tracking/organiser_event_tracking">Organizer Event Tracking</a></li>
-                        <li id="event_track"><a href="<?php echo base_url();?>tracking/admin_event_tracking">Admin's Event Tracking</a></li>
-                        <li id="event_track"><a href="<?php echo base_url();?>tracking/organiser_track_date">Organizer Event By Date</a></li>
-                        <li id="event_track"><a href="<?php echo base_url();?>tracking/admin_track_date">Admin's Event By Date</a></li>
+                        <li id="org_request"><a href="<?php echo base_url();?>dashboard/get_all_organiser_request">Organizer Requests</a></li>
+                        <li id="org_track"><a href="<?php echo base_url();?>tracking/organiser_event_tracking">Organizer Events</a></li>
+                        <li id="event_track"><a href="<?php echo base_url();?>tracking/admin_event_tracking">Admin Events</a></li>
+                        <li id="event_track"><a href="<?php echo base_url();?>tracking/organiser_track_date">Organizer Events by Date</a></li>
+                        <li id="event_track"><a href="<?php echo base_url();?>tracking/admin_track_date">Admin Events by Date</a></li>
 
 
                     </ul>
@@ -165,7 +165,7 @@
                 <li class="has_sub" id="email">
                     <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-envelope" aria-hidden="true"></i><span> Notification </span></a>
                     <ul class="list-unstyled">
-                        <li id="newsletter"><a href="<?php echo base_url();?>emailtemplate/home"> Notification Template</a></li>
+                        <li id="newsletter"><a href="<?php echo base_url();?>emailtemplate/home"> Create/View</a></li>
                         <li id="sendemail"><a href="<?php echo base_url();?>emailtemplate/select_users"> Send Notification </a></li>
                     </ul>
                 </li>
@@ -193,7 +193,7 @@
 
               <li class="list-inline-item dropdown notification-list">
 
-                <a class="nav-link  arrow-none waves-effect nav-user" data-toggle="tooltip" data-placement="bottom"  title="Change Password" href="<?php echo base_url(); ?>users/update_password/">
+                <a class="nav-link  arrow-none waves-effect nav-user" data-toggle="tooltip" data-placement="bottom"   href="<?php echo base_url(); ?>users/update_password/">
                    Change Password
                 </a>
                 <?php $user_role=$this->session->userdata('user_role');
@@ -201,7 +201,7 @@
 
                 }else{ ?>
 
-                  <a class="nav-link  arrow-none waves-effect nav-user" data-toggle="tooltip" data-placement="bottom" title="Edit Profile" href="<?php echo base_url(); ?>users/edit/<?php echo $id;?>">
+                  <a class="nav-link  arrow-none waves-effect nav-user" data-toggle="tooltip" data-placement="bottom"  href="<?php echo base_url(); ?>users/edit/<?php echo $id;?>">
                      Profile
                   </a>
 
@@ -227,7 +227,7 @@
               </button>
             </li>
             <li class="hide-phone list-inline-item app-search">
-                <h3 class="page-title"> Welcome To Admin</h3>
+                <h3 class="page-title"> Heyla  Admin</h3>
             </li>
           </ul>
 

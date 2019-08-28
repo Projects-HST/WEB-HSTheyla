@@ -35,7 +35,7 @@ public function __construct()
   		     $data= array("status"=>"success");
   		     return $data;
          }else{
-              $data= array("status"=>"Already Exist");
+              $data= array("status"=>"Category already exists!");
               return $data;
             }
 
@@ -53,16 +53,16 @@ public function __construct()
     {
       $uquery="UPDATE category_master SET category_image='$categorypic1',order_by='$disp_order',status='$status',updated_by='$user_id',updated_at=NOW() WHERE id='$category_id'";
       $uresultset=$this->db->query($uquery);
-      
-      if($old_disp_order > $disp_order) 
+
+      if($old_disp_order > $disp_order)
       {
         $uQuery = "update category_master set order_by=order_by+1 where order_by >= '$disp_order' and order_by <'$old_disp_order' and id!='$category_id'";
        $uQuery1=$this->db->query($uQuery);
       }else{
-        $uQuery = "update category_master set order_by=order_by-1 where order_by >'$old_disp_order' and order_by<='$disp_order' and id!='$category_id' "; 
+        $uQuery = "update category_master set order_by=order_by-1 where order_by >'$old_disp_order' and order_by<='$disp_order' and id!='$category_id' ";
         $uQuery1=$this->db->query($uQuery);
       }
-      
+
       $data= array("status"=>"success");
       return $data;
     }
@@ -77,10 +77,10 @@ public function __construct()
       if($resultset){
           echo "success";
       }else{
-          echo "Something Went Wrong";
+          echo "Something went wrong! Please try again later.";
       }
       }else{
-          echo "Already Exist";
+          echo "Category already exists!";
          }
     }
 

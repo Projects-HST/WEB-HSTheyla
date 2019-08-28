@@ -52,13 +52,13 @@ class Booking extends CI_Controller
         $sta=$datas['status'];
         //print_r($sta);exit;
         if($sta=="success"){
-	       $this->session->set_flashdata('msg','Added Successfully');
+	       $this->session->set_flashdata('msg','Ticket plan created successfully');
 		   redirect('booking/home/'.$eventid.'');
 	     }else if($sta=="AE"){
-	     	 $this->session->set_flashdata('msg','Already Exist');
+	     	 $this->session->set_flashdata('msg','Ticket plan already exists!');
 		     redirect('booking/home/'.$eventid.'');
 	     }else{
-	     	 $this->session->set_flashdata('msg','Faild To Add');
+	     	 $this->session->set_flashdata('msg','Something went wrong! Please try again later.');
 		     redirect('booking/home/'.$eventid.'');
 	     }
 	}
@@ -97,10 +97,10 @@ class Booking extends CI_Controller
         $eventid=base64_encode($eventid);
         //print_r($sta);exit;
         if($sta=="success"){
-	       $this->session->set_flashdata('msg','updated Successfully');
+	       $this->session->set_flashdata('msg','Changes made are saved');
 		   redirect('booking/home/'.$eventid.'');
 	     }else{
-	     	 $this->session->set_flashdata('msg','Faild To update');
+	     	 $this->session->set_flashdata('msg','Something went wrong! Please try again later.');
 		     redirect('booking/home/'.$eventid.'');
 	     }
 	}
@@ -117,10 +117,10 @@ class Booking extends CI_Controller
         $eveid=base64_encode($eveid);
         //print_r($sta);exit;
         if($sta=="success"){
-	       $this->session->set_flashdata('msg','Deleted Successfully');
+	       $this->session->set_flashdata('msg','Ticket plan deleted successfully');
 		   redirect('booking/home/'.$eveid.'');
 	     }else{
-	     	 $this->session->set_flashdata('msg','Faild To Delete');
+	     	 $this->session->set_flashdata('msg','Something went wrong! Please try again later.');
 		     redirect('booking/home/'.$eveid.'');
 	     }
 	   }else{
@@ -172,13 +172,13 @@ class Booking extends CI_Controller
         $sta=$datas['status'];
         //print_r($sta);exit;
         if($sta=="success"){
-	       $this->session->set_flashdata('msg','Added Successfully');
+	       $this->session->set_flashdata('msg','Show timing created successfully');
 		   redirect('booking/add_show_time/'.$plan_id.'/'.$eventid.'');
 	     }else if($sta=="AE"){
-	     	 $this->session->set_flashdata('msg','Already Exist');
+	     	 $this->session->set_flashdata('msg','Show timing already exists!');
 		    redirect('booking/add_show_time/'.$plan_id.'/'.$eventid.'');
 	     }else{
-	     	 $this->session->set_flashdata('msg','Faild To Add');
+	     	 $this->session->set_flashdata('msg','Something went wrong! Please try again later.');
 		    redirect('booking/add_show_time/'.$plan_id.'/'.$eventid.'');
 	     }
     }
@@ -221,10 +221,10 @@ class Booking extends CI_Controller
         $sta=$datas['status'];
         //print_r($sta);exit;
         if($sta=="success"){
-	       $this->session->set_flashdata('msg','updated Successfully');
+	       $this->session->set_flashdata('msg','Changes made are saved');
 		   redirect('booking/add_show_time/'.$plan_id.'/'.$eventid.'');
 	     }else{
-	     	 $this->session->set_flashdata('msg','Faild To update');
+	     	 $this->session->set_flashdata('msg','Something went wrong! Please try again later.');
 		    redirect('booking/add_show_time/'.$plan_id.'/'.$eventid.'');
 	     }
     }

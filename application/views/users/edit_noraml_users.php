@@ -12,7 +12,7 @@
                 <div class="card m-b-20">
                     <div class="card-block">
 
-                 <h4 class="mt-0 header-title"> Users Details </h4>
+                 <h4 class="mt-0 header-title"> Heyla User Details </h4>
 
                   <?php if($this->session->flashdata('msg')): ?>
                     <div class="alert <?php $msg=$this->session->flashdata('msg');
@@ -27,9 +27,9 @@
 <?php foreach($users_view AS $res){ } ?>
 <input type="hidden" name="user_id" value="<?php echo $res->user_id; ?>">
 <div class="row">
-    <div class="col-md-3 bor"><p class="txt_label">User name</p></div>
+    <div class="col-md-3 bor"><p class="txt_label">Username</p></div>
     <div class="col-md-3 bor"><p class="txt_value"><?php echo $res->user_name; ?></p></div>
-    <div class="col-md-3 bor"><p class="txt_label">User Role</p></div>
+    <div class="col-md-3 bor"><p class="txt_label">Role</p></div>
     <div class="col-md-3 bor"><p class="txt_value"><?php echo $res->user_role_name; ?></p></div>
     <div class="col-md-3 bor"><p class="txt_label">Full Name</p></div>
     <div class="col-md-3 bor"><p class="txt_value"><?php echo $res->name; ?></p></div>
@@ -41,12 +41,12 @@
     <div class="col-md-3 bor"><p class="txt_label">Gender</p></div>
     <div class="col-md-3 bor"><p class="txt_value"><?php echo $res->gender;?></p></div>
 
-    <div class="col-md-3 bor"><p class="txt_label">Newsletter Status</p></div>
+    <div class="col-md-3 bor"><p class="txt_label">Newsletter Subscription</p></div>
     <div class="col-md-3 bor"><p class="txt_value"><?php echo $res->newsletter_status; ?></p></div>
     <div class="col-md-3 bor"><p class="txt_label">Referal Code</p></div>
     <div class="col-md-3 bor"><p class="txt_value"><?php echo $res->referal_code;?></p></div>
 
-    <div class="col-md-3 bor"><p class="txt_label">Email</p></div>
+    <div class="col-md-3 bor"><p class="txt_label">Email ID</p></div>
     <div class="col-md-3 bor"><p class="txt_value"><?php echo $res->email_id;?></p></div>
     <div class="col-md-3 bor"><p class="txt_label">Location</p></div>
     <div class="col-md-3 bor"><p class="txt_value"><?php echo $res->city_name;?></p></div>
@@ -56,8 +56,8 @@
     <div class="col-md-3 bor"><p class="txt_value">
       <select class="form-control"  name="login_status" id="login_status">
            <option value="">Select Status</option>
-           <option value="Y">Yes</option>
-           <option value="N">No</option>
+           <option value="Y">Enable</option>
+           <option value="N">Disable</option>
        </select>
        <script>$('#login_status').val('<?php echo $res->status; ?>');</script>
      </p></div>
@@ -65,8 +65,8 @@
 </div>
 <br>
 <div class="text-right">
-      <button type="submit" id="save" class="btn btn-primary waves-effect waves-light">
-      Update login status
+      <button type="submit" id="save" class="btn btn-success waves-effect waves-light">
+  Save
     </button>
 
 </div>

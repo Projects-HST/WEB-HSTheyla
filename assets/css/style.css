@@ -1532,6 +1532,12 @@ table.focus-on tbody tr.focused td {
 .error {
   color: #ff0000; }
 
+.error:first-letter{
+  text-transform: capitalize;
+}
+.error:first-letter {
+  text-transform: uppercase;
+}
 .parsley-error {
   border-color: #ff0000; }
 

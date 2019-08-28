@@ -13,10 +13,12 @@
 <div class="col-12">
 <div class="card m-b-20">
     <div class="card-block">
-        <h4 class="mt-0 header-title"> Add Gallery ( <span style="color: #28c2dc;">  <?php foreach($eventname as $rows){ echo $rows->event_name;}?>  </span> ) </h4>
+        <h4 class="mt-0 header-title"> Gallery</h4>
         <div class="m-b-30">
            <form  method="post" action="<?php echo base_url();?>events/add_gallery" name="eventpicform" id="eventpicform" enctype="multipart/form-data">
+               <label>Event: &nbsp;<span style="color: #28c2dc;">  <?php foreach($eventname as $rows){ echo $rows->event_name;}?>  </span></label>
               <div class="form-group row">
+
                  <div class="col-sm-4">
                   <input type="file" name="eventpicture[]" class="form-control" accept="image/*"  multiple="">
                   <input type="hidden" name="eventid" class="form-control" value="<?php echo $evnid;?>"><span style="color:#F00;">(985*550px)</span>
@@ -24,7 +26,7 @@
                </div>
                <div class="form-group row">
                   <div class="col-sm-4">
-                      <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
+                      <button type="submit" class="btn btn-success waves-effect waves-light">Upload</button>
                   </div>
              </div>
             </form>
@@ -39,11 +41,11 @@
                <div class="col-12">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title">View Event Gallery</h4>
+                        <h4 class="mt-0 header-title">View Gallery</h4>
 
                            <?php if($this->session->flashdata('msg')): ?>
                              <div class="alert <?php $msg=$this->session->flashdata('msg');
-                             if($msg=='Added Successfully' || $msg=='Deleted Successfully'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
+                             if($msg=='Image uploaded successfully' || $msg=='Image deleted'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                            ×</button> <?php echo $this->session->flashdata('msg'); ?>
                         </div>
@@ -52,10 +54,10 @@
                         <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
-                                  <th>S.No</th>
+                                  <th>S. No</th>
                                  <th>Event Name</th>
-                                 <th>Event Picture</th>
-                                 <th>Action</th>
+                                 <th>Image</th>
+                                 <th>Actions</th>
                               </tr>
                            </thead>
                            <tbody>
@@ -100,7 +102,7 @@
         },
         messages: {
          eventid:"Enter Event Id",
-        'eventpicture[]':"Select Picture"
+        'eventpicture[]':"Select picture"
                },
          });
    });

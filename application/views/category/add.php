@@ -11,18 +11,19 @@
                <div class="col-lg-8">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title"> Add Category </h4>
+                        <h4 class="mt-0 header-title"> Add Event Category </h4>
                         <form method="post" action="<?php echo base_url();?>category/add_category" name="categoryform" enctype="multipart/form-data" id="categoryform">
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-4 col-form-label">Category Name</label>
+                              <label for="example-text-input" class="col-sm-4 col-form-label">Category</label>
                               <div class="col-sm-6">
                                  <input class="form-control" type="text" name="categoryname" id="example-text-input">
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Picture</label>
+                              <label class="col-sm-4 col-form-label">Image</label>
                               <div class="col-sm-6">
-                                 <input type="file" id="file_upload" name="categorypic" class="form-control" accept="image/*"><span style="color: red;">Image Size (73 X 73)</span>
+                                 <input type="file" id="file_upload" name="categorypic" class="form-control" accept="image/*">
+                                 <span style="color: red;">(Size: 73 X 73)</span>
                                  <div id="preview" style="color: red;"></div>
                               </div>
                            </div>
@@ -47,19 +48,17 @@
                               <label class="col-sm-4 col-form-label">Status</label>
                               <div class="col-sm-6">
                                  <select class="form-control" name="eventsts">
-                                    <option value="">Select Status</option>
-                                    <option value="Y">Yes</option>
-                                    <option value="N">No</option>
+                                    <option value="">Select status</option>
+                                    <option value="Y">Active</option>
+                                    <option value="N">Inactive</option>
                                  </select>
                               </div>
                            </div>
                            <div class="form-group">
                               <label class="col-sm-4 col-form-label"></label>
-                              <button type="submit" class="btn btn-primary waves-effect waves-light">
-                              Submit </button>
-                              <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                              Reset
-                              </button>
+                              <button type="submit" class="btn btn-success waves-effect waves-light">
+                              Add </button>
+
                            </div>
                      </div>
                      </form>
@@ -102,10 +101,10 @@
                <div class="col-12">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title">View All Category</h4>
+                        <h4 class="mt-0 header-title">View All  Categories</h4>
                         <?php if($this->session->flashdata('msg')): ?>
                           <div class="alert <?php $msg=$this->session->flashdata('msg');
-                          if($msg=='Added Successfully' || $msg=='Updated Successfully'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
+                          if($msg=='Category added successfully' || $msg=='Changes made are saved'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                            ×</button>
                            <?php echo $this->session->flashdata('msg'); ?>
@@ -114,11 +113,11 @@
                         <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
-                                 <th>S.No</th>
-                                 <th>Category Name</th>
-                                 <th>Category Picture</th>
+                                 <th>S. No</th>
+                                 <th>Category</th>
+                                 <th>Image</th>
                                  <th>Status</th>
-                                 <th>Action</th>
+                                 <th>Actions</th>
                               </tr>
                            </thead>
                            <tbody>
@@ -207,10 +206,10 @@
             disp_order: { required: true }
           },
       messages: {
-            categoryname: "Enter Category Name",
-            categorypic: "Select Category Picture",
-            eventsts: "Select Status",
-            disp_order:"Select Display Order"
+            categoryname: "Enter category",
+            categorypic: "Select image",
+            eventsts: "Select status",
+            disp_order:"Select display order"
             },
          });
    });
@@ -220,7 +219,7 @@
    categoryname: {required: true},
    },
    messages: {
-   categoryname: "Enter Category Name"
+   categoryname: "Enter category"
    },
    submitHandler: function(form) {
    //alert("hi");

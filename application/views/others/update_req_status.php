@@ -1,7 +1,7 @@
 <div class="page-content-wrapper ">
     <div class="container">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-8">
         <div class="card m-b-20">
                              <div class="card-block">
                                <?php foreach($get_org_request as $rows){} ?>
@@ -16,7 +16,7 @@
                                       </div>
                                    </div> -->
                                    <div class="form-group row">
-                                      <label for="example-text-input" class="col-sm-4 col-form-label">Email Or Phone</label>
+                                      <label for="example-text-input" class="col-sm-5 col-form-label">Email ID/Phone Number</label>
                                       <div class="col-sm-6">
                                         <?php echo $rows->email_id; ?>
                                       </div>
@@ -30,10 +30,10 @@
                                       </div>
                                    </div> -->
                                    <div class="form-group row">
-                                      <label class="col-sm-4 col-form-label">Status</label>
-                                      <div class="col-sm-8">
+                                      <label class="col-sm-5 col-form-label">Status</label>
+                                      <div class="col-sm-4">
                                         <select name="req_status" class="form-control">
-                                            <option  value="Rejected">Rejected</option>
+                                            <option  value="Denied">Denied</option>
                                           <option  value="Pending">Pending</option>
                                           <option  value="Approved">Approved</option>
                                         </select>
@@ -41,8 +41,8 @@
                                       </div>
                                    </div>
                                    <div class="form-group">
-                                      <label class="col-sm-4 col-form-label"></label>
-                                      <button type="submit" class="btn btn-primary waves-effect waves-light">
+                                      <label class="col-sm-5 col-form-label"></label>
+                                      <button type="submit" class="btn btn-success waves-effect waves-light">
                                       Update  </button>
 
                                    </div>
@@ -73,8 +73,8 @@ $('#change_req_status').validate({ // initialize the plugin
 
                 if (response == "success") {
                     swal({
-                        title: "Success",
-                        text: "Update Successfully",
+                        title: "",
+                        text: "Status Updated",
                         type: "success"
                     }).then(function() {
                         location.href = '<?php echo base_url(); ?>dashboard/get_all_organiser_request';

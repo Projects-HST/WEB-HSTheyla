@@ -5,11 +5,11 @@
                <div class="col-lg-9">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title"> Edit Template </h4>
+                        <h4 class="mt-0 header-title"> Edit Notification </h4>
                         <?php foreach($edit as $res){ }?>
         <form  method="post" enctype="multipart/form-data" action="<?php echo base_url();?>emailtemplate/update_template" name="templateform" id="templateform">
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-4 col-form-label">Template Name</label>
+                              <label for="example-text-input" class="col-sm-4 col-form-label">Title</label>
                               <div class="col-sm-6">
                                  <input class="form-control" type="text" name="templatename" maxlength="30" id="example-text-input"  value="<?php echo $res->template_name;?>">
                                   <input class="form-control" type="hidden" name="tid"   value="<?php echo $res->id;?>">
@@ -17,13 +17,13 @@
                            </div>
 
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Template Content</label>
+                              <label class="col-sm-4 col-form-label">Message</label>
                               <div class="col-sm-8">
                                   <textarea class="form-control" rows="5" name="templatecontent" maxlength="240" placeholder="Max 240 Characters"><?php echo $res->template_content;?></textarea>
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Change Image(Optional)</label>
+                              <label class="col-sm-4 col-form-label">Change Image(optional)</label>
                               <div class="col-sm-6">
                                    <input class="form-control" type="file" name="notification_img"  id="notification_img" >
                               </div>
@@ -39,8 +39,8 @@
                            </div>
                            <div class="form-group">
                               <label class="col-sm-4 col-form-label"></label>
-                              <button type="submit" class="btn btn-primary waves-effect waves-light">
-                              Update </button>
+                              <button type="submit" class="btn btn-success waves-effect waves-light">
+                              Save </button>
 
                            </div>
                      </div>
@@ -68,8 +68,8 @@
          templatecontent:{required:true }
         },
         messages: {
-        templatename:"Enter Template Name",
-        templatecontent:"Enter Template Details",
+        templatename:"Enter title",
+        templatecontent:"What do you want to convey?",
           notification_img:{extension: "Upload only PNG or  JPEG" },
          },
          });

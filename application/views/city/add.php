@@ -6,15 +6,15 @@
                <div class="col-lg-8">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title"> Add City </h4>
+                        <h4 class="mt-0 header-title"> Add City/Area </h4>
 
                         <form method="post" action="<?php echo base_url();?>city/add_city" name="cityform" id="cityform" onSubmit='return check();'>
 
                             <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Country Name</label>
+                              <label class="col-sm-4 col-form-label">Country</label>
                               <div class="col-sm-6">
                                  <select class="form-control" name="countryid"    onchange="getstatename(this.value)">
-                                     <option value="">Select Country Name</option>
+                                     <option value="">Select Country</option>
                                      <?php foreach($countyr_list as $cntry){ ?>
                                                 <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
                                      <?php } ?>
@@ -24,7 +24,7 @@
 
 
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">State Name</label>
+                              <label class="col-sm-4 col-form-label">State</label>
                               <div class="col-sm-6">
                                  <select class="form-control" name="stateid" id="staname" >
 
@@ -35,7 +35,7 @@
 
 
                             <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-4 col-form-label">City Name</label>
+                              <label for="example-text-input" class="col-sm-4 col-form-label">City/Area</label>
                               <div class="col-sm-6">
                                  <input class="form-control"  type="text" id="cityid" name="cityname" id="example-text-input">
                               </div>
@@ -43,14 +43,14 @@
 
                            <div class="form-group row">
 
-                            <label for="latitude" class="col-sm-4 col-form-label">Event Latitude</label>
+                            <label for="latitude" class="col-sm-4 col-form-label">City/Area Latitude</label>
                             <div class="col-sm-6">
                                 <input class="form-control" type="text" name="txtLatitude"  id="latu" >
                                 <div id="ermsg"></div> <div id="ermsg2"></div>
                             </div>
                           </div>
                            <div class="form-group row">
-                              <label for="longitude" class="col-sm-4 col-form-label">Event Longitude</label>
+                              <label for="longitude" class="col-sm-4 col-form-label">City/Area Longitude</label>
                             <div class="col-sm-6">
                                 <input class="form-control" type="text" name="txtLongitude" id="lon">
                                  <div id="ermsg1"></div> <div id="ermsg3"></div>
@@ -62,19 +62,17 @@
                               <label class="col-sm-4 col-form-label"> Status</label>
                               <div class="col-sm-6">
                                  <select class="form-control"  name="eventsts">
-                                    <option value="">Select Status</option>
-                                    <option value="Y">Yes</option>
-                                    <option value="N">No</option>
+                                    <option value="">Select status</option>
+                                    <option value="Y">Active</option>
+                                    <option value="N">Inactive</option>
                                  </select>
                               </div>
                            </div>
                            <div class="form-group">
                               <label class="col-sm-4 col-form-label"></label>
-                              <button type="submit" id="save" class="btn btn-primary waves-effect waves-light">
-                              Submit </button>
-                              <button type="reset" id="save1" class="btn btn-secondary waves-effect m-l-5">
-                              Reset
-                              </button>
+                              <button type="submit" id="save" class="btn btn-success waves-effect waves-light">
+                              Add </button>
+
                            </div>
                      </div>
                      </form>
@@ -90,10 +88,10 @@
                <div class="col-12">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title">View All City</h4>
+                        <h4 class="mt-0 header-title">View All Cities/Areas</h4>
                            <?php if($this->session->flashdata('msg')): ?>
                         <div class="alert <?php $msg=$this->session->flashdata('msg');
-                        if($msg=='Added Successfully' || $msg=='Update Successfully'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
+                        if($msg=='City/area added successfully' || $msg=='Changes made are saved'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                            ×</button> <?php echo $this->session->flashdata('msg'); ?>
                         </div>
@@ -102,12 +100,12 @@
                         <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
-							                   <th>S.No</th>
-                                 <th>Country Name</th>
-                                 <th>State Name</th>
-                                 <th>City Name</th>
+							                   <th>S. No</th>
+                                 <th>Country</th>
+                                 <th>State</th>
+                                 <th>City/Area</th>
                                  <th>Status</th>
-                                 <th>Action</th>
+                                 <th>Actions</th>
                               </tr>
                            </thead>
                            <tbody>
@@ -176,12 +174,12 @@
 
         },
         messages: {
-        countryid:"Select Country Name",
-        stateid:"Select State Name",
-        cityname:"Enter City Name",
-        eventsts:"Select Status",
-        txtLatitude:"Enter Latitude",
-        txtLongitude:"Enter Longitude",
+        countryid:"Select country",
+        stateid:"Select state",
+        cityname:"Enter city/area",
+        eventsts:"Select status",
+        txtLatitude:"Enter latitude",
+        txtLongitude:"Enter longitude",
                },
          });
    });

@@ -78,14 +78,14 @@ class Events extends CI_Controller
 		$event_id		 = $datas['event_id'];
         // print_r($sta);exit;
         if ($sta == "success") {
-            $this->session->set_flashdata('msg', 'Added Successfully');
+            $this->session->set_flashdata('msg', 'Event created successfully');
             //redirect('events/add_events_gallery/'.$event_id);
             redirect('events/view_events');
         } else if ($sta == "Already Exist") {
-            $this->session->set_flashdata('msg', 'Already Exist');
+            $this->session->set_flashdata('msg', 'Event already exists!');
             redirect('events/view_events');
         } else {
-            $this->session->set_flashdata('msg', 'Faild To Add');
+            $this->session->set_flashdata('msg', 'Something went wrong! Please try again later.');
             redirect('events/view_events');
         }
     }
@@ -211,19 +211,19 @@ class Events extends CI_Controller
         $sta   = $datas['status'];
         // print_r($sta);exit;
         if ($sta == "success") {
-            $this->session->set_flashdata('msg', 'Update Successfully');
+            $this->session->set_flashdata('msg', 'Changes made are saved');
             redirect('events/view_events');
         } else if ($sta == "Already Exist") {
-            $this->session->set_flashdata('msg', 'Already Exist');
+            $this->session->set_flashdata('msg', 'Event already exists!');
             redirect('events/view_events');
         } else {
-            $this->session->set_flashdata('msg', 'Faild To Update');
+            $this->session->set_flashdata('msg', 'Something went wrong! Please try again later.');
             redirect('events/view_events');
         }
     }
     public function view_single_events($id)
     {
-        $id            = base64_decode($id);    
+        $id            = base64_decode($id);
         $datas         = $this->session->userdata();
         $user_id       = $this->session->userdata('id');
         $user_role     = $this->session->userdata('user_role');
@@ -308,10 +308,10 @@ class Events extends CI_Controller
             $datas = $this->eventsmodel->upload_events_pic($eventid, $total_uploads);
             $sta   = $datas['status'];
             if ($sta == "success") {
-                $this->session->set_flashdata('msg', 'Added Successfully');
+                $this->session->set_flashdata('msg', 'Image uploaded successfully');
                 redirect('events/add_events_gallery/' . $eventid . '');
             } else {
-                $this->session->set_flashdata('msg', 'Faild To Add');
+                $this->session->set_flashdata('msg', 'Something went wrong! Please try again later.');
                 redirect('events/add_events_gallery/' . $eventid . '');
             }
         }
@@ -324,10 +324,10 @@ class Events extends CI_Controller
         $datas     = $this->eventsmodel->delete_events_pic($id, $eventid);
         $sta       = $datas['status'];
         if ($sta == "success") {
-            $this->session->set_flashdata('msg', 'Deleted Successfully');
+            $this->session->set_flashdata('msg', 'Image deleted');
             redirect('events/add_events_gallery/' . $eventid . '');
         } else {
-            $this->session->set_flashdata('msg', 'Faild To Delete');
+            $this->session->set_flashdata('msg', 'Something went wrong! Please try again later.');
             redirect('events/add_events_gallery/' . $eventid . '');
         }
     }

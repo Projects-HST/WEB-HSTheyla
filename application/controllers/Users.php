@@ -71,16 +71,16 @@ class Users extends CI_Controller
 					$datas=$this->usersmodel->add_user_details($name,$username,$cell,$email,$address1,$user_pic1,$user_id,$display_status);
 			 		$sta=$datas['status'];
 		     if($sta=="success"){
-		       $this->session->set_flashdata('msg','Added Successfully');
+		       $this->session->set_flashdata('msg','Sub-admin created successfully');
 			   redirect('users/view');
 		     }else if($sta=="UA"){
-	             $this->session->set_flashdata('msg','Username Already Exist');
+	             $this->session->set_flashdata('msg','Username already exists!');
 			     redirect('users/view');
 		     }else if($sta=="ME"){
-                   $this->session->set_flashdata('msg','Mobile OR Email Id Already Exist');
+                   $this->session->set_flashdata('msg','Mobile Number OR Email ID already exists!');
 			       redirect('users/view');
 		     }else{
-		     	 $this->session->set_flashdata('msg','Faild To Add');
+		     	 $this->session->set_flashdata('msg','Something went wrong! Please try again later.');
 			      redirect('users/view');
 		     }
 
@@ -255,14 +255,14 @@ class Users extends CI_Controller
 		   $datas=$this->usersmodel->update_user_details($uid,$username,$name,$cell,$email,$address1,$user_pic,$user_id,$display_status);
 			 $sta=$datas['status'];
 		     if($sta=="success"){
-		       $this->session->set_flashdata('msg','Updated Successfully');
+		       $this->session->set_flashdata('msg','Changes made are saved');
 			   redirect('users/view');
 		     }else if($sta=="Already Exist"){
-	             $this->session->set_flashdata('msg','Already Exist');
+	             $this->session->set_flashdata('msg','Already exists!');
 			     redirect('users/view');
 		     }
 		     else{
-		     	 $this->session->set_flashdata('msg','Faild To Update');
+		     	 $this->session->set_flashdata('msg','Something went wrong! Please try again later.');
 			      redirect('users/view');
 		     }
 
@@ -282,10 +282,10 @@ class Users extends CI_Controller
 						$datas=$this->usersmodel->update_user_login_status($uid,$login_status,$user_id);
 						$sta=$datas['status'];
 								if($sta=="success"){
-								$this->session->set_flashdata('msg','Updated Successfully');
+								$this->session->set_flashdata('msg','Changes made are saved');
 								redirect('users/view_normal_users');
 								}else{
-								$this->session->set_flashdata('msg','Faild To Update');
+								$this->session->set_flashdata('msg','Something went wrong! Please try again later.');
 								redirect('users/view_normal_users');
 								}
 						}else{

@@ -4,7 +4,7 @@
             <div class="col-12">
                 <div class="card m-b-20">
                     <div class="card-block">
-                    <h4 class="mt-0 header-title">Password Update </h4>
+                    <h4>Reset Password </h4><br>
                     <?php foreach($users_view AS $res){ }
                     ?>
                     <form action="" method="post" id="form_id">
@@ -12,21 +12,21 @@
                           <div class="col-md-12">
 
                             <div class="form-group row">
-                              <div class="col-md-2">New Password</div>
+                              <div class="col-md-3">New Password</div>
                               <div class="col-md-3">
                                   <input type="password" class="form-control" name="new_password" value="">
                               </div>
                            </div>
                            <div class="form-group row">
-                             <div class="col-md-2">Confrim Password</div>
+                             <div class="col-md-3">Confirm New Password</div>
                              <div class="col-md-3">
                                  <input type="password" class="form-control" name="confrim_password" value="">
                              </div>
                           </div>
                           <div class="form-group row">
-                            <div class="col-md-2"></div>
+                            <div class="col-md-3"></div>
                             <div class="col-md-3">
-                                <input type="submit" class="btn"  value="Update Password">
+                                <input type="submit" class="btn btn-success"  value="Save">
                             </div>
                          </div>
                         </div>
@@ -68,10 +68,10 @@ $(document).ready(function () {
   },
   messages: {
       new_password: {
-        required:"Please Enter New Password"
+        required:"Please enter new password!",minlength:"Password should be minimum of 6 characters",maxlength:"Password should not be more than 12 characters",
       },
       confrim_password: {
-              required: "Enter Confirm Password",
+              required: "You should confirm your password!",
               notEqualTo: "Password Should Match"
       }
   },
@@ -84,7 +84,7 @@ $(document).ready(function () {
              success: function(response) {
                 var stats=response.status;
                  if (stats=="success") {
-                swal('Password changed successfully')
+                swal('Password reset successfully')
                 window.setTimeout(function () {
                  location.href = "<?php echo base_url(); ?>adminlogin/dashboard";
                }, 1000);

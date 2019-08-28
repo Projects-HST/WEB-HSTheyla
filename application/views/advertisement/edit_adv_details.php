@@ -42,7 +42,7 @@
                             <input type="hidden" class="form-control"  name="id" value=" <?php echo $res->id;?>" >
                              </div>
 
-                            <label for="etime" class="col-sm-2 col-form-label">Category Name</label>
+                            <label for="etime" class="col-sm-2 col-form-label">Category</label>
                             <div class="col-sm-4">
                               <input type="text" class="form-control" readonly="" value=" <?php echo $res->category_name;   ?>">
                             <input type="hidden" class="form-control"  name="category_id" value=" <?php echo $res->category_id;?>" >
@@ -52,18 +52,16 @@
                        <div class="form-group row">
                             <label for="sdate" class="col-sm-2 col-form-label">Start Date</label>
                             <div class="col-sm-4">
-                              <div class="input-group">
+
                                 <input type="text" class="form-control datepicker"  name="start_date"  value="<?php $date=date_create($res->date_from);echo date_format($date,"d-m-Y");  ?>" id="datepicker-autoclose">
-                                <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
-                            </div>
+
                             </div>
 
                              <label for="edate" class="col-sm-2 col-form-label">End Date</label>
                             <div class="col-sm-4">
-                               <div class="input-group">
+
                                 <input type="text" class="form-control datepicker"  name="end_date" value="<?php $date=date_create($res->date_to);echo date_format($date,"d-m-Y");  ?>" id="datepicker">
-                                <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
-                            </div>
+
                             </div>
                         </div>
 
@@ -82,7 +80,7 @@
 
 
                         <div class="form-group row">
-                             <label for="ecost" class="col-sm-2 col-form-label">Plans</label>
+                             <label for="ecost" class="col-sm-2 col-form-label">Plan</label>
                             <div class="col-sm-4">
                                  <select class="form-control" required="" name="adv_plan">
                                     <option value="Free">Select Plans </option>
@@ -93,12 +91,12 @@
                                 </select>
                                 <script language="JavaScript">document.advertisementform.adv_plan.value="<?php echo $res->adv_plan_id; ?>";</script>
                             </div>
-                            <label for="Status" class="col-sm-2 col-form-label">Status</label>
+                            <label for="Status" class="col-sm-2 col-form-label">Banner Status</label>
                             <div class="col-sm-4">
                                <select class="form-control" name="status">
-                                    <option value="">Select Status</option>
-                                    <option value="Y">Yes</option>
-                                    <option value="N">No</option>
+                                    <option value="">Select status</option>
+                                    <option value="Y">Active</option>
+                                    <option value="N">Inactive</option>
                                 </select>
                                  <script language="JavaScript">document.advertisementform.status.value="<?php echo $res->status; ?>";</script>
                             </div>
@@ -115,8 +113,8 @@
                         </div
                            <div class="form-group">
                               <label class="col-sm-4 col-form-label"></label>
-                              <button type="submit" class="btn btn-primary waves-effect waves-light">
-                              Update </button>
+                              <button type="submit" class="btn btn-success waves-effect waves-light">
+                              Save </button>
 
                            </div>
                      </div>
@@ -158,12 +156,12 @@
          status:{required:true }
         },
         messages: {
-        start_date:"Select Start Date",
-        start_time:"Select Start Time",
-        end_date:"Select End Date",
-        end_time:"Select End Time",
-        adv_plan:"Select Plan ",
-        status:"Select Status",
+        start_date:"Select start date",
+        start_time:"Select start time",
+        end_date:"Select end date",
+        end_time:"Select end time",
+        adv_plan:"Select plan ",
+        status:"Select status",
                },
          });
    });

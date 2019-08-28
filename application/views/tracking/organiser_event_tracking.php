@@ -1,16 +1,18 @@
 <div class="page-content-wrapper ">
     <div class="container">
       <div class="row">
+
       <div class="col-lg-12">
+          <h4 class="mt-0 header-title">Events Details </h4>
           <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                <th>S.No</th>
-                <th>Username/ Email / Mobile No </th>
-                <th>Total Event Posted</th>
-                <th>Approved</th>
-                <th>Pending</th>
-                <th>View Events</th>
+                <th>S. No</th>
+                <th>Username/Email ID/Mobile Number </th>
+                <th>Total Events Posted</th>
+                <th>Active Events</th>
+                <th>Inactive Events</th>
+                <th>Actions</th>
             </tr>
             </thead>
               <tbody>

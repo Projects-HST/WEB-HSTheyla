@@ -4,15 +4,15 @@
                <div class="col-lg-8">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title"> Edit City </h4>
+                        <h4 class="mt-0 header-title"> Edit City/Area </h4>
                         <?php foreach($edit as $res){ }?>
                         <form class="" method="post" action="<?php echo base_url();?>city/update_city" id="cityform" name="cityform" onSubmit='return check();'>
 
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Country Name</label>
+                              <label class="col-sm-4 col-form-label">Country </label>
                               <div class="col-sm-6">
                                  <select class="form-control" name="countryid"  onchange="getstatename(this.value)">
-                                     <option value="">Select Country Name</option>
+                                     <option value="">Select Country </option>
                                      <?php foreach($countyr_list as $cntry){ ?>
                                                 <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
                                      <?php } ?>
@@ -22,7 +22,7 @@
                            </div>
 
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">State Name</label>
+                              <label class="col-sm-4 col-form-label">State </label>
                               <div class="col-sm-6">
                               <!--input class="form-control" type="hidden" value="<?php echo $res->state_id; ?>" name="stateid">
                               <div id="old" style="display:none;"">
@@ -41,7 +41,7 @@
 
 
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-4 col-form-label">City Name</label>
+                              <label for="example-text-input" class="col-sm-4 col-form-label">City/Area</label>
                               <div class="col-sm-6">
                                  <input class="form-control" type="text"  name="cityname" id="city_id" value="<?php echo $res->city_name; ?>" id="example-text-input">
                                   <input class="form-control" type="hidden"  name="cityid" value="<?php echo $res->id; ?>" id="example-text-input">
@@ -49,14 +49,14 @@
                            </div>
                            <div class="form-group row">
 
-                            <label for="latitude" class="col-sm-4 col-form-label">Event Latitude</label>
+                            <label for="latitude" class="col-sm-4 col-form-label">City/Area Latitude</label>
                             <div class="col-sm-6">
                                 <input class="form-control" type="text" name="txtLatitude"  id="latu" value="<?php echo $res->city_latitude; ?>">
                                 <div id="ermsg"></div> <div id="ermsg2"></div>
                             </div>
                           </div>
                            <div class="form-group row">
-                              <label for="longitude" class="col-sm-4 col-form-label">Event Longitude</label>
+                              <label for="longitude" class="col-sm-4 col-form-label">City/Area Longitude</label>
                             <div class="col-sm-6">
                                 <input class="form-control" type="text" name="txtLongitude" id="lon" value="<?php echo $res->city_longitude; ?>">
                                  <div id="ermsg1"></div> <div id="ermsg3"></div>
@@ -66,16 +66,16 @@
                               <label class="col-sm-4 col-form-label">Status</label>
                               <div class="col-sm-6">
                                  <select class="form-control"  name="eventsts">
-                                    <option value="Y">Yes</option>
-                                    <option value="N">No</option>
+                                    <option value="Y">Active</option>
+                                    <option value="N">Inactive</option>
                                  </select>
 					<script language="JavaScript">document.cityform.eventsts.value="<?php echo $res->event_status; ?>";</script>
                               </div>
                            </div>
                            <div class="form-group">
                               <label class="col-sm-4 col-form-label"></label>
-                              <button type="submit" id="save" class="btn btn-primary waves-effect waves-light">
-                              Update </button>
+                              <button type="submit" id="save" class="btn btn-success waves-effect waves-light">
+                              Save </button>
                            </div>
                      </div>
                      </form>
@@ -133,12 +133,12 @@
 
         },
         messages: {
-        countryid:"Select Country Name",
-        stateid:"Select State Name",
-        cityname:"Enter City Name",
-        eventsts:"Select Status",
-        txtLatitude:"Enter Latitude",
-        txtLongitude:"Enter Longitude",
+        countryid:"Select country",
+        stateid:"Select state",
+        cityname:"Enter city/area ",
+        eventsts:"Select status",
+        txtLatitude:"Enter city/area latitude",
+        txtLongitude:"Enter city/area longitude",
                },
          });
    });

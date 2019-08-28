@@ -13,7 +13,7 @@
                         <span class="counter"><?php foreach ($admin_users as $rows_admin) {
                           echo $rows_admin->users;
                         } ?></span>
-                        <b style="font-size:14px;">Admin</b>
+                        <b style="font-size:14px;">Heyla Admins</b>
                     </div>
                 </div>
               <!-- </a> -->
@@ -33,7 +33,7 @@
                           <span class="counter"><?php foreach ($users as $value) {
                             echo $value->users;
                           } ?></span>
-                          <b style="font-size:14px;">Users</b>
+                          <b style="font-size:14px;">Heyla Users</b>
                       </div>
                   </div>
                 <!-- </a> -->
@@ -49,7 +49,7 @@
                           <span class="counter"><?php foreach ($org_users as $rows_org) {
                             echo $rows_org->users;
                           } ?></span>
-                          <b style="font-size:14px;">Orgainser</b>
+                          <b style="font-size:14px;">Organizers</b>
                       </div>
                   </div>
                 <!-- </a> -->
@@ -62,7 +62,7 @@
                           <span class="counter"><?php foreach ($total_category as $rows_cat) {
                             echo $rows_cat->count;
                           } ?></span>
-                          <b style="font-size:14px;">Category</b>
+                          <b style="font-size:14px;">Categories</b>
                       </div>
                   </div>
                 <!-- </a> -->
@@ -102,7 +102,7 @@
                           <span class="counter"><?php foreach ($hotspot_events as $row_hotspot) {
                             echo $row_hotspot->count;
                           } ?></span>
-                          <b style="font-size:14px;">Hotspot </b>
+                          <b style="font-size:14px;">Hotspots </b>
                       </div>
                   </div>
                 <!-- </a> -->
@@ -154,7 +154,7 @@
                           <span class="counter"><?php foreach ($ad_events as $row_ad) {
                             echo $row_ad->count;
                           } ?></span>
-                          <b style="font-size:14px;">Ad Events</b>
+                          <b style="font-size:14px;">Event Advertisements</b>
                       </div>
                   </div>
                 <!-- </a> -->
@@ -167,7 +167,7 @@
                           <span class="counter"><?php foreach ($org_events as $res) {
                             echo $res->org;
                           } ?></span>
-                        <b style="font-size:14px;"> Organizer Events </b>
+                        <b style="font-size:14px;"> Organizers' Events </b>
                       </div>
                     <!-- </a> -->
                   </div>
@@ -180,7 +180,7 @@
                           <span class="counter"><?php foreach ($booking as $res) {
                             echo $res->booking;
                           } ?></span>
-                          <b style="font-size:14px;">Booking</b>
+                          <b style="font-size:14px;">Total Bookings</b>
                       </div>
                   </div>
                 <!-- </a> -->
@@ -207,7 +207,7 @@
                           <span class="counter"><?php foreach ($organiser_request as $res) {
                             echo $res->request_pending;
                           } ?></span>
-                         <b style="font-size:14px;"> Organiser  Request </b>
+                         <b style="font-size:14px;"> Organizers' Applications </b>
                       </div>
                   </div>
                 <!-- </a> -->
@@ -223,7 +223,7 @@
                         <span class="counter"><?php foreach ($newsletter_user as $row_news) {
                           echo $row_news->count;
                         } ?></span>
-                        <b style="font-size:14px;">Subscribed User</b>
+                        <b style="font-size:14px;">Newsletter Subscriptions</b>
                     </div>
                 </div>
               <!-- </a> -->
@@ -236,6 +236,6 @@
 
   </div> <!-- Page content Wrapper -->
 </div> <!-- content -->
-<script>
-   // $('[data-toggle="tooltip"]').tooltip();
-</script>
+<style>
+.bg-primary{height: 110px;}
+</style>

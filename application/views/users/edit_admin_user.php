@@ -4,7 +4,7 @@
             <div class="col-12">
                 <div class="card m-b-20">
                     <div class="card-block">
-                        <h4 class="mt-0 header-title"> Update Users Details </h4>
+                        <h4 class="mt-0 header-title"> Edit Profile </h4>
                         <?php if($this->session->flashdata('msg')): ?>
                             <div class="alert <?php $msg=$this->session->flashdata('msg');
                             if($msg=='Added Successfully' || $msg=='Updated Successfully'){ echo " alert-success "; }else{ echo "alert-danger "; } ?>">
@@ -35,7 +35,7 @@
                                             <input class="form-control" type="text" name="mobile" id="mfun" value="<?php  echo $rows->mobile_no; ?>">
 
                                         </div>
-                                        <label for="Name" class="col-sm-2 col-form-label">Email Id</label>
+                                        <label for="Name" class="col-sm-2 col-form-label">Email ID</label>
                                         <div class="col-sm-4">
                                             <input class="form-control" type="text" id="efun" name="email"  value="<?php  echo $rows->email_id; ?>">
 
@@ -49,25 +49,25 @@
                                         <div class="col-sm-4">
                                             <textarea id="textarea" name="address1" class="form-control" maxlength="100" rows="3"><?php  echo $rows->address_line1; ?></textarea>
                                         </div>
-                                        <label class="col-sm-2 col-form-label">User Picture</label>
+                                        <label class="col-sm-2 col-form-label">Profile Picture</label>
                                         <div class="col-sm-4">
                                             <input type="file" name="user_picture" class="form-control" accept="image/*">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="Status" class="col-sm-2 col-form-label">Display Status</label>
+                                        <label for="Status" class="col-sm-2 col-form-label">Status</label>
                                         <div class="col-sm-4">
                                             <select class="form-control" name="display_status" id="display_status">
                                                 <option value="">Select Status</option>
-                                                <option value="Y">Yes</option>
-                                                <option value="N">No</option>
+                                                <option value="Y">Active</option>
+                                                <option value="N">Inactive</option>
                                             </select>
                                             <script>$('#display_status').val('<?php echo $rows->status; ?>');</script>
                                         </div>
-                                        <div class="col-sm-2">Current Pic</div>
+                                        <div class="col-sm-2"></div>
                                         <div class="col-sm-4">
-                                          <img src="<?php  echo base_url(); ?>assets/users/<?php echo $rows->user_picture; ?>" class="img-responsive" style="width:100px;">
+                                          <img src="<?php  echo base_url(); ?>assets/users/<?php echo $rows->user_picture; ?>" class="img-circle" style="width:100px;height:100px;border-radius:50px;">
                                         </div>
 
                                     </div>
@@ -76,8 +76,8 @@
 
                                         <label class="col-sm-2 col-form-label"></label>
                                         <div class="col-sm-2">
-                                            <button type="submit" id="save" class="btn btn-primary waves-effect waves-light">
-                                                Update </button>
+                                            <button type="submit" id="save" class="btn btn-success waves-effect waves-light">
+                                                Save </button>
                                         </div>
 
                                     </div>
@@ -165,30 +165,30 @@
 
             messages: {
                 username: {
-                    required: "Enter the Username ",
-                    remote: "Username Already Exists"
+                    required: "This field cannot be empty!",
+                    remote: "Username already exists!"
                 },
-                name: "Enter Name",
+                name: "This field cannot be empty!",
                 mobile: {
-                    required: "Enter the Mobile Number ",
-                    remote: "Mobile Number Already Exists"
+                    required: "This field cannot be empty!",
+                    remote: "Mobile number already exists!"
                 },
                 email: {
-                    required: "Enter the Email ",
-                    remote: "Email Already Exists"
+                    required: "This field cannot be empty!",
+                    remote: "Email already exists!"
                 },
                 pwd: "Enter Password",
                 dob: "Select DOB",
                 gender: "Select Gender",
                 occupation: "Enter Occupation",
-                address1: "Enter Address",
+                address1: "This field cannot be empty!",
                 country: "Select Country Name",
                 statename: "Select State Name",
                 city: "Select City Name",
                 zip: "Enter Zip",
                 status: "Select Status",
                 userrole: "Select User Role",
-                display_status: "Select Display Status"
+                display_status: "Select status"
             },
         });
     });

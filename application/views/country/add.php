@@ -4,11 +4,11 @@
                <div class="col-lg-8">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title"> <b> ADD COUNTRY</b> </h4>
+                        <h4 class="mt-0 header-title"> <b> Add Country</b> </h4>
 
                         <form class="" method="post" action="<?php echo base_url();?>country/add_country" name="countryform" id="countryform">
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-4 col-form-label">Country Name</label>
+                              <label for="example-text-input" class="col-sm-4 col-form-label">Country</label>
                               <div class="col-sm-6">
                                  <input class="form-control" type="text"  name="countryname" value="" id="example-text-input">
                               </div>
@@ -18,18 +18,16 @@
                               <div class="col-sm-6">
                                  <select class="form-control" name="eventsts">
                                     <option value="">Select  Status</option>
-                                    <option value="Y">Yes</option>
-                                    <option value="N">No</option>
+                                    <option value="Y">Active</option>
+                                    <option value="N">Inactive</option>
                                  </select>
                               </div>
                            </div>
                            <div class="form-group">
                               <label class="col-sm-4 col-form-label"></label>
-                              <button type="submit" class="btn btn-primary waves-effect waves-light">
-                              Submit </button>
-                              <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                              Reset
-                              </button>
+                              <button type="submit" class="btn btn-success waves-effect waves-light">
+                              Add </button>
+
                            </div>
                      </div>
                      </form>
@@ -45,7 +43,7 @@
 
                        <?php if($this->session->flashdata('msg')): ?>
                         <div class="alert <?php $msg=$this->session->flashdata('msg');
-                        if($msg=='Added Successfully' || $msg=='Update Successfully'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
+                        if($msg=='Added Successfully' || $msg=='Changes made are saved'){ echo "alert-success"; }else{ echo "alert-success"; } ?>">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                            ×</button> <?php echo $this->session->flashdata('msg'); ?>
                         </div>
@@ -54,10 +52,10 @@
                         <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
-							            <th>S.No</th>
-                                 <th>Country Name</th>
+							            <th>S. No</th>
+                                 <th>Country</th>
                                  <th>Status</th>
-                                 <th>Action</th>
+                                 <th>Actions</th>
                               </tr>
                            </thead>
                            <tbody>
@@ -69,7 +67,7 @@
                               <tr>
                                  <td><?php  echo $i; ?></td>
                                  <td><?php  echo $rows->country_name; ?></td>
-                                 <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
+                                 <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Inactive </button>'; }?></td>
 								 <td><a href="<?php echo base_url();?>country/edit_country/<?php echo $rows->id;?>"><img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a></td>
                               </tr>
                              <?php $i++;  }  ?>
@@ -97,8 +95,8 @@
          eventsts:{required:true }
         },
         messages: {
-        countryname:"Enter Country Name",
-        eventsts:"Select Status"
+        countryname:"Enter country",
+        eventsts:"Select status"
                },
          });
    });

@@ -77,7 +77,7 @@ FROM user_details AS ud LEFT JOIN user_master AS um ON ud.user_id=um.id LEFT JOI
       if($res){
         $data=array("status"=>"success");
       }else{
-        $data=array("status"=>"error");
+        $data=array("status"=>"Something went wrong! Please try again later. ");
       }
       return $data;
 

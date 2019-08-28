@@ -1,8 +1,4 @@
-<style>
-th{
-  width: 100px;
-}
-</style>
+
 
     <div class="page-content-wrapper ">
         <div class="container">
@@ -25,7 +21,7 @@ th{
                             <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
                         <thead>
                         <tr>
-                            <th>Event Name</th>
+                            <th style="width:200px;">Event</th>
                             <th>Event Rating</th>
                             <th>Comments</th>
                             <th>Status</th>

@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class State extends CI_Controller 
+class State extends CI_Controller
 {
 
 
-	function __construct() 
+	function __construct()
 	   {
 		  parent::__construct();
 		  $this->load->model('statemodel');
@@ -48,14 +48,14 @@ class State extends CI_Controller
          $sta=$datas['status'];
 	     //print_r($sta);exit;
 	     if($sta=="success"){
-	       $this->session->set_flashdata('msg','Added Successfully');
+	       $this->session->set_flashdata('msg','State added successfully');
 		   redirect('state/home');
 	     }else if($sta=="Already Exist"){
-             $this->session->set_flashdata('msg','Already Exist');
+             $this->session->set_flashdata('msg','State already exists!');
 		     redirect('state/home');
 	     }
 	     else{
-	     	 $this->session->set_flashdata('msg','Faild To Add');
+	     	 $this->session->set_flashdata('msg','Something went wrong! Please try again later.');
 		     redirect('state/home');
 	     }
 
@@ -67,7 +67,7 @@ class State extends CI_Controller
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-	    
+
         $datas['countyr_list'] = $this->statemodel->getall_country_list();
 	    $datas['edit']=$this->statemodel->eidt_state_details($id);
 	    //echo'<pre>'; print_r($datas['edit']);exit;
@@ -88,8 +88,8 @@ class State extends CI_Controller
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-        
-        $countryid=$this->input->post("countryid"); 
+
+        $countryid=$this->input->post("countryid");
         $statename=$this->input->post("statename");
         $stateid=$this->input->post("stateid");
 	    $estatus=$this->input->post("eventsts");
@@ -98,13 +98,13 @@ class State extends CI_Controller
         $sta=$datas['status'];
 	     //print_r($sta);exit;
 	     if($sta=="success"){
-	       $this->session->set_flashdata('msg','Update Successfully');
+	       $this->session->set_flashdata('msg','Changes made are saved');
 		   redirect('state/home');
 	     }else if($sta=="Already Exist"){
-	     	 $this->session->set_flashdata('msg','Already Exist');
+	     	 $this->session->set_flashdata('msg','State already exists');
 		     redirect('state/home');
 	     }else{
-	     	 $this->session->set_flashdata('msg','Faild To Update');
+	     	 $this->session->set_flashdata('msg','Something went wrong! Please try again later.');
 		     redirect('state/home');
 	     }
     }

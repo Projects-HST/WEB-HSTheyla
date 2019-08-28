@@ -1,12 +1,10 @@
-
-
     <div class="page-content-wrapper ">
         <div class="container">
         <div class="row">
         <div class="col-lg-12">
             <div class="card m-b-20">
                 <div class="card-block">
-                    <h4 class="mt-0 header-title"></h4>
+                    <h4 class="mt-0 header-title">Organizer Events</h4>
 
                      <?php if($this->session->flashdata('msg')): ?>
                        <div class="alert <?php $msg=$this->session->flashdata('msg');
@@ -20,13 +18,13 @@
 
                   <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
                         <thead>
-                            <tr> <th>S.No</th>
-                            <th>Event Name</th>
+                            <tr> <th>S. No</th>
+                            <th style="width:200px;">Event</th>
                             <!--th>Event Category</th-->
-                            <th>City</th>
-                            <th>Popularity</th>
+                            <th>City/Area</th>
+                            <th>Views</th>
                             <th>Status</th>
-                            <th>Action</th>
+                            <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -45,7 +43,7 @@
                             <td><?php echo $rows->city_name ; ?></td>
                             <td><?php foreach($popular as $values){  $evid=$values->event_id;
                              if($eid==$evid){ echo $values->popular; } }?></td>
-                             <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
+                             <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Inactive </button>'; }?></td>
                             <td>
                              <a href="<?php echo base_url();?>events/edit_events/<?php echo base64_encode($rows->id);?>">
                               <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>

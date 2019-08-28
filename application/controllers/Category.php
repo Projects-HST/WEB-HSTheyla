@@ -45,13 +45,13 @@ class Category extends CI_Controller
         $sta   = $datas['status'];
         //print_r($sta);exit;
         if ($sta == "success") {
-            $this->session->set_flashdata('msg', 'Added Successfully');
+            $this->session->set_flashdata('msg', 'Category added successfully');
             redirect('category/home');
-        } else if ($sta == "Already Exist") {
+        } else if ($sta == "Category already exists!") {
             $this->session->set_flashdata('msg', $sta);
             redirect('category/home');
         } else {
-            $this->session->set_flashdata('msg', 'Faild To Add');
+            $this->session->set_flashdata('msg', 'Something went wrong! Please try again later.');
             redirect('category/home');
         }
     }
@@ -98,9 +98,9 @@ class Category extends CI_Controller
         $sta   = $datas['status'];
         //print_r($sta);exit;
         if ($sta == "success") {
-            $this->session->set_flashdata('msg', 'Updated Successfully');
+            $this->session->set_flashdata('msg', 'Changes made are saved');
             redirect('category/home');
-        } else if ($sta == "Already Exist") {
+        } else if ($sta == "Category already exists!") {
             $this->session->set_flashdata('msg', $sta);
             redirect('category/home');
         } else {
