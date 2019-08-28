@@ -390,7 +390,7 @@ class Apimainmodel extends CI_Model {
 				/* $Title = "Testing Title";
 				$Message = "Testing Message";
 				$mobiletype = "1";
-				$this->sendNotification($gcm_key,$Title,$Message,$mobiletype); */
+				$this->sendNotification($gcm_key,$Title,$Message,$mobiletype);  */
 					
     				$response = array("status" => "Success", "msg" => "Login Successfully", "userData" => $userData);
     				return $response;
@@ -2794,28 +2794,81 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 
 
 //#################### User Notification ###############//
-	public function User_notification($user_id)
+	public function View_notification($user_id)
 	{
 		$notify_query = "SELECT
 							B.template_name,
 							B.template_content,
-							A.view_status
+							B.notification_img,
+							A.view_status,
+							A.created_at
 						FROM
 							notification_history A,
 							email_template B
 						WHERE
-							A.user_master_id = '$user_id' AND A.template_id = B.id
+							A.user_master_id = '$user_id' AND A.created_at >=(CURDATE() - INTERVAL 3 DAY) AND A.template_id = B.id
 						GROUP BY
-							A.template_id ORDER BY A.created_at DESC";
-		$notify_res = $this->db->query($notify_query);
-		$notify_result = $notify_res->result();
+							A.template_id
+						ORDER BY
+							A.created_at
+						DESC";
+					$notify_res = $this->db->query($notify_query);
+					//$notify_result = $notify_res->result();
 		
-
-		 if($notify_res->num_rows()>0){
-			 $response = array("status" => "success", "msg" => "View Notification","Notification"=>$notify_result);
+		if($notify_res->num_rows()>0){
+			   foreach ($notify_res->result() as $rows)
+			    {
+					$template_pic = $rows->notification_img;
+					
+					if ($template_pic != ""){
+							$template_pic_url = "https://heylaapp.com/testing/assets/notification/images/".$template_pic;
+					} else {
+						$template_pic_url = "";
+					}
+					
+					$notify_data[] = array(
+							"template_name" => $rows->template_name,
+							"template_content" => $rows->template_content,
+							"template_pic" => $template_pic_url,
+							"view_status" => $rows->view_status,
+							"created_at" => $rows->created_at
+				    );
+				}
+			$update_sql = "UPDATE notification_history SET view_status = '1' WHERE user_master_id ='$user_id'";
+    		$update_result = $this->db->query($update_sql);
+			
+			 $response = array("status" => "success", "msg" => "View Notification","Notification"=>$notify_data);
 		}else{
 			 $response = array("status" => "error", "msg" => "Notification not found");
 		}
+		return $response;
+	}
+	
+//#################### User Notification End ###############//
+
+//#################### User Notification ###############//
+	public function New_notification($user_id)
+	{
+		$notify_query = "SELECT
+							B.template_name,
+							B.template_content,
+							A.view_status,
+							A.created_at
+						FROM
+							notification_history A,
+							email_template B
+						WHERE
+							A.user_master_id = '$user_id' AND A.view_status = '0' AND A.created_at >=(CURDATE() - INTERVAL 3 DAY) AND A.template_id = B.id
+						GROUP BY
+							A.template_id
+						ORDER BY
+							A.created_at
+						DESC";
+						
+		$notify_res = $this->db->query($notify_query);
+		$notifi_count = $notify_res->num_rows();
+		$response = array("status" => "success", "msg" => "New Notification","New_notification"=>$notifi_count);
+
 		return $response;
 	}
 	

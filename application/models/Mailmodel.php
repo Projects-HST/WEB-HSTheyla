@@ -241,13 +241,15 @@ Class Mailmodel extends CI_Model
 					
 						if ($i< $count){
             				if ($temp_key!=""){
-            					$gcm_key .= $temp_key.",";
+            					 $gcm_key .= $temp_key.",";
             				}
             			} else {
-            				$gcm_key .= $temp_key;
+            				 $gcm_key .= $temp_key;
             			}
 			
-						/* $device_token = explode(",", $gcm_key);
+			//echo $gcm_key;
+			
+						$device_token = explode(",", $gcm_key);
 						$passphrase = 'hs123';
 						$loction ='assets/notification/heylaapp.pem';
 
@@ -263,20 +265,23 @@ Class Mailmodel extends CI_Model
 
 						$body['aps'] = array(
 							'alert' => array(
-								'body' => $subject,
+								'title' => $subject,
+								'body' => $cnotes,
 								'action-loc-key' => 'Heyla App',
-							),
-							'badge' => 2,
-							'sound' => 'assets/notification/oven.caf',
-							);
-
+							)
+						);
+						$body['data'] = array(
+							'mediaUrl' => "$img_url",
+							'mediaType' => "jpg"
+						); 
+						
 						$payload = json_encode($body);
 
-							$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $gcm_key)) . pack("n", strlen($payload)) . $payload;
+							//$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $gcm_key)) . pack("n", strlen($payload)) . $payload;
 							//$result = fwrite($fp, $msg, strlen($msg));
 
 						foreach($device_token as $token) {
-
+							
 							// Build the binary notification
 							$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $token)) . pack("n", strlen($payload)) . $payload;
 							$result = fwrite($fp, $msg, strlen($msg));
@@ -284,11 +289,10 @@ Class Mailmodel extends CI_Model
 
 							fclose($fp);
 							$i = $i+1;
-					} */
-					
 				}
 
 			}
+			//exit;
 			$data3= array("status"=>"Notify");
             return $data3;
 		}
