@@ -283,7 +283,6 @@ Class Mailmodel extends CI_Model
 
 							// Build the binary notification
 							$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $token)) . pack("n", strlen($payload)) . $payload;
-							echo $msg;
 							$result = fwrite($fp, $msg, strlen($msg));
 						}
 
