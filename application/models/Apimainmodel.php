@@ -2799,6 +2799,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 		$notify_query = "SELECT
 							B.template_name,
 							B.template_content,
+							B.notification_img,
 							A.view_status,
 							A.created_at
 						FROM
@@ -2812,13 +2813,31 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 							A.created_at
 						DESC";
 					$notify_res = $this->db->query($notify_query);
-					$notify_result = $notify_res->result();
+					//$notify_result = $notify_res->result();
 		
+		if($notify_res->num_rows()>0){
+			   foreach ($notify_res->result() as $rows)
+			    {
+					$template_pic = $rows->notification_img;
+					
+					if ($template_pic != ""){
+							$template_pic_url = "https://heylaapp.com/testing/assets/notification/images/".$template_pic;
+					} else {
+						$template_pic_url = "";
+					}
+					
+					$notify_data[] = array(
+							"template_name" => $rows->template_name,
+							"template_content" => $rows->template_content,
+							"template_pic" => $template_pic_url,
+							"view_status" => $rows->view_status,
+							"created_at" => $rows->created_at
+				    );
+				}
 			$update_sql = "UPDATE notification_history SET view_status = '1' WHERE user_master_id ='$user_id'";
     		$update_result = $this->db->query($update_sql);
-
-		 if($notify_res->num_rows()>0){
-			 $response = array("status" => "success", "msg" => "View Notification","Notification"=>$notify_result);
+			
+			 $response = array("status" => "success", "msg" => "View Notification","Notification"=>$notify_data);
 		}else{
 			 $response = array("status" => "error", "msg" => "Notification not found");
 		}
