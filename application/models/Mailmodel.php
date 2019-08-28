@@ -263,7 +263,8 @@ Class Mailmodel extends CI_Model
 
 						$body['aps'] = array(
 							'alert' => array(
-								'body' => $subject,
+								'title' => $subject,
+								'body' => $cnotes,
 								'action-loc-key' => 'Heyla App',
 							),
 							'badge' => 2,
@@ -275,7 +276,7 @@ Class Mailmodel extends CI_Model
 
 //echo $payload;
 //exit;
-							$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $gcm_key)) . pack("n", strlen($payload)) . $payload;
+							//$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $gcm_key)) . pack("n", strlen($payload)) . $payload;
 							//$result = fwrite($fp, $msg, strlen($msg));
 
 						foreach($device_token as $token) {
