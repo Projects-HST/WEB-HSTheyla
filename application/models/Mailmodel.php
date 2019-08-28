@@ -262,18 +262,6 @@ Class Mailmodel extends CI_Model
 							exit("Failed to connect: $err $errstr" . PHP_EOL);
 
 						$body['aps'] = array(
-						'alert' => array(
-							'title' => $subject,
-							'body' => $cnotes,
-							'action-loc-key' => 'Heyla App',
-						),
-						'mediaUrl' => $img_url,
-						'mediaType' => "image",
-						'badge' => 2,
-						'sound' => 'assets/notification/oven.caf',
-						);
-				
-						/* $body['aps'] = array(
 							'alert' => array(
 								'body' => $subject,
 								'action-loc-key' => 'Heyla App',
@@ -281,7 +269,7 @@ Class Mailmodel extends CI_Model
 							'badge' => 2,
 							'sound' => 'assets/notification/oven.caf',
 							);
- */
+
 						$payload = json_encode($body);
 
 							$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $gcm_key)) . pack("n", strlen($payload)) . $payload;
@@ -296,7 +284,7 @@ Class Mailmodel extends CI_Model
 
 							fclose($fp);
 							$i = $i+1;
-					
+					} 
 					
 				}
 
