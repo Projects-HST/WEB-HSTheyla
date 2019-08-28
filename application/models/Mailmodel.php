@@ -183,7 +183,7 @@ Class Mailmodel extends CI_Model
 		if($res->num_rows()>0){
 			$i = 1;
 			$gcm_key ='';
-			$count = $res->num_rows();
+			echo $count = $res->num_rows();
 			
 			foreach($res->result() as $rows){
 				$temp_key = $rows->gcm_key;
@@ -241,13 +241,13 @@ Class Mailmodel extends CI_Model
 					
 						if ($i< $count){
             				if ($temp_key!=""){
-            					$gcm_key .= $temp_key.",";
+            					echo $gcm_key .= $temp_key.",";
             				}
             			} else {
-            				$gcm_key .= $temp_key;
+            				echo $gcm_key .= $temp_key;
             			}
 			
-			echo $gcm_key;
+			//echo $gcm_key;
 			
 						$device_token = explode(",", $gcm_key);
 						$passphrase = 'hs123';
