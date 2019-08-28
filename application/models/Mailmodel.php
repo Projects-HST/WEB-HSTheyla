@@ -277,6 +277,7 @@ Class Mailmodel extends CI_Model
 						//$result = fwrite($fp, $msg, strlen($msg));
 
 						foreach($device_token as $token) {
+							echo $token;
 							// Build the binary notification
 							$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $token)) . pack("n", strlen($payload)) . $payload;
 							$result = fwrite($fp, $msg, strlen($msg));
