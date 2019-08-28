@@ -247,7 +247,7 @@ Class Mailmodel extends CI_Model
             				 $gcm_key .= $temp_key;
             			}
 			
-			echo $gcm_key;
+			//echo $gcm_key;
 			
 						$device_token = explode(",", $gcm_key);
 						$passphrase = 'hs123';
@@ -284,6 +284,7 @@ Class Mailmodel extends CI_Model
 							$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $token)) . pack("n", strlen($payload)) . $payload;
 							$result = fwrite($fp, $msg, strlen($msg));
 							echo $token;
+							echo "<br>";
 						}
 
 							fclose($fp);
