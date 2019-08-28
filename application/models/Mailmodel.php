@@ -247,6 +247,8 @@ Class Mailmodel extends CI_Model
             				$gcm_key .= $temp_key;
             			}
 			
+			echo $gcm_key;
+			
 						$device_token = explode(",", $gcm_key);
 						$passphrase = 'hs123';
 						$loction ='assets/notification/heylaapp.pem';
@@ -275,7 +277,7 @@ Class Mailmodel extends CI_Model
 
 						//$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $gcm_key)) . pack("n", strlen($payload)) . $payload;
 						//$result = fwrite($fp, $msg, strlen($msg));
-						print_r($device_token);
+
 						foreach($device_token as $token) {
 							
 							// Build the binary notification
