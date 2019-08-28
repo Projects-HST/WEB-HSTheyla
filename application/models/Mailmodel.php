@@ -275,14 +275,15 @@ Class Mailmodel extends CI_Model
 
 						$payload = json_encode($body);
 
-						//$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $gcm_key)) . pack("n", strlen($payload)) . $payload;
-						//$result = fwrite($fp, $msg, strlen($msg));
+							//$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $gcm_key)) . pack("n", strlen($payload)) . $payload;
+							//$result = fwrite($fp, $msg, strlen($msg));
 
 						foreach($device_token as $token) {
 							
 							// Build the binary notification
 							$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $token)) . pack("n", strlen($payload)) . $payload;
 							$result = fwrite($fp, $msg, strlen($msg));
+							
 							echo $token;
 							echo "<br>";
 						}
