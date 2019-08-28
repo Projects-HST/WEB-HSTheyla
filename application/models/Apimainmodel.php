@@ -2794,28 +2794,62 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 
 
 //#################### User Notification ###############//
-	public function User_notification($user_id)
+	public function View_notification($user_id)
 	{
 		$notify_query = "SELECT
 							B.template_name,
 							B.template_content,
-							A.view_status
+							A.view_status,
+							A.created_at
 						FROM
 							notification_history A,
 							email_template B
 						WHERE
-							A.user_master_id = '$user_id' AND A.template_id = B.id
+							A.user_master_id = '$user_id' AND A.created_at >=(CURDATE() - INTERVAL 3 DAY) AND A.template_id = B.id
 						GROUP BY
-							A.template_id ORDER BY A.created_at DESC";
-		$notify_res = $this->db->query($notify_query);
-		$notify_result = $notify_res->result();
+							A.template_id
+						ORDER BY
+							A.created_at
+						DESC";
+					$notify_res = $this->db->query($notify_query);
+					$notify_result = $notify_res->result();
 		
+			$update_sql = "UPDATE notification_history SET view_status = '1' WHERE user_master_id ='$user_id'";
+    		$update_result = $this->db->query($update_sql);
 
 		 if($notify_res->num_rows()>0){
 			 $response = array("status" => "success", "msg" => "View Notification","Notification"=>$notify_result);
 		}else{
 			 $response = array("status" => "error", "msg" => "Notification not found");
 		}
+		return $response;
+	}
+	
+//#################### User Notification End ###############//
+
+//#################### User Notification ###############//
+	public function New_notification($user_id)
+	{
+		$notify_query = "SELECT
+							B.template_name,
+							B.template_content,
+							A.view_status,
+							A.created_at
+						FROM
+							notification_history A,
+							email_template B
+						WHERE
+							A.user_master_id = '$user_id' AND A.view_status = '0' AND A.created_at >=(CURDATE() - INTERVAL 3 DAY) AND A.template_id = B.id
+						GROUP BY
+							A.template_id
+						ORDER BY
+							A.created_at
+						DESC";
+						
+		$notify_res = $this->db->query($notify_query);
+		$notifi_count = $notify_res->num_rows();
+		$response = array("status" => "success", "msg" => "New Notification","New_notification"=>$notifi_count);
+
 		return $response;
 	}
 	
