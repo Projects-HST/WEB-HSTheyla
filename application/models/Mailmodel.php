@@ -284,8 +284,8 @@ Class Mailmodel extends CI_Model
 							$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $token)) . pack("n", strlen($payload)) . $payload;
 							$result = fwrite($fp, $msg, strlen($msg));
 							
-							echo $token;
-							echo "<br>";
+							//echo $token;
+							//echo "<br>";
 						}
 
 							fclose($fp);
