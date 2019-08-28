@@ -284,7 +284,7 @@ Class Mailmodel extends CI_Model
 
 							fclose($fp);
 							$i = $i+1;
-					} 
+					
 					
 				}
 
