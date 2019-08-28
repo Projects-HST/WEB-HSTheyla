@@ -273,8 +273,8 @@ Class Mailmodel extends CI_Model
 						$payload = json_encode($body);
 
 
-echo $payload;
-exit;
+//echo $payload;
+//exit;
 							$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $gcm_key)) . pack("n", strlen($payload)) . $payload;
 							//$result = fwrite($fp, $msg, strlen($msg));
 
