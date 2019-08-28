@@ -77,7 +77,6 @@ class Apimainmodel extends CI_Model {
 
 			$body['aps'] = array(
 				'alert' => array(
-					'title' => $Title,
 					'body' => $Message,
 					'action-loc-key' => 'Heyla App',
 				),
@@ -388,10 +387,10 @@ class Apimainmodel extends CI_Model {
 					$update_gcm = $this->db->query($sQuery);
 				}
 
-				$Title = "Testing Title";
+				/* $Title = "Testing Title";
 				$Message = "Testing Message";
-				$mobiletype = "2";
-				$this->sendNotification($gcm_key,$Title,$Message,$mobiletype); 
+				$mobiletype = "1";
+				$this->sendNotification($gcm_key,$Title,$Message,$mobiletype);  */
 					
     				$response = array("status" => "Success", "msg" => "Login Successfully", "userData" => $userData);
     				return $response;
