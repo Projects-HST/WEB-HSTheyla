@@ -269,7 +269,7 @@ Class Mailmodel extends CI_Model
 								'body' => $cnotes,
 								'action-loc-key' => 'Heyla App',
 							),
-							'urlImageString' =>$img_url
+							'attachment' =>$img_url
 							);
 
 						$payload = json_encode($body);
