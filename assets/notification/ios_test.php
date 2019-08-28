@@ -10,7 +10,7 @@ $message = 'Test iOS 10 Media Attachment Push';
 ////////////////////////////////////////////////////////////////////////////////
 
 $ctx = stream_context_create();
-stream_context_set_option($ctx, 'ssl', 'local_cert', 'ck.pem');
+stream_context_set_option($ctx, 'ssl', 'local_cert', 'heylaapp.pem');
 stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);
 stream_context_set_option($ctx, 'ssl', 'cafile', 'entrust_2048_ca.cer');
 
