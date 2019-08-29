@@ -21,6 +21,10 @@ transform: rotate(-90deg);
 .dropdown-block li a{
   color: #000;
   font-size: 14px;
+      margin-left: 25px;
+}
+.profile_menu{
+  margin-left:-60px;
 }
 .cursor_link{
   cursor: pointer;

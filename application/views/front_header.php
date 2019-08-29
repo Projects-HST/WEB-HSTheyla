@@ -46,7 +46,11 @@
   max-width:700px;
 }
 
-
+.dropdown-menu>li:hover, .dropdown-menu>li:focus {
+    color: #262626;
+    text-decoration: none;
+    background-color: #f5f5f5;
+}
 </style>
 <body>
 
@@ -121,7 +125,7 @@
                                       <li><a class="nav-link logout-btn" onclick="logout()">Logout</a></li>
 
                                     </ul> -->
-                                    <ul class="dropdown-menu dropdown-block" role="menu" style="margin-left:-60px;">
+                                    <ul class="dropdown-menu dropdown-block profile_menu" role="menu" style="">
                                         <li><a href="<?php echo base_url(); ?>profile">Profile</a></li>
                                          <li><a href="<?php echo base_url(); ?>change_password">Change Password</a></li>
                                         <li><a class="cursor_link" onclick="logout()">Logout</a></li>

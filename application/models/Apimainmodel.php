@@ -40,7 +40,7 @@ class Apimainmodel extends CI_Model {
 					$Title,
 					$Message,
 					'https://heylaapp.com/testing/assets/notification/images/event.JPG'
-				); 
+				);
 
 // 			//if the push don't have an image give null in place of image
  			 /* $push = new Push(
@@ -391,12 +391,12 @@ class Apimainmodel extends CI_Model {
 				$Message = "Testing Message";
 				$mobiletype = "1";
 				$this->sendNotification($gcm_key,$Title,$Message,$mobiletype);  */
-					
+
     				$response = array("status" => "Success", "msg" => "Login Successfully", "userData" => $userData);
     				return $response;
 		} else {
 
-					$response = array("status" => "Error", "msg" => "Invalid login");
+					$response = array("status" => "Error", "msg" => "Incorrect credentials");
 					return $response;
 		}
 
@@ -597,7 +597,7 @@ class Apimainmodel extends CI_Model {
 					return $response;
 		} else {
 
-					$response = array("status" => "Error", "msg" => "Invalid login");
+					$response = array("status" => "Error", "msg" => "Incorrect credentials");
 					return $response;
 		}
 
@@ -688,7 +688,7 @@ class Apimainmodel extends CI_Model {
 
             $points_sql = "INSERT INTO user_points_count (user_id) VALUES ('". $user_id . "')";
 			$insert_points = $this->db->query($points_sql);
-			
+
             $gcmQuery = "SELECT * FROM push_notification_master WHERE gcm_key like '%" .$gcm_key. "%' LIMIT 1";
 			$gcm_result = $this->db->query($gcmQuery);
 			$gcm_ress = $gcm_result->result();
@@ -698,10 +698,10 @@ class Apimainmodel extends CI_Model {
 						$sQuery = "INSERT INTO push_notification_master (user_id,gcm_key,mobile_type) VALUES ('". $user_id . "','". $gcm_key . "','". $mobile_type . "')";
 						$update_gcm = $this->db->query($sQuery);
 					}
-			$mobile_message = 'Verify OTP :'. $OTP;
+			       $mobile_message = 'Dear user, Use the OTP '.$OTP.' to complete your registration.- Team Heyla';
 
-            $subject = "Heyla App - Email Verification";
-            $email_message = 'Thanking for Registering with Heyla App <br>To allow us to confirm the validity of your email address, <a href="'. base_url().'home/emailverfiy/'.$encrypt_email.'" target="_blank" style="background-color: #478ECC; font-size:15px; font-weight: bold; padding: 10px; text-decoration: none; color: #fff; border-radius: 5px;">Click this verification link.</a><br><br><br>';
+            $subject = "Heyla User Registration Successful";
+            $email_message = 'Hi,<br> Welcome! <br> You have successfully registered with Heyla. We wish you events that are memorable and enjoyable!<br><br> With love,<br> Team Heyla <br><br><br><br> <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.<small>';
 
             $this->sendSMS($mobile_no,$mobile_message);
             $this->sendMail($email_id,$subject,$email_message);
@@ -764,10 +764,10 @@ class Apimainmodel extends CI_Model {
 				  $OTP = $rows->mobile_otp;
 			}
 
-			$mobile_message = 'Verify OTP :'. $OTP;
+			$mobile_message = 'Dear user, Use the OTP '.$OTP.' to complete your registration.- Team Heyla';
             $this->sendSMS($mobile_no,$mobile_message);
 
-			$response = array("status" => "Success", "msg" => "OTP Send Successfully");
+			$response = array("status" => "Success", "msg" => "OTP resent");
 		} else {
 		    $response = array("status" => "Error", "msg" => "OTP Send Error");
 		}
@@ -892,12 +892,12 @@ class Apimainmodel extends CI_Model {
     			$update_sql = "UPDATE user_master SET user_name = '$new_user_name' WHERE id='$user_id'";
     			$update_result = $this->db->query($update_sql);
 
-    			$response = array("status" => "Success", "msg" => "Username Updated Successfully");
+    			$response = array("status" => "Success", "msg" => "Username updated successfully");
     		} else {
     		    $response = array("status" => "Error", "msg" => "Old Username Error");
     		}
 		} else {
-		    $response = array("status" => "Error", "msg" => "Username Already Exist");
+		    $response = array("status" => "Error", "msg" => "Username already exists!");
 		}
 	    return $response;
 	}
@@ -935,9 +935,9 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 				$update_sql= "UPDATE user_details SET `name` ='$full_name', `birthdate` ='$date_of_birth', `gender` ='$gender', `occupation` ='$occupation', `address_line1` ='$address_line_1', `address_line2` ='$address_line_2', `address_line3` ='$address_line_3', `country_id` ='$country_id', `state_id` ='$state_id', `city_id` ='$city_id', `zip` ='$zip_code', `newsletter_status` ='$news_letter' WHERE user_id='$user_id'";
 				$update_result = $this->db->query($update_sql);
 
-				$response = array("status" => "success", "msg" => "Profile Updated");
+				$response = array("status" => "success", "msg" => "Changes made are saved");
 			} else {
-				$response = array("status" => "error", "msg" => "Username Already Exist");
+				$response = array("status" => "error", "msg" => "Username already exists!");
 			}
 			return $response;
 	}
@@ -1121,7 +1121,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
         			$update_sql = "UPDATE user_master SET mobile_otp = '$OTP', updated_by = '$user_id', updated_at =NOW() WHERE id='$user_id'";
     			    $update_result = $this->db->query($update_sql);
 
-            		$mobile_message = 'Verify OTP :'. $OTP;
+            		$mobile_message = 'Hi,Use the OTP '.$OTP.' to reset your password.- Team Heyla';
                     $this->sendSMS($mobile_no,$mobile_message);
                     $sType = "Mobile";
                 }
@@ -1220,7 +1220,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
             $response = array("status" => "success", "msg" => "View Cities","cities"=>$city_result);
 
       }else{
-              $response = array("status" => "error", "msg" => "Cities not found");
+              $response = array("status" => "error", "msg" => "City/Area not found");
       }
 
       return $response;
@@ -1258,7 +1258,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			     	$response = array("status" => "success", "msg" => "View Cities","Cities"=>$city_result);
 
 			}else{
-			        $response = array("status" => "error", "msg" => "Cities not found");
+			        $response = array("status" => "error", "msg" => "City/Area not found");
 			}
 
 			return $response;
@@ -1277,7 +1277,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			     	$response = array("status" => "success", "msg" => "View Cities","Cities"=>$city_result);
 
 			}else{
-			        $response = array("status" => "error", "msg" => "Cities not found");
+			        $response = array("status" => "error", "msg" => "City/Area not found");
 			}
 
 			return $response;
@@ -1290,7 +1290,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	{
 		$updQuery = "UPDATE user_details SET city_id = '$city_id' WHERE user_id  ='$user_id'";
 		$updResult = $this->db->query($updQuery);
-		
+
 		$response = array("status" => "success", "msg" => "City Updated","User_cityid"=>$city_id);
 		return $response;
 	}
@@ -1301,7 +1301,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	{
 		$updQuery = "UPDATE user_details SET newsletter_status = '$status' WHERE user_id  ='$user_id'";
 		$updResult = $this->db->query($updQuery);
-		
+
 		$response = array("status" => "success", "msg" => "Notification Updated");
 		return $response;
 	}
@@ -1471,7 +1471,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 					$sQuery = "INSERT INTO user_wish_list (user_id ,event_id) VALUES ('". $user_id . "','". $event_id . "')";
 					$update_gcm = $this->db->query($sQuery);
 					$wishlist_id = $this->db->insert_id();
-					
+
 					$response = array("status" => "success", "msg" => "Wishlist Added","wishlist_id"=>$wishlist_id );
 				} else {
 				    $response = array("status" => "exist", "msg" => "Already Added");
@@ -1536,7 +1536,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			     	$response = array("status" => "success", "msg" => "View Wishlist","Eventdetails"=>$eventData);
 
 			}else{
-			        $response = array("status" => "error", "msg" => "Wishlist not found");
+			        $response = array("status" => "error", "msg" => "Wish list not found");
 			}
 
 			return $response;
@@ -1550,7 +1550,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
             	$sQuery = "DELETE FROM user_wish_list WHERE id = '" .$wishlist_id. "' AND user_id = '" .$user_id. "'";
     			$delete_list = $this->db->query($sQuery);
 
-				$response = array("status" => "success", "msg" => "Wishlist Deleted");
+				$response = array("status" => "success", "msg" => "Event removed from wish list!");
 
 			return $response;
 	}
@@ -1569,7 +1569,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			    	{
 			        	$wishlist_id = $rows->id;
 					}
-				$response = array("status" => "success", "msg" => "Wishlist Added","wishlist_id"=>$wishlist_id);
+				$response = array("status" => "success", "msg" => "Event added to wish list","wishlist_id"=>$wishlist_id);
 			} else {
 				$response = array("status" => "empty", "msg" => "No Records Found");
 			}
@@ -1692,7 +1692,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                             WHERE ev.hotspot_status = 'N' AND $day_query ev.end_date>= '$current_date' AND  ev.category_id IN ($preferrence) AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
                             group by ev.id order by ev.start_date";
 	    }
-		
+
 	    if ($event_type == 'Popularity'){
 	         $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
                             from events as ev
@@ -1702,7 +1702,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                             WHERE ev.hotspot_status = 'N' AND $day_query ev.end_date>= '$current_date' AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
                             group by ev.id ORDER by popularity DESC";
 	    }
-		
+
 		if ($event_type == 'Hotspot'){
 	        $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
                             from events as ev
@@ -1763,7 +1763,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 
 			     	$response = array("status" => "success", "msg" => "View Events","Eventdetails"=>$output);
 			}else{
-			        $response = array("status" => "error", "msg" => "Events not found");
+			        $response = array("status" => "error", "msg" => "Aw! No events are happening!");
 			}
 
 			return $response;
@@ -1772,9 +1772,9 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 
 
   function search_events($search_event,$city_id,$event_type,$user_id,$user_type){
-	  
+
 	   $current_date = date("Y-m-d");
-	   
+
 	   if ($user_type ==1){
             $pre_query = "SELECT * FROM user_preference WHERE user_id = '$user_id'";
         } else {
@@ -1789,8 +1789,8 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
     			}
     			$preferrence = implode (",", $pref_ids);
     		 }
-   
-  
+
+
   if ($event_type == 'All'){
 	         $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
                             from events as ev
@@ -1818,7 +1818,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                             WHERE ev.event_name like '%$search_event%' AND ev.hotspot_status = 'N' AND ev.end_date>= '$current_date' AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
                             group by ev.id ORDER by popularity DESC";
 	    }
-		
+
 		if ($event_type == 'Hotspot'){
 	        $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
                             from events as ev
@@ -1828,8 +1828,8 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                             WHERE ev.event_name like '%$search_event%' AND ev.hotspot_status = 'Y' AND  ev.event_city = '$city_id' AND ev.event_status  ='Y'
                             group by ev.id";
 	    }
-		
-		
+
+
     /* if($event_type=='Favourite'){
         $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity FROM events AS ev
                     LEFT join event_popularity AS ep on ep.event_id = ev.id
@@ -1856,7 +1856,8 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 
 	$event_res = $this->db->query($event_query);
         if($event_res->num_rows()==0){
-            $response = array("status" => "error", "msg" => "Events not found");
+            $response = array("status" => "error", "msg" => "Aw! No events are happening!
+");
         }else{
           $res=$event_res->result();
           foreach($res as $rows){
@@ -1919,7 +1920,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			     	$response = array("status" => "success", "msg" => "View Event Images","Eventgallery"=>$eventImages);
 
 			}else{
-			        $response = array("status" => "error", "msg" => "Gallery not found");
+			        $response = array("status" => "error", "msg" => "No images added yet!");
 			}
 
 			return $response;
@@ -1936,7 +1937,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			 if($review_res->num_rows()>0){
 			     	$response = array("status" => "exist", "msg" => "Already Exist","Reviewdetails"=>$review_result);
 			}else{
-			        $response = array("status" => "new", "msg" => "Review Not found");
+			        $response = array("status" => "new", "msg" => "No reviews added yet!");
 			}
 
 			return $response;
@@ -2006,7 +2007,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
             if (!empty($output)) {
                 $response = array("status" => "success", "msg" => "View Reviews","Reviewdetails"=>$output);
             }else{
-                $response = array("status" => "error", "msg" => "Reviews not found");
+                $response = array("status" => "error", "msg" => "No reviews added yet!");
             }
 
 			return $response;
@@ -2190,7 +2191,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			    }
 			     	$response = array("status" => "success", "msg" => "View Events","Eventdetails"=>$eventData);
 			}else{
-			        $response = array("status" => "error", "msg" => "Events not found");
+			        $response = array("status" => "error", "msg" => "Aw! No events are happening!");
 			}
 
 			return $response;
@@ -2228,7 +2229,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			     	$response = array("status" => "success", "msg" => "View Booking Timings","Eventtiming"=>$time_result);
 
 			}else{
-			        $response = array("status" => "error", "msg" => "Booking Timings not found");
+			        $response = array("status" => "error", "msg" => "Sorry! No shows on this date!");
 			}
 
 			return $response;
@@ -2246,7 +2247,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			 if($plan_res->num_rows()>0){
 			     	$response = array("status" => "success", "msg" => "Booking Plans","Plandetails"=>$plan_result);
 			}else{
-			        $response = array("status" => "error", "msg" => "Plans not found");
+			        $response = array("status" => "error", "msg" => "Something went wrong! Please try again later.");
 			}
 
 			return $response;
@@ -2330,7 +2331,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			     	$response = array("status" => "success", "msg" => "View Booking History","Bookinghistory"=>$booking_result);
 
 			}else{
-			        $response = array("status" => "error", "msg" => "Booking not found");
+			        $response = array("status" => "error", "msg" => "You haven't booked any events!");
 			}
 
 			return $response;
@@ -2348,7 +2349,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
     			     	$response = array("status" => "success", "msg" => "View Booking attendees","Bookingattendees"=>$attendees_result);
 
     			}else{
-    			        $response = array("status" => "error", "msg" => "Booking not found");
+    			        $response = array("status" => "error", "msg" => "You haven't booked any events!");
     			}
 
 			return $response;
@@ -2635,7 +2636,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 
 			     	$response = array("status" => "success", "msg" => "View Events","Eventdetails"=>$eventData);
 			}else{
-			        $response = array("status" => "error", "msg" => "Events not found");
+			        $response = array("status" => "error", "msg" => "Aw! No events are happening!");
 			}
 
 			return $response;
@@ -2721,7 +2722,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 				$query="INSERT INTO refund_request(user_id,order_id,status,created_at) VALUES ('$user_id','$order_id','Pending',NOW())";
 				$resultset=$this->db->query($query);
 
-    			$email_id = 'ganesh.happysanz@gmail.com';
+    			$email_id = 'info@heylaapp.com';
     			$subject = "Heyla App - Refund Request";
                 $email_message = '<html>
 						 <body>
@@ -2787,7 +2788,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 		$this->sendMail($email_id,$subject,$email_message);
 
     	$response = array("status" => "success", "msg" => "Mail Send to Admin");
-		
+
 		return $response;
 	}
 //#################### User Feedback End ###############//
@@ -2814,18 +2815,18 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 						DESC";
 					$notify_res = $this->db->query($notify_query);
 					//$notify_result = $notify_res->result();
-		
+
 		if($notify_res->num_rows()>0){
 			   foreach ($notify_res->result() as $rows)
 			    {
 					$template_pic = $rows->notification_img;
-					
+
 					if ($template_pic != ""){
 							$template_pic_url = "https://heylaapp.com/testing/assets/notification/images/".$template_pic;
 					} else {
 						$template_pic_url = "";
 					}
-					
+
 					$notify_data[] = array(
 							"template_name" => $rows->template_name,
 							"template_content" => $rows->template_content,
@@ -2836,14 +2837,14 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 				}
 			$update_sql = "UPDATE notification_history SET view_status = '1' WHERE user_master_id ='$user_id'";
     		$update_result = $this->db->query($update_sql);
-			
+
 			 $response = array("status" => "success", "msg" => "View Notification","Notification"=>$notify_data);
 		}else{
 			 $response = array("status" => "error", "msg" => "Notification not found");
 		}
 		return $response;
 	}
-	
+
 //#################### User Notification End ###############//
 
 //#################### User Notification ###############//
@@ -2864,14 +2865,14 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 						ORDER BY
 							A.created_at
 						DESC";
-						
+
 		$notify_res = $this->db->query($notify_query);
 		$notifi_count = $notify_res->num_rows();
 		$response = array("status" => "success", "msg" => "New Notification","New_notification"=>$notifi_count);
 
 		return $response;
 	}
-	
+
 //#################### User Notification End ###############//
 
 
