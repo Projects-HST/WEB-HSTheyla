@@ -22,11 +22,12 @@
             <p class="email-verify">
               <?php
                 if($res['msg']=="verify"){ ?>
-                  Thank you! Your email has been verified successfully. <a href="<?php echo base_url(); ?>"> Click here to Login.</a>
+                  Yay! Email verified successfully. <a href="<?php echo base_url(); ?>signin"> Click here to sign in.</a>
               <?php  }else{
                   echo $res['msg'];
                 }
                ?>
+
 
         </p>
           </div>

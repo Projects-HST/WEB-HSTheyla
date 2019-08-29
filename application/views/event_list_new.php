@@ -153,7 +153,10 @@
   <div class="form_search eventdetail-pge slider_form">
     <div class="row">
       <div class="col-md-12">
-        <div class="head_text"><h2>Find Events Near You</h2></div>
+        <div class="head_text">
+          <!-- <h2>Find Events Near You</h2> -->
+          <h2>Events in the Lion City</h2>
+        </div>
       </div>
               <!--<form class="navbar-form navbar-right search-event-form" role="search" method="post" action="" name="search_form" id="search_form">-->
                   <!-- <input  type="text" class="form-control search_box btn-block" name="search_term" id="search_term"  placeholder="Search Event by name" value="" autocomplete="off"> -->
@@ -165,12 +168,43 @@
                 </form>-->
     </div>
     <div class="row">
+
+      <div class="col-md-6 col-lg-3">
+          <label class="form-label">I'm looking for</label>
+        <div class="form-group ">
+              <div class="col-sm-12">
+
+           <?php
+            $tot_count = count($category_list);
+            $str_value = '';
+            $i = 1;
+              foreach($category_list as $res){
+              $str = $res->id;
+              if ($i < $tot_count) { $str = $str.',';}
+              $i = $i+1;
+              $str_value = $str_value . $str;
+            }
+           ?>
+
+              <select id="category" size="3" onchange="getCategoryevents()" class="form-control btn-block" multiple>
+                   <?php
+           foreach($category_list as $res){ ?>
+                   <option value="<?php echo $res->id; ?>"><?php echo $res->category_name; ?></option>
+                   <?php } ?>
+           <option value="<?php echo $str_value; ?>"><?php echo "All"; ?></option>
+                 </select>
+
+
+            </div>
+        </div>
+      </div>
+
     <div class="col-md-6 col-lg-3">
-      <label class="form-label">Select Location</label>
+      <label class="form-label">In</label>
       <div class="form-group">
           <div class="col-sm-12" id="select_city">
             <select class="form-control" name="ctyname" id="ctyname" onChange="getCityevents();">
-                  <option value="">Select Location</option>
+                  <option value="">Area</option>
                   <?php foreach($city_list as $cty){ ?>
                   <option value="<?php echo $cty->id; ?>"><?php echo $cty->city_name; ?></option>
                   <?php } ?>
@@ -180,43 +214,15 @@
           </div>
       </div>
     </div>
+
     <div class="col-md-6 col-lg-3">
-        <label class="form-label">Select Category</label>
-      <div class="form-group ">
-            <div class="col-sm-12">
-
-			   <?php
-					$tot_count = count($category_list);
-					$str_value = '';
-					$i = 1;
-						foreach($category_list as $res){
-						$str = $res->id;
-						if ($i < $tot_count) { $str = $str.',';}
-						$i = $i+1;
-						$str_value = $str_value . $str;
-					}
-				 ?>
-
-            <select id="category" size="3" onchange="getCategoryevents()" class="form-control btn-block" multiple>
-                 <?php
-				 foreach($category_list as $res){ ?>
-                 <option value="<?php echo $res->id; ?>"><?php echo $res->category_name; ?></option>
-                 <?php } ?>
-				 <option value="<?php echo $str_value; ?>"><?php echo "All"; ?></option>
-               </select>
-
-
-          </div>
-      </div>
-    </div>
-    <div class="col-md-6 col-lg-3">
-        <label class="form-label">Preference</label>
+        <label class="form-label">My preference</label>
         <div class="form-group">
               <div class="col-sm-12">
                 <select class="form-control" name="event_type" id="event_type" onchange="getTypeevents();">
-                  <option value="">Select Type</option>
-                  <option value="1">Popular</option>
-                  <option value="2">Hotspot</option>
+                  <option value="">Select preference</option>
+                  <option value="1">Popularity</option>
+                  <option value="2">Hotspots</option>
                 </select>
             </div>
         </div>
@@ -226,7 +232,7 @@
         <label class="form-label">Search</label>
         <div class="form-group">
           <div class="col-sm-12">
-            <input  type="text" class="form-control " name="search_term" id="search_term"   value="" autocomplete="off"  placeholder="&#xF002; Search Event by Name" style="font-family:Arial, FontAwesome" >
+            <input  type="text" class="form-control " name="search_term" id="search_term"   value="" autocomplete="off"  placeholder="&#xF002; Search for events" style="font-family:Arial, FontAwesome" >
         </div>
           </div>
           <p><a href="" onclick="clear_all()" class="clear_btn">Clear all</a></p>
@@ -264,7 +270,7 @@ function hideSelected(value) {
   }
 }
 $('#category').select2({
-        placeholder: 'Select Category',
+        placeholder: 'Event categories',
         "multiple": true,
         allowClear: true,
         minimumResultsForSearch: -1,
@@ -1099,7 +1105,7 @@ function clear_all()
 		}
 
 	  });
-	  alert("Clear all search?");
+	  alert("Clear all results?");
 }
 
 </script>

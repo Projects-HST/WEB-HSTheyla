@@ -10,16 +10,16 @@
 }
 
 </style><div class="col-sm-12 col-md-12 " id="content">
-    <h3 class="dashboard_tab">Booking history</h3>
+    <h3 class="dashboard_tab">Booking History</h3>
 </div>
 <div class="col-md-12 profile_tab">
 
         <div class="card-block" style="padding:20px;">
-          <?php  
+          <?php
 		  if (empty($booking_details)) {
-				echo "<center><h3>Sorry!.. Booking not found.</h3></center>";
+				echo "<center><h3>You haven't booked any event yet!</h3></center>";
 			} else {
-			
+
 			  foreach($booking_details as $res){
 				$event_id = $res->event_id * 564738;
 				$event_name = strtolower(preg_replace("/[^\w]/", "-", $res->event_name));
@@ -48,7 +48,7 @@
 				 </div>
 			   </div>
 			 </div>
-		   <?php } 
+		   <?php }
 		}
 		?>
 

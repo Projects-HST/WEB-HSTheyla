@@ -32,7 +32,7 @@ $secondhalf = array_slice($res, $len / 2);
           <div class="col">
             <p class="footer_heading">Quick links</p>
             <ul class="fnt-footer ">
-                <li class=""><a href="<?php echo base_url(); ?>about-us">About Us</a></li>
+                <li class=""><a href="<?php echo base_url(); ?>about-us">About</a></li>
                 <li class=""><a href="<?php echo base_url(); ?>">Events</a></li>
                 <li class=""><a href="#">Blog</a></li>
               <li class=""><a href="<?php echo base_url(); ?>privacy">Privacy Policy</a></li>
@@ -56,7 +56,7 @@ $secondhalf = array_slice($res, $len / 2);
               <li class=""><a href="https://twitter.com/heylaapp"  target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/share_twitter.png"></a></li>
                 <li class=""><a href="https://www.youtube.com/channel/UCrjx62OpVHGhX5UONO8QDmw"  target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/youtube.png"></a></li>
             </ul>
-            <p class="footer_heading">Download Apps</p>
+            <p class="footer_heading">Download Heyla</p>
             <ul class="fnt-footer social_follow">
               <li class=""><a href="https://itunes.apple.com/us/app/heyla/id1438601804?ls=1&mt=8" target="_blank"><img class="store_img" src="<?php echo base_url(); ?>assets/front/images/app.png"></a></li>
               <li class=""><a href="https://play.google.com/store/apps/details?id=com.palprotech.heylaapp" target="_blank"><img class="store_img"  src="<?php echo base_url(); ?>assets/front/images/play.png"></a></li>
@@ -68,7 +68,7 @@ $secondhalf = array_slice($res, $len / 2);
     <!-- /.container -->
     <div class="container">
 
-        <p class=" text-center foot_copyrights">Crafted with <a href="https://happysanztech.com" target="_blank" style="text-decoration:none;"><b style="color:#fff;font-size:20px;">Happy Sanz Tech</b></a></p>
+        <p class=" text-center foot_copyrights">Built with <i class="fa fa-heart" aria-hidden="true" style="    width: 10px;"></i> by <a href="https://happysanztech.com" target="_blank" style="text-decoration:none;"><b style="color:#fff;font-size:20px;">Happy Sanz Tech</b></a></p>
     </div>
 </footer>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -175,14 +175,14 @@ $('#formsignup').validate({ // initialize the plugin
 
 function logout(){
   swal({
-      title: 'Are you sure?',
-      text: "You Want to logout !",
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes!',
-      cancelButtonText: 'No'
+    title: '',
+    text: "You want to logout?",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes',
+    cancelButtonText: 'No'
 
   }).then(function(){
     window.location.href='<?php echo base_url(); ?>logout';

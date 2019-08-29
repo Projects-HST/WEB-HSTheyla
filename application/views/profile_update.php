@@ -68,14 +68,14 @@ input[type="file"] {
 }
 </style>
 <div class=" col-md-12 " id="content">
-    <h3 class="dashboard_tab">Profile Setting</h3>
+    <h3 class="dashboard_tab">User Profile</h3>
 </div>
 <?php  foreach($res as $rows){} ?>
 <div class="col-md-12 profile_tab">
 <div class="col-md-7">
   <form class="form" role="form" autocomplete="off" method="post" action="" id="profile_form">
       <div class="form-group row">
-          <label class="col-md-3 col-form-label form-control-label">Name</label>
+          <label class="col-md-3 col-form-label form-control-label">Full Name</label>
           <div class="col-md-6">
               <input class="form-control" type="text" name="first_name" value="<?php echo $rows->name; ?>">
           </div>
@@ -88,11 +88,11 @@ input[type="file"] {
       </div>
 
       <div class="form-group row">
-          <label class="col-md-3 col-form-label form-control-label">Email</label>
+          <label class="col-md-3 col-form-label form-control-label">Email ID</label>
           <div class="col-md-6">
             <p>  <?php echo $rows->email_id;  if($rows->email_verify=='N'){ ?><i class="fas fa-exclamation-triangle notverfied" title="Email is Not Verified"></i>
 
-          <?php  }else{  } ?> <span class="change-email"><a href="<?php echo  base_url(); ?>changemail"><br><small>Change my email</small></a></span></p>
+          <?php  }else{  } ?> <span class="change-email"><a href="<?php echo  base_url(); ?>changemail"><br><small>Change Email ID</small></a></span></p>
           </div>
       </div>
           <div class="form-group row">
@@ -108,12 +108,12 @@ input[type="file"] {
 
             </div>
       <div class="form-group row">
-          <label class="col-md-3 col-form-label form-control-label">Mobile number</label>
+          <label class="col-md-3 col-form-label form-control-label">Mobile Number</label>
           <div class="col-md-6">
-            <p>  <?php if(empty($rows->mobile_no)){ echo $rows->mobile_no; ?>
+            <p>  <?php if(empty($rows->mobile_no)){ echo $rows->mobile_no; ?><br>
                 <span class="change-email"><a href="<?php echo  base_url(); ?>mobile">Add Mobile number</a></span></p>
           <?php  }else{ echo $rows->mobile_no; ?>
-              <span class="change-email"><a href="<?php echo  base_url(); ?>mobilenumber">&nbsp; <small>Change Mobile number</small></a></span></p>
+              <span class="change-email"><a href="<?php echo  base_url(); ?>mobilenumber"><br> <small>Change Mobile Number</small></a></span></p>
           <?php   } ?>
           <!-- <input class="form-control" type="text" name="mobile_no" id="mobile_no" value="<?php echo $rows->mobile_no; ?>"> -->
 
@@ -138,7 +138,7 @@ input[type="file"] {
           </div>
       </div>
       <div class="form-group row">
-          <label class="col-md-3 col-form-label form-control-label">Subscribe  Newsletter</label>
+          <label class="col-md-3 col-form-label form-control-label">Newsletter Subscription</label>
           <div class="col-md-6">
             <select class="col-form-label" name="newsletter_status" id="newsletter_status">
               <option value="Y">Yes</option>
@@ -151,7 +151,7 @@ input[type="file"] {
       <div class="form-group row">
           <label class="col-md-3 col-form-label form-control-label"></label>
           <div class="col-md-6">
-              <input type="submit" class="btn btn-primary" value="Save Changes">
+              <input type="submit" class="btn btn-primary" value="Save">
           </div>
       </div>
   </form>
@@ -171,14 +171,14 @@ input[type="file"] {
 <div class="">
   <!-- <input type="file" name="upload_image" class="btn btn-primary" id="upload_image" style="margin-left:150px;" /> -->
   <label for="upload_image" class="custom-file-upload"  style="margin-left:150px;">
-    <i class="fa fa-cloud-upload"></i> Upload Pciture
+    <i class="fa fa-cloud-upload"></i> Upload Image
 </label>
 <input id="upload_image" type="file" name="upload_image" />
 </div>
 
     <?php if(empty($rows->user_picture)){ ?>
   <?php  }else{ ?>
-    <small class="" style="margin-left:150px;"><a onclick="remove_img()" style="cursor: pointer;">Remove Picture</a></small>
+    <small class="" style="margin-left:150px;"><a onclick="remove_img()" style="cursor: pointer;">Remove Profile Picture</a></small>
   <?php  } ?>
 
 
@@ -191,7 +191,7 @@ input[type="file"] {
 		<div class="modal-content">
       		<div class="modal-header">
         		<button type="button" class="close" data-dismiss="modal">&times;</button>
-        		<h4 class="modal-title">Upload & Crop Image</h4>
+        		<h4 class="modal-title">Crop & Upload Image</h4>
       		</div>
       		<div class="modal-body">
         		<div class="row">
@@ -201,7 +201,7 @@ input[type="file"] {
             	</div>
           	<div class="row">
   					<div class="col-md-12 text-center" style="padding-top:30px;">
-  										  <button class="btn btn-success crop_image">Crop & Upload Image</button>
+  										  <button class="btn btn-success crop_image">Upload</button>
 					</div>
 				</div>
       		</div>
@@ -272,8 +272,8 @@ $(document).ready(function(){
         {
           if(data=="success"){
             swal({
-                title: "success",
-                text: " Profile Picture Updated.",
+                title: "",
+                text: " Profile picture updated",
                 type: "success"
             }).then(function() {
                location.reload();
@@ -322,7 +322,7 @@ $('#profile_form').validate({ // initialize the plugin
                         maxlength:"Maximum 12 characters",
                        required: "Please enter your username",
                        user_name: "Please enter a username",
-                       remote: "Username already in use!"
+                       remote: "Username already exists!"
                    },
          mobile_no: {
                         required: "Please enter your username",
@@ -343,8 +343,8 @@ $('#profile_form').validate({ // initialize the plugin
             success: function(response) {
                 if (response == "success") {
                     swal({
-                        title: "success",
-                        text: " Profile Saved.",
+                        title: "",
+                        text: "Changes made are saved",
                         type: "success"
                     }).then(function() {
                        location.reload();

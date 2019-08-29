@@ -371,21 +371,20 @@ Class Loginmodel extends CI_Model
        $res=$this->db->query($update);
        $encrypt_email= base64_encode($email);
       $to=$email;
-      $subject="Changing of Email";
+      $subject="Heyla User Email ID Change";
       $htmlContent = '
       <html>
       <head>
-      <title></title>
+      <title>'.$subject.'</title>
          </head>
          <body style="background-color:#E4F1F7;"><div style="background-image: url('.base_url().'assets/front/images/email_1.png);height:700px;margin: auto;width: 100%;background-repeat: no-repeat;">
-            <div  style="padding:50px;width:400px;"><p>Dear '.$email.'</p>
-           <p style="font-size:20px;">Welcome to Heyla!</p>
-           <p style="font-size:20px;">We’re glad you signed up.</p>
-           <p style="margin-left:50px;"> <br>We wish you to make cheerful memories with each event! </p>
-           <p style="font-size:20px;">With love,<br>Team Heyla<br>
-               <p>To confirm your email address, click the verification link below
-               <br><br><a href="'. base_url().'home/emailverfiy/'.$encrypt_email.'" target="_blank"style="background-color: #478ECC;    padding: 12px;    text-decoration: none;    color: #fff;    border-radius: 20px;">Click here</a>
-             </p>
+            <div  style="padding:50px;width:400px;">
+           <p>Hi,</p>
+           <p style="font-size:17px;">Please click the below link to get your new email ID validated: </p>
+           <p><a href="'. base_url().'home/emailverfiy/'.$encrypt_email.'" target="_blank">Click here</a></p>
+           <p style="font-size:20px;">With love,<br>Team Heyla<br></p>
+           <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.</small>
+           </div>
            </body>
         </html>';
     $headers = "MIME-Version: 1.0" . "\r\n";
@@ -399,7 +398,7 @@ Class Loginmodel extends CI_Model
       echo "failed";
     }
      }else{
-       echo "Email Already Exist";
+       echo "Email ID already exists!";
      }
 
    }
@@ -410,7 +409,7 @@ Class Loginmodel extends CI_Model
      if($res->num_rows()==1){
        foreach($res->result() as $rows){}
          if($rows->email_verify=='Y'){
-           $data=array("msg"=>"Email  has been Verified Already Thank You.");
+           $data=array("msg"=>"Your email has been verified already! <a href=".base_url()."signin>click here to sign in.</a>");
              return $data;
          }else{
            $user_id=$rows->id;
@@ -454,21 +453,19 @@ Class Loginmodel extends CI_Model
 
         if($result){
           $to=$email;
-          $subject="Welcome to Heyla App";
+          $subject=" Heyla User Registration";
           $htmlContent = '
           <html>
           <head>
-          <title></title>
+          <title> '.$subject.'</title>
              </head>
              <body style="background-color:#E4F1F7;"><div style="background-image: url('.base_url().'assets/front/images/email_1.png);height:700px;margin: auto;width: 100%;background-repeat: no-repeat;">
-                <div  style="padding:50px;width:400px;"><p>Dear '.$email.'</p>
-               <p style="font-size:20px;">Welcome to Heyla!</p>
-               <p style="font-size:20px;">We’re glad you signed up.</p>
-               <p style="margin-left:50px;"> <br>We wish you to make cheerful memories with each event! </p>
-               <p style="font-size:20px;">With love,<br>Team Heyla<br>
-                   <p>To confirm your email address, click the verification link below
-                   <br><br><a href="'. base_url().'home/emailverfiy/'.$encrypt_email.'" target="_blank"style="background-color: #478ECC;    padding: 12px;    text-decoration: none;    color: #fff;    border-radius: 20px;">Click here</a>
-                 </p>
+                <div  style="padding:50px;width:400px;"><p>Dear  '.$name.'</p>
+                <p style="font-size:17px;">Welcome!</p>
+                <p style="font-size:17px;">We are glad you signed up.</p>
+                <p style="font-size:17px;"><a href="'. base_url().'home/emailverfiy/'.$encrypt_email.'">Click here</a> to get your email ID verified.</p>
+                <p style="font-size:17px;"> We wish you to make cheerful memories with each event! </p>
+                <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.</small>
                </body>
             </html>';
         $headers = "MIME-Version: 1.0" . "\r\n";
@@ -519,7 +516,7 @@ Class Loginmodel extends CI_Model
       $OTP = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT);
       $update_user_otp="UPDATE user_master SET mobile_otp='$OTP' WHERE id='$user_id'";
       $result=$this->db->query($update_user_otp);
-      $mobile_message = 'Verify Your Mobile Number:'. $OTP;
+      $mobile_message = 'Use this OTP to verify your mobile number:'. $OTP;
       $this->load->model('smsmodel');
       $response=$this->smsmodel->sendOTPtomobile($mob,$mobile_message);
 
@@ -534,7 +531,7 @@ Class Loginmodel extends CI_Model
       $check_email="SELECT * FROM user_master WHERE email_id='$email'";
      $res=$this->db->query($check_email);
      if($res->num_rows()==0){
-        echo "Email Not Registered";
+        echo "This email doesn't seem to be in our record! <br>Please check.";
 
      }else{
        $result=$res->result();
@@ -542,16 +539,19 @@ Class Loginmodel extends CI_Model
        $email=$rows->email_id;
        $encrypt_email= base64_encode($email);
        $to=$email;
-       $subject="Reset Password";
+       $subject="Heyla - Reset Password";
        $htmlContent = '
         <html>
         <head>
         <title>Reset Password</title>
            </head>
            <body>
-           <p style="margin-left:50px;">To Reset Password.Click the below Link <br>
-         <br>   <a href="'. base_url().'home/reset/'.$encrypt_email.'" target="_blank"style="background-color: #478ECC;    padding: 12px;    text-decoration: none;    color: #fff;    border-radius: 20px;">Click Here To Reset</a></br>  </p>
-
+           <p>Hi,<p/>
+           <p style="margin-left:50px;">Please click the below link to reset your password:<br>
+         <br>   <a href="'. base_url().'home/reset/'.$encrypt_email.'" target="_blank"style="background-color: #478ECC;    padding: 8px;    text-decoration: none;    color: #fff;    border-radius: 20px;">Click Here To Reset</a></br>  </p>
+            <p>With love,  <br>Team Heyla</p>
+            <br><br>
+            <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.</small>
            </body>
         </html>';
     $headers = "MIME-Version: 1.0" . "\r\n";
@@ -563,7 +563,7 @@ Class Loginmodel extends CI_Model
           echo "success";
 
       }else{
-        echo "Something Went Wrong";
+        echo "Something went wrong! Please try again later.";
       }
      }
    }
@@ -581,7 +581,7 @@ Class Loginmodel extends CI_Model
         if($result){
             echo "success";
         }else{
-            echo "Something Went Wrong";
+            echo "Something went wrong! Please try again later.";
         }
     }
    }

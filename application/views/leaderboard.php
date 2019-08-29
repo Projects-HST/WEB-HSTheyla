@@ -38,7 +38,7 @@ padding-right: 50px;
 <div class="total_points_tab">
 
     <div class="box">
-<img src="<?php echo base_url(); ?>assets/front/images/trophy.png" class="img-center img_trophy"><span class="total_points_font">Total Points - <b><?php echo $res->total_points; ?></span>
+<img src="<?php echo base_url(); ?>assets/front/images/trophy.png" class="img-center img_trophy"><span class="total_points_font">Total Points Earned  <b><?php echo $res->total_points; ?></span>
 <center></center>
 </div>
 </div>
@@ -62,13 +62,13 @@ padding-right: 50px;
       </div>
       <div class="box">
         <img src="<?php echo base_url(); ?>assets/front/images/review.png" class="img-center">
-        <span class="points_font">Reviews (<?php echo $res->review_points ; ?>)</span>
+        <span class="points_font">Event Reviews (<?php echo $res->review_points ; ?>)</span>
     </div>
   </div>
   <div class="col-md-4 text-center">
     <div class="box">
       <img src="<?php echo base_url(); ?>assets/front/images/event-share.png" class="img-center">
-    <span class="points_font">Event Sharing (<?php echo $res->sharing_points ; ?>)</span>
+    <span class="points_font">Sharing Events (<?php echo $res->sharing_points ; ?>)</span>
         </div>
       <div class="box">
 

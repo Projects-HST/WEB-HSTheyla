@@ -10,12 +10,12 @@
 }
 </style>
 <div class="col-sm-12 col-md-12 " id="content">
-    <h3 class="dashboard_tab">View Events</h3>
+    <h3 class="dashboard_tab">Events By Me</h3>
 </div>
 <div class="col-md-12 event_section" id="content">
 
 <div class="col-md-12 ">
-  <?php if(empty($result)){ echo "<center><h3>No Events Added</h3></center>"; }else{
+  <?php if(empty($result)){ echo "<center><h3>You haven't added any event yet!</h3></center>"; }else{
     foreach($result as $rows){
 $status=$rows->event_status;
 $enc_event_id=$rows->id;

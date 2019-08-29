@@ -136,7 +136,7 @@ body{background-color: #fff;}
 
                    }else{ ?>
                      <li class="nav-item">
-                        <a class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become An Organiser</a>
+                        <a class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become An Organizer</a>
                     </li>
                 <?php   }?>
 
@@ -145,7 +145,7 @@ body{background-color: #fff;}
                     $user_id = $this->session->userdata('id');
                        if(empty($user_role)){ ?>
                          <li class="nav-item">
-                              <a class="nav-link" href="<?php echo base_url(); ?>signin" style="margin-top:10px;">Login / Sign Up </a>
+                              <a class="nav-link" href="<?php echo base_url(); ?>signup" style="margin-top:10px;">Login / Sign Up </a>
                         </li>
 
 
@@ -175,7 +175,7 @@ body{background-color: #fff;}
 
 
                                 <li class="nav-item">
-                                  <p class="welcome_name">Hi <?php echo $rows->name; ?> !</p>
+                                  <p class="welcome_name">Hi <?php echo $rows->name; ?> </p>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

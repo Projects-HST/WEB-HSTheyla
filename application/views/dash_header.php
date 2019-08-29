@@ -72,7 +72,7 @@
                                   $result=$res->result();
                                   foreach($result as $rows){} ?>
                                   <li class="nav-item">
-                                    <p class="welcome_name">Hi <?php echo $rows->name; ?> !</p>
+                                    <p class="welcome_name">Hi <?php echo $rows->name; ?> </p>
                                   </li>
                                  <li class="dropdown">
                                      <a id="user-profile" href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -137,7 +137,7 @@
                     <li class="side-menu">
                         <a href="<?php echo base_url(); ?>bookedevents" class="booked_events_active">
                           <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/booked_events.png"></span>
-                          <span class="sidebar-title">Booked events</span>
+                          <span class="sidebar-title">Booking Details</span>
                         </a>
                     </li>
                     <li class="side-menu">
@@ -151,7 +151,7 @@
                   <li class="side-menu">
                         <a href="<?php echo base_url(); ?>wishlist" class="wishlist_active">
                           <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/wishlist.png"></span>
-                          <span class="sidebar-title">Wishlist</span>
+                          <span class="sidebar-title">Wish List</span>
                         </a>
                   </li>
                   <li class="side-menu">

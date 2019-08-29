@@ -8,11 +8,7 @@
 .form-control{
   width: 270px;
 }
-input[type=text] {
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid #000000;
-}
+
 .error{
   color:red;
 }
@@ -25,7 +21,7 @@ input[type=text] {
 <center>
 
 
-  <p style="font-size:22px;">Change the Mobile Number</p>
+  <p style="font-size:22px;">Change  Mobile Number</p>
         <div class="reset">
 
   <div class="">
@@ -47,7 +43,7 @@ input[type=text] {
             <input type="text" class="form-control" id="mobileotp" name="mobileotp"  placeholder="Enter OTP">
             <p id="mobilemsg"></p>
         </div>
-        <button type="submit" id="submit" class="btn btn-event btn-lg">save</button>
+        <button type="submit" id="submit" class="btn btn-event btn-lg">Submit</button>
     </form>
   </div>
 </div>
@@ -61,7 +57,7 @@ input[type=text] {
    $('#update_mobile_number').validate({ // initialize the plugin
        rules: {
          mobile : {
-           required: true,minlength: 10, maxlength: 11, digits: true,
+           required: true,minlength: 10, maxlength: 10, digits: true,
            remote: {
                   url: "<?php echo base_url(); ?>home/existmobile",
                   type: "post",  complete: function(data){
@@ -83,7 +79,7 @@ input[type=text] {
 
        },
        messages: {
-         mobile: { required:"Enter the Mobile number", minlength: "Min is 10", maxlength: "Max is 11",remote:"Mobile Number Already Exists" },
+         mobile: { required:"Enter new mobile number", minlength: "Please check the number of digits!", maxlength: "Please check the number of digits!",remote:"Mobile number already exists!" },
          mobileotp: {   required: "Enter  OTP",remote:"Invalid OTP"}
 
 
@@ -98,8 +94,8 @@ input[type=text] {
 
                    if (response == "success") {
                      swal({
-                title: "Success",
-                text: " Mobile Number Has been Updated Successfully",
+                title: "",
+                text: " Mobile number changed successfully",
                 type: "success"
             }).then(function() {
                 location.href = '<?php echo base_url(); ?>profile';

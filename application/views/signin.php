@@ -3,15 +3,15 @@
   <div class="col-md-2"></div>
   <div class="col-md-8  col-md-auto signin-div">
     <div class="row">
-    <p class="login-heading">Login</p>
-      <p class="login_tag">Become a part of our community!</p>
+    <p class="login-heading">Sign In</p>
+      <p class="login_tag">Heyla&#8212;a window to the stages of the city-state</p>
 
     <div class="col-lg-6 col-sm-12">
-      <form action="<?php echo base_url(); ?>adminlogin/home" method="post" class="formsignin">
+      <form action="<?php echo base_url(); ?>adminlogin/home" method="post" class="formsignin" id="formsignin">
         <div class="col-xs-6 form_box" >
           <div class="left-inner-addon">
             <i class="fas fa-user"></i>
-            <input type="text" class="form-control user-text-box" name="username" id="username" required placeholder="Username or Mobile Number or Email" />
+            <input type="text" class="form-control user-text-box" name="username" id="username"  placeholder="Username/Mobile Number/Email ID" />
           </div>
         </div>
         <div class="col-xs-6 form_box" >
@@ -21,15 +21,15 @@
           </div> -->
           <div class="left-inner-addon">
             <i class="fas fa-lock"></i>
-            <input id="password-field" type="password" class="form-control"  name="pwd"  placeholder="Password" value="" required>
+            <input id="password-field" type="password" class="form-control"  name="pwd"  placeholder="Password" value="" >
              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
            </div>
         </div>
         <p><a href="<?php echo base_url(); ?>reset" class="forgotpwdtext">Forgot Password?</a></p>
         <div class="col-xs-12" >
-            <input type="submit" class="btn btn-primary btn-block btn-login" placeholder="Password" value="Login" />
+            <input type="submit" class="btn btn-primary btn-block btn-login" placeholder="Password" value="Sign In" />
         </div>
-        <p>Don’t have a Heyla account yet?<br><a href="<?php echo base_url(); ?>signup">Create your account now</a> </p>
+        <p>Don’t have an account? <a href="<?php echo base_url(); ?>signup">Sign Up</a> </p>
       </form>
 
     </div>
@@ -42,7 +42,7 @@
 
         <fb:login-button size="large" class="fb_btn" scope="public_profile,email"
                          onlogin="checkLoginState();">
-          Connect with Facebook
+          Sign in with Facebook
         </fb:login-button>
 
     <!-- <a onclick="checkLoginState();" class="social-link-img" scope="public_profile,email"><img src="<?php echo base_url(); ?>assets/front/images/fb-login.png" class="img-responsive social-img"></a> -->
@@ -121,6 +121,24 @@
 
 
 <script>
+
+$('#formsignin').validate({ // initialize the plugin
+    rules: {
+        username: {
+            required: true
+        },
+        pwd: {
+            required: true
+        },
+
+    },
+    messages: {
+        username: { required:"This field cannot be empty!" },
+        pwd: { required:"This field cannot be empty!"}
+    }
+
+});
+
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '386225678654929',
@@ -183,6 +201,11 @@ function checkLoginState() {
            // sweetAlert("Oops...", "Something went Wrong", "error");
         }
  }
+
+
+
+
+
 </script>
 
 

@@ -25,15 +25,15 @@ th{
 
 </style>
 <div class="col-sm-12 col-md-12 " id="content">
-    <h3 class="dashboard_tab">Points table</h3>
+    <h3 class="dashboard_tab">Well endowed with points!</h3>
 </div>
 <div class="event_section">
   <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
            <thead>
               <tr>
-                 <th>S.No</th>
+                 <th>S. No</th>
                  <th>Name</th>
-                 <th>Total Points</th>
+                 <th>Points Earned</th>
                  <th>Rank</th>
               </tr>
            </thead>

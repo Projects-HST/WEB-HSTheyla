@@ -3,8 +3,8 @@
         <div class="col-md-2"></div>
         <div class="col-md-8 col-sm-12 col-md-auto signin-div">
             <div class="row">
-                <p class="login-heading">Sign up Now </p>
-                  <p class="login_tag">Become a part of our community!</p>
+                <p class="login-heading">Sign Up</p>
+                  <p class="login_tag">Heyla&#8212;a window to the stages of the city-state</p>
                 <div class="col-lg-6 col-sm-12">
                     <form action="" method="post" class="formsignup" id="formsignup">
                         <div class="col-xs-6 form_box">
@@ -22,7 +22,7 @@
                         <div class="col-xs-6 form_box">
                             <div class="left-inner-addon">
                                 <i class="fas fa-envelope"></i>
-                                <input type="email" class="form-control" name="email" placeholder="Email" />
+                                <input type="email" class="form-control" name="email" placeholder="Email ID" />
                             </div>
                         </div>
                         <div class="col-xs-6 form_box">
@@ -33,11 +33,11 @@
                                  <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                             </div>
                         </div>
-                        <p>By signingup I agree <a href="<?php echo base_url(); ?>terms" class="">T&C<a/> and <a href="<?php echo base_url(); ?>privacy" class="">Privacy Policy</a></p>
+                        <p class="legal_text">By signing up, I agree to the <a href="<?php echo base_url(); ?>terms" class="">Terms and Conditions <a/> and <a href="<?php echo base_url(); ?>privacy" class="">Privacy Policy</a></p>
                         <div class="col-xs-12">
                             <input type="submit" class="btn btn-primary btn-block btn-login" placeholder="Password" value="Sign Up" />
                         </div>
-                        <p>Already Registered? <a href="<?php echo base_url(); ?>signin" class="">Login<a/></p>
+                        <p>Already registered? <a href="<?php echo base_url(); ?>signin" class="">Sign In<a/></p>
 
       </form>
 
@@ -51,7 +51,7 @@
         <!-- <a class="social-link-img" onclick="checkLoginState()" scope="public_profile,email"><img src="<?php echo base_url(); ?>assets/front/images/login-facebook.png" class="img-responsive social-img"></a> -->
         <fb:login-button size="large" class="fb_btn" scope="public_profile,email"
                          onlogin="checkLoginState();">
-          Connect with Facebook
+        Sign in with Facebook
         </fb:login-button>
         <br>
 
@@ -123,11 +123,11 @@ $('#formsignup').validate({ // initialize the plugin
         },
     },
     messages: {
-        name: { required:"Enter the Username", minlength: "Min is 6", maxlength: "Max is 12",remote:"Username Already Exists" },
-        email: { required:"Enter the Email id",remote:"Email id Already Exists" },
-          mobile: { required:"Enter the Mobile number", minlength: "Min is 10", maxlength: "Max is 11",remote:"Mobile Number Already Exists" },
+        name: { required:"Username cannot be empty!", minlength: "Minimum 6 characters please!", maxlength: "No more than 12 characters please!",remote:"Username already exists!" },
+        email: { required:"Email ID cannot be empty!",remote:"Email ID already exists!" },
+          mobile: { required:"Mobile number cannot be empty!",minlength: "Please check the number of digits!", maxlength: "Please check the number of digits!",remote:"Mobile number already exists!" },
 
-        new_password: { required:"Enter the Password", minlength: "Min is 6", maxlength: "Max is 12" }
+        new_password: { required:"Password cannot be empty!", minlength: "Minimum 6 characters please!", maxlength: "No more than 12 characters please!", }
     },
     submitHandler: function(form) {
         //alert("hi");
@@ -140,11 +140,11 @@ $('#formsignup').validate({ // initialize the plugin
 
                 if (response == "verify") {
                     swal({
-                        title: "Success",
-                        text: "You have Registered Successfully.",
+                        title: "Just one more step!",
+                        text: "Please check your email to verify your registration",
                         type: "success"
                     }).then(function() {
-                        location.href = '<?php echo base_url(); ?>verify';
+                        location.href = '<?php echo base_url(); ?>signin';
                     });
                 } else {
                     sweetAlert("Oops...", response, "error");

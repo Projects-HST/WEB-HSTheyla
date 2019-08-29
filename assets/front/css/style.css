@@ -40,7 +40,7 @@ body{
 }
 .error{
   color: red;
-
+  font-size: 14px;
 }
 .no_padding{
   padding-left: 0px;
@@ -65,6 +65,9 @@ body{
 .carousel-item {
   height: 32rem;
 
+}
+.legal_text{
+  font-size: 12px;
 }
 .form_search{
   margin-left: 100px;
@@ -707,6 +710,9 @@ padding-bottom: 15px;
 .event_img{
 
 }
+.profile_menu{
+  margin-left: 0px;
+}
 .carousel-item{
   height:350px;
 }
@@ -756,6 +762,12 @@ padding-bottom: 15px;
   border-right: none !important;
 }
 }
+
+@media (max-width:736px)  {
+  .profile_menu{
+    margin-left: 0px;
+  }
+}
 @media (max-width:600px)  {
 .organsier{
   padding-top: 0px;
@@ -765,6 +777,7 @@ padding-bottom: 15px;
   padding: 5px;
 
 }
+
 .contact_icon{
   padding: 3px;
 }
@@ -1143,6 +1156,9 @@ a.btn.btn-login.btn-primary.btn-block.review-btn{
   .carousel-item{
     height:350px;
   }
+  .profile_menu{
+    margin-left: 0px;
+  }
 
   .event-banner-img{
     height: 234px;
@@ -1171,6 +1187,9 @@ display: none;
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
 .social-img{
   width: 185px;
+}
+.profile_menu{
+  margin-left: 0px;
 }
 
 }
@@ -1203,6 +1222,9 @@ and (orientation : landscape) {
 }
 .carousel-item{
   height:450px;
+}
+.profile_menu{
+  margin-left: 0px;
 }
 }
 

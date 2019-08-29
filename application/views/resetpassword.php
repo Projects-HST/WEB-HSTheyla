@@ -6,12 +6,12 @@
                 <img src="<?php echo base_url(); ?>assets/front/images/email.png" class="img-fluid">
               <form action="" method="post" id="resetform">
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Enter the Registered Email to Reset </label>
-                  <input type="email" class="form-control" id="email" name="email" placeholder="Registered Email Id">
+                  <label for="exampleInputPassword1">Please enter your registered email ID to reset your password</label>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Ex: dawkins@gmail.com">
                 </div>
                 <div class="form-group">
 
-                  <input type="submit" class="form-control btn-event btn btn-login" id="" value="Reset Now">
+                  <input type="submit" class="form-control btn-event btn btn-login" id="" value="Submit">
                 </div>
               </form>
             </center>
@@ -77,7 +77,7 @@
            email: {required: true},
        },
        messages: {
-           email: "Enter Registered Email"
+           email: "Email ID is required!"
        },
        submitHandler: function(form) {
            //alert("hi");
@@ -89,8 +89,8 @@
 
                    if (response == "success") {
                      swal({
-                title: "Success",
-                text: "Reset Password has sent Registered Email",
+                title: " ",
+                text: "Please check your email.<br> We have sent you a link to reset your login password.",
                 type: "success"
             }).then(function() {
                 location.href = '<?php echo base_url(); ?>';

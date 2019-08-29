@@ -25,20 +25,20 @@ public function home()
 	if($result['status']=='Deactive')
 	{
 		$datas['user_data']=array("status"=>$result['status'],"msg"=>$result['msg']);
-		$this->session->set_flashdata('msg', 'Account Deactivated');
+		$this->session->set_flashdata('msg', '<b>Yikes!</b><br> Your account has been deactivated by our admin. <br>For further clarifications, reach us via support@heylaapp.com');
 		redirect('signin');
 	}
 
 	if($result['status']=='notRegistered')
 	{
 		$datas['user_data']=array("status"=>$result['status'],"msg"=>$result['msg']);
-		$this->session->set_flashdata('msg', 'Invalid Login');
+		$this->session->set_flashdata('msg', 'Invalid credentials!');
 		redirect('signin');
 	}
 	if($result['status']=='emailverfiy')
 	{
 		$datas['user_data']=array("status"=>$result['status'],"msg"=>$result['msg']);
-		$this->session->set_flashdata('msg', 'You have to Verify your Email to login');
+		$this->session->set_flashdata('msg', '<b>Just one more step!</b> <br> Please check your email to get your registration verified');
 		redirect('signin');
 	}
 
@@ -139,12 +139,12 @@ public function home()
 		redirect('signin');
 	}	elseif($msg=="emailverfiy"){
 			$datas['user_data']=array("status"=>$result['status'],"msg"=>$result['msg']);
-			$this->session->set_flashdata('msg', 'You have to Verify your Email to login');
+			$this->session->set_flashdata('msg', '<b>Just one more step!</b> <br> Please check your email to get your registration verified');
 			redirect('signin');
 		}
 	else{
 		$datas['user_data']=array("status"=>$result['status'],"msg"=>$result['msg']);
-		$this->session->set_flashdata('msg', 'Email invalid');
+		$this->session->set_flashdata('msg', 'Email ID invalid!');
 		redirect('signin');
 	}
 }

@@ -8,11 +8,7 @@
 .form-control{
   width: 270px;
 }
-input[type=text] {
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid #000000;
-}
+
 .error{
   color:red;
 }
@@ -25,7 +21,7 @@ input[type=text] {
 <center>
 
 
-  <p style="font-size:24px;">If email has changed the verification link has sent to the new email you have entered.</p>
+  <p style="font-size:24px;">Change Email ID</p>
         <div class="reset">
 
   <div class="">
@@ -37,12 +33,12 @@ input[type=text] {
         </div>
 
         <div class="form-group">
-            <input type="text" class="form-control" id="email" name="email" required="" placeholder="Enter New Email_id " >
+            <input type="text" class="form-control" id="email" name="email" required="" placeholder="Enter New Email ID " >
 
             <p id="emailmsg"></p>
         </div>
 
-        <button type="submit" id="submit" class="btn btn-event btn-lg">save</button>
+        <button type="submit" id="submit" class="btn btn-event btn-lg">Submit</button>
     </form>
   </div>
 </div>
@@ -74,7 +70,7 @@ $.validator.addMethod("user_email_not_same", function(value, element) {
        },
        messages: {
 
-            email: {   required: "Enter new  email",user_email_not_same:" ",remote:"Email already exist"
+            email: {   required: "Enter new  email ID",user_email_not_same:" ",remote:"Email already exists!"
 
           }
 
@@ -90,8 +86,8 @@ $.validator.addMethod("user_email_not_same", function(value, element) {
 
                    if (response == "success") {
                      swal({
-                title: "Success",
-                text: " Email Has been Changed Successfully",
+                title: "",
+                text: "Please check your email to get your new email ID verified",
                 type: "success"
             }).then(function() {
                 location.href = '<?php echo base_url(); ?>profile';

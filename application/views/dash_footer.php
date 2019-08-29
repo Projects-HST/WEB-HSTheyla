@@ -64,13 +64,13 @@
 $('#datetimepicker').datetimepicker();
 function logout(){
   swal({
-      title: 'Are you sure?',
-      text: "You Want to logout !",
+      title: '',
+      text: "You want to logout?",
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes!',
+      confirmButtonText: 'Yes',
       cancelButtonText: 'No'
   }).then(function(){
     window.location.href='<?php echo base_url(); ?>logout';

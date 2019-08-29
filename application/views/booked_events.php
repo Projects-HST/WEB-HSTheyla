@@ -10,16 +10,16 @@
 }
 </style>
 <div class="col-sm-12 col-md-12 " id="content">
-    <h3 class="dashboard_tab">Booked Event History </h3>
+    <h3 class="dashboard_tab">Booking Details </h3>
 </div>
 <div class="container event_section">
   <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
            <thead>
               <tr>
-                 <th>S.No</th>
-                 <th>Event Name</th>
+                 <th>S. No</th>
+                 <th>Event</th>
                  <th>Plan</th>
-                 <th>Show Date & Time</th>
+                 <th>Date & Time</th>
                  <th>Seats</th>
                  <th>Booking Date</th>
                  <!--th>Amount</th-->

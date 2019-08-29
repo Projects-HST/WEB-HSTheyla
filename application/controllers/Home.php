@@ -258,14 +258,14 @@ class Home extends CI_Controller {
         $currentcpic=$this->input->post('currentcpic');
         $eventid=$this->input->post('eventid');
 		$event_pic      = $_FILES['eventbanner']['name'];
-        
+
 		$temp = pathinfo($event_pic, PATHINFO_EXTENSION);
         $file_name      = time() . rand(1, 5) . rand(6, 10);
         $event_banner   = $file_name. '.' .$temp;
         $uploaddir      = 'assets/events/banner/';
         $profilepic     = $uploaddir . $event_banner;
         move_uploaded_file($_FILES['eventbanner']['tmp_name'], $profilepic);
-        
+
 		$eadv_status=$this->input->post('eadv_status');
 		$booking_sts=$this->input->post('booking_sts');
 		$hotspot_sts=$this->input->post('hotspot_sts');
@@ -709,9 +709,13 @@ class Home extends CI_Controller {
 			$email = $this->uri->segment(3);
 			$data['res']=$this->loginmodel->email_verify($email);
 			if($data['res']['msg']=='verify'){
+				$this->load->view('front_header');
 					$this->load->view('email_verification',$data);
+					$this->load->view('front_footer');
 				}else{
+					$this->load->view('front_header');
 				$this->load->view('email_verification',$data);
+				$this->load->view('front_footer');
 			}
 
 		}

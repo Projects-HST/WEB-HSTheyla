@@ -16,10 +16,10 @@
   <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
         <thead>
         <tr>
-            <th>Event Name</th>
-            <th>Event Category</th>
-            <th>Event City</th>
-            <th>Action</th>
+            <th>Event</th>
+            <th>Category</th>
+            <th>City/Area</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
