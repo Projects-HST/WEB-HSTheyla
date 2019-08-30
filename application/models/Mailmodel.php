@@ -263,19 +263,22 @@ Class Mailmodel extends CI_Model
 						if (!$fp)
 							exit("Failed to connect: $err $errstr" . PHP_EOL);
 
- 
+
+
 						 // Create the payload body
-						/* $body['aps'] = array(
-							'alert' => $cnotes,
-							'sound' => 'default',
-							 'mutable-content' => 1
+						 $body['aps'] = array(
+							'alert' => 'Test',
+							'content-available' =>1,
+							'badge-content' => 1,
+							'badge-sound' => 'default'
 							);
-						$body['data'] = array(
+							
+						/*$body['data'] = array(
 							'mediaUrl' => "http://www.alphansotech.com/wp-content/uploads/2015/12/Push-notification-1.jpg",
 							'mediaType' => "jpg"
 						); */
 
-							$body['aps'] = array(
+							/* $body['aps'] = array(
 							'alert' => array(
 								'title' => $subject,
 								'body' => $cnotes,
@@ -287,7 +290,7 @@ Class Mailmodel extends CI_Model
 							$body['data'] = array(
 							'mediaUrl' => "$img_url",
 							'mediaType' => "image"
-						); 
+						);  */
 						
 						$payload = json_encode($body);
 
