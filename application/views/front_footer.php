@@ -11,7 +11,7 @@ $secondhalf = array_slice($res, $len / 2);
       <div class="row footer_container">
 
 
-          <div class="col-lg-3 col-md-3 col-sm-6">
+          <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
             <p class="footer_heading">Categories</p>
             <ul class="fnt-footer ">
               <?php  foreach($firsthalf as $row_cat){  ?>
@@ -20,7 +20,7 @@ $secondhalf = array_slice($res, $len / 2);
 
             </ul>
           </div>
-          <div class="col-lg-3 col-md-3 col-sm-6">
+          <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
             <p class="footer_heading">&nbsp;</p>
             <ul class="fnt-footer ">
               <?php  foreach($secondhalf as $row_sec_cat){  ?>
@@ -29,33 +29,24 @@ $secondhalf = array_slice($res, $len / 2);
             </ul>
 
           </div>
-          <div class="col">
-            <p class="footer_heading">Quick links</p>
-            <ul class="fnt-footer ">
-                <li class=""><a href="<?php echo base_url(); ?>about-us">About</a></li>
-                <li class=""><a href="<?php echo base_url(); ?>">Events</a></li>
-                <li class=""><a href="#">Blog</a></li>
-              <li class=""><a href="<?php echo base_url(); ?>privacy">Privacy Policy</a></li>
-              <li class=""><a href="<?php echo base_url(); ?>payment">Payment Policy</a></li>
-              <li class=""><a href="<?php echo base_url(); ?>terms">Terms & Conditions</a></li>
+          <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+            <p class="footer_heading">Get In Touch</p>
+            <ul class="fnt-footer contact_text">
+              <li class=""><i class="fa fa-envelope" aria-hidden="true"></i><span> info@heylaapp.com </span></li>
+              <li class=""><i class="fa fa-phone" aria-hidden="true"></i>  +65 123-1234-1</li>
             </ul>
-
-          </div>
-          <div class="col">
-            <p class="footer_heading">Contact Us</p>
-            <p class="address_form">Happy Sanz Tech <br>
-                 #3, Perks campus, <br> Uppilipalayam,<br> Coimbatore-641015</p>
-                 <p class="address_form">hello@heylaapp.com</p>
-          </div>
-          <div class="col">
             <p class="footer_heading">Follow  Us On</p>
             <ul class="fnt-footer social_follow">
               <li class=""><a href="https://www.facebook.com/heylaapp/" target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/share_facebook.png"></a></li>
               <li class=""><a href="https://www.instagram.com/heyla_app/" target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/instagram.png"></a></li>
               <!-- <li class=""><a href=""><img src="<?php echo base_url(); ?>assets/front/images/gp_follow.png"></a></li> -->
               <li class=""><a href="https://twitter.com/heylaapp"  target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/share_twitter.png"></a></li>
-                <li class=""><a href="https://www.youtube.com/channel/UCrjx62OpVHGhX5UONO8QDmw"  target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/youtube.png"></a></li>
+              <li class=""><a href="https://www.youtube.com/channel/UCrjx62OpVHGhX5UONO8QDmw"  target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/youtube.png"></a></li>
             </ul>
+
+          </div>
+
+          <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
             <p class="footer_heading">Download Heyla</p>
             <ul class="fnt-footer social_follow">
               <li class=""><a href="https://itunes.apple.com/us/app/heyla/id1438601804?ls=1&mt=8" target="_blank"><img class="store_img" src="<?php echo base_url(); ?>assets/front/images/app.png"></a></li>
@@ -66,9 +57,24 @@ $secondhalf = array_slice($res, $len / 2);
       </div>
   </div>
     <!-- /.container -->
-    <div class="container">
+    <div class="container-fluid no_padding">
+      <div class="row footer_container">
+        <hr>
+        <div class="col-lg-8">
+          <ul class="list-inline pull-left footer_bottom_links">
+              <li class="list-inline-item"><a href="<?php echo base_url(); ?>about-us">About</a></li>
+              <li class="list-inline-item"><a href="<?php echo base_url(); ?>">Events</a></li>
+              <li class="list-inline-item"><a href="#">Blog</a></li>
+              <li class="list-inline-item"><a href="<?php echo base_url(); ?>privacy">Privacy Policy</a></li>
+              <li class="list-inline-item"><a href="<?php echo base_url(); ?>payment">Payment Policy</a></li>
+              <li class="list-inline-item"><a href="<?php echo base_url(); ?>terms">Terms & Conditions</a></li>
+            </ul>
+        </div>
+        <div class="col-lg-4">
+          <p class=" text-center foot_copyrights">Built with <i class="fa fa-heart" aria-hidden="true" style="    width: 10px;"></i> by <a href="https://happysanztech.com" target="_blank" style="text-decoration:none;"><b style="color:#fff;font-size:20px;">Happy Sanz Tech</b></a></p>
+        </div>
+          </div>
 
-        <p class=" text-center foot_copyrights">Built with <i class="fa fa-heart" aria-hidden="true" style="    width: 10px;"></i> by <a href="https://happysanztech.com" target="_blank" style="text-decoration:none;"><b style="color:#fff;font-size:20px;">Happy Sanz Tech</b></a></p>
     </div>
 </footer>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -66,7 +66,7 @@
                             </div>
                              <label for="Address" class="col-sm-2 col-form-label">Address</label>
                             <div class="col-sm-4">
-                               <textarea id="textarea" name="address"  class="form-control" maxlength="240" rows="3" placeholder=""></textarea>
+                               <textarea id="textarea" name="address"  class="form-control" maxlength="240" rows="5" placeholder=""></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -143,18 +143,12 @@
 
                         <div class="form-group row">
                             <label for="" class="col-sm-2 col-form-label">Description</label>
-                            <div class="col-sm-4">
-                                <textarea type="text" id="description"  name="description" class="form-control" maxlength="30000" rows="3" placeholder=""></textarea>
+                            <div class="col-sm-10">
+                                <textarea type="text" id="description"  name="description" class="form-control" maxlength="30000" rows="15" placeholder=""></textarea>
                             </div>
 
-                             <label for="ecost" class="col-sm-2 col-form-label">Event Type</label>
-                            <div class="col-sm-4">
-                                 <select class="form-control"  name="eventcost">
-                                    <option value="Free">Free</option>
-                                    <option value="Paid">Paid</option>
-                                    <!-- <option value="Invite">Invite</option> -->
-                                </select>
-                            </div>
+
+
                         </div>
 
 
@@ -204,6 +198,14 @@
                         </div>
 
                         <div class="form-group row">
+                          <label for="ecost" class="col-sm-2 col-form-label">Event Type</label>
+                         <div class="col-sm-4">
+                              <select class="form-control"  name="eventcost">
+                                 <option value="Free">Free</option>
+                                 <option value="Paid">Paid</option>
+                                 <!-- <option value="Invite">Invite</option> -->
+                             </select>
+                           </div>
                             <label for="Status" class="col-sm-2 col-form-label">Event Status</label>
                             <div class="col-sm-4">
                                <select class="form-control"  name="event_status">

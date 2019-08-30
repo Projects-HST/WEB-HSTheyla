@@ -67,7 +67,7 @@ th{
                             <td><?php echo $rows->city_name ; ?></td>
                             <td><?php foreach($popular as $values){  $evid=$values->event_id;
                              if($eid==$evid){ echo $values->popular; } }?></td>
-                             <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
+                             <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Inactive </button>'; }?></td>
 
                             <td>
                              <a href="<?php echo base_url();?>events/edit_events/<?php echo base64_encode($rows->id);?>">
@@ -125,7 +125,7 @@ th{
                             <td><?php echo $rows->city_name ; ?></td>
                             <td><?php  foreach($popular as $values){
                               $evid=$values->event_id; if($eid==$evid){ echo $values->popular; } }?></td>
-                               <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
+                               <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Inactive </button>'; }?></td>
                            <td>
                              <a href="<?php echo base_url();?>events/edit_events/<?php echo base64_encode($rows->id);?>">
                               <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
@@ -183,7 +183,7 @@ th{
                             <td><?php echo $rows->city_name ; ?></td>
                             <td><?php foreach($popular as $values){
                               $evid=$values->event_id; if($eid==$evid){ echo $values->popular; } }?></td>
-                               <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
+                               <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Inactive </button>'; }?></td>
                            <td>
                              <a href="<?php echo base_url();?>events/edit_events/<?php echo base64_encode($rows->id);?>">
                               <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
@@ -234,7 +234,7 @@ th{
                           <td><?php echo $rows->city_name ; ?></td>
                           <td><?php foreach($popular as $values){
                             $evid=$values->event_id; if($eid==$evid){ echo $values->popular; } }?></td>
-                             <td><?php if($evn_sts=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
+                             <td><?php if($evn_sts=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Inactive </button>'; }?></td>
                           <td>
                            <a href="<?php echo base_url();?>events/edit_events/<?php echo base64_encode($rows->id);?>">
                             <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>

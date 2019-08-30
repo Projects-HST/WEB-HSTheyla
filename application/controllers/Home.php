@@ -41,6 +41,32 @@ class Home extends CI_Controller {
 
 	}
 
+
+
+		public function about()
+		{
+
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			$data['country_list'] = $this->eventlistmodel->getall_country_list();
+			$data['city_list'] = $this->eventlistmodel->getall_city_list();
+			$data['category_list'] = $this->eventlistmodel->getall_category_list();
+			$data['event_resu'] = $this->eventlistmodel->get_events();
+			$data['adv_event_result'] = $this->eventlistmodel->getadv_events();
+			$data['popular_events'] = $this->eventlistmodel->popular_events();
+			if($user_role==1){
+				redirect('adminlogin/dashboard');
+			}else if($user_role==2){
+				$this->load->view('about', $datas);
+			}else if($user_role==3){
+					$this->load->view('about', $datas);
+			}else{
+				$this->load->view('about', $datas);
+			}
+
+		}
+
 	public function signin()
 	{
 
@@ -424,6 +450,7 @@ class Home extends CI_Controller {
 			}
 
 	}
+
 
 
 	public function gmaillogin(){

@@ -81,7 +81,7 @@
                             </div>
                              <label for="Address" class="col-sm-2 col-form-label">Address</label>
                             <div class="col-sm-4">
-                               <textarea id="address" name="address" required="" class="form-control" maxlength="240" rows="3" placeholder=""><?php echo $rows->event_address; ?></textarea>
+                               <textarea id="address" name="address" required="" class="form-control" maxlength="240" rows="5" placeholder=""><?php echo $rows->event_address; ?></textarea>
                             </div>
 
                         </div>
@@ -161,18 +161,10 @@
                         </div>
                         <div class="form-group row">
                             <label for="" class="col-sm-2 col-form-label">Description</label>
-                            <div class="col-sm-4">
-                                <textarea type="text" id="description"  name="description" class="form-control" maxlength="30000" rows="3" placeholder=""><?php echo $rows->description; ?></textarea>
+                            <div class="col-sm-10">
+                                <textarea type="text" id="description"  name="description" class="form-control" maxlength="30000" rows="15" placeholder=""><?php echo $rows->description; ?></textarea>
                             </div>
-                             <label for="ecost" class="col-sm-2 col-form-label">Event Type</label>
-                            <div class="col-sm-4">
-                                 <select class="form-control" required="" name="eventcost">
-                                    <option value="Free">Free</option>
-                                    <option value="Paid">Paid</option>
-                                    <!-- <option value="Invite">Invite</option> -->
-                                </select>
-                                <script language="JavaScript">document.eventform.eventcost.value="<?php echo $rows->event_type; ?>";</script>
-                            </div>
+
                         </div>
 
                         <div class="form-group row">
@@ -211,12 +203,23 @@
 
                             <label class="col-sm-2 col-form-label">Alternate  Contact Person</label>
                               <div class="col-sm-4">
-                                <input class="form-control" type="text" value="<?php echo $rows->sec_contact_person; ?>" required="" name="sec_contact_person" value="" >
+                                <input class="form-control" type="text" value="<?php echo $rows->sec_contact_person; ?>"  name="sec_contact_person" value="" >
                               </div>
                         </div>
 
 
 						<div class="form-group row">
+
+              <label for="ecost" class="col-sm-2 col-form-label">Event Type</label>
+             <div class="col-sm-4">
+                  <select class="form-control" required="" name="eventcost">
+                     <option value="Free">Free</option>
+                     <option value="Paid">Paid</option>
+                     <!-- <option value="Invite">Invite</option> -->
+                 </select>
+                 <script language="JavaScript">document.eventform.eventcost.value="<?php echo $rows->event_type; ?>";</script>
+             </div>
+
                              <label for="Status" class="col-sm-2 col-form-label">Event Status</label>
                             <div class="col-sm-4">
                                <select class="form-control" required="" name="event_status">
