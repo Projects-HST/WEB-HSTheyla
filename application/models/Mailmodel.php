@@ -281,6 +281,7 @@ Class Mailmodel extends CI_Model
 								'action-loc-key' => 'Heyla App',
 							),
 							'badge' => 1,
+							'mutable-content' => 1,
 							'sound' => 'assets/notification/oven.caf',
 							'mediaUrl' => "$img_url",
 							'mediaType' => "image"
