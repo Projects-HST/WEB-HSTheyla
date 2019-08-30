@@ -249,7 +249,7 @@ Class Mailmodel extends CI_Model
 			
 			//echo $gcm_key;
 			
-						$device_token = explode(",", $gcm_key);
+						 $device_token = explode(",", $gcm_key);
 						$passphrase = 'hs123';
 						$loction ='assets/notification/heylaapp.pem';
 
@@ -263,17 +263,35 @@ Class Mailmodel extends CI_Model
 						if (!$fp)
 							exit("Failed to connect: $err $errstr" . PHP_EOL);
 
-						$body['aps'] = array(
+
+
+						 // Create the payload body
+						 $body['aps'] = array(
+							'alert' => 'Test',
+							'content-available' =>1,
+							'badge-content' => 1,
+							'badge-sound' => 'default'
+							'mediaUrl' => "$img_url"
+							);
+							
+						/*$body['data'] = array(
+							'mediaUrl' => "http://www.alphansotech.com/wp-content/uploads/2015/12/Push-notification-1.jpg",
+							'mediaType' => "jpg"
+						); */
+
+							/* $body['aps'] = array(
 							'alert' => array(
 								'title' => $subject,
 								'body' => $cnotes,
 								'action-loc-key' => 'Heyla App',
-							)
-						);
-						$body['data'] = array(
-							'mediaUrl' => "$img_url",
-							'mediaType' => "jpg"
+							),
+							'badge' => 2,
+							'sound' => 'assets/notification/oven.caf',
 						); 
+							$body['data'] = array(
+							'mediaUrl' => "$img_url",
+							'mediaType' => "image"
+						);  */
 						
 						$payload = json_encode($body);
 
@@ -288,11 +306,10 @@ Class Mailmodel extends CI_Model
 						}
 
 							fclose($fp);
-							$i = $i+1;
+							$i = $i+1; 
 				}
 
 			}
-			//exit;
 			$data3= array("status"=>"Notify");
             return $data3;
 		}
