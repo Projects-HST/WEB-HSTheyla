@@ -270,12 +270,14 @@ Class Mailmodel extends CI_Model
 								'action-loc-key' => 'Heyla App',
 							),
 							'badge' => 2,
-							'sound' => 'assets/notification/oven.caf'
-						);
-						$body['data'] = array(
+							'sound' => 'assets/notification/oven.caf',
 							'mediaUrl' => "$img_url",
 							'mediaType' => "image"
-						); 
+						);
+						/* $body['data'] = array(
+							'mediaUrl' => "$img_url",
+							'mediaType' => "image"
+						);  */
 						
 						$payload = json_encode($body);
 
