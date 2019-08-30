@@ -263,19 +263,6 @@ Class Mailmodel extends CI_Model
 						if (!$fp)
 							exit("Failed to connect: $err $errstr" . PHP_EOL);
 
-
-						{
-							"aps" : {
-								"alert" : {
-								"title" : "title",
-								"body" : "Your message Here"
-								},
-								"mutable-content" : "1",
-								"category" : "newCategory"
-							},
-							"otherCustomURL" : "http://www.xxx.jpg"
-						 }
-						 
 						$body['aps'] = array(
 							'alert' => array(
 								'title' => $subject,
