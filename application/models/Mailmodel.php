@@ -263,7 +263,18 @@ Class Mailmodel extends CI_Model
 						if (!$fp)
 							exit("Failed to connect: $err $errstr" . PHP_EOL);
 
-						$body['aps'] = array(
+
+						$body = array(
+						  'aps' => array(
+							'alert' => 'Rich notification',
+							'sound' => 'default',
+							'mutable-content' => 1
+						  ),
+						  'mediaUrl'  => 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/FloorGoban.JPG/1024px-FloorGoban.JPG',
+						  'mediaType' => 'image'
+						);
+
+						/* $body['aps'] = array(
 							'alert' => array(
 								'title' => $subject,
 								'body' => $cnotes,
@@ -275,7 +286,7 @@ Class Mailmodel extends CI_Model
 						$body['data'] = array(
 							'mediaUrl' => "$img_url",
 							'mediaType' => "image"
-						); 
+						);  */
 						
 						$payload = json_encode($body);
 
