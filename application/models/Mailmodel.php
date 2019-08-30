@@ -268,8 +268,7 @@ Class Mailmodel extends CI_Model
 						$body['aps'] = array(
 							'alert' => $cnotes,
 							'sound' => 'default',
-							 'mutable-content' => 1,
-							 'category'=> "pusher"
+							 'mutable-content' => 1
 							);
 						$body['data'] = array(
 							'mediaUrl' => "http://www.alphansotech.com/wp-content/uploads/2015/12/Push-notification-1.jpg",
