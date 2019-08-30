@@ -272,7 +272,9 @@ Class Mailmodel extends CI_Model
 							),
 							 'sound' => 'default',
 							 'mutable-content' => 1,
-							 'category'=> "NotificationServices"
+							 'category'=> 'NotificationServices',
+							 'badge' => 2,
+							'sound' => 'assets/notification/oven.caf',
 							
 							//'badge' => 2,
 							//'sound' => 'assets/notification/oven.caf',
