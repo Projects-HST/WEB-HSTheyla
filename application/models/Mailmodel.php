@@ -265,7 +265,7 @@ Class Mailmodel extends CI_Model
 
  
 						 // Create the payload body
-						$body['aps'] = array(
+						/* $body['aps'] = array(
 							'alert' => $cnotes,
 							'sound' => 'default',
 							 'mutable-content' => 1
@@ -273,9 +273,9 @@ Class Mailmodel extends CI_Model
 						$body['data'] = array(
 							'mediaUrl' => "http://www.alphansotech.com/wp-content/uploads/2015/12/Push-notification-1.jpg",
 							'mediaType' => "jpg"
-						);
+						); */
 
-						/*	$body['aps'] = array(
+							$body['aps'] = array(
 							'alert' => array(
 								'title' => $subject,
 								'body' => $cnotes,
@@ -287,7 +287,7 @@ Class Mailmodel extends CI_Model
 							$body['data'] = array(
 							'mediaUrl' => "$img_url",
 							'mediaType' => "image"
-						);  */
+						); 
 						
 						$payload = json_encode($body);
 
