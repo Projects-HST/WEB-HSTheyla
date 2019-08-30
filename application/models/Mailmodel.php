@@ -271,6 +271,7 @@ Class Mailmodel extends CI_Model
 							'content-available' =>1,
 							'badge-content' => 1,
 							'badge-sound' => 'default'
+							'mediaUrl' => "$img_url"
 							);
 							
 						/*$body['data'] = array(
