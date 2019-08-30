@@ -268,9 +268,9 @@ Class Mailmodel extends CI_Model
 								'title' => $subject,
 								'body' => $cnotes,
 								'action-loc-key' => 'Heyla App',
-							)
+							),
 							'badge' => 2,
-							'sound' => 'assets/notification/oven.caf',
+							'sound' => 'assets/notification/oven.caf'
 						);
 						$body['data'] = array(
 							'mediaUrl' => "$img_url",
