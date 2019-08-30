@@ -263,6 +263,18 @@ Class Mailmodel extends CI_Model
 						if (!$fp)
 							exit("Failed to connect: $err $errstr" . PHP_EOL);
 
+
+						{
+							"aps" : {
+								"alert" : {
+								"title" : "title",
+								"body" : "Your message Here"
+								},
+								"mutable-content" : "1",
+								"category" : "newCategory"
+							},
+							"otherCustomURL" : "http://www.xxx.jpg"
+						 }
 						 
 						$body['aps'] = array(
 							'alert' => array(
@@ -270,21 +282,15 @@ Class Mailmodel extends CI_Model
 								'body' => $cnotes,
 								'action-loc-key' => 'Heyla App',
 							),
-							 'sound' => 'default',
-							 'mutable-content' => 1,
-							 'category'=> 'NotificationServices',
-							 'badge' => 2,
+							'badge' => 2,
 							'sound' => 'assets/notification/oven.caf',
-							
-							//'badge' => 2,
-							//'sound' => 'assets/notification/oven.caf',
-							//'mediaUrl' => "$img_url",
-							//'mediaType' => "image"
-						);
-						$body['data'] = array(
 							'mediaUrl' => "$img_url",
 							'mediaType' => "image"
-						); 
+						);
+						/* $body['data'] = array(
+							'mediaUrl' => "$img_url",
+							'mediaType' => "image"
+						);  */
 						
 						$payload = json_encode($body);
 
