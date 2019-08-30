@@ -267,11 +267,11 @@ Class Mailmodel extends CI_Model
 
 						 // Create the payload body
 						 $body['aps'] = array(
-							'alert' => 'Test',
+							'alert' => $cnotes,
 							'content-available' =>1,
 							'badge-content' => 1,
-							'badge-sound' => 'default'
-							'mediaUrl' => "$img_url"
+							'badge-sound' => 'default',
+							'mediaUrl' => $img_url
 							);
 							
 						/*$body['data'] = array(
