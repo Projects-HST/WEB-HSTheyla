@@ -277,7 +277,7 @@ Class Mailmodel extends CI_Model
  
 						 // Create the payload body
 						$body['aps'] = array(
-							'alert' => $message,
+							'alert' => $cnotes,
 							'sound' => 'default',
 							 'mutable-content' => 1,
 							 'category'=> "pusher"
