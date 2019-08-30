@@ -264,16 +264,14 @@ Class Mailmodel extends CI_Model
 							exit("Failed to connect: $err $errstr" . PHP_EOL);
 
 						$body['aps'] = array(
-							'alert' => array(
-								'title' => $subject,
-								'body' => $cnotes,
-								'action-loc-key' => 'Heyla App',
-							)
-						);
-						$body['data'] = array(
-							'mediaUrl' => "$img_url",
-							'mediaType' => "jpg"
-						); 
+								'alert' => array(
+									'title' => $subject,
+									'body' => $cnotes,
+									'action-loc-key' => 'Heyla App',
+								),
+								'badge' => 2,
+								'sound' => 'assets/notification/oven.caf',
+								);
 						
 						$payload = json_encode($body);
 
