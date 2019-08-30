@@ -272,10 +272,10 @@ Class Mailmodel extends CI_Model
 							'badge' => 2,
 							'sound' => 'assets/notification/oven.caf'
 						);
-						/* $body['data'] = array(
+						$body['data'] = array(
 							'mediaUrl' => "$img_url",
 							'mediaType' => "image"
-						);  */
+						); 
 						
 						$payload = json_encode($body);
 
