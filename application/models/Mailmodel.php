@@ -249,7 +249,7 @@ Class Mailmodel extends CI_Model
 			
 			//echo $gcm_key;
 			
-						$device_token = explode(",", $gcm_key);
+						 $device_token = explode(",", $gcm_key);
 						$passphrase = 'hs123';
 						$loction ='assets/notification/heylaapp.pem';
 
@@ -264,14 +264,16 @@ Class Mailmodel extends CI_Model
 							exit("Failed to connect: $err $errstr" . PHP_EOL);
 
 						$body['aps'] = array(
-								'alert' => array(
-									'title' => $subject,
-									'body' => $cnotes,
-									'action-loc-key' => 'Heyla App',
-								),
-								'badge' => 2,
-								'sound' => 'assets/notification/oven.caf',
-								);
+							'alert' => array(
+								'title' => $subject,
+								'body' => $cnotes,
+								'action-loc-key' => 'Heyla App',
+							)
+						);
+						$body['data'] = array(
+							'mediaUrl' => "$img_url",
+							'mediaType' => "jpg"
+						); 
 						
 						$payload = json_encode($body);
 
@@ -286,7 +288,7 @@ Class Mailmodel extends CI_Model
 						}
 
 							fclose($fp);
-							$i = $i+1;
+							$i = $i+1; 
 				}
 
 			}
