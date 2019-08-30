@@ -263,17 +263,6 @@ Class Mailmodel extends CI_Model
 						if (!$fp)
 							exit("Failed to connect: $err $errstr" . PHP_EOL);
 
-
-						/* $body = array(
-						  'aps' => array(
-							'alert' => 'Rich notification',
-							'sound' => 'default',
-							'mutable-content' => 1
-						  ),
-						  'mediaUrl'  => 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/FloorGoban.JPG/1024px-FloorGoban.JPG',
-						  'mediaType' => 'image'
-						);
- */
  
 						 // Create the payload body
 						$body['aps'] = array(
@@ -287,19 +276,16 @@ Class Mailmodel extends CI_Model
 							'mediaType' => "jpg"
 						);
 
-						/* $body['aps'] = array(
+						/*	$body['aps'] = array(
 							'alert' => array(
 								'title' => $subject,
 								'body' => $cnotes,
 								'action-loc-key' => 'Heyla App',
 							),
-							'badge' => 1,
-							'mutable-content' => 1,
+							'badge' => 2,
 							'sound' => 'assets/notification/oven.caf',
-							'mediaUrl' => "$img_url",
-							'mediaType' => "image"
-						); */
-						/* $body['data'] = array(
+						); 
+							$body['data'] = array(
 							'mediaUrl' => "$img_url",
 							'mediaType' => "image"
 						);  */
