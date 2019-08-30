@@ -26,7 +26,7 @@ class Eventlist extends CI_Controller
 		$data['search_values'] = get_cookie('search_values');
 		//print_r($data);
 		$this->load->view('front_header');
-		$this->load->view('event_list_new', $data);
+		$this->load->view('event_list', $data);
 		$this->load->view('front_footer');
 	}
 
@@ -122,7 +122,7 @@ class Eventlist extends CI_Controller
 			$data['meta_description']=$desc;
 		}
 		$this->load->view('front_header', $data);
-		$this->load->view('eventdetails_new', $data);
+		$this->load->view('eventdetails', $data);
 		$this->load->view('front_footer');
     }
 
@@ -293,10 +293,10 @@ class Eventlist extends CI_Controller
     {
 		delete_cookie("search_values");
 		delete_cookie("city_values");
-		
+
 		echo "Success";
     }
-		
+
     public function webflow()
     {
       $this->load->view('front_header');

@@ -75,7 +75,7 @@ $route['bookedevents'] = 'home/bookedevents';
 $route['reviewevents'] = 'home/reviewevents';
 //$route['viewreviews'] = 'home/viewreviews';
 $route['home'] = 'home/home';
-$route['about-us'] = 'home/index';
+$route['about-us'] = 'home/about';
 $route['privacy'] = 'home/privacy';
 $route['payment'] = 'home/payment';
 $route['terms'] = 'home/terms';
@@ -88,4 +88,3 @@ $route['webflow'] = 'eventlist/webflow';
 $route['appflow'] = 'eventlist/appflow';
 $route['(:any)/eventdetails/(:any)/(:any)'] = 'eventlist/eventdetails/$2/$3';
 $route['eventdetails/(:any)/(:any)'] = 'eventlist/eventdetails/$1/$2';
-

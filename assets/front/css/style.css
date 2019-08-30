@@ -12,7 +12,9 @@ top:0;
 left:100%;
 margin-top:-6px;
 }
-
+.show_mobile_tab{
+  display: none;
+}
 /* rotate caret on hover */
 .dropdown-menu > li > a:hover:after {
 text-decoration: underline;
@@ -48,6 +50,20 @@ body{
 }
 .select2-selection__choice{
   font-size: 10px;
+}
+.contact_text{
+  color: #fff;
+  font-size: 14px;
+}
+
+hr{
+  border-top: 1px solid #fff;
+  width:100%;
+}
+.footer_bottom_links li a{
+  color: #fff;
+  font-size: 12px;
+  text-align: left;
 }
 .no_banner{
   margin-top: 150px;
@@ -710,6 +726,9 @@ padding-bottom: 15px;
 .event_img{
 
 }
+.show_mobile_tab{
+  display: block;
+}
 .profile_menu{
   margin-left: 0px;
 }
@@ -767,11 +786,17 @@ padding-bottom: 15px;
   .profile_menu{
     margin-left: 0px;
   }
+  .show_mobile_tab{
+    display: block;
+  }
 }
 @media (max-width:600px)  {
 .organsier{
   padding-top: 0px;
   height: auto;
+}
+.show_mobile_tab{
+  display: block;
 }
 .text_box{
   padding: 5px;
@@ -1153,6 +1178,9 @@ a.btn.btn-login.btn-primary.btn-block.review-btn{
       background-color: #000;
 
   }
+  .show_mobile_tab{
+    display: block;
+  }
   .carousel-item{
     height:350px;
   }
@@ -1191,7 +1219,9 @@ display: none;
 .profile_menu{
   margin-left: 0px;
 }
-
+.show_mobile_tab{
+  display: block;
+}
 }
 
 .navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .logout-btn:hover{
@@ -1222,6 +1252,9 @@ and (orientation : landscape) {
 }
 .carousel-item{
   height:450px;
+}
+.show_mobile_tab{
+  display: block;
 }
 .profile_menu{
   margin-left: 0px;

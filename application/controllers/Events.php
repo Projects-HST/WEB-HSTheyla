@@ -37,7 +37,7 @@ class Events extends CI_Controller
         $category       = $this->input->post('category');
         $country        = $this->input->post('country');
         $city           = $this->input->post('city');
-        $venue          = $this->input->post('venue');
+        $venue          = $this->db->escape_str($this->input->post('venue'));
         $address        = $this->db->escape_str($this->input->post('address'));
         $description    = $this->db->escape_str($this->input->post('description'));
         $eventcost      = $this->input->post('eventcost');

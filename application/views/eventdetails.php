@@ -155,11 +155,15 @@ foreach($event_details as $res){
 <script src="<?php echo base_url(); ?>assets/front/js/jquery.galpop.min.js"></script>
 <div class="container-fluid event_details_bg">
   <div class="row event_details_bg_row">
-    <div class="col-md-8 col-lg-8">
+    <div class="col-md-12 col-lg-8">
     	<img class="d-block event_detail_img" src="<?php echo base_url(); ?>assets/events/banner/<?php echo $res->event_banner; ?>" style="">
+				<p class="event_detail_title  show_mobile_tab"><?php echo $res->event_name; ?></p>
+			<p class="event_heading">Description</p>
+			<p class="event_detail_desc"><?php echo nl2br($res->description); ?></p>
+
 
     </div>
-    <div class="col-md-4 col-lg-4">
+    <div class="col-md-12 col-lg-4">
       <div class="event_detail_thumb">
 				<?php if ($hotspot_status == 'N') { ?>
 					<p><span class="event_thumb event_detail_date">
@@ -206,11 +210,56 @@ foreach($event_details as $res){
          </p>
       </div>
 
+			<div class="event_detail_thumb">
+				 <p class="event_heading">Organizer Details</p>
+				 	<p><i class="fa fa-user" aria-hidden="true"></i><span class="organiser_details_text"><?php echo $res->contact_person;  ?><?php if(!empty($res->sec_contact_person)){ echo ",  $res->sec_contact_person"; } ?></span></p>
+					<p><i class="fa fa-mobile" aria-hidden="true"></i><span class="organiser_details_text"><?php echo $res->primary_contact_no;  ?><?php if(!empty($res->secondary_contact_no)){ echo ",  $res->secondary_contact_no"; } ?></span></p>
+					<p><i class="fa fa-envelope" aria-hidden="true"></i><span class="organiser_details_text"><?php echo $res->contact_email; ?></span></p>
+				 <p>
+	 		 	</p>
+			</div>
+			<p class="event_heading">Review</p>
+			<hr>
+			<?php
+				if (!empty($event_reviews)){ ?>
+					<div class="event_detail_thumb">
+			 <?php
+					foreach($event_reviews as $result){
+						 $ratings = $result->event_rating;
+			?>
+								<div class="review_section">
+									<p class="review_name"><?php echo $result->user_name; ?>
+										<span class="rated_star">
+											<?php
+													 for ($i=1; $i <6; $i++)
+												{
+										if ($i <= $ratings){
+											echo "<img src='".base_url()."assets/front/images/rated.png' class='img-responsive'>";
+										} else {
+											echo "<img src='".base_url()."assets/front/images/unrated.png' class='img-responsive'>";
+										}
+									}
+								?>
+										</span>
+									</p>
+									<p class="review_desc"><?php echo $result->comments;?></p>
+									</div>
+			 <?php
+					}
+					?>
+							</div>
+			 <?php
+				}
+			?>
+						<div class="event_booking_section">
+							<p><?php if (empty($event_reviews)){?>Be the first one to Review ! Share Your experience<?php } ?><a  onclick="session_check()" class="review_btn pull-right" data-toggle="modal" data-target="#reviewModal">Write a review</a></p>
+						</div>
+
+
 
     </div>
-		<div class="col-md-12">
-			<p class="event_heading">Description</p>
-			<p class="event_detail_desc"><?php echo nl2br($res->description); ?></p>
+		<div class="col-md-12 col-sm-12 col-lg-8 col-xs-6">
+
 			<?php if (!empty($event_gallery)){ ?>
 
 			      <div class="event_detail_thumb">
@@ -224,42 +273,6 @@ foreach($event_details as $res){
 
 			<div id="map" class="map"></div>-->
 
-			<p class="event_heading">Review</p>
-			<hr>
-			<?php
-				if (!empty($event_reviews)){ ?>
-			 		<div class="event_detail_thumb">
-			 <?php
-					foreach($event_reviews as $result){
-						 $ratings = $result->event_rating;
-			?>
-			          <div class="review_section">
-			            <p class="review_name"><?php echo $result->user_name; ?>
-			              <span class="rated_star">
-			              	<?php
-			                     for ($i=1; $i <6; $i++)
-			            			{
-										if ($i <= $ratings){
-											echo "<img src='".base_url()."assets/front/images/rated.png' class='img-responsive'>";
-										} else {
-											echo "<img src='".base_url()."assets/front/images/unrated.png' class='img-responsive'>";
-										}
-									}
-								?>
-			              </span>
-			            </p>
-			            <p class="review_desc"><?php echo $result->comments;?></p>
-			            </div>
-			 <?php
-					}
-					?>
-			        </div>
-			 <?php
-				}
-			?>
-			      <div class="event_booking_section">
-			        <p><?php if (empty($event_reviews)){?>Be the first one to Review ! Share Your experience<?php } ?><a  onclick="session_check()" class="review_btn pull-right" data-toggle="modal" data-target="#reviewModal">Write a review</a></p>
-			      </div>
 
 		</div>
   </div>
