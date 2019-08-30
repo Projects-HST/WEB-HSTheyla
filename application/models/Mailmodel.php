@@ -274,7 +274,20 @@ Class Mailmodel extends CI_Model
 						  'mediaType' => 'image'
 						);
  */
+ 
+						 // Create the payload body
 						$body['aps'] = array(
+							'alert' => $message,
+							'sound' => 'default',
+							 'mutable-content' => 1,
+							 'category'=> "pusher"
+							);
+						$body['data'] = array(
+							'mediaUrl' => "http://www.alphansotech.com/wp-content/uploads/2015/12/Push-notification-1.jpg",
+							'mediaType' => "jpg"
+						);
+
+						/* $body['aps'] = array(
 							'alert' => array(
 								'title' => $subject,
 								'body' => $cnotes,
@@ -285,7 +298,7 @@ Class Mailmodel extends CI_Model
 							'sound' => 'assets/notification/oven.caf',
 							'mediaUrl' => "$img_url",
 							'mediaType' => "image"
-						);
+						); */
 						/* $body['data'] = array(
 							'mediaUrl' => "$img_url",
 							'mediaType' => "image"
