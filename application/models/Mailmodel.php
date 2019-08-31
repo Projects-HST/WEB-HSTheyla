@@ -284,10 +284,11 @@ Class Mailmodel extends CI_Model
 									},
 									"mutable-content": 1
 								},
-								"mediaUrl-url": "'.$img_url.'",
+								"mediaUrl": "'.$img_url.'",
 								"mediaType": "image"
 							}';
-echo $payload;
+							
+							
 						/* $body['aps'] = array(
 							'alert' => array (array(
 								'title' => $subject,
