@@ -263,37 +263,28 @@ Class Mailmodel extends CI_Model
 						if (!$fp)
 							exit("Failed to connect: $err $errstr" . PHP_EOL);
 
+							$payload = '{
+								"aps": {
+									"alert": {
+										"body": "'.$subject.'",
+										"title": "'.$cnotes.'"
+									},
+									"mutable-content": 1
+								},
+								"attachment-url": "'.$img_url.'"
+							}';
 
-
-						 // Create the payload body
-						 $body['aps'] = array(
-							'alert' => $cnotes,
-							'content-available' =>1,
-							'badge-content' => 1,
-							'badge-sound' => 'default',
-							'mediaUrl' => $img_url
-							);
-							
-						/*$body['data'] = array(
-							'mediaUrl' => "http://www.alphansotech.com/wp-content/uploads/2015/12/Push-notification-1.jpg",
-							'mediaType' => "jpg"
-						); */
-
-							/* $body['aps'] = array(
-							'alert' => array(
+						/* $body['aps'] = array(
+							'alert' => array (array(
 								'title' => $subject,
-								'body' => $cnotes,
-								'action-loc-key' => 'Heyla App',
+								'body' => $cnotes
 							),
-							'badge' => 2,
-							'sound' => 'assets/notification/oven.caf',
-						); 
-							$body['data'] = array(
-							'mediaUrl' => "$img_url",
-							'mediaType' => "image"
-						);  */
-						
-						$payload = json_encode($body);
+							'mutable-content' => 1
+						),
+							'attachment-url' => "https://api.buienradar.nl/Image/1.0/RadarMapNL"
+						);
+						 
+						$payload = json_encode($body);*/
 
 							//$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $gcm_key)) . pack("n", strlen($payload)) . $payload;
 							//$result = fwrite($fp, $msg, strlen($msg));
