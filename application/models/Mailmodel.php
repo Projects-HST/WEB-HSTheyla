@@ -263,6 +263,19 @@ Class Mailmodel extends CI_Model
 						if (!$fp)
 							exit("Failed to connect: $err $errstr" . PHP_EOL);
 
+
+							/* {
+								"aps": {
+									"alert": {
+										"body": "Het gaat over 15 minuten regenen in Alkmaar",
+										"title": "Buienalert"
+									},
+									"mutable-content": 1
+								},
+								"mediaUrl": "https://api.buienradar.nl/Image/1.0/RadarMapNL",
+								"mediaType": "image"
+							} */
+
 							$payload = '{
 								"aps": {
 									"alert": {
@@ -271,7 +284,8 @@ Class Mailmodel extends CI_Model
 									},
 									"mutable-content": 1
 								},
-								"attachment-url": "'.$img_url.'"
+								"mediaUrl-url": "'.$img_url.'",
+								"mediaType": "image"
 							}';
 
 						/* $body['aps'] = array(
