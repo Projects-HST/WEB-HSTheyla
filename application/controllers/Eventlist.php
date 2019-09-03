@@ -193,6 +193,8 @@ class Eventlist extends CI_Controller
 
 
 
+
+
 	public function event_booking()
     {
 		$number = '1234567890';
@@ -200,12 +202,9 @@ class Eventlist extends CI_Controller
 		for ($i = 0; $i < 7; $i++) {
 			$randomNumber .= $number[rand(0, 7 - 1)];
 		}
-
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
-
-		//$user_id = $this->input->post('user_id');
 		if($user_id!=''){
 			$order_id = $randomNumber."-".$user_id;
 			$event_id  = $this->input->post('event_id');
@@ -214,13 +213,13 @@ class Eventlist extends CI_Controller
 			$number_of_seats  = $this->input->post('no_seats');
 			$total_amount  = $this->input->post('total_amount');
 			$booking_date = $this->input->post('booking_date');
+			$datas['booking_process'] = $this->eventlistmodel->booking_process($order_id,$event_id,$plan_id,$plan_time_id,$user_id,$number_of_seats,$total_amount,$booking_date);
 
-			$data['booking_process'] = $this->eventlistmodel->booking_process($order_id,$event_id,$plan_id,$plan_time_id,$user_id,$number_of_seats,$total_amount,$booking_date);
-			$this->load->view('front_header');
-			$this->load->view('bookingprocess_new', $data);
+    	$this->load->view('front_header');
+			$this->load->view('booking_process_new', $datas);
 			$this->load->view('front_footer');
 		}else{
-			redirect('/signin/');
+			redirect('signin');
 		}
     }
 

@@ -1,17 +1,17 @@
     <section class="">
       <div class="container">
-        <div class="">
-          <div class="verify-text" style="    margin-bottom: 200px;">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="verify-text" style="    margin-bottom: 100px;">
             <center>
-                <img src="<?php echo base_url(); ?>assets/front/images/email.png" class="img-fluid">
-              <form action="" method="post" id="resetform">
+                <img src="<?php echo base_url(); ?>assets/front/images/forgot_password.png" class="img-responsive imgsize_80 forgot_img">
+              <form action="" method="post" id="resetform" class="resetform">
                 <div class="form-group">
                   <label for="exampleInputPassword1">Please enter your registered email ID to reset your password</label>
                   <input type="email" class="form-control" id="email" name="email" placeholder="Ex: dawkins@gmail.com">
                 </div>
                 <div class="form-group">
 
-                  <input type="submit" class="form-control btn-event btn btn-login" id="" value="Submit">
+                  <input type="submit" class=" btn_no_radius btn btn-login" id="" value="Submit">
                 </div>
               </form>
             </center>

@@ -78,26 +78,27 @@ $secondhalf = array_slice($res, $len / 2);
     </div>
 </footer>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="row">
-    <div class="col-md-5"><img src="<?php echo base_url(); ?>assets/front/images/become_organiser.jpg"></div>
-      <div class="col-md-7">
-
-        <p class="become_organiser_text"> <p class="heading" style="color:#000;font-size:22px;">Become A Event Organiser</p>
-        <p class="popup_txt">When modals become too long for the user’s viewport or device, they scroll independent of the page itself. Try the demo below to see what we mean.</p></p>
-		<?php if ($user_id!='') { ?>
-		<form class="form" role="form" autocomplete="off" id="formsignup" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="user_id" id="user_id" value="<?php echo $user_id; ?>">
-		  <center><button type="submit" id="submit" class="btn btn-primary btn-lg">Request Now</button></center>
-        </form>
-		<?php } else { ?>
-		<center><a class="btn btn-lg btn-primary" href="<?php echo base_url(); ?>/signin" role="button">Sign In</a></center>
-		<?php } ?>
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="row popup_body">
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+              <a href="#" class="pull-right close_popup" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></a>
+              <p class="text-center"><img class="organizer_icon" src="<?php echo base_url(); ?>assets/front/images/organizer.png"></p>
+              <p class="become_organiser_text"> <p class="heading" style="color:#000;font-size:22px;">Become A Event Organiser</p>
+                  <p class="popup_txt">Whether it's an event that fulfills people's needs or the one that gets their adrenalin going, we're here to help you get it done. Click the button to get started!</p>
+              </p>
+      		        <?php if ($user_id!='') { ?>
+              		<form class="form" role="form" autocomplete="off" id="formsignup" method="post" enctype="multipart/form-data">
+              			<input type="hidden" name="user_id" id="user_id" value="<?php echo $user_id; ?>">
+              		  <center><button type="submit" id="submit" class="btn btn-primary btn-lg">Request Now</button></center>
+                      </form>
+              		<?php } else { ?>
+              		<center><a class="btn btn-lg btn-primary btn-lg" href="<?php echo base_url(); ?>/signin" role="button">Sign In</a></center>
+              		<?php } ?>
+            </div>
+        </div>
+      </div>
     </div>
-    </div>
-    </div>
-  </div>
 </div>
 </body>
 <script src="<?php echo base_url(); ?>assets/plugins/datatables/dataTables.buttons.min.js"></script>

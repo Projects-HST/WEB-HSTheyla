@@ -59,7 +59,8 @@
         <div class="container-fluid">
             <a class="navbar-brand" href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>assets/front/images/heyla_logo.png" class="imglogo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <span class="toggle_menu"><i class="fa fa-bars" aria-hidden="true"></i></span>
+
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto topmenu">
@@ -70,7 +71,7 @@
 
                    }else{ ?>
                      <li class="nav-item">
-                        <a class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become An Organizer</a>
+                        <a href="#" class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become An Organizer</a>
                     </li>
                 <?php   }?>
 

@@ -396,7 +396,7 @@ class Apimainmodel extends CI_Model {
     				return $response;
 		} else {
 
-					$response = array("status" => "Error", "msg" => "Incorrect credentials");
+					$response = array("status" => "Error", "msg" => "Incorrect credentials!");
 					return $response;
 		}
 
@@ -597,7 +597,7 @@ class Apimainmodel extends CI_Model {
 					return $response;
 		} else {
 
-					$response = array("status" => "Error", "msg" => "Incorrect credentials");
+					$response = array("status" => "Error", "msg" => "Incorrect credentials!");
 					return $response;
 		}
 

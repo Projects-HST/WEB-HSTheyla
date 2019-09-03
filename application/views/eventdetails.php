@@ -77,7 +77,7 @@
 	unicode-bidi: bidi-override;
 	padding: 10px 30px;
 	display: inline-block;
-	width: 500px;
+
 }
 .user-rating input {
 	opacity: 0;
@@ -201,7 +201,7 @@ foreach($event_details as $res){
 
 
       <div class="event_detail_thumb">
-         <p class="event_heading">Share with your Friends</p>
+         <p class="event_heading">Share with friends</p>
          <p>
             <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/" onclick="sharepoints(<?php echo $user_id; ?> ,<?php echo $disp_event_id; ?>)" target="_blank" title="Share on Facebook"><img src="<?php echo base_url(); ?>assets/front/images/share_facebook.png"></a>
             <a href="https://web.whatsapp.com/send?text=<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/" data-action="share/whatsapp/share" onclick="sharepoints(<?php echo $user_id; ?> ,<?php echo $disp_event_id; ?>)" target="_blank" title="Share on WhatsApp"><img src="<?php echo base_url(); ?>assets/front/images/share_whatsapp.png"></a>
@@ -251,8 +251,10 @@ foreach($event_details as $res){
 			 <?php
 				}
 			?>
-						<div class="event_booking_section">
-							<p><?php if (empty($event_reviews)){?>Be the first one to Review ! Share Your experience<?php } ?><a  onclick="session_check()" class="review_btn pull-right" data-toggle="modal" data-target="#reviewModal">Write a review</a></p>
+						<div class="event_booking_section text-center ">
+						<p class="text-center"><img class="img-responsive write_review_img" src="<?php echo base_url(); ?>assets/front/images/write_review.png"></p>
+						<p class="write_first_review"><?php if (empty($event_reviews)){?>Be the first one to Review ! Share Your experience<?php } ?></p>
+						<p class="text-center"><a  onclick="session_check()" class="review_btn" data-toggle="modal" data-target="#reviewModal">Write a review</a></p>
 						</div>
 
 
@@ -288,9 +290,9 @@ foreach($event_details as $res){
 		<?php if (!empty($booking_dates)){ ?>
 				<div class="col-md-3">
 
-					 <label class="form-label">Select Date</label>
+					 <label class="form-label">Date</label>
 						<select class="form-control" id="show_date" onchange="disp_time()">
-						<option value="">Select Date</option>
+						<option value="">Date</option>
 						<?php foreach($booking_dates as $res){
 							$originalDate = $res->show_date;
 						?>
@@ -298,9 +300,9 @@ foreach($event_details as $res){
 						<?php } ?>
 						</select>
 				</div>
-				<div class="col-md-3" id="plan_time"><label class="form-label">Select Time</label><select class="form-control" id="show_time"><option value="">Select Time</option></select></div>
-				<div class="col-md-3" id="plan_details"><label class="form-label">Select Plan</label><select class="form-control" id="show_time"><option value="">Select Plan</option></select></div>
-				<div class="col-md-3" id="plan_seats"><label class="form-label">Select Seats</label><select class="form-control" id="show_time"><option value="">Select Seats</option></select></div>
+				<div class="col-md-3" id="plan_time"><label class="form-label">Timing</label><select class="form-control" id="show_time"><option value="">Select Time</option></select></div>
+				<div class="col-md-3" id="plan_details"><label class="form-label">Plan</label><select class="form-control" id="show_time"><option value="">Select Plan</option></select></div>
+				<div class="col-md-3" id="plan_seats"><label class="form-label">Tickets</label><select class="form-control" id="show_time"><option value="">Select Seats</option></select></div>
 				<div class="row" style="padding-top:20px;" id="plan_summary"></div>
 				<?php }  else {
 						echo "No Dates Found";
@@ -314,7 +316,7 @@ foreach($event_details as $res){
  <div class="modal-dialog">
  <div class="modal-content">
  <div class="modal-header">
-   <h4 class="modal-title">Write Review</h4>
+   <h4 class="modal-title">Write review</h4>
    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
  </div>
  <div class="modal-body" id="modal-body">
@@ -329,7 +331,7 @@ foreach($event_details as $res){
 
 	<form name="frmReview" id="" action="#" method="post" enctype="multipart/form-data" class="form" autocomplete="off">
        <div class="form-group row">
-       <div class="col-lg-12">
+       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
            <div class="rating">
              <span class="user-rating">
 
@@ -365,8 +367,8 @@ foreach($event_details as $res){
 	<?php } else { ?>
 
 	<form name="frmReview" id="" action="#" method="post" enctype="multipart/form-data" class="form" autocomplete="off">
-       <div class="form-group row">
-       <div class="col-lg-12">
+       <div class="form-group">
+       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
            <div class="rating">
              <span class="user-rating">
              <input type="radio" name="rating" id="rating_1" value="5"><span class="star"></span>
@@ -403,9 +405,9 @@ foreach($event_details as $res){
 
 <script>
 
-	var time_result ="<label class='form-label'>Select Time</label><select class='form-control' id='show_time'><option value=''>Select Time</option>";
-	var plan_result ="<label class='form-label'>Select Plan</label><select class='form-control' id='show_plan'><option value=''>Select Plan</option>";
-	var seat_result ="<label class='form-label'>Select Seats</label><select class='form-control' id='show_seats'><option value=''>Select Seats</option>";
+	var time_result ="<label class='form-label'>Timing</label><select class='form-control' id='show_time'><option value=''>Select Time</option>";
+	var plan_result ="<label class='form-label'>Plan</label><select class='form-control' id='show_plan'><option value=''>Select Plan</option>";
+	var seat_result ="<label class='form-label'>Tickets</label><select class='form-control' id='show_seats'><option value=''>Select Seats</option>";
 
 	function session_check()
 	{
@@ -418,6 +420,9 @@ foreach($event_details as $res){
 
   	function disp_time()
 	{
+
+
+
 		$('#show_plan').prop('selectedIndex',0);
 		$('#show_seats').prop('selectedIndex',0);
 
@@ -434,7 +439,7 @@ foreach($event_details as $res){
 		var dataArray = JSON.parse(data);
 
 		if (dataArray.length>0) {
-			result +="<label class='form-label'>Select Time</label><select class='form-control' id='show_time' onchange='disp_plan()'><option value=''>Select Time</option>";
+			result +="<label class='form-label'>Timing</label><select class='form-control' id='show_time' onchange='disp_plan()'><option value=''>Select Time</option>";
 
 
 			for (var i = 0; i < dataArray.length; i++){
@@ -478,7 +483,7 @@ foreach($event_details as $res){
 
 		if (dataArray.length>0) {
 
-			result +="<label class='form-label'>Select Plan</label><select class='form-control' id='show_plan' onchange='disp_seats()'><option value=''>Select Plan</option>";
+			result +="<label class='form-label'>Plan</label><select class='form-control' id='show_plan' onchange='disp_seats()'><option value=''>Select Plan</option>";
 
 			for (var i = 0; i < dataArray.length; i++){
 				var plan_name = dataArray[i].plan_name;
@@ -517,7 +522,7 @@ foreach($event_details as $res){
 		success: function(data) {
 		var dataArray = JSON.parse(data);
 		if (dataArray.length>0) {
-			result +="<label class='form-label'>Select Seats</label><select class='form-control' id='show_seats' onchange='plan_summary()'><option value=''>Select Seats</option>";
+			result +="<label class='form-label'>Tickets</label><select class='form-control' id='show_seats' onchange='plan_summary()'><option value=''>Select Seats</option>";
 			for (var i = 0; i < dataArray.length; i++){
 				var event_id = dataArray[i].event_id;
 				var plan_id = dataArray[i].plan_id;
@@ -558,7 +563,9 @@ foreach($event_details as $res){
 
 
 		// result +="<div class='col-md-6'><p class='event_select_text'>Plan Name</p></div><div class='col-md-6'><p class='event_select_text'>"+disp_plan_name+"</p></div><div class='col-md-6'><p class='event_select_text'>Ticket Price</p></div><div class='col-md-6'><p class='event_select_text'>₹ "+disp_plan_rate+"</p></div><div class='col-md-6'><p class='event_select_text'>No. of Seats</p></div><div class='col-md-6'><p class='event_select_text'>"+no_seats+"</p></div><div class='col-md-6 total_price'><p class='event_select_text'>Total Price</p></div><div class='col-md-6 total_price'><p class='event_select_text'>₹ "+disp_total+"</p></div><div class='col-md-12'><input type='submit' class='btn book_tickets confirm_btn' value='Continue' /></p><input type='hidden' name='no_seats' id='no_seats' value="+no_seats+" /><input type='hidden' name='total_amount' id='total_amount' value="+disp_total+" /><input type='hidden' name='user_id' id='user_id' value='<?php echo $user_id; ?>' /></div>";
-		result +="<div class='row'><div class='col-md-12'><center><p class='pay_sum'>Payment Summary</p></center></div><div class='col-md-3'></div><div class='col-md-3'> <p class='event_select_text'>Plan Name</p></div><div class='col-md-2'> <p class='event_select_text'>"+disp_plan_name+"</p></div><div class='col-md-4'></div><div class='col-md-3'></div><div class='col-md-3'> <p class='event_select_text'>Ticket Price</p></div><div class='col-md-2'> <p class='event_select_text'>₹ "+disp_plan_rate+"</p></div><div class='col-md-4'></div><div class='col-md-3'></div><div class='col-md-3'><p class='event_select_text'>No. of Seats</p></div><div class='col-md-2'> <p class='event_select_text'>"+no_seats+"</p></div><div class='col-md-4'></div><div class='col-md-3'></div><div class='col-md-3 total_price'> <p class='event_select_text'>Total Price</p></div><div class='col-md-2 total_price'> <p class='event_select_text'>₹ "+disp_total+"</p></div><div class='col-md-4'></div></div><div class='col-md-12'><center><input type='submit' class='btn book_tickets confirm_btn' value='Continue'/></center> </p><input type='hidden' name='no_seats' id='no_seats' value="+no_seats+"><input type='hidden' name='total_amount' id='total_amount' value="+disp_total+"><input type='hidden' name='user_id' id='user_id' value='<?php echo $user_id; ?>'></div>";
+	result +="<div class='row'><div class='col-md-12 col-sm-12'><center><p class='pay_sum'>Payment Summary</p></center></div><div class='col-md-3 hide_mob'></div><div class='col-md-3 col-sm-6'> <p class='event_select_text'>Plan</p></div><div class='col-md-2 col-sm-6'> <p class='event_select_text'>"+disp_plan_name+"</p></div><div class='col-md-4 hide_mob'></div><div class='col-md-3 hide_mob'></div><div class='col-md-3'> <p class='event_select_text'>Ticket Price</p></div><div class='col-md-2'> <p class='event_select_text'>₹ "+disp_plan_rate+"</p></div><div class='col-md-4 hide_mob'></div><div class='col-md-3 hide_mob'></div><div class='col-md-3'><p class='event_select_text'>No. of Tickets</p></div><div class='col-md-2'> <p class='event_select_text'>"+no_seats+"</p></div><div class='col-md-4 hide_mob'></div><div class='col-md-3 hide_mob'></div><div class='col-md-3 total_price'> <p class='event_select_text'>Total</p></div><div class='col-md-2 total_price'> <p class='event_select_text'>₹ "+disp_total+"</p></div><div class='col-md-4 hide_mob'></div></div><div class='col-md-12'><center><input type='submit' class='btn book_tickets confirm_btn' value='Continue'/></center> </p><input type='hidden' name='no_seats' id='no_seats' value="+no_seats+"><input type='hidden' name='total_amount' id='total_amount' value="+disp_total+"><input type='hidden' name='user_id' id='user_id' value='<?php echo $user_id; ?>'></div>";
+
+
 
 		 $("#plan_summary").html(result).show();
 	}

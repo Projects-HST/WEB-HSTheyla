@@ -203,30 +203,36 @@ body{background-color: #fff;}
             </div>
         </div>
     </nav>
-<div class="container-fluid" style="background-color:#fff;">
-  <div class="homeslider">
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner" role="listbox">
-      <div class="carousel-item active">
-        <img class="first-slide" src="<?php echo base_url(); ?>assets/front/images/about_usbanner.jpg" alt="First slide" style="width:100%;height:auto;">
-        </div>
+
+  <div class="container-fluid">
+    <div class="container">
+      <img class="about_heyla_img" src="<?php echo base_url(); ?>assets/front/images/about_usbanner.jpg" alt="First slide" style="">
     </div>
   </div>
-  </div>
-</div>
+
   <div class="">
     <div class="container-fluid">
-
-        <div class="about_us" style="margin-top:-130px;">
-            <center><h3>About Us</h3></center>
+        <div class="about_us container" style="">
+            <center><h3>About Heyla</h3></center>
             <p class="whatsheyla" id="services">
-               Heyla is like the encyclopaedia of “What, When and Where” of the World of Events, from Entertainment, Shopping, Sports, Dining, Travelling, Business and many more. You can organize events or attend them, or choose to do both if you wish.</p>
-            <p class="whatsheyla">Heyla acts as the connecting link between event organizers and event seekers. It is your gateway to the World outside in your pocket, waiting to be explored, shared and enjoyed. Know what the buzzing events in Singapore are, today.
-            </p>
-
-                  <p class="whatsheyla" id="services">
-                  It’s an everything-for-everybody App and exploring is just a few clicks away.</p>
+              Heyla is an encyclopaedia of “What, When and Where” for the world of events, from entertainment, shopping, sports, dining, travelling, business, and many more. You can organize events or attend them, or choose to do both.</p>
+            <p class="whatsheyla">Heyla acts as a connecting link between event organizers and event seekers. It is your gateway in your pocket to the world outside, waiting to be explored, shared and enjoyed. Know what buzzing events are happening in Singapore today.</p>
         </div>
+    </div>
+      <div class="container-fluid no_padding about_us_content">
+      <div class="container want_to_know_text">
+      <center><h3>Want to know what’s happening in Singapore?</h3></center><br>
+    <p class="whatsheyla">There’s always something happening in the Little Red Dot. The question is, “are you ready to step out and make a memory”? <br> We got determined to step in, after learning that there is a huge gap between event organizers and event seekers. Heyla is that bridge. It’s a conduit between organizers and general public.  </p>
+    <h3>For organizers</h3>
+    <p class="whatsheyla">By becoming an event organizer, you can create or organize any type of event such as entertainment, business meets, family gatherings, travellers, casual or formal meet-ups, and many more. The organizer's imagination is the limit. Get in touch with us  to know more.</p>
+    <h3>For users</h3>
+    <p class="whatsheyla">Whether you’re an individual or with a group of buddies, local or travelling, Heyla satisfies your event hunting like never before. <br>
+    You can find events of your choice within a few clicks. Whether it’s nearby or around the city-state you can expect events that keep you engaged at any given time.<br>
+     You can take a look at our ‘Map View’ of the events, to choose them location wise. Make sure to check out ‘Hotspots’ or ‘Popular’ events to explore the most happening places.<br>
+    But the best way to know is by simply exploring the app.<br>
+    Download the app now to discover the world of entertainment, knowledge and networking.
+    </p>
+    </div>
     </div>
   </div>
   <section class="features_section" style="" id="services">
@@ -253,17 +259,18 @@ body{background-color: #fff;}
                         <div class="media mediaobj">
                           <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/favourite.png" alt="Generic placeholder image">
                           <div class="media-body">
-                              <h5 class="mt-0">Favourite</h5> Tailor made events for you.<br></div>
+                              <h5 class="mt-0">Favourite</h5>Tailor-made events for you<br></div>
                         </div>
                     </div>
 
                   </div>
+
                   <div class="row">
                     <div class="col-sm-6 col-md-10 featurebox">
                         <div class="media mediaobj">
                             <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/Popular.png" alt="Generic placeholder image">
                                 <div class="media-body">
-                                    <h5 class="mt-0">The </h5>Trending events happening in your city.</div>
+                                    <h5 class="mt-0">Popular </h5>Trending events happening in your city.</div>
                         </div>
                     </div>
 
@@ -274,17 +281,16 @@ body{background-color: #fff;}
                         <div class="media mediaobj">
                           <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/hotspot.png" alt="Generic placeholder image">
                           <div class="media-body">
-                              <h5 class="mt-0">Hotspot</h5>You can't leave the city without checking in here.</div>
+                              <h5 class="mt-0">Hotspots</h5>You can't leave the city-state without checking in here.</div>
                         </div>
                     </div>
-
                         </div>
                           <div class="row">
                         <div class="col-sm-6 col-md-10  featurebox">
                             <div class="media mediaobj">
                                 <img class="d-flex mr-3 featureicons" src="<?php echo base_url(); ?>assets/front/images/leaderboard.png" alt="Generic placeholder image">
                                 <div class="media-body">
-                                    <h5 class="mt-0">Leaderboard</h5>Let's add to the overall fun by competing with other Heyla App Users.</div>
+                                    <h5 class="mt-0">Leaderboard</h5>Let's add to the overall fun by competing with other Heyla app Users.</div>
                             </div>
                         </div>
                   </div>
@@ -294,91 +300,106 @@ body{background-color: #fff;}
       </div>
 
   </section>
+  <?php    $sql="SELECT id,category_name FROM category_master  WHERE status='Y' ORDER BY order_by ASC";
+    $resu=$this->db->query($sql);
+    $res=$resu->result();
+  $len = count($res);
+  $firsthalf = array_slice($res, 0, $len / 2);
+  $secondhalf = array_slice($res, $len / 2);
+     ?>
+  <footer class="footer-bg footer" id="stickfooter">
+    <div class="container-fluid no_padding">
+        <div class="row footer_container">
 
-<footer class="footer-bg footer" id="stickfooter">
-  <div class="container-fluid">
-      <div class="row footer_container">
-          <div class="col">
-            <p class="footer_heading">Categories</p>
-            <ul class="fnt-footer ">
-              <li class=""><a href="">Events</a></li>
-              <li class=""><a href="">Hotspot</a></li>
-              <li class=""><a href="">Ads Event</a></li>
-            </ul>
-          </div>
-          <div class="col">
-            <p class="footer_heading">Country</p>
-            <ul class="fnt-footer ">
-              <li class=""><a href="">India</a></li>
-              <li class=""><a href="">Singapore</a></li>
-              <li class=""><a href="">Malaysia</a></li>
-            </ul>
 
-          </div>
-          <div class="col">
-            <p class="footer_heading">Quick links</p>
-            <ul class="fnt-footer ">
-              <li class=""><a href="<?php echo base_url(); ?>about-us">About Us</a></li>
-              <li class=""><a href="<?php echo base_url(); ?>">Events</a></li>
-                <li class=""><a href="#">Blog</a></li>
-              <li class=""><a href="<?php echo base_url(); ?>privacy">Privacy Policy</a></li>
-              <li class=""><a href="<?php echo base_url(); ?>payment">Payment Policy</a></li>
-              <li class=""><a href="<?php echo base_url(); ?>terms">Terms & Conditions</a></li>
-            </ul>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+              <p class="footer_heading">Categories</p>
+              <ul class="fnt-footer ">
+                <?php  foreach($firsthalf as $row_cat){  ?>
+                    <li class=""><a href=""><?php echo $row_cat->category_name; ?></a></li>
+                <?php } ?>
 
-          </div>
-          <div class="col">
-            <p class="footer_heading">Contact Us</p>
-            <p class="address_form">Happy Sanz Tech <br>
-               #3, Perks campus, <br> Uppilipalayam,<br> Coimbatore-641015</p>
-               <p class="address_form">hello@heylaapp.com</p>
-          </div>
-          <div class="col">
-            <p class="footer_heading">Follow  Us On</p>
-            <ul class="fnt-footer social_follow">
-              <li class=""><a href="https://www.facebook.com/heylaapp/" target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/share_facebook.png"></a></li>
-              <li class=""><a href="https://www.instagram.com/heyla_app/" target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/instagram.png"></a></li>
-              <!-- <li class=""><a href=""><img src="<?php echo base_url(); ?>assets/front/images/gp_follow.png"></a></li> -->
-              <li class=""><a href="https://twitter.com/heylaapp"  target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/share_twitter.png"></a></li>
-                <li class=""><a href="https://twitter.com/heylaapp"  target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/share_googleplus.png"></a></li>
-            </ul>
-            <p class="footer_heading">Download Apps</p>
-            <ul class="fnt-footer social_follow">
-              <li class=""><a href="" target="_blank"><img class="store_img" src="<?php echo base_url(); ?>assets/front/images/app.png"></a></li>
-              <li class=""><a href="" target="_blank"><img class="store_img"  src="<?php echo base_url(); ?>assets/front/images/play.png"></a></li>
+              </ul>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+              <p class="footer_heading">&nbsp;</p>
+              <ul class="fnt-footer ">
+                <?php  foreach($secondhalf as $row_sec_cat){  ?>
+                    <li class=""><a href=""><?php echo $row_sec_cat->category_name; ?></a></li>
+                <?php } ?>
+              </ul>
 
-            </ul>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+              <p class="footer_heading">Get In Touch</p>
+              <ul class="fnt-footer contact_text">
+                <li class=""><i class="fa fa-envelope" aria-hidden="true"></i><span> info@heylaapp.com </span></li>
+                <li class=""><i class="fa fa-phone" aria-hidden="true"></i>  +65 123-1234-1</li>
+              </ul>
+              <p class="footer_heading">Follow  Us On</p>
+              <ul class="fnt-footer social_follow">
+                <li class=""><a href="https://www.facebook.com/heylaapp/" target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/share_facebook.png"></a></li>
+                <li class=""><a href="https://www.instagram.com/heyla_app/" target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/instagram.png"></a></li>
+                <!-- <li class=""><a href=""><img src="<?php echo base_url(); ?>assets/front/images/gp_follow.png"></a></li> -->
+                <li class=""><a href="https://twitter.com/heylaapp"  target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/share_twitter.png"></a></li>
+                <li class=""><a href="https://www.youtube.com/channel/UCrjx62OpVHGhX5UONO8QDmw"  target="_blank"><img src="<?php echo base_url(); ?>assets/front/images/youtube.png"></a></li>
+              </ul>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+              <p class="footer_heading">Download Heyla</p>
+              <ul class="fnt-footer social_follow">
+                <li class=""><a href="https://itunes.apple.com/us/app/heyla/id1438601804?ls=1&mt=8" target="_blank"><img class="store_img" src="<?php echo base_url(); ?>assets/front/images/app.png"></a></li>
+                <li class=""><a href="https://play.google.com/store/apps/details?id=com.palprotech.heylaapp" target="_blank"><img class="store_img"  src="<?php echo base_url(); ?>assets/front/images/play.png"></a></li>
+
+              </ul>
+            </div>
+        </div>
+    </div>
+      <!-- /.container -->
+      <div class="container-fluid no_padding">
+        <div class="row footer_container">
+          <hr>
+          <div class="col-lg-8">
+            <ul class="list-inline pull-left footer_bottom_links">
+                <li class="list-inline-item"><a href="<?php echo base_url(); ?>about-us">About</a></li>
+                <li class="list-inline-item"><a href="<?php echo base_url(); ?>">Events</a></li>
+                <li class="list-inline-item"><a href="#">Blog</a></li>
+                <li class="list-inline-item"><a href="<?php echo base_url(); ?>privacy">Privacy Policy</a></li>
+                <li class="list-inline-item"><a href="<?php echo base_url(); ?>payment">Payment Policy</a></li>
+                <li class="list-inline-item"><a href="<?php echo base_url(); ?>terms">Terms & Conditions</a></li>
+              </ul>
           </div>
+          <div class="col-lg-4">
+            <p class=" text-center foot_copyrights">Built with <i class="fa fa-heart" aria-hidden="true" style="    width: 10px;"></i> by <a href="https://happysanztech.com" target="_blank" style="text-decoration:none;"><b style="color:#fff;font-size:20px;">Happy Sanz Tech</b></a></p>
+          </div>
+            </div>
+
       </div>
-  </div>
-    <!-- /.container -->
-    <div class="container">
-          <center><img class="text-center" src="<?php echo base_url(); ?>assets/front/images/heyla_white.png"></center>
-        <p class=" text-center foot_copyrights">Crafted with <a href="" style="text-decoration:none;"><b style="color:#fff;font-size:20px;">Happiness</b></a></p>
-    </div>
-</footer>
+  </footer>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="row">
-    <div class="col-md-5"><img src="<?php echo base_url(); ?>assets/front/images/become_organiser.jpg"></div>
-      <div class="col-md-7">
-      <p class="become_organiser_text"> <p class="heading" style="color:#000;font-size:22px;">Become A Event Organiser</p>
-        <p class="popup_txt">When modals become too long for the user’s viewport or device, they scroll independent of the page itself. Try the demo below to see what we mean.</p>
-      </p>
-      <?php $user_id = $this->session->userdata('id');
-       if ($user_id!='') { ?>
-      <form class="form" role="form" autocomplete="off" id="formsignup" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="user_id" id="user_id" value="<?php echo $user_id; ?>">
-        <center><button type="submit" id="submit" class="btn btn-primary btn-lg">Request Now</button></center>
-          </form>
-      <?php } else { ?>
-    	<center><a class="btn btn-lg btn-primary" href="<?php echo base_url(); ?>/signin" role="button">Sign In</a></center>
-      <?php } ?>
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="row popup_body">
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+              <a href="#" class="pull-right close_popup" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></a>
+              <p class="text-center"><img class="organizer_icon " src="<?php echo base_url(); ?>assets/front/images/organizer.png"></p>
+              <p class="become_organiser_text"> <p class="heading" style="color:#000;font-size:22px;">Become A Event Organiser</p>
+                <p class="popup_txt">Whether it's an event that fulfills people's needs or the one that gets their adrenalin going, we're here to help you get it done. Click the button to get started!</p>
+              </p>
+      		        <?php if ($user_id!='') { ?>
+              		<form class="form" role="form" autocomplete="off" id="formsignup" method="post" enctype="multipart/form-data">
+              			<input type="hidden" name="user_id" id="user_id" value="<?php echo $user_id; ?>">
+              		  <center><button type="submit" id="submit" class="btn btn-primary btn-lg">Request Now</button></center>
+                      </form>
+              		<?php } else { ?>
+              		<center><a class="btn btn-lg btn-primary btn-lg" href="<?php echo base_url(); ?>/signin" role="button">Sign In</a></center>
+              		<?php } ?>
+            </div>
+        </div>
+      </div>
     </div>
-    </div>
-    </div>
-  </div>
 </div>
 </body>
 <script src="<?php echo base_url(); ?>assets/plugins/datatables/dataTables.buttons.min.js"></script>

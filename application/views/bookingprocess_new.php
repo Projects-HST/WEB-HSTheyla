@@ -27,18 +27,16 @@ hr{
 <div class="container-fluid">
   <div class="row order_page">
 <?php
-
 if(empty($booking_process)){
-
 		echo "ERROR";
-} else { 
+} else {
 
 		foreach($booking_process as $res){
 			$originalDate = $res->show_date;;
 		}
-?>  
+?>
 
-    <div class="col-md-8">
+    <div class="col-md-8 no_padding box_grey_border">
       <div class="summary_box">Order Summary</div>
       <div class="col-md-12 col-sm-12 summary_card">
         <div class="row">
@@ -66,7 +64,7 @@ if(empty($booking_process)){
           <div class="col-md-1 text-center"><p class="summary_text dot">:</p></div>
           <div class="col-md-6"><p class="summary_text"><?php echo $res->number_of_seats;?></p></div>
         </div>
-		
+
         <div class="row">
           <div class="col-md-5"><p class="summary_label summary_text">Event Name</p></div>
           <div class="col-md-1 text-center"><p class="summary_text dot">:</p></div>
@@ -118,6 +116,7 @@ if(empty($booking_process)){
               <p class="payment_heading">₹ <?php echo $res->IHC;?></p>
           </div>
         </div>
+        <br>
 
         <div class="row">
           <div class="col-md-6">
@@ -141,6 +140,7 @@ if(empty($booking_process)){
               <p class="payment_heading">₹ <?php echo $res->SGST;?></p>
           </div>
         </div>-->
+        <br>
           <hr class="total_bor">
         <div class="row">
 
@@ -155,6 +155,7 @@ if(empty($booking_process)){
           </div>
 
         </div>
+        <br>
         <hr class="total_bor">
 
         <div id="strclock" style="text-align: center;"></div>
@@ -183,7 +184,7 @@ if(empty($booking_process)){
       </div>
     </div>
     <center>  <img src="<?php echo base_url(); ?>assets/front/images/login_bg.png" class="img-thumbnail"> </center>
-	
+
 <?php } ?>
   </div>
 </div>
@@ -219,9 +220,9 @@ if(empty($booking_process)){
     hours = (pat.test(hour) == true) ? '0'+hour : hour;
 
     document.getElementById('strclock').innerHTML = hours+":"+mins+":"+secs;
-    if(hour >= 1) { 
+    if(hour >= 1) {
            document.getElementById('clock').innerHTML = hour+1+' hour until timer runs out!';
-    } 
+    }
     else if(min >= 1) {
            document.getElementById('clock').innerHTML = min+' minute until timer runs out!';
     }
@@ -232,7 +233,7 @@ if(empty($booking_process)){
         if(time == '00:00:00') {
             alert("You have exceeded the time limit and your booking has been released.");
             window.location="http://heylaapp.com/testing";
-        } else{ 
+        } else{
             setTimeout("countdown()",1000);
         }
     }
