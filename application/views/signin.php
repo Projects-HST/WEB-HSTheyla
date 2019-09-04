@@ -36,7 +36,7 @@
 <div class="col-md-1">
   <p class="or-text">OR</p>
 </div>
-    <div class="col-lg-5 col-sm-12">
+    <div class="col-lg-5 col-md-12 col-sm-12">
       <div class="socialmedia-tab">
         <!-- <a class="social-link-img" onclick="checkLoginState()" scope="public_profile,email"><img src="<?php echo base_url(); ?>assets/front/images/login-facebook.png" class="img-responsive social-img"></a><br> -->
 
@@ -61,9 +61,7 @@
 
   </div>
 </div>
-<div class="container-fluid">
-<center>  <img src="<?php echo base_url(); ?>assets/front/images/login_bg.png" class="img-thumbnail"> </center>
-</div>
+
 
 
 

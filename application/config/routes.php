@@ -76,6 +76,7 @@ $route['reviewevents'] = 'home/reviewevents';
 //$route['viewreviews'] = 'home/viewreviews';
 $route['home'] = 'home/home';
 $route['about-us'] = 'home/about';
+$route['faq'] = 'home/faq';
 $route['privacy'] = 'home/privacy';
 $route['payment'] = 'home/payment';
 $route['terms'] = 'home/terms';

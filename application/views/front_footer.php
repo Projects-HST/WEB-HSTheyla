@@ -64,6 +64,7 @@ $secondhalf = array_slice($res, $len / 2);
           <ul class="list-inline pull-left footer_bottom_links">
               <li class="list-inline-item"><a href="<?php echo base_url(); ?>about-us">About</a></li>
               <li class="list-inline-item"><a href="<?php echo base_url(); ?>">Events</a></li>
+              <li class="list-inline-item"><a href="<?php echo base_url(); ?>faq">FAQ</a></li>
               <li class="list-inline-item"><a href="#">Blog</a></li>
               <li class="list-inline-item"><a href="<?php echo base_url(); ?>privacy">Privacy Policy</a></li>
               <li class="list-inline-item"><a href="<?php echo base_url(); ?>payment">Payment Policy</a></li>

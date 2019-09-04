@@ -1,6 +1,7 @@
 .imglogo{
   width: 125px;
 }
+
 .navbar-nav li:hover > ul.dropdown-menu {
 display: block;
 }
@@ -365,7 +366,7 @@ hr{
   width: 75px;
 }
 .organiser_btn{
-  background-color: #ffbb17;
+  background-color: #458ecc;
     color: #fff !important;
     margin-top: 8px;
 }
@@ -763,7 +764,7 @@ i.fas{
   width: 100px;
 }
 .socialmedia-tab{
-  text-align: left;
+  text-align: center;
 padding-top: 50px;
 padding-bottom: 15px;
 }
@@ -780,6 +781,10 @@ padding-bottom: 15px;
 }
 .event_img{
 
+}
+.faq_content{
+  padding-left: 20px !important;
+  padding-right: 20px !important;
 }
 .order_page{
   padding-top: 100px;
@@ -852,6 +857,9 @@ padding-bottom: 15px;
   }
   .show_mobile_tab{
     display: block;
+  }
+  .or-text{
+  display: none;
   }
 }
 @media (max-width:600px)  {
@@ -1286,6 +1294,9 @@ display: none;
 .show_mobile_tab{
   display: block;
 }
+.or-text{
+display: none;
+}
 }
 
 .navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .logout-btn:hover{
@@ -1399,4 +1410,51 @@ ul.dropdown-menu.show{
   color: #7B7B7B;
   cursor: pointer;
   width: 0;
+}
+
+
+/* Facebook button */
+._51mx{
+  height: 30px;
+}
+._4z_6 {
+    height: 30px !important;
+}
+
+
+
+/* Faq */
+
+.page_title{
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+}
+.panel-title a{
+  color: #000;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+}
+.panel-title{
+  margin-bottom: 0px;
+  padding: 5px;
+}
+.panel-default{
+  border: 1px solid grey;
+  margin-bottom: 5px;
+}
+.bs-example{
+  margin: 20px;
+}
+.faq_content {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.accordian_heading{
+  font-size: 20px;
+  font-weight: 500;
+}
+.faq_page{
+  margin-top: 150px;
 }

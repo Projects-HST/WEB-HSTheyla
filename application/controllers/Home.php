@@ -121,6 +121,16 @@ class Home extends CI_Controller {
 		$this->load->view('front_footer');
 	}
 
+	public function faq()
+	{
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
+		$user_role=$this->session->userdata('user_role');
+		$this->load->view('front_header');
+		$this->load->view('faq', $datas);
+		$this->load->view('front_footer');
+	}
+
 	public function eventdetails()
 	{
 		$datas=$this->session->userdata();

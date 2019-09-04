@@ -42,9 +42,9 @@
       </form>
 
     </div>
-<div class="col-lg-1 co-sm-12">
-  <p class="or-text">OR</p>
-</div>
+    <div class="col-md-1">
+      <p class="or-text">OR</p>
+    </div>
     <div class="col-lg-5 col-sm-12">
       <div class="socialmedia-tab">
 
@@ -66,9 +66,7 @@
 
     </div>
 </div>
-<div class="container-fluid">
-<center>  <img src="<?php echo base_url(); ?>assets/front/images/login_bg.png" class="img-thumbnail"> </center>
-</div>
+
 
 
 
