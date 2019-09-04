@@ -31,7 +31,7 @@
 
                 <br>
                 <br><b>Customer Care</b>
-                <br> If there are any queries regarding your order, you can get in touch with us at <a href="mailto:hello@heylaapp.com">hello@heylaapp.com </a> / 9443471551. We assure you a response within one business day.
+                <br> If there are any queries regarding your order, you can get in touch with us at <a href="mailto:hello@heylaapp.sg">hello@heylaapp.sg </a> / 9443471551. We assure you a response within one business day.
                 <br>
                 <br><b>Changes on Pricing</b>
                 <br> This Pricing Policy was last updated on 08.09.2018. From time to time we may change or make additions to our Pricing Policy. We will notify you of any material changes to this policy as required by law. We will also post an updated copy on our website and during app updates.

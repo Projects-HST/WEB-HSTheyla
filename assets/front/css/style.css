@@ -1,7 +1,9 @@
 .imglogo{
   width: 125px;
 }
-
+.navbar {
+    border-bottom: 1px solid #dad9d9;
+}
 .navbar-nav li:hover > ul.dropdown-menu {
 display: block;
 }

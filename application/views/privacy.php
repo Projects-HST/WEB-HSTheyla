@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <p style="color:#000;">
                 <b>Introduction to the Privacy Policy</b>
-                <br> This privacy policy is for the website <b><a href="https://heylaapp.com/" target="_blank">www.heylaapp.com</a></b> and its application, and served by HeylaApp and governs the privacy of its users who choose to use it.
+                <br> This privacy policy is for the website <b><a href="https://heylaapp.sg/" target="_blank">www.heylaapp.sg</a></b> and its application, and served by HeylaApp and governs the privacy of its users who choose to use it.
                 <br>
                 <br> The policy sets out the different areas where user privacy is concerned. It outlines the obligations and requirements of the users, the app, the website and website owners. Furthermore, the way it processes, stores and protects user data and information will also be detailed within this policy.
 

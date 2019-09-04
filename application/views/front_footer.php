@@ -168,7 +168,7 @@ $('#formsignup').validate({ // initialize the plugin
                     if (response == "Thanks for requesting we contact you shortly") {
                         swal({
                             title: "Success",
-                            text: response,
+                            text: "Your application to become an organizer has been registered. We will get back to you shortly.",
                             type: "success"
                         }).then(function() {
                             location.href = '<?php echo base_url(); ?>';

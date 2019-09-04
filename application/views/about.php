@@ -365,6 +365,7 @@ body{background-color: #fff;}
             <ul class="list-inline pull-left footer_bottom_links">
                 <li class="list-inline-item"><a href="<?php echo base_url(); ?>about-us">About</a></li>
                 <li class="list-inline-item"><a href="<?php echo base_url(); ?>">Events</a></li>
+                <li class="list-inline-item"><a href="<?php echo base_url(); ?>faq">FAQ</a></li>
                 <li class="list-inline-item"><a href="#">Blog</a></li>
                 <li class="list-inline-item"><a href="<?php echo base_url(); ?>privacy">Privacy Policy</a></li>
                 <li class="list-inline-item"><a href="<?php echo base_url(); ?>payment">Payment Policy</a></li>
@@ -463,7 +464,7 @@ $('#formsignup').validate({ // initialize the plugin
                     if (response == "Thanks for requesting we contact you shortly") {
                         swal({
                             title: "Success",
-                            text: response,
+                            text: "Your application to become an organizer has been registered. We will get back to you shortly.",
                             type: "success"
                         }).then(function() {
                             location.href = '<?php echo base_url(); ?>';
