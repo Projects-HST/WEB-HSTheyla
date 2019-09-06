@@ -11,7 +11,7 @@
         <div class="col-xs-6 form_box" >
           <div class="left-inner-addon">
             <i class="fas fa-user"></i>
-            <input type="text" class="form-control user-text-box" name="username" id="username"  placeholder="Username/Mobile Number/Email ID" />
+            <input type="text" class="form-control" name="username" id="username"  placeholder="Username/Mobile Number/Email ID" />
           </div>
         </div>
         <div class="col-xs-6 form_box" >
