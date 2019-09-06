@@ -1261,6 +1261,9 @@ a.btn.btn-login.btn-primary.btn-block.review-btn{
   .show_mobile_tab{
     display: block;
   }
+  .field-icon{
+    margin-top: -50px;
+  }
   .carousel-item{
     height:350px;
   }
