@@ -173,6 +173,7 @@ foreach($event_details as $res){
 
 
          <p><img src="<?php echo base_url(); ?>assets/front/images/time.png"><span class="event_thumb event_detail_date"><?php echo $res->start_time;?> - <?php echo $res->end_time;?></span></p>
+				 <p><img src="<?php echo base_url(); ?>assets/front/images/location.png"><span class="event_thumb event_detail_date event_deetail_venue"><?php echo $res->event_address; ?></span></p>
          <p><img src="<?php echo base_url(); ?>assets/front/images/location.png"><span class="event_thumb event_detail_date event_deetail_venue"><?php echo $res->event_venue; ?></span></p>
 		 <p><a href="http://maps.google.com/maps?z=12&t=m&q=loc:<?php echo $event_latitude;?>+<?php echo $event_longitude;?>" target="_blank"> View Location</a> </p>
 		 <?php if(is_null($mini_amount_range)){
@@ -213,7 +214,7 @@ foreach($event_details as $res){
 			<div class="event_detail_thumb">
 				 <p class="event_heading">Organizer Details</p>
 				 	<p><i class="fa fa-user" aria-hidden="true"></i><span class="organiser_details_text"><?php echo $res->contact_person;  ?><?php if(!empty($res->sec_contact_person)){ echo ",  $res->sec_contact_person"; } ?></span></p>
-					<p><i class="fa fa-mobile" aria-hidden="true"></i><span class="organiser_details_text"><?php echo $res->primary_contact_no;  ?><?php if(!empty($res->secondary_contact_no)){ echo ",  $res->secondary_contact_no"; } ?></span></p>
+					<p><i class="fa fa-mobile" aria-hidden="true"></i><span class="organiser_details_text"> <?php echo $res->primary_contact_no; ?><?php if(!empty($res->secondary_contact_no)){ echo ",  $res->secondary_contact_no"; } ?></span></p>
 					<p><i class="fa fa-envelope" aria-hidden="true"></i><span class="organiser_details_text"><?php echo $res->contact_email; ?></span></p>
 				 <p>
 	 		 	</p>

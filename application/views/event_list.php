@@ -272,7 +272,7 @@ function hideSelected(value) {
 $('#category').select2({
         placeholder: 'Event categories',
         "multiple": true,
-        allowClear: true,
+        allowClear: false,
         minimumResultsForSearch: -1,
         templateResult: hideSelected
 
@@ -452,7 +452,7 @@ function getAlleventsresult(limit,offset)
 				$("#event_list_all").append(result);
 				$('#loader_image').hide();
 				offset = limit + offset;
-				$("#loader_message").html('<center><a class="btn btn-sm more_event" onclick="getAlleventsresult('+limit+','+offset+')" role="button">More Events</a></center>').show();
+				$("#loader_message").html('<center><a  class="btn btn-sm more_event" onclick="getAlleventsresult('+limit+','+offset+')" role="button">More Events</a></center>').show();
 			} else {
 				$('#loader_image').hide();
 				$("#loader_message").html('<center><p class="btn btn-sm no_event" style="color:#ffffff;">No more Events</p></center>').show();
@@ -536,7 +536,7 @@ function getCityevents()
 				$("#event_list_cty").append(result);
 				$('#loader_image').hide();
 				offset = limit + offset;
-				$("#loader_message").html('<center><a class="btn btn-sm more_event" onclick="getCityeventsresult('+limit+','+offset+')" role="button">More Events</a></center>').show();
+				$("#loader_message").html('<center><a  class="btn btn-sm more_event" onclick="getCityeventsresult('+limit+','+offset+')" role="button">More Events</a></center>').show();
 
 			} else {
 				$('#loader_image').hide();
@@ -621,7 +621,7 @@ function getCityeventsresult(limit,offset)
 				$("#event_list_cty").append(result);
 				$('#loader_image').hide();
 				offset = limit + offset;
-				$("#loader_message").html('<center><a class="btn btn-sm more_event" onclick="getCityeventsresult('+limit+','+offset+')" role="button">More Events</a></center>').show();
+				$("#loader_message").html('<center><a  class="btn btn-sm more_event" onclick="getCityeventsresult('+limit+','+offset+')" role="button">More Events</a></center>').show();
 			} else {
 				$('#loader_image').hide();
 				$("#loader_message").html('<center><p class="btn btn-sm no_event" style="color:#ffffff;">No more Events</p></center>').show();
@@ -714,7 +714,7 @@ function getCategoryevents()
 				$("#event_list_cat").append(result);
 				$('#loader_image').hide();
 				offset = limit + offset;
-				$("#loader_message").html('<center><a class="btn btn-sm more_event" onclick="getCategoryeventsresult('+limit+','+offset+')" role="button">More Events</a></center>').show();
+				$("#loader_message").html('<center><a  class="btn btn-sm more_event" onclick="getCategoryeventsresult('+limit+','+offset+')" role="button">More Events</a></center>').show();
 			} else {
 				$('#loader_image').hide();
 				$("#loader_message").html('<center><p class="btn btn-sm no_event" style="color:#ffffff;">No more Events</p></center>').show();
@@ -799,7 +799,7 @@ function getCategoryeventsresult(limit,offset)
         $("#event_list_cat").append(result);
         $('#loader_image').hide();
 		offset = limit + offset;
-        $("#loader_message").html('<center><a class="btn btn-sm more_event" onclick="getCategoryeventsresult('+limit+','+offset+')" role="button">More Events</a><center>').show();
+        $("#loader_message").html('<center><a  class="btn btn-sm more_event" onclick="getCategoryeventsresult('+limit+','+offset+')" role="button">More Events</a><center>').show();
 		} else {
         $('#loader_image').hide();
         $("#loader_message").html('<center><p class="btn btn-sm no_event" style="color:#ffffff;">No more Events</p></center>').show();
@@ -892,7 +892,7 @@ function getTypeevents()
 				$("#event_list_type").append(result);
 				$('#loader_image').hide();
 				offset = limit + offset;
-				$("#loader_message").html('<center><a class="btn btn-sm more_event" onclick="getTypeeventsresult('+limit+','+offset+')" role="button">More Events</a></center>').show();
+				$("#loader_message").html('<center><a  class="btn btn-sm more_event" onclick="getTypeeventsresult('+limit+','+offset+')" role="button">More Events</a></center>').show();
 			} else {
 				$('#loader_image').hide();
 				$("#loader_message").html('<center><p class="btn btn-sm no_event" style="color:#ffffff;">No more Events</p></center>').show();
@@ -980,7 +980,7 @@ function getTypeeventsresult(limit,offset)
 			 $("#event_list_type").append(result);
 				$('#loader_image').hide();
 				offset = limit + offset;
-				$("#loader_message").html('<center><a class="btn btn-sm more_event" onclick="getTypeeventsresult('+limit+','+offset+')" role="button">More Events</a></center>').show();
+				$("#loader_message").html('<center><a  class="btn btn-sm more_event" onclick="getTypeeventsresult('+limit+','+offset+')" role="button">More Events</a></center>').show();
 			} else {
 				$('#loader_image').hide();
 				$("#loader_message").html('<center><p class="btn btn-sm no_event" style="color:#ffffff;">No more Events</p></center>').show();
@@ -1069,7 +1069,7 @@ function getSearchevents()
 			// var result="<div class='row'><center><p class='btn btn-sm no_event' style='color:#ffffff;''>No more Events</p></center></div>";
 			// $("#event_list_search").html(result).show();
       $('#loader_image').hide();
-      $("#loader_message").html('<center><p class="btn btn-sm no_event" style="color:#ffffff;">No more Events</p></center>').show();
+      $("#loader_message").html('<center><p class="btn btn-sm no_event" style="color:#ffffff;">Sorry! No results match your search!</p></center>').show();
 		}
 	}
 	});

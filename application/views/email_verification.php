@@ -6,10 +6,10 @@
   text-align: center;
   padding-top: 15%;
 }
-.footer{
-  position: fixed;
-  bottom: 0px;
-  width: 100%;
+.verify-page{
+  padding-top: 100px;
+  padding-bottom: 100px;
+
 }
 </style>
 

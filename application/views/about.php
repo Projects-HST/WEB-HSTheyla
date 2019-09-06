@@ -386,7 +386,7 @@ body{background-color: #fff;}
             <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
               <a href="#" class="pull-right close_popup" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></a>
               <p class="text-center"><img class="organizer_icon " src="<?php echo base_url(); ?>assets/front/images/organizer.png"></p>
-              <p class="become_organiser_text"> <p class="heading" style="color:#000;font-size:22px;">Become A Event Organiser</p>
+              <p class="become_organiser_text"> <p class="heading" style="color:#000;font-size:22px;">Become An Event Organiser</p>
                 <p class="popup_txt">Whether it's an event that fulfills people's needs or the one that gets their adrenalin going, we're here to help you get it done. Click the button to get started!</p>
               </p>
       		        <?php if ($user_id!='') { ?>
