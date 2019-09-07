@@ -11,7 +11,7 @@ foreach($booking_result as $res){
          $("#paytm").submit();
     });
     </script>
-	<form method="post" name="paytm" id='paytm' class="confirm_process" action="https://heylaapp.com/paytm_web/pgRedirect.php">
+	<form method="post" name="paytm" id='paytm' class="confirm_process" action="https://heylaapp.com/testing/paytm_web/pgRedirect.php">
 		<input type="hidden" name="ORDER_ID" value="<?php echo $res->order_id;?>"/>
 		<input type="hidden" name="CUST_ID" value="123456"/>
 		<input type="hidden" name="INDUSTRY_TYPE_ID" value="Retail109"/>
