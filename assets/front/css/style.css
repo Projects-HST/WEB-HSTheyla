@@ -2,7 +2,8 @@
   width: 125px;
 }
 .navbar {
-    border-bottom: 1px solid #dad9d9;
+    /* border-bottom: 1px solid #dad9d9; */
+    box-shadow: 0 6px 12px 0 rgba(0,0,0,.06);
 }
 .navbar-nav li:hover > ul.dropdown-menu {
 display: block;
@@ -738,6 +739,7 @@ hr{
     position: absolute;
     padding: 10px 12px 10px 10px;
     pointer-events: none;
+        z-index: 1000;
 }
 i.fas{
   font-size: 14px;

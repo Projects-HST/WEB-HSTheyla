@@ -15,15 +15,16 @@
           </div>
         </div>
         <div class="col-xs-6 form_box" >
-          <!-- <div class="left-inner-addon">
+          <div class="left-inner-addon">
             <i class="fas fa-lock"></i>
             <input type="password" class="form-control" id="pwd" name="pwd"  placeholder="Password"  required/>
-          </div> -->
-          <div class="left-inner-addon">
+            <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+          </div>
+          <!-- <div class="left-inner-addon">
             <i class="fas fa-lock"></i>
             <input id="password-field" type="password" class="form-control"  name="pwd"  placeholder="Password" value="" >
              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-           </div>
+           </div> -->
         </div>
         <p><a href="<?php echo base_url(); ?>reset" class="forgotpwdtext">Forgot Password?</a></p>
         <div class="col-xs-12" >

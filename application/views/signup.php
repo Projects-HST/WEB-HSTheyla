@@ -31,6 +31,15 @@
                                 <i class="fas fa-lock"></i>
                                 <input id="password-field" type="password" class="form-control"  name="new_password"  placeholder="Password" value="" required>
                                  <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                 <!-- <i class="fas fa-lock"></i> -->
+                                 <!-- <div class="input-group">
+          <input id="password-field" type="password" class="form-control"  name="new_password"  placeholder="Password" value="" required>
+          <span class="input-group-btn">
+            <button class="btn btn-default reveal" type="button"><span class="fa fa-fw fa-eye"></span></button>
+          </span>
+        </div> -->
+
+
                             </div>
                         </div>
                         <p class="legal_text">By signing up, I agree to the <a href="<?php echo base_url(); ?>terms" class="">Terms and Conditions <a/> and <a href="<?php echo base_url(); ?>privacy" class="">Privacy Policy</a></p>
@@ -72,9 +81,7 @@
 
 </div>
 <style>
-.navbar {
-  border-bottom: 1px solid #dad9d9;
-}
+
 .error{
   color: red;
 }
@@ -277,5 +284,12 @@ function statusChangeCallback(response) {
 //         document.getElementById("fb").checked = false
 //     }
 // }
-
+$(".reveal").on('click',function() {
+    var $pwd = $("#password-field");
+    if ($pwd.attr('type') === 'password') {
+        $pwd.attr('type', 'text');
+    } else {
+        $pwd.attr('type', 'password');
+    }
+});
 </script>
