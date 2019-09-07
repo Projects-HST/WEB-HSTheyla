@@ -24,7 +24,7 @@ $paramList["INDUSTRY_TYPE_ID"] = $INDUSTRY_TYPE_ID;
 $paramList["CHANNEL_ID"] = $CHANNEL_ID;
 $paramList["TXN_AMOUNT"] = $TXN_AMOUNT;
 $paramList["WEBSITE"] = PAYTM_MERCHANT_WEBSITE;
-$paramList["CALLBACK_URL"] = "https://heylaapp.com/paytm_web/TxnStatus.php?ORDER_ID=".$ORDER_ID;
+$paramList["CALLBACK_URL"] = "https://heylaapp.com/testing/paytm_web/TxnStatus.php?ORDER_ID=".$ORDER_ID;
 
 // $paramList["CALLBACK_URL"] = "http://localhost/PaytmKit/pgResponse.php";
 // $paramList["MSISDN"] = $MSISDN; //Mobile number of customer
