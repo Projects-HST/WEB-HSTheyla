@@ -165,26 +165,27 @@ Class Mailmodel extends CI_Model
 		$tsql = "SELECT id,template_name,template_content,notification_img FROM email_template WHERE id='$email_temp_id'";
 		$res = $this->db->query($tsql);
 		$result1 = $res->result();
-		foreach($result1 as $rows){ 
+		foreach($result1 as $rows){
 			$temp_id = $rows->id;
 			$subject = $rows->template_name;
 			$cnotes = $rows->template_content;
 			$notification_img = $rows->notification_img;
 			if ($notification_img!=""){
-				$img_url = "https://heylaapp.com/testing/assets/notification/images/".$notification_img;
+				$img_url = base_url()."assets/notification/images/".$notification_img;
 			} else {
-				$img_url = "null";
+				$img_url = " ";
 			}
 		}
-
-		$check_user = "SELECT * FROM push_notification_master WHERE user_id IN ($user_ids)";
+		echo $img_url;
+		echo $check_user = "SELECT * FROM push_notification_master WHERE user_id IN ($user_ids)";
+		exit;
 		$res=$this->db->query($check_user);
 
 		if($res->num_rows()>0){
 			$i = 1;
 			$gcm_key ='';
 			$count = $res->num_rows();
-			
+
 			foreach($res->result() as $rows){
 				$temp_key = $rows->gcm_key;
 				$mobile_type = $rows->mobile_type;
@@ -202,9 +203,9 @@ Class Mailmodel extends CI_Model
 						} else {
 							$gcm_key .= $temp_key;
 						}
-						
+
 						//echo $gcm_key;
-						
+
 						require_once 'assets/notification/Firebase.php';
 						require_once 'assets/notification/Push.php';
 
@@ -217,7 +218,7 @@ Class Mailmodel extends CI_Model
 								$cnotes,
 								$img_url
 							);
-					
+
 			// 			//if the push don't have an image give null in place of image
 						// $push = new Push(
 						// 		'HEYLA',
@@ -236,9 +237,9 @@ Class Mailmodel extends CI_Model
 							 $firebase->send(array($token),$mPushNotification);
 						}
 
-					
+
 				} else {
-					
+
 						if ($i< $count){
             				if ($temp_key!=""){
             					 $gcm_key .= $temp_key.",";
@@ -246,9 +247,9 @@ Class Mailmodel extends CI_Model
             			} else {
             				 $gcm_key .= $temp_key;
             			}
-			
+
 			//echo $gcm_key;
-			
+
 						 $device_token = explode(",", $gcm_key);
 						$passphrase = 'hs123';
 						$loction ='assets/notification/heylaapp.pem';
@@ -287,8 +288,8 @@ Class Mailmodel extends CI_Model
 								"mediaUrl": "'.$img_url.'",
 								"mediaType": "image"
 							}';
-							
-							
+
+
 						/* $body['aps'] = array(
 							'alert' => array (array(
 								'title' => $subject,
@@ -298,7 +299,7 @@ Class Mailmodel extends CI_Model
 						),
 							'attachment-url' => "https://api.buienradar.nl/Image/1.0/RadarMapNL"
 						);
-						 
+
 						$payload = json_encode($body);*/
 
 							//$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $gcm_key)) . pack("n", strlen($payload)) . $payload;
@@ -313,7 +314,7 @@ Class Mailmodel extends CI_Model
 						}
 
 							fclose($fp);
-							$i = $i+1; 
+							$i = $i+1;
 				}
 
 			}
@@ -321,7 +322,7 @@ Class Mailmodel extends CI_Model
             return $data3;
 		}
 
-  
+
 	  /* $sql="SELECT * FROM push_notification_master WHERE user_id IN ($user_ids)";
 	  $result=$this->db->query($sql);
 	  $user_result=$result->result();
@@ -389,10 +390,10 @@ Class Mailmodel extends CI_Model
             			} else {
             				$gcm_key .= $temp_key;
             			}
-			
+
 				//echo $gcm_key;
 
-				
+
     			$device_token = explode(",", $gcm_key);
     			$passphrase = 'hs123';
     		    $loction ='assets/notification/heylaapp.pem';

@@ -215,6 +215,7 @@ class Emailtemplate extends CI_Controller
 			    $user_role=$this->session->userdata('user_role');
 		        if($user_role == 1 || $user_role == 4){
 					$user_ids = $this->input->post('user_id');
+		
 					$email_temp_id=$this->input->post('email_temp_id');
 					//$email = $this->input->post('email');
 					$sms = $this->input->post('sms');
