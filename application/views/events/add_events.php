@@ -316,8 +316,9 @@
          end_time:{required:true },
          eadv_status:{required:true},
          hotspot_sts:{required:true},
-         pcontact_cell:{required:true,digits:true,maxlength:12,minlength:12 },
-         contact_person:{required:true },
+         pcontact_cell:{required:true,digits:true,maxlength:12,minlength:8 },
+         scontact_cell:{required:false,digits:true,maxlength:12,minlength:8},
+         contact_person:{required:true},
          email:{required:true },
          event_status:{required:true },
          txtLatitude:{required:true },
@@ -344,7 +345,15 @@
           required:"This field cannot be empty!",
           digits:"Only numbers",
         },
-        contact_person:"This field cannot be empty!",
+        scontact_cell:{
+          required:"This field cannot be empty!",
+          digits:"Only numbers",
+        },
+        contact_person:{
+          required:"This field cannot be empty!",
+
+        },
+
         email:"This field cannot be empty!",
         event_status:"Select status",
         txtLatitude:"This field cannot be empty!",
