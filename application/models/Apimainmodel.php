@@ -2822,7 +2822,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 					$template_pic = $rows->notification_img;
 
 					if ($template_pic != ""){
-							$template_pic_url = "https://heylaapp.com/testing/assets/notification/images/".$template_pic;
+							$template_pic_url = base_url()."assets/notification/images/".$template_pic;
 					} else {
 						$template_pic_url = "";
 					}
