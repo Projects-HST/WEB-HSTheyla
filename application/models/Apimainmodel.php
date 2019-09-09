@@ -2349,7 +2349,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
     			     	$response = array("status" => "success", "msg" => "View Booking attendees","Bookingattendees"=>$attendees_result);
 
     			}else{
-    			        $response = array("status" => "error", "msg" => "You haven't booked any events!");
+    			        $response = array("status" => "error", "msg" => "You haven't added any attendees!");
     			}
 
 			return $response;
