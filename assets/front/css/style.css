@@ -1313,6 +1313,9 @@ display: none;
 .or-text{
 display: none;
 }
+ul.dropdown-menu.show{
+  margin-left: 0px!important;
+}
 }
 
 .navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .logout-btn:hover{
