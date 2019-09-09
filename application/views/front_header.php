@@ -110,7 +110,7 @@
 
 
                                 <li class="nav-item">
-                                  <p class="welcome_name">Hi <?php echo $rows->name; ?> </p>
+                                  <p class="welcome_name">Hi <?php echo if(!empty($rows->name)){ echo $rows->name; }else{ } ?> </p>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
