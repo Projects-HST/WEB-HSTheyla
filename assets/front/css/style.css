@@ -874,6 +874,9 @@ ul.dropdown-menu.show{
   .or-text{
   display: none;
   }
+  ul.dropdown-menu.show{
+    margin-left: 0px!important;
+  }
 }
 @media (max-width:600px)  {
 .organsier{
@@ -1263,6 +1266,9 @@ a.btn.btn-login.btn-primary.btn-block.review-btn{
       background-color: #000;
 
   }
+  ul.dropdown-menu.show{
+    margin-left: 0px!important;
+  }
   .show_mobile_tab{
     display: block;
   }
@@ -1352,6 +1358,9 @@ and (orientation : landscape) {
 }
 .profile_menu{
   margin-left: 0px;
+}
+ul.dropdown-menu.show{
+  margin-left: 0px!important;
 }
 }
 
