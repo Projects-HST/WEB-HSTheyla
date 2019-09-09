@@ -1322,6 +1322,9 @@ display: none;
 ul.dropdown-menu.show{
   margin-left: 30px!important;
 }
+.profile_menu{
+  margin-left: 0px;
+}
 }
 
 .navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .logout-btn:hover{
