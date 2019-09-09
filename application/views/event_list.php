@@ -817,6 +817,7 @@ function getTypeevents()
 	var limit = 9;
 	var offset = 0;
 
+
 	var city_id_value=ctyname.value;
 	var type_id = event_type.value;
 	var category_id = $("#category").val();

@@ -184,7 +184,7 @@ Class Eventlistmodel extends CI_Model
 	function get_city_events($country_id,$city_id,$category_id,$limit,$offset)
     {
 		$current_date = date("Y-m-d");
-		
+
 		if ($this->session->userdata('id') !=''){
 			$user_id = $this->session->userdata('id');
 		} else {
@@ -205,8 +205,8 @@ Class Eventlistmodel extends CI_Model
 		}else {
 			$category_query = "";
 		}
-	
-		
+
+
 		$sql="SELECT * FROM(SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 			FROM events AS e
 			LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
@@ -314,14 +314,31 @@ Class Eventlistmodel extends CI_Model
 				LEFT JOIN city_master AS ci ON e.event_city = ci.id
 				LEFT JOIN category_master AS ca ON e.category_id = ca.id
 				WHERE $country_query $city_query $category_query e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y' ORDER BY id DESC LIMIT $limit OFFSET $offset";
-		} else {
-				 $sql="SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+		} else if($type_id =='2'){
+			 	 $sql="SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
 				FROM events AS e
 				LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
 				LEFT JOIN country_master AS cy ON e.event_country = cy.id
 				LEFT JOIN city_master AS ci ON e.event_city = ci.id
 				LEFT JOIN category_master AS ca ON e.category_id = ca.id
 				WHERE $country_query $city_query $category_query e.hotspot_status = 'Y' AND e.event_status = 'Y' ORDER BY id DESC LIMIT $limit OFFSET $offset";
+		}else{
+			$sql="SELECT * FROM(SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+					FROM events AS e
+					LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
+					LEFT JOIN country_master AS cy ON e.event_country = cy.id
+					LEFT JOIN city_master AS ci ON e.event_city = ci.id
+					LEFT JOIN category_master AS ca ON e.category_id = ca.id
+					WHERE e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.event_status = 'Y'
+					UNION
+					SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+					FROM events AS e
+					LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
+					LEFT JOIN country_master AS cy ON e.event_country = cy.id
+					LEFT JOIN city_master AS ci ON e.event_city = ci.id
+					LEFT JOIN category_master AS ca ON e.category_id = ca.id
+					WHERE e.hotspot_status = 'Y' AND e.event_status = 'Y') AS event_list ORDER BY id DESC LIMIT $limit OFFSET $offset";
+
 		}
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
@@ -333,7 +350,7 @@ Class Eventlistmodel extends CI_Model
     {
 		$current_date = date("Y-m-d");
 		$srch_term = addslashes($srch_term);
-		
+
 		if ($this->session->userdata('id') !=''){
 			$user_id = $this->session->userdata('id');
 		} else {
@@ -365,7 +382,7 @@ Class Eventlistmodel extends CI_Model
 	function getevent_reviews_user($event_id)
     {
 		$current_date = date("Y-m-d");
-		
+
 		if ($this->session->userdata('id') !=''){
 			$user_id = $this->session->userdata('id');
 		} else {
@@ -482,8 +499,8 @@ Class Eventlistmodel extends CI_Model
 
 	function booking_process($order_id,$event_id,$plan_id,$plan_time_id,$user_id,$number_of_seats,$total_amount,$booking_date)
     {
-		
-		
+
+
 			$sql = "SELECT seat_rate FROM booking_plan WHERE id = '$plan_id' AND event_id = '$event_id'";
 			$resu=$this->db->query($sql);
 			if($resu->num_rows()>0)
@@ -512,14 +529,14 @@ Class Eventlistmodel extends CI_Model
 		 //$total_amount = $samount + $extra;
 
 			//$squery = "SELECT * FROM booking_process A, booking_session B WHERE A.user_id >= '$user_id' AND A.order_id = B.order_id AND B.plan_time_id ='$plan_time_id' AND  B.status = 'Start'";
-			
+
 			$squery = "SELECT * FROM booking_process A, booking_session B WHERE A.user_id = '$user_id' AND A.order_id = B.order_id AND B.plan_time_id ='$plan_time_id' AND  B.status = 'Start'";
 			$resul_set =$this->db->query($squery);
 			if($resul_set->num_rows()==0)
 			{
 				$sql = "SELECT * FROM booking_plan_timing WHERE seat_available >= '$number_of_seats' AND id = '$plan_time_id'";
 				$resu=$this->db->query($sql);
-				
+
 				if($resu->num_rows()>0)
 				{
 					$sQuery = "INSERT INTO booking_process (order_id,event_id,plan_id,plan_time_id,user_id,number_of_seats,total_amount,booking_date) VALUES ('". $order_id . "','". $event_id . "','". $plan_id . "','". $plan_time_id . "','". $user_id . "','". $number_of_seats . "','". $total_amount . "','". $booking_date . "')";
@@ -540,7 +557,7 @@ Class Eventlistmodel extends CI_Model
 					return $res;
 				}
 			}
-			
+
     }
 
 
