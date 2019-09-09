@@ -56,6 +56,7 @@
   margin-top: 200px;
 }
 </style>
+<br>
 <div class=" col-md-12 " id="content">
     <h3 class="dashboard_tab">Change Password</h3>
 </div>
