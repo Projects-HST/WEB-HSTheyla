@@ -123,8 +123,8 @@
         <div class="carousel-item <?php if ($i=='0') echo "active"; ?>" style="background-image: url('<?php echo base_url(); ?>assets/events/slider/<?php echo $res->banner; ?>');background-size: cover;background-position: center;background-repeat: no-repeat;">
               <div class="container">
                 <div class="carousel-caption d-none d-md-block text-left">
-                  <h1><?php echo $res->event_name; ?></h1>
-                  <p><?php echo $disp_banner_desc; ?></p>
+                  <!-- <h1><?php echo $res->event_name; ?></h1>
+                  <p><?php echo $disp_banner_desc; ?></p> -->
                   <p><a class="btn btn-lg btn-primary cursor_link" href="<?php echo base_url(); ?>eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/" role="button">Explore Now</a></p>
                 </div>
               </div>
