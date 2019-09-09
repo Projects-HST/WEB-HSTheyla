@@ -12,7 +12,7 @@
 <link href="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
 <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/front/js/bootstrap3.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script> 
+<script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/additional-methods.min.js"></script>
 
 <script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
@@ -27,6 +27,7 @@
   gtag('js', new Date());
 
   gtag('config', 'UA-92904528-2');
+
 </script>
 </head>
 

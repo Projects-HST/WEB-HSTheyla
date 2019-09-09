@@ -10,6 +10,9 @@
 .booking_history_active{
   border-left: 4px solid #458ecc;
 }
+.footer_section{
+  display: none;
+}
 </style>
 
 <div class="col-sm-12 col-md-12 " id="content">
@@ -72,7 +75,6 @@
   <div class="card-header card-header-title">
     <h3 class="mb-0 booking_attendees_title">Booking Attendees</h3>
   </div>
-
   <div class="card-block" style="padding:20px;">
     <?php if(empty($event_attendees)){ echo "<center>No Attendees found</center>";}else{foreach($event_attendees as $rows){ ?>
             <div class="row" style="padding:5px;">
