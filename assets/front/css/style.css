@@ -76,13 +76,16 @@ body{
 .organizer_icon{
   margin-top: 40px;
 }
+.foot_logo{
+  width: 140px;
+}
 hr{
   border-top: 1px solid #fff;
   width:100%;
 }
 .footer_bottom_links li a{
   color: #fff;
-  font-size: 12px;
+  font-size: 14px;
   text-align: left;
 }
 .no_banner{
@@ -1385,7 +1388,7 @@ and (orientation : landscape) {
     border:1px solid #ddd;
 }
 ul.dropdown-menu.show{
-  margin-left: -100px;
+  margin-left: 0px;
 }
 .nav-item{
   margin-left: 10px;

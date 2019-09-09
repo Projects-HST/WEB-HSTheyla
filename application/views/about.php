@@ -136,7 +136,7 @@ body{background-color: #fff;}
 
                    }else{ ?>
                      <li class="nav-item">
-                        <a class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become An Organizer</a>
+                        <a href="" class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become An Organizer</a>
                     </li>
                 <?php   }?>
 
@@ -373,7 +373,12 @@ body{background-color: #fff;}
               </ul>
           </div>
           <div class="col-lg-4">
-            <p class=" text-center foot_copyrights">Built with <i class="fa fa-heart" aria-hidden="true" style="    width: 10px;"></i> by <a href="https://happysanztech.com" target="_blank" style="text-decoration:none;"><b style="color:#fff;font-size:20px;">Happy Sanz Tech</b></a></p>
+            <p class=" text-center foot_copyrights">Built with <i class="fa fa-heart" aria-hidden="true" style="    width: 10px;"></i> by
+              <a href="https://happysanztech.com" target="_blank" style="text-decoration:none;">
+                <!-- <b style="color:#fff;font-size:20px;">Happy Sanz Tech</b> -->
+                <img src="<?php  echo base_url(); ?>assets/happy-logo.png" class="img-responsive foot_logo">
+              </a>
+            </p>
           </div>
             </div>
 
