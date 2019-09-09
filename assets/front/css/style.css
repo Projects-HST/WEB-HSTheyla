@@ -864,20 +864,6 @@ ul.dropdown-menu.show{
 }
 }
 
-@media (max-width:736px)  {
-  .profile_menu{
-    margin-left: 0px;
-  }
-  .show_mobile_tab{
-    display: block;
-  }
-  .or-text{
-  display: none;
-  }
-  ul.dropdown-menu.show{
-    margin-left: 0px!important;
-  }
-}
 @media (max-width:600px)  {
 .organsier{
   padding-top: 0px;
@@ -1261,51 +1247,7 @@ a.btn.btn-login.btn-primary.btn-block.review-btn{
   padding: 10px;
 }
 /* Ipad */
-@media (min-width: 768px) and (max-width: 1024px){
-  .booking-section{
-      background-color: #000;
 
-  }
-  ul.dropdown-menu.show{
-    margin-left: 30px!important;
-  }
-  .show_mobile_tab{
-    display: block;
-  }
-  .field-icon{
-    margin-top: -50px;
-  }
-  .carousel-item{
-    height:350px;
-  }
-  .profile_menu{
-    margin-left: 0px;
-  }
-
-  .event-banner-img{
-    height: 234px;
-    width: 100%;
-  }
-  .event_fee{
-    margin-top: 35px;
-  }
-.or-text{
-display: none;
-}
-.socialmedia-tab{
-    padding-top: 30px;
-      text-align: center;
-}
-
-.formsignin{
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
-.form_search{
-  margin-left: 0px;
-  margin-right: 0px;
-}
-}
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
 .social-img{
   width: 185px;
@@ -1322,9 +1264,7 @@ display: none;
 ul.dropdown-menu.show{
   margin-left: 30px!important;
 }
-.profile_menu{
-  margin-left: 0px;
-}
+
 }
 
 .navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .logout-btn:hover{
@@ -1359,11 +1299,9 @@ and (orientation : landscape) {
 .show_mobile_tab{
   display: block;
 }
+
 .profile_menu{
   margin-left: 0px;
-}
-ul.dropdown-menu.show{
-  margin-left: 0px!important;
 }
 }
 
@@ -1402,9 +1340,7 @@ ul.dropdown-menu.show{
     border-radius:30px;
     border:1px solid #ddd;
 }
-ul.dropdown-menu.show{
-  margin-left: 0px;
-}
+
 .nav-item{
   margin-left: 10px;
   margin-top: 0px;
@@ -1488,4 +1424,59 @@ ul.dropdown-menu.show{
 }
 .faq_page{
   margin-top: 150px;
+}
+
+@media (min-width: 768px) and (max-width: 1024px){
+  .booking-section{
+      background-color: #000;
+
+  }
+  .show_mobile_tab{
+    display: block;
+  }
+  .field-icon{
+    margin-top: -50px;
+  }
+  .carousel-item{
+    height:350px;
+  }
+  .profile_menu{
+    margin-left: -60px;
+  }
+
+  .event-banner-img{
+    height: 234px;
+    width: 100%;
+  }
+  .event_fee{
+    margin-top: 35px;
+  }
+  .or-text{
+  display: none;
+  }
+.socialmedia-tab{
+    padding-top: 30px;
+      text-align: center;
+}
+.formsignin{
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.form_search{
+  margin-left: 0px;
+  margin-right: 0px;
+}
+}
+
+@media (max-width:768px)  {
+  .profile_menu{
+    margin-left: 0px;
+  }
+  .show_mobile_tab{
+    display: block;
+  }
+  .or-text{
+  display: none;
+  }
+
 }
