@@ -101,7 +101,7 @@
                 </li>
 
                 <li class="has_sub" id="advertisement">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-calendar-clock"></i> <span> Advertisement </span> </a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i><span> Advertisement </span> </a>
                     <ul class="list-unstyled">
                         <li id="plan"><a href="<?php echo base_url();?>advertisement/home"> Add Plan</a></li>
                         <li id="list"><a href="<?php echo base_url();?>advertisement/view_adv_plan">Banner Advertisement</a></li>
@@ -146,7 +146,7 @@
                 </li>
 
                 <li class="has_sub" id="track">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-users" aria-hidden="true"></i>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-file-text-o" aria-hidden="true"></i></i>
                 <span> Events Record</span></a>
                     <ul class="list-unstyled">
 
