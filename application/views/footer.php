@@ -1,7 +1,7 @@
 
         <footer class="footer">
             <!-- ©<?php echo date("Y"); ?>   -->
-            Developed by  <span><a href="http://happysanztech.com/" target="_blank"><img src="<?php echo base_url(); ?>assets/happy_logo_blue .png" style="width:100px;"></a></span>
+            Developed by  <span><a href="http://happysanztech.com/" target="_blank"><img src="<?php echo base_url(); ?>assets/happy_logo_blue.png" style="width:100px;"></a></span>
         </footer>
     </div>
     <!-- End Right content here -->
