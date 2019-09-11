@@ -1,5 +1,5 @@
-<?php  $user_id = $this->session->userdata('id');
-?><style>
+<?php  $user_id = $this->session->userdata('id');?>
+<style>
 .navbar {
   border-bottom: 1px solid #dad9d9;
 }
@@ -7,16 +7,17 @@
 hr{
   border-color: #fff;
 }
+
 .total_bor{
   opacity: 0.5;
 }
-
 </style>
+
 <div class="container-fluid">
     <div class="row order_page">
       <?php
       if(empty($booking_process)){ ?>
-      	<div class="col-md-12 text-center" style="margin-top:100px;"><h3>Something went wrong! Please try again later.</h3></div>
+			<div class="col-md-12 text-center" style="margin-top:100px;"><h3>Something went wrong! Please try again later.</h3></div>
       <?php } else {
 
       		foreach($booking_process as $res){
@@ -128,9 +129,9 @@ hr{
 
 <script type="text/javascript">
 
-	window.onbeforeunload = function() {
-	  return "Data will be lost if you leave the page, are you sure?";
-	};
+	//window.onbeforeunload = function() {
+	//  return "Data will be lost if you leave the page, are you sure?";
+	//};
 
     var hour = 0
     var min = 5;

@@ -536,8 +536,16 @@ foreach($event_details as $res){
 				var seat_available = dataArray[i].seat_available;
 				var seat_rate = dataArray[i].seat_rate;
 			};
-			var available_seats = (parseInt(seat_available)+1);
-			for (var i = 1; i < available_seats; i++){
+			
+				var available_seats = (parseInt(seat_available)+1);
+			
+			if (available_seats <= 10){
+				var select_seats = available_seats;
+			}else {
+				var select_seats = 11;
+			}
+				
+			for (var i = 1; i < select_seats; i++){
 				result +="<option value='"+i+"'>"+i+"</option>";
 			};
 			result +="</select><input type='hidden' id='booking_date' name='booking_date' value='"+show_date+"' /><input type='hidden' id='event_id' name='event_id' value='"+event_id+"' /><input type='hidden' name='plan_id' id='plan_id' value='"+plan_id+"' /><input type='hidden' id='plan_name' value='"+plan_name+"' /><input type='hidden' name='plantime_id' id='plantime_id' value='"+plantime_id+"' /><input type='hidden' name='seat_rate' id='seat_rate' value='"+seat_rate+"' />";

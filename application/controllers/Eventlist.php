@@ -215,7 +215,7 @@ class Eventlist extends CI_Controller
 			$booking_date = $this->input->post('booking_date');
 			$datas['booking_process'] = $this->eventlistmodel->booking_process($order_id,$event_id,$plan_id,$plan_time_id,$user_id,$number_of_seats,$total_amount,$booking_date);
 
-    	$this->load->view('front_header');
+			$this->load->view('front_header');
 			$this->load->view('booking_process_new', $datas);
 			$this->load->view('front_footer');
 		}else{
