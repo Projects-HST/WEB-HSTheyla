@@ -350,8 +350,8 @@ body{background-color: #fff;}
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
               <p class="footer_heading">Download Heyla</p>
               <ul class="fnt-footer social_follow">
-                <li class=""><a href="https://itunes.apple.com/us/app/heyla/id1438601804?ls=1&mt=8" target="_blank"><img class="store_img" src="<?php echo base_url(); ?>assets/front/images/app.png"></a></li>
-                  <br>
+                <li class=""><a href="https://apps.apple.com/us/app/heyla/id1438601804?ls=1" target="_blank"><img class="store_img" src="<?php echo base_url(); ?>assets/front/images/app.png"></a></li>
+                <br>
                 <li class=""><a href="https://play.google.com/store/apps/details?id=com.palprotech.heylaapp" target="_blank"><img class="store_img"  src="<?php echo base_url(); ?>assets/front/images/play.png"></a></li>
 
               </ul>
