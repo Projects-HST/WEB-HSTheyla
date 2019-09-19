@@ -4,6 +4,7 @@ Class Mailmodel extends CI_Model
 	public function __construct()
 	{
 	  parent::__construct();
+	  $this->load->helper('url');
 	}
 
 
@@ -171,7 +172,7 @@ Class Mailmodel extends CI_Model
 			$cnotes = $rows->template_content;
 			$notification_img = $rows->notification_img;
 			if ($notification_img!=""){
-				$img_url = "./assets/notification/images/".$notification_img;
+				$img_url = base_url()."assets/notification/images/".$notification_img;
 			} else {
 				$img_url = "null";
 			}
