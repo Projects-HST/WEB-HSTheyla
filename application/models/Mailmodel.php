@@ -165,13 +165,13 @@ Class Mailmodel extends CI_Model
 		$tsql = "SELECT id,template_name,template_content,notification_img FROM email_template WHERE id='$email_temp_id'";
 		$res = $this->db->query($tsql);
 		$result1 = $res->result();
-		foreach($result1 as $rows){ 
+		foreach($result1 as $rows){
 			$temp_id = $rows->id;
 			$subject = $rows->template_name;
 			$cnotes = $rows->template_content;
 			$notification_img = $rows->notification_img;
 			if ($notification_img!=""){
-				$img_url = "https://heylaapp.com/testing/assets/notification/images/".$notification_img;
+				$img_url = "./assets/notification/images/".$notification_img;
 			} else {
 				$img_url = "null";
 			}
@@ -184,7 +184,7 @@ Class Mailmodel extends CI_Model
 			$i = 1;
 			$gcm_key ='';
 			$count = $res->num_rows();
-			
+
 			foreach($res->result() as $rows){
 				$temp_key = $rows->gcm_key;
 				$mobile_type = $rows->mobile_type;
@@ -202,9 +202,9 @@ Class Mailmodel extends CI_Model
 						} else {
 							$gcm_key .= $temp_key;
 						}
-						
+
 						//echo $gcm_key;
-						
+
 						require_once 'assets/notification/Firebase.php';
 						require_once 'assets/notification/Push.php';
 
@@ -217,13 +217,6 @@ Class Mailmodel extends CI_Model
 								$cnotes,
 								$img_url
 							);
-					
-			// 			//if the push don't have an image give null in place of image
-						// $push = new Push(
-						// 		'HEYLA',
-						// 		'Hi Testing from maran',
-						// 		null
-						// 	);
 
 						//getting the push from push object
 						$mPushNotification = $push->getPush();
@@ -236,9 +229,9 @@ Class Mailmodel extends CI_Model
 							 $firebase->send(array($token),$mPushNotification);
 						}
 
-					
+
 				} else {
-					
+
 						if ($i< $count){
             				if ($temp_key!=""){
             					 $gcm_key .= $temp_key.",";
@@ -246,9 +239,7 @@ Class Mailmodel extends CI_Model
             			} else {
             				 $gcm_key .= $temp_key;
             			}
-			
-			//echo $gcm_key;
-			
+
 						 $device_token = explode(",", $gcm_key);
 						$passphrase = 'hs123';
 						$loction ='assets/notification/heylaapp.pem';
@@ -264,18 +255,6 @@ Class Mailmodel extends CI_Model
 							exit("Failed to connect: $err $errstr" . PHP_EOL);
 
 
-							/* {
-								"aps": {
-									"alert": {
-										"body": "Het gaat over 15 minuten regenen in Alkmaar",
-										"title": "Buienalert"
-									},
-									"mutable-content": 1
-								},
-								"mediaUrl": "https://api.buienradar.nl/Image/1.0/RadarMapNL",
-								"mediaType": "image"
-							} */
-
 							$payload = '{
 								"aps": {
 									"alert": {
@@ -287,25 +266,8 @@ Class Mailmodel extends CI_Model
 								"mediaUrl": "'.$img_url.'",
 								"mediaType": "image"
 							}';
-							
-							
-						/* $body['aps'] = array(
-							'alert' => array (array(
-								'title' => $subject,
-								'body' => $cnotes
-							),
-							'mutable-content' => 1
-						),
-							'attachment-url' => "https://api.buienradar.nl/Image/1.0/RadarMapNL"
-						);
-						 
-						$payload = json_encode($body);*/
 
-							//$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $gcm_key)) . pack("n", strlen($payload)) . $payload;
-							//$result = fwrite($fp, $msg, strlen($msg));
 
-//echo $payload;
-//exit;
 						foreach($device_token as $token) {
 							// Build the binary notification
 							$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $token)) . pack("n", strlen($payload)) . $payload;
@@ -313,129 +275,13 @@ Class Mailmodel extends CI_Model
 						}
 
 							fclose($fp);
-							$i = $i+1; 
+							$i = $i+1;
 				}
 
 			}
 			$data3= array("status"=>"Notify");
             return $data3;
 		}
-
-  
-	  /* $sql="SELECT * FROM push_notification_master WHERE user_id IN ($user_ids)";
-	  $result=$this->db->query($sql);
-	  $user_result=$result->result();
-	  $count = $result->num_rows();
-
-	  if($count>0) {
-	       $i = 1;
-	       $gcm_key ='';
-
-		  foreach($user_result as $row){
-			 //echo $temp_key = $row->gcm_key;
-			  $mobile_type = $row->mobile_type;
-			  $user_id = $row->user_id;
-
-    			if ($mobile_type =='1'){
-
-                        if ($i< $count){
-            				if ($temp_key!=""){
-            					$gcm_key .= $temp_key.",";
-            				}
-            			} else {
-            				$gcm_key .= $temp_key;
-            			}
-
-            	echo $gcm_key;
-
-
-    				require_once 'assets/notification/Firebase.php';
-    				require_once 'assets/notification/Push.php';
-
-    				$device_token = explode(",", $gcm_key);
-    				$push = null;
-
-    	//        //first check if the push has an image with it
-    				$push = new Push(
-    						$subject,
-    						$cnotes,
-    						'http://heylaapp.com/notification/images/events.jpg'
-    					);
-
-    	// 			//if the push don't have an image give null in place of image
-    				// $push = new Push(
-    				// 		'HEYLA',
-    				// 		'Hi Testing from maran',
-    				// 		null
-    				// 	);
-
-    				//getting the push from push object
-    				$mPushNotification = $push->getPush();
-
-    				//creating firebase class object
-    				$firebase = new Firebase();
-    				//$firebase->send($gcm_key,$mPushNotification);
-
-    			foreach($device_token as $token) {
-    				 $firebase->send(array($token),$mPushNotification);
-    			}
-
-    		} else {
-
-                if ($i< $count){
-            				if ($temp_key!=""){
-            					$gcm_key .= $temp_key.",";
-            				}
-            			} else {
-            				$gcm_key .= $temp_key;
-            			}
-			
-				//echo $gcm_key;
-
-				
-    			$device_token = explode(",", $gcm_key);
-    			$passphrase = 'hs123';
-    		    $loction ='assets/notification/heylaapp.pem';
-
-    			$ctx = stream_context_create();
-    			stream_context_set_option($ctx, 'ssl', 'local_cert', $loction);
-    			stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);
-
-    			// Open a connection to the APNS server
-    			$fp = stream_socket_client('ssl://gateway.sandbox.push.apple.com:2195', $err, $errstr, 60, STREAM_CLIENT_CONNECT|STREAM_CLIENT_PERSISTENT, $ctx);
-
-    			if (!$fp)
-    				exit("Failed to connect: $err $errstr" . PHP_EOL);
-
-    			$body['aps'] = array(
-    				'alert' => array(
-    					'body' => $subject,
-    					'action-loc-key' => 'Heyla App',
-    				),
-    				'badge' => 2,
-    				'sound' => 'assets/notification/oven.caf',
-    				);
-
-    			$payload = json_encode($body);
-
-    				$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $gcm_key)) . pack("n", strlen($payload)) . $payload;
-            		//$result = fwrite($fp, $msg, strlen($msg));
-
-    			foreach($device_token as $token) {
-
-    				// Build the binary notification
-        			$msg = chr(0) . pack("n", 32) . pack("H*", str_replace(" ", "", $token)) . pack("n", strlen($payload)) . $payload;
-            		$result = fwrite($fp, $msg, strlen($msg));
-    			}
-
-    				fclose($fp);
-    				$i = $i+1;
-    		}
-
-		}
-			 $data3= array("status"=>"Notify");
-            return $data3;
-	  } */
 
   }
 
