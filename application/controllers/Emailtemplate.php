@@ -44,16 +44,16 @@ class Emailtemplate extends CI_Controller
 	   {
 		    $tempname=$this->db->escape_str($this->input->post('templatename'));
 		    $tempdetails=$this->db->escape_str($this->input->post('templatecontent'));
-				$pic = $_FILES["notification_img"]["name"];
+			$pic = $_FILES["notification_img"]["name"];
 				if(empty($pic)){
-					$img=' ';
+					$img='';
 				}else{
-				$temp = pathinfo($pic, PATHINFO_EXTENSION);
-				$img = round(microtime(true)) . '.' . $temp;
-				$uploaddir = 'assets/notification/images/';
-				$profilepic = $uploaddir.$img;
-				move_uploaded_file($_FILES['notification_img']['tmp_name'], $profilepic);
-			}
+					$temp = pathinfo($pic, PATHINFO_EXTENSION);
+					$img = round(microtime(true)) . '.' . $temp;
+					$uploaddir = 'assets/notification/images/';
+					$profilepic = $uploaddir.$img;
+					move_uploaded_file($_FILES['notification_img']['tmp_name'], $profilepic);
+				}
 
 		    $datas = $this->emailtemplatemodel->add_templates_details($tempname,$tempdetails,$img,$user_id);
 	        $sta=$datas['status'];

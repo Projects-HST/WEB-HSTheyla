@@ -136,27 +136,25 @@
 					$sbooking_date = date("d-m-Y", strtotime($booking_date));
 					$transaction_date = date("d-m-Y H:i:s"); 
 					$subject = "Heyla App Ticket Booking";
+					
+					$email_message ='<html>
+									 <body>
+										<p>Hi,</p>
+										<p>Bravo!</p>
+										<p>Your booking for '.$event_name.' has been confirmed. </p>
+										<p>Booking ID : '.$order_id.'</p>
+										<p>Event name : '.$event_name.'</p>
+										<p>Ticket : '.$plan_name.'</p>
+										<p>Seats : '.$number_of_seats.'</p>
+										<p>Event Date and time : '.$sbooking_date.' '.$show_time.'</p>
+										<p>Transaction date and time : '.$transaction_date.'</p>
+										<p>Find more details on  <a href="https://goo.gl/A6DGuZ">login</a></p>
+										<p>We wish you to make Cheerful Memories with each event!<br>Or<br>We wish you for an event that is memorable and enjoyable!</p>
+										<p>Regards,<br>Team Heyla</p>
+									 </body>
+									 </html>';
 /*
-							Hi <Name>, 
-								Bravo!
-								Your booking for <Event name> has been confirmed. 
-								Booking ID – 9462961-116
-								Event name:
-								Ticket: Platinum
-								Seats: <Seat Numbers>
-								Admit: 1 for Clowns, Puppets and more
-								Event Date and time : 28/04/2019 at 05:30 P.M.
-								Transaction date and time: 25/03/2019 at 04:42:04
-								Find more details on 
-								<link>
 
-								We wish you to make Cheerful Memories with each event!
-								Or
-								We wish you for an event that is memorable and enjoyable!
-
-								Regards,
-								Team Heyla
-*/
 					$email_message ='<html>
 									 <body>
 										<p>Order Id : '.$order_id.'</p>
@@ -168,7 +166,7 @@
 										<p>More detail please <a href="https://goo.gl/A6DGuZ">login</a></p>
 									 </body>
 									 </html>';
-					
+*/
 					
 					$Message = "Hi Customer, Booking Id : ".$order_id. "Seats : ".$plan_name."," .$number_of_seats." for ".$event_name." on ".$sbooking_date." ".$show_time.". Transaction Date : ".$transaction_date." More detail https://goo.gl/A6DGuZ";
 				  //Your authentication key
