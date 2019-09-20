@@ -191,8 +191,14 @@ Class Mailmodel extends CI_Model
 				$mobile_type = $rows->mobile_type;
 				$user_id = $rows->user_id;
 
+				
+				$sQuery = "SELECT * FROM user_details WHERE user_id = '$user_id' AND newsletter_status = 'Y'";
+				$res=$this->db->query($check_user);
+				if($res->num_rows()>0){
+				
 				$query ="INSERT INTO notification_history(template_id,user_master_id,view_status,created_at) VALUES('$temp_id','$user_id','0',NOW())";
 				$resultset=$this->db->query($query);
+
 
 
     			if ($mobile_type =='1'){
@@ -278,6 +284,9 @@ Class Mailmodel extends CI_Model
 							fclose($fp);
 							$i = $i+1;
 				}
+				
+				}
+				
 
 			}
 			$data3= array("status"=>"Notify");
