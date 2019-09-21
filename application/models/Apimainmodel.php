@@ -197,7 +197,8 @@ class Apimainmodel extends CI_Model {
 	    $state_name = '';
 	    $city_name = '';
 
-		$sql = "SELECT * FROM user_master WHERE user_name ='".$username."' AND password = md5('".$password."') AND mobile_verify ='Y' AND email_verify ='Y' AND status='Y'";
+		//$sql = "SELECT * FROM user_master WHERE user_name ='".$username."' AND password = md5('".$password."') AND mobile_verify ='Y' AND email_verify ='Y' AND status='Y'";
+		$sql = "SELECT * FROM user_master WHERE user_name ='".$username."' AND password = md5('".$password."') AND email_verify ='Y' AND status='Y' AND email_verify ='Y'
 		$user_result = $this->db->query($sql);
 		$ress = $user_result->result();
 		if($user_result->num_rows()>0)
