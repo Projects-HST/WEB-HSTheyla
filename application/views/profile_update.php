@@ -98,9 +98,11 @@ input[type="file"] {
           <div class="form-group row">
               <label class="col-md-3 col-form-label form-control-label">Gender</label>
               <div class="col-md-6">
-                <select class="col-form-label" name="gender" id="gender">
+                <select class="col-form-label form-control" name="gender" id="gender">
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                  <option value="Rather not say">Rather not say</option>
                 </select>
                 <script>$('#gender').val('<?php echo $rows->gender; ?>');</script>
 
@@ -133,14 +135,22 @@ input[type="file"] {
       <div class="form-group row">
           <label class="col-md-3 col-form-label form-control-label">Occupation</label>
           <div class="col-md-6">
-            <input class="form-control" type="text" name="occupation" value="<?php echo $rows->occupation; ?>">
+            <!-- <input class="form-control" type="text" name="occupation" value="<?php echo $rows->occupation; ?>"> -->
+            <select class="col-form-label form-control" name="occupation" id="occupation">
+              <option value="Student">Student</option>
+              <option value="Employed">Employed</option>
+              <option value="Self Employed/Business">Self Employed/Business</option>
+              <option value="Home Maker">Home Maker</option>
+              <option value="Other">Other</option>
+            </select>
+            <script>$('#occupation').val('<?php echo $rows->occupation; ?>');</script>
 
           </div>
       </div>
       <div class="form-group row">
           <label class="col-md-3 col-form-label form-control-label">Newsletter Subscription</label>
           <div class="col-md-6">
-            <select class="col-form-label" name="newsletter_status" id="newsletter_status">
+            <select class="col-form-label form-control" name="newsletter_status" id="newsletter_status">
               <option value="Y">Yes</option>
               <option value="N">No</option>
             </select>

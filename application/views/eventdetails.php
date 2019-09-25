@@ -357,7 +357,7 @@ foreach($event_details as $res){
        </div>
        <div class="form-group row">
          <div class="col-lg-12">
-           <textarea type="text" name="message" id="message"  class="form-control" maxlength="240" placeholder="Max 240 Characters"><?php echo $comments; ?></textarea>
+           <textarea type="text" name="message" id="message"  class="form-control" maxlength="250" placeholder="Max 250 Characters"><?php echo $comments; ?></textarea>
          </div>
        </div>
        <div class="form-group row">
@@ -387,7 +387,7 @@ foreach($event_details as $res){
        </div>
        <div class="form-group row">
          <div class="col-lg-12">
-           <textarea type="text" name="message" id="message" maxlength="240" placeholder="Max 240 Characters" class="form-control"></textarea>
+           <textarea type="text" name="message" id="message" maxlength="250" placeholder="Max 250 Characters" class="form-control"></textarea>
          </div>
        </div>
        <div class="form-group row">
@@ -536,15 +536,15 @@ foreach($event_details as $res){
 				var seat_available = dataArray[i].seat_available;
 				var seat_rate = dataArray[i].seat_rate;
 			};
-			
+
 				var available_seats = (parseInt(seat_available)+1);
-			
+
 			if (available_seats <= 10){
 				var select_seats = available_seats;
 			}else {
 				var select_seats = 11;
 			}
-				
+
 			for (var i = 1; i < select_seats; i++){
 				result +="<option value='"+i+"'>"+i+"</option>";
 			};

@@ -137,7 +137,7 @@
                     </li>
                     <li class="side-menu">
                         <a href="<?php echo base_url(); ?>bookedevents" class="booked_events_active">
-                          <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/booked_events.png"></span>
+                          <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/booking_details.png"></span>
                           <span class="sidebar-title">Booking Details</span>
                         </a>
                     </li>

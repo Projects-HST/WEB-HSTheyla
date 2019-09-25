@@ -19,13 +19,13 @@ public function __construct()
 	  	return $res;
     }
 
-    function insert_category($categoryname,$categorypic1,$disp_order,$status,$user_id,$user_role)
+    function insert_category($categoryname,$categorypic1,$disp_order,$status,$user_id,$user_role,$pic_cat)
     {
          $check_category="SELECT * FROM category_master WHERE category_name='$categoryname'";
          $result=$this->db->query($check_category);
          if($result->num_rows()==0)
          {
-           $query="INSERT INTO category_master(category_name,category_image,order_by,status,created_by,created_at) VALUES ('$categoryname','$categorypic1','$disp_order','$status','$user_id',NOW())";
+           $query="INSERT INTO category_master(category_name,category_image,category_banner,order_by,status,created_by,created_at) VALUES ('$categoryname','$categorypic1','$pic_cat','$disp_order','$status','$user_id',NOW())";
            $resultset=$this->db->query($query);
            $lastInsertId = $this->db->insert_id();
 
@@ -49,9 +49,9 @@ public function __construct()
        return $res;
     }
 
-    function update_category_details($category_id,$categorypic1,$disp_order,$old_disp_order,$status,$user_id,$user_role)
+    function update_category_details($category_id,$categorypic1,$disp_order,$old_disp_order,$status,$user_id,$user_role,$pic_cat)
     {
-      $uquery="UPDATE category_master SET category_image='$categorypic1',order_by='$disp_order',status='$status',updated_by='$user_id',updated_at=NOW() WHERE id='$category_id'";
+      $uquery="UPDATE category_master SET category_image='$categorypic1',category_banner='$pic_cat',order_by='$disp_order',status='$status',updated_by='$user_id',updated_at=NOW() WHERE id='$category_id'";
       $uresultset=$this->db->query($uquery);
 
       if($old_disp_order > $disp_order)

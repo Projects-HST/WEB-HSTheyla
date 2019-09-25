@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta name="theme-color" content="#478ECC" />
+    <link rel="icon" href="<?php echo base_url(); ?>assets/fav_icon.png" type="image/gif" sizes="32x32">
     <title><?php if(isset($meta_title)){echo $meta_title;}else{echo "Heyla";}?> </title>
     <meta name="description" content="<?php if(isset($meta_description)){echo $meta_description;}else{echo "Heyla";}?>"/>
     <link href="<?php echo base_url(); ?>assets/front/css/bootstrap.min.css" rel="stylesheet">
@@ -215,8 +216,7 @@ body{background-color: #fff;}
         <div class="about_us container" style="">
             <center><h3>About Heyla</h3></center>
             <p class="whatsheyla" id="services">
-              Heyla is an encyclopaedia of “What, When and Where” for the world of events, from entertainment, shopping, sports, dining, travelling, business, and many more. You can organize events or attend them, or choose to do both.</p>
-            <p class="whatsheyla">Heyla acts as a connecting link between event organizers and event seekers. It is your gateway in your pocket to the world outside, waiting to be explored, shared and enjoyed. Know what buzzing events are happening in Singapore today.</p>
+              Heyla is an encyclopaedia of “What, When and Where” for the world of events, from entertainment, shopping, sports, dining, travelling, business, and many more. You can organize events or attend them, or choose to do both.Heyla acts as a connecting link between event organizers and event seekers. It is your gateway in your pocket to the world outside, waiting to be explored, shared and enjoyed. Know what buzzing events are happening in Singapore today.</p>
         </div>
     </div>
       <div class="container-fluid no_padding about_us_content">
@@ -226,11 +226,7 @@ body{background-color: #fff;}
     <h3>For organizers</h3>
     <p class="whatsheyla">By becoming an event organizer, you can create or organize any type of event such as entertainment, business meets, family gatherings, travellers, casual or formal meet-ups, and many more. The organizer's imagination is the limit. Get in touch with us  to know more.</p>
     <h3>For users</h3>
-    <p class="whatsheyla">Whether you’re an individual or with a group of buddies, local or travelling, Heyla satisfies your event hunting like never before. <br>
-    You can find events of your choice within a few clicks. Whether it’s nearby or around the city-state you can expect events that keep you engaged at any given time.<br>
-     You can take a look at our ‘Map View’ of the events, to choose them location wise. Make sure to check out ‘Hotspots’ or ‘Popular’ events to explore the most happening places.<br>
-    But the best way to know is by simply exploring the app.<br>
-    Download the app now to discover the world of entertainment, knowledge and networking.
+    <p class="whatsheyla">Whether you’re an individual or with a group of buddies, local or travelling, Heyla satisfies your event hunting like never before.You can find events of your choice within a few clicks. Whether it’s nearby or around the city-state you can expect events that keep you engaged at any given time.You can take a look at our ‘Map View’ of the events, to choose them location wise. Make sure to check out ‘Hotspots’ or ‘Popular’ events to explore the most happening places.But the best way to know is by simply exploring the app.Download the app now to discover the world of entertainment, knowledge and networking.
     </p>
     </div>
     </div>
@@ -334,7 +330,7 @@ body{background-color: #fff;}
               <p class="footer_heading">Get In Touch</p>
               <ul class="fnt-footer contact_text">
                 <li class=""><i class="fa fa-envelope" aria-hidden="true"></i><span> info@heylaapp.com </span></li>
-                <li class=""><i class="fa fa-phone" aria-hidden="true"></i>  +65 123-1234-1</li>
+                <li class=""><i class="fa fa-phone" aria-hidden="true"></i>  +65 9887 2345</li>
               </ul>
               <p class="footer_heading">Follow  Us On</p>
               <ul class="fnt-footer social_follow">

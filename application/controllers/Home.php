@@ -6,13 +6,16 @@ class Home extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
+		$this->load->helper('cookie');
 		$this->load->model('loginmodel');
 		$this->load->model('apimainmodel');
 	//	$this->load->model('facebook');
+	  $this->load->model('smsmodel');
 		$this->load->model('eventlistmodel');
 		$this->load->model('organizermodel');
 		$this->load->model('organizerbookingmodel');
 		$this->load->helper('url');
+
 		$this->load->library('session');
 
 	}
@@ -685,8 +688,8 @@ class Home extends CI_Controller {
 
 
 		public function reset_password(){
-			$email=$this->input->post('email');
-			$data=$this->loginmodel->reset_password($email);
+			$mobile_number=$this->input->post('mobile_number');
+			$data=$this->loginmodel->reset_password($mobile_number);
 		}
 		public function mail(){
 			$name=$this->db->escape_str($this->input->post('name'));
@@ -758,6 +761,7 @@ class Home extends CI_Controller {
 		}
 
 		public function reset(){
+
 			  $email_token = $this->uri->segment(3);
 				$datas['res']=$email_token;
 				$this->load->view('front_header');
@@ -767,7 +771,7 @@ class Home extends CI_Controller {
 		}
 
 		public function update_password(){
-			$email_token=$this->input->post('email_token');
+			$email_token=$this->input->post('email_token');		
 			$new_password=$this->input->post('new_password');
 			$retype_password=$this->input->post('retype_password');
 			$data=$this->loginmodel->update_password($email_token,$new_password,$retype_password);
@@ -882,11 +886,24 @@ class Home extends CI_Controller {
 
 		public function create_profile(){
 			$name=$this->input->post('name');
-			$mobile=$this->input->post('mobile');
+		  $mobile=$this->input->post('mobile');
 			$email=$this->input->post('email');
 			$password=$this->input->post('new_password');
 			$datas['res']=$this->loginmodel->create_profile($name,$mobile,$email,$password);
 
+		}
+		public function mobile_verify_otp(){
+		 $mobile_otp=$this->input->post('mobile_otp');
+		 $mobile=$this->input->post('mobile');
+		 $data['res']=$this->loginmodel->mobile_verify_otp_check($mobile_otp,$mobile);
+		 echo json_encode($data['res']);
+		}
+
+		public function password_otp_check(){
+		 $mobile_otp=$this->input->post('mobile_otp');
+		 $mobile=$this->input->post('mobile');
+		 $data['res']=$this->loginmodel->password_otp_check($mobile_otp,$mobile);
+		 echo json_encode($data['res']);
 		}
 
 
@@ -915,6 +932,10 @@ class Home extends CI_Controller {
 			if($user_role=='3'){
 				$datas['res']=$this->loginmodel->sendOTPmobilechange($mobile,$user_id);
 			}
+		}
+		public function mobile_otp_update(){
+			$mobile=$this->input->post('mobile');
+			$datas['res']=$this->loginmodel->mobile_otp_update($mobile);
 		}
 
 

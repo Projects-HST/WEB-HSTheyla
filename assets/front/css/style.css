@@ -16,7 +16,22 @@ top:0;
 left:100%;
 margin-top:-6px;
 }
-
+.btn_resend_otp{
+  margin-top: 5px;
+margin-bottom: 5px;
+background-color: #458ecc;
+border: none;
+color: #fff;
+}
+.otp_verifcation_form{
+  margin-bottom: 100px;
+  margin-top: 50px;
+}
+.otp_form{
+  margin-top: 100px;
+background-color: #fff;
+border-radius: 3px;
+}
 .show_mobile_tab{
   display: none;
 }
@@ -88,6 +103,9 @@ hr{
   color: #fff;
   font-size: 14px;
   text-align: left;
+}
+.footer_bottom_links{
+  text-align: left !important;
 }
 .no_banner{
   margin-top: 150px;
@@ -862,6 +880,9 @@ ul.dropdown-menu.show{
 
 .head_text h2{
   border-right: none !important;
+}
+.footer_bottom_links li a{
+
 }
 }
 

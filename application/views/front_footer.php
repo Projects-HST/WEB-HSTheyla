@@ -15,7 +15,7 @@ $secondhalf = array_slice($res, $len / 2);
             <p class="footer_heading">Categories</p>
             <ul class="fnt-footer ">
               <?php  foreach($firsthalf as $row_cat){  ?>
-                  <li class=""><a href=""><?php echo $row_cat->category_name; ?></a></li>
+                  <li class=""><a href="<?php echo base_url(); ?>/eventlist/category/<?php echo base64_encode($row_cat->id*98765); ?>/<?php echo $row_cat->category_name; ?>"><?php echo $row_cat->category_name; ?></a></li>
               <?php } ?>
 
             </ul>
@@ -24,7 +24,7 @@ $secondhalf = array_slice($res, $len / 2);
             <p class="footer_heading">&nbsp;</p>
             <ul class="fnt-footer ">
               <?php  foreach($secondhalf as $row_sec_cat){  ?>
-                  <li class=""><a href=""><?php echo $row_sec_cat->category_name; ?></a></li>
+                  <li class=""><a href="<?php echo base_url(); ?>/eventlist/category/<?php echo base64_encode($row_sec_cat->id*98765); ?>/<?php echo $row_sec_cat->category_name; ?>"><?php echo $row_sec_cat->category_name; ?></a></li>
               <?php } ?>
             </ul>
 
@@ -33,7 +33,7 @@ $secondhalf = array_slice($res, $len / 2);
             <p class="footer_heading">Get In Touch</p>
             <ul class="fnt-footer contact_text">
               <li class=""><i class="fa fa-envelope" aria-hidden="true"></i><span> info@heylaapp.com </span></li>
-              <li class=""><i class="fa fa-phone" aria-hidden="true"></i>  +65 123-1234-1</li>
+              <li class=""><i class="fa fa-phone" aria-hidden="true"></i> +65 9887 2345</li>
             </ul>
             <p class="footer_heading">Follow  Us On</p>
             <ul class="fnt-footer social_follow">
@@ -62,7 +62,7 @@ $secondhalf = array_slice($res, $len / 2);
       <div class="row footer_container">
         <hr>
         <div class="col-lg-8">
-          <ul class="list-inline pull-left footer_bottom_links">
+          <ul class="list-inline footer_bottom_links">
               <li class="list-inline-item"><a href="<?php echo base_url(); ?>about-us">About</a></li>
               <li class="list-inline-item"><a href="<?php echo base_url(); ?>">Events</a></li>
               <li class="list-inline-item"><a href="<?php echo base_url(); ?>faq">FAQ</a></li>

@@ -8,11 +8,6 @@
 .form-control{
   width: 270px;
 }
-input[type=text] {
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid #000000;
-}
 
 
 </style>
@@ -23,7 +18,7 @@ input[type=text] {
 <center>
 
 
-  <p style="margin-top:5%;font-size:22px;">Add the Mobile Number</p>
+  <p style="margin-top:10%;font-size:22px;">Add the Mobile Number</p>
         <div class="reset">
 
   <div class="">

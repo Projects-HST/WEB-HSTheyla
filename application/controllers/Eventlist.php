@@ -84,11 +84,11 @@ class Eventlist extends CI_Controller
 
 	public function search_term_events()
     {
-      	$srch_term  = $this->input->post('srch_term');
+    $srch_term  = $this->input->post('srch_term');
 		set_cookie('search_values',$srch_term,'3600');
 		delete_cookie("city_values");
-        $data['event_result'] = $this->eventlistmodel->getsearch_term_events($srch_term);
-        echo json_encode($data['event_result']);
+    $data['event_result'] = $this->eventlistmodel->getsearch_term_events($srch_term);
+    echo json_encode($data['event_result']);
     }
 
 	public function get_city_name()
@@ -126,6 +126,24 @@ class Eventlist extends CI_Controller
 		$this->load->view('front_footer');
     }
 
+    public function category()
+      {
+
+        $cat_id=$this->uri->segment(3);
+        $cat_name=$this->uri->segment(4);
+        $datas=$this->session->userdata();
+    		$user_id=$this->session->userdata('id');
+    		$user_role=$this->session->userdata('user_role');
+        $data['res_cat']=$this->eventlistmodel->category_details($cat_id);
+
+        $data['cat_event']=$this->eventlistmodel->category_events($cat_id);
+        // echo "<pre>";
+        // print_r($data['cat_event']);
+        // exit;
+        $this->load->view('front_header',$data);
+        $this->load->view('category_based_events',$data);
+    	  $this->load->view('front_footer');
+      }
 
 	public function eventwishlist()
     {
@@ -252,26 +270,6 @@ class Eventlist extends CI_Controller
 		$message  = $this->input->post('message');
 		$data['reviews'] = $this->eventlistmodel->add_review($event_id,$user_id,$rating,$message);
 		echo "OK";
-
-		/*
-		$sreviewimage  = $_FILES['reviewimage']['name'];
-		echo $sreviewimage;
-
-		if($_FILES['reviewimage']['name']!='') {
-			$review_pic = $_FILES['reviewimage']['name'];
-			$temp = pathinfo($review_pic, PATHINFO_EXTENSION);
-			$file_name      = time() . rand(1, 5) . rand(6, 10);
-			$review_banner   = $file_name. '.' .$temp;
-			$uploaddir      = 'assets/review/images/';
-			$profilepic     = $uploaddir . $review_banner;
-			move_uploaded_file($_FILES['reviewimage']['tmp_name'], $profilepic);
-			$data['reviews'] = $this->eventlistmodel->add_review($event_id,$user_id,$rating,$message,$review_banner);
-		} else {
-			$review_banner ="";
-			$data['reviews'] = $this->eventlistmodel->add_review($event_id,$user_id,$rating,$message,$review_banner);
-		}
-       	echo json_encode($data['reviews']);
-		*/
     }
 
 	public function updatereview()
@@ -302,6 +300,8 @@ class Eventlist extends CI_Controller
       $this->load->view('webflow');
       $this->load->view('front_footer');
     }
+
+
 
 	public function appflow()
     {

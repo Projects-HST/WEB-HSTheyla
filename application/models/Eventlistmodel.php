@@ -536,7 +536,7 @@ Class Eventlistmodel extends CI_Model
 						 $old_session_id=$rows->psession_id;
 						 $old_number_of_seats=$rows->number_of_seats;
 						 $old_plan_time_id=$rows->plan_time_id;
-						 
+
 					}
 
 					    $update_seats = "UPDATE booking_plan_timing SET seat_available = seat_available+$old_number_of_seats WHERE id ='$old_plan_time_id'";
@@ -544,7 +544,7 @@ Class Eventlistmodel extends CI_Model
 
 						$delete_process = "DELETE FROM booking_process WHERE id = '$old_booking_id'";
 						$resu=$this->db->query($delete_process);
-					
+
 
 						$delete_session = "DELETE FROM booking_session WHERE id = '$old_session_id'";
 						$resu=$this->db->query($delete_session);
@@ -637,5 +637,43 @@ Class Eventlistmodel extends CI_Model
         	return $c_id;
 
     } */
+
+
+		function category_details($cat_id){
+			$category_id=base64_decode($cat_id)/98765;
+		 	$select="SELECT * FROM category_master WHERE id='$category_id'";
+			$resu=$this->db->query($select);
+	  	return $resu->result();
+		}
+
+		function category_events($cat_id){
+			$category_id=base64_decode($cat_id)/98765;
+			$current_date = date("Y-m-d");
+			if ($this->session->userdata('id') !=''){
+				$user_id = $this->session->userdata('id');
+			} else {
+				$user_id = 0;
+			}
+
+			    $sql="SELECT * FROM(SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+					FROM events AS e
+					LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
+					LEFT JOIN country_master AS cy ON e.event_country = cy.id
+					LEFT JOIN city_master AS ci ON e.event_city = ci.id
+					LEFT JOIN category_master AS ca ON e.category_id = ca.id
+					WHERE e.category_id='$category_id' AND e.hotspot_status = 'N' AND e.end_date >= '$current_date' AND e.category_id='$cat_id' AND e.event_status = 'Y'
+					UNION
+					SELECT e.*,DATE_FORMAT(e.start_date,'%d/%m/%Y') AS dstart_date, DATE_FORMAT(e.end_date,'%d/%m/%Y') AS dend_date,cy.country_name,ci.city_name,uwl.user_id as wlstatus
+					FROM events AS e
+					LEFT JOIN user_wish_list AS uwl ON uwl.event_id = e.id AND uwl.user_id = '$user_id'
+					LEFT JOIN country_master AS cy ON e.event_country = cy.id
+					LEFT JOIN city_master AS ci ON e.event_city = ci.id
+					LEFT JOIN category_master AS ca ON e.category_id = ca.id
+					WHERE e.category_id='$category_id' AND e.hotspot_status = 'Y' AND e.event_status = 'Y') AS event_list   ORDER BY id DESC";
+
+				$resu=$this->db->query($sql);
+				$res=$resu->result();
+				return $res;
+		}
 }
 ?>

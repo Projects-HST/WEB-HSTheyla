@@ -24,10 +24,10 @@ Class Loginmodel extends CI_Model
               foreach($res->result() as $rows)
                {
                  $check_email_verify=$rows->email_verify;
-                 if($check_email_verify=='N'){
-                   $data= array("status"=>"emailverfiy","msg"=>"emailverfiy");
-                   return $data;
-                }
+                //  if($check_email_verify=='N'){
+                //    $data= array("status"=>"emailverfiy","msg"=>"emailverfiy");
+                //    return $data;
+                // }
                  $quer="SELECT status FROM user_master WHERE id='$rows->id'";
                  $resultset=$this->db->query($quer);
                  $status=$rows->status;
@@ -452,28 +452,38 @@ Class Loginmodel extends CI_Model
     		$encrypt_email= base64_encode($s);
 
         if($result){
-          $to=$email;
-          $subject=" Heyla User Registration";
-          $htmlContent = '
-          <html>
-          <head>
-          <title> '.$subject.'</title>
-             </head>
-             <body style="background-color:#E4F1F7;"><div style="background-image: url('.base_url().'assets/front/images/email_1.png);height:700px;margin: auto;width: 100%;background-repeat: no-repeat;">
-                <div  style="padding:50px;width:400px;"><p>Dear  '.$name.'</p>
-                <p style="font-size:17px;">Welcome!</p>
-                <p style="font-size:17px;">We are glad you signed up.</p>
-                <p style="font-size:17px;"><a href="'. base_url().'home/emailverfiy/'.$encrypt_email.'">Click here</a> to get your email ID verified.</p>
-                <p style="font-size:17px;"> We wish you to make cheerful memories with each event! </p>
-                <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.</small>
-               </body>
-            </html>';
-        $headers = "MIME-Version: 1.0" . "\r\n";
-        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        // Additional headers
-        $headers .= 'From: heylapp<info@heylapp.com>' . "\r\n";
-        $sent= mail($to,$subject,$htmlContent,$headers);
-          echo "verify";
+            echo "verify";
+
+          $digits = 4;
+          $OTP = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT);
+          $update_user_otp="UPDATE user_master SET mobile_otp='$OTP' WHERE id='$last_id'";
+          $result=$this->db->query($update_user_otp);
+          $mobile_message = 'Use this OTP to verify your mobile number:'. $OTP;
+          $this->load->model('smsmodel');
+          $mob=$mobile;
+          $response=$this->smsmodel->sendOTPtomobile($mob,$mobile_message);
+        //   $to=$email;
+        //   $subject=" Heyla User Registration";
+        //   $htmlContent = '
+        //   <html>
+        //   <head>
+        //   <title> '.$subject.'</title>
+        //      </head>
+        //      <body style="background-color:#E4F1F7;"><div style="background-image: url('.base_url().'assets/front/images/email_1.png);height:700px;margin: auto;width: 100%;background-repeat: no-repeat;">
+        //         <div  style="padding:50px;width:400px;"><p>Dear  '.$name.'</p>
+        //         <p style="font-size:17px;">Welcome!</p>
+        //         <p style="font-size:17px;">We are glad you signed up.</p>
+        //         <p style="font-size:17px;"><a href="'. base_url().'home/emailverfiy/'.$encrypt_email.'">Click here</a> to get your email ID verified.</p>
+        //         <p style="font-size:17px;"> We wish you to make cheerful memories with each event! </p>
+        //         <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.</small>
+        //        </body>
+        //     </html>';
+        // $headers = "MIME-Version: 1.0" . "\r\n";
+        // $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        // // Additional headers
+        // $headers .= 'From: heylapp<info@heylapp.com>' . "\r\n";
+        // $sent= mail($to,$subject,$htmlContent,$headers);
+
         }else{
           echo "failed";
         }
@@ -481,6 +491,69 @@ Class Loginmodel extends CI_Model
 
     }
 
+
+   }
+
+
+   function mobile_verify_otp_check($mobile_otp,$mobile){
+     $check_otp="SELECT * FROM user_master WHERE mobile_no='$mobile' and mobile_otp='$mobile_otp'";
+     $res=$this->db->query($check_otp);
+     if($res->num_rows()==1){
+       foreach($res->result() as $rows){ }
+       $get_user_id=$rows->id;
+       $insert_activity="INSERT INTO  user_activity (date,user_id,activity_detail) VALUES(NOW(),'$get_user_id','normal_login') ";
+       $result_activity=$this->db->query($insert_activity);
+       $update_user_login_count="UPDATE user_master SET login_count=login_count+1 WHERE id='$get_user_id'";
+       $excu_user_login_count=$this->db->query($update_user_login_count);
+       $update_user_points="UPDATE user_points_count SET login_count=login_count+1,login_points=login_points+1,total_points=total_points+1 WHERE user_id='$get_user_id'";
+       $excu_user_points=$this->db->query($update_user_points);
+       $data = array("user_name" => $rows->user_name,"msg"  =>"success","mobile_no"=>$rows->mobile_no,"status"=>$rows->status,"email_id"=>$rows->email_id,"user_role"=>$rows->user_role,"id"=>$rows->id);
+       $this->session->set_userdata($data);
+       return $data;
+     }else{
+       $data= array("status" => "failed","msg" => "Something went wrong! Please try again later.");
+       return $data;
+
+     }
+
+   }
+
+
+   function password_otp_check($mobile_otp,$mobile){
+      $check_otp="SELECT * FROM user_master WHERE mobile_no='$mobile' and mobile_otp='$mobile_otp'";
+     $res=$this->db->query($check_otp);
+     if($res->num_rows()==1){
+       foreach($res->result() as $rows){ }
+       $get_user_id=$rows->id;
+       $update="UPDATE user_master SET password='' WHERE id='$get_user_id'";
+       $excu_update=$this->db->query($update);
+       if($excu_update){
+         $data= array("status" => "success","msg" => "Otp Verified Successfully");
+         return $data;
+       }else{
+         $data= array("status" => "failed","msg" => "Something went wrong! Please try again later.");
+         return $data;
+       }
+     }else{
+       $data= array("status" => "failed","msg" => "Something went wrong! Please try again later.");
+       return $data;
+     }
+   }
+
+   function mobile_otp_update($mobile){
+     $digits = 4;
+     $OTP = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT);
+     $update_user_otp="UPDATE user_master SET mobile_otp='$OTP' WHERE mobile_no='$mobile'";
+     $result=$this->db->query($update_user_otp);
+     $mobile_message = 'Use this OTP to verify your mobile number:'. $OTP;
+     $this->load->model('smsmodel');
+     $mob=$mobile;
+     $response=$this->smsmodel->sendOTPtomobile($mob,$mobile_message);
+     if($result){
+       echo "OTP Resent";
+     }else{
+       echo "Something went wrong! Please try again later.";
+     }
    }
 
    function save_profile_info($first_name,$user_name,$address,$gender,$newsletter_status,$occupation,$user_id){
@@ -512,7 +585,7 @@ Class Loginmodel extends CI_Model
    function sendOTPmobilechange($mobile,$user_id){
       $mob=$mobile;
 
-       $digits = 4;
+      $digits = 4;
       $OTP = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT);
       $update_user_otp="UPDATE user_master SET mobile_otp='$OTP' WHERE id='$user_id'";
       $result=$this->db->query($update_user_otp);
@@ -527,56 +600,71 @@ Class Loginmodel extends CI_Model
       $res=$this->db->query($empty_otp);
    }
 
-   function reset_password($email){
-      $check_email="SELECT * FROM user_master WHERE email_id='$email'";
+   function reset_password($mobile_number){
+      $check_email="SELECT * FROM user_master WHERE mobile_no='$mobile_number'";
      $res=$this->db->query($check_email);
      if($res->num_rows()==0){
-        echo "This email doesn't seem to be in our record! <br>Please check.";
+        echo "This Mobile number doesn't seem to be in our record! <br>Please check.";
 
      }else{
        $result=$res->result();
        foreach($result as $rows){}
        $email=$rows->email_id;
-       $encrypt_email= base64_encode($email);
-       $to=$email;
-       $subject="Heyla - Reset Password";
-       $htmlContent = '
-        <html>
-        <head>
-        <title>Reset Password</title>
-           </head>
-           <body>
-           <p>Hi,<p/>
-           <p style="margin-left:50px;">Please click the below link to reset your password:<br>
-         <br>   <a href="'. base_url().'home/reset/'.$encrypt_email.'" target="_blank"style="background-color: #478ECC;    padding: 8px;    text-decoration: none;    color: #fff;    border-radius: 20px;">Click Here To Reset</a></br>  </p>
-            <p>With love,  <br>Team Heyla</p>
-            <br><br>
-            <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.</small>
-           </body>
-        </html>';
-    $headers = "MIME-Version: 1.0" . "\r\n";
-    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-    // Additional headers
-    $headers .= 'From: heylapp<info@heylapp.com>' . "\r\n";
-    $sent= mail($to,$subject,$htmlContent,$headers);
-      if($sent){
-          echo "success";
+       $mobile_no=$rows->mobile_no;
+       $digits = 4;
+       $OTP = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT);
+       $update_user_otp="UPDATE user_master SET mobile_otp='$OTP' WHERE mobile_no='$mobile_number'";
+       $result=$this->db->query($update_user_otp);
+       $mobile_message = 'Use this OTP to verify your mobile number:'. $OTP;
+       $this->load->model('smsmodel');
+       $mob=$mobile_number;
+       $response=$this->smsmodel->sendOTPtomobile($mob,$mobile_message);
+       if($result){
+         echo "OTP Resent";
+       }else{
+         echo "Something went wrong! Please try again later.";
+       }
 
-      }else{
-        echo "Something went wrong! Please try again later.";
-      }
+    //    $encrypt_email= base64_encode($email);
+    //    $to=$email;
+    //    $subject="Heyla - Reset Password";
+    //    $htmlContent = '
+    //     <html>
+    //     <head>
+    //     <title>Reset Password</title>
+    //        </head>
+    //        <body>
+    //        <p>Hi,<p/>
+    //        <p style="margin-left:50px;">Please click the below link to reset your password:<br>
+    //      <br>   <a href="'. base_url().'home/reset/'.$encrypt_email.'" target="_blank"style="background-color: #478ECC;    padding: 8px;    text-decoration: none;    color: #fff;    border-radius: 20px;">Click Here To Reset</a></br>  </p>
+    //         <p>With love,  <br>Team Heyla</p>
+    //         <br><br>
+    //         <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.</small>
+    //        </body>
+    //     </html>';
+    // $headers = "MIME-Version: 1.0" . "\r\n";
+    // $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+    // // Additional headers
+    // $headers .= 'From: heylapp<info@heylapp.com>' . "\r\n";
+    // $sent= mail($to,$subject,$htmlContent,$headers);
+    //   if($sent){
+    //       echo "success";
+    //
+    //   }else{
+    //     echo "Something went wrong! Please try again later.";
+    //   }
      }
    }
 
    function update_password($email_token,$new_password,$retype_password){
-      $email_decrypt=base64_decode($email_token);
-      $check_email="SELECT * FROM user_master WHERE email_id='$email_decrypt'";
+      $email_decrypt=base64_decode($email_token)/987654;
+     $check_email="SELECT * FROM user_master WHERE mobile_no='$email_decrypt'";  
      $res=$this->db->query($check_email);
       if($res->num_rows()==0){
         echo "Something Went Wrong";
       }else{
         $pwd=md5($new_password);
-        $update_user_master="UPDATE user_master SET password='$pwd' WHERE email_id='$email_decrypt'";
+        $update_user_master="UPDATE user_master SET password='$pwd' WHERE mobile_no='$email_decrypt'";
         $result=$this->db->query($update_user_master);
         if($result){
             echo "success";

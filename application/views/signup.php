@@ -1,7 +1,8 @@
+<script src="<?php echo base_url(); ?>assets/front/js/jquery.cookie.js"></script>
 <div class="container-fluid signinbg">
     <div class="row">
         <div class="col-md-2"></div>
-        <div class="col-md-8 col-sm-12 col-md-auto signin-div">
+        <div class="col-md-8 col-sm-12 col-md-auto signin-div" id="signin-div">
             <div class="row">
                 <p class="login-heading">Sign Up</p>
                   <p class="login_tag">Heyla&#8212;a window to the stages of the city-state</p>
@@ -16,7 +17,7 @@
                         <div class="col-xs-6 form_box">
                             <div class="left-inner-addon">
                                 <i class="fas fa-mobile-alt"></i>
-                                <input type="text" class="form-control" name="mobile" placeholder="Mobile Number" />
+                                <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Mobile Number" />
                             </div>
                         </div>
                         <div class="col-xs-6 form_box">
@@ -31,13 +32,7 @@
                                 <i class="fas fa-lock"></i>
                                 <input id="password-field" type="password" class="form-control"  name="new_password"  placeholder="Password" value="" required>
                                  <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-                                 <!-- <i class="fas fa-lock"></i> -->
-                                 <!-- <div class="input-group">
-          <input id="password-field" type="password" class="form-control"  name="new_password"  placeholder="Password" value="" required>
-          <span class="input-group-btn">
-            <button class="btn btn-default reveal" type="button"><span class="fa fa-fw fa-eye"></span></button>
-          </span>
-        </div> -->
+
 
 
                             </div>
@@ -71,6 +66,30 @@
         </div>
     </div>
 
+    <div class="col-md-8 col-sm-12 col-md-auto otp_form" id="otp_form">
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-5">
+            <p class="login_tag">Heyla&#8212;a window to the stages of the city-state</p>
+          <center>  <img src="<?php echo base_url(); ?>assets/front/images/otp_icon.png" class="img-responsive" style="width:100px;"></center>
+
+              <form action="" method="post" class="otp_verifcation_form " id="otp_form_validate">
+                <div class="col-xs-6 form_box">
+                    <div class="left-inner-addon">
+
+                        <input type="text" class="form-control" name="mobile_otp" id="mobile_otp" placeholder="OTP" />
+                    </div>
+                    <small><a  href="#" class="pull-right btn_resend_otp" onclick="resend_otp_function()" >Resend OTP</a></small>
+                </div>
+                <div class="col-xs-12">
+                    <input type="submit" class="btn btn-primary btn-block btn-login" placeholder="Password" value="Verfiy OTP" />
+                </div>
+              </form>
+
+          </div>
+        </div>
+
+    </div>
+
     <div class="col-md-2">
 
     </div>
@@ -80,7 +99,9 @@
 
 
 </div>
+
 <style>
+
 
 .error{
   color: red;
@@ -100,6 +121,8 @@
 }
 </style>
 <script>
+$('#signin-div').show();
+$('#otp_form').hide();
 $('#formsignup').validate({ // initialize the plugin
     rules: {
         name: {
@@ -110,14 +133,14 @@ $('#formsignup').validate({ // initialize the plugin
                 }
         },
         email: {
-            required: true,email:true,
+            required: false,email:true,
             remote: {
                    url: "<?php echo base_url(); ?>home/existemail",
                    type: "post"
                 }
         },
         mobile: {
-            required: true,minlength: 10, maxlength: 10, digits: true,
+            required: false,minlength: 10, maxlength: 10, digits: true,
             remote: {
                    url: "<?php echo base_url(); ?>home/existmobile",
                    type: "post"
@@ -136,6 +159,9 @@ $('#formsignup').validate({ // initialize the plugin
     },
     submitHandler: function(form) {
         //alert("hi");
+        var mobile=$('#mobile').val();
+
+        $.cookie("mobile_cookie", mobile);
 
         $.ajax({
             url: "<?php echo base_url(); ?>home/create_profile",
@@ -144,13 +170,9 @@ $('#formsignup').validate({ // initialize the plugin
             success: function(response) {
 
                 if (response == "verify") {
-                    swal({
-                        title: "Just one more step!",
-                        text: "Please check your email to verify your registration",
-                        type: "success"
-                    }).then(function() {
-                        location.href = '<?php echo base_url(); ?>signin';
-                    });
+                   swal('OTP Sent to Mobile number');
+                   $('#otp_form').show();
+                   $('#signin-div').hide();
                 } else {
                     sweetAlert("Oops...", response, "error");
                 }
@@ -158,6 +180,57 @@ $('#formsignup').validate({ // initialize the plugin
         });
     }
 });
+
+$('#otp_form_validate').validate({
+    rules: {
+        mobile_otp: {
+            required: true
+        }
+    },
+    messages: {
+        mobile_otp: { required:"OTP cannot be empty!"}
+    },
+    submitHandler: function(form) {
+        var mobile=$.cookie("mobile_cookie");
+        var mobile_otp=$('#mobile_otp').val();
+        $.ajax({
+            url: "<?php echo base_url(); ?>home/mobile_verify_otp",
+            type: 'POST',
+            dataType : 'json',
+            data: { mobile_otp: mobile_otp,mobile : mobile},
+            success: function(response) {
+              if (response.status== "Y") {
+                $.removeCookie("mobile_cookie");
+                  swal({
+                     title: " ",
+                     text: "Heyla Welcomes you!.",
+                     type: "success"
+                 }).then(function() {
+                     location.href = '<?php echo base_url(); ?>';
+                 });
+                } else {
+                    sweetAlert("Oops...", response.msg, "error");
+                }
+            }
+        });
+    }
+});
+
+function resend_otp_function(){
+  var mobile=$.cookie("mobile_cookie");
+  $.ajax({
+      method: "post",
+    url: "<?php echo base_url(); ?>home/mobile_otp_update",
+    data: {
+        mobile: mobile
+    },
+    cache: false,
+    success: function(response){
+      swal(response);
+
+    }
+  });
+}
 
 $(".toggle-password").click(function() {
 
@@ -240,50 +313,7 @@ function statusChangeCallback(response) {
 
 <script src="//connect.facebook.net/en_US/all.js"></script>
 <script type="text/javascript">
-// FB.init({
-//   appId: '323814224809825',
-//   channelUrl : '',
-//   xfbml: true,
-//   status: true,
-//   cookie: true,
-// });
-//
-// function fbAuthUser() {
-//     FB.login(checkLoginStatus);
-// }
-//
-//
-// function checkLoginStatus(response) {
-//     if(response && response.status == 'connected') {
-// 	 FB.api('/me', {fields: 'name,email'}, function(response) {
-//         var fbname=response.name;
-// 		var fbemail=response.email;
-//
-//         swal('Please wait')
-//         swal.showLoading();
-//          $.ajax({
-//               url:'<?php echo base_url(); ?>home/facebook_login',
-//               data: { 'fbname' : fbname, 'fbemail' : fbemail },
-//               type: "POST",
-//               crossDomain: true,
-//               success: function (data) {
-//               if(data=="success"){
-//                 setTimeout(function(){
-//                  window.location.reload(1);
-//               }, 1000);
-//               }else{
-//                 sweetAlert("Oops...", "Something wen Wrong", "error");
-//               }
-//
-//           }
-//
-//
-//         });
-//     });
-//     } else {
-//         document.getElementById("fb").checked = false
-//     }
-// }
+
 $(".reveal").on('click',function() {
     var $pwd = $("#password-field");
     if ($pwd.attr('type') === 'password') {

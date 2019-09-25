@@ -1076,31 +1076,31 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			$digits = 4;
 			$OTP = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT);
 
-    		$sql = "SELECT * FROM user_master WHERE email_id ='".$user_name."' AND status='Y'";
-    		$user_result = $this->db->query($sql);
-    		$ress = $user_result->result();
-    		if($user_result->num_rows()>0)
-    		{
-    			foreach ($user_result->result() as $rows)
-    			{
-    				  $user_id = $rows->id;
-    				  $email_id = $rows->email_id;
-    				  $email_verify = $rows->email_verify;
-    			}
-                    if ($email_verify=='N') {
-                        $Message = 'Please verify your email id';
-                        $sType = "Email";
-                        $user_id = '';
-                    } else {
-
-                    $encrypt_email = base64_encode($email_id);
-
-            		$subject = "Heyla App - Forgot Password URL";
-            		$email_message = 'Please Click the Forgot Password link. <a href="'. base_url().'home/reset/'.$encrypt_email.'" target="_blank" style="background-color: #478ECC; font-size:15px; font-weight: bold; padding: 10px; text-decoration: none; color: #fff; border-radius: 5px;">Forgot Password</a><br><br><br>';
-                    $this->sendMail($email_id,$subject,$email_message);
-                    $sType = "Email";
-                }
-    		}
+    		// $sql = "SELECT * FROM user_master WHERE email_id ='".$user_name."' AND status='Y'";
+    		// $user_result = $this->db->query($sql);
+    		// $ress = $user_result->result();
+    		// if($user_result->num_rows()>0)
+    		// {
+    		// 	foreach ($user_result->result() as $rows)
+    		// 	{
+    		// 		  $user_id = $rows->id;
+    		// 		  $email_id = $rows->email_id;
+    		// 		  $email_verify = $rows->email_verify;
+    		// 	}
+        //             if ($email_verify=='N') {
+        //                 $Message = 'Please verify your email id';
+        //                 $sType = "Email";
+        //                 $user_id = '';
+        //             } else {
+        //
+        //             $encrypt_email = base64_encode($email_id);
+        //
+        //     		$subject = "Heyla App - Forgot Password URL";
+        //     		$email_message = 'Please Click the Forgot Password link. <a href="'. base_url().'home/reset/'.$encrypt_email.'" target="_blank" style="background-color: #478ECC; font-size:15px; font-weight: bold; padding: 10px; text-decoration: none; color: #fff; border-radius: 5px;">Forgot Password</a><br><br><br>';
+        //             $this->sendMail($email_id,$subject,$email_message);
+        //             $sType = "Email";
+        //         }
+    		// }
 
     		$sql = "SELECT * FROM user_master WHERE mobile_no ='".$user_name."'AND status='Y'";
     		$user_result = $this->db->query($sql);
@@ -1114,18 +1114,13 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
     				  $mobile_verify = $rows->mobile_verify;
     			}
 
-    			if ($mobile_verify=='N') {
-                    $Message = 'Please verify your Mobile';
-                    $sType = "Mobile";
-                    $user_id = '';
-                } else {
+
         			$update_sql = "UPDATE user_master SET mobile_otp = '$OTP', updated_by = '$user_id', updated_at =NOW() WHERE id='$user_id'";
     			    $update_result = $this->db->query($update_sql);
+            	$mobile_message = 'Hi,Use the OTP '.$OTP.' to reset your password.- Team Heyla';
+              $this->sendSMS($mobile_no,$mobile_message);
+              $sType = "Mobile";
 
-            		$mobile_message = 'Hi,Use the OTP '.$OTP.' to reset your password.- Team Heyla';
-                    $this->sendSMS($mobile_no,$mobile_message);
-                    $sType = "Mobile";
-                }
     		}
 
 	        if ( $user_id != "") {

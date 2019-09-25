@@ -28,6 +28,14 @@
                               </div>
                            </div>
                            <div class="form-group row">
+                              <label class="col-sm-4 col-form-label">Banner Image</label>
+                              <div class="col-sm-6">
+                                 <input type="file" id="file_upload" name="category_banner" class="form-control" accept="image/*">
+                                 <span style="color: red;">(Size: 73 X 73)</span>
+                                 <div id="category_banner" style="color: red;"></div>
+                              </div>
+                           </div>
+                           <div class="form-group row">
                               <label class="col-sm-4 col-form-label">Display Order</label>
                               <div class="col-sm-6">
                                  <select class="form-control" name="disp_order">
@@ -116,6 +124,7 @@
                                  <th>S. No</th>
                                  <th>Category</th>
                                  <th>Image</th>
+                                 <th>Banner</th>
                                  <th>Status</th>
                                  <th>Actions</th>
                               </tr>
@@ -133,6 +142,9 @@
                                  <td id="ct"><a href="" data-toggle="modal" class="open-AddBookDialog" data-target="#myModal" data-id="<?php echo $rows->id; ?>" data-name="<?php echo $rows->category_name; ?>"><?php  echo $rows->category_name; ?></a></td>
                                  <td>
                                     <img src="<?php echo base_url(); ?>assets/category/<?php echo $rows->category_image; ?>" class="img-circle">
+                                 </td>
+                                 <td>
+                                    <img src="<?php echo base_url(); ?>assets/category/<?php echo $rows->category_banner; ?>" class="img-responsive" style="width:150px;">
                                  </td>
                                  <td>
                                     <?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?>
@@ -202,12 +214,14 @@
       rules: {
             categoryname: { required: true },
             categorypic: { required: true },
+            category_banner:{required: true},
             eventsts: { required: true },
             disp_order: { required: true }
           },
       messages: {
             categoryname: "Enter category",
             categorypic: "Select image",
+            category_banner: "Select image",
             eventsts: "Select status",
             disp_order:"Select display order"
             },

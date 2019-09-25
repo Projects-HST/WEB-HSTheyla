@@ -106,10 +106,10 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 			<textarea id="textarea" name="address" required="" class="form-control" maxlength="240" rows="3" placeholder=""><?php echo trim($rows->event_address); ?></textarea>
 				</div>
 
-				<label for="Description" class="col-sm-2 col-form-label">Description</label>
+				<!-- <label for="Description" class="col-sm-2 col-form-label">Description</label>
 				<div class="col-sm-4">
           <textarea  id="textarea" required="" name="description" class="form-control" maxlength="30000" rows="3" placeholder=""><?php echo $rows->description; ?></textarea>
-      	</div>
+      	</div> -->
 		</div>
 	</div>
 	<div class="col-md-12 form_box">
@@ -130,6 +130,16 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 				</div>
 		</div>
 	</div>
+
+  <div class="col-md-12 form_box">
+    <div class="form-group">
+  <label for="Description" class="col-sm-2 col-form-label">Description</label>
+  <div class="col-sm-12">
+    <textarea  id="textarea" required="" name="description" class="form-control" maxlength="30000" rows="8" placeholder=""><?php echo $rows->description; ?></textarea>
+  </div>
+</div>
+</div>
+
 	<div id = "date_time">
 <div class="col-md-12 form_box">
 <div class="form-group">

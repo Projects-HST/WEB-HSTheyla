@@ -41,7 +41,16 @@ class Category extends CI_Controller
         $uploaddir    = 'assets/category/';
         $profilepic   = $uploaddir . $categorypic1;
         move_uploaded_file($_FILES['categorypic']['tmp_name'], $profilepic);
-        $datas = $this->categorymodel->insert_category($categoryname, $categorypic1, $disp_order, $status, $user_id, $user_role);
+
+
+        $pic = $_FILES['category_banner']['name'];
+        $temp = pathinfo($pic, PATHINFO_EXTENSION);
+        $file_name    = time() . rand(1,5) . rand(6,10);
+        $pic_cat = $file_name . '.' .$temp;
+        $uploaddir    = 'assets/category/';
+        $cat_img   = $uploaddir . $pic_cat;
+        move_uploaded_file($_FILES['category_banner']['tmp_name'], $cat_img);
+        $datas = $this->categorymodel->insert_category($categoryname, $categorypic1, $disp_order, $status, $user_id, $user_role,$pic_cat);
         $sta   = $datas['status'];
         //print_r($sta);exit;
         if ($sta == "success") {
@@ -78,6 +87,7 @@ class Category extends CI_Controller
 
         $status       = $this->input->post('eventsts');
         $currentpic   = $this->input->post('currentcpic');
+        $category_banner_old   = $this->input->post('category_banner_old');
         $category_id  = $this->input->post('id');
 
         $old_disp_order=$this->input->post('old_disp_order');
@@ -94,7 +104,20 @@ class Category extends CI_Controller
         if (empty($category_pic)) {
             $categorypic1 = $currentpic;
         }
-        $datas = $this->categorymodel->update_category_details($category_id,$categorypic1,$disp_order,$old_disp_order,$status,$user_id,$user_role);
+
+
+        $pic = $_FILES['category_banner']['name'];
+        $temp = pathinfo($pic, PATHINFO_EXTENSION);
+        $file_name    = time() . rand(1,5) . rand(6,10);
+        $pic_cat = $file_name . '.' .$temp;
+        $uploaddir    = 'assets/category/';
+        $cat_img   = $uploaddir . $pic_cat;
+        move_uploaded_file($_FILES['category_banner']['tmp_name'], $cat_img);
+        if (empty($pic)) {
+            $pic_cat = $category_banner_old;
+        }
+      
+        $datas = $this->categorymodel->update_category_details($category_id,$categorypic1,$disp_order,$old_disp_order,$status,$user_id,$user_role,$pic_cat);
         $sta   = $datas['status'];
         //print_r($sta);exit;
         if ($sta == "success") {

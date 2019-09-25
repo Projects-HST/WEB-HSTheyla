@@ -91,16 +91,16 @@
 				<div class="col-sm-4">
 					 <textarea id="textarea" name="address"  class="form-control" maxlength="240" rows="3" placeholder=""></textarea>
 				</div>
-				 <label for="Description" class="col-sm-2 col-form-label">Description</label>
-            <div class="col-sm-4">
-                <textarea  id="textarea"  name="description" class="form-control" maxlength="30000" rows="3" placeholder=""></textarea>
-            </div>
+
 		</div>
 	</div>
   <div class="col-md-12 form_box">
     <label for="latitude" class="col-sm-2 col-form-label">Select</label>
      <div id="dvMap" style="width:100%; height:250px"> </div>
   </div>
+
+
+
   <div class="col-md-12 form_box">
     <div class="form-group">
         <label for="latitude" class="col-sm-2 col-form-label">Event Latitude</label>
@@ -114,6 +114,14 @@
              <div id="ermsg1"></div> <div id="ermsg3"></div>
         </div>
     </div>
+  </div>
+  <div class="col-md-12 form_box">
+    <div class="form-group">
+      <label for="Description" class="col-sm-2 col-form-label">Description</label>
+         <div class="col-sm-12">
+             <textarea  id="textarea"  name="description" class="form-control" maxlength="30000" rows="8" placeholder=""></textarea>
+         </div>
+      </div>
   </div>
 
              <div id = "date_time">
