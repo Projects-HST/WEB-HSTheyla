@@ -2117,7 +2117,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
         }
 
 	    if ($from_date !='' &&  $to_date !=''){
-	        $fromto_date_query = "ev.start_date <= STR_TO_DATE('" . $to_date . "','%Y-%m-%d') AND  ev.end_date >= STR_TO_DATE('" . $from_date . "','%Y-%m-%d') AND";
+	        $fromto_date_query = "ev.start_date <= STR_TO_DATE('" . $to_date . "','%d-%m-%Y') AND  ev.end_date >= STR_TO_DATE('" . $from_date . "','%d-%m-%Y') AND";
 	   }
 
 	   if ($price_range !='') {
