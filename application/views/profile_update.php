@@ -98,6 +98,7 @@ input[type="file"] {
               <label class="col-md-3 col-form-label form-control-label">Gender</label>
               <div class="col-md-6">
                 <select class="col-form-label form-control" name="gender" id="gender">
+                    <option value="">--Select Gender--</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                   <option value="Other">Other</option>
@@ -136,6 +137,7 @@ input[type="file"] {
           <div class="col-md-6">
             <!-- <input class="form-control" type="text" name="occupation" value="<?php echo $rows->occupation; ?>"> -->
             <select class="col-form-label form-control" name="occupation" id="occupation">
+              <option value="">--Select Occupation--</option>
               <option value="Student">Student</option>
               <option value="Employed">Employed</option>
               <option value="Self Employed/Business">Self Employed/Business</option>
