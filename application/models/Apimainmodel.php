@@ -198,7 +198,8 @@ class Apimainmodel extends CI_Model {
 	    $city_name = '';
 
 		//	$sql = "SELECT * FROM user_master WHERE user_name ='".$username."' AND password = md5('".$password."') AND mobile_verify ='Y' AND email_verify ='Y' AND status='Y'";
-		$sql = "SELECT * FROM user_master WHERE user_name ='".$username."' AND password = md5('".$password."') AND email_verify ='Y' AND status='Y' AND email_verify ='Y'";
+	 	$sql = "SELECT * FROM user_master WHERE (user_name='$username' OR mobile_no='$username' OR email_id='$username') AND password = md5('".$password."')  AND status='Y'";
+
 		$user_result = $this->db->query($sql);
 		$ress = $user_result->result();
 		if($user_result->num_rows()>0)
@@ -210,30 +211,30 @@ class Apimainmodel extends CI_Model {
 			}
 		}
 
-		$sql = "SELECT * FROM user_master WHERE mobile_no ='".$username."' AND password = md5('".$password."') AND mobile_verify ='Y' AND status='Y'";
-		$user_result = $this->db->query($sql);
-		$ress = $user_result->result();
-		if($user_result->num_rows()>0)
-		{
-			foreach ($user_result->result() as $rows)
-			{
-				  $user_id = $rows->id;
-				  $login_count = $rows->login_count+1;
-
-			}
-		}
-
-		$sql = "SELECT * FROM user_master WHERE email_id ='".$username."' AND password = md5('".$password."') AND email_verify ='Y' AND status='Y'";
-		$user_result = $this->db->query($sql);
-		$ress = $user_result->result();
-		if($user_result->num_rows()>0)
-		{
-			foreach ($user_result->result() as $rows)
-			{
-				  $user_id = $rows->id;
-				  $login_count = $rows->login_count+1;
-			}
-		}
+		// $sql = "SELECT * FROM user_master WHERE mobile_no ='".$username."' AND password = md5('".$password."') AND mobile_verify ='Y' AND status='Y'";
+		// $user_result = $this->db->query($sql);
+		// $ress = $user_result->result();
+		// if($user_result->num_rows()>0)
+		// {
+		// 	foreach ($user_result->result() as $rows)
+		// 	{
+		// 		  $user_id = $rows->id;
+		// 		  $login_count = $rows->login_count+1;
+    //
+		// 	}
+		// }
+    //
+	 	// $sql = "SELECT * FROM user_master WHERE email_id ='".$username."' AND password = md5('".$password."')  AND status='Y'";
+		// $user_result = $this->db->query($sql);
+		// $ress = $user_result->result();
+		// if($user_result->num_rows()>0)
+		// {
+		// 	foreach ($user_result->result() as $rows)
+		// 	{
+		// 		  $user_id = $rows->id;
+		// 		  $login_count = $rows->login_count+1;
+		// 	}
+		// }
 
 
 
@@ -241,7 +242,8 @@ class Apimainmodel extends CI_Model {
 		if ( $user_id != "") {
 
 
-		    $sql = "SELECT A.id as userid, A.user_name, A.mobile_no, A.email_id, A.email_verify, A.login_count, A.user_role, B.name, B.birthdate, B.gender, B.occupation, B.address_line1, B.address_line2, B.address_line3, B.country_id, B. state_id, B.city_id, B.zip, B.user_picture, B.newsletter_status, B.referal_code, C.user_role_name FROM user_master A, user_details B, user_role_master C WHERE A.id=B.user_id AND A.user_role = C.id AND A.id ='".$user_id."'";
+		     $sql = "SELECT A.id as userid, A.user_name, A.mobile_no, A.email_id, A.email_verify, A.login_count, A.user_role, B.name, B.birthdate, B.gender, B.occupation, B.address_line1, B.address_line2, B.address_line3, B.country_id, B. state_id, B.city_id, B.zip, B.user_picture, B.newsletter_status, B.referal_code, C.user_role_name FROM user_master A, user_details B, user_role_master C WHERE A.id=B.user_id AND A.user_role = C.id AND A.id ='".$user_id."'";
+
 
 			$user_result = $this->db->query($sql);
 			$ress = $user_result->result();
@@ -349,7 +351,7 @@ class Apimainmodel extends CI_Model {
 							"user_role_name" => $ress[0]->user_role_name,
 							"referal_code" => $ress[0]->referal_code,
 							"user_login_count" => $ress[0]->login_count,
-							"event_organizer" => $event_organizer
+							"event_organizer" => " "
 				);
 			}
 
@@ -930,10 +932,10 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 
     		if($user_result->num_rows() == 0)
     		{
-				$update_query= "UPDATE user_master SET `user_name` ='$user_name' WHERE id='$user_id'";
+				$update_query= "UPDATE user_master SET user_name ='$user_name' WHERE id='$user_id'";
 				$update_query_result = $this->db->query($update_query);
 
-				$update_sql= "UPDATE user_details SET `name` ='$full_name', `birthdate` ='$date_of_birth', `gender` ='$gender', `occupation` ='$occupation', `address_line1` ='$address_line_1', `address_line2` ='$address_line_2', `address_line3` ='$address_line_3', `country_id` ='$country_id', `state_id` ='$state_id', `city_id` ='$city_id', `zip` ='$zip_code', `newsletter_status` ='$news_letter' WHERE user_id='$user_id'";
+				$update_sql= "UPDATE user_details SET name ='$full_name', birthdate ='$date_of_birth', gender ='$gender', occupation ='$occupation',address_line1 ='$address_line_1', address_line2 ='$address_line_2', address_line3 ='$address_line_3',country_id ='$country_id',state_id ='$state_id',city_id ='$city_id',zip ='$zip_code', newsletter_status ='$news_letter' WHERE user_id='$user_id'";
 				$update_result = $this->db->query($update_sql);
 
 				$response = array("status" => "success", "msg" => "Changes made are saved");
@@ -2061,6 +2063,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 //#################### Advanced Events Search ####################//
 	public function Advance_search($single_date,$from_date,$to_date,$event_type,$event_category,$selected_preference,$selected_city,$price_range)
 	{
+	    //echo $event_category;exit;
 	    $current_date = date("Y-m-d");
 
 	    $city_query ='';
@@ -2073,7 +2076,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 		$price_range_query = '';
 
 	    if ($selected_city!='') {
-            $city_query = "SELECT * FROM city_master WHERE city_name like '%" .$selected_city. "%' LIMIT 1";
+             $city_query = "SELECT * FROM city_master WHERE city_name like '%" .$selected_city. "%' LIMIT 1";
     		$city_res = $this->db->query($city_query);
     		 if($city_res->num_rows()>0){
     		    foreach ($city_res->result() as $rows)
@@ -2126,7 +2129,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 
 
 	    if ($event_category == 'Hotspot'){
-            $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
+             $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
                         FROM events AS ev
                         LEFT join event_popularity AS ep on ep.event_id = ev.id
                         LEFT JOIN city_master AS ci ON ev.event_city = ci.id
@@ -2135,7 +2138,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
                         WHERE $city_query $preference_query $event_type_query $event_category_query $price_range_query
                         ev.event_status ='Y' group by ev.id $event_popularity_query";
         } else {
-			$event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
+		 	  $event_query = "select ev.*, ci.city_name, cy.country_name, count(ep.event_id) as popularity
                         FROM events AS ev
                         LEFT join event_popularity AS ep on ep.event_id = ev.id
                         LEFT JOIN city_master AS ci ON ev.event_city = ci.id
@@ -2143,7 +2146,9 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 						LEFT JOIN booking_plan AS bp ON ev.id = bp.event_id
                         WHERE $city_query $preference_query $event_type_query $event_category_query $single_date_query $fromto_date_query $price_range_query
                         ev.end_date>= '$current_date' AND ev.event_status ='Y' group by ev.id $event_popularity_query";
+
 		}
+
 
 		$event_res = $this->db->query($event_query);
 

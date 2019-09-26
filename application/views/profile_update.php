@@ -21,7 +21,7 @@
   font-size: 16px;
 }
 .profile_tab{
-  margin-top: 50px;
+  margin-top: 10px;
   margin-bottom:50px;
 }
 
@@ -90,9 +90,8 @@ input[type="file"] {
       <div class="form-group row">
           <label class="col-md-3 col-form-label form-control-label">Email ID</label>
           <div class="col-md-6">
-            <p>  <?php echo $rows->email_id;  if($rows->email_verify=='N'){ ?><i class="fas fa-exclamation-triangle notverfied" title="Email is Not Verified"></i>
+            <input type="email" class="form-control"  name="email"  id="email" value="<?php echo $rows->email_id; ?>">
 
-          <?php  }else{  } ?> <span class="change-email"><a href="<?php echo  base_url(); ?>changemail"><br><small>Change Email ID</small></a></span></p>
           </div>
       </div>
           <div class="form-group row">
@@ -316,6 +315,13 @@ $('#profile_form').validate({ // initialize the plugin
                  type: "post"
               }
         },
+        email:{
+          required: false,email:true,
+          remote: {
+                 url: "<?php echo base_url(); ?>home/check_email_exist/<?php echo $this->session->userdata('id'); ?>",
+                 type: "post"
+              }
+        },
         name: {
             required: true
         },
@@ -339,6 +345,9 @@ $('#profile_form').validate({ // initialize the plugin
                         mobile_no: "Please enter a username",
                         remote: "Mobile number already in exist!"
                     },
+          email: {
+                         remote: "Email id already in exist!"
+                     },
 
         name: "Enter Name",
           gender: "Select Gender",

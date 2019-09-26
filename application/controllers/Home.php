@@ -771,7 +771,7 @@ class Home extends CI_Controller {
 		}
 
 		public function update_password(){
-			$email_token=$this->input->post('email_token');		
+			$email_token=$this->input->post('email_token');
 			$new_password=$this->input->post('new_password');
 			$retype_password=$this->input->post('retype_password');
 			$data=$this->loginmodel->update_password($email_token,$new_password,$retype_password);
@@ -801,6 +801,12 @@ class Home extends CI_Controller {
 			$mobile_no=$this->input->post('mobile_no');
 			$user_id=$this->uri->segment(3);
 			$data=$this->loginmodel->check_mobile($mobile_no,$user_id);
+
+		}
+		public function check_email_exist(){
+			$email=$this->input->post('email');
+			$user_id=$this->uri->segment(3);
+			$data=$this->loginmodel->check_email_exist($email,$user_id);
 
 		}
 
@@ -914,11 +920,12 @@ class Home extends CI_Controller {
 			if($user_id){
 				$first_name=$this->input->post('first_name');
 				$user_name=$this->input->post('user_name');
+				$email_id=$this->input->post('email');
 				$address=$this->input->post('address');
 				$gender=$this->input->post('gender');
 				$newsletter_status=$this->input->post('newsletter_status');
 				$occupation=$this->input->post('occupation');
-				$datas['res']=$this->loginmodel->save_profile_info($first_name,$user_name,$address,$gender,$newsletter_status,$occupation,$user_id);
+				$datas['res']=$this->loginmodel->save_profile_info($first_name,$user_name,$email_id,$address,$gender,$newsletter_status,$occupation,$user_id);
 			}else{
 				redirect('/');
 			}

@@ -246,16 +246,16 @@ Class Loginmodel extends CI_Model
    function check_email($email){
      $check_email="SELECT * FROM user_master WHERE email_id='$email'";
      $res=$this->db->query($check_email);
-     if($res->num_rows()>0){
-       echo "success";
+     if($res->num_rows()==0){
+       echo "true";
      }else{
-       echo "already";
+       echo "false";
      }
    }
 
 
    function exist_email($email){
-      $check_email="SELECT * FROM user_master WHERE email_id='$email'";
+     $check_email="SELECT * FROM user_master WHERE email_id='$email'";
      $res=$this->db->query($check_email);
      if($res->num_rows()==0){
        echo "true";
@@ -345,6 +345,16 @@ Class Loginmodel extends CI_Model
    }
    function check_mobile($mobile_no,$user_id){
      $select="SELECT * FROM user_master Where mobile_no='$mobile_no' and id!='$user_id'";
+      $result=$this->db->query($select);
+      if($result->num_rows()>0){
+        echo "false";
+        }else{
+          echo "true";
+      }
+   }
+
+   function check_email_exist($email,$user_id){
+     $select="SELECT * FROM user_master Where email_id='$email' and id!='$user_id'";
       $result=$this->db->query($select);
       if($result->num_rows()>0){
         echo "false";
@@ -503,7 +513,7 @@ Class Loginmodel extends CI_Model
        $get_user_id=$rows->id;
        $insert_activity="INSERT INTO  user_activity (date,user_id,activity_detail) VALUES(NOW(),'$get_user_id','normal_login') ";
        $result_activity=$this->db->query($insert_activity);
-       $update_user_login_count="UPDATE user_master SET login_count=login_count+1 WHERE id='$get_user_id'";
+       $update_user_login_count="UPDATE user_master SET login_count=login_count+1,mobile_verify='Y' WHERE id='$get_user_id'";
        $excu_user_login_count=$this->db->query($update_user_login_count);
        $update_user_points="UPDATE user_points_count SET login_count=login_count+1,login_points=login_points+1,total_points=total_points+1 WHERE user_id='$get_user_id'";
        $excu_user_points=$this->db->query($update_user_points);
@@ -556,11 +566,11 @@ Class Loginmodel extends CI_Model
      }
    }
 
-   function save_profile_info($first_name,$user_name,$address,$gender,$newsletter_status,$occupation,$user_id){
+   function save_profile_info($first_name,$user_name,$email_id,$address,$gender,$newsletter_status,$occupation,$user_id){
 				  $update_user_details="UPDATE user_details SET name='$first_name',address_line1='$address',occupation='$occupation',gender='$gender',newsletter_status='$newsletter_status' WHERE user_id='$user_id'";
 
 				 $result=$this->db->query($update_user_details);
-         $update_user_master="UPDATE user_master SET user_name='$user_name' WHERE id='$user_id'";
+         $update_user_master="UPDATE user_master SET user_name='$user_name',email_id='$email_id' WHERE id='$user_id'";
 				 $result=$this->db->query($update_user_master);
 				 if($result){
 					  echo "success";
@@ -658,7 +668,7 @@ Class Loginmodel extends CI_Model
 
    function update_password($email_token,$new_password,$retype_password){
       $email_decrypt=base64_decode($email_token)/987654;
-     $check_email="SELECT * FROM user_master WHERE mobile_no='$email_decrypt'";  
+     $check_email="SELECT * FROM user_master WHERE mobile_no='$email_decrypt'";
      $res=$this->db->query($check_email);
       if($res->num_rows()==0){
         echo "Something Went Wrong";

@@ -444,7 +444,8 @@ class Apimain extends CI_Controller {
         $user_id = $this->input->post("user_id");
         $full_name = $this->input->post("full_name");
         $username = $this->input->post("username");
-        $date_of_birth = $this->input->post("date_of_birth");
+			  $dob = $this->input->post("date_of_birth");
+				$date_of_birth = date("Y-m-d", strtotime($dob));
         $gender = $this->input->post("gender");
         $occupation = $this->input->post("occupation");
         $address_line_1 = $this->input->post("address_line_1");
@@ -1532,7 +1533,7 @@ class Apimain extends CI_Controller {
 
 	public function advanceSearch()
 	{
-		$_POST = json_decode(file_get_contents("php://input"), TRUE);
+    	$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
 		if(!$this->checkMethod())
 		{
@@ -1574,6 +1575,7 @@ class Apimain extends CI_Controller {
 
 		$data['result']=$this->apimainmodel->Advance_search($single_date,$from_date,$to_date,$event_type,$event_category,$selected_preference,$selected_city,$price_range);
 		$response = $data['result'];
+
 		echo json_encode($response);
 	}
 
@@ -2210,15 +2212,15 @@ class Apimain extends CI_Controller {
 			echo json_encode($res);
 			return;
 		}
-		
+
 		$name = "";
 		$email = "";
 		$comments = "";
-		
+
 		$name = $this->input->post("name");
 		$email = $this->input->post("email");
 		$comments = $this->input->post("comments");
-		
+
 		$data['result']=$this->apimainmodel->User_Feedback($name,$email,$comments);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -2248,11 +2250,11 @@ class Apimain extends CI_Controller {
 			echo json_encode($res);
 			return;
 		}
-		
+
 		$user_id = "";
-		
+
 		$user_id = $this->input->post("user_id");
-		
+
 		$data['result']=$this->apimainmodel->View_notification($user_id);
 		$response = $data['result'];
 		echo json_encode($response);
@@ -2281,11 +2283,11 @@ class Apimain extends CI_Controller {
 			echo json_encode($res);
 			return;
 		}
-		
+
 		$user_id = "";
-		
+
 		$user_id = $this->input->post("user_id");
-		
+
 		$data['result']=$this->apimainmodel->New_notification($user_id);
 		$response = $data['result'];
 		echo json_encode($response);

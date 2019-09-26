@@ -140,7 +140,7 @@ $('#formsignup').validate({ // initialize the plugin
                 }
         },
         mobile: {
-            required: false,minlength: 10, maxlength: 10, digits: true,
+            required: true,minlength: 10, maxlength: 10, digits: true,
             remote: {
                    url: "<?php echo base_url(); ?>home/existmobile",
                    type: "post"
