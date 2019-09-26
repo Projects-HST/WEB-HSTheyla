@@ -297,9 +297,11 @@
 		  return false;
 		}
 	});
+	
   $.validator.addMethod('filesize', function (value, element, param) {
       return this.optional(element) || (element.files[0].size <= param)
   }, 'File size must be less than 1 MB');
+  
     $('#eventform').validate({ // initialize the plugin
        rules: {
          category:{required:true },
@@ -323,7 +325,7 @@
          event_status:{required:true },
          txtLatitude:{required:true },
          txtLongitude:{required:true },
-		     eventbanner:{required:true,accept: "jpg,jpeg,png", filesize: 1048576  }
+		 eventbanner:{required:true,accept: "jpg,jpeg,png", filesize: 1048576  }
         },
 
         messages: {
@@ -358,7 +360,7 @@
         event_status:"Select status",
         txtLatitude:"This field cannot be empty!",
         txtLongitude:"This field cannot be empty!",
-    		eventbanner:{
+		eventbanner:{
           required:"Select banner",
           accept:"Please upload .jpg or .png .",
           fileSize:"File must be JPG or PNG, less than 1MB"
