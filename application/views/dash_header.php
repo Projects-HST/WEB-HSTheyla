@@ -20,6 +20,7 @@
 <script src="<?php echo base_url(); ?>assets/front/js/moment.js"></script>
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-92904528-2"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -27,7 +28,6 @@
   gtag('js', new Date());
 
   gtag('config', 'UA-92904528-2');
-
 </script>
 </head>
 

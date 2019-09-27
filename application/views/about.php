@@ -30,6 +30,7 @@
     <!--  Forms Validations Plugin -->
     <script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/additional-methods.min.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-92904528-2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
