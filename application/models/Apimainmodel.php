@@ -2422,7 +2422,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	        }
 	    if ($rule_id == '2') //Sharing//
 	        {
-	            $activity_sql = "INSERT INTO user_activity (date,user_id,event_id,rule_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $event_id . "','". $rule_id . "','Sharing')";
+	        $activity_sql = "INSERT INTO user_activity (date,user_id,event_id,rule_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $event_id . "','". $rule_id . "','Sharing')";
 		    	$insert_activity = $this->db->query($activity_sql);
 
 		    	$activity_points = "UPDATE user_points_count SET sharing_count = sharing_count+1,sharing_points = sharing_points+5,total_points=total_points+5 WHERE user_id  ='$user_id'";
@@ -2432,13 +2432,21 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	        }
 	   	if ($rule_id == '3') //Checkin//
 	        {
-    	       	$activity_sql = "INSERT INTO user_activity (date,user_id,event_id,rule_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $event_id . "','". $rule_id . "','Checkin')";
-		    	$insert_activity = $this->db->query($activity_sql);
 
-		    	$activity_points = "UPDATE user_points_count SET checkin_count = checkin_count+1,checkin_points = checkin_points+10,total_points=total_points+10 WHERE user_id  ='$user_id'";
-		    	$insert_points = $this->db->query($activity_points);
+          $check_user_activity="SELECT * FROM user_activity where user_id='$user_id' and event_id='$event_id' and activity_detail='Checkin'";
+          $check_activity = $this->db->query($check_user_activity);
+          if($check_activity->num_rows()==0){
+            $activity_sql = "INSERT INTO user_activity (date,user_id,event_id,rule_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $event_id . "','". $rule_id . "','Checkin')";
+  		    	$insert_activity = $this->db->query($activity_sql);
+  		    	$activity_points = "UPDATE user_points_count SET checkin_count = checkin_count+1,checkin_points = checkin_points+10,total_points=total_points+10 WHERE user_id  ='$user_id'";
+  		    	$insert_points = $this->db->query($activity_points);
+      			$response = array("status" => "success", "msg" => "User Activity Updated");
+          }else{
+            	$response = array("status" => "error", "msg" => "You have already  Checked-in for this Event");
+          }
 
-    			$response = array("status" => "success", "msg" => "User Activity Updated");
+
+
 	        }
 
 			return $response;
