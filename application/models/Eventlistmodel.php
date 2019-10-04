@@ -397,11 +397,20 @@ Class Eventlistmodel extends CI_Model
 	function getevent_reviews($event_id)
     {
 		$current_date = date("Y-m-d");
-		$sql="SELECT * FROM event_reviews A, user_master B WHERE A.user_id = B.id AND A.event_id ='$event_id' AND A.status ='Y'";
+		$sql="SELECT * FROM event_reviews A, user_master B WHERE A.user_id = B.id AND A.event_id ='$event_id' AND A.status ='Y' LIMIT 5";
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
 	  	return $res;
     }
+
+		function get_all_reviews_for_event($event_id){
+			 $id=base64_decode($event_id)/564738;
+			$current_date = date("Y-m-d");
+			$sql="SELECT * FROM event_reviews A, user_master B WHERE A.user_id = B.id AND A.event_id ='$id' AND A.status ='Y'";
+				$resu=$this->db->query($sql);
+				$res=$resu->result();
+				return $res;
+		}
 
 	function getevent_gallery($event_id)
     {

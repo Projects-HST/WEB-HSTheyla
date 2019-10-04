@@ -145,6 +145,19 @@ class Eventlist extends CI_Controller
     	  $this->load->view('front_footer');
       }
 
+      public function event_reviews()
+        {
+
+          $event_id=$this->uri->segment(3);
+          $datas=$this->session->userdata();
+      		$user_id=$this->session->userdata('id');
+      		$user_role=$this->session->userdata('user_role');
+          $data['res_event_review']=$this->eventlistmodel->get_all_reviews_for_event($event_id);
+          $this->load->view('front_header',$data);
+          $this->load->view('reviews_for_event',$data);
+      	  $this->load->view('front_footer');
+        }
+
 	public function eventwishlist()
     {
       	$user_id  = $this->input->post('user_id');
