@@ -642,12 +642,7 @@ class Home extends CI_Controller {
 		}
 
 
-		public function verify(){
-			$this->load->view('front_header');
-			$this->load->view('verify');
-			$this->load->view('front_footer');
-
-		}
+	
 		public function privacy(){
 
 			$this->load->view('front_header');

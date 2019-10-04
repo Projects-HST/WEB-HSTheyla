@@ -226,10 +226,13 @@ foreach($event_details as $res){
 			<p class="event_heading">Review</p>
 			<hr>
 			<?php
-				if (!empty($event_reviews)){ ?>
+				if (!empty($event_reviews)){
+						echo count($event_reviews);
+					 ?>
 					<div class="event_detail_thumb">
 			 <?php
 					foreach($event_reviews as $result){
+
 						 $ratings = $result->event_rating;
 			?>
 								<div class="review_section">
@@ -256,6 +259,7 @@ foreach($event_details as $res){
 			 <?php
 				}
 			?>
+		
 						<div class="event_booking_section text-center ">
 						<p class="text-center"><img class="img-responsive write_review_img" src="<?php echo base_url(); ?>assets/front/images/write_review.png"></p>
 						<p class="write_first_review"><?php if (empty($event_reviews)){?>Be the first one to Review ! Share Your experience<?php } ?></p>
