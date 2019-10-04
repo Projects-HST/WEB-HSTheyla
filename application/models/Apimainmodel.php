@@ -2290,21 +2290,87 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	public function Bookingprocess($order_id,$event_id,$plan_id,$plan_time_id,$user_id,$number_of_seats,$total_amount,$booking_date)
 	{
 
-	        $sQuery = "INSERT INTO booking_process (order_id,event_id,plan_id,plan_time_id,user_id,number_of_seats,total_amount,booking_date) VALUES ('". $order_id . "','". $event_id . "','". $plan_id . "','". $plan_time_id . "','". $user_id . "','". $number_of_seats . "','". $total_amount . "','". $booking_date . "')";
+		$squery = "SELECT A.id AS booking_id,A.plan_time_id,B.id AS psession_id,B.number_of_seats FROM booking_process A, booking_session B WHERE A.user_id = '$user_id' AND A.order_id = B.order_id AND B.plan_time_id ='$plan_time_id' AND  B.status = 'Start'";
+		$resul_set =$this->db->query($squery);
+			if($resul_set->num_rows()>0)
+			{
+				foreach($resul_set->result() as $rows)
+				{
+					 $old_booking_id=$rows->booking_id;
+					 $old_session_id=$rows->psession_id;
+					 $old_number_of_seats=$rows->number_of_seats;
+					 $old_plan_time_id=$rows->plan_time_id;
+
+				}
+					$update_seats = "UPDATE booking_plan_timing SET seat_available = seat_available+$old_number_of_seats WHERE id ='$old_plan_time_id'";
+					$resu=$this->db->query($update_seats);
+
+					$delete_process = "DELETE FROM booking_process WHERE id = '$old_booking_id'";
+					$resu=$this->db->query($delete_process);
+
+					$delete_session = "DELETE FROM booking_session WHERE id = '$old_session_id'";
+					$resu=$this->db->query($delete_session);
+
+				$sql = "SELECT * FROM booking_plan_timing WHERE seat_available >= '$number_of_seats' AND id = '$plan_time_id'";
+				$resu=$this->db->query($sql);
+
+				if($resu->num_rows()>0)
+				{
+					$sQuery = "INSERT INTO booking_process (order_id,event_id,plan_id,plan_time_id,user_id,number_of_seats,total_amount,booking_date) VALUES ('". $order_id . "','". $event_id . "','". $plan_id . "','". $plan_time_id . "','". $user_id . "','". $number_of_seats . "','". $total_amount . "','". $booking_date . "')";
+					$booking_insert = $this->db->query($sQuery);
+
+					$update_seats = "UPDATE booking_plan_timing SET seat_available = seat_available-$number_of_seats WHERE id ='$plan_time_id'";
+					$seatsupdate = $this->db->query($update_seats);
+
+					$_SESSION['booking_start'] = time(); // taking now logged in time
+					$_SESSION['booking_expire'] = $_SESSION['booking_start'] + (300) ; // ending a session in 10mins
+
+					$session_seats = "INSERT INTO booking_session (session_expiry,order_id,plan_time_id,number_of_seats,status) VALUES ('". $_SESSION['booking_expire'] . "','". $order_id . "','". $plan_time_id . "','". $number_of_seats . "','Start')";
+					$session_insert = $this->db->query($session_seats);
+					$response = array("status" => "success", "msg" => "Bookingprocess");
+				} else {
+					$response = array("status" => "success", "msg" => "Seat Error");
+				}
+			} else {
+				$sql = "SELECT * FROM booking_plan_timing WHERE seat_available >= '$number_of_seats' AND id = '$plan_time_id'";
+				$resu=$this->db->query($sql);
+
+				if($resu->num_rows()>0)
+				{
+					$sQuery = "INSERT INTO booking_process (order_id,event_id,plan_id,plan_time_id,user_id,number_of_seats,total_amount,booking_date) VALUES ('". $order_id . "','". $event_id . "','". $plan_id . "','". $plan_time_id . "','". $user_id . "','". $number_of_seats . "','". $total_amount . "','". $booking_date . "')";
+					$booking_insert = $this->db->query($sQuery);
+
+					$update_seats = "UPDATE booking_plan_timing SET seat_available = seat_available-$number_of_seats WHERE id ='$plan_time_id'";
+					$seatsupdate = $this->db->query($update_seats);
+
+					$_SESSION['booking_start'] = time(); // taking now logged in time
+					$_SESSION['booking_expire'] = $_SESSION['booking_start'] + (300) ; // ending a session in 10mins
+
+					$session_seats = "INSERT INTO booking_session (session_expiry,order_id,plan_time_id,number_of_seats,status) VALUES ('". $_SESSION['booking_expire'] . "','". $order_id . "','". $plan_time_id . "','". $number_of_seats . "','Start')";
+					$session_insert = $this->db->query($session_seats);
+					
+					$response = array("status" => "success", "msg" => "Bookingprocess");
+				} else {
+					$response = array("status" => "success", "msg" => "Seat Error");
+				}
+			}
+
+			return $response;
+
+/* 	        $sQuery = "INSERT INTO booking_process (order_id,event_id,plan_id,plan_time_id,user_id,number_of_seats,total_amount,booking_date) VALUES ('". $order_id . "','". $event_id . "','". $plan_id . "','". $plan_time_id . "','". $user_id . "','". $number_of_seats . "','". $total_amount . "','". $booking_date . "')";
 			$booking_insert = $this->db->query($sQuery);
 
 			$update_seats = "UPDATE booking_plan_timing SET seat_available = seat_available-$number_of_seats WHERE id ='$plan_time_id'";
 		    $seatsupdate = $this->db->query($update_seats);
 
 		    $_SESSION['booking_start'] = time(); // taking now logged in time
-            $_SESSION['booking_expire'] = $_SESSION['booking_start'] + (600) ; // ending a session in 10mins
+            $_SESSION['booking_expire'] = $_SESSION['booking_start'] + (300) ; // ending a session in 10mins
 
 		     $session_seats = "INSERT INTO booking_session (session_expiry,order_id,plan_time_id,number_of_seats,status) VALUES ('". $_SESSION['booking_expire'] . "','". $order_id . "','". $plan_time_id . "','". $number_of_seats . "','Start')";
-		    $session_insert = $this->db->query($session_seats);
-
+		    $session_insert = $this->db->query($session_seats); 
 
         	$response = array("status" => "success", "msg" => "Bookingprocess");
-			return $response;
+			return $response;*/
 	}
 //#################### Booking Process End ###############//
 
