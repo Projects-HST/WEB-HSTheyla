@@ -73,6 +73,7 @@
                      <li class="nav-item">
                         <a href="#" class="nav-link organiser_btn" data-toggle="modal" data-target="#exampleModal">Become An Organizer</a>
                     </li>
+                    
                 <?php   }?>
 
                     <?php
@@ -121,11 +122,7 @@
                                           <?php  }
                                           ?>
                                     </a>
-                                    <!-- <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="margin-left:-60px;">
-                                      <li><a class="nav-link" href="<?php echo base_url(); ?>profile">Profile</a></li>
-                                      <li><a class="nav-link logout-btn" onclick="logout()">Logout</a></li>
 
-                                    </ul> -->
                                     <ul class="dropdown-menu dropdown-block profile_menu" role="menu" style="">
                                         <li><a href="<?php echo base_url(); ?>profile">Profile</a></li>
                                          <li><a href="<?php echo base_url(); ?>change_password">Change Password</a></li>
