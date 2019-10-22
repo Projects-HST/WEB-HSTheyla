@@ -33,7 +33,7 @@ $secondhalf = array_slice($res, $len / 2);
             <p class="footer_heading">Get In Touch</p>
             <ul class="fnt-footer contact_text">
               <li class=""><i class="fa fa-envelope" aria-hidden="true"></i><span> info@heylaapp.com </span></li>
-              <li class=""><i class="fa fa-phone" aria-hidden="true"></i> +65 9887 2345</li>
+              <li class=""><i class="fa fa-phone" aria-hidden="true"></i> +65 8110 0119</li>
             </ul>
             <p class="footer_heading">Follow  Us On</p>
             <ul class="fnt-footer social_follow">
