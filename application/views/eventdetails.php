@@ -433,8 +433,6 @@ foreach($event_details as $res){
   	function disp_time()
 	{
 
-
-
 		$('#show_plan').prop('selectedIndex',0);
 		$('#show_seats').prop('selectedIndex',0);
 

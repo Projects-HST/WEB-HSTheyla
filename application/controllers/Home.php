@@ -556,7 +556,6 @@ class Home extends CI_Controller {
 
 		public function logout()
 		{
-
 			$datas=$this->session->userdata();
 			$this->session->unset_userdata($datas);
 			$this->session->sess_destroy();
