@@ -3,7 +3,7 @@
       <div class="row">
 
       <div class="col-lg-12">
-          <h4 class="mt-0 header-title">Events Details </h4>
+          <h4 class="mt-0 header-title">Events List</h4>
           <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
             <thead>
                 <tr>
@@ -37,8 +37,20 @@
     </div>
     </div>
 </div>
-<script>
+<script type="text/javascript">
+
+	$('#track').addClass("has_sub active nav-active");
+  
 $(document).ready(function() {
-  $('table.display').DataTable();
+
+	 $(document).on("preInit.dt", function(){
+		$(".dataTables_filter input[type='search']").attr("maxlength", 20);
+	});
+	
+	$('table').DataTable({
+         "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+        "iDisplayLength": 25,
+		"ordering": false
+    });
 } );
 </script>

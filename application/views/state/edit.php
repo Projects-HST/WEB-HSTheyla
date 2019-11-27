@@ -11,7 +11,7 @@
                         <form class="" method="post" action="<?php echo base_url();?>state/update_state" id="stateform" name="stateform">
 
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Country</label>
+                              <label class="col-sm-4 col-form-label">Country <span class="error">*</span></label>
                               <div class="col-sm-6">
                                  <select class="form-control" name="countryid" >
                                      <option value="">Select Country </option>
@@ -24,14 +24,14 @@
                            </div>
 
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-4 col-form-label">State </label>
+                              <label for="example-text-input" class="col-sm-4 col-form-label">State <span class="error">*</span></label>
                               <div class="col-sm-6">
-                                 <input class="form-control" type="text"  name="statename" value="<?php echo $res->state_name; ?>" id="example-text-input">
+                                 <input class="form-control" type="text"  name="statename" value="<?php echo $res->state_name; ?>" id="example-text-input" maxlength="50"> 
                                   <input class="form-control" type="hidden"  name="stateid" value="<?php echo $res->id; ?>" id="example-text-input">
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Status</label>
+                              <label class="col-sm-4 col-form-label">Status <span class="error">*</span></label>
                               <div class="col-sm-6">
                                  <select class="form-control"  name="eventsts">
                                     <option value="Y">Active</option>
@@ -74,9 +74,9 @@
 
         },
         messages: {
-        countryid:"Select country ",
-        statename:"Enter state ",
-        eventsts:"Select status"
+        countryid:"Select Country",
+        statename:"Enter State",
+        eventsts:"Select Status"
                },
          });
    });

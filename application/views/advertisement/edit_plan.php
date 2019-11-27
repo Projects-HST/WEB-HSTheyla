@@ -17,16 +17,16 @@
 
                      <form  method="post" action="<?php echo base_url();?>advertisement/update_plans" name="advertisementform" id="advertisementform" enctype="multipart/form-data">
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-4 col-form-label">Plan Name</label>
+                              <label for="example-text-input" class="col-sm-4 col-form-label">Plan Name <span class="error">*</span></label>
                               <div class="col-sm-6">
-                                 <input class="form-control" type="text" name="planname" value="<?php echo $res->plan_name;?>" id="example-text-input">
-                                 <input class="form-control" type="hidden" name="planid" value="<?php echo $res->id;?>" id="example-text-input">
+                                 <input class="form-control" type="text" name="planname" value="<?php echo $res->plan_name;?>" maxlength="50">
+                                 <input class="form-control" type="hidden" name="planid" value="<?php echo $res->id;?>">
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Plan Price</label>
+                              <label class="col-sm-4 col-form-label">Plan Price <span class="error">*</span></label>
                               <div class="col-sm-6">
-                                 <input type="text" name="plan_rate" class="form-control" value="<?php echo $res->plan_rate;?>" id="example-text-input">
+                                 <input type="text" name="plan_rate" class="form-control" value="<?php echo $res->plan_rate;?>"  maxlength="10">
                               </div>
                            </div>
                            <div class="form-group">

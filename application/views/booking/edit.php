@@ -9,9 +9,9 @@
                         <?php   foreach($edit as $res){ } ?>
                            <form  method="post" action="<?php echo base_url();?>booking/update_plans" name="planform" id="planform">
                             <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Plan Name </label>
+                              <label class="col-sm-4 col-form-label">Plan Name <span class="error">*</span></label>
                               <div class="col-sm-6">
-                                 <input class="form-control" type="text" name="planname" value="<?php echo $res->plan_name ;?>" >
+                                 <input class="form-control" type="text" name="planname" value="<?php echo $res->plan_name ;?>" maxlength="25">
                            <input class="form-control"  type="hidden" name="event_id" value="<?php echo $res->event_id ;?>">
                            <input class="form-control"  type="hidden" name="plan_id" value="<?php echo $res->id ;?>">
                               </div>
@@ -25,9 +25,9 @@
                            </div-->
 
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Amount </label>
+                              <label class="col-sm-4 col-form-label">Amount <span class="error">*</span></label>
                               <div class="col-sm-6">
-                                 <input class="form-control"  type="text" name="amount"  value="<?php echo $res->seat_rate ;?>" >
+                                 <input class="form-control"  type="text" name="amount"  value="<?php echo $res->seat_rate ;?>" maxlength="11">
                               </div>
                            </div>
                            <div class="form-group">

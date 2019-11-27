@@ -30,7 +30,7 @@
                                       </div>
                                    </div> -->
                                    <div class="form-group row">
-                                      <label class="col-sm-5 col-form-label">Status</label>
+                                      <label class="col-sm-5 col-form-label">Status <span class="red_txt_label">*</span></label>
                                       <div class="col-sm-4">
                                         <select name="req_status" class="form-control">
                                             <option  value="Denied">Denied</option>

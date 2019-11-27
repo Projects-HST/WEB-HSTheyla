@@ -55,7 +55,6 @@
     <div class="col-md-3 bor"><p class="txt_label">Login Status</p></div>
     <div class="col-md-3 bor"><p class="txt_value">
       <select class="form-control"  name="login_status" id="login_status">
-           <option value="">Select Status</option>
            <option value="Y">Enable</option>
            <option value="N">Disable</option>
        </select>
@@ -98,7 +97,7 @@
 
 <script type="text/javascript">
 
-  $('#viewuser').addClass("active");
+  $('#normaluser').addClass("active");
   $('#users').addClass("has_sub active nav-active");
 
  $('#ctname').prop('disabled', 'disabled');

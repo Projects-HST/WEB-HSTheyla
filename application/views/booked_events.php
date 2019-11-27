@@ -10,13 +10,13 @@
 }
 </style>
 <div class="col-sm-12 col-md-12 " id="content">
-    <h3 class="dashboard_tab">Booking Details </h3>
+    <h3 class="dashboard_tab">Event Reviews </h3>
 </div>
-<div class="container event_section">
-  <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+<div class="col-md-12 event_section">
+  <table id="" class="table table-striped table-bordered" cellspacing="0" width="100%">
            <thead>
               <tr>
-                 <th>S. No</th>
+                 <th>S.No</th>
                  <th>Event</th>
                  <th>Plan</th>
                  <th>Date & Time</th>
@@ -47,6 +47,14 @@
 </div>
 <script>
 $(document).ready(function() {
-  $('table.display').DataTable();
+  $(document).on("preInit.dt", function(){
+		$(".dataTables_filter input[type='search']").attr("maxlength", 20);
+	});
+  
+	$('table').DataTable({
+         "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+        "iDisplayLength": 25,
+		"ordering": false
+    });
 } );
 </script>

@@ -18,14 +18,14 @@
                   <?php $i=1; foreach ($get_all_request as $value) {   ?>
                     <tr>
                       <td><?php echo $i; ?></td>
-                        <td><?php echo $value->name;?> <br><?php echo $value->email_id; ?> </td>
+                        <td><?php echo $value->name_req;?> <br><?php echo $value->email_id; ?> </td>
                         <!-- <td><?php echo $value->message;?></td> -->
                           <td><?php if($value->req_status=="Pending"){ ?>
                             <p class="btn btn-danger waves-effect waves-light">Pending</p>
                           <?php }else if($value->req_status=="Approved"){ ?>
                               <p class="btn btn-success waves-effect waves-light">Approved</p>
                         <?php  }else{ ?>
-                            <p class="btn btn-primary waves-effect waves-light">Rejected</p>
+                            <p class="btn btn-primary waves-effect waves-light">Denied</p>
                       <?php  }?></td>
 
                        <td><a href="<?php echo base_url(); ?>dashboard/update_req_status/<?php echo $value->rq_id*9876; ?>"><img title="Update" src="<?php echo base_url(); ?>assets/icons/view.png"></a>  </td>
@@ -42,6 +42,14 @@
 </div> <!-- content -->
 <script>
 $(document).ready(function() {
-$('table.display').DataTable();
+		 $(document).on("preInit.dt", function(){
+		$(".dataTables_filter input[type='search']").attr("maxlength", 20);
+	});
+	
+	$('table').DataTable({
+         "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+        "iDisplayLength": 25,
+		"ordering": false
+    });
 } );
 </script>

@@ -11,10 +11,10 @@
                         <form class="" method="post" action="<?php echo base_url();?>state/add_state" id="stateform" name="stateform">
 
                             <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Country </label>
+                              <label class="col-sm-4 col-form-label">Country <span class="error">*</span></label>
                               <div class="col-sm-6">
                                  <select class="form-control" name="countryid"  >
-                                     <option value="">Select country </option>
+                                     <option value="">Select Country </option>
                                      <?php foreach($countyr_list as $cntry){ ?>
                                           <option value="<?php echo $cntry->id; ?>"><?php echo $cntry->country_name; ?></option>
                                      <?php } ?>
@@ -23,17 +23,17 @@
                            </div>
 
                             <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-4 col-form-label">State Name</label>
+                              <label for="example-text-input" class="col-sm-4 col-form-label">State Name <span class="error">*</span></label>
                               <div class="col-sm-6">
-                                 <input class="form-control"   type="text" name="statename" id="example-text-input">
+                                 <input class="form-control"   type="text" name="statename" id="example-text-input" maxlength="50">
                               </div>
                            </div>
 
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Status</label>
+                              <label class="col-sm-4 col-form-label">Status <span class="error">*</span></label>
                               <div class="col-sm-6">
                                  <select class="form-control"  name="eventsts">
-                                    <option value="">Select status</option>
+                                    <option value="">Select Status</option>
                                     <option value="Y">Active</option>
                                     <option value="N">Inactive</option>
                                  </select>
@@ -65,7 +65,7 @@
                           </div>
                         <?php endif; ?>
 
-                        <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
 							            <th>S. No</th>
@@ -107,6 +107,17 @@
 <!-- content -->
 <script type="text/javascript">
     $(document).ready(function () {
+
+	$(document).on("preInit.dt", function(){
+		$(".dataTables_filter input[type='search']").attr("maxlength", 20);
+	});
+	
+	$('table').DataTable({
+         "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+        "iDisplayLength": 25,
+		"ordering": false
+    });
+	
     $('#stateform').validate({ // initialize the plugin
        rules: {
          countryid:{required:true },
@@ -115,9 +126,9 @@
 
         },
         messages: {
-        countryid:"Select country ",
-        statename:"Enter state ",
-        eventsts:"Select status"
+        countryid:"Select Country ",
+        statename:"Enter State",
+        eventsts:"Select Status"
                },
          });
    });

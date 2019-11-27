@@ -13,7 +13,7 @@
     <h3 class="dashboard_tab">Event Reviews </h3>
 </div>
 <div class="col-md-12 event_section">
-  <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
+  <table class="table table-striped table-bordered display" cellspacing="0" width="100%">
         <thead>
         <tr>
             <th>Event</th>
@@ -39,6 +39,14 @@
 </div>
 <script>
 $(document).ready(function() {
-  $('table.display').DataTable();
+  $(document).on("preInit.dt", function(){
+		$(".dataTables_filter input[type='search']").attr("maxlength", 20);
+	});
+  
+	$('table').DataTable({
+         "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+        "iDisplayLength": 25,
+		"ordering": false
+    });
 } );
 </script>

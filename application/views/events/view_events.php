@@ -79,10 +79,7 @@ th{
                               <!--a onclick="confirmGetMessage(<?php echo $eid;?>)" >
                               <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
 
-                              <?php if($etype=='Paid'){?>
-                              <a href="<?php echo base_url();?>booking/home/<?php echo base64_encode($rows->id);?>">
-                              <img title="Ticket plans" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
-                              <?php } ?>
+                             
 
                               <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo $rows->id;?>">
                               <img title="Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/></a>
@@ -90,6 +87,10 @@ th{
                               <a href="<?php echo base_url();?>events/view_events_reviews/<?php echo base64_encode($rows->id);?>">
                               <img title="Reviews" src="<?php echo base_url();?>assets/icons/review.png"/></a>
 
+							<?php if($etype=='Paid'){?>
+                              <a href="<?php echo base_url();?>booking/home/<?php echo base64_encode($rows->id);?>">
+                              <img title="Ticket plans" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
+                              <?php } ?>
                             </td>
                         </tr>
                       <?php $i++; }  }  ?>
@@ -98,7 +99,7 @@ th{
                         </div>
 
                     <div class="tab-pane p-3" id="profile-1" role="tabpanel">
-                      <table class="table table-striped table-bordered display" cellspacing="0" width="100%">
+                      <table id="datatable" class="table table-striped table-bordered display" cellspacing="0" width="100%">
                         <thead>
                         <tr>
                           <th>S. No</th>
@@ -136,10 +137,6 @@ th{
                               <!--a onclick="confirmGetMessage(<?php echo $eid;?>)">
                               <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
 
-                              <?php if($etype=='Paid'){?>
-                              <a href="<?php echo base_url();?>booking/home/<?php echo base64_encode($rows->id);?>">
-                              <img title="Ticket plans" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
-                              <?php } ?>
 
                               <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo $rows->id;?>">
                               <img title="Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/></a>
@@ -147,6 +144,10 @@ th{
                               <a href="<?php echo base_url();?>events/view_events_reviews/<?php echo base64_encode($rows->id);?>">
                               <img title="Reviews" src="<?php echo base_url();?>assets/icons/review.png"/></a>
 
+                              <?php if($etype=='Paid'){?>
+                              <a href="<?php echo base_url();?>booking/home/<?php echo base64_encode($rows->id);?>">
+                              <img title="Ticket plans" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
+                              <?php } ?>
                             </td>
                         </tr>
                        <?php $i++; } }  ?>
@@ -191,17 +192,18 @@ th{
                               <img  title="Event details" src="<?php echo base_url();?>assets/icons/view.png"/></a>
                               <!--a onclick="confirmGetMessage(<?php echo $eid;?>)">
                               <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
-                              <?php if($etype=='Paid'){ ?>
-                              <a href="<?php echo base_url();?>booking/home/<?php echo base64_encode($rows->id);?>">
-                                <img title="Ticket plans" src="<?php echo base_url();?>assets/icons/booking.png"/>
-                             </a>
-                              <?php } ?>
+                             
                               <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo $rows->id;?>">
                               <img title="Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/>
                             </a>
                             <a href="<?php echo base_url();?>events/view_events_reviews/<?php echo base64_encode($rows->id);?>">
                               <img title="Reviews" src="<?php echo base_url();?>assets/icons/review.png"/>
                             </a>
+							 <?php if($etype=='Paid'){ ?>
+                              <a href="<?php echo base_url();?>booking/home/<?php echo base64_encode($rows->id);?>">
+                                <img title="Ticket plans" src="<?php echo base_url();?>assets/icons/booking.png"/>
+                             </a>
+                              <?php } ?>
                             </td>
                         </tr>
                        <?php $i++; } }  ?>
@@ -243,17 +245,18 @@ th{
                             <img  title="Event details" src="<?php echo base_url();?>assets/icons/view.png"/></a>
                             <!--a onclick="confirmGetMessage(<?php echo $eid;?>)">
                             <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
-                            <?php if($etype=='Paid'){ ?>
-                            <a href="<?php echo base_url();?>booking/home/<?php echo base64_encode($rows->id);?>">
-                              <img title="Ticket plans" src="<?php echo base_url();?>assets/icons/booking.png"/>
-                           </a>
-                            <?php } ?>
+
                             <a href="<?php echo base_url();?>events/add_events_gallery/<?php echo $rows->id;?>">
                             <img title="Gallery" src="<?php echo base_url();?>assets/icons/gallery.png"/>
                           </a>
                           <a href="<?php echo base_url();?>events/view_events_reviews/<?php echo base64_encode($rows->id);?>">
                             <img title="Reviews" src="<?php echo base_url();?>assets/icons/review.png"/>
                           </a>
+						   <?php if($etype=='Paid'){ ?>
+                            <a href="<?php echo base_url();?>booking/home/<?php echo base64_encode($rows->id);?>">
+                              <img title="Ticket plans" src="<?php echo base_url();?>assets/icons/booking.png"/>
+                           </a>
+                            <?php } ?>
                           </td>
                         </tr>
                        <?php $i++; }  ?>
@@ -272,7 +275,7 @@ th{
 
 </style>
 <script type="text/javascript">
-  function confirmGetMessage(eid)
+function confirmGetMessage(eid)
   {
     var r=confirm("Do you want to delete this?")
     if (r==true) {
@@ -281,7 +284,6 @@ th{
       type: 'POST',
       data: { eventid: eid },
       success: function(response) {
-      //alert(response);exit;
           if (response == "success") {
               swal({
                   title: "Success",
@@ -300,7 +302,28 @@ th{
        }
   }
 
-  $(document).ready(function() {
-    $('table.display').DataTable();
+$(document).ready(function() {
+	
+	$(document).on("preInit.dt", function(){
+    $(".dataTables_filter input[type='search']").attr("maxlength", 20);
+  });
+  
+	$('table').DataTable({
+        "aLengthMenu": [[25, 50, 75, 100, -1], [25, 50, 75, 100, "All"]],
+        "iDisplayLength": 25,
+		"ordering": false,
+		"bAutoWidth": false,
+		"columns": [
+					{ "width": "7%" },
+					{ "width": "45%" },
+					{ "width": "15%" },
+					{ "width": "5%" },
+					{ "width": "5%" },
+					{ "width": "24%" }
+				  ]
+    });
+	
+	
 } );
+  
 </script>

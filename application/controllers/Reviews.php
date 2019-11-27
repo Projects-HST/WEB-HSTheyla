@@ -20,7 +20,7 @@ class Reviews extends CI_Controller
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-      $datas['views'] = $this->reviewsmodel->view_all_reviews();
+		$datas['views'] = $this->reviewsmodel->view_all_reviews();
 			if($user_role == 1 || $user_role == 4)
 			{
 			  $this->load->view('header');
@@ -36,7 +36,7 @@ class Reviews extends CI_Controller
       $datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
-      $datas['views'] = $this->reviewsmodel->view_all_reviews();
+		$datas['views'] = $this->reviewsmodel->view_peding_reviews();
 			if($user_role == 1 || $user_role == 4)
 			{
 			  $this->load->view('header');
@@ -47,6 +47,23 @@ class Reviews extends CI_Controller
 		 		 }
 
     }
+	
+	 public function archive_reviews()
+    {
+    	$datas=$this->session->userdata();
+	    $user_id=$this->session->userdata('id');
+	    $user_role=$this->session->userdata('user_role');
+      $datas['views'] = $this->reviewsmodel->view_all_archive_reviews();
+			if($user_role == 1 || $user_role == 4)
+			{
+			  $this->load->view('header');
+			  $this->load->view('reviews/archive_reviews',$datas);
+			  $this->load->view('footer');
+		 	}else{
+		 			redirect('/');
+		 		 }
+    }
+	
     public function display($id,$sts,$event_id,$userid)
     {
     	$datas=$this->session->userdata();
@@ -90,21 +107,7 @@ class Reviews extends CI_Controller
 
     }
 
-    public function archive_reviews()
-    {
-    	$datas=$this->session->userdata();
-	    $user_id=$this->session->userdata('id');
-	    $user_role=$this->session->userdata('user_role');
-      $datas['views'] = $this->reviewsmodel->view_all_archive_reviews();
-			if($user_role == 1 || $user_role == 4)
-			{
-			  $this->load->view('header');
-			  $this->load->view('reviews/archive_reviews',$datas);
-			  $this->load->view('footer');
-		 	}else{
-		 			redirect('/');
-		 		 }
-    }
+   
 
 
 }

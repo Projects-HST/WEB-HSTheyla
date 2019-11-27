@@ -75,27 +75,27 @@ input[type="file"] {
 <div class="col-md-7">
   <form class="form" role="form" autocomplete="off" method="post" action="" id="profile_form">
       <div class="form-group row">
-          <label class="col-md-3 col-form-label form-control-label">Full Name</label>
+          <label class="col-md-3 col-form-label form-control-label">Full Name <span class="red_txt_label">*</span></label>
           <div class="col-md-6">
-              <input class="form-control" type="text" name="first_name" value="<?php echo $rows->name; ?>">
+              <input class="form-control" type="text" name="name" value="<?php echo $rows->name; ?>" maxlength="50">
           </div>
       </div>
       <div class="form-group row">
-          <label class="col-md-3 col-form-label form-control-label">Username</label>
+          <label class="col-md-3 col-form-label form-control-label">Username <span class="red_txt_label">*</span></label>
           <div class="col-md-6">
-              <input class="form-control" type="text" name="user_name" value="<?php echo $rows->user_name; ?>">
+              <input class="form-control" type="text" name="user_name" value="<?php echo $rows->user_name; ?>" maxlength="15">
           </div>
       </div>
 
       <div class="form-group row">
-          <label class="col-md-3 col-form-label form-control-label">Email ID</label>
+          <label class="col-md-3 col-form-label form-control-label">Email ID <span class="red_txt_label">*</span></label>
           <div class="col-md-6">
-            <input type="email" class="form-control"  name="email"  id="email" value="<?php echo $rows->email_id; ?>">
+            <input type="email" class="form-control"  name="email"  id="email" value="<?php echo $rows->email_id; ?>" maxlength="50">
 
           </div>
       </div>
           <div class="form-group row">
-              <label class="col-md-3 col-form-label form-control-label">Gender</label>
+              <label class="col-md-3 col-form-label form-control-label">Gender <span class="red_txt_label">*</span></label>
               <div class="col-md-6">
                 <select class="col-form-label form-control" name="gender" id="gender">
                     <option value="">--Select Gender--</option>
@@ -127,8 +127,8 @@ input[type="file"] {
       <div class="form-group row">
           <label class="col-md-3 col-form-label form-control-label">Address</label>
           <div class="col-md-8">
-            <textarea class="textarea form-control textarea-form"  rows="4" name="address"><?php echo $rows->address_line1; ?></textarea>
-              </div>
+            <textarea class="textarea form-control textarea-form"  rows="4" name="address" maxlength="150"><?php echo $rows->address_line1; ?></textarea>
+          </div>
       </div>
 
 
@@ -310,6 +310,9 @@ $('#profile_form').validate({ // initialize the plugin
         //          type: "post"
         //       }
         // },
+		name: {
+            required: true
+        },
         user_name:{
           required: true,minlength: 6, maxlength: 12,
           remote: {
@@ -318,15 +321,13 @@ $('#profile_form').validate({ // initialize the plugin
               }
         },
         email:{
-          required: false,email:true,
+          required: true,email:true,
           remote: {
                  url: "<?php echo base_url(); ?>home/check_email_exist/<?php echo $this->session->userdata('id'); ?>",
                  type: "post"
               }
         },
-        name: {
-            required: true
-        },
+
         gender: {
             required: true
         },
@@ -348,11 +349,12 @@ $('#profile_form').validate({ // initialize the plugin
                         remote: "Mobile number already in exist!"
                     },
           email: {
+						 required: "Please enter email",
                          remote: "Email id already in exist!"
                      },
 
         name: "Enter Name",
-          gender: "Select Gender",
+        gender: "Select Gender",
         address: "Enter Address "
     },
     submitHandler: function(form) {

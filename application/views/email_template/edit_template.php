@@ -9,7 +9,7 @@
                         <?php foreach($edit as $res){ }?>
         <form  method="post" enctype="multipart/form-data" action="<?php echo base_url();?>emailtemplate/update_template" name="templateform" id="templateform">
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-4 col-form-label">Title</label>
+                              <label for="example-text-input" class="col-sm-4 col-form-label">Title <span class="error">*</span></label>
                               <div class="col-sm-6">
                                  <input class="form-control" type="text" name="templatename" maxlength="30" id="example-text-input"  value="<?php echo $res->template_name;?>">
                                   <input class="form-control" type="hidden" name="tid"   value="<?php echo $res->id;?>">
@@ -17,9 +17,9 @@
                            </div>
 
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Message</label>
+                              <label class="col-sm-4 col-form-label">Message <span class="error">*</span></label>
                               <div class="col-sm-8">
-                                  <textarea class="form-control" rows="5" name="templatecontent" maxlength="240" placeholder="Max 240 Characters"><?php echo $res->template_content;?></textarea>
+                                  <textarea class="form-control" rows="5" name="templatecontent" maxlength="140" placeholder="Max 140 Characters"><?php echo $res->template_content;?></textarea>
                               </div>
                            </div>
                            <div class="form-group row">

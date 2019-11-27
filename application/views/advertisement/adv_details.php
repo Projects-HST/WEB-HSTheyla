@@ -33,10 +33,10 @@
                         <form  method="post" action="<?php echo base_url();?>advertisement/add_adv_history" name="advertisementform" id="aform" enctype="multipart/form-data" onSubmit='return check();'>
                          <?php //echo $event_id;   echo $category_id;?>
                        <div class="form-group row">
-                            <label for="sdate" class="col-sm-2 col-form-label">Start Date</label>
+                            <label for="sdate" class="col-sm-2 col-form-label">Start Date <span class="error">*</span></label>
                             <div class="col-sm-4">
 
-                                <input type="text" class="form-control datepicker"  name="start_date" id="datepicker-autoclose" autocomplete="off" >
+                                <input type="text" class="form-control datepicker"  name="start_date" id="datepicker1" autocomplete="off" >
 
 
                            <input type="hidden" class="form-control"  name="event_id" value=" <?php echo $event_id;   ?>">
@@ -44,10 +44,10 @@
 
                             </div>
 
-                             <label for="edate" class="col-sm-2 col-form-label">End Date</label>
+                             <label for="edate" class="col-sm-2 col-form-label">End Date <span class="error">*</span></label>
                             <div class="col-sm-4">
 
-                                <input type="text" class="form-control datepicker"  name="end_date" id="datepicker"  autocomplete="off">
+                                <input type="text" class="form-control datepicker"  name="end_date" id="datepicker2"  autocomplete="off">
 
 
                             </div>
@@ -68,7 +68,7 @@
 
 
                         <div class="form-group row">
-                             <label for="ecost" class="col-sm-2 col-form-label">Plan</label>
+                             <label for="ecost" class="col-sm-2 col-form-label">Plan <span class="error">*</span></label>
                             <div class="col-sm-4">
                                  <select name="adv_plan" class="form-control">
                                     <?php foreach ($plans as $values) { ?>
@@ -78,7 +78,7 @@
 
                                 </select>
                             </div>
-                            <label for="Status" class="col-sm-2 col-form-label">Banner Status</label>
+                            <label for="Status" class="col-sm-2 col-form-label">Banner Status <span class="error">*</span></label>
                             <div class="col-sm-4">
                                <select class="form-control" name="status">
                                     <option value="">Select status</option>
@@ -124,7 +124,7 @@
                         </div>
                         <?php endif; ?>
 
-                        <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
 							                   <th>S.No</th>
@@ -220,11 +220,21 @@ function confirmGetMessage(adid)
  $(document).ready(function ()
  {
 
+ $(document).on("preInit.dt", function(){
+		
+	$(".dataTables_filter input[type='search']").attr("maxlength", 20);
+	});
+	
+	$('table').DataTable({
+         "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+        "iDisplayLength": 25,
+		"ordering": false
+    });
+
     $( ".datepicker" ).datepicker({
-      format: 'dd-mm-yyyy'
-
-
-});
+      format: 'dd-mm-yyyy',
+	  autoclose: true
+	});
 
     $('#aform').validate({ // initialize the plugin
        rules: {
@@ -248,8 +258,8 @@ function confirmGetMessage(adid)
    function check()
     {
 
-      var fdate = document.getElementById("datepicker-autoclose").value;
-      var tdate = document.getElementById("datepicker").value;
+      var fdate = document.getElementById("datepicker1").value;
+      var tdate = document.getElementById("datepicker2").value;
 
        //alert(fdate);alert(tdate);
       var chunks = fdate.split('-');
@@ -262,8 +272,8 @@ function confirmGetMessage(adid)
       //alert( Date.parse(formattedDate1));
       if(Date.parse(formattedDate) > Date.parse(formattedDate1) )
       {
-       alert("Startdate should be less than Enddate");
-       return false;
+			alert("Startdate should be less than Enddate");
+			return false;
       }
 
       if(Date.parse(formattedDate)==Date.parse(formattedDate1) )

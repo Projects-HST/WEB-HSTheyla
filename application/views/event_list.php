@@ -235,7 +235,7 @@
             <input  type="text" class="form-control " name="search_term" id="search_term"   value="" autocomplete="off"  placeholder="&#xF002; Search for events" style="font-family:Arial, FontAwesome" >
         </div>
           </div>
-          <p><a href="" onclick="clear_all()" class="clear_btn">Clear all</a></p>
+          <p><a onclick="return clear_all()" class="clear_btn" style="cursor: pointer; color:#007bff;">Clear all</a></p>
 
 
 
@@ -1094,19 +1094,23 @@ function editwishlist(user_id,event_id)
 	});
 }
 
-function clear_all()
-{
-	 $.get("<?php echo base_url(); ?>eventlist/clear_all", function(data, status){
-		 //alert("Data: " + data + "\nStatus: " + status);
-		if (data =='Success'){
-			$("#search_term").val("");
-			$('#ctyname').prop('selectedIndex',0);
-			$('#category').prop('selectedIndex',0);
-			$('#event_type').prop('selectedIndex',0);
-		}
 
-	  });
-	  alert("Clear all results?");
+function clear_all(){
+  swal({
+    title: '',
+    text: "Clear All Results?",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes',
+    cancelButtonText: 'No'
+
+  }).then(function(){
+    window.location.href='<?php echo base_url(); ?>eventlist/clear_all';
+  }).catch(function(reason){
+
+  });
 }
 
 </script>

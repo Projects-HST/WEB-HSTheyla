@@ -44,7 +44,7 @@
                              <button type="button" style="float: right;" data-toggle="modal" id="sendAll" data-target="#addmodel" class="btn btn-success waves-effect waves-light">Send To All</button>
                         <!--/div-->
                       </label>
-                        <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="" class="table table-striped table-bordered" cellspacing="0" width="100%">
                       <thead>
                         <tr>
                           <th>S. No</th>
@@ -115,14 +115,14 @@
                <!-- Modal content-->
                <div class="modal-content">
                    <div class="modal-header">
-                      <h5 class="modal-title mt-0" id="myLargeModalLabel">Inform User</h5>
+                      <h5 class="modal-title mt-0" id="myLargeModalLabel">Send Notification</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                   </div>
                <div class="modal-body">
                <!--<form method="post" action="<?php echo base_url();?>emailtemplate/send_email" >-->
                <form method="post" action="<?php echo base_url();?>emailtemplate/send_newsletter" >
                  <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Title</label>
+                    <label class="col-sm-3 col-form-label">Title <span class="red_txt_label">*</span></label>
                     <div class="col-sm-6">
                       <select class="form-control" required="" name="email_temp_id" id="email_temp_id" style="margin-bottom:05%;" >
                         <option value="">Select title</option>
@@ -133,7 +133,7 @@
                     </div>
                  </div>
                  <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Send as</label>
+                    <label class="col-sm-3 col-form-label">Send as <span class="red_txt_label">*</span></label>
                     <div class="col-sm-6">
                       <!-- <input type="checkbox" name="email" value="email">Email</input> -->
   					          <input type="checkbox" name="sms" value="sms">SMS</input> &nbsp;&nbsp;
@@ -162,6 +162,18 @@
 <!-- content -->
 <script type="text/javascript">
  $(document).ready(function () {
+	 
+	$(document).on("preInit.dt", function(){
+		$(".dataTables_filter input[type='search']").attr("maxlength", 20);
+	});
+	
+	 $('table').DataTable({
+         "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+        "iDisplayLength": 25,
+		"ordering": false
+    });
+	 
+	 
    $('#checkAll:checkbox').change(function() {
             $("input:checkbox").prop('checked', $(this).prop("checked"));
 

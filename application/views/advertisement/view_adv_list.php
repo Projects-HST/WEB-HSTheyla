@@ -20,7 +20,7 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div class="tab-pane active p-3" id="home-1" role="tabpanel">
-                            <table  id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <table  id="" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                         <tr>
                             <th>S. No</th>
@@ -104,6 +104,14 @@
  }
 
   $(document).ready(function() {
-
+	 $(document).on("preInit.dt", function(){
+			$(".dataTables_filter input[type='search']").attr("maxlength", 20);
+		});
+		
+		$('table').DataTable({
+			 "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+			"iDisplayLength": 25,
+			"ordering": false
+		});
 } );
 </script>

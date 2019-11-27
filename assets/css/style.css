@@ -2439,8 +2439,10 @@ File: Responsive
 /*# sourceMappingURL=style.css.map */
 
 
-.txt_label{
-
+.red_txt_label{
+  color: #ec0000;
+  font-size: 15px;
+  font-weight: 600;
 }
 .txt_value{
   color: #f71010;

@@ -34,6 +34,7 @@ class Dashboard extends CI_Controller
     $user_role=$this->session->userdata('user_role');
     if($user_role==1){
       $data['get_all_request'] = $this->loginmodel->get_all_organiser_request();
+	  //print_r ($data['get_all_request']);
       $this->load->view('header');
       $this->load->view('others/get_all_request', $data);
       $this->load->view('footer');

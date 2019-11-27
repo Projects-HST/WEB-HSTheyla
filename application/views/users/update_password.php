@@ -12,15 +12,15 @@
                           <div class="col-md-12">
 
                             <div class="form-group row">
-                              <div class="col-md-3">New Password</div>
+                              <div class="col-md-3">New Password <span class="error">*</span></div>
                               <div class="col-md-3">
-                                  <input type="password" class="form-control" name="new_password" value="">
+                                  <input type="text" class="form-control" name="new_password" value="">
                               </div>
                            </div>
                            <div class="form-group row">
-                             <div class="col-md-3">Confirm New Password</div>
+                             <div class="col-md-3">Confirm New Password <span class="error">*</span></div>
                              <div class="col-md-3">
-                                 <input type="password" class="form-control" name="confrim_password" value="">
+                                 <input type="text" class="form-control" name="confrim_password" value="">
                              </div>
                           </div>
                           <div class="form-group row">

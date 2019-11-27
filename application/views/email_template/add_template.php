@@ -8,13 +8,13 @@
 
                         <form  method="post" enctype="multipart/form-data" action="<?php echo base_url();?>emailtemplate/add_template" name="templateform" id="templateform">
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-4 col-form-label">Title</label>
+                              <label for="example-text-input" class="col-sm-4 col-form-label">Title <span class="error">*</span></label>
                               <div class="col-sm-6">
                                  <input class="form-control" type="text" name="templatename" maxlength="30" id="example-text-input" placeholder="">
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Message</label>
+                              <label class="col-sm-4 col-form-label">Message <span class="error">*</span></label>
                               <div class="col-sm-8">
                                   <textarea class="form-control" rows="5" name="templatecontent" maxlength="140" placeholder="Max 140 Characters"></textarea>
                               </div>
@@ -50,10 +50,10 @@
                         </div>
                         <?php endif; ?>
 
-                        <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
-							                 <th>S. No</th>
+							   <th>S. No</th>
                                <th style="width:200px;">Title</th>
                                 <th>Message</th>
                                 <th>Image</th>
@@ -99,6 +99,17 @@
 <!-- content -->
 <script type="text/javascript">
  $(document).ready(function () {
+	 
+	 $(document).on("preInit.dt", function(){
+		$(".dataTables_filter input[type='search']").attr("maxlength", 20);
+	});
+	
+	$('table').DataTable({
+         "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+        "iDisplayLength": 25,
+		"ordering": false
+    });
+	
     $('#templateform').validate({ // initialize the plugin
        rules: {
          templatename:{required:true },

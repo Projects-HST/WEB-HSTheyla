@@ -7,7 +7,7 @@
         <div class="col-lg-12">
             <div class="card m-b-20">
                 <div class="card-block">
-
+					<h4 class="mt-0 header-title">All Reviews </h4>
                      <?php if($this->session->flashdata('msg')): ?>
                        <div class="alert <?php $msg=$this->session->flashdata('msg');
                        if($msg=='Added Successfully' || $msg=='Updated Successfully'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
@@ -21,33 +21,35 @@
                             <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
                         <thead>
                         <tr>
-                            <th style="width:200px;">Event</th>
-                            <th>Event Rating</th>
-                            <th>Comments</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
+						
+                    <th>S. No</th>
+                    <th>Event</th>
+                    <th>Rating</th>
+                    <th>Comments</th>
+					<th>Status</th>
+                    <th>Actions</th>
+                </tr>
+				
+							
                         </thead>
                         <tbody>
-                        <?php foreach($views as $rows){
+						 <?php $i=1; if(!empty($views)) { foreach ($views as $rows) {  
+                        
                            $sts=$rows->status; ?>
                         <tr>
+						 <td><?php echo $i; ?></td>
                             <td><?php echo $rows->event_name ; ?></td>
                             <td><?php echo $rows->event_rating ; ?></td>
                             <td><?php echo $rows->comments ; ?></td>
-                             <td><?php if($sts=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
+                             <td><?php if($sts=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Inactive </button>'; }?></td>
                             <td>
                              <a href="<?php echo base_url();?>reviews/edit_reviews/<?php echo $rows->id;?>">
                               <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
-
-                             <a href="<?php echo base_url();?>reviews/view_single_reviews/<?php echo $rows->id;?>">
-                              <img  title="View Events" src="<?php echo base_url();?>assets/icons/view.png"/></a>
-
                               <a href="<?php echo base_url();?>reviews/delete_reviews/<?php echo $rows->id;?>">
                               <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
                             </td>
                         </tr>
-                       <?php }  ?>
+                       <?php $i++; }  } else{ echo "<p class=card-text> No Reviews Found </p>";}?>
                         </tbody>
                     </table>
 
@@ -64,6 +66,23 @@
 </div> <!-- content -->
 <script type="text/javascript">
   $(document).ready(function() {
-    $('table.display').DataTable();
+	$(document).on("preInit.dt", function(){
+		$(".dataTables_filter input[type='search']").attr("maxlength", 20);
+	});
+	
+	$('table').DataTable({
+        "aLengthMenu": [[25, 50, 75, 100, -1], [25, 50, 75, 100, "All"]],
+        "iDisplayLength": 25,
+		"ordering": false,
+		"bAutoWidth": false,
+		"columns": [
+					{ "width": "7%" },
+					{ "width": "35%" },
+					{ "width": "8%" },
+					{ "width": "35%" },
+					{ "width": "5%" },
+					{ "width": "10%" }
+				  ]
+    });
 } );
 </script>

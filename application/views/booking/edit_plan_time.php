@@ -13,7 +13,7 @@
                            <?php foreach ($edit as $res){ }?>
 
                              <div class="form-group row">
-                              <label class="col-sm-4 col-form-label"> Date</label>
+                              <label class="col-sm-4 col-form-label">Date <span class="error">*</span></label>
                               <div class="col-sm-6">
 
                                 <input id="sdate" type="hidden" class="form-control" name="showdate" value="<?php echo $newDate = date("d-m-Y",strtotime($res->show_date)); ?>" >
@@ -44,7 +44,7 @@
                            </div>
 
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label"> Time</label>
+                              <label class="col-sm-4 col-form-label">Time <span class="error">*</span></label>
                               <div class="col-sm-6">
 
        <input id="timepicker1" type="text" class="form-control"  name="showtime" value="<?php echo $res->show_time; ?>" >
@@ -56,9 +56,9 @@
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-4 col-form-label">Available Seats</label>
+                              <label for="example-text-input" class="col-sm-4 col-form-label">Available Seats <span class="error">*</span></label>
                               <div class="col-sm-6">
-                                 <input class="form-control"  type="text" name="seats" value="<?php echo $res->seat_available; ?>" >
+                                 <input class="form-control"  type="text" name="seats" value="<?php echo $res->seat_available; ?>" maxlength="5">
                               </div>
                            </div>
 

@@ -16,13 +16,13 @@
                         <?php foreach($edit as $res){ }?>
                         <form  method="post" action="<?php echo base_url();?>category/update_category" name="categoryform" enctype="multipart/form-data" id="categoryform">
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-4 col-form-label">Category</label>
+                              <label for="example-text-input" class="col-sm-4 col-form-label">Category <span class="error">*</span></label>
                               <div class="col-sm-6">
-                                 <input class="form-control" type="text" name="categoryname" value="<?php echo $res->category_name; ?>" readonly>
+                                 <input class="form-control" type="text" name="categoryname" value="<?php echo $res->category_name; ?>" readonly >
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Image</label>
+                              <label class="col-sm-4 col-form-label">Image <span class="error">*</span></label>
                            <div class="col-sm-6">
                               <input type="file" name="categorypic" id="file_upload" class="form-control" accept="image/*">
                                  <div id="preview" style="color: red;"></div>
@@ -36,13 +36,16 @@
                            <div class="col-sm-6">
                               <input type="file" name="category_banner" id="file_upload" class="form-control" accept="image/*">
 
-                              <input type="hidden" name="category_banner_old" class="form-control" value="<?php echo $res->category_banner; ?>" >
-
+                              <?php if ($res->category_banner !='') { ?>
                                <img src="<?php echo base_url(); ?>assets/category/<?php echo $res->category_banner; ?>" class="img-circle">
+							   <input type="text" name="category_banner_old" class="form-control" value="<?php echo $res->category_banner; ?>" >
+							  <?php } else { ?>
+							  <img src="../../assets/icons/no_banner.jpg" class="img-circle">
+							  <?php } ?>
                               </div>
                            </div>
                             <div class="form-group row">
-                            <label class="col-sm-4 col-form-label">Display Order</label>
+                            <label class="col-sm-4 col-form-label">Display Order <span class="error">*</span></label>
                             <div class="col-sm-6">
                              <input type="hidden" name="old_disp_order" class="form-control" value="<?php echo $res->order_by; ?>">
                                 <select class="form-control" name="disp_order">
@@ -54,10 +57,10 @@
                                   </div>
                                     </div>
                             <div class="form-group row">
-                              <label class="col-sm-4 col-form-label"> Status</label>
+                              <label class="col-sm-4 col-form-label"> Status <span class="error">*</span></label>
                               <div class="col-sm-6">
                                  <select class="form-control"  name="eventsts">
-                                    <option value="">Select status</option>
+                                    <option value="">Select Status</option>
                                     <option value="Y">Active</option>
                                     <option value="N">Inactive</option>
                                  </select>
@@ -129,10 +132,10 @@
 
         },
         messages: {
-        categoryname:"Enter category",
+        categoryname:"Enter Category",
         //categorypic:"Select Category Picture",
-        eventsts:"Select status",
-        disp_order:"Select display order"
+        eventsts:"Select Status",
+        disp_order:"Select Display order"
                },
          });
    });

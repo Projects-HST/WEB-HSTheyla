@@ -33,6 +33,16 @@
 </div>
 <script>
 $(document).ready(function() {
-  $('table.display').DataTable();
+
+ $(document).on("preInit.dt", function(){
+		$(".dataTables_filter input[type='search']").attr("maxlength", 20);
+	});
+	
+	$('table').DataTable({
+         "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+        "iDisplayLength": 25,
+		"ordering": false
+    });
+
 } );
 </script>

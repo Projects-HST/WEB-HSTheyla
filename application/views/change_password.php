@@ -65,11 +65,11 @@
   <form class="form" role="form" autocomplete="off" method="post" action="" id="change_password">
       <div class="form-group row">
           <label class="col-md-4 col-form-label form-control-label">New Password</label>
-          <div class="col-md-6"><input class="form-control" type="password" id="new_password" name="new_password" value=""></div>
+          <div class="col-md-6"><input class="form-control" type="text" id="new_password" name="new_password" value=""></div>
       </div>
       <div class="form-group row">
           <label class="col-md-4 col-form-label form-control-label">Confirm Password</label>
-          <div class="col-md-6"><input class="form-control" type="password" id="confirm_password" name="confirm_password" value=""></div>
+          <div class="col-md-6"><input class="form-control" type="text" id="confirm_password" name="confirm_password" value=""></div>
       </div>
 
       <div class="form-group row">

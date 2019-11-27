@@ -100,7 +100,27 @@
        }
   }
 
-  $(document).ready(function() {
-    $('table.display').DataTable();
+ $(document).ready(function() {
+	
+	$(document).on("preInit.dt", function(){
+    $(".dataTables_filter input[type='search']").attr("maxlength", 20);
+  });
+  
+	$('table').DataTable({
+        "aLengthMenu": [[25, 50, 75, 100, -1], [25, 50, 75, 100, "All"]],
+        "iDisplayLength": 25,
+		"ordering": false,
+		"bAutoWidth": false,
+		"columns": [
+					{ "width": "7%" },
+					{ "width": "45%" },
+					{ "width": "15%" },
+					{ "width": "5%" },
+					{ "width": "5%" },
+					{ "width": "24%" }
+				  ]
+    });
+	
+	
 } );
 </script>

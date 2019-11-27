@@ -211,7 +211,9 @@ foreach($event_details as $res){
             <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/" onclick="sharepoints(<?php echo $user_id; ?> ,<?php echo $disp_event_id; ?>)" target="_blank" title="Share on Facebook"><img src="<?php echo base_url(); ?>assets/front/images/share_facebook.png"></a>
             <a href="https://web.whatsapp.com/send?text=<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/" data-action="share/whatsapp/share" onclick="sharepoints(<?php echo $user_id; ?> ,<?php echo $disp_event_id; ?>)" target="_blank" title="Share on WhatsApp"><img src="<?php echo base_url(); ?>assets/front/images/share_whatsapp.png"></a>
             <a href="https://twitter.com/share?&text=<?php echo $res->event_name; ?>&url=<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/" onclick="sharepoints(<?php echo $user_id; ?> ,<?php echo $disp_event_id; ?>)" target="_blank" ><img src="<?php echo base_url(); ?>assets/front/images/share_twitter.png"></a>
-			<!--<a href="https://plus.google.com/share?url=<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/" onclick="sharepoints(<?php echo $user_id; ?> ,<?php echo $disp_event_id; ?>)" target="_blank" title="Share on Google+"><img src="<?php echo base_url(); ?>assets/front/images/share_instagram.png"></a>-->
+			<a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/" onclick="sharepoints(<?php echo $user_id; ?> ,<?php echo $disp_event_id; ?>)" target="_blank" title="Share on Linkedin"><img src="<?php echo base_url(); ?>assets/front/images/share_linkedin.png"></a>
+			<a href="https://www.instagram.com/?url=<?php echo base_url(); ?>eventlist/eventdetails/<?php echo $enc_event_id; ?>/<?php echo $event_name; ?>/" onclick="sharepoints(<?php echo $user_id; ?> ,<?php echo $disp_event_id; ?>)" target="_blank" title="Share on Instagram" rel="noopener"><img src="<?php echo base_url(); ?>assets/front/images/share_instagram.png"></a>
+			
          </p>
       </div>
 
@@ -279,7 +281,7 @@ foreach($event_details as $res){
 			      <div class="event_detail_thumb">
 			         <p class="event_heading">Gallery</p>
 			         <?php foreach($event_gallery as $gallery_img){ ?>
-			         <a class="galpop-callback" data-galpop-group="callback" href="<?php echo base_url(); ?>assets/events/gallery/<?php echo $gallery_img->event_image; ?>"><img src="<?php echo base_url(); ?>assets/events/gallery/<?php echo $gallery_img->event_image; ?>" class="img-responsive  img_gallery"></a>
+			         <a class="galpop-callback" data-galpop-group="callback" href="<?php echo base_url(); ?>assets/events/gallery/<?php echo $gallery_img->event_image; ?>"><img src="<?php echo base_url(); ?>assets/events/gallery/<?php echo $gallery_img->event_image; ?>" class="img-responsive img_gallery"></a>
 			         <?php } ?>
 			      </div>
 			 <?php } ?>

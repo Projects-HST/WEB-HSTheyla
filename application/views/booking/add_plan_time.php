@@ -16,7 +16,7 @@ th{
                         <form  method="post"  enctype="multipart/form-data" action="<?php echo base_url();?>booking/add_show_times_details" name="plantimeform" id="plantimeform">
 
                             <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Date</label>
+                              <label class="col-sm-4 col-form-label">Date <span class="error">*</span></label>
                               <div class="col-sm-6">
                                  <select class="form-control" name="showdate">
                                    <?php
@@ -41,7 +41,7 @@ th{
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Time</label>
+                              <label class="col-sm-4 col-form-label">Time <span class="error">*</span></label>
                               <div class="col-sm-6">
                                  <input id="timepicker1" type="text" class="form-control"  name="showtime"/>
                                  <!--input class="form-control"   type="text" name="showtime"-->
@@ -50,9 +50,9 @@ th{
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-4 col-form-label">Available Seats</label>
+                              <label for="example-text-input" class="col-sm-4 col-form-label">Available Seats <span class="error">*</span></label>
                               <div class="col-sm-6">
-                                 <input class="form-control"  type="text" name="seats" >
+                                 <input class="form-control"  type="text" name="seats" maxlength="5">
                               </div>
                            </div>
 
@@ -79,7 +79,7 @@ th{
                            ×</button> <?php echo $this->session->flashdata('msg'); ?>
                         </div>
                         <?php endif; ?>
-                        <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
                                  <th>S. No</th>
@@ -129,11 +129,21 @@ th{
 
 <script type="text/javascript">
    $('#timepicker1').timepicki();
-
-    $('#vieweve').addClass("active");
+   $('#vieweve').addClass("active");
   $('#events').addClass("has_sub active nav-active");
 
    $(document).ready(function () {
+	   
+   	$(document).on("preInit.dt", function(){
+		$(".dataTables_filter input[type='search']").attr("maxlength", 20);
+	});
+	
+	$('table').DataTable({
+         "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+        "iDisplayLength": 25,
+		"ordering": false
+    });
+	   
    $('#plantimeform').validate({ // initialize the plugin
       rules: {
         showtime:{required:true },

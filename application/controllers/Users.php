@@ -189,7 +189,7 @@ class Users extends CI_Controller
 				 }
 		}
 
-		public function edit_noraml_users($id)
+		public function edit_normal_users($id)
 		{
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
@@ -201,7 +201,7 @@ class Users extends CI_Controller
 		if($user_role == 1 || $user_role == 4)
 		{
 			$this->load->view('header');
-			$this->load->view('users/edit_noraml_users',$datas);
+			$this->load->view('users/edit_normal_users',$datas);
 			$this->load->view('footer');
 		}else{
 				redirect('/');

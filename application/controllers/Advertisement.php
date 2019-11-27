@@ -121,6 +121,8 @@ class Advertisement extends CI_Controller
         $datas['plans']       = $this->advertisementmodel->getall_adv_plans();
         $datas['event_id']    = $id;
         $datas['category_id'] = $category_id;
+		
+		//print_r( $datas['result'] );
         if ($user_role == 1 || $user_role == 4) {
             $this->load->view('header');
             $this->load->view('advertisement/adv_details', $datas);
@@ -219,6 +221,7 @@ class Advertisement extends CI_Controller
         $user_role      = $this->session->userdata('user_role');
         $datas['edit']  = $this->advertisementmodel->getall_adv_history($id);
         $datas['plans'] = $this->advertisementmodel->getall_adv_plans();
+		
         if ($user_role == 1 || $user_role == 4) {
             $this->load->view('header');
             $this->load->view('advertisement/edit_adv_details', $datas);
@@ -234,6 +237,8 @@ class Advertisement extends CI_Controller
         $user_role      = $this->session->userdata('user_role');
         $datas['edit']  = $this->advertisementmodel->getall_adv_history($id);
         $datas['plans'] = $this->advertisementmodel->getall_adv_plans();
+		
+		
         if ($user_role == 1 || $user_role == 4) {
             $this->load->view('header');
             $this->load->view('advertisement/edit_adv_history', $datas);

@@ -8,9 +8,9 @@
                         <h4 class="mt-0 header-title">Create Ticket Plan </h4>
                         <form  method="post"  enctype="multipart/form-data" action="<?php echo base_url();?>booking/add_plans" name="planform" id="planform">
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Plan Name</label>
+                              <label class="col-sm-4 col-form-label">Plan Name <span class="error">*</span></label>
                               <div class="col-sm-6">
-                                 <input class="form-control"   type="text" name="planname">
+                                 <input class="form-control"   type="text" name="planname" maxlength="25">
                                  <input class="form-control"  type="hidden" name="event_id" value="<?php echo $eventid ;?>">
                               </div>
                            </div>
@@ -21,9 +21,9 @@
                               </div>
                            </div-->
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Amount </label>
+                              <label class="col-sm-4 col-form-label">Amount <span class="error">*</span></label>
                               <div class="col-sm-6">
-                                 <input class="form-control" type="text" name="amount" >
+                                 <input class="form-control" type="text" name="amount" maxlength="10">
                               </div>
                            </div>
                            <div class="form-group">
@@ -49,7 +49,7 @@
                            ×</button> <?php echo $this->session->flashdata('msg'); ?>
                         </div>
                         <?php endif; ?>
-                        <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
                                  <th>S. No</th>
@@ -100,6 +100,17 @@
    $('#vieweve').addClass("active");
   $('#events').addClass("has_sub active nav-active");
    $(document).ready(function () {
+	   
+   	$(document).on("preInit.dt", function(){
+		$(".dataTables_filter input[type='search']").attr("maxlength", 20);
+	});
+	
+	$('table').DataTable({
+         "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+        "iDisplayLength": 25,
+		"ordering": false
+    });
+	
    $('#planform').validate({ // initialize the plugin
       rules: {
         planname:{required:true },

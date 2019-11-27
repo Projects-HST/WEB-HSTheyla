@@ -63,8 +63,18 @@
 <script type="text/javascript">
   $('#vieweve').addClass("active");
   $('#events').addClass("has_sub active nav-active");
+  
+  
   $(document).ready(function() {
-    $('table.display').DataTable();
+   	$(document).on("preInit.dt", function(){
+		$(".dataTables_filter input[type='search']").attr("maxlength", 20);
+	});
+	
+	$('table').DataTable({
+         "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+        "iDisplayLength": 25,
+		"ordering": false
+    });
   } );
 
 </script>

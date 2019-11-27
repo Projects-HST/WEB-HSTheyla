@@ -23,7 +23,7 @@
 
                 <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>events/add_events" name="eventform" id="eventform" onSubmit='return check();'>
                     <div class="form-group row">
-                       <label for="country" class="col-sm-2 col-form-label">Select Country</label>
+                       <label for="country" class="col-sm-2 col-form-label">Select Country <span class="error">*</span></label>
                        <div class="col-sm-4">
                          <select class="form-control" name="country" onchange="getcityname(this.value)">
                            <option value="">Select country</option>
@@ -32,7 +32,7 @@
                                 <?php } ?>
                            </select>
                        </div>
-                       <label for="city" class="col-sm-2 col-form-label">Select City/Area</label>
+                       <label for="city" class="col-sm-2 col-form-label">Select City/Area <span class="error">*</span></label>
                        <div class="col-sm-4">
                           <select class="form-control" name="city" id="ctname">
                                      <option value="">Select city/area</option>
@@ -41,7 +41,7 @@
                        </div>
                    </div>
                         <div class="form-group row">
-                            <label for="Category" class="col-sm-2 col-form-label">Event Category</label>
+                            <label for="Category" class="col-sm-2 col-form-label">Event Category <span class="error">*</span></label>
                             <div class="col-sm-4">
                                 <select class="form-control" name="category">
                                   <option value="">Select category</option>
@@ -51,22 +51,22 @@
                                 </select>
                             </div>
 
-                            <label for="Name" class="col-sm-2 col-form-label">Event Name</label>
+                            <label for="Name" class="col-sm-2 col-form-label">Event Name <span class="error">*</span></label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text"  name="event_name">
+                                <input class="form-control" type="text"  name="event_name" maxlength="100">
                             </div>
                         </div>
 
 
 
                         <div class="form-group row">
-                            <label for="Venue" class="col-sm-2 col-form-label">Venue</label>
+                            <label for="Venue" class="col-sm-2 col-form-label">Venue <span class="error">*</span></label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text"  name="venue"  >
+                                <input class="form-control" type="text"  name="venue" maxlength="50">
                             </div>
-                             <label for="Address" class="col-sm-2 col-form-label">Address</label>
+                             <label for="Address" class="col-sm-2 col-form-label">Address <span class="error">*</span></label>
                             <div class="col-sm-4">
-                               <textarea id="textarea" name="address"  class="form-control" maxlength="240" rows="5" placeholder=""></textarea>
+                               <textarea id="textarea" name="address"  class="form-control" maxlength="240" rows="3" placeholder="" maxlength="100"></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -75,14 +75,14 @@
 
                         </div>
                       <div class="form-group row">
-                          <label for="latitude" class="col-sm-2 col-form-label">Event Latitude</label>
+                          <label for="latitude" class="col-sm-2 col-form-label">Event Latitude <span class="error">*</span></label>
                           <div class="col-sm-4">
-                              <input class="form-control" type="text" name="txtLatitude"  id="latu" >
+                              <input class="form-control" type="text" name="txtLatitude"  id="latu" maxlength="20">
                               <div id="ermsg"></div> <div id="ermsg2"></div>
                           </div>
-                            <label for="longitude" class="col-sm-2 col-form-label">Event Longitude</label>
+                            <label for="longitude" class="col-sm-2 col-form-label">Event Longitude <span class="error">*</span></label>
                           <div class="col-sm-4">
-                              <input class="form-control" type="text" name="txtLongitude" id="lon">
+                              <input class="form-control" type="text" name="txtLongitude" id="lon" maxlength="20">
                                <div id="ermsg1"></div> <div id="ermsg3"></div>
                           </div>
                       </div>
@@ -91,18 +91,18 @@
 
 					                 <div id = "date_time">
                        <div class="form-group row">
-                            <label for="sdate" class="col-sm-2 col-form-label">Start Date</label>
+                            <label for="sdate" class="col-sm-2 col-form-label">Start Date <span class="error">*</span></label>
                             <div class="col-sm-4">
                               <div class="input-group">
-                                <input type="text" class="form-control datepicker"  name="start_date" id="datepicker-autoclose" value="<?php echo date("d-m-Y"); ?>">
+                                <input type="text" class="form-control datepicker"  name="start_date" id="datepicker1" value="<?php echo date("d-m-Y"); ?>" autocomplete="off">
 
                             </div>
                             </div>
 
-                             <label for="edate" class="col-sm-2 col-form-label">End Date</label>
+                             <label for="edate" class="col-sm-2 col-form-label">End Date <span class="error">*</span></label>
                             <div class="col-sm-4">
                                <div class="input-group">
-                                <input type="text" class="form-control datepicker" name="end_date" id="datepicker" value="<?php echo date("d-m-Y"); ?>">
+                                <input type="text" class="form-control datepicker" name="end_date" id="datepicker2" value="<?php echo date("d-m-Y"); ?>" autocomplete="off">
 
 
                             </div>
@@ -110,19 +110,19 @@
                         </div>
 					</div>
                         <div class="form-group row">
-                            <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
+                            <label for="stime" class="col-sm-2 col-form-label">Start Time <span class="error">*</span></label>
                             <div class="col-sm-4">
                                <input  type="text" class="form-control" id="stime" name="start_time" value="<?php echo $current_time; ?>">
 
                             </div>
-                             <label for="etime" class="col-sm-2 col-form-label">End Time</label>
+                             <label for="etime" class="col-sm-2 col-form-label">End Time <span class="error">*</span></label>
                             <div class="col-sm-4">
                               <input  type="text" class="form-control" id="etime" name="end_time" value="<?php echo $current_time; ?>">
 
                             </div>
                         </div>
                         <div class="form-group row">
-                           <label for="Status" class="col-sm-2 col-form-label">Event Advertisement </label>
+                           <label for="Status" class="col-sm-2 col-form-label">Event Advertisement <span class="error">*</span></label>
                            <div class="col-sm-4">
                               <select class="form-control" name="eadv_status">
                                    <option value="">Select</option>
@@ -131,7 +131,7 @@
                                </select>
                            </div>
 
-                            <label for="Status" class="col-sm-2 col-form-label">Is this place a hotspot? </label>
+                            <label for="Status" class="col-sm-2 col-form-label">Is this place a hotspot? <span class="error">*</span></label>
                            <div class="col-sm-4">
                               <select class="form-control" name="hotspot_sts" id="hotspot_sts">
                                    <option value="">Select</option>
@@ -142,7 +142,7 @@
                       </div>
 
                         <div class="form-group row">
-                            <label for="" class="col-sm-2 col-form-label">Description</label>
+                            <label for="" class="col-sm-2 col-form-label">Description <span class="error">*</span></label>
                             <div class="col-sm-10">
                                 <textarea type="text" id="description"  name="description" class="form-control" maxlength="30000" rows="15" placeholder=""></textarea>
                             </div>
@@ -153,24 +153,24 @@
 
 
                         <div class="form-group row">
-                            <label for="primarycell" class="col-sm-2 col-form-label">Phone Number</label>
+                            <label for="primarycell" class="col-sm-2 col-form-label">Phone Number <span class="error">*</span></label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text"  name="pcontact_cell"  value="">
+                                <input class="form-control" type="text"  name="pcontact_cell" value="" maxlength="12">
                             </div>
                             <label for="seccell" class="col-sm-2 col-form-label">Alternate Phone Number</label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" name="scontact_cell" value="" >
+                                <input class="form-control" type="text" name="scontact_cell" value="" maxlength="12">
                             </div>
                         </div>
 
                        <div class="form-group row">
-                            <label for="Person" class="col-sm-2 col-form-label">Contact Person</label>
+                            <label for="Person" class="col-sm-2 col-form-label">Contact Person <span class="error">*</span></label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text"  name="contact_person" value="">
+                                <input class="form-control" type="text"  name="contact_person" value="" maxlength="50">
                             </div>
-                            <label for="Email" class="col-sm-2 col-form-label">Email ID</label>
+                            <label for="Email" class="col-sm-2 col-form-label">Email ID <span class="error">*</span></label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text"  name="email" value="" >
+                                <input class="form-control" type="email"  name="email" value="" maxlength="50">
                             </div>
                         </div>
 
@@ -180,10 +180,10 @@
 
                             <label for="Colour" class="col-sm-2 col-form-label">Alternate Contact Person</label>
                             <div class="col-sm-4">
-                              <input class="form-control" type="text"  name="sec_contact_person" value="" id="sec_contact_person">
+                              <input class="form-control" type="text"  name="sec_contact_person" value="" id="sec_contact_person" maxlength="50">
                             </div>
 
-                            <label class="col-sm-2 col-form-label">Event Banner
+                            <label class="col-sm-2 col-form-label">Event Banner <span class="error">*</span>
                               <span style="color:#F00;">(985*550px)</span></label>
                               <div class="col-sm-4">
                                  <input type="file" name="eventbanner" id="file_upload" class="form-control" accept="image/*" >
@@ -198,7 +198,7 @@
                         </div>
 
                         <div class="form-group row">
-                          <label for="ecost" class="col-sm-2 col-form-label">Event Type</label>
+                          <label for="ecost" class="col-sm-2 col-form-label">Event Type </label>
                          <div class="col-sm-4">
                               <select class="form-control"  name="eventcost">
                                  <option value="Free">Free</option>
@@ -206,7 +206,7 @@
                                  <!-- <option value="Invite">Invite</option> -->
                              </select>
                            </div>
-                            <label for="Status" class="col-sm-2 col-form-label">Event Status</label>
+                            <label for="Status" class="col-sm-2 col-form-label">Event Status <span class="error">*</span></label>
                             <div class="col-sm-4">
                                <select class="form-control"  name="event_status">
                                     <option value="">Select status</option>
@@ -218,14 +218,10 @@
 
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label"></label>
-                            <div class="col-sm-2">
-                              <button type="submit" class="btn btn-success waves-effect waves-light">
-                              Create </button></div>
-                              <div class="col-sm-2">
-                              <button type="reset" class="btn btn-secondary waves-effect m-l-5">
-                              Clear
-                              </button></div>
+                            <div class="col-sm-4"></div>
+                            <div class="col-sm-2"><button type="submit" class="btn btn-success waves-effect waves-light">Create </button></div>
+                            <div class="col-sm-2"><button type="reset" class="btn btn-secondary waves-effect m-l-5">Clear</button></div>
+							<div class="col-sm-4"></div>
                         </div>
 
                      </form>
@@ -248,8 +244,8 @@
 
 	 window.onload = function () {
 		var mapOptions = {
-					center: new google.maps.LatLng(20.5937, 78.9629),
-					zoom:4,
+					center: new google.maps.LatLng(1.3521, 103.8198),
+					zoom:10,
 					mapTypeId: google.maps.MapTypeId.ROADMAP
 				};
 				var infoWindow = new google.maps.InfoWindow();
@@ -268,7 +264,8 @@
   $(document).ready(function () {
 
 	$( ".datepicker" ).datepicker({
-		format: 'dd-mm-yyyy'
+		format: 'dd-mm-yyyy',
+		autoclose: true
 	});
 
 	$('#hotspot_sts').on('change', function() {
@@ -405,8 +402,8 @@
 
 function check()
 {
-      var fdate = document.getElementById("datepicker-autoclose").value;
-      var tdate = document.getElementById("datepicker").value;
+      var fdate = document.getElementById("datepicker1").value;
+      var tdate = document.getElementById("datepicker2").value;
 
       var chunks = fdate.split('-');
       var formattedDate = chunks[1]+'/'+chunks[0]+'/'+chunks[2];

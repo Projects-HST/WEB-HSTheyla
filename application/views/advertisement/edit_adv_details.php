@@ -30,7 +30,7 @@
                <div class="col-lg-12">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title"> Edit Advertisement Details </h4>
+                        <h4 class="mt-0 header-title"> Edit Advertisement Details</h4>
                         <form  method="post" action="<?php echo base_url();?>advertisement/update_adv_history" name="advertisementform" enctype="multipart/form-data" id="aform" onSubmit='return check();'>
                          <?php foreach($edit AS $res){}?>
 
@@ -38,29 +38,29 @@
                             <label for="stime" class="col-sm-2 col-form-label">Event Name</label>
                             <div class="col-sm-4">
                               <input type="text" class="form-control" readonly="" value="<?php echo $res->event_name;   ?>">
-                            <input type="hidden" class="form-control"  name="event_id" value=" <?php echo $res->event_id;?>" >
-                            <input type="hidden" class="form-control"  name="id" value=" <?php echo $res->id;?>" >
+                            <input type="hidden" class="form-control"  name="event_id" value="<?php echo $res->event_id;?>" >
+                            <input type="hidden" class="form-control"  name="id" value="<?php echo $res->id;?>" >
                              </div>
 
                             <label for="etime" class="col-sm-2 col-form-label">Category</label>
                             <div class="col-sm-4">
-                              <input type="text" class="form-control" readonly="" value=" <?php echo $res->category_name;   ?>">
-                            <input type="hidden" class="form-control"  name="category_id" value=" <?php echo $res->category_id;?>" >
+                              <input type="text" class="form-control" readonly="" value="<?php echo $res->category_name;   ?>">
+                            <input type="hidden" class="form-control"  name="category_id" value="<?php echo $res->category_id;?>" >
                             </div>
                         </div>
 
                        <div class="form-group row">
-                            <label for="sdate" class="col-sm-2 col-form-label">Start Date</label>
+                            <label for="sdate" class="col-sm-2 col-form-label">Start Date <span class="error">*</span></label>
                             <div class="col-sm-4">
 
-                                <input type="text" class="form-control datepicker"  name="start_date"  value="<?php $date=date_create($res->date_from);echo date_format($date,"d-m-Y");  ?>" id="datepicker-autoclose">
+                                <input type="text" class="form-control datepicker"  name="start_date"  value="<?php $date=date_create($res->date_from);echo date_format($date,"d-m-Y");  ?>" id="datepicker1">
 
                             </div>
 
-                             <label for="edate" class="col-sm-2 col-form-label">End Date</label>
+                             <label for="edate" class="col-sm-2 col-form-label">End Date <span class="error">*</span></label>
                             <div class="col-sm-4">
 
-                                <input type="text" class="form-control datepicker"  name="end_date" value="<?php $date=date_create($res->date_to);echo date_format($date,"d-m-Y");  ?>" id="datepicker">
+                                <input type="text" class="form-control datepicker"  name="end_date" value="<?php $date=date_create($res->date_to);echo date_format($date,"d-m-Y");  ?>" id="datepicker2">
 
                             </div>
                         </div>
@@ -80,10 +80,9 @@
 
 
                         <div class="form-group row">
-                             <label for="ecost" class="col-sm-2 col-form-label">Plan</label>
+                             <label for="ecost" class="col-sm-2 col-form-label">Plan <span class="error">*</span></label>
                             <div class="col-sm-4">
-                                 <select class="form-control" required="" name="adv_plan">
-                                    <option value="Free">Select Plans </option>
+                                 <select class="form-control" name="adv_plan">
                                     <?php foreach ($plans as $values) {?>
                                     <option value="<?php echo $values->id; ?>"><?php  echo $values->plan_name; ?></option>
                                    <?php  } ?>
@@ -91,10 +90,9 @@
                                 </select>
                                 <script language="JavaScript">document.advertisementform.adv_plan.value="<?php echo $res->adv_plan_id; ?>";</script>
                             </div>
-                            <label for="Status" class="col-sm-2 col-form-label">Banner Status</label>
+                            <label for="Status" class="col-sm-2 col-form-label">Banner Status <span class="error">*</span></label>
                             <div class="col-sm-4">
                                <select class="form-control" name="status">
-                                    <option value="">Select status</option>
                                     <option value="Y">Active</option>
                                     <option value="N">Inactive</option>
                                 </select>
@@ -142,7 +140,8 @@
 
  $(document).ready(function () {
   $( ".datepicker" ).datepicker({
-        format: 'dd-mm-yyyy'
+        format: 'dd-mm-yyyy',
+		 autoclose: true
       });
 
 
@@ -160,7 +159,7 @@
         start_time:"Select start time",
         end_date:"Select end date",
         end_time:"Select end time",
-        adv_plan:"Select plan ",
+        adv_plan:"Select plan",
         status:"Select status",
                },
          });
@@ -168,8 +167,8 @@
   function check()
     {
 
-      var fdate = document.getElementById("datepicker-autoclose").value;
-      var tdate = document.getElementById("datepicker").value;
+      var fdate = document.getElementById("datepicker1").value;
+      var tdate = document.getElementById("datepicker2").value;
 
        //alert(fdate);alert(tdate);
       var chunks = fdate.split('-');

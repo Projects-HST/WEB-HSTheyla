@@ -1,21 +1,18 @@
-<style>
-td{
-  width: 100px;
-}
-</style>
-    <div class="page-content-wrapper ">
+<div class="page-content-wrapper ">
         <div class="container">
+            <div class="row">
 
-           <?php if($this->session->flashdata('msg')): ?>
-             <div class="alert <?php $msg=$this->session->flashdata('msg');
-             if($msg=='Added Successfully' || $msg=='Updated Successfully'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
+        <div class="col-lg-12">
+            <div class="card m-b-20">
+                <div class="card-block">
+					<h4 class="mt-0 header-title">Archived Reviews </h4>
+					
+					<?php if($this->session->flashdata('msg')): ?>
+                          <div class="alert alert-success">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                            ×</button> <?php echo $this->session->flashdata('msg'); ?>
                           </div>
                         <?php endif; ?>
-
-                        <div class="row">
-                          <div class="col-md-12">
                             <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
                             <thead>
                             <tr>
@@ -40,14 +37,29 @@ td{
                         </tbody>
                     </table>
                           </div>
-                        </div>
-
-
-
-
-</div> <!-- content -->
-<script>
-$(document).ready(function() {
-  $('table.display').DataTable();
+                  </div>
+               </div>
+               <!-- end col -->
+            </div>
+            <!-- end row -->
+         </div>
+		   <!-- container -->
+      </div>
+     <!-- Page content Wrapper href="<?php echo base_url();?>advertisement/delete_history_all/<?php echo $rows->id;?>" -->
+   </div>
+    <!-- Top Bar Start -->
+</div>
+<!-- content -->
+<script type="text/javascript">
+  $(document).ready(function() {
+	$(document).on("preInit.dt", function(){
+		$(".dataTables_filter input[type='search']").attr("maxlength", 20);
+	});
+	
+	$('table').DataTable({
+         "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+        "iDisplayLength": 25,
+		"ordering": false
+    });
 } );
 </script>

@@ -281,11 +281,11 @@ class Home extends CI_Controller {
         $eventcost=$this->input->post('eventcost');
         $sdate=$this->input->post('start_date');
 		$dateTime = new DateTime($sdate);
-		$start_date=date_format($dateTime,'Y-m-d');
+		 $start_date=date_format($dateTime,'Y-m-d');
         $edate=$this->input->post('end_date');
         $dateTime = new DateTime($edate);
-		$end_date=date_format($dateTime,'Y-m-d');
-        $start_time=$this->input->post('start_time');
+		 $end_date=date_format($dateTime,'Y-m-d');
+         $start_time=$this->input->post('start_time');
         $end_time=$this->input->post('end_time');
         $txtLatitude=$this->input->post('txtLatitude');
         $txtLongitude=$this->input->post('txtLongitude');
@@ -509,13 +509,13 @@ class Home extends CI_Controller {
 				 redirect('/');
 			 }
 		 }else{
-			 echo "Account Deactive";
+			 echo "Your Account is Deactive. Please contact Admin";
 
 		 }
 
 		}
 		else{
-		$authUrl=$client->createAuthUrl();
+			$authUrl=$client->createAuthUrl();
 			redirect($authUrl);
 		}
 
@@ -530,25 +530,26 @@ class Home extends CI_Controller {
 
 				$datas['result'] = $this->loginmodel->getuserfb($firstname,$email);
 
-						$user_role=$datas['result']['user_role'];
-						$status=$datas['result']['status'];
+				 $user_role=$datas['result']['user_role'];
+				 $status=$datas['result']['status'];
 
 
-						if($status=='Y'){
-							if($user_role==3){
-							echo "success";
-							}else if($user_role==2){
-									echo "success";
-							}else{
-								redirect('/');
-							}
-						}else if($status=='error'){
-							echo "Something Went wrong";
+				if($status=='Y')
+				{
+					if($user_role==3){
+						echo "success";
+					}else if($user_role==2){
+						echo "success";
+					}else{
+						redirect('/');
+					}
+				}else if($status=='error'){
+					echo "Something Went wrong";
 
-						}else{
-						redirect('deactive');
+				}else{
+					echo "Your Account is Deactive";
 
-						}
+				}
 
 
 
@@ -912,7 +913,7 @@ class Home extends CI_Controller {
 			$user_id=$this->session->userdata('id');
 			 $user_role=$this->session->userdata('user_role');
 			if($user_id){
-				$first_name=$this->input->post('first_name');
+				$first_name=$this->input->post('name');
 				$user_name=$this->input->post('user_name');
 				$email_id=$this->input->post('email');
 				$address=$this->input->post('address');

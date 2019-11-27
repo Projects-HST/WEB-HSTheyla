@@ -14,17 +14,17 @@
                         <h4 class="mt-0 header-title"> Add Event Category </h4>
                         <form method="post" action="<?php echo base_url();?>category/add_category" name="categoryform" enctype="multipart/form-data" id="categoryform">
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-4 col-form-label">Category</label>
+                              <label for="example-text-input" class="col-sm-4 col-form-label">Category <span class="error">*</span></label>
                               <div class="col-sm-6">
-                                 <input class="form-control" type="text" name="categoryname" id="example-text-input">
+                                 <input class="form-control" type="text" name="categoryname" id="example-text-input" maxlength="50">
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Image</label>
+                              <label class="col-sm-4 col-form-label">Image <span class="error">*</span></label>
                               <div class="col-sm-6">
                                  <input type="file" id="file_upload" name="categorypic" class="form-control" accept="image/*">
                                  <span style="color: red;">(Size: 73 X 73)</span>
-                                 <div id="preview" style="color: red;"></div>
+                                 
                               </div>
                            </div>
                            <div class="form-group row">
@@ -32,11 +32,11 @@
                               <div class="col-sm-6">
                                  <input type="file" id="file_upload" name="category_banner" class="form-control" accept="image/*">
                                  <span style="color: red;">(Size: 73 X 73)</span>
-                                 <div id="category_banner" style="color: red;"></div>
+                                 
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Display Order</label>
+                              <label class="col-sm-4 col-form-label">Display Order <span class="error">*</span></label>
                               <div class="col-sm-6">
                                  <select class="form-control" name="disp_order">
                                     <?php if(!empty($result)){
@@ -53,10 +53,10 @@
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Status</label>
+                              <label class="col-sm-4 col-form-label">Status <span class="error">*</span></label>
                               <div class="col-sm-6">
                                  <select class="form-control" name="eventsts">
-                                    <option value="">Select status</option>
+                                    <option value="">Select Status</option>
                                     <option value="Y">Active</option>
                                     <option value="N">Inactive</option>
                                  </select>
@@ -95,7 +95,7 @@
                                  <label for="example-text-input" class="col-sm-4 col-form-label">Category Name</label>
                                  <div class="col-sm-6">
                                     <input type="hidden" name="ct_id" id="ct_id" class="form-control" value="">
-                                    <input type="text" name="categoryname" id="ct_name" class="form-control" value="">
+                                    <input type="text" name="categoryname" id="ct_name" class="form-control" value="" maxlength="50">
                                  </div>
                               </div>
                               <button type="submit" class="btn btn-primary" style="float:right;">Save changes</button>
@@ -118,7 +118,7 @@
                            <?php echo $this->session->flashdata('msg'); ?>
                         </div>
                         <?php endif; ?>
-                        <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
                                  <th>S. No</th>
@@ -143,8 +143,12 @@
                                  <td>
                                     <img src="<?php echo base_url(); ?>assets/category/<?php echo $rows->category_image; ?>" class="img-circle">
                                  </td>
-                                 <td>
+                                 <td align="center">
+								 <?php if ($rows->category_banner != "") { ?>
                                     <img src="<?php echo base_url(); ?>assets/category/<?php echo $rows->category_banner; ?>" class="img-responsive" style="width:150px;">
+								 <?php } else { ?>
+									<img src="../assets/icons/no_banner.jpg" class="img-circle">
+								 <?php } ?>
                                  </td>
                                  <td>
                                     <?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?>
@@ -191,6 +195,16 @@
 
    $(document).ready(function()
    {
+	   $(document).on("preInit.dt", function(){
+		$(".dataTables_filter input[type='search']").attr("maxlength", 20);
+	});
+	
+	$('table').DataTable({
+         "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+        "iDisplayLength": 25,
+		"ordering": false
+    });
+	
         $('#file_upload').on('change', function()
         {
           var f=this.files[0]
@@ -214,16 +228,14 @@
       rules: {
             categoryname: { required: true },
             categorypic: { required: true },
-            category_banner:{required: true},
             eventsts: { required: true },
             disp_order: { required: true }
           },
       messages: {
-            categoryname: "Enter category",
-            categorypic: "Select image",
-            category_banner: "Select image",
-            eventsts: "Select status",
-            disp_order:"Select display order"
+            categoryname: "Enter Category",
+            categorypic: "Select Category Icon",
+            eventsts: "Select Status",
+            disp_order:"Select Display Order"
             },
          });
    });
@@ -233,7 +245,7 @@
    categoryname: {required: true},
    },
    messages: {
-   categoryname: "Enter category"
+   categoryname: "Enter Category"
    },
    submitHandler: function(form) {
    //alert("hi");

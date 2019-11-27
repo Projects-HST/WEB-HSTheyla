@@ -8,13 +8,13 @@
 
                         <form class="" method="post" action="<?php echo base_url();?>country/add_country" name="countryform" id="countryform">
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-4 col-form-label">Country</label>
+                              <label for="example-text-input" class="col-sm-4 col-form-label">Country <span class="error">*</span></label>
                               <div class="col-sm-6">
-                                 <input class="form-control" type="text"  name="countryname" value="" id="example-text-input">
+                                 <input class="form-control" type="text" name="countryname" value="" id="example-text-input" maxlength="50">
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Status</label>
+                              <label class="col-sm-4 col-form-label">Status <span class="error">*</span></label>
                               <div class="col-sm-6">
                                  <select class="form-control" name="eventsts">
                                     <option value="">Select  Status</option>
@@ -49,7 +49,7 @@
                         </div>
                         <?php endif; ?>
 
-                        <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
 							            <th>S. No</th>
@@ -89,16 +89,31 @@
 <!-- content -->
 <script type="text/javascript">
  $(document).ready(function () {
+	 
+	$(document).on("preInit.dt", function(){
+		$(".dataTables_filter input[type='search']").attr("maxlength", 20);
+	});
+  
+	$('table').DataTable({
+         "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+        "iDisplayLength": 25,
+		"ordering": false
+    });
+	
     $('#countryform').validate({ // initialize the plugin
        rules: {
          countryname:{required:true },
          eventsts:{required:true }
         },
         messages: {
-        countryname:"Enter country",
-        eventsts:"Select status"
+        countryname:"Enter Country",
+        eventsts:"Select Status"
                },
          });
    });
+   
+  
+   
+  
 
 </script>

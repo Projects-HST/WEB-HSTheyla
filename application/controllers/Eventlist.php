@@ -303,8 +303,7 @@ class Eventlist extends CI_Controller
     {
 		delete_cookie("search_values");
 		delete_cookie("city_values");
-
-		echo "Success";
+		redirect('/');
     }
 
     public function webflow()

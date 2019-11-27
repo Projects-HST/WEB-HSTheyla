@@ -1,20 +1,20 @@
-<style>
-
-</style>
 
     <div class="page-content-wrapper ">
         <div class="container">
-            <h4 class="mt-0 header-title">Unread Reviews </h4>
+            <div class="row">
 
-           <?php if($this->session->flashdata('msg')): ?>
+        <div class="col-lg-12">
+            <div class="card m-b-20">
+                <div class="card-block">
+					<h4 class="mt-0 header-title">Pending Reviews </h4>
+					
+					<?php if($this->session->flashdata('msg')): ?>
                           <div class="alert alert-success">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                            ×</button> <?php echo $this->session->flashdata('msg'); ?>
                           </div>
                         <?php endif; ?>
 
-            <div class="row">
-              <div class="col-md-12">
                 <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
                 <thead>
                 <tr>
@@ -38,23 +38,33 @@
                    &nbsp;<a href="<?php echo base_url(); ?>reviews/archive/<?php echo $value->id; ?>/A/<?php echo $value->event_id; ?>/<?php echo $value->user_id; ?>" class="btn btn-warning waves-effect waves-light">
              Archive</a>  </td>
             </tr>
-          <?php $i++; }  }?>
+          <?php $i++; }  } else{ echo "<p class=card-text> No Reviews Found </p>";}?>
             </tbody>
         </table>
               </div>
+                  </div>
+               </div>
+               <!-- end col -->
             </div>
-
-
-
-        </div>
-    </div>
-
-
-</div> <!-- content -->
+            <!-- end row -->
+         </div>
+		   <!-- container -->
+      </div>
+     <!-- Page content Wrapper href="<?php echo base_url();?>advertisement/delete_history_all/<?php echo $rows->id;?>" -->
+   </div>
+    <!-- Top Bar Start -->
+</div>
+<!-- content -->
 <script type="text/javascript">
-
-
-$(document).ready(function() {
-  $('table.display').DataTable();
+  $(document).ready(function() {
+	$(document).on("preInit.dt", function(){
+		$(".dataTables_filter input[type='search']").attr("maxlength", 20);
+	});
+	
+	$('table').DataTable({
+         "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+        "iDisplayLength": 25,
+		"ordering": false
+    });
 } );
 </script>

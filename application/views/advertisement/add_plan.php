@@ -16,15 +16,15 @@
 
                         <form method="post" action="<?php echo base_url();?>advertisement/add_plans" name="advertisementform" id="advertisementform" enctype="multipart/form-data">
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-4 col-form-label">Plan Name</label>
+                              <label for="example-text-input" class="col-sm-4 col-form-label">Plan Name <span class="error">*</span></label>
                               <div class="col-sm-6">
-                                 <input class="form-control" type="text" name="planname">
+                                 <input class="form-control" type="text" name="planname" maxlength="50">
                               </div>
                            </div>
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Plan Price</label>
+                              <label class="col-sm-4 col-form-label">Plan Price <span class="error">*</span></label>
                               <div class="col-sm-6">
-                                 <input type="text" name="plan_rate" class="form-control">
+                                 <input type="text" name="plan_rate" class="form-control" maxlength="10">
                               </div>
                            </div>
                            <div class="form-group">
@@ -53,7 +53,7 @@
                         </div>
                         <?php endif; ?>
 
-                        <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
 							                  <th>S. No</th>
@@ -128,6 +128,17 @@
   }
 
  $(document).ready(function () {
+	 
+	 $(document).on("preInit.dt", function(){
+		$(".dataTables_filter input[type='search']").attr("maxlength", 20);
+	});
+	
+	$('table').DataTable({
+         "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+        "iDisplayLength": 25,
+		"ordering": false
+    });
+	
     $('#advertisementform').validate({ // initialize the plugin
        rules: {
          planname:{required:true },

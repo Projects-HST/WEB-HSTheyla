@@ -42,14 +42,15 @@ class Category extends CI_Controller
         $profilepic   = $uploaddir . $categorypic1;
         move_uploaded_file($_FILES['categorypic']['tmp_name'], $profilepic);
 
-
-        $pic = $_FILES['category_banner']['name'];
-        $temp = pathinfo($pic, PATHINFO_EXTENSION);
-        $file_name    = time() . rand(1,5) . rand(6,10);
-        $pic_cat = $file_name . '.' .$temp;
-        $uploaddir    = 'assets/category/';
-        $cat_img   = $uploaddir . $pic_cat;
-        move_uploaded_file($_FILES['category_banner']['tmp_name'], $cat_img);
+		if ($_FILES['category_banner']['name']!="") {
+			$pic = $_FILES['category_banner']['name'];
+			$temp = pathinfo($pic, PATHINFO_EXTENSION);
+			$file_name    = time() . rand(1,5) . rand(6,10);
+			$pic_cat = $file_name . '.' .$temp;
+			$uploaddir    = 'assets/category/';
+			$cat_img   = $uploaddir . $pic_cat;
+			move_uploaded_file($_FILES['category_banner']['tmp_name'], $cat_img);
+		}
         $datas = $this->categorymodel->insert_category($categoryname, $categorypic1, $disp_order, $status, $user_id, $user_role,$pic_cat);
         $sta   = $datas['status'];
         //print_r($sta);exit;

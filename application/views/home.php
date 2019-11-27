@@ -1,10 +1,11 @@
+  <?php $user_role=$this->session->userdata('user_role'); ?>
   <div class="page-content-wrapper ">
       <div class="container">
           <div class="row">
-            <?php  $user_role=$this->session->userdata('user_role');
-            if($user_role==4){ ?>
+            <?php  
+			
+            if($user_role==1){ ?>
 
-          <?php  }else{ ?>
             <div class="col-md-6 col-lg-6 col-xl-3">
                <!-- <a href="<?php echo base_url();?>events/view_events" class="test" data-toggle="tooltip" title="View Events Details"> -->
                 <div class="mini-stat clearfix bg-primary">
@@ -13,19 +14,15 @@
                         <span class="counter"><?php foreach ($admin_users as $rows_admin) {
                           echo $rows_admin->users;
                         } ?></span>
-                        <b style="font-size:14px;">Heyla Admins</b>
+                        <b style="font-size:14px;">Staff</b>
                     </div>
                 </div>
               <!-- </a> -->
             </div>
           <?php  } ?>
+		  
+		  
               <div class="col-md-6 col-lg-6 col-xl-3">
-                <?php  $user_role=$this->session->userdata('user_role');
-                if($user_role==4){ ?>
-                    <!-- <a href="#" class="test" data-toggle="tooltip" title="View Users Details"> -->
-              <?php  }else{ ?>
-                    <!-- <a href="<?php echo base_url();?>users/view" class="test" data-toggle="tooltip" title="View Users Details"> -->
-              <?php  } ?>
 
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><i class="fa fa-users" aria-hidden="true"></i></span>
@@ -33,7 +30,7 @@
                           <span class="counter"><?php foreach ($users as $value) {
                             echo $value->users;
                           } ?></span>
-                          <b style="font-size:14px;">Heyla Users</b>
+                          <b style="font-size:14px;">Users</b>
                       </div>
                   </div>
                 <!-- </a> -->
@@ -62,7 +59,7 @@
                           <span class="counter"><?php foreach ($total_category as $rows_cat) {
                             echo $rows_cat->count;
                           } ?></span>
-                          <b style="font-size:14px;">Categories</b>
+                          <b style="font-size:14px;">Event Categories</b>
                       </div>
                   </div>
                 <!-- </a> -->
@@ -80,35 +77,62 @@
                   </div>
                 <!-- </a> -->
               </div>
-              <div class="col-md-6 col-lg-6 col-xl-3">
+              
+			 <div class="col-md-6 col-lg-6 col-xl-3">
                  <!-- <a href="#" class="test" data-toggle="tooltip" title="View Events Details"> -->
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/active_events.png" /></span>
                       <div class="mini-stat-info text-right text-white">
-                          <span class="counter"><?php foreach ($events as $rows) {
-                            echo $rows->events;
+                          <span class="counter"><?php foreach ($active_events as $rows) {
+                            echo $rows->active_events;
                           } ?></span>
-                          <b style="font-size:14px;">Active Events</b>
+                          <b style="font-size:14px;">Mainstream Events</b>
                       </div>
                   </div>
                 <!-- </a> -->
               </div>
-
-              <div class="col-md-6 col-lg-6 col-xl-3">
+			  <div class="col-md-6 col-lg-6 col-xl-3">
                  <!-- <a href="#" class="test" data-toggle="tooltip" title="View Events Details"> -->
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/hotspot.png" /></span>
                       <div class="mini-stat-info text-right text-white">
                           <span class="counter"><?php foreach ($hotspot_events as $row_hotspot) {
-                            echo $row_hotspot->count;
+                            echo $row_hotspot->hotspot_events;
                           } ?></span>
                           <b style="font-size:14px;">Hotspots </b>
                       </div>
                   </div>
                 <!-- </a> -->
               </div>
-              <div class="col-md-6 col-lg-6 col-xl-3">
+			  <div class="col-md-6 col-lg-6 col-xl-3">
                  <!-- <a href="#" class="test" data-toggle="tooltip" title="View Events Details"> -->
+                  <div class="mini-stat clearfix bg-primary">
+                      <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/general.png" /></span>
+                      <div class="mini-stat-info text-right text-white">
+                          <span class="counter"><?php foreach ($live_events as $rows) {
+                            echo $rows->live_events;
+                          } ?></span>
+                          <b style="font-size:14px;">Active Mainstream Events</b>
+                      </div>
+                  </div>
+                <!-- </a> -->
+              </div>
+			   <div class="col-md-6 col-lg-6 col-xl-3">
+                 <!-- <a href="#" class="test" data-toggle="tooltip" title="View Events Details"> -->
+                  <div class="mini-stat clearfix bg-primary">
+                      <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/active_events.png" /></span>
+                      <div class="mini-stat-info text-right text-white">
+                          <span class="counter"><?php foreach ($archive_events as $rows) {
+                            echo $rows->archive_events;
+                          } ?></span>
+                          <b style="font-size:14px;">Unlisted Events</b>
+                      </div>
+                  </div>
+                <!-- </a> -->
+              </div>
+			
+              <!--<div class="col-md-6 col-lg-6 col-xl-3">
+                  <a href="#" class="test" data-toggle="tooltip" title="View Events Details"> 
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/general.png" /></span>
                       <div class="mini-stat-info text-right text-white">
@@ -118,8 +142,9 @@
                           <b style="font-size:14px;">General </b>
                       </div>
                   </div>
-                <!-- </a> -->
-              </div>
+                 </a> 
+              </div>-->
+			   
               <div class="col-md-6 col-lg-6 col-xl-3">
                  <!-- <a href="#" class="test" data-toggle="tooltip" title="View Events Details"> -->
                   <div class="mini-stat clearfix bg-primary">
@@ -128,7 +153,7 @@
                           <span class="counter"><?php foreach ($paid_events as $row_piad) {
                             echo $row_piad->count;
                           } ?></span>
-                          <b style="font-size:14px;">Paid Events </b>
+                          <b style="font-size:14px;">Active Paid Events</b>
                       </div>
                   </div>
                 <!-- </a> -->
@@ -141,7 +166,7 @@
                           <span class="counter"><?php foreach ($free_events as $row_free) {
                             echo $row_free->count;
                           } ?></span>
-                          <b style="font-size:14px;">Free Events</b>
+                          <b style="font-size:14px;">Active Free Events</b>
                       </div>
                   </div>
                 <!-- </a> -->
@@ -154,7 +179,7 @@
                           <span class="counter"><?php foreach ($ad_events as $row_ad) {
                             echo $row_ad->count;
                           } ?></span>
-                          <b style="font-size:14px;">Event Advertisements</b>
+                          <b style="font-size:14px;">Active Event Advertisements</b>
                       </div>
                   </div>
                 <!-- </a> -->
@@ -167,7 +192,7 @@
                           <span class="counter"><?php foreach ($org_events as $res) {
                             echo $res->org;
                           } ?></span>
-                        <b style="font-size:14px;"> Organizers' Events </b>
+                        <b style="font-size:14px;">Unreviewed Organizer Events</b>
                       </div>
                     <!-- </a> -->
                   </div>
@@ -180,25 +205,26 @@
                           <span class="counter"><?php foreach ($booking as $res) {
                             echo $res->booking;
                           } ?></span>
-                          <b style="font-size:14px;">Total Bookings</b>
+                          <b style="font-size:14px;">Total Tickets Booked</b>
                       </div>
                   </div>
                 <!-- </a> -->
               </div>
               <div class="col-md-6 col-lg-6 col-xl-3">
-                 <!-- <a href="#" class="test" data-toggle="tooltip" title="View                  Pending Reviews Details"> -->
+                 <!-- <a href="#" class="test" data-toggle="tooltip" title="View Pending Reviews Details"> -->
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom:10px; padding-right:2px;" src="<?php echo base_url();?>assets/icons/dashboard/Pending.png" /></span>
                       <div class="mini-stat-info text-right text-white">
                           <span class="counter"><?php foreach ($reviews as $res) {
                             echo $res->reviews;
                           } ?></span>
-                         <b style="font-size:14px;"> Pending Reviews </b>
+                         <b style="font-size:14px;">Unrestrained User Reviews</b>
                       </div>
                   </div>
                 <!-- </a> -->
               </div>
-              <?php   $user_role=$this->session->userdata('user_role');if($user_role==1){ ?>
+			  
+              <?php   if($user_role==1){ ?>
               <div class="col-md-6 col-lg-6 col-xl-3">
                  <!-- <a href="#" class="test" data-toggle="tooltip" title="View                  Organiser Request"> -->
                   <div class="mini-stat clearfix bg-primary">
@@ -207,16 +233,15 @@
                           <span class="counter"><?php foreach ($organiser_request as $res) {
                             echo $res->request_pending;
                           } ?></span>
-                         <b style="font-size:14px;"> Organizers' Applications </b>
+                         <b style="font-size:14px;">Organizer Applications</b>
                       </div>
                   </div>
                 <!-- </a> -->
               </div>
-            <?php }else{
-
-            } ?>
-            <div class="col-md-6 col-lg-6 col-xl-3">
-               <!-- <a href="#" class="test" data-toggle="tooltip" title="View Booking Details"> -->
+            <?php } ?>
+			
+            <!--<div class="col-md-6 col-lg-6 col-xl-3">
+              <a href="#" class="test" data-toggle="tooltip" title="View Booking Details">
                 <div class="mini-stat clearfix bg-primary">
                     <span class="mini-stat-icon"><img style="padding-bottom:10px; padding-right:2px;" src="<?php echo base_url();?>assets/icons/dashboard/subscribed_user.png" /></span>
                     <div class="mini-stat-info text-right text-white">
@@ -226,8 +251,8 @@
                         <b style="font-size:14px;">Newsletter Subscriptions</b>
                     </div>
                 </div>
-              <!-- </a> -->
-            </div>
+              </a> 
+            </div>-->
 
 
           </div>

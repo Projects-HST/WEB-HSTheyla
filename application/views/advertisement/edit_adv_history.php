@@ -30,7 +30,7 @@
                <div class="col-lg-12">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title"> Edit  Advertisement Details </h4>
+                        <h4 class="mt-0 header-title"> Edit  Advertisement Details</h4>
                         <form  method="post" action="<?php echo base_url();?>advertisement/update_adv_history_all" name="advertisementform" enctype="multipart/form-data" onSubmit='return check();'>
                          <?php foreach($edit AS $res){}?>
 

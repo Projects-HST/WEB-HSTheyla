@@ -110,7 +110,7 @@
                   <li>
                       <a href="<?php echo base_url(); ?>leaderboard" class="leaderboard_active">
                           <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/dashboard.png"></span>
-                          <span class="sidebar-title">Dashboard</span>
+                          <span class="sidebar-title">Leaderboard</span>
                       </a>
                   </li>
 

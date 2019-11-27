@@ -1,23 +1,27 @@
-<div class="page-content-wrapper">
-    <div class="container">
-    <div class="col-12">
-        <h4 class="mt-0 header-title"> Heyla Users </h4>
-      <div class="card m-b-20">
-        <?php if($this->session->flashdata('msg')): ?>
-          <div class="alert <?php $msg=$this->session->flashdata('msg');
-          if($msg=='Added Successfully' || $msg=='Changes made are saved'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-              ×</button> <?php echo $this->session->flashdata('msg'); ?>
-           </div>
-           <?php endif; ?>
+  <div class="page-content-wrapper ">
+        <div class="container">
+            <div class="row">
+
+        <div class="col-12">
+            <div class="card m-b-20">
+                <div class="card-block">
+
+                    <h4 class="mt-0 header-title">Heyla Users </h4>
+
+					<?php if($this->session->flashdata('msg')): ?>
+					  <div class="alert <?php $msg=$this->session->flashdata('msg');
+					  if($msg=='Added Successfully' || $msg=='Changes made are saved'){ echo "alert-success"; }else{ echo "alert-danger"; } ?>">
+						  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+						  ×</button> <?php echo $this->session->flashdata('msg'); ?>
+					   </div>
+				   <?php endif; ?>
 
                 <table  class="table table-striped table-bordered display" cellspacing="0" width="100%">
                     <thead>
                     <tr>
                         <th>S. No</th>
-                        <th style="width:200px;">Username/Email ID/Phone Number</th>
-                        <th style="width:100px;">Full Name</th>
-                        <th>City/Area</th>
+                        <th>Username</th>
+                        <th>Full Name</th>
                         <th>Points</th>
                         <th>Status</th>
                         <th>Actions </th>
@@ -33,30 +37,27 @@
                           ?>
                     <tr>
                         <td><?php echo $i; ?></td>
-                        <td><?php echo $rows->user_name ; ?><br>
-                        <?php echo $rows->email_id; ?><br><?php echo $rows->mobile_no; ?>
-                        </td>
+                        <td><?php echo $rows->user_name ; ?> <br> <?php echo $rows->email_id; ?> <br> <?php echo $rows->mobile_no; ?></td>
                         <td><?php echo $rows->name ; ?></td>
-
-
-                        <td><?php echo $rows->city_name ; ?></td>
                         <td><?php echo $rows->total_points ; ?></td>
                         <td><?php if($sts=='Y'){ echo'<p class="btn btn-secondary btn-success btn-sm"> Active </p>'; }else{ echo'<p class="btn btn-secondary btn-primary btn-sm"> Deactive </p>'; }?></td>
-                        <td>
-                          <a href="<?php echo base_url();?>users/edit_noraml_users/<?php echo $rows->id;?>">
-                          <img title="Edit details" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
-                        </td>
+                        <td><a href="<?php echo base_url();?>users/edit_normal_users/<?php echo $rows->id;?>"><img title="Edit details" src="<?php echo base_url();?>assets/icons/edit.png" /></a></td>
                     </tr>
                    <?php $i++; }  ?>
                     </tbody>
                 </table>
 
+         </div>
+
+
+                    </div>
+
+                </div>
+            </div>
         </div>
-    </div>
+      </div> <!-- end row -->
 
 </div>
-</div>
-
 <script type="text/javascript">
 
 function confirmGetMessage(usid,uid)
@@ -89,6 +90,14 @@ $.ajax({
 
 
 $(document).ready(function() {
-  $('table.display').DataTable();
+  $(document).on("preInit.dt", function(){
+		$(".dataTables_filter input[type='search']").attr("maxlength", 20);
+	});
+	
+	$('table').DataTable({
+         "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+        "iDisplayLength": 25,
+		"ordering": false
+    });
 });
 </script>

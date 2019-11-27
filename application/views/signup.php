@@ -11,27 +11,27 @@
                         <div class="col-xs-6 form_box">
                             <div class="left-inner-addon">
                                 <i class="fas fa-user"></i>
-                                <input type="text" class="form-control" name="name" placeholder="Username" />
+                                <input type="text" class="form-control" name="name" placeholder="Username" maxlength="12"/>
                             </div>
                         </div>
                         <div class="col-xs-6 form_box">
                             <div class="left-inner-addon">
                                 <i class="fas fa-mobile-alt"></i>
-                                <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Mobile Number" />
+                                <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Mobile Number" maxlength="10"/>
                             </div>
                         </div>
                         <div class="col-xs-6 form_box">
                             <div class="left-inner-addon">
                                 <i class="fas fa-envelope"></i>
-                                <input type="email" class="form-control" name="email" placeholder="Email ID" />
+                                <input type="email" class="form-control" name="email" placeholder="Email ID (Optional)" maxlength="50" />
                             </div>
                         </div>
                         <div class="col-xs-6 form_box">
                             <div class="left-inner-addon">
 
                                 <i class="fas fa-lock"></i>
-                                <input id="password-field" type="password" class="form-control"  name="new_password"  placeholder="Password" value="" required>
-                                 <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                <input id="password-field" type="password" class="form-control"  name="new_password"  placeholder="Password" maxlength="12" required>
+                                 <span toggle="#password-field" class="fa fa-fw  fa-eye-slash field-icon toggle-password"></span>
 
 
 
@@ -203,7 +203,7 @@ $('#otp_form_validate').validate({
                 $.removeCookie("mobile_cookie");
                   swal({
                      title: " ",
-                     text: "Heyla Welcomes you!.",
+                     text: "Heyla Welcomes you!",
                      type: "success"
                  }).then(function() {
                      location.href = '<?php echo base_url(); ?>';
@@ -234,7 +234,7 @@ function resend_otp_function(){
 
 $(".toggle-password").click(function() {
 
-  $(this).toggleClass("fa-eye fa-eye-slash");
+  $(this).toggleClass("fa-eye-slash fa-eye");
   var input = $($(this).attr("toggle"));
   if (input.attr("type") == "password") {
     input.attr("type", "text");
@@ -296,7 +296,7 @@ function statusChangeCallback(response) {
                     sweetAlert("Oops...", "Something went Wrong", "error");
                   }
                   else{
-                    sweetAlert("Oops...", "Something went Wrong", "error");
+                    sweetAlert("Oops...", "Your Account is Deactive", "error");
                   }
 
               }

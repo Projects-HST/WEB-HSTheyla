@@ -8,7 +8,7 @@
 <meta content="" name="description" />
 <meta content="" name="author" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
+ <link rel="icon" href="<?php echo base_url(); ?>assets/fav_icon.png" type="image/gif" sizes="32x32">
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/morris/morris.css">
 <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="<?php echo base_url(); ?>assets/css/icons.css" rel="stylesheet" type="text/css">
@@ -95,7 +95,7 @@
                     <span>Events</span> </a>
                     <ul class="list-unstyled">
                         <li id="adevents"><a href="<?php echo base_url();?>events/home">Add Events</a></li>
-                        <li id="vieweve"><a href="<?php echo base_url();?>events/view_events">View Events</a></li>
+                        <li id="vieweve"><a href="<?php echo base_url();?>events/view_events">View / Edit Events</a></li>
                         <li id="orgeve"><a href="<?php echo base_url();?>events/organizer_events">Organizer Events</a></li>
                     </ul>
                 </li>
@@ -116,13 +116,14 @@
                     <ul class="list-unstyled">
                         <li><a href="<?php echo base_url();?>reviews/view_reviews">Unread </a></li>
                         <li><a href="<?php echo base_url();?>reviews/archive_reviews">Archived </a></li>
+						<li><a href="<?php echo base_url();?>reviews/home">All </a></li>
                     </ul>
                 </li>
 
                 <li class="has_sub" id="booking">
                     <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-calendar-check-o" aria-hidden="true"></i><span> Booking </span></a>
                     <ul class="list-unstyled">
-                        <li id="org_request"><a href="<?php echo base_url();?>tracking/refund_request">Refund Details</a></li>
+                        <!--<li id="org_request"><a href="<?php echo base_url();?>tracking/refund_request">Refund Details</a></li>-->
                         <li><a href="<?php echo base_url();?>bookinghistory/process_details">Booking Process</a></li>
                         <li id="booking_status"><a href="<?php echo base_url();?>bookinghistory/status_details">Booking Status</a></li>
                         <li id="booking_history"><a href="<?php echo base_url();?>bookinghistory/home">History</a></li>
@@ -152,9 +153,9 @@
 
                         <li id="org_request"><a href="<?php echo base_url();?>dashboard/get_all_organiser_request">Organizer Requests</a></li>
                         <li id="org_track"><a href="<?php echo base_url();?>tracking/organiser_event_tracking">Organizer Events</a></li>
-                        <li id="event_track"><a href="<?php echo base_url();?>tracking/admin_event_tracking">Admin Events</a></li>
-                        <li id="event_track"><a href="<?php echo base_url();?>tracking/organiser_track_date">Organizer Events by Date</a></li>
-                        <li id="event_track"><a href="<?php echo base_url();?>tracking/admin_track_date">Admin Events by Date</a></li>
+                        <li id="admin_event_track"><a href="<?php echo base_url();?>tracking/admin_event_tracking">Admin Events</a></li>
+                        <li id="org_event_track"><a href="<?php echo base_url();?>tracking/organiser_track_date">Organizer Events by Date</a></li>
+                        <li id="admin_event_track"><a href="<?php echo base_url();?>tracking/admin_track_date">Admin Events by Date</a></li>
 
 
                     </ul>

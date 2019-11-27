@@ -9,7 +9,7 @@
                         <form class="" method="post" action="<?php echo base_url();?>city/update_city" id="cityform" name="cityform" onSubmit='return check();'>
 
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Country </label>
+                              <label class="col-sm-4 col-form-label">Country <span class="error">*</span></label>
                               <div class="col-sm-6">
                                  <select class="form-control" name="countryid"  onchange="getstatename(this.value)">
                                      <option value="">Select Country </option>
@@ -22,7 +22,7 @@
                            </div>
 
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">State </label>
+                              <label class="col-sm-4 col-form-label">State <span class="error">*</span></label>
                               <div class="col-sm-6">
                               <!--input class="form-control" type="hidden" value="<?php echo $res->state_id; ?>" name="stateid">
                               <div id="old" style="display:none;"">
@@ -41,29 +41,29 @@
 
 
                            <div class="form-group row">
-                              <label for="example-text-input" class="col-sm-4 col-form-label">City/Area</label>
+                              <label for="example-text-input" class="col-sm-4 col-form-label">City/Area <span class="error">*</span></label>
                               <div class="col-sm-6">
-                                 <input class="form-control" type="text"  name="cityname" id="city_id" value="<?php echo $res->city_name; ?>" id="example-text-input">
-                                  <input class="form-control" type="hidden"  name="cityid" value="<?php echo $res->id; ?>" id="example-text-input">
+                                 <input class="form-control" type="text"  name="cityname" id="city_id" value="<?php echo $res->city_name; ?>" id="example-text-input" maxlength="50">
+                                  <input class="form-control" type="hidden"  name="cityid" value="<?php echo $res->id; ?>" id="example-text-input" >
                               </div>
                            </div>
                            <div class="form-group row">
 
-                            <label for="latitude" class="col-sm-4 col-form-label">City/Area Latitude</label>
+                            <label for="latitude" class="col-sm-4 col-form-label">City/Area Latitude <span class="error">*</span></label>
                             <div class="col-sm-6">
-                                <input class="form-control" type="text" name="txtLatitude"  id="latu" value="<?php echo $res->city_latitude; ?>">
+                                <input class="form-control" type="text" name="txtLatitude"  id="latu" value="<?php echo $res->city_latitude; ?>" maxlength="30">
                                 <div id="ermsg"></div> <div id="ermsg2"></div>
                             </div>
                           </div>
                            <div class="form-group row">
-                              <label for="longitude" class="col-sm-4 col-form-label">City/Area Longitude</label>
+                              <label for="longitude" class="col-sm-4 col-form-label">City/Area Longitude <span class="error">*</span></label>
                             <div class="col-sm-6">
-                                <input class="form-control" type="text" name="txtLongitude" id="lon" value="<?php echo $res->city_longitude; ?>">
+                                <input class="form-control" type="text" name="txtLongitude" id="lon" value="<?php echo $res->city_longitude; ?>" maxlength="30">
                                  <div id="ermsg1"></div> <div id="ermsg3"></div>
                             </div>
                         </div>
                            <div class="form-group row">
-                              <label class="col-sm-4 col-form-label">Status</label>
+                              <label class="col-sm-4 col-form-label">Status <span class="error">*</span></label>
                               <div class="col-sm-6">
                                  <select class="form-control"  name="eventsts">
                                     <option value="Y">Active</option>
@@ -101,25 +101,6 @@
    $('#city').addClass("active");
    $('#master').addClass("has_sub active nav-active");
 
- //    window.onload = function () {
- //    var mapOptions = {
- //                center: new google.maps.LatLng(20.5937, 78.9629),
- //                zoom:4,
- //                mapTypeId: google.maps.MapTypeId.ROADMAP
- //            };
- //            var infoWindow = new google.maps.InfoWindow();
- //            var latlngbounds = new google.maps.LatLngBounds();
- //            var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
- //            google.maps.event.addListener(map, 'click', function (e)
- //            {
- //             var la=e.latLng.lat();
- //             var lo=e.latLng.lng();
- //             document.getElementById("latu").value=la;
- //             document.getElementById("lon").value=lo;
- //             //alert(la); alert(lo);
- //            //alert("Latitude: " + e.latLng.lat() + "\r\nLongitude: " + e.latLng.lng());
- //            });
- // }
    $(document).ready(function () {
 
     $('#cityform').validate({ // initialize the plugin
@@ -133,10 +114,10 @@
 
         },
         messages: {
-        countryid:"Select country",
-        stateid:"Select state",
-        cityname:"Enter city/area ",
-        eventsts:"Select status",
+        countryid:"Select Country",
+        stateid:"Select State",
+        cityname:"Enter City/Area ",
+        eventsts:"Select Status",
         txtLatitude:"Enter city/area latitude",
         txtLongitude:"Enter city/area longitude",
                },

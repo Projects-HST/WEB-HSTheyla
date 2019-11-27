@@ -11,7 +11,7 @@
         <div class="col-xs-6 form_box" >
           <div class="left-inner-addon">
             <i class="fas fa-user"></i>
-            <input type="text" class="form-control" name="username" id="username"  placeholder="Username/Mobile Number/Email ID" />
+            <input type="text" class="form-control" name="username" id="username"  placeholder="Username/Mobile Number/Email ID" maxlength="50" />
           </div>
         </div>
         <div class="col-xs-6 form_box" >
@@ -20,8 +20,8 @@
             <!-- <input type="password" class="form-control" id="pwd" name="pwd"  placeholder="Password"  required/>
             <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span> -->
             <!-- <i class="fas fa-lock"></i> -->
-            <input id="password-field" type="password" class="form-control"  name="pwd"  placeholder="Password" value="" required>
-             <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+            <input id="password-field" type="password" class="form-control"  name="pwd"  placeholder="Password" maxlength="12" required>
+             <span toggle="#password-field" class="fa fa-fw fa-eye-slash field-icon toggle-password"></span>
           </div>
           <!-- <div class="left-inner-addon">
             <i class="fas fa-lock"></i>
@@ -193,7 +193,7 @@ function checkLoginState() {
                       sweetAlert("Oops...", "Something went Wrong", "error");
                     }
                     else{
-                      sweetAlert("Oops...", "Something went Wrong", "error");
+                      sweetAlert("Oops...", "Your Account is Deactive", "error");
                     }
                 }
               });
@@ -215,7 +215,7 @@ function checkLoginState() {
 <script type="text/javascript">
 $(".toggle-password").click(function() {
 
-  $(this).toggleClass("fa-eye fa-eye-slash");
+  $(this).toggleClass("fa-eye-slash fa-eye");
   var input = $($(this).attr("toggle"));
   if (input.attr("type") == "password") {
     input.attr("type", "text");

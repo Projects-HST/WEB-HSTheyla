@@ -1,8 +1,8 @@
-    <div class="page-content-wrapper ">
+  <div class="page-content-wrapper ">
         <div class="container">
             <div class="row">
 
-        <div class="col-lg-12">
+        <div class="col-12">
             <div class="card m-b-20">
                 <div class="card-block">
 
@@ -19,14 +19,14 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div class="tab-pane active p-3" id="home-1" role="tabpanel">
-                            <table  id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <table  id="" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                         <tr>
                             <th>S. No</th>
                             <th>Username/Email ID </th>
                             <th>Full Name</th>
                             <th>Phone Number</th>
-                            <th>Profile Picture</th>
+                            <!--<th>Profile Picture</th>-->
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
@@ -48,7 +48,7 @@
                             <td><?php echo $rows->name ; ?></td>
 
                             <td><?php echo $rows->mobile_no; ?></td>
-                            <td><img src="<?php  echo base_url(); ?>assets/users/<?php echo $rows->user_picture; ?>" class="img-responsive" style="width:100px;"></td>
+                            <!--<td><img src="<?php  echo base_url(); ?>assets/users/<?php echo $rows->user_picture; ?>" class="img-responsive" style="width:100px;"></td>-->
 
 
 
@@ -72,9 +72,9 @@
       </div> <!-- end row -->
 
      </div><!-- container -->
-    </div> <!-- Page content Wrapper href="<?php echo base_url();?>users/delete/<?php echo $rows->id;?>/<?php echo $rows->user_id; ?>"-->
+    </div> <!-- Page content Wrapper-->
 
-</div> <!-- content -->
+
 <script type="text/javascript">
 
   function confirmGetMessage(usid,uid)
@@ -107,6 +107,14 @@
 
 
   $(document).ready(function() {
-
+$(document).on("preInit.dt", function(){
+		$(".dataTables_filter input[type='search']").attr("maxlength", 20);
+	});
+	
+	$('table').DataTable({
+         "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+        "iDisplayLength": 25,
+		"ordering": false
+    });
 } );
 </script>

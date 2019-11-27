@@ -70,12 +70,14 @@ Class Loginmodel extends CI_Model
            $resultset=$this->db->query($query);
            return $resultset->result();
          }
+		 
          function get_tlt_no_org_user()
          {
            $query="SELECT COUNT(*) as users FROM user_master WHERE user_role='2'";
            $resultset=$this->db->query($query);
            return $resultset->result();
          }
+		 
          function get_tlt_no_admin_user()
          {
            $query="SELECT COUNT(*) as users FROM user_master WHERE user_role='4'";
@@ -83,24 +85,78 @@ Class Loginmodel extends CI_Model
            return $resultset->result();
          }
 
+         function get_tlt_no_events()
+         {
+           $query="SELECT COUNT(*) as events FROM events";
+           $resultset=$this->db->query($query);
+           return $resultset->result();
+         }
+		 
+		  function get_active_events()
+         {
+            $query="SELECT COUNT(*) as active_events FROM events WHERE event_status='Y'";
+           $resultset=$this->db->query($query);
+           return $resultset->result();
+         }
+		 
+		 function get_archive_events()
+         {
+           $query="SELECT COUNT(*) as archive_events FROM events WHERE event_status='N' OR end_date <= CURDATE() AND hotspot_status='N'";
+           $resultset=$this->db->query($query);
+           return $resultset->result();
+         }
+	 	
+		 
+		 function get_no_of_hotspot_events()
+         {
+           $query="SELECT count(*) as hotspot_events FROM events where  hotspot_status='Y' and event_status='Y'";
+           $resultset=$this->db->query($query);
+           return $resultset->result();
+         }
+		 
+
+		function get_no_of_general_events()
+         {
+           $query="SELECT count(*) as general_events FROM events where hotspot_status='N' and event_status='Y'";
+           $resultset=$this->db->query($query);
+           return $resultset->result();
+         }
+
+         function live_events()
+         {
+           $query="SELECT count(*) as live_events FROM events where hotspot_status='N' and event_status='Y' and end_date>= CURDATE()";
+           $resultset=$this->db->query($query);
+           return $resultset->result();
+         }
+		 
          function get_no_of_paid_events()
          {
-           $query="SELECT count(*) as count from events where event_type='Paid' and event_status='Y'";
+           $query="SELECT count(*) as count from events where event_type='Paid' and event_status='Y' and end_date>= CURDATE()";
            $resultset=$this->db->query($query);
            return $resultset->result();
          }
-         function get_no_of_free_events()
+         
+		 function get_no_of_free_events()
          {
-           $query="SELECT count(*) as count from events where event_type='Free' and event_status='Y'";
+           $query="SELECT count(*) as count from events where event_type='Free' and event_status='Y' and end_date>= CURDATE()";
            $resultset=$this->db->query($query);
            return $resultset->result();
          }
-         function get_no_of_ad_events()
+         
+		 function get_no_of_ad_events()
          {
            $query="SELECT count(*) as count FROM adv_event_history where date_to >=CURRENT_DATE and status='Y'";
            $resultset=$this->db->query($query);
            return $resultset->result();
          }
+		 
+		 function get_tlt_no_orgevents()
+         {
+           $query="SELECT COUNT(e.event_name) AS org FROM user_master AS um,events AS e WHERE um.user_role='2' AND um.id=e.created_by AND e.event_status='N'";
+           $resultset=$this->db->query($query);
+           return $resultset->result();
+         }
+		 
          function get_no_of_news_letter_subscriber()
          {
            $query="SELECT count(*) as count FROM user_details where newsletter_status='Y'";
@@ -108,35 +164,7 @@ Class Loginmodel extends CI_Model
            return $resultset->result();
          }
 
-         function get_no_of_hotspot_events()
-         {
-           $query="SELECT count(*) as count FROM events where  hotspot_status='Y' and event_status='Y'";
-           $resultset=$this->db->query($query);
-           return $resultset->result();
-         }
-         function get_no_of_general_events()
-         {
-           $query="SELECT count(*) as count FROM events where end_date >=NOW() and hotspot_status='N' and event_status='Y'";
-           $resultset=$this->db->query($query);
-           return $resultset->result();
-         }
-
-
-
-         function get_tlt_no_events()
-         {
-           $query="SELECT COUNT(*) as events FROM events";
-           $resultset=$this->db->query($query);
-           return $resultset->result();
-         }
-
-         function get_tlt_no_orgevents()
-         {
-           $query="SELECT COUNT(e.event_name) AS org FROM user_master AS um,events AS e WHERE um.user_role='2' AND um.id=e.created_by AND e.event_status='N'";
-           $resultset=$this->db->query($query);
-           return $resultset->result();
-         }
-
+         
          function get_tlt_no_booking()
          {
            $query="SELECT COUNT(*) AS booking FROM booking_history";
@@ -173,15 +201,19 @@ Class Loginmodel extends CI_Model
        $query="INSERT INTO user_master (email_id,last_login,user_role,email_verify,status,created_at) VALUES('$email',NOW(),'3','Y','Y',NOW())";
        $resultset=$this->db->query($query);
        $insert_id = $this->db->insert_id();
-       $user_master_query="INSERT INTO user_details(user_id,name) VALUES('$insert_id','$firstname')";
+       
+	   $user_master_query="INSERT INTO user_details(user_id,name) VALUES('$insert_id','$firstname')";
        $result=$this->db->query($user_master_query);
-       $user_points_query="INSERT INTO user_points_count(user_id) VALUES('$insert_id')";
+       
+	   $user_points_query="INSERT INTO user_points_count(user_id) VALUES('$insert_id')";
        $exc_user_points=$this->db->query($user_points_query);
-       if($result){
+	   
+       
          $quer="SELECT * FROM user_master WHERE id='$insert_id'";
          $resultset=$this->db->query($quer);
+		 if($resultset){
          foreach($resultset->result() as $rows){ }
-         $status=$rows->status;
+         /* $status=$rows->status;
          switch($status)
          {
             case "Y":
@@ -200,7 +232,7 @@ Class Loginmodel extends CI_Model
                 $data= array("status"=>"Deactive","msg"=>"Your Account Is De-Activated");
                  return $data;
               break;
-          }
+          } */
 
          $data =  array("user_name" => $rows->user_name,"msg"  =>"success","mobile_no"=>$rows->mobile_no,"status"=>$rows->status,"email_id"=>$rows->email_id,"user_role"=>$rows->user_role,"id"=>$rows->id);
           $insert_activity="INSERT INTO  user_activity (date,user_id,activity_detail) VALUES(NOW(),'$rows->id','google_login') ";
@@ -219,20 +251,29 @@ Class Loginmodel extends CI_Model
          return $data;
        }
      }else{
-       $quer="SELECT * FROM user_master WHERE email_id='$email'";
+       $quer="SELECT * FROM user_master WHERE email_id='$email' AND status = 'Y'";
        $resultset=$this->db->query($quer);
+	   
+	   if($resultset->num_rows()>0){
        foreach($res->result() as $rows){}
        $status=$rows->status;
-       $data= array("user_name" => $rows->user_name,"msg"  =>"success","mobile_no"=>$rows->mobile_no,"status"=>$rows->status,"email_id"=>$rows->email_id,"user_role"=>$rows->user_role,"id"=>$rows->id);
+       
+	   $data= array("user_name" => $rows->user_name,"msg"  =>"success","mobile_no"=>$rows->mobile_no,"status"=>$rows->status,"email_id"=>$rows->email_id,"user_role"=>$rows->user_role,"id"=>$rows->id);
+	   
        $insert_activity="INSERT INTO  user_activity (date,user_id,activity_detail) VALUES(NOW(),'$rows->id','normal_login') ";
        $result_activity=$this->db->query($insert_activity);
+	   
        $update_user_login_count="UPDATE user_master SET login_count=login_count+1 WHERE id='$rows->id'";
        $excu_user_login_count=$this->db->query($update_user_login_count);
+	   
        $update_user_points="UPDATE user_points_count SET login_count=login_count+1,login_points=login_points+1,total_points=total_points+1 WHERE user_id='$rows->id'";
        $excu_user_points=$this->db->query($update_user_points);
        $this->session->set_userdata($data);
        return $data;
-     }
+     }else {
+			    $data= array("status" => "Deactive");
+		   }
+	 }
 
    }
 
@@ -686,24 +727,28 @@ Class Loginmodel extends CI_Model
 
    function getuserfb($firstname,$email){
      if(empty($email)){
-       $data= array("status"=>"error","msg"=>"Something Went Wrong");
+		$data= array("status"=>"error","msg"=>"Something Went Wrong");
         return $data;
      }else{
        $check_email="SELECT * FROM user_master WHERE email_id='$email'";
-        $res=$this->db->query($check_email);
+       $res=$this->db->query($check_email);
         if($res->num_rows()==0){
           $query="INSERT INTO user_master (email_id,last_login,user_role,email_verify,status,created_at) VALUES('$email',NOW(),'3','Y','Y',NOW())";
           $resultset=$this->db->query($query);
           $insert_id = $this->db->insert_id();
+		  
           $user_points_query="INSERT INTO user_points_count(user_id) VALUES('$insert_id')";
           $exc_user_points=$this->db->query($user_points_query);
+		  
           $user_master_query="INSERT INTO user_details(user_id,name) VALUES('$insert_id','$firstname')";
           $result=$this->db->query($user_master_query);
-          if($result){
-            $quer="SELECT * FROM user_master WHERE id='$insert_id'";
+         
+            
+			$quer="SELECT * FROM user_master WHERE id='$insert_id'";
             $resultset=$this->db->query($quer);
-            foreach($resultset->result() as $rows){ }
-            $status=$rows->status;
+			 if($result){
+				foreach($resultset->result() as $rows){ }
+            /* $status=$rows->status;
             switch($status)
             {
                case "Y":
@@ -722,7 +767,7 @@ Class Loginmodel extends CI_Model
                    $data= array("status"=>"Deactive","msg"=>"Your Account Is De-Activated");
                     return $data;
                  break;
-             }
+             } */
 
             $data =  array("user_name" => $rows->user_name,"msg"  =>"success","mobile_no"=>$rows->mobile_no,"status"=>$rows->status,"email_id"=>$rows->email_id,"user_role"=>$rows->user_role,"id"=>$rows->id);
             $insert_activity="INSERT INTO  user_activity (date,user_id,activity_detail) VALUES(NOW(),'$rows->id','fb_login') ";
@@ -740,8 +785,11 @@ Class Loginmodel extends CI_Model
             return $data;
           }
         }else{
-          $quer="SELECT * FROM user_master WHERE email_id='$email'";
+          $quer="SELECT * FROM user_master WHERE email_id='$email' AND status = 'Y'";
           $resultset=$this->db->query($quer);
+		  
+		   if($resultset->num_rows()>0){
+		
           foreach($res->result() as $rows){}
           $status=$rows->status;
           $data= array("user_name" => $rows->user_name,"msg"  =>"success","mobile_no"=>$rows->mobile_no,"status"=>$rows->status,"email_id"=>$rows->email_id,"user_role"=>$rows->user_role,"id"=>$rows->id);
@@ -753,6 +801,9 @@ Class Loginmodel extends CI_Model
           $excu_user_points=$this->db->query($update_user_points);
           $this->session->set_userdata($data);
           return $data;
+		   } else {
+			    $data= array("status" => "Deactive");
+		   }
         }
      }
 
@@ -928,8 +979,7 @@ Class Loginmodel extends CI_Model
 
 
   function get_all_organiser_request(){
-    $sql = "SELECT ogr.id as rq_id,ud.name,um.email_id,um.user_name,um.id, ogr.*,ud.user_id FROM organiser_request AS ogr LEFT JOIN user_master AS um ON um.id=ogr.user_id LEFT JOIN user_details AS ud ON ud.user_id=um.id
-ORDER BY ogr.id DESC";
+    $sql = "SELECT ogr.id as rq_id,ud.name AS name_req,um.email_id,um.user_name,um.id, ogr.*,ud.user_id FROM organiser_request AS ogr LEFT JOIN user_master AS um ON um.id=ogr.user_id LEFT JOIN user_details AS ud ON ud.user_id=um.id ORDER BY ogr.id DESC";
     $resu=$this->db->query($sql);
     $res=$resu->result();
     return $res;
