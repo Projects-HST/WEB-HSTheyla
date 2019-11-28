@@ -4,6 +4,8 @@ Class Eventsmodel extends CI_Model
 	public function __construct()
 	{
 		  parent::__construct();
+		  $this->load->model('mailmodel');
+		  $this->load->model('smsmodel');
 	}
 
 
@@ -101,7 +103,43 @@ Class Eventsmodel extends CI_Model
         }else{
 			$booking='Y';
 		}
+		
+		 if($event_status=='N'){
+          	$status ='Inactive';
+        }else{
+			$status ='Active';
+		}
+		
+		$usr_check ="SELECT
+				A.event_name,
+				B.mobile_no,
+				B.email_id,
+				B.user_role
+			FROM events A,
+				user_master B
+			WHERE
+				A.created_by = B.id AND A.id = '$eventid'";
+		$res=$this->db->query($usr_check);
+		if($res->num_rows()==1)
+		{
+		  foreach($res->result() as $rows)
+		   {
+			    $event_name = $rows->event_name;
+			    $user_role = $rows->user_role;
+			    $mobile = $rows->mobile_no;
+			    $email = $rows->email_id;
+		   }
+		}
+		if ($user_role =='2'){
 
+			$email_messaege = 'Your event has been updated by Heyla Admin. To view the changes, log in to https://www.heylaapp.com';
+			$this->mailmodel->send_mail($email,$email_messaege);
+			
+			//$mobile_message = 'Your Event - '.$event_name.' is '.$status.'';
+			$mobile_message = 'Your event has been updated by Heyla Admin. To view the changes, log in to https://www.heylaapp.com';
+            $this->smsmodel->sendOTPtomobile($mobile,$mobile_message);
+		}
+		
       $sql="UPDATE events SET category_id='$category',event_name='$event_name',event_venue='$venue',event_address='$address',description='$description',start_date='$start_date',end_date='$end_date',start_time='$start_time',end_time='$end_time',event_banner='$event_banner',event_latitude='$txtLatitude',event_longitude='$txtLongitude',event_country='$country',event_city='$city',primary_contact_no='$pcontact_cell',secondary_contact_no='$scontact_cell',contact_person='$contact_person',sec_contact_person='$sec_contact_person',contact_email='$email',event_type='$eventcost',adv_status='$eadv_status',booking_status='$booking',hotspot_status='$hotspot_sts',featured_status='$featured_sts',event_status='$event_status',updated_by='$user_id',updated_at=NOW() WHERE id='$eventid'";
         $eresultset=$this->db->query($sql);
         $data= array("status"=>"success");

@@ -72,7 +72,14 @@ $(document).ready(function() {
 	$('table').DataTable({
          "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
         "iDisplayLength": 25,
-		"ordering": false
+		"ordering": false,
+		"bAutoWidth": false,
+		"columns": [
+					{ "width": "8%" },
+					{ "width": "62%" },
+					{ "width": "15%" },
+					{ "width": "15%" }
+				  ]
     });
 } );
 

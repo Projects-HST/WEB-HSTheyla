@@ -6,8 +6,8 @@ Class Loginmodel extends CI_Model
   public function __construct()
   {
       parent::__construct();
-       $this->load->model('mailmodel');
-
+		$this->load->model('mailmodel');
+		$this->load->model('smsmodel');
   }
 
  function login($username,$password)

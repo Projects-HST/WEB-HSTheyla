@@ -24,7 +24,8 @@ class Eventlist extends CI_Controller
 		//$data['country_values'] = get_cookie('country_values');
 		$data['city_values'] = get_cookie('city_values');
 		$data['search_values'] = get_cookie('search_values');
-		//print_r($data);
+		//print_r($data['banner_event_result']);
+		//exit;
 		$this->load->view('front_header');
 		$this->load->view('event_list', $data);
 		$this->load->view('front_footer');
