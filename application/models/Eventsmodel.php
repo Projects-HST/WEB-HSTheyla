@@ -124,7 +124,7 @@ Class Eventsmodel extends CI_Model
 		{
 		  foreach($res->result() as $rows)
 		   {
-			    $event_name = $rows->event_name;
+			    //$sevent_name = $rows->event_name;
 			    $user_role = $rows->user_role;
 			    $mobile = $rows->mobile_no;
 			    $email = $rows->email_id;
