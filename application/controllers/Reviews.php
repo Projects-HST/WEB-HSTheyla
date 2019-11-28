@@ -107,6 +107,14 @@ class Reviews extends CI_Controller
 
     }
 
+	public function remove_review($wishlist_id)
+	{
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
+		$user_role=$this->session->userdata('user_role');
+		$datas['remove_data'] = $this->reviewsmodel->remove_review($wishlist_id);
+		redirect('/reviews/home');
+	}
    
 
 

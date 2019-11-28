@@ -43,10 +43,8 @@
                             <td><?php echo $rows->comments ; ?></td>
                              <td><?php if($sts=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Inactive </button>'; }?></td>
                             <td>
-                             <a href="<?php echo base_url();?>reviews/edit_reviews/<?php echo $rows->id;?>">
-                              <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
-                              <a href="<?php echo base_url();?>reviews/delete_reviews/<?php echo $rows->id;?>">
-                              <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
+                              <a onclick="return confirm_remove(<?php echo $rows->id; ?>)" style="cursor:pointer">
+                              <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/ ></a>
                             </td>
                         </tr>
                        <?php $i++; }  } else{ echo "<p class=card-text> No Reviews Found </p>";}?>
@@ -85,4 +83,21 @@
 				  ]
     });
 } );
+
+function confirm_remove(id){
+  swal({
+      title: '',
+      text: "Are you sure want to remove?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+  }).then(function(){
+		window.location.href='<?php echo base_url(); ?>reviews/remove_review/'+id;
+  }).catch(function(reason){
+
+  });
+}
 </script>

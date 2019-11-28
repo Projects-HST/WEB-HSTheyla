@@ -202,7 +202,7 @@ Class Loginmodel extends CI_Model
        $resultset=$this->db->query($query);
        $insert_id = $this->db->insert_id();
        
-	   $user_master_query="INSERT INTO user_details(user_id,name) VALUES('$insert_id','$firstname')";
+	   $user_master_query="INSERT INTO user_details(user_id,name,newsletter_status) VALUES('$insert_id','$firstname','Y')";
        $result=$this->db->query($user_master_query);
        
 	   $user_points_query="INSERT INTO user_points_count(user_id) VALUES('$insert_id')";
@@ -601,7 +601,7 @@ Class Loginmodel extends CI_Model
      $mob=$mobile;
      $response=$this->smsmodel->sendOTPtomobile($mob,$mobile_message);
      if($result){
-       echo "OTP Resent";
+       echo "OTP is sent again.";
      }else{
        echo "Something went wrong! Please try again later.";
      }
@@ -740,7 +740,7 @@ Class Loginmodel extends CI_Model
           $user_points_query="INSERT INTO user_points_count(user_id) VALUES('$insert_id')";
           $exc_user_points=$this->db->query($user_points_query);
 		  
-          $user_master_query="INSERT INTO user_details(user_id,name) VALUES('$insert_id','$firstname')";
+          $user_master_query="INSERT INTO user_details(user_id,name,newsletter_status) VALUES('$insert_id','$firstname','Y')";
           $result=$this->db->query($user_master_query);
          
             
@@ -855,6 +855,26 @@ Class Loginmodel extends CI_Model
 		return $res;
 	}
 
+
+	public function user_points()
+	{
+		$sql="SELECT
+				A.id,
+				B.name,
+				C.total_points
+			FROM
+				user_master A,
+				user_details B,
+				user_points_count C
+			WHERE
+				A.id = B.user_id AND A.id = C.user_id AND A.status = 'Y' AND A.user_role != 1
+			ORDER BY
+				C.total_points
+			DESC";
+		$resu=$this->db->query($sql);
+		$res=$resu->result();
+		return $res;
+	}
 
 	public function get_booking($user_id)
 	{

@@ -158,8 +158,8 @@ if(empty($booking_process)){
         <br>
         <hr class="total_bor">
 
-        <div id="strclock" style="text-align: center;"></div>
-        <div id="clock" style="text-align: center;"></div>
+        <div id="strclock" style="text-align: center;"></div>sdfsdfsdff
+       <!-- <div id="clock" style="text-align: center;"></div> -->
 
 		<form method="post" name="OrderData" class="confirm_process" action="<?php echo base_url(); ?>eventlist/payment_gateway/">
 			<input type="hidden" name="order_id" value="<?php echo $res->order_id;?>"/>
@@ -220,7 +220,7 @@ if(empty($booking_process)){
     hours = (pat.test(hour) == true) ? '0'+hour : hour;
 
     document.getElementById('strclock').innerHTML = hours+":"+mins+":"+secs;
-    if(hour >= 1) {
+    /* if(hour >= 1) {
            document.getElementById('clock').innerHTML = hour+1+' hour until timer runs out!';
     }
     else if(min >= 1) {
@@ -228,7 +228,7 @@ if(empty($booking_process)){
     }
     else {
            document.getElementById('clock').innerHTML = sec+' seconds until timer runs out!';
-    }
+    } */
    var time = document.getElementById('strclock').innerHTML;
         if(time == '00:00:00') {
             alert("You have exceeded the time limit and your booking has been released.");

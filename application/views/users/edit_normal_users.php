@@ -54,9 +54,9 @@
     <div class="col-md-3 bor"><p class="txt_value"><?php echo $res->last_login;?></p></div>
     <div class="col-md-3 bor"><p class="txt_label">Login Status</p></div>
     <div class="col-md-3 bor"><p class="txt_value">
-      <select class="form-control"  name="login_status" id="login_status">
-           <option value="Y">Enable</option>
-           <option value="N">Disable</option>
+      <select class="form-control"  name="login_status" id="login_status">Activate or Deactivate
+           <option value="Y">Activate</option>
+           <option value="N">Deactivate</option>
        </select>
        <script>$('#login_status').val('<?php echo $res->status; ?>');</script>
      </p></div>

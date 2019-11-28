@@ -68,9 +68,9 @@
                                  <td><?php  echo $i; ?></td>
                                  <td><?php  echo $rows->template_name; ?></td>
                                  <td><?php  echo $rows->template_content; ?></td>
-                                 <td><?php if(empty($rows->notification_img)){
-
-                                 }else{ ?>
+                                 <td><?php if(empty($rows->notification_img)){ ?>
+										<img src="../assets/icons/no_banner.jpg" class="img-circle">
+                                <?php }else{ ?>
                                    <img src="<?php echo base_url(); ?>assets/notification/images/<?php  echo $rows->notification_img; ?>" style="width:100px;">
                               <?php   } ?>
 

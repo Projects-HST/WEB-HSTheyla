@@ -117,7 +117,7 @@ $('#otp_form').hide();
                success: function(response) {
 
                    if (response == "OTP Resent") {
-            swal('OTP Sent to Mobile number');
+            swal('OTP sent to mobile number.');
             $('#otp_form').show();
             $('#reset_section').hide();
                    } else {
@@ -153,7 +153,7 @@ $('#otp_form').hide();
                    $.removeCookie("mobile_cookie");
                      swal({
                         title: " ",
-                        text: "Thank you Mobile number verified!.",
+                        text: "Mobile number verified.",
                         type: "success"
                     }).then(function() {
                         location.href = '<?php echo base_url(); ?>home/reset/'+ency_mobile+'';

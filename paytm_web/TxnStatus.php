@@ -243,22 +243,22 @@
 					$activity_points = "UPDATE user_points_count SET booking_count  = booking_count+1,booking_points=booking_points+20,total_points=total_points+20 WHERE user_id ='$user_id'";
 					$insert_points = mysql_query($activity_points) or die("Could not select Query ");
 					
-					header("Location: https://heylaapp.com/testing/home/eventattendees/".$enc_order_id."");
+					header("Location: https://heylaapp.com/home/eventattendees/".$enc_order_id."");
 				} else {
 					$enc_order_id = base64_encode($order_id);
-					header("Location: https://heylaapp.com/testing/home/paymentrefund/".$enc_order_id."");
+					header("Location: https://heylaapp.com/home/paymentrefund/".$enc_order_id."");
 				}
  
     	    }
 
         	if($STATUS=="TXN_FAILURE")
         	{
-        	   header("Location: https://heylaapp.com/testing/home/paymenterror/");
+        	   header("Location: https://heylaapp.com/home/paymenterror/");
         	}
         	
         	if($STATUS=="PENDING")
         	{
-        	   header("Location: https://heylaapp.com/testing/home/paymenterror/");
+        	   header("Location: https://heylaapp.com/home/paymenterror/");
         	}
   	
     }

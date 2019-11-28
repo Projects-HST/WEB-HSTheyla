@@ -61,6 +61,13 @@ function reviews_status($id,$sts,$user_id,$event_id,$userid)
 	return $data;
 }
 
+	public function remove_review($id)
+	{
+		$sql="DELETE FROM event_reviews WHERE id='$id'";
+		$resu=$this->db->query($sql);
+		//$res = "Removed";
+		//return $res;
+	}
 
 
 }

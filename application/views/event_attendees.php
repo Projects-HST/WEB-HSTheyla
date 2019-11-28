@@ -61,7 +61,8 @@
          	<input type="hidden" name="order_id" id="order_id" value="<?php echo $order_id; ?>" />
             <input type="hidden" name="count" id="count" value="<?php echo $number_of_seats; ?>" />
             <br>
-            <input type="submit" class="btn btn-primary" name="button" id="button" value="Submit" />
+            <input type="submit" class="btn btn-primary" name="button" id="button" value="Submit" />&nbsp;&nbsp;
+			<input type="button" class="btn btn-cancel" name="button" id="button" value="Cancel" onclick="return page_redirect()" />
          </form>
       </div>
     </div>
@@ -97,6 +98,11 @@ function check()
 		}
 	}
 return true;
+}
+
+function page_redirect()
+{
+	window.location="<?php echo base_url(); ?>";
 }
 </script>
 <style>

@@ -75,7 +75,7 @@ input[type="file"] {
 <div class="col-md-7">
   <form class="form" role="form" autocomplete="off" method="post" action="" id="profile_form">
       <div class="form-group row">
-          <label class="col-md-3 col-form-label form-control-label">Full Name <span class="red_txt_label">*</span></label>
+          <label class="col-md-3 col-form-label form-control-label">Full Name<span class="red_txt_label">*</span></label>
           <div class="col-md-6">
               <input class="form-control" type="text" name="name" value="<?php echo $rows->name; ?>" maxlength="50">
           </div>
@@ -303,13 +303,6 @@ $(document).ready(function(){
 
 $('#profile_form').validate({ // initialize the plugin
     rules: {
-        // mobile_no: {
-        //   required: true,
-        //   remote: {
-        //          url: "<?php echo base_url(); ?>home/check_mobile/<?php echo $this->session->userdata('id'); ?>",
-        //          type: "post"
-        //       }
-        // },
 		name: {
             required: true
         },

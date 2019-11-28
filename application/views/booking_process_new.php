@@ -105,7 +105,8 @@ hr{
              <div class="row">
                 <div class="col text-center">
                   <div id="strclock" style="text-align: center;"></div>
-                  <div id="clock" style="text-align: center;"></div>
+                  <!--<div id="clock" style="text-align: center;">until timer runs out!</div>-->
+				  <div id="clock" style="text-align: center;">Until timer runs out!</div>
                 </div>
              </div>
              <div class="row">
@@ -159,7 +160,8 @@ hr{
     hours = (pat.test(hour) == true) ? '0'+hour : hour;
 
     document.getElementById('strclock').innerHTML = hours+":"+mins+":"+secs;
-    if(hour >= 1) {
+	//document.getElementById('strclock').innerHTML = hours+":"+mins+":"+secs+" until timer runs out!";
+   /*  if(hour >= 1) {
            document.getElementById('clock').innerHTML = hour+1+' hour until timer runs out!';
     }
     else if(min >= 1) {
@@ -167,10 +169,11 @@ hr{
     }
     else {
            document.getElementById('clock').innerHTML = sec+' seconds until timer runs out!';
-    }
+    } */
    var time = document.getElementById('strclock').innerHTML;
         if(time == '00:00:00') {
-            alert(" You've exceeded your booking time limit!");
+			swal("You've exceeded your booking time limit!");
+            //alert(" You've exceeded your booking time limit!");
             window.location="<?php echo base_url(); ?>";
         } else{
             setTimeout("countdown()",1000);

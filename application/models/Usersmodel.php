@@ -70,6 +70,19 @@ FROM user_details AS ud LEFT JOIN user_master AS um ON ud.user_id=um.id LEFT JOI
     }
 
 
+       function check_password_match($old_password,$user_id){
+         $pwd=md5($old_password);
+		 $select="SELECT * FROM user_master WHERE password='$pwd' AND id='$user_id'";
+         $result=$this->db->query($select);
+         
+		 if($result->num_rows()==0){
+				echo "false";
+         }else{
+				echo "true";
+         }
+       }
+	   
+
     function change_password($new_password,$confrim_password,$user_id){
       $pwd=md5($new_password);
       $query="UPDATE user_master  SET password='$pwd' WHERE id='$user_id'";
@@ -142,6 +155,24 @@ FROM user_details AS ud LEFT JOIN user_master AS um ON ud.user_id=um.id LEFT JOI
          $usupdate="UPDATE user_details SET name='$name',address_line1='$address1',user_picture='$user_pic' WHERE  user_id='$uid'";
 
         $usdetails=$this->db->query($usupdate);
+        if($usdetails){
+          $data= array("status"=>"success");
+        }else{
+          $data= array("status"=>"failure");
+        }
+        return $data;
+
+
+    }
+	
+	function update_profile_details($uid,$name,$cell,$email,$address1,$user_pic,$user_id)
+    {
+    	 $umupdate="UPDATE user_master SET mobile_no='$cell',email_id='$email',updated_by='$user_id',updated_at=NOW() WHERE  id='$uid'";
+    	 $umdetails=$this->db->query($umupdate);
+
+         $usupdate="UPDATE user_details SET name='$name',address_line1='$address1',user_picture='$user_pic' WHERE  user_id='$uid'";
+		 $usdetails=$this->db->query($usupdate);
+
         if($usdetails){
           $data= array("status"=>"success");
         }else{

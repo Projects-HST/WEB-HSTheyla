@@ -188,36 +188,15 @@
 <nav class="navbar-custom">
   <ul class="list-inline float-right mb-0">
           <?php
-                    $id=$this->session->userdata('id');
-                    //echo $id;
-                    ?>
+				$id=$this->session->userdata('id');
+				$user_name=$this->session->userdata('user_name');
+				$user_role=$this->session->userdata('user_role');
+          ?>
 
               <li class="list-inline-item dropdown notification-list">
-
-                <a class="nav-link  arrow-none waves-effect nav-user" data-toggle="tooltip" data-placement="bottom"   href="<?php echo base_url(); ?>users/update_password/">
-                   Change Password
-                </a>
-                <?php $user_role=$this->session->userdata('user_role');
-                if($user_role==4){
-
-                }else{ ?>
-
-                  <a class="nav-link  arrow-none waves-effect nav-user" data-toggle="tooltip" data-placement="bottom"  href="<?php echo base_url(); ?>users/edit/<?php echo $id;?>">
-                     Profile
-                  </a>
-
-              <?php  }
-                 ?>
-
-                  <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" href="<?php echo base_url(); ?>adminlogin/logout">
-                     Logout
-                  </a>
-                  <!--div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                      <!-a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
-                      <a class="dropdown-item" href="#"><span class="badge badge-success pull-right">5</span><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
-                      <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a!->
-                      <a class="dropdown-item" href="<?php echo base_url(); ?>adminlogin/logout"><i class="fa fa-cogs "></i>Logout</a>
-                  </div-->
+			  <a class="nav-link  arrow-none waves-effect nav-user" data-toggle="tooltip" data-placement="bottom"   href="<?php echo base_url(); ?>users/update_password/">Change Password</a>
+              <a class="nav-link  arrow-none waves-effect nav-user" data-toggle="tooltip" data-placement="bottom"  href="<?php echo base_url(); ?>users/profile/<?php echo $id;?>">Profile</a>
+              <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" href="<?php echo base_url(); ?>adminlogin/logout">Logout</a>
               </li>
           </ul>
 
@@ -228,7 +207,11 @@
               </button>
             </li>
             <li class="hide-phone list-inline-item app-search">
-                <h3 class="page-title"> Heyla  Admin</h3>
+			<?php if ($id == '1') { ?>
+                <h3 class="page-title"> Heyla Admin</h3>
+			<?php } else { ?>
+			 <h3 class="page-title"> Heyla Subadmin - <?php echo $user_name; ?></h3>
+			<?php } ?>
             </li>
           </ul>
 

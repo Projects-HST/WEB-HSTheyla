@@ -1,3 +1,4 @@
+<?php $user_id=$this->session->userdata('id');?>
 <div class="page-content-wrapper ">
     <div class="container">
         <div class="row">
@@ -10,18 +11,32 @@
                     <form action="" method="post" id="form_id">
                         <div class="row">
                           <div class="col-md-12">
-
+                            <div class="form-group row">
+                              <div class="col-md-3">Old Password <span class="error">*</span></div>
+                              <div class="col-md-3">
+                                  <input type="password" class="form-control" name="old_password" id="old_password" value="">
+                              </div>
+							  <div class="col-md-3">
+								  <span toggle="#old_password" class="fa fa-fw fa-eye-slash field-icon old_password"></span>
+                              </div>
+                           </div>
                             <div class="form-group row">
                               <div class="col-md-3">New Password <span class="error">*</span></div>
                               <div class="col-md-3">
-                                  <input type="text" class="form-control" name="new_password" value="">
+                                  <input type="password" class="form-control" name="new_password" id="new_password" value="">
+                              </div>
+							   <div class="col-md-3">
+								  <span toggle="#new_password" class="fa fa-fw fa-eye-slash field-icon new_password"></span>
                               </div>
                            </div>
                            <div class="form-group row">
                              <div class="col-md-3">Confirm New Password <span class="error">*</span></div>
                              <div class="col-md-3">
-                                 <input type="text" class="form-control" name="confrim_password" value="">
+                                 <input type="password" class="form-control" name="confrim_password" id="confrim_password" value="">
                              </div>
+							  <div class="col-md-3">
+								  <span toggle="#confrim_password" class="fa fa-fw fa-eye-slash field-icon confrim_password"></span>
+                              </div>
                           </div>
                           <div class="form-group row">
                             <div class="col-md-3"></div>
@@ -58,7 +73,14 @@ $(document).ready(function () {
 
   $('#form_id').validate({
   rules: {
-      new_password: {
+	  old_password: {
+          required: true,  minlength : 6,maxlength:12,
+		  remote: {
+                       url: "<?php echo base_url(); ?>users/check_password_match/<?php echo $user_id; ?>",
+                       type: "post"
+                    }
+        },
+		new_password: {
           required: true,  minlength : 6,maxlength:12,
         },
         confrim_password: {
@@ -67,6 +89,10 @@ $(document).ready(function () {
           }
   },
   messages: {
+	  old_password: {
+        required:"Please enter old password!",minlength:"Password should be minimum of 6 characters",maxlength:"Password should not be more than 12 characters",
+		remote: "Old Password Doesn't Match!"
+      },
       new_password: {
         required:"Please enter new password!",minlength:"Password should be minimum of 6 characters",maxlength:"Password should not be more than 12 characters",
       },
@@ -97,4 +123,36 @@ $(document).ready(function () {
        }
   });
  });
+ 
+
+$(".old_password").click(function() {
+  $(this).toggleClass("fa-eye-slash fa-eye");
+  var input = $($(this).attr("toggle"));
+  if (input.attr("type") == "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+});
+
+$(".new_password").click(function() {
+  $(this).toggleClass("fa-eye-slash fa-eye");
+  var input = $($(this).attr("toggle"));
+  if (input.attr("type") == "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+});
+
+$(".confrim_password").click(function() {
+  $(this).toggleClass("fa-eye-slash fa-eye");
+  var input = $($(this).attr("toggle"));
+  if (input.attr("type") == "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+});
+
 </script>

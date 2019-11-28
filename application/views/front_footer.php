@@ -15,7 +15,7 @@ $secondhalf = array_slice($res, $len / 2);
             <p class="footer_heading">Categories</p>
             <ul class="fnt-footer ">
               <?php  foreach($firsthalf as $row_cat){  ?>
-                  <li class=""><a href="<?php echo base_url(); ?>/eventlist/category/<?php echo base64_encode($row_cat->id*98765); ?>/<?php echo $row_cat->category_name; ?>"><?php echo $row_cat->category_name; ?></a></li>
+                  <li class=""><a href="<?php echo base_url(); ?>eventlist/category/<?php echo base64_encode($row_cat->id*98765); ?>/<?php echo $row_cat->category_name; ?>"><?php echo $row_cat->category_name; ?></a></li>
               <?php } ?>
 
             </ul>
@@ -24,7 +24,7 @@ $secondhalf = array_slice($res, $len / 2);
             <p class="footer_heading">&nbsp;</p>
             <ul class="fnt-footer ">
               <?php  foreach($secondhalf as $row_sec_cat){  ?>
-                  <li class=""><a href="<?php echo base_url(); ?>/eventlist/category/<?php echo base64_encode($row_sec_cat->id*98765); ?>/<?php echo $row_sec_cat->category_name; ?>"><?php echo $row_sec_cat->category_name; ?></a></li>
+                  <li class=""><a href="<?php echo base_url(); ?>eventlist/category/<?php echo base64_encode($row_sec_cat->id*98765); ?>/<?php echo $row_sec_cat->category_name; ?>"><?php echo $row_sec_cat->category_name; ?></a></li>
               <?php } ?>
             </ul>
 

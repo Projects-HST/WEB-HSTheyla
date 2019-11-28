@@ -8,9 +8,23 @@
 .footer_section{
   display: none;
 }
+table{
+  background-color: #fff;
+}
+.table-striped>tbody>tr:nth-child(odd){
+  background-color: #fff;
+}
+th{
+  width: 150px;
+}
+.dataTables_filter {
+   width: 50%;
+   float: right;
+   text-align: right;
+}
 </style>
 <div class="col-sm-12 col-md-12 " id="content">
-    <h3 class="dashboard_tab">Event Reviews </h3>
+    <h3 class="dashboard_tab">Booked Events</h3>
 </div>
 <div class="col-md-12 event_section">
   <table id="" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -52,9 +66,18 @@ $(document).ready(function() {
 	});
   
 	$('table').DataTable({
-         "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
+        "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
         "iDisplayLength": 25,
-		"ordering": false
+		"ordering": false,
+		"bAutoWidth": false,
+		"columns": [
+					{ "width": "7%" },
+					{ "width": "48%" },
+					{ "width": "5%" },
+					{ "width": "20%" },
+					{ "width": "5%" },
+					{ "width": "15%" }
+				  ]
     });
 } );
 </script>

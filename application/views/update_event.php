@@ -298,8 +298,8 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 
 	 window.onload = function () {
 		var mapOptions = {
-					center: new google.maps.LatLng(20.5937, 78.9629),
-					zoom:4,
+					center: new google.maps.LatLng(1.3521, 103.8198),
+					zoom:12,
 					mapTypeId: google.maps.MapTypeId.ROADMAP
 				};
 				var infoWindow = new google.maps.InfoWindow();

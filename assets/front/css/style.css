@@ -1183,6 +1183,12 @@ a.btn.btn-login.btn-primary.btn-block.review-btn{
   border-color: #478ecc;
   cursor: pointer;
 }
+.btn-cancel{
+  color: #fff;
+  background-color: #f20404;
+  border-color: #de0404;
+  cursor: pointer;
+}
 .btn-primary:hover{
   color: #fff;
   background-color: #478ecc;

@@ -20,7 +20,7 @@
         <div class="form-group">
             <input type="password" class="form-control" id="retype_password" name="retype_password" required="" placeholder="Confirm new password">
         </div>
-        <button type="submit" id="submit" class="btn btn-event btn-lg">Reset</button>
+        <button type="submit" id="submit" class="btn btn-event btn-lg">Save</button>
     </form>
   </div>
 </div>
@@ -48,26 +48,26 @@
 <script type="text/javascript">
 
    $('#update_pass').validate({ // initialize the plugin
-       rules: {
-         new_password : {
-              minlength : 6,maxlength:12,
-          },
-          retype_password : {
-
-              equalTo : '[name="new_password"]',
+   
+   rules: {
+		new_password: {
+          required: true,  minlength : 6,maxlength:12,
+        },
+        retype_password: {
+            required: true,
+            equalTo : '[name="new_password"]',
           }
-       },
-       messages: {
-           new_password: {           required:"Please enter new password!",minlength:"Password should be minimum of 6 characters",maxlength:"Password should not be more than 12 characters",
-},
-           retype_password: {
-               required: "You should confirm your new password!",
-               equalTo:"The passwords in both fields don't match!",
-               notEqualTo: "Password Should Match"
-           }
-
-
-       },
+  },
+  messages: {
+      new_password: {
+        required:"Please enter a new password",minlength:"Password should be minimum of 6 characters",maxlength:"Password should not be more than 12 characters",
+      },
+      retype_password: {
+              required: "Please confirm your new password",
+              notEqualTo: "This entry doen't match your new password. Please check."
+      }
+  },
+  
        submitHandler: function(form) {
            //alert("hi");
            $.ajax({
@@ -79,7 +79,7 @@
                    if (response == "success") {
                      swal({
                 title: " ",
-                text: " Your password has been reset",
+                text: "Your password have been reset.",
                 type: "success"
             }).then(function() {
                 location.href = '<?php echo base_url(); ?>';

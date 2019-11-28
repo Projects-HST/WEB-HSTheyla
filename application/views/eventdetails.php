@@ -227,22 +227,16 @@ foreach($event_details as $res){
 			</div>
 			<p class="event_heading">Review</p>
 			<hr>
-			<?php
-				if (!empty($event_reviews)){
-
-					 ?>
+			<?php if (!empty($event_reviews)){ ?>
 					<div class="event_detail_thumb">
-			 <?php
-					foreach($event_reviews as $result){
-
+			 <?php	foreach($event_reviews as $result){ 
 						 $ratings = $result->event_rating;
 			?>
-								<div class="review_section">
-									<p class="review_name"><?php echo $result->user_name; ?>
-										<span class="rated_star">
-											<?php
-													 for ($i=1; $i <6; $i++)
-												{
+						<div class="review_section">
+							<p class="review_name"><?php echo $result->user_name; ?>
+								<span class="rated_star">
+								<?php
+									 for ($i=1; $i <6; $i++) {
 										if ($i <= $ratings){
 											echo "<img src='".base_url()."assets/front/images/rated.png' class='img-responsive'>";
 										} else {
@@ -250,25 +244,26 @@ foreach($event_details as $res){
 										}
 									}
 								?>
-										</span>
-									</p>
-									<p class="review_desc"><?php echo $result->comments;?></p>
-									</div>
-			 <?php
-					}
-					?>
+								</span>
+							</p>
+							<p class="review_desc"><?php echo $result->comments;?></p>
 							</div>
-			 <?php
-		 } ?>
+			 <?php	} ?>
+					</div>
+			 <?php } ?>
 
-					<?php if (!empty($event_reviews)){ ?>
-						<div class=""><a href="<?php echo base_url(); ?>eventlist/event_reviews/<?php echo base64_encode($event_id); ?>">See all reviews</a></div>
-					<?php	} ?>
+						<?php if (!empty($event_reviews)){ ?>
+							<div class=""><a href="<?php echo base_url(); ?>eventlist/event_reviews/<?php echo base64_encode($event_id); ?>">See all reviews</a></div>
+						<?php } ?>
 
 						<div class="event_booking_section text-center ">
 						<p class="text-center"><img class="img-responsive write_review_img" src="<?php echo base_url(); ?>assets/front/images/write_review.png"></p>
 						<p class="write_first_review"><?php if (empty($event_reviews)){?>Be the first one to Review ! Share Your experience<?php } ?></p>
+						<?php if (count($event_reviews_users)>0){ ?>
+						<p class="text-center"><a  onclick="session_check()" class="review_btn" data-toggle="modal" data-target="#reviewModal">Update a review</a></p>
+						<?php } else { ?>
 						<p class="text-center"><a  onclick="session_check()" class="review_btn" data-toggle="modal" data-target="#reviewModal">Write a review</a></p>
+						<?php } ?>
 						</div>
 
 
@@ -348,17 +343,21 @@ foreach($event_details as $res){
        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
            <div class="rating">
              <span class="user-rating">
-
+			 <input type="radio" name="rating" id="rating_1" value="5"><span class="star"></span>
+             <input type="radio" name="rating" id="rating_2" value="4"><span class="star"></span>
+             <input type="radio" name="rating" id="rating_3" value="3"><span class="star"></span>
+             <input type="radio" name="rating" id="rating_4" value="2"><span class="star"></span>
+             <input type="radio" name="rating" id="rating_5" value="1"><span class="star"></span>
 			 <?php
-				for ($i=1; $i <6; $i++)
-				//$y = 5;
+				/* for($i=5; $i>=1; $i=$i-1)
+				//for ($i=1; $i <6; $i++)
 				{
 					if ($i <= $event_rating){
-						echo '<input type="radio" name="rating" id="rating_'.$i.'" value="'.$i.'" checked><span class="star"></span>';
-					} else {
 						echo '<input type="radio" name="rating" id="rating_'.$i.'" value="'.$i.'"><span class="star"></span>';
+					} else {
+						echo '<input type="radio" name="rating" id="rating_'.$i.'" value="'.$i.'" checked><span class="star"></span>';
 					}
-				}
+				} */
 			?>
              </span>
            </div>

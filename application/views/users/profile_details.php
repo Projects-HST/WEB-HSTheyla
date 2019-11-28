@@ -14,28 +14,28 @@
                             </div>
                             <?php endif; ?>
                             <?php  foreach($res as $rows) {} ?>
-                                <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>users/update_user_details" name="usersform" id="usersform">
+                                <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>users/profile_update" name="usersform" id="usersform">
                                     <div class="form-group row">
-                                        <label for="Category" class="col-sm-2 col-form-label">Username <span class="error">*</span></label>
+                                        <label for="Category" class="col-sm-2 col-form-label">Username</label>
                                         <div class="col-sm-4">
-                                            <input class="form-control" type="text" id="ufun" name="username" value="<?php  echo $rows->user_name; ?>" maxlength="12">
+                                            <input class="form-control" type="text" id="ufun" name="username" value="<?php  echo $rows->user_name; ?>" disabled>
                                               <input class="form-control" type="hidden" name="user_id" value="<?php echo $rows->user_id; ?>">
                                               <input type="hidden" name="old_picture" class="form-control" value="<?php echo $rows->user_picture; ?>" >
 
                                         </div>
-                                        <label for="Category" class="col-sm-2 col-form-label">Full Name <span class="error">*</span></label>
+                                        <label for="Category" class="col-sm-2 col-form-label">Full Name <span class="red_txt_label">*</span></label>
                                         <div class="col-sm-4">
                                             <input class="form-control" type="text" name="name" value="<?php  echo $rows->name; ?>" maxlength="50">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="Name" class="col-sm-2 col-form-label">Mobile Number <span class="error">*</span></label>
+                                        <label for="Name" class="col-sm-2 col-form-label">Mobile Number <span class="red_txt_label">*</span></label>
                                         <div class="col-sm-4">
-                                            <input class="form-control" type="text" name="mobile" id="mfun" value="<?php  echo $rows->mobile_no; ?>" maxlength="10">
+                                            <input class="form-control" type="text" name="mobile" id="mfun" value="<?php  echo $rows->mobile_no; ?>" maxlength="12">
 
                                         </div>
-                                        <label for="Name" class="col-sm-2 col-form-label">Email ID <span class="error">*</span></label>
+                                        <label for="Name" class="col-sm-2 col-form-label">Email ID <span class="red_txt_label">*</span></label>
                                         <div class="col-sm-4">
                                             <input class="form-control" type="email" id="efun" name="email"  value="<?php  echo $rows->email_id; ?>" maxlength="50">
 
@@ -45,34 +45,18 @@
 
 
                                     <div class="form-group row">
-                                        <label for="ecost" class="col-sm-2 col-form-label">Address <span class="error">*</span></label>
+                                        <label for="ecost" class="col-sm-2 col-form-label">Address <span class="red_txt_label">*</span></label>
                                         <div class="col-sm-4">
                                             <textarea id="textarea" name="address1" class="form-control" maxlength="100" rows="3"><?php  echo $rows->address_line1; ?></textarea>
                                         </div>
                                         <label class="col-sm-2 col-form-label">Profile Picture</label>
                                         <div class="col-sm-4">
-                                            <input type="file" name="user_picture" class="form-control" accept="image/*">
+                                            <input type="file" name="user_picture" class="form-control" accept="image/*"><br>
+											<img src="<?php echo base_url(); ?>assets/users/<?php echo $rows->user_picture; ?>" style="width:100px;height:100px;border-radius:50px;">
                                         </div>
                                     </div>
-
+									
                                     <div class="form-group row">
-                                        <label for="Status" class="col-sm-2 col-form-label">Status <span class="error">*</span></label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" name="display_status" id="display_status">
-                                                <option value="Y">Active</option>
-                                                <option value="N">Inactive</option>
-                                            </select>
-                                            <script>$('#display_status').val('<?php echo $rows->status; ?>');</script>
-                                        </div>
-                                        <div class="col-sm-2"></div>
-                                        <div class="col-sm-4">
-                                          <img src="<?php  echo base_url(); ?>assets/users/<?php echo $rows->user_picture; ?>" class="img-circle" style="width:100px;height:100px;border-radius:50px;">
-                                        </div>
-
-                                    </div>
-
-                                    <div class="form-group row">
-
                                         <label class="col-sm-2 col-form-label"></label>
                                         <div class="col-sm-2">
                                             <button type="submit" id="save" class="btn btn-success waves-effect waves-light">
@@ -96,10 +80,6 @@
 <!-- content -->
 
 <script type="text/javascript">
-
-  $('#adminuser').addClass("active");
-  $('#users').addClass("has_sub active nav-active");
-  
     $(document).ready(function() {
         $('#usersform').validate({
             rules: {

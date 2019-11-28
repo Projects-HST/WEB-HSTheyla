@@ -331,23 +331,6 @@ class Home extends CI_Controller {
 
 
 
-
-	public function removewishlist($wishlist_id)
-	{
-		$datas=$this->session->userdata();
-		$user_id=$this->session->userdata('id');
-		$user_role=$this->session->userdata('user_role');
-		$datas['wishlist_remove'] = $this->loginmodel->remove_wishlist($wishlist_id);
-		$datas['wishlist_details'] = $this->loginmodel->get_wishlist($user_id);
-		if($user_role==3 || $user_role==2){
-			$this->load->view('dash_header');
-			$this->load->view('wishlist', $datas);
-			$this->load->view('dash_footer');
-		}else{
-			redirect('/');
-		}
-	}
-
 	public function eventattendees($order_id)
 	 {
 		$sorder_id = base64_decode($order_id);
@@ -1004,7 +987,8 @@ class Home extends CI_Controller {
 			$user_id=$this->session->userdata('id');
 			$user_role=$this->session->userdata('user_role');
 			if($user_role==3 || $user_role==2){
-			$datas['user_points'] = $this->apimainmodel->user_points($user_id);
+			$datas['user_points'] = $this->loginmodel->user_points();
+			//print_r ($datas['user_points']);
 			$this->load->view('dash_header');
 			$this->load->view('points_table',$datas);
 			$this->load->view('dash_footer');
@@ -1043,6 +1027,19 @@ class Home extends CI_Controller {
 				redirect('/');
 			}
 		}
+		
+		
+
+
+	public function removewishlist($wishlist_id)
+	{
+		$datas=$this->session->userdata();
+		$user_id=$this->session->userdata('id');
+		$user_role=$this->session->userdata('user_role');
+		$datas['wishlist_remove'] = $this->loginmodel->remove_wishlist($wishlist_id);
+		redirect('/wishlist');
+	}
+	
 		public function createevent(){
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');

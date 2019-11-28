@@ -15,26 +15,26 @@
                             <?php endif; ?>
                                 <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>users/add_user_details" name="usersform" id="usersform" onSubmit='return check();'>
                                     <div class="form-group row">
-                                        <label for="Category" class="col-sm-2 col-form-label">Username</label>
+                                        <label for="Category" class="col-sm-2 col-form-label">Username <span class="error">*</span></label>
                                         <div class="col-sm-4">
-                                            <input class="form-control" type="text" id="ufun" name="username">
+                                            <input class="form-control" type="text" id="ufun" name="username" maxlength="12">
 
                                         </div>
-                                        <label for="Category" class="col-sm-2 col-form-label">Full Name</label>
+                                        <label for="Category" class="col-sm-2 col-form-label">Full Name <span class="error">*</span></label>
                                         <div class="col-sm-4">
-                                            <input class="form-control" type="text" name="name">
+                                            <input class="form-control" type="text" name="name" maxlength="50">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="Name" class="col-sm-2 col-form-label">Mobile Number</label>
+                                        <label for="Name" class="col-sm-2 col-form-label">Mobile Number <span class="error">*</span></label>
                                         <div class="col-sm-4">
-                                            <input class="form-control" type="text" name="mobile" id="mfun">
+                                            <input class="form-control" type="text" name="mobile" id="mfun" maxlength="10">
 
                                         </div>
-                                        <label for="Name" class="col-sm-2 col-form-label">Email ID</label>
+                                        <label for="Name" class="col-sm-2 col-form-label">Email ID <span class="error">*</span></label>
                                         <div class="col-sm-4">
-                                            <input class="form-control" type="text" id="efun" name="email">
+                                            <input class="form-control" type="email" id="efun" name="email" maxlength="50">
 
                                         </div>
 
@@ -42,7 +42,7 @@
 
 
                                     <div class="form-group row">
-                                        <label for="ecost" class="col-sm-2 col-form-label">Address</label>
+                                        <label for="ecost" class="col-sm-2 col-form-label">Address <span class="error">*</span></label>
                                         <div class="col-sm-4">
                                             <textarea id="textarea" name="address1" class="form-control" maxlength="100" rows="3"></textarea>
                                         </div>
@@ -53,7 +53,7 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="Status" class="col-sm-2 col-form-label">Status</label>
+                                        <label for="Status" class="col-sm-2 col-form-label">Status <span class="error">*</span></label>
                                         <div class="col-sm-4">
                                             <select class="form-control" name="display_status">
                                                 <option value="">Select status</option>

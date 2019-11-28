@@ -39,20 +39,25 @@ th{
            </thead>
            <tbody>
 <?php
+				$user_id = $this->session->userdata('id');
                 $i=1;
-
-                foreach($user_points['user_points'] as $rows) {
-                  if(empty($rows['name'])){
-                     $name=$rows['user_name'];
-                  }else{
-                     $name=$rows['name'];
-                  }
+                foreach($user_points as $rows) 
+				{
+					$sname = $rows->name;
+					$sid = $rows->id;
+					
+					   if($sname == ''){
+						 $name="Heyla User";
+					  }else{
+						 $name=$sname;
+					  } 
                 ?>
+			
               <tr>
-                <td><?php echo $i; ?></td>
-                <td><?php echo $name; ?></td>
-                <td><?php echo $rows['total_points']; ?></td>
-                <td><?php echo $i; ?></td>
+                <td <?php if ($user_id == $sid) { ?>bgcolor="#e1e3e1"<?php } ?>><?php echo $i; ?></td>
+                <td <?php if ($user_id == $sid) { ?>bgcolor="#e1e3e1"<?php } ?>><?php echo $name; ?></td>
+                <td <?php if ($user_id == $sid) { ?>bgcolor="#e1e3e1"<?php } ?>><?php echo $rows->total_points;?></td>
+                <td <?php if ($user_id == $sid) { ?>bgcolor="#e1e3e1"<?php } ?>><?php echo $i; ?></td>
               </tr>
              <?php $i++;  }  ?>
            </tbody>
