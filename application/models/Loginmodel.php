@@ -423,21 +423,20 @@ Class Loginmodel extends CI_Model
        $encrypt_email= base64_encode($email);
       $to=$email;
       $subject="Heyla User Email ID Change";
-      $htmlContent = '
-      <html>
-      <head>
-      <title>'.$subject.'</title>
-         </head>
-         <body style="background-color:#E4F1F7;"><div style="background-image: url('.base_url().'assets/front/images/email_1.png);height:700px;margin: auto;width: 100%;background-repeat: no-repeat;">
-            <div  style="padding:50px;width:400px;">
-           <p>Hi,</p>
-           <p style="font-size:17px;">Please click the below link to get your new email ID validated: </p>
-           <p><a href="'. base_url().'home/emailverfiy/'.$encrypt_email.'" target="_blank">Click here</a></p>
-           <p style="font-size:20px;">With love,<br>Team Heyla<br></p>
-           <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.</small>
-           </div>
-           </body>
-        </html>';
+      $htmlContent = '<html>
+				  <head>
+				  <title>'.$subject.'</title>
+					 </head>
+					 <body style="background-color:#E4F1F7;"><div style="background-image: url('.base_url().'assets/front/images/email_1.png);height:700px;margin: auto;width: 100%;background-repeat: no-repeat;">
+						<div  style="padding:50px;width:400px;">
+					   <p>Hi,</p>
+					   <p style="font-size:17px;">Please click the below link to get your new email ID validated: </p>
+					   <p><a href="'. base_url().'home/emailverfiy/'.$encrypt_email.'" target="_blank">Click here</a></p>
+					   <p style="font-size:20px;">With love,<br>Team Heyla<br></p>
+					   <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.</small>
+					   </div>
+					   </body>
+					</html>';
     $headers = "MIME-Version: 1.0" . "\r\n";
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
     // Additional headers

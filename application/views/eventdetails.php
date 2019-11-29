@@ -132,6 +132,39 @@ span.fa.fa-star.checked{
 .fa{
 	    color: #8e9398;
 }
+
+
+
+.rating {
+    overflow: hidden;
+    display: inline-block;
+}
+
+.rating-input {
+    float: right;
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    margin: 0 0 0 -16px;
+    opacity: 0;
+}
+
+ .rating-star {
+    cursor: pointer;
+    position: relative;
+	 float: right;
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: url('<?php echo base_url(); ?>assets/images/star.png') 0 -16px;
+}
+
+.rating-star:hover,
+.rating-star:hover ~ .rating-star,
+.rating-input:checked ~ .rating-star {
+    background-position: 0 0;
+}
+
 </style>
 <?php
 $user_id = $this->session->userdata('id');
@@ -383,13 +416,16 @@ foreach($event_details as $res){
        <div class="form-group">
        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
            <div class="rating">
+				
+	
              <span class="user-rating">
-             <input type="radio" name="rating" id="rating_1" value="5"><span class="star"></span>
-             <input type="radio" name="rating" id="rating_2" value="4"><span class="star"></span>
-             <input type="radio" name="rating" id="rating_3" value="3"><span class="star"></span>
-             <input type="radio" name="rating" id="rating_4" value="2"><span class="star"></span>
-             <input type="radio" name="rating" id="rating_5" value="1"><span class="star"></span>
+				 <input type="radio" name="rating" id="rating_1" value="5"><span class="star"></span>
+				 <input type="radio" name="rating" id="rating_2" value="4"><span class="star"></span>
+				 <input type="radio" name="rating" id="rating_3" value="3"><span class="star"></span>
+				 <input type="radio" name="rating" id="rating_4" value="2"><span class="star"></span>
+				 <input type="radio" name="rating" id="rating_5" value="1"><span class="star"></span>
              </span>
+			 
            </div>
          </div>
        </div>
@@ -689,9 +725,11 @@ foreach($event_details as $res){
 
 
 	$('#review_add').on('click', function() {
+
 		var result = '';
 		var form_data = new FormData();
-		var rating=$('input[name=rating]:checked').val();
+		//var rating=$('input[name=rating]:checked').val();
+		var rating=$("input[name='rating']:checked").val();
 		var message=$('#message').val();
 		var event_id=$('#event_id').val();
 

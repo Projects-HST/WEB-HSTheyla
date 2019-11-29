@@ -8,6 +8,8 @@
     <link rel="icon" href="<?php echo base_url(); ?>assets/fav_icon.png" type="image/gif" sizes="32x32">
     <title><?php if(isset($meta_title)){echo "Heyla - ".$meta_title;}else{echo "Heyla";}?> </title>
     <meta name="description" content="<?php if(isset($meta_description)){echo $meta_description;}else{echo "Heyla";}?>"/>
+	
+	
     <link href="<?php echo base_url(); ?>assets/front/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/front/css/style.css" rel="stylesheet">
     <!-- <link href="<?php echo base_url(); ?>assets/front/css/main.css" rel="stylesheet"> -->
@@ -19,16 +21,24 @@
 
     <link href="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template -->
+	
+	
+	
     <!-- <link href="<?php echo base_url(); ?>assets/front/css/carousel.css" rel="stylesheet"> -->
+	
     <script src="<?php echo base_url(); ?>assets/front/js/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/front/js/popper.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/front/js/bootstrap.min.js"></script>
+	
     <script src="<?php echo base_url(); ?>assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/pages/sweet-alert.init.js"></script>
+	
     <!--  Forms Validations Plugin -->
     <script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/additional-methods.min.js"></script>
+	
+	
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-92904528-2"></script>
     <script>
@@ -126,6 +136,7 @@
                                     <ul class="dropdown-menu dropdown-block profile_menu" role="menu" style="">
                                         <li><a href="<?php echo base_url(); ?>profile">Profile</a></li>
                                          <li><a href="<?php echo base_url(); ?>change_password">Change Password</a></li>
+										 <li><a href="<?php echo base_url(); ?>user_points">User Points</a></li>
                                         <li><a class="cursor_link" onclick="logout()">Logout</a></li>
                                     </ul>
                                   </li>
