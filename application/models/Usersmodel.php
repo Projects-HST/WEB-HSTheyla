@@ -58,29 +58,62 @@ FROM user_details AS ud LEFT JOIN user_master AS um ON ud.user_id=um.id LEFT JOI
 
 
     function update_user_login_status($uid,$login_status,$user_id){
-       $query="UPDATE user_master  SET status='$login_status',updated_at=NOW(),updated_by='$user_id' WHERE id='$uid'";
+		
+		$query = "UPDATE user_master  SET status='$login_status',updated_at=NOW(),updated_by='$user_id' WHERE id='$uid'";
+		$res=$this->db->query($query);
+		
+		if ($login_status == 'Y'){
+			$check_usr="SELECT * FROM user_master WHERE id='$uid'";
+			$res=$this->db->query($check_usr);
+			if($res->num_rows()>0){
+				foreach($res->result() as $rows){ 
+					$email = $rows->email_id;
+				}
+			}
+		
+			if ($email !=""){
+				$subject="Yay! Heyla account reactivated";
+				$htmlContent = '<html>
+						 <head>
+						 <title>Yay! Heyla account reactivated</title>
+							</head>
+							<body>
+							<p>Hi,<p/>
+							<p>Welcome back! Your Heyla account has been successfully reactivated. Now you can resume  exploring, booking, and organizing a wide spectrum of events with a few taps.</p>
+							<p>To log in, user your email ID/phone number/username and your existing password.</p>
+							 <p>With love,  <br>Team Heyla</p>
+							 <br><br>
+							 <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.</small>
+							</body>
+						 </html>';
+					$headers = "MIME-Version: 1.0" . "\r\n";
+					$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+					// Additional headers
+					$headers .= 'From: heylapp<info@heylapp.com>' . "\r\n";
+					$sent= mail($to,$subject,$htmlContent,$headers);
+			}
+		}
 
-      $res=$this->db->query($query);
-      if($res){
-        $data=array("status"=>"success");
-      }else{
-        $data=array("status"=>"error");
-      }
-      return $data;
+		  if($res){
+			$data=array("status"=>"success");
+		  }else{
+			$data=array("status"=>"error");
+		  }
+		  return $data;
     }
 
 
-       function check_password_match($old_password,$user_id){
-         $pwd=md5($old_password);
-		 $select="SELECT * FROM user_master WHERE password='$pwd' AND id='$user_id'";
-         $result=$this->db->query($select);
-         
-		 if($result->num_rows()==0){
-				echo "false";
-         }else{
-				echo "true";
-         }
-       }
+   function check_password_match($old_password,$user_id){
+	 $pwd=md5($old_password);
+	 $select="SELECT * FROM user_master WHERE password='$pwd' AND id='$user_id'";
+	 $result=$this->db->query($select);
+	 
+	 if($result->num_rows()==0){
+			echo "false";
+	 }else{
+			echo "true";
+	 }
+   }
 	   
 
     function change_password($new_password,$confrim_password,$user_id){

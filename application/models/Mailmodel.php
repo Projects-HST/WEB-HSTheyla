@@ -11,17 +11,15 @@ Class Mailmodel extends CI_Model
 
 	function send_mail($email,$notes)
 	{
-
 		$to = $email;
-		$subject="Heyla ";
-		$htmlContent = '
-		<html>
-		<head>  <title></title>
-		</head>
-		<body>
-		<p style="margin-left:30px;">'.$notes.'</p>
-			</body>
-		</html>';
+		$subject="Heyla";
+		$htmlContent = '<html>
+					<head>  <title></title>
+					</head>
+					<body>
+					<p style="margin-left:30px;">'.$notes.'</p>
+					</body>
+					</html>';
 		// Set content-type header for sending HTML email
 		$headers = "MIME-Version: 1.0" . "\r\n";
 		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
@@ -34,9 +32,6 @@ Class Mailmodel extends CI_Model
 
   function send_mail_to_users($user_ids,$email_temp_id)
   {
-      //echo "Email";
-      //echo "<br>";
-  	//echo $user_ids; echo $email_temp_id;exit;
   	 $tsql="SELECT id,template_name,template_content FROM email_template WHERE id='$email_temp_id'";
 	 $res=$this->db->query($tsql);
 	 $result1=$res->result();
