@@ -88,6 +88,7 @@
                                      <ul class="dropdown-menu dropdown-block" role="menu">
                                          <li><a href="<?php echo base_url(); ?>profile">Profile</a></li>
 										 <li><a href="<?php echo base_url(); ?>change_password">Change Password</a></li>
+										 <li><a href="<?php echo base_url(); ?>user_points">User Points</a></li>
                                          <li><a class="nav-link logout-btn" onclick="logout()">Logout</a></li>
                                      </ul>
                                  </li>
@@ -161,12 +162,12 @@
                         <span class="sidebar-title">Booking History</span>
                       </a>
                   </li>
-                  <li class="side-menu">
+                  <!--<li class="side-menu">
                       <a href="<?php echo base_url(); ?>user_points" class="user_points">
                         <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/user_points.png"></span>
                         <span class="sidebar-title">User Points</span>
                       </a>
-                  </li>
+                  </li>-->
 				  <li class="side-menu">
                       <a class="user_points" onclick="delete_ac(<?php echo $user_id;?>)" style="cursor:pointer;">
                         <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/del_ac.png"></span>
