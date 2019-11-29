@@ -90,7 +90,7 @@ FROM user_details AS ud LEFT JOIN user_master AS um ON ud.user_id=um.id LEFT JOI
 					$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 					// Additional headers
 					$headers .= 'From: heylapp<info@heylapp.com>' . "\r\n";
-					$sent= mail($to,$subject,$htmlContent,$headers);
+					$sent= mail($email,$subject,$htmlContent,$headers);
 			}
 		}
 
