@@ -242,7 +242,7 @@ class Users extends CI_Controller
 					$old_picture=$this->input->post('old_picture');
 				
 					if(empty($_FILES['user_picture']['name'])){
-						$user_pic1=$old_picture;
+						$user_pic = $old_picture;
 					}else{
 						$user_pic=$_FILES['user_picture']['name'];
 						$temp = pathinfo($user_pic, PATHINFO_EXTENSION);
