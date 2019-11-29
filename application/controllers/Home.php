@@ -1232,6 +1232,20 @@ class Home extends CI_Controller {
 			}
 		}
 
+		public function deactivate($user_id)
+		{
+			$datas['ac_remove'] = $this->loginmodel->ac_remove($user_id);
 
+			$datas=$this->session->userdata();
+			$this->session->unset_userdata($datas);
+			$this->session->sess_destroy();
+			redirect('/');
+		}
 
+		public function activate(){
+			$name=$this->input->post('name');
+			$mobile=$this->input->post('mobile');
+			$email=$this->input->post('email');
+			$data = $this->loginmodel->ac_activate($name,$mobile,$email);
+		}
 }

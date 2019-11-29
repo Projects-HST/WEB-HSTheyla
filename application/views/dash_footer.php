@@ -1,3 +1,4 @@
+<?php $user_id = $this->session->userdata('id'); ?>
 </div>
 <div class="container-fluid footer_section">
   <footer class="footer-bg footer" id="stickfooter">
@@ -59,9 +60,8 @@
 <!-- Datatable init js -->
 <script src="<?php echo base_url(); ?>assets/pages/datatables.init.js"></script>
 <script>
-
-
 $('#datetimepicker').datetimepicker();
+
 function logout(){
   swal({
       title: '',
@@ -74,6 +74,23 @@ function logout(){
       cancelButtonText: 'No'
   }).then(function(){
     window.location.href='<?php echo base_url(); ?>logout';
+  }).catch(function(reason){
+
+  });
+}
+
+function delete_ac(user_id){
+  swal({
+      title: 'Are you sure?',
+      text: "You won't be able to book and organize events if you deactivate your account.",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Deactivate',
+      cancelButtonText: 'Cancel'
+  }).then(function(){
+    window.location.href='<?php echo base_url(); ?>home/deactivate/'+user_id;
   }).catch(function(reason){
 
   });

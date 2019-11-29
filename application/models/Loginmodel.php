@@ -1068,5 +1068,43 @@ Class Loginmodel extends CI_Model
 				mail($sender_emails,$subject,$email_message,$headers);
 			}
 	}
+	
+	  function ac_remove($user_id){
+		  $sql = "UPDATE user_master SET status ='N' WHERE id='$user_id'";
+		  $resu=$this->db->query($sql);
+	  }
+	  
+	  
+	  function ac_activate($name,$mobile,$email){
+     
+        $to="hello@heylaapp.com,maran.happysanz@gmail.com";
+        $subject="Account Reactivation Request";
+        $htmlContent = '
+         <html>
+         <head>
+         <title>Contact Form</title>
+            </head>
+            <body>
+              <div class="mail-content">
+                <p>Name - '.$name.'</p>
+                <p>Email - '.$email.'</p>
+                <p>Mobile - '.$mobile.'</p>
+              </div>
+            </body>
+         </html>';
+     $headers = "MIME-Version: 1.0" . "\r\n";
+     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+     // Additional headers
+	 $headers .= 'From: Account Reactivation<'.$email.'>' . "\r\n";
+     //$headers .= 'From: '.$email. "\r\n";
+	
+     $sent= mail($to,$subject,$htmlContent,$headers);
+     if($sent){
+       echo "sucess";
+     }else{
+        echo "failed";
+     }
+
+    }
 
 }
