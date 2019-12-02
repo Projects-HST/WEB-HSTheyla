@@ -83,9 +83,14 @@
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/active_events.png" /></span>
                       <div class="mini-stat-info text-right text-white">
-                          <span class="counter"><?php foreach ($active_events as $rows) {
-                            echo $rows->active_events;
-                          } ?></span>
+                          <span class="counter">
+						  <?php foreach ($live_events as $rows) {
+							  $slive_events = $rows->live_events;
+                          } ?>
+						  <?php foreach ($archive_events as $rows) {
+								$sarchive_events = $rows->archive_events;
+                          } ?>
+						  <?php echo $slive_events + $sarchive_events;?> </span>
                           <b style="font-size:14px;">Mainstream Events</b>
                       </div>
                   </div>
@@ -110,7 +115,8 @@
                       <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/general.png" /></span>
                       <div class="mini-stat-info text-right text-white">
                           <span class="counter"><?php foreach ($live_events as $rows) {
-                            echo $rows->live_events;
+							  $live_events = $rows->live_events;
+                            echo $live_events;
                           } ?></span>
                           <b style="font-size:14px;">Active Mainstream Events</b>
                       </div>
@@ -123,7 +129,8 @@
                       <span class="mini-stat-icon"><img style="padding-bottom: 9px;padding-right: 2px;" src="<?php echo base_url();?>assets/icons/dashboard/active_events.png" /></span>
                       <div class="mini-stat-info text-right text-white">
                           <span class="counter"><?php foreach ($archive_events as $rows) {
-                            echo $rows->archive_events;
+								$archive_events = $rows->archive_events;
+								echo $archive_events;
                           } ?></span>
                           <b style="font-size:14px;">Unlisted Events</b>
                       </div>

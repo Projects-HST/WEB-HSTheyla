@@ -94,7 +94,7 @@ Class Loginmodel extends CI_Model
 		 
 		  function get_active_events()
          {
-            $query="SELECT COUNT(*) as active_events FROM events WHERE event_status='Y'";
+            $query="SELECT COUNT(*) as active_events FROM events WHERE hotspot_status='N' and event_status='Y'";
            $resultset=$this->db->query($query);
            return $resultset->result();
          }
@@ -109,7 +109,7 @@ Class Loginmodel extends CI_Model
 		 
 		 function get_no_of_hotspot_events()
          {
-           $query="SELECT count(*) as hotspot_events FROM events where  hotspot_status='Y' and event_status='Y'";
+           $query="SELECT count(*) as hotspot_events FROM events where hotspot_status='Y' and event_status='Y'";
            $resultset=$this->db->query($query);
            return $resultset->result();
          }
