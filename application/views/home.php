@@ -233,7 +233,7 @@
 			  
               <?php   if($user_role==1){ ?>
               <div class="col-md-6 col-lg-6 col-xl-3">
-                 <!-- <a href="#" class="test" data-toggle="tooltip" title="View                  Organiser Request"> -->
+                 <!-- <a href="#" class="test" data-toggle="tooltip" title="View Organiser Request"> -->
                   <div class="mini-stat clearfix bg-primary">
                       <span class="mini-stat-icon"><img style="padding-bottom:10px; padding-right:2px;" src="<?php echo base_url();?>assets/icons/dashboard/organiser_request.png" /></span>
                       <div class="mini-stat-info text-right text-white">
