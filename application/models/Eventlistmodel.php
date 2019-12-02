@@ -648,7 +648,11 @@ Class Eventlistmodel extends CI_Model
 
 	function update_review($event_id,$review_id,$user_id,$rating,$message)
     {
-		$sQuery = "UPDATE event_reviews SET event_rating='$rating',comments='$message',status='N',updated_at= NOW() WHERE id  ='$review_id'";
+		if ($rating!='undefined'){
+			 $sQuery = "UPDATE event_reviews SET event_rating='$rating',comments='$message',status='N',updated_at= NOW() WHERE id  ='$review_id'";
+		} else {
+			$sQuery = "UPDATE event_reviews SET comments='$message',status='N',updated_at= NOW() WHERE id  ='$review_id'";
+		}
 		$review_update = $this->db->query($sQuery);
     }
 

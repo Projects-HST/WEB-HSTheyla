@@ -372,15 +372,31 @@ foreach($event_details as $res){
 	<form name="frmReview" id="" action="#" method="post" enctype="multipart/form-data" class="form" autocomplete="off">
        <div class="form-group row">
        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-           <div class="rating">
-             <span class="user-rating">
+		<table width="100%" border="0" cellspacing="2" cellpadding="2">
+		  <tr>
+			<td width="15%">Old Rating :</td>
+			<td width="20%"><span class="rated_star">
+				<?php
+					 for ($i=1; $i <6; $i++) {
+						if ($i <= $event_rating){
+							echo "<img src='".base_url()."assets/front/images/rated.png' class='img-responsive' style='margin-right:2px;'>";
+						} else {
+							echo "<img src='".base_url()."assets/front/images/unrated.png' class='img-responsive' style='margin-right:2px;'>";
+						}
+					}
+				?>
+				</span></td>
+				<td width="25%">&nbsp;</td>
+			<td width="14%">New Rating :</td>
+			<td width="26%"><span class="user-rating">
 			 <input type="radio" name="rating" id="rating_1" value="5"><span class="star"></span>
              <input type="radio" name="rating" id="rating_2" value="4"><span class="star"></span>
              <input type="radio" name="rating" id="rating_3" value="3"><span class="star"></span>
              <input type="radio" name="rating" id="rating_4" value="2"><span class="star"></span>
              <input type="radio" name="rating" id="rating_5" value="1"><span class="star"></span>
 			 <?php
-				/* for($i=5; $i>=1; $i=$i-1)
+			 /* echo $event_rating;
+				for($i=5; $i>=1; $i=$i-1)
 				//for ($i=1; $i <6; $i++)
 				{
 					if ($i <= $event_rating){
@@ -388,10 +404,12 @@ foreach($event_details as $res){
 					} else {
 						echo '<input type="radio" name="rating" id="rating_'.$i.'" value="'.$i.'" checked><span class="star"></span>';
 					}
-				} */
+				}  */
 			?>
-             </span>
-           </div>
+             </span></td>
+		  </tr>
+		</table>
+
          </div>
        </div>
        <div class="form-group row">
@@ -414,7 +432,6 @@ foreach($event_details as $res){
        <div class="form-group">
        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
            <div class="rating">
-				
 	
              <span class="user-rating">
 				 <input type="radio" name="rating" id="rating_1" value="5"><span class="star"></span>
