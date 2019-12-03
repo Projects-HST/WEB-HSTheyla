@@ -32,7 +32,7 @@ class Dashboard extends CI_Controller
     $datas=$this->session->userdata();
     $user_id=$this->session->userdata('id');
     $user_role=$this->session->userdata('user_role');
-    if($user_role==1){
+    if($user_role==1 || $user_role==4){
       $data['get_all_request'] = $this->loginmodel->get_all_organiser_request();
 	  //print_r ($data['get_all_request']);
       $this->load->view('header');
@@ -47,7 +47,7 @@ class Dashboard extends CI_Controller
     $datas=$this->session->userdata();
     $user_id=$this->session->userdata('id');
     $user_role=$this->session->userdata('user_role');
-    if($user_role==1){
+    if($user_role==1 || $user_role==4){
       $data['get_org_request'] = $this->loginmodel->get_organiser_request($id);
       $this->load->view('header');
       $this->load->view('others/update_req_status', $data);
@@ -61,7 +61,7 @@ class Dashboard extends CI_Controller
     $datas=$this->session->userdata();
     $user_id=$this->session->userdata('id');
     $user_role=$this->session->userdata('user_role');
-    if($user_role==1){
+    if($user_role==1 || $user_role==4){
       $req_status=$this->input->post('req_status');
       $rq_id=$this->input->post('req_id');
       $org_id=$this->input->post('org_id');

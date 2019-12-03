@@ -53,15 +53,20 @@
       <div class="socialmedia-tab">
 
         <!-- <a class="social-link-img" onclick="checkLoginState()" scope="public_profile,email"><img src="<?php echo base_url(); ?>assets/front/images/login-facebook.png" class="img-responsive social-img"></a> -->
-        <fb:login-button size="large" class="fb_btn" scope="public_profile,email"
-                         onlogin="checkLoginState();">
-        Sign in with Facebook
+        <fb:login-button size="large" class="fb_btn" scope="public_profile,email" onlogin="checkLoginState();">
+			Sign in with Facebook
         </fb:login-button>
         <br>
-
-
-          <a href="<?php echo base_url(); ?>google_login" class="social-link-img"><img src="<?php echo base_url(); ?>assets/front/images/login-google.png" class="img-responsive social-img"></a>
-                </div>
+         <a href="<?php echo base_url(); ?>google_login" class="social-link-img"><img src="<?php echo base_url(); ?>assets/front/images/login-google.png" class="img-responsive social-img"></a>
+         </div>
+		 
+		 <?php if($this->session->flashdata('msg')): ?>
+				<div class="alert alert-primary">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					<?php echo $this->session->flashdata('msg'); ?>
+				</div>
+            <?php endif; ?>
+		 
             </div>
         </div>
     </div>
@@ -296,7 +301,7 @@ function statusChangeCallback(response) {
                     sweetAlert("Oops...", "Something went Wrong", "error");
                   }
                   else{
-                    sweetAlert("Oops...", "Your Account is Deactive", "error");
+                    sweetAlert("Sorry!", "Your Account is Deactive. Please contact Admin", "error");
                   }
 
               }

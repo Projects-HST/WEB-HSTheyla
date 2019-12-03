@@ -195,9 +195,10 @@
 											 <input class="form-control" type="text"  name="email" value="" maxlength="50">
 									 </div>
 
-									              <label for="ecost" class="col-sm-2 col-form-label">Event Type</label>
+									              <label for="ecost" class="col-sm-2 col-form-label">Event Type <span class="red_txt_label">*</span></label>
             <div class="col-sm-4">
                  <select class="form-control"  name="eventcost">
+					<option value="">Select Type</option>
                     <option value="Free">Free</option>
                     <option value="Paid">Paid</option>
                 </select>

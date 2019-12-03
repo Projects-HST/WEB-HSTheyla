@@ -487,13 +487,12 @@ class Home extends CI_Controller {
 					 redirect('/');
 			 }else if($user_role==2){
 			     redirect('/');
-				//$this->load->view('profile', $datas);
 			 }else{
 				 redirect('/');
 			 }
 		 }else{
-			 echo "Your Account is Deactive. Please contact Admin";
-
+			 $this->session->set_flashdata('msg', ''.$name.'Your Account is Deactive. Please contact Admin');
+			 redirect('/signup/');
 		 }
 
 		}

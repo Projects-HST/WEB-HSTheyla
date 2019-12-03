@@ -1,3 +1,8 @@
+<?php
+	$id=$this->session->userdata('id');
+	$user_name=$this->session->userdata('user_name');
+	$user_role=$this->session->userdata('user_role');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,10 +78,7 @@
                         <span> Dashboard </span>
                     </a>
                 </li>
-                <?php $user_role=$this->session->userdata('user_role');
-                if($user_role==4){
-
-                }else{ ?>
+                <?php if($user_role==1){ ?>
                   <li class="has_sub" id="master">
                       <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-apps"></i> <span> Master </span> </a>
                       <ul class="list-unstyled">
@@ -88,8 +90,6 @@
                       </ul>
                   </li>
               <?php   } ?>
-
-
                 <li class="has_sub" id="events">
                     <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-star" aria-hidden="true"></i>
                     <span>Events</span> </a>
@@ -129,10 +129,7 @@
                         <li id="booking_history"><a href="<?php echo base_url();?>bookinghistory/home">History</a></li>
                     </ul>
                 </li>
-                <?php $user_role=$this->session->userdata('user_role');
-                if($user_role==4){
-
-                }else{ ?>
+                <?php if($user_role==1){ ?>
                 <li class="has_sub" id="users">
                     <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-users" aria-hidden="true"></i>
                 <span> User Management</span></a>
@@ -145,23 +142,21 @@
 
                     </ul>
                 </li>
-
+				<?php  } ?>
                 <li class="has_sub" id="track">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-file-text-o" aria-hidden="true"></i></i>
-                <span> Events Record</span></a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-file-text-o" aria-hidden="true"></i></i><span> Events Record</span></a>
                     <ul class="list-unstyled">
-
                         <li id="org_request"><a href="<?php echo base_url();?>dashboard/get_all_organiser_request">Organizer Requests</a></li>
+						  <?php if($user_role==1){ ?>
                         <li id="org_track"><a href="<?php echo base_url();?>tracking/organiser_event_tracking">Organizer Events</a></li>
                         <li id="admin_event_track"><a href="<?php echo base_url();?>tracking/admin_event_tracking">Admin Events</a></li>
                         <li id="org_event_track"><a href="<?php echo base_url();?>tracking/organiser_track_date">Organizer Events by Date</a></li>
                         <li id="admin_event_track"><a href="<?php echo base_url();?>tracking/admin_track_date">Admin Events by Date</a></li>
-
-
+						<?php  } ?>
                     </ul>
                 </li>
 
-              <?php  } ?>
+              
 
                 <li class="has_sub" id="email">
                     <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-envelope" aria-hidden="true"></i><span> Notification </span></a>
@@ -187,11 +182,7 @@
   <div class="topbar">
 <nav class="navbar-custom">
   <ul class="list-inline float-right mb-0">
-          <?php
-				$id=$this->session->userdata('id');
-				$user_name=$this->session->userdata('user_name');
-				$user_role=$this->session->userdata('user_role');
-          ?>
+
 
               <li class="list-inline-item dropdown notification-list">
 			  <a class="nav-link  arrow-none waves-effect nav-user" data-toggle="tooltip" data-placement="bottom"   href="<?php echo base_url(); ?>users/update_password/">Change Password</a>
@@ -210,7 +201,7 @@
 			<?php if ($id == '1') { ?>
                 <h3 class="page-title"> Heyla Admin</h3>
 			<?php } else { ?>
-			 <h3 class="page-title"> Heyla Subadmin - <?php echo $user_name; ?></h3>
+			 <h3 class="page-title"> Heyla Sub-Admin : <?php echo $user_name; ?></h3>
 			<?php } ?>
             </li>
           </ul>
