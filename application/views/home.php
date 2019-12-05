@@ -231,7 +231,7 @@
                 <!-- </a> -->
               </div>
 			  
-              <?php   if($user_role==1){ ?>
+
               <div class="col-md-6 col-lg-6 col-xl-3">
                  <!-- <a href="#" class="test" data-toggle="tooltip" title="View Organiser Request"> -->
                   <div class="mini-stat clearfix bg-primary">
@@ -245,7 +245,7 @@
                   </div>
                 <!-- </a> -->
               </div>
-            <?php } ?>
+
 			
             <!--<div class="col-md-6 col-lg-6 col-xl-3">
               <a href="#" class="test" data-toggle="tooltip" title="View Booking Details">
