@@ -107,7 +107,7 @@ if ($con) {
 	 function sendSMS($Phoneno,$Message)
 	{
         //Your authentication key
-        $authKey = "191431AStibz285a4f14b4";
+        $authKey = "270429AChw544RizSP5deb6e61";
         
         //Multiple mobiles numbers separated by comma
         $mobileNumber = "$Phoneno";
