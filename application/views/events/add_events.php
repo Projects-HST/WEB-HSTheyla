@@ -350,7 +350,6 @@
         },
         contact_person:{
           required:"This field cannot be empty!",
-
         },
 
         email:"This field cannot be empty!",
