@@ -1,3 +1,4 @@
+<?php $user_id=$this->session->userdata('id');?>
 <style>
 .card-block{
   padding: 30px;
@@ -61,6 +62,11 @@
 <div class="col-md-12 profile_tab">
 <div class="col-md-9">
   <form class="form" role="form" autocomplete="off" method="post" action="" id="change_password">
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label form-control-label">Old Password <span class="error">*</span></label>
+          <div class="col-md-5"><input class="form-control" type="password" id="old_password" name="old_password" value="" maxlength="12"></div>
+		   <div class="col-md-1"> <span toggle="#old_password" class="fa fa-fw fa-eye-slash field-icon old_password"></span></div>
+      </div>
       <div class="form-group row">
           <label class="col-md-3 col-form-label form-control-label">New Password <span class="error">*</span></label>
           <div class="col-md-5"><input class="form-control" type="password" id="new_password" name="new_password" value="" maxlength="12"></div>
@@ -94,6 +100,13 @@ $.validator.addMethod("password_validate", function(value, element) {
 
 $('#change_password').validate({ // initialize the plugin
     rules: {
+		old_password: {
+          required: true,  minlength : 6,maxlength:12,
+		  remote: {
+                       url: "<?php echo base_url(); ?>users/check_password_match/<?php echo $user_id; ?>",
+                       type: "post"
+                    }
+        },
 		new_password: {
           required: true,  minlength : 6,maxlength:12,
         },
@@ -103,12 +116,16 @@ $('#change_password').validate({ // initialize the plugin
           }
   },
   messages: {
+	   old_password: {
+        required:"Please enter old password!",minlength:"Password should be minimum of 6 characters",maxlength:"Password should not be more than 12 characters",
+		remote: "Old Password doesn't match!"
+      },
       new_password: {
         required:"Please enter new password!",minlength:"Password should be minimum of 6 characters",maxlength:"Password should not be more than 12 characters",
       },
       confirm_password: {
               required: "You should confirm your password!",
-              notEqualTo: "Password Should Match"
+              notEqualTo: "Password should match"
       }
   },
     submitHandler: function(form) {

@@ -386,8 +386,8 @@ foreach($event_details as $res){
 					}
 				?>
 				</span></td>
-				<td width="25%">&nbsp;</td>
-			<td width="14%">New Rating :</td>
+				<td width="22%">&nbsp;</td>
+			<td width="17%">New Rating :</td>
 			<td width="26%"><span class="user-rating">
 			 <input type="radio" name="rating" id="rating_1" value="5"><span class="star"></span>
              <input type="radio" name="rating" id="rating_2" value="4"><span class="star"></span>

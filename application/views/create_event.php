@@ -307,18 +307,26 @@ $(document).ready(function () {
     }
   });
 
-  $('#file_upload').on('change', function()
-        {
-          var f=this.files[0]
-          var actual=f.size||f.fileSize;
-          var orgi=actual/1024;
-            if(orgi<1024){
-              $("#preview").html('');
-            }else{
-              $("#preview").html('File Size Must be  Lesser than 1 MB');
-              return false;
-            }
-        });
+  $('#file_upload').on('change', function() {
+	  var f=this.files[0]
+	  var actual=f.size||f.fileSize;
+	  var orgi=actual/1024;
+		if(orgi<1024){
+		  $("#preview").html('');
+		  //$("#preview").html('<img src="<?php echo base_url(); ?>assets/loader.gif" alt="Uploading...."/>');
+		  $("#eventform").ajaxForm({
+			  target: '#preview'
+		  }).submit();
+		}else{
+		  //$("#preview").html('File Size Must be  Lesser than 1 MB');
+		  //alert("File Size Must be  Lesser than 1 MB");
+		  return false;
+		}
+	});
+	
+  $.validator.addMethod('filesize', function (value, element, param) {
+      return this.optional(element) || (element.files[0].size <= param)
+  }, 'File size must be less than 1 MB');
 
     $('#eventform').validate({ // initialize the plugin
        rules: {
@@ -336,7 +344,7 @@ $(document).ready(function () {
          end_time:{required:true },
          eadv_status:{required:true},
          hotspot_sts:{required:true},
-         pcontact_cell:{required:true },
+		 pcontact_cell:{required:true,digits:true,maxlength:12,minlength:8 },
          contact_person:{required:true },
          email:{required:true },
          event_status:{required:true },
@@ -360,13 +368,20 @@ $(document).ready(function () {
         end_time:"Select End Time",
         eadv_status:"Select Advertisement Status ",
         hotspot_sts:"Select Hotspot Status ",
-        pcontact_cell:"Enter Primary Contact Number",
+		pcontact_cell:{
+          required:"Enter Primary Contact Number",
+          digits:"Only numbers",
+        },
         contact_person:"Enter Name",
         email:"Enter Email",
         event_status:"Select Status",
         txtLatitude:"Enter Latitude",
         txtLongitude:"Enter Longitude",
-		eventbanner:"Select Banner"
+		eventbanner:{
+          required:"Select banner",
+          accept:"Please upload .jpg or .png .",
+          fileSize:"File must be JPG or PNG, less than 1MB"
+        }
        },
          });
    });

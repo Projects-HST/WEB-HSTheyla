@@ -1076,7 +1076,7 @@ Class Loginmodel extends CI_Model
 	  
 	  function ac_activate($name,$mobile,$email){
      
-        $to="hello@heylaapp.com,maran.happysanz@gmail.com";
+        $to="hello@heylaapp.com";
         $subject="Account Reactivation Request";
         $htmlContent = '
          <html>

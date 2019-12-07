@@ -49,12 +49,13 @@ hr{
         </div>
         <div class="row">
           <div class="col"><p class="summary_label summary_text">No.of Seats: </p></div>
-          <div class="col"><p class="summary_text"><?php echo $res->event_name;?></p></div>
+           <div class="col"><p class="summary_text"><?php echo $res->number_of_seats;?></p></div>
 
        </div>
          <div class="row">
            <div class="col"><p class="summary_label summary_text">Event: </p></div>
-             <div class="col"><p class="summary_text"><?php echo $res->number_of_seats;?></p></div>
+		   <div class="col"><p class="summary_text"><?php echo $res->event_name;?></p></div>
+            
 
         </div>
           <div class="row">
