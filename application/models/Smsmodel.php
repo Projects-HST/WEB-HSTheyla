@@ -35,7 +35,7 @@ Class Smsmodel extends CI_Model
 		CURLOPT_SSL_VERIFYHOST => 0,
 		CURLOPT_SSL_VERIFYPEER => 0,
 		CURLOPT_HTTPHEADER => array(
-		"authkey: 242202ALE69fBMks5bbee06b",
+		"authkey: 270429AChw544RizSP5deb6e61",
 		"content-type: application/json"
 		),
 		));

@@ -170,7 +170,7 @@
 					
 					$Message = "Hi Customer, Booking Id : ".$order_id. "Seats : ".$plan_name."," .$number_of_seats." for ".$event_name." on ".$sbooking_date." ".$show_time.". Transaction Date : ".$transaction_date." More detail https://goo.gl/A6DGuZ";
 				  //Your authentication key
-					$authKey = "242202ALE69fBMks5bbee06b";
+					$authKey = "270429AChw544RizSP5deb6e61";
 					
 					//Multiple mobiles numbers separated by comma
 					$mobileNumber = "$created_mobile,$user_mobile";
