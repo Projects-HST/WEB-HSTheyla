@@ -132,11 +132,10 @@ Class Eventsmodel extends CI_Model
 		}
 		if ($user_role =='2'){
 
-			$email_messaege = 'Your event has been updated by Heyla Admin. To view the changes, log in to https://www.heylaapp.com';
+			$email_messaege = $event_name. ' has been updated by Heyla Admin. To view the changes, log in to https://www.heylaapp.com';
 			$this->mailmodel->send_mail($email,$email_messaege);
 			
-			//$mobile_message = 'Your Event - '.$event_name.' is '.$status.'';
-			$mobile_message = 'Your event has been updated by Heyla Admin. To view the changes, log in to https://www.heylaapp.com';
+			$mobile_message = $event_name . ' has been updated by Heyla Admin. To view the changes, log in to https://www.heylaapp.com';
             $this->smsmodel->sendOTPtomobile($mobile,$mobile_message);
 		}
 		

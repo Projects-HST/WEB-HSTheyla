@@ -367,6 +367,7 @@ $(document).ready(function () {
          eadv_status:{required:true},
          hotspot_sts:{required:true},
          pcontact_cell:{required:true,digits:true,maxlength:12,minlength:8 },
+		 scontact_cell:{required:false,digits:true,maxlength:12,minlength:8 },
          contact_person:{required:true },
          email:{required:true },
          event_status:{required:true },
@@ -391,6 +392,9 @@ $(document).ready(function () {
         hotspot_sts:"Select Hotspot Status ",
 		pcontact_cell:{
           required:"Enter Primary Contact Number",
+          digits:"Only numbers",
+        },
+		scontact_cell:{
           digits:"Only numbers",
         },
         contact_person:"Enter Name",
