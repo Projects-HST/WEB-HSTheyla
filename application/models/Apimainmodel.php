@@ -198,14 +198,14 @@ class Apimainmodel extends CI_Model {
 	    $city_name = '';
 
 		//	$sql = "SELECT * FROM user_master WHERE user_name ='".$username."' AND password = md5('".$password."') AND mobile_verify ='Y' AND email_verify ='Y' AND status='Y'";
-	 	$sql = "SELECT * FROM user_master WHERE (user_name='$username' OR mobile_no='$username' OR email_id='$username') AND password = md5('".$password."')  AND status='Y'";
+	   $sql = "SELECT * FROM user_master WHERE (user_name='$username' OR mobile_no='$username' OR email_id='$username') AND password = md5('".$password."')";
 
 		$user_result = $this->db->query($sql);
 		$ress = $user_result->result();
 		if($user_result->num_rows()>0)
 		{
 
-      $check_status="SELECT * FROM user_master WHERE email_id ='$email_id' AND status='N'";
+       $check_status="SELECT * FROM user_master WHERE(user_name='$username' OR mobile_no='$username' OR email_id='$username') AND status='N'";
       $user_status = $this->db->query($check_status);
       if($user_status->num_rows()==1){
         $response = array("status" => "Error", "msg" => "Account Deactivated");
@@ -218,34 +218,6 @@ class Apimainmodel extends CI_Model {
 			  $login_count = $rows->login_count+1;
 			}
 		}
-
-		// $sql = "SELECT * FROM user_master WHERE mobile_no ='".$username."' AND password = md5('".$password."') AND mobile_verify ='Y' AND status='Y'";
-		// $user_result = $this->db->query($sql);
-		// $ress = $user_result->result();
-		// if($user_result->num_rows()>0)
-		// {
-		// 	foreach ($user_result->result() as $rows)
-		// 	{
-		// 		  $user_id = $rows->id;
-		// 		  $login_count = $rows->login_count+1;
-    //
-		// 	}
-		// }
-    //
-	 	// $sql = "SELECT * FROM user_master WHERE email_id ='".$username."' AND password = md5('".$password."')  AND status='Y'";
-		// $user_result = $this->db->query($sql);
-		// $ress = $user_result->result();
-		// if($user_result->num_rows()>0)
-		// {
-		// 	foreach ($user_result->result() as $rows)
-		// 	{
-		// 		  $user_id = $rows->id;
-		// 		  $login_count = $rows->login_count+1;
-		// 	}
-		// }
-
-
-
 
 		if ( $user_id != "") {
 
