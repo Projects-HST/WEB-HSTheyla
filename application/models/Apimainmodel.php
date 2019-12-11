@@ -407,7 +407,7 @@ class Apimainmodel extends CI_Model {
     				return $response;
 		} else {
 
-					$response = array("status" => "Error", "msg" => "Account Deactivated");
+					$response = array("status" => "Error", "msg" => "Invalid credentials!");
 					return $response;
 		}
 
