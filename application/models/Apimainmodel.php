@@ -204,6 +204,14 @@ class Apimainmodel extends CI_Model {
 		$ress = $user_result->result();
 		if($user_result->num_rows()>0)
 		{
+
+      $check_status="SELECT * FROM user_master WHERE email_id ='$email_id' AND status='N'";
+      $user_status = $this->db->query($check_status);
+      if($user_status->num_rows()==1){
+        $response = array("status" => "Error", "msg" => "Account Deactivated");
+        return $response;
+      }
+
 			foreach ($user_result->result() as $rows)
 			{
 			  $user_id = $rows->id;
