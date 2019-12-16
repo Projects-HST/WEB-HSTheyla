@@ -86,14 +86,14 @@ class Home extends CI_Controller {
 			$this->load->view('front_header');
 			$this->load->view('signin', $datas);
 			$this->load->view('front_footer');
+/* 			$this->session->set_flashdata('');  
+			$this->session->unset_userdata($datas);
+			$this->session->sess_destroy(); */
 		}
-
-
-
 	}
+
 	public function signup()
 	{
-
 		$datas=$this->session->userdata();
 		$user_id=$this->session->userdata('id');
 		$user_role=$this->session->userdata('user_role');
@@ -107,6 +107,9 @@ class Home extends CI_Controller {
 			$this->load->view('front_header');
 			$this->load->view('signup', $datas);
 			$this->load->view('front_footer');
+			$this->session->set_flashdata('');  
+			$this->session->unset_userdata($datas);
+			$this->session->sess_destroy();
 		}
 
 
