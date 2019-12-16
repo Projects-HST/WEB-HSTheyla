@@ -198,46 +198,26 @@ class Apimainmodel extends CI_Model {
 	    $city_name = '';
 
 		//	$sql = "SELECT * FROM user_master WHERE user_name ='".$username."' AND password = md5('".$password."') AND mobile_verify ='Y' AND email_verify ='Y' AND status='Y'";
-	 	$sql = "SELECT * FROM user_master WHERE (user_name='$username' OR mobile_no='$username' OR email_id='$username') AND password = md5('".$password."')  AND status='Y'";
+	   $sql = "SELECT * FROM user_master WHERE (user_name='$username' OR mobile_no='$username' OR email_id='$username') AND password = md5('".$password."')";
 
 		$user_result = $this->db->query($sql);
 		$ress = $user_result->result();
 		if($user_result->num_rows()>0)
 		{
+
+       $check_status="SELECT * FROM user_master WHERE(user_name='$username' OR mobile_no='$username' OR email_id='$username') AND status='N'";
+      $user_status = $this->db->query($check_status);
+      if($user_status->num_rows()==1){
+        $response = array("status" => "Error", "msg" => "Account Deactivated");
+        return $response;
+      }
+
 			foreach ($user_result->result() as $rows)
 			{
 			  $user_id = $rows->id;
 			  $login_count = $rows->login_count+1;
 			}
 		}
-
-		// $sql = "SELECT * FROM user_master WHERE mobile_no ='".$username."' AND password = md5('".$password."') AND mobile_verify ='Y' AND status='Y'";
-		// $user_result = $this->db->query($sql);
-		// $ress = $user_result->result();
-		// if($user_result->num_rows()>0)
-		// {
-		// 	foreach ($user_result->result() as $rows)
-		// 	{
-		// 		  $user_id = $rows->id;
-		// 		  $login_count = $rows->login_count+1;
-    //
-		// 	}
-		// }
-    //
-	 	// $sql = "SELECT * FROM user_master WHERE email_id ='".$username."' AND password = md5('".$password."')  AND status='Y'";
-		// $user_result = $this->db->query($sql);
-		// $ress = $user_result->result();
-		// if($user_result->num_rows()>0)
-		// {
-		// 	foreach ($user_result->result() as $rows)
-		// 	{
-		// 		  $user_id = $rows->id;
-		// 		  $login_count = $rows->login_count+1;
-		// 	}
-		// }
-
-
-
 
 		if ( $user_id != "") {
 
@@ -399,7 +379,7 @@ class Apimainmodel extends CI_Model {
     				return $response;
 		} else {
 
-					$response = array("status" => "Error", "msg" => "Incorrect credentials!");
+					$response = array("status" => "Error", "msg" => "Invalid credentials!");
 					return $response;
 		}
 
@@ -424,18 +404,26 @@ class Apimainmodel extends CI_Model {
             $signup_type = "gplus_signup";
         }
 
-		$sql = "SELECT * FROM user_master WHERE email_id ='".$email_id."' AND status='Y'";
+		$sql = "SELECT * FROM user_master WHERE email_id ='".$email_id."'";
 		$user_result = $this->db->query($sql);
 		$ress = $user_result->result();
 		if($user_result->num_rows()>0)
 		{
+
+      $check_status="SELECT * FROM user_master WHERE email_id ='$email_id' AND status='N'";
+      $user_status = $this->db->query($check_status);
+      if($user_status->num_rows()==1){
+        $response = array("status" => "Error", "msg" => "Account Deactivated");
+        return $response;
+      }
+
 			foreach ($user_result->result() as $rows)
 			{
 				  $user_id = $rows->id;
 				  $login_count = $rows->login_count+1;
 			}
 
-            $activity_sql = "INSERT INTO user_activity (date,user_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $login_mode . "')";
+        $activity_sql = "INSERT INTO user_activity (date,user_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $login_mode . "')";
     		$insert_activity = $this->db->query($activity_sql);
 
 		} else {
@@ -2348,7 +2336,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 
 					$session_seats = "INSERT INTO booking_session (session_expiry,order_id,plan_time_id,number_of_seats,status) VALUES ('". $_SESSION['booking_expire'] . "','". $order_id . "','". $plan_time_id . "','". $number_of_seats . "','Start')";
 					$session_insert = $this->db->query($session_seats);
-					
+
 					$response = array("status" => "success", "msg" => "Bookingprocess");
 				} else {
 					$response = array("status" => "success", "msg" => "Seat Error");
@@ -2367,7 +2355,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
             $_SESSION['booking_expire'] = $_SESSION['booking_start'] + (300) ; // ending a session in 10mins
 
 		     $session_seats = "INSERT INTO booking_session (session_expiry,order_id,plan_time_id,number_of_seats,status) VALUES ('". $_SESSION['booking_expire'] . "','". $order_id . "','". $plan_time_id . "','". $number_of_seats . "','Start')";
-		    $session_insert = $this->db->query($session_seats); 
+		    $session_insert = $this->db->query($session_seats);
 
         	$response = array("status" => "success", "msg" => "Bookingprocess");
 			return $response;*/
