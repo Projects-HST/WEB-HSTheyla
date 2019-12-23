@@ -1,4 +1,5 @@
 <?php
+	date_default_timezone_set('Asia/Kolkata');
 	header("Pragma: no-cache");
 	header("Cache-Control: no-cache");
 	header("Expires: 0");
