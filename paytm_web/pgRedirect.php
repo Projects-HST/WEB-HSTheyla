@@ -24,7 +24,7 @@ $paramList["INDUSTRY_TYPE_ID"] = $INDUSTRY_TYPE_ID;
 $paramList["CHANNEL_ID"] = $CHANNEL_ID;
 $paramList["TXN_AMOUNT"] = $TXN_AMOUNT;
 $paramList["WEBSITE"] = PAYTM_MERCHANT_WEBSITE;
-$paramList["CALLBACK_URL"] = "https://heylaapp.com/testing/paytm_web/TxnStatus.php?ORDER_ID=".$ORDER_ID;
+$paramList["CALLBACK_URL"] = "https://heylaapp.com/paytm_web/TxnStatus.php?ORDER_ID=".$ORDER_ID;
 
 // $paramList["CALLBACK_URL"] = "http://localhost/PaytmKit/pgResponse.php";
 // $paramList["MSISDN"] = $MSISDN; //Mobile number of customer
@@ -32,12 +32,8 @@ $paramList["CALLBACK_URL"] = "https://heylaapp.com/testing/paytm_web/TxnStatus.p
 // $paramList["VERIFIED_BY"] = "EMAIL"; //
 // $paramList["IS_USER_VERIFIED"] = "YES"; //
 
-
-//print_r ($paramList);
 //Here checksum string will return by getChecksumFromArray() function.
 $checkSum = getChecksumFromArray($paramList,PAYTM_MERCHANT_KEY);
-//echo $checkSum;
-//exit;/
 ?>
 <html>
 <head>

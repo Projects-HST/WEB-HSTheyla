@@ -50,13 +50,12 @@
         $result = explode("-", $string);
         $order_id=$result[0];  
         $user_id= $result[1];
-    
-    
+
         $sQuery = "SELECT * FROM user_master WHERE id='" .$user_id. "'";
-        $objRs = mysql_query($sQuery);
-            if (mysql_num_rows($objRs)> 0)
+        $objRs = mysqli_query($con,$sQuery);
+            if (mysqli_num_rows($objRs)> 0)
         	{
-        		while ($row = mysql_fetch_array($objRs))
+        		while ($row = mysqli_fetch_array($objRs))
         		{
         		    $id = trim($row['id']);
         		    $user_name = trim($row['user_name']) ;
@@ -69,13 +68,13 @@
         $_SESSION['userdata'] = $data;
 
     
-    $sQuery = "SELECT * FROM booking_status_paytm WHERE order_id ='" .$ORDERID. "'";
-    $objRs = mysql_query($sQuery);
-            if (mysql_num_rows($objRs) == 0)
+        $sQuery = "SELECT * FROM booking_status_paytm WHERE order_id ='" .$ORDERID. "'";
+        $objRs = mysqli_query($con,$sQuery);
+            if (mysqli_num_rows($objRs) == 0)
         	{
         	
         	$sQuery = "INSERT INTO booking_status_paytm (order_id,user_id,track_id,bank_trans_id,amount,order_status,trans_type,gateway,resp_code,resp_msg,bank_name,mid,payment_mode,refunt_amt, trans_date) VALUES ('$ORDERID','$user_id','$TXNID','$BANKTXNID','$TXNAMOUNT','$STATUS','$TXNTYPE','$GATEWAYNAME','$RESPCODE','$RESPMSG','$BANKNAME','$MID','$PAYMENTMODE','$REFUNDAMT','$TXNDATE')";
-		    $objRs  = mysql_query($sQuery) or die("Could not select Query ");
+		    $objRs = mysqli_query($con,$sQuery);
     
             $sQuery = "SELECT
                         A.*,
@@ -90,10 +89,10 @@
                         booking_plan_timing D
                     WHERE
                         A.user_id = B.id AND A.plan_id = C.id AND A.plan_time_id = D.id AND A.order_id = '" .$ORDERID. "'";
-            $objRs = mysql_query($sQuery);
-            if (mysql_num_rows($objRs)> 0)
+            $objRs = mysqli_query($con,$sQuery);
+            if (mysqli_num_rows($objRs)> 0)
             	{
-            		while ($row = mysql_fetch_array($objRs))
+            		while ($row = mysqli_fetch_array($objRs))
             		{
             			$order_id = trim($row['order_id']) ;
             			$event_id = trim($row['event_id']) ;
@@ -113,10 +112,10 @@
                 }
          
             $sQuery = "SELECT A.id,A.event_name, A.created_by,B.id AS user_id, B.email_id,B.mobile_no FROM events A,user_master B WHERE A.created_by = B.id AND A.id   = '" .$event_id. "'";
-            $objRs = mysql_query($sQuery);
-                if (mysql_num_rows($objRs)> 0)
+            $objRs = mysqli_query($con,$sQuery);
+                if (mysqli_num_rows($objRs)> 0)
             	{
-            		while ($row = mysql_fetch_array($objRs))
+            		while ($row = mysqli_fetch_array($objRs))
             		{
             		    $event_name = trim($row['event_name']) ;
             			$created_email = trim($row['email_id']) ;
@@ -128,33 +127,14 @@
     	    if($STATUS=="TXN_SUCCESS")
     	    {
 				
-				$sQuery = "SELECT * FROM booking_session WHERE order_id = '" .$order_id. "' AND session_expiry <= '" .$current_time. "' AND status = 'Expiry' ";
-				$objRs = mysql_query($sQuery);
-                if (mysql_num_rows($objRs)== 0)
+				$sQuery = "SELECT * FROM booking_session WHERE order_id = '" .$order_id. "' AND session_expiry <= '" .$current_time. "' AND status = 'Expiry'";
+				$objRs = mysqli_query($con,$sQuery);
+                if (mysqli_num_rows($objRs)== 0)
             	{
 					$enc_order_id = base64_encode($order_id);
 					$sbooking_date = date("d-m-Y", strtotime($booking_date));
 					$transaction_date = date("d-m-Y H:i:s"); 
 					$subject = "Heyla App Ticket Booking";
-					
-					$email_message ='<html>
-									 <body>
-										<p>Hi,</p>
-										<p>Bravo!</p>
-										<p>Your booking for '.$event_name.' has been confirmed. </p>
-										<p>Booking ID : '.$order_id.'</p>
-										<p>Event name : '.$event_name.'</p>
-										<p>Ticket : '.$plan_name.'</p>
-										<p>Seats : '.$number_of_seats.'</p>
-										<p>Event Date and time : '.$sbooking_date.' '.$show_time.'</p>
-										<p>Transaction date and time : '.$transaction_date.'</p>
-										<p>Find more details on  <a href="https://goo.gl/A6DGuZ">login</a></p>
-										<p>We wish you to make Cheerful Memories with each event!<br>Or<br>We wish you for an event that is memorable and enjoyable!</p>
-										<p>Regards,<br>Team Heyla</p>
-									 </body>
-									 </html>';
-/*
-
 					$email_message ='<html>
 									 <body>
 										<p>Order Id : '.$order_id.'</p>
@@ -166,7 +146,7 @@
 										<p>More detail please <a href="https://goo.gl/A6DGuZ">login</a></p>
 									 </body>
 									 </html>';
-*/
+					
 					
 					$Message = "Hi Customer, Booking Id : ".$order_id. "Seats : ".$plan_name."," .$number_of_seats." for ".$event_name." on ".$sbooking_date." ".$show_time.". Transaction Date : ".$transaction_date." More detail https://goo.gl/A6DGuZ";
 				  //Your authentication key
@@ -224,8 +204,8 @@
 					curl_close($ch);
 					
 					
-					$sender_emails = $created_email.','.$user_email;
-					
+					 $sender_emails = $created_email.','.$user_email;
+		
 					// Set content-type header for sending HTML email
 					$headers = "MIME-Version: 1.0" . "\r\n";
 					$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
@@ -234,18 +214,19 @@
 					mail($sender_emails,$subject,$email_message,$headers);
 					
 					
+					$objRs = mysqli_query($con,$sQuery);
 					$sQuery = "INSERT INTO booking_history (order_id,event_id,plan_id,plan_time_id,user_id,number_of_seats,booking_date,total_amount,payment_gateway,created_at) VALUES ('". $order_id . "','". $event_id . "','". $plan_id . "','". $plan_time_id . "','". $user_id . "','". $number_of_seats . "','". $booking_date . "','". $total_amount . "','Paytm','". $created_at . "')";
-					$insert_query = mysql_query($sQuery) or die("Could not select Query ");
+					$insert_query = mysqli_query($con,$sQuery) or die("Could not select Query ");
 					
 					$activity_sql = "INSERT INTO user_activity (date,user_id,event_id,rule_id,activity_detail) VALUES (NOW(),'". $user_id . "','". $event_id . "','5','Booking')";
-					$insert_activity = mysql_query($activity_sql) or die("Could not select Query ");
+					$insert_activity = mysqli_query($con,$activity_sql) or die("Could not select Query ");
 					
 					$activity_points = "UPDATE user_points_count SET booking_count  = booking_count+1,booking_points=booking_points+20,total_points=total_points+20 WHERE user_id ='$user_id'";
-					$insert_points = mysql_query($activity_points) or die("Could not select Query ");
+					$insert_points = mysqli_query($con,$activity_points) or die("Could not select Query ");
 					
 					header("Location: https://heylaapp.com/home/eventattendees/".$enc_order_id."");
 				} else {
-					$enc_order_id = base64_encode($order_id);
+				    $enc_order_id = base64_encode($order_id);
 					header("Location: https://heylaapp.com/home/paymentrefund/".$enc_order_id."");
 				}
  

@@ -1,17 +1,29 @@
 <?php
 
-function encrypt_e($input, $ky){
-	$ky   = html_entity_decode($ky);
+function encrypt_e($input, $ky) {
+	$key   = html_entity_decode($ky);
 	$iv = "@@@@&&&&####$$$$";
-	$data = openssl_encrypt ( $input , "AES-128-CBC" , $ky, 0, $iv );
+	$data = openssl_encrypt ( $input , "AES-128-CBC" , $key, 0, $iv );
 	return $data;
 }
 
-function decrypt_e($crypt, $ky){
-	$ky   = html_entity_decode($ky);
+function decrypt_e($crypt, $ky) {
+	$key   = html_entity_decode($ky);
 	$iv = "@@@@&&&&####$$$$";
-	$data = openssl_decrypt ( $crypt , "AES-128-CBC" , $ky, 0, $iv );
+	$data = openssl_decrypt ( $crypt , "AES-128-CBC" , $key, 0, $iv );
 	return $data;
+}
+
+function pkcs5_pad_e($text, $blocksize) {
+	$pad = $blocksize - (strlen($text) % $blocksize);
+	return $text . str_repeat(chr($pad), $pad);
+}
+
+function pkcs5_unpad_e($text) {
+	$pad = ord($text{strlen($text) - 1});
+	if ($pad > strlen($text))
+		return false;
+	return substr($text, 0, -1 * $pad);
 }
 
 function generateSalt_e($length) {
@@ -154,7 +166,7 @@ function getTxnStatusNew($requestParamList) {
 }
 
 function initiateTxnRefund($requestParamList) {
-	$CHECKSUM = getChecksumFromArray($requestParamList,PAYTM_MERCHANT_KEY,0);
+	$CHECKSUM = getRefundChecksumFromArray($requestParamList,PAYTM_MERCHANT_KEY,0);
 	$requestParamList["CHECKSUM"] = $CHECKSUM;
 	return callAPI(PAYTM_REFUND_URL, $requestParamList);
 }

@@ -1,17 +1,44 @@
 <?php
 
-function encrypt_e($input, $ky){
-	$ky   = html_entity_decode($ky);
+function encrypt_e($input, $ky) {
+	$key = $ky;
+	$size = mcrypt_get_block_size(MCRYPT_RIJNDAEL_128, 'cbc');
+	$input = pkcs5_pad_e($input, $size);
+	$td = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', 'cbc', '');
 	$iv = "@@@@&&&&####$$$$";
-	$data = openssl_encrypt ( $input , "AES-128-CBC" , $ky, 0, $iv );
+	mcrypt_generic_init($td, $key, $iv);
+	$data = mcrypt_generic($td, $input);
+	mcrypt_generic_deinit($td);
+	mcrypt_module_close($td);
+	$data = base64_encode($data);
 	return $data;
 }
 
-function decrypt_e($crypt, $ky){
-	$ky   = html_entity_decode($ky);
+function decrypt_e($crypt, $ky) {
+
+	$crypt = base64_decode($crypt);
+	$key = $ky;
+	$td = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', 'cbc', '');
 	$iv = "@@@@&&&&####$$$$";
-	$data = openssl_decrypt ( $crypt , "AES-128-CBC" , $ky, 0, $iv );
-	return $data;
+	mcrypt_generic_init($td, $key, $iv);
+	$decrypted_data = mdecrypt_generic($td, $crypt);
+	mcrypt_generic_deinit($td);
+	mcrypt_module_close($td);
+	$decrypted_data = pkcs5_unpad_e($decrypted_data);
+	$decrypted_data = rtrim($decrypted_data);
+	return $decrypted_data;
+}
+
+function pkcs5_pad_e($text, $blocksize) {
+	$pad = $blocksize - (strlen($text) % $blocksize);
+	return $text . str_repeat(chr($pad), $pad);
+}
+
+function pkcs5_unpad_e($text) {
+	$pad = ord($text{strlen($text) - 1});
+	if ($pad > strlen($text))
+		return false;
+	return substr($text, 0, -1 * $pad);
 }
 
 function generateSalt_e($length) {
