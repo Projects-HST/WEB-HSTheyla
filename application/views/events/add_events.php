@@ -12,9 +12,9 @@
 	curl_close($ch);
 	// Decode JSON response:
 	$api_result = json_decode($json, true);
-	echo $country=$api_result['country_name'];
-	echo $country=$api_result['latitude'];
-	echo $country=$api_result['longitude'];
+	 $country=$api_result['country_name'];
+	 $slatitude=$api_result['latitude'];
+	 $slongitude=$api_result['longitude'];
 ?>
 <script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
 <link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
@@ -258,7 +258,7 @@
 
 	 window.onload = function () {
 		var mapOptions = {
-					center: new google.maps.LatLng(1.3521, 103.8198),
+					center: new google.maps.LatLng(<?php echo  $slatitude; ?>, <?php echo $slongitude;),
 					zoom:10,
 					mapTypeId: google.maps.MapTypeId.ROADMAP
 				};
