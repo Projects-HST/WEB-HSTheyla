@@ -410,9 +410,9 @@ class Apimainmodel extends CI_Model {
 		if($user_result->num_rows()>0)
 		{
 
-      $check_status="SELECT * FROM user_master WHERE email_id ='$email_id' AND status='N'";
+    $check_status="SELECT * FROM user_master WHERE email_id ='$email_id' AND status='N'";
       $user_status = $this->db->query($check_status);
-      if($user_status->num_rows()==1){
+      if($user_status->num_rows()>=1){
         $response = array("status" => "Error", "msg" => "Account Deactivated");
         return $response;
       }
@@ -767,6 +767,20 @@ class Apimainmodel extends CI_Model {
 
 
 //#################### Resend OTP End ####################//
+
+  function account_deactive($user_id){
+
+    $update_sql = "UPDATE user_master SET status = 'N' WHERE id='$user_id'";
+    $update_result = $this->db->query($update_sql);
+    if($update_result){
+      $response = array("status" => "Success", "msg" => "Account Deactivated Successfully");
+    } else {
+        $response = array("status" => "Error", "msg" => "Something Went Wrong!");
+    }
+      return $response;
+
+
+  }
 
 
 //#################### Update Mobile ####################//
