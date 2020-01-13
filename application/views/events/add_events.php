@@ -2,7 +2,7 @@
   	$dateTime = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
 	$current_time = $dateTime->format("h:i A");
 	
-		/* $ip=$_SERVER['REMOTE_ADDR'];
+		$ip=$_SERVER['REMOTE_ADDR'];
 		$access_key = 'ed4a0ff6cd906632c411e531777136e5';
 		// Initialize CURL:
 		$ch = curl_init('http://api.ipstack.com/'.$ip.'?access_key='.$access_key.'');
@@ -14,47 +14,15 @@
 		$api_result = json_decode($json, true);
 		echo $country=$api_result['country_name'];
 		
-		$details_url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$country."&sensor=false";
-		curl_init();
-curl_setopt($ch, CURLOPT_URL, $details_url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-$response = json_decode(curl_exec($ch), true);
+$geocode_stats = file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?address=india&sensor=false");
 
-// If Status Code is ZERO_RESULTS, OVER_QUERY_LIMIT, REQUEST_DENIED or INVALID_REQUEST
-if ($response['status'] != 'OK') {
-	return null;
-}
+$output_deals = json_decode($geocode_stats);
 
-//print_r($response);
-//print_r($response['results'][0]['geometry']['location']);
+$latLng = $output_deals->results[0]->geometry->location;
 
-$latLng = $response['results'][0]['geometry']['location'];
-
-echo $lat = $latLng['lat'];
-echo $lng = $latLng['lng'];	 */
+$lat = $latLng->lat;
+$lng = $latLng->lng;	
 ?>
-<form id="form1" runat="server">
-<div>
-    <script type="text/javascript" src="http://j.maxmind.com/app/geoip.js" ></script>
-    <br />Country Code:
-    <script type="text/javascript">document.write(geoip_country_code());</script>
-    <br />Country Name:
-    <script type="text/javascript">document.write(geoip_country_name());</script>
-    <br />City:
-    <script type="text/javascript">document.write(geoip_city());</script>
-    <br />Region:
-    <script type="text/javascript">document.write(geoip_region());</script>
-    <br />Region Name:
-    <script type="text/javascript">document.write(geoip_region_name());</script>
-    <br />Latitude:
-    <script type="text/javascript">document.write(geoip_latitude());</script>
-    <br />Longitude:
-    <script type="text/javascript">document.write(geoip_longitude());</script>
-    <br />Postal Code:
-    <script type="text/javascript">document.write(geoip_postal_code());</script>
-
-</div>
-</form>
 <script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
 <link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
 
