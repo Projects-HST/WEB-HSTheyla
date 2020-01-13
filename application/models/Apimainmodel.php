@@ -770,7 +770,7 @@ class Apimainmodel extends CI_Model {
 
   function account_deactive($user_id){
 
-    $update_sql = "UPDATE user_master SET status = 'N' WHERE id='$user_id'";
+    $update_sql = "UPDATE user_master SET status = 'N',updated_by='$user_id' WHERE id='$user_id'";
     $update_result = $this->db->query($update_sql);
     if($update_result){
       $response = array("status" => "Success", "msg" => "Account Deactivated Successfully");
