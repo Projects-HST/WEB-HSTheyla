@@ -298,7 +298,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 
 	 window.onload = function () {
 		var mapOptions = {
-					center: new google.maps.LatLng(1.3521, 103.8198),
+					center: new google.maps.LatLng(<?php echo $rows->event_latitude; ?>, <?php echo $rows->event_longitude; ?>),
 					zoom:12,
 					mapTypeId: google.maps.MapTypeId.ROADMAP
 				};
