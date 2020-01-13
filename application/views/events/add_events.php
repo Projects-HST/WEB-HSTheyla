@@ -24,7 +24,7 @@ print_r(get_lat_long($address));
 // function to get  the address
 function get_lat_long($address) {
    $array = array();
-   $geo = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($country).'&sensor=false');
+   $geo = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($address).'&sensor=false');
 
    // We convert the JSON to an array
    $geo = json_decode($geo, true);
