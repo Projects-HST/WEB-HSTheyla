@@ -2,7 +2,7 @@
   	$dateTime = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
 	$current_time = $dateTime->format("h:i A");
 	
-		$ip=$_SERVER['REMOTE_ADDR'];
+		/* $ip=$_SERVER['REMOTE_ADDR'];
 		$access_key = 'ed4a0ff6cd906632c411e531777136e5';
 		// Initialize CURL:
 		$ch = curl_init('http://api.ipstack.com/'.$ip.'?access_key='.$access_key.'');
@@ -31,8 +31,15 @@ if ($response['status'] != 'OK') {
 $latLng = $response['results'][0]['geometry']['location'];
 
 echo $lat = $latLng['lat'];
-echo $lng = $latLng['lng'];	
+echo $lng = $latLng['lng'];	 */
 ?>
+<script type="text/javascript" src="http://j.maxmind.com/app/geoip.js" ></script>
+	Region Name:
+    <script type="text/javascript">document.write(geoip_region_name());</script>
+    <br />Latitude:
+    <script type="text/javascript">document.write(geoip_latitude());</script>
+    <br />Longitude:
+    <script type="text/javascript">document.write(geoip_longitude());</script>
 <script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
 <link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
 
