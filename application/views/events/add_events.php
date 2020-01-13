@@ -14,14 +14,32 @@
 		$api_result = json_decode($json, true);
 		echo $country=$api_result['country_name'];
 		
-$geocode_stats = file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?address=india&sensor=false");
 
-$output_deals = json_decode($geocode_stats);
 
-$latLng = $output_deals->results[0]->geometry->location;
+// We define our address
+$address = 'Indore, MP 452001';
+echo"<PRE>";
+print_r(get_lat_long($address));
 
-$lat = $latLng->lat;
-$lng = $latLng->lng;	
+// function to get  the address
+function get_lat_long($address) {
+   $array = array();
+   $geo = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($country).'&sensor=false');
+
+   // We convert the JSON to an array
+   $geo = json_decode($geo, true);
+
+   // If everything is cool
+   if ($geo['status'] = 'OK') {
+      $latitude = $geo['results'][0]['geometry']['location']['lat'];
+      $longitude = $geo['results'][0]['geometry']['location']['lng'];
+      $array = array('lat'=> $latitude ,'lng'=>$longitude);
+   }
+
+   return $array;
+}
+
+
 ?>
 <script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
 <link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
