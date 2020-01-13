@@ -260,8 +260,8 @@
 
    window.onload = function () {
     var mapOptions = {
-                center: new google.maps.LatLng(1.3521, 103.8198),
-                zoom:10,
+                center: new google.maps.LatLng(<?php echo $rows->event_latitude; ?>, <?php echo $rows->event_longitude; ?>),
+                zoom:8,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
             var infoWindow = new google.maps.InfoWindow();
