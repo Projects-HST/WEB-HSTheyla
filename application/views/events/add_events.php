@@ -33,13 +33,28 @@ $latLng = $response['results'][0]['geometry']['location'];
 echo $lat = $latLng['lat'];
 echo $lng = $latLng['lng'];	 */
 ?>
-<script type="text/javascript" src="http://j.maxmind.com/app/geoip.js" ></script>
-	Region Name:
+<form id="form1" runat="server">
+<div>
+    <script type="text/javascript" src="http://j.maxmind.com/app/geoip.js" ></script>
+    <br />Country Code:
+    <script type="text/javascript">document.write(geoip_country_code());</script>
+    <br />Country Name:
+    <script type="text/javascript">document.write(geoip_country_name());</script>
+    <br />City:
+    <script type="text/javascript">document.write(geoip_city());</script>
+    <br />Region:
+    <script type="text/javascript">document.write(geoip_region());</script>
+    <br />Region Name:
     <script type="text/javascript">document.write(geoip_region_name());</script>
     <br />Latitude:
     <script type="text/javascript">document.write(geoip_latitude());</script>
     <br />Longitude:
     <script type="text/javascript">document.write(geoip_longitude());</script>
+    <br />Postal Code:
+    <script type="text/javascript">document.write(geoip_postal_code());</script>
+
+</div>
+</form>
 <script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
 <link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
 
