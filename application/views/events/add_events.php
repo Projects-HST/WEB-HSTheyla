@@ -1,6 +1,18 @@
 <?php
   	$dateTime = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
 	$current_time = $dateTime->format("h:i A");
+	
+		$ip=$_SERVER['REMOTE_ADDR'];
+		$access_key = 'ed4a0ff6cd906632c411e531777136e5';
+		// Initialize CURL:
+		$ch = curl_init('http://api.ipstack.com/'.$ip.'?access_key='.$access_key.'');
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		// Store the data:
+		$json = curl_exec($ch);
+		curl_close($ch);
+		// Decode JSON response:
+		$api_result = json_decode($json, true);
+		echo $country=$api_result['country_name'];
 ?>
 <script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
 <link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
