@@ -57,7 +57,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
     <div class="card m-b-20">
         <div class="card-block">
          
-     	<h4 class="mt-0 header-title">Create Events</h4>
+     	<h4 class="mt-0 header-title">Create Events 123</h4>
 
       <?php if($this->session->flashdata('msg')): ?>
             <div class="alert alert-success">
