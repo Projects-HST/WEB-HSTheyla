@@ -352,7 +352,7 @@
    
     window.onload = function () {
 var mapOptions = {
-    center: new google.maps.LatLng(20.5937, 78.9629),
+    center: new google.maps.LatLng(<?php echo $rows->event_latitude; ?>, <?php echo $rows->event_longitude; ?>),
     zoom:4,
     mapTypeId: google.maps.MapTypeId.ROADMAP
 };

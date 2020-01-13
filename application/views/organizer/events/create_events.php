@@ -1,17 +1,31 @@
 <?php
 function get_times( $default = '10:00', $interval = '+15 minutes' ) 
 {
-$output = '';
-$current = strtotime( '00:00:00' );
-$end = strtotime( '23:59:00' );
-while( $current <= $end ) {
-$time = date( 'H:i:s', $current );
-$sel = ( $time == $default ) ? ' selected' : '';
-$output .= "<option value=\"{$time}\">" . date( 'h.i A', $current ) .'</option>';
-$current = strtotime( $interval, $current );
+	$output = '';
+	$current = strtotime( '00:00:00' );
+	$end = strtotime( '23:59:00' );
+	while( $current <= $end ) {
+		$time = date( 'H:i:s', $current );
+		$sel = ( $time == $default ) ? ' selected' : '';
+		$output .= "<option value=\"{$time}\">" . date( 'h.i A', $current ) .'</option>';
+		$current = strtotime( $interval, $current );
+	}
+	return $output;
 }
-return $output;
-}
+
+	$ip=$_SERVER['REMOTE_ADDR'];
+	$access_key = 'ed4a0ff6cd906632c411e531777136e5';
+	// Initialize CURL:
+	$ch = curl_init('http://api.ipstack.com/'.$ip.'?access_key='.$access_key.'');
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	// Store the data:
+	$json = curl_exec($ch);
+	curl_close($ch);
+	// Decode JSON response:
+	$api_result = json_decode($json, true);
+	 $country=$api_result['country_name'];
+	 $slatitude=$api_result['latitude'];
+	 $slongitude=$api_result['longitude'];
 ?>
 <script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
 <link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
@@ -316,7 +330,7 @@ return $output;
    
 window.onload = function () {
 var mapOptions = {
-    center: new google.maps.LatLng(20.5937, 78.9629),
+    center: new google.maps.LatLng(<?php echo  $slatitude; ?>, <?php echo $slongitude;?>),,
     zoom:4,
     mapTypeId: google.maps.MapTypeId.ROADMAP
 };
