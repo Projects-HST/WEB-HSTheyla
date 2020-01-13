@@ -13,6 +13,25 @@
 		// Decode JSON response:
 		$api_result = json_decode($json, true);
 		echo $country=$api_result['country_name'];
+		
+		$details_url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$country."&sensor=false";
+		curl_init();
+curl_setopt($ch, CURLOPT_URL, $details_url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+$response = json_decode(curl_exec($ch), true);
+
+// If Status Code is ZERO_RESULTS, OVER_QUERY_LIMIT, REQUEST_DENIED or INVALID_REQUEST
+if ($response['status'] != 'OK') {
+	return null;
+}
+
+//print_r($response);
+//print_r($response['results'][0]['geometry']['location']);
+
+$latLng = $response['results'][0]['geometry']['location'];
+
+echo $lat = $latLng['lat'];
+echo $lng = $latLng['lng'];	
 ?>
 <script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
 <link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
