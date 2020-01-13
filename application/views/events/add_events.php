@@ -2,44 +2,19 @@
   	$dateTime = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
 	$current_time = $dateTime->format("h:i A");
 	
-		$ip=$_SERVER['REMOTE_ADDR'];
-		$access_key = 'ed4a0ff6cd906632c411e531777136e5';
-		// Initialize CURL:
-		$ch = curl_init('http://api.ipstack.com/'.$ip.'?access_key='.$access_key.'');
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		// Store the data:
-		$json = curl_exec($ch);
-		curl_close($ch);
-		// Decode JSON response:
-		$api_result = json_decode($json, true);
-		echo $country=$api_result['country_name'];
-		
-
-
-// We define our address
-$address = 'Indore, MP 452001';
-echo"<PRE>";
-print_r(get_lat_long($address));
-
-// function to get  the address
-function get_lat_long($address) {
-   $array = array();
-   $geo = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($address).'&sensor=false');
-
-   // We convert the JSON to an array
-   $geo = json_decode($geo, true);
-
-   // If everything is cool
-   if ($geo['status'] = 'OK') {
-      $latitude = $geo['results'][0]['geometry']['location']['lat'];
-      $longitude = $geo['results'][0]['geometry']['location']['lng'];
-      $array = array('lat'=> $latitude ,'lng'=>$longitude);
-   }
-
-   return $array;
-}
-
-
+	$ip=$_SERVER['REMOTE_ADDR'];
+	$access_key = 'ed4a0ff6cd906632c411e531777136e5';
+	// Initialize CURL:
+	$ch = curl_init('http://api.ipstack.com/'.$ip.'?access_key='.$access_key.'');
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	// Store the data:
+	$json = curl_exec($ch);
+	curl_close($ch);
+	// Decode JSON response:
+	$api_result = json_decode($json, true);
+	echo $country=$api_result['country_name'];
+	echo $country=$api_result['latitude'];
+	echo $country=$api_result['longitude'];
 ?>
 <script src="<?php echo base_url(); ?>assets/js/timepicki.js"></script>
 <link href="<?php echo base_url(); ?>assets/css/timepicki.css" rel="stylesheet" type="text/css">
