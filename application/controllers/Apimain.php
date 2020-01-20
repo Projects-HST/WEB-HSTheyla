@@ -293,6 +293,70 @@ class Apimain extends CI_Controller {
 	}
 
 //-----------------------------------------------//
+//-----------------------------------------------//
+
+	public function check_account_activate()
+	{
+
+	   $_POST = json_decode(file_get_contents("php://input"), TRUE);
+
+		if(!$this->checkMethod())
+		{
+			return FALSE;
+		}
+
+		if($_POST == FALSE)
+		{
+			$res = array();
+			$res["opn"] = "OTP Resend";
+			$res["scode"] = 204;
+			$res["message"] = "Input error";
+
+			echo json_encode($res);
+			return;
+		}
+
+		 $email_or_mobile = $this->input->post("email_or_mobile");
+
+		$data['result']=$this->apimainmodel->check_account_activate($email_or_mobile);
+		$response = $data['result'];
+		echo json_encode($response);
+	}
+
+//-----------------------------------------------//
+
+//-----------------------------------------------//
+
+	public function reactivate_account()
+	{
+
+	   $_POST = json_decode(file_get_contents("php://input"), TRUE);
+
+		if(!$this->checkMethod())
+		{
+			return FALSE;
+		}
+
+		if($_POST == FALSE)
+		{
+			$res = array();
+			$res["opn"] = "OTP Resend";
+			$res["scode"] = 204;
+			$res["message"] = "Input error";
+
+			echo json_encode($res);
+			return;
+		}
+
+		 $email_or_mobile = $this->input->post("email_or_mobile");
+		 $code = $this->input->post("code");
+
+		$data['result']=$this->apimainmodel->reactivate_account($email_or_mobile,$code);
+		$response = $data['result'];
+		echo json_encode($response);
+	}
+
+//-----------------------------------------------//
 
 //-----------------------------------------------//
 

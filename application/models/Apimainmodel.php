@@ -756,7 +756,7 @@ class Apimainmodel extends CI_Model {
 			}
 
 			$mobile_message = 'Dear user, Use the OTP '.$OTP.' to complete your registration.- Team Heyla';
-            $this->sendSMS($mobile_no,$mobile_message);
+      $this->sendSMS($mobile_no,$mobile_message);
 
 			$response = array("status" => "Success", "msg" => "OTP resent");
 		} else {
@@ -778,8 +778,67 @@ class Apimainmodel extends CI_Model {
         $response = array("status" => "Error", "msg" => "Something Went Wrong!");
     }
       return $response;
+  }
 
 
+  //#################### Check Account Activated ####################//
+
+  function check_account_activate($email_or_mobile){
+    $select_mobile="SELECT * FROM user_master WHERE (mobile_no='$email_or_mobile' or email_id='$email_or_mobile')";
+    $res_mobile= $this->db->query($select_mobile);
+    if($res_mobile->num_rows()==1){
+        $result=$res_mobile->result();
+          foreach($result as $rows_res){}
+        $check_user_deactivated="SELECT * FROM user_master WHERE (mobile_no='$email_or_mobile' or email_id='$email_or_mobile') AND updated_by='$rows_res->id' and status='N'";
+        $res_checked= $this->db->query($check_user_deactivated);
+        if($res_checked->num_rows()==1){
+          $digits = 4;
+          $OTP = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT);
+          $update="UPDATE user_master SET mobile_otp='$OTP' WHERE id='$rows_res->id'";
+          $excute=$this->db->query($update);
+          $email_id=$rows_res->email_id;
+            if($email_id == $email_or_mobile){
+              $subject = "Heyla User account activation";
+              $email_message = 'Hi,<br> Welcome! <br> You have requested to activated registered Heyla account use this code to <b>'.$OTP.'</b> to verify. <br><br> With love,<br> Team Heyla <br><br><br><br> <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.<small>';
+              $this->sendMail($email_id,$subject,$email_message);
+              $response = array("status" => "Success", "msg" => "Code has sent to mail  successfully");
+            }else{
+              $mobile_no=$rows_res->mobile_no;
+              $mobile_message = 'Dear user, Use the Code '.$OTP.' to complete your Activation.- Team Heyla';
+              $this->sendSMS($mobile_no,$mobile_message);
+              $response = array("status" => "Success", "msg" => "Code has sent to mobile number successfully");
+            }
+
+        }else{
+            $response = array("status" => "Error", "msg" => "Please Contact Heyla Team!.");
+        }
+
+    }else{
+        $response = array("status" => "Error", "msg" => "Something Went Wrong!");
+    }
+    return $response;
+  }
+
+
+
+//####################  Account Reactivate ####################//
+
+  function reactivate_account($email_or_mobile,$code){
+    $check_user_deactivated="SELECT * FROM user_master WHERE (mobile_no='$email_or_mobile' or email_id='$email_or_mobile') AND mobile_otp='$code' and status='N'";
+    $res_checked= $this->db->query($check_user_deactivated);
+    if($res_checked->num_rows()==1){
+        $update="UPDATE user_master SET status='Y' WHERE (mobile_no='$email_or_mobile' or email_id='$email_or_mobile')";
+
+        $excute=$this->db->query($update);
+        if($excute){
+          $response = array("status" => "success", "msg" => "Account activated successfully");
+        }else{
+            $response = array("status" => "Error", "msg" => "Something Went Wrong!");
+        }
+    }else{
+        $response = array("status" => "Error", "msg" => "Something Went Wrong!");
+    }
+      return $response;
   }
 
 
@@ -1119,7 +1178,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
     			}
 
 
-        			$update_sql = "UPDATE user_master SET mobile_otp = '$OTP', updated_by = '$user_id', updated_at =NOW() WHERE id='$user_id'";
+        			$update_sql = "UPDATE user_master SET mobile_otp = '$OTP', updated_at =NOW() WHERE id='$user_id'";
     			    $update_result = $this->db->query($update_sql);
             	$mobile_message = 'Hi,Use the OTP '.$OTP.' to reset your password.- Team Heyla';
               $this->sendSMS($mobile_no,$mobile_message);
