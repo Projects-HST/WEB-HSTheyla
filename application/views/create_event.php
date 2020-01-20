@@ -363,8 +363,8 @@ $(document).ready(function () {
          contact_person:{required:true },
          email:{required:true },
          event_status:{required:true },
-         txtLatitude:{required:true },
-         txtLongitude:{required:true },
+         txtLatitude:{required:true,number: true },
+         txtLongitude:{required:true,number: true },
 		 eventbanner:{required:true }
         },
 
@@ -393,8 +393,14 @@ $(document).ready(function () {
         contact_person:"Enter Name",
         email:"Enter Email",
         event_status:"Select Status",
-        txtLatitude:"Enter Latitude",
-        txtLongitude:"Enter Longitude",
+        txtLatitude:{
+          required:"This field cannot be empty!",
+		  number: "Decimal and Numbers Only"
+        },
+		txtLongitude:{
+          required:"This field cannot be empty!",
+		  number: "Decimal and Numbers Only"
+        },
 		eventbanner:{
           required:"Select banner",
           accept:"Please upload .jpg or .png .",
