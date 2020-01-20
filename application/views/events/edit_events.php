@@ -306,32 +306,30 @@
 
 		$('#eventform').validate({ // initialize the plugin
 		   rules: {
-				 category:{required:true },
-				 event_name:{required:true },
-				 country:{required:true },
-				 city:{required:true },
-				 venue:{required:true },
-				 address:{required:true },
-				 description:{required:true },
-				 eventcost:{required:true },
-				 start_date:{required:true },
-				 end_date:{required:true },
-				 start_time:{required:true },
-				 end_time:{required:true },
-         pcontact_cell:{required:true,digits:true,maxlength:12,minlength:8 },
-         scontact_cell:{required:false,digits:true,maxlength:12,minlength:8},
-				 contact_person:{required:true },
-				 email:{required:true },
-				 eadv_status:{required:true},
-				 hotspot_sts:{required:true},
-				 event_status:{required:true },
-         eventbanner:{required:false,accept: "jpg,jpeg,png", filesize: 1048576},
-				 txtLatitude:{required:true },
-				 txtLongitude:{required:true }
-
-				},
-
-				messages: {
+				category:{required:true },
+				event_name:{required:true },
+				country:{required:true },
+				city:{required:true },
+				venue:{required:true },
+				address:{required:true },
+				description:{required:true },
+				eventcost:{required:true },
+				start_date:{required:true },
+				end_date:{required:true },
+				start_time:{required:true },
+				end_time:{required:true },
+				pcontact_cell:{required:true,digits:true,maxlength:12,minlength:8 },
+				scontact_cell:{required:false,digits:true,maxlength:12,minlength:8},
+				contact_person:{required:true },
+				email:{required:true },
+				eadv_status:{required:true},
+				hotspot_sts:{required:true},
+				event_status:{required:true },
+				txtLatitude:{required:true,number: true },
+				txtLongitude:{required:true,number: true },
+				eventbanner:{required:false,accept: "jpg,jpeg,png", filesize: 1048576},
+			},
+			messages: {
 				category:"Select category",
 				event_name:"This field cannot be empty!",
 				country:"Select country",
@@ -344,26 +342,32 @@
 				end_date:"Select end date",
 				start_time:"Select start time",
 				end_time:"Select end time",
-        pcontact_cell:{
-          required:"This field cannot be empty!",
-          digits:"Only numbers",
-        },
-        scontact_cell:{
-          required:"This field cannot be empty!",
-          digits:"Only numbers",
-        },
+				pcontact_cell:{
+				  required:"This field cannot be empty!",
+				  digits:"Only numbers",
+				},
+				scontact_cell:{
+				  required:"This field cannot be empty!",
+				  digits:"Only numbers",
+				},
 				contact_person:"This field cannot be empty!",
 				eadv_status:"Selection required ",
 				hotspot_sts:"Selection required ",
 				email:"This field cannot be empty!",
 				event_status:"Select Status",
-				txtLatitude:"This field cannot be empty!",
-				txtLongitude:"This field cannot be empty!",
-        eventbanner:{
-          required:"Select banner",
-          accept:"Please upload .jpg or .png .",
-            fileSize:"File must be JPG or PNG, less than 1MB"
-        }
+				txtLatitude:{
+				  required:"This field cannot be empty!",
+				  number: "Decimal and Numbers Only"
+				},
+				txtLongitude:{
+				  required:"This field cannot be empty!",
+				  number: "Decimal and Numbers Only"
+				},
+				eventbanner:{
+					required:"Select banner",
+					accept:"Please upload .jpg or .png .",
+					fileSize:"File must be JPG or PNG, less than 1MB"
+				}
 				},
 			 });
    });
