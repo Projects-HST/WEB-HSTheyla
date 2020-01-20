@@ -916,9 +916,9 @@ class Home extends CI_Controller {
 			$user_id=$this->session->userdata('id');
 			$user_role=$this->session->userdata('user_role');
 			$mobile=$this->input->post('mobile');
-			if($user_role=='3'){
+			//if($user_role=='3'){
 				$datas['res']=$this->loginmodel->sendOTPmobilechange($mobile,$user_id);
-			}
+			//}
 		}
 		public function mobile_otp_update(){
 			$mobile=$this->input->post('mobile');
