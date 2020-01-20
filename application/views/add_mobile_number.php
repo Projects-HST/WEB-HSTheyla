@@ -28,7 +28,7 @@
 
 
         <div class="form-group">
-            <input type="text" class="form-control" id="mobile" name="mobile" required="" placeholder="Enter New Mobile Number " onkeyup="check_mobile()">
+            <input type="text" class="form-control" id="mobile" name="mobile" required="" placeholder="Enter New Mobile Number " onkeyup="check_mobile()" maxlength="12"> 
               <br><span><button onclick="sendOTP()" id="sendbtn">Send  OTP</button></span>
             <p id="mobilenum"></p>
         </div>
@@ -51,7 +51,7 @@
    $('#update_mobile_number').validate({ // initialize the plugin
        rules: {
          mobile : {
-            required: true,  maxlength : 10
+            required:true,digits:true,maxlength:12,minlength:8
           },
           mobileotp : {
              required: true,
@@ -59,15 +59,14 @@
                     url: "<?php echo base_url(); ?>home/checkotp",
                     type: "post"
                  }
-
            },
-
        },
        messages: {
-           mobile: {   required: "Enter  Mobile Number", maxlength: "Max is 10"},
+		   mobile:{
+				required:"This field cannot be empty!",
+				digits:"Only numbers",
+        },
             mobileotp: {   required: "Enter  OTP",remote:"You have enter invalid OTP "}
-
-
        },
        submitHandler: function(form) {
            //alert("hi");
@@ -80,7 +79,7 @@
                    if (response == "success") {
                      swal({
                 title: "Success",
-                text: " Mobile Number Has been Changed Successfully",
+                text: " Mobile number added successfully",
                 type: "success"
             }).then(function() {
                 location.href = '<?php echo base_url(); ?>profile';

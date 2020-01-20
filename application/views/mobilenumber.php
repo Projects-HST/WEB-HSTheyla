@@ -35,7 +35,7 @@
 
 
         <div class="form-group">
-            <input type="text" class="form-control" id="mobile" name="mobile" required="" placeholder="Enter New Mobile Number " >
+            <input type="text" class="form-control" id="mobile" name="mobile" required="" placeholder="Enter New Mobile Number" maxlength="12">
               <br><span><button onclick="sendOTP()" id="sendbtn">Send  OTP</button></span>
             <p id="mobilenum"></p>
         </div>
@@ -57,7 +57,7 @@
    $('#update_mobile_number').validate({ // initialize the plugin
        rules: {
          mobile : {
-           required: true,minlength: 10, maxlength: 10, digits: true,
+           required: true,minlength: 8, maxlength: 12, digits: true,
            remote: {
                   url: "<?php echo base_url(); ?>home/existmobile",
                   type: "post",  complete: function(data){
@@ -79,10 +79,8 @@
 
        },
        messages: {
-         mobile: { required:"Enter new mobile number", minlength: "Please check the number of digits!", maxlength: "Please check the number of digits!",remote:"Mobile number already exists!" },
-         mobileotp: {   required: "Enter  OTP",remote:"Invalid OTP"}
-
-
+         mobile: { required:"This field cannot be empty!", digits:"Only numbers",remote:"Mobile number already exists!" },
+         mobileotp: {   required: "Enter OTP",remote:"Invalid OTP"}
        },
        submitHandler: function(form) {
            //alert("hi");
