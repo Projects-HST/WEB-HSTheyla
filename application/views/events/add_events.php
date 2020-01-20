@@ -333,8 +333,8 @@
          scontact_cell:{required:false,digits:true,maxlength:12,minlength:8},
          contact_person:{required:true},
          email:{required:true },
-         event_status:{required:true },
-         txtLatitude:{required:true },
+         event_status:{required:true,digits:true },
+         txtLatitude:{required:true,digits:true },
          txtLongitude:{required:true },
 		 eventbanner:{required:true,accept: "jpg,jpeg,png", filesize: 1048576  }
         },
