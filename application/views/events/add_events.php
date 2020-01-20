@@ -333,9 +333,9 @@
          scontact_cell:{required:false,digits:true,maxlength:12,minlength:8},
          contact_person:{required:true},
          email:{required:true },
-         event_status:{required:true,digits:true },
-         txtLatitude:{required:true,digits:true },
-         txtLongitude:{required:true },
+         event_status:{required:true },
+         txtLatitude:{required:true,number: true },
+         txtLongitude:{required:true,number: true },
 		 eventbanner:{required:true,accept: "jpg,jpeg,png", filesize: 1048576  }
         },
 
@@ -368,8 +368,14 @@
 
         email:"This field cannot be empty!",
         event_status:"Select status",
-        txtLatitude:"This field cannot be empty!",
-        txtLongitude:"This field cannot be empty!",
+		txtLatitude:{
+          required:"This field cannot be empty!",
+		  number: "Decimal Numbers Only"
+        },
+		txtLongitude:{
+          required:"This field cannot be empty!",
+		  number: "Decimal Numbers Only"
+        },
 		eventbanner:{
           required:"Select banner",
           accept:"Please upload .jpg or .png .",
