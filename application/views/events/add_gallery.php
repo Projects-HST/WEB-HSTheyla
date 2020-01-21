@@ -71,8 +71,8 @@
                                  <td>
                                     <img src="<?php echo base_url(); ?>assets/events/gallery/<?php echo $rows->event_image; ?>" class="img-circle">
                                  </td>
-                                 <td> <a href="<?php echo base_url();?>events/delete_events_img/<?php echo $rows->id;?>/<?php echo $rows->eventid;?>">
-                              <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a></td>
+                                 <td> <a href="#" onclick="return confirm_remove(<?php echo $rows->id; ?>,<?php echo $rows->eventid;?>)">
+								<img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png" ></a></td>
                               </tr>
                              <?php $i++;  }  ?>
                            </tbody>
@@ -118,5 +118,23 @@
                },
          });
    });
+
+
+function confirm_remove(id,eventid){
+  swal({
+      title: '',
+      text: "Are you sure want to remove?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+  }).then(function(){
+		window.location.href='<?php echo base_url(); ?>events/delete_events_img/'+id+'/'+eventid;
+  }).catch(function(reason){
+
+  });
+}
 
 </script>
