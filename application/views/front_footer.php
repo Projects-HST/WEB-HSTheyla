@@ -118,7 +118,7 @@ $secondhalf = array_slice($res, $len / 2);
               <p class="popup_txt" style="text-align:center;">To reactivate your Heyla account kindly submit the following details.</p>
 				<form class="form" role="form" autocomplete="off" id="ac_form" method="post" enctype="multipart/form-data">
 					<div class="col-xs-6 form_box" style="padding:10px 20px 5px 10px;">
-                        <input type="text" class="form-control" name="name" placeholder="Username" maxlength="12">
+                        <input type="text" class="form-control" name="name" placeholder="Name" maxlength="30">
                      </div>
 					<div class="col-xs-6 form_box" style="padding:10px 20px 5px 10px;">
 						<input type="text" class="form-control" id="mobile" name="mobile" placeholder="Mobile Number" maxlength="10">
