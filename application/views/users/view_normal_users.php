@@ -22,6 +22,7 @@
                         <th>S. No</th>
                         <th>Username</th>
                         <th>Full Name</th>
+						<th>Role</th>
                         <th>Points</th>
                         <th>Status</th>
                         <th>Actions </th>
@@ -39,6 +40,7 @@
                         <td><?php echo $i; ?></td>
                         <td><?php echo $rows->user_name ; ?> <br> <?php echo $rows->email_id; ?> <br> <?php echo $rows->mobile_no; ?></td>
                         <td><?php echo $rows->name ; ?></td>
+						 <td><?php echo $rows->user_role_name ; ?></td>
                         <td><?php echo $rows->total_points ; ?></td>
                         <td><?php if($sts=='Y'){ echo'<p class="btn btn-secondary btn-success btn-sm"> Active </p>'; }else{ echo'<p class="btn btn-secondary btn-primary btn-sm"> Deactive </p>'; }?></td>
                         <td><a href="<?php echo base_url();?>users/edit_normal_users/<?php echo $rows->id;?>"><img title="Edit details" src="<?php echo base_url();?>assets/icons/edit.png" /></a></td>

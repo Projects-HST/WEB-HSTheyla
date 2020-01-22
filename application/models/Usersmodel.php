@@ -30,7 +30,7 @@ FROM user_details AS ud LEFT JOIN user_master AS um ON ud.user_id=um.id LEFT JOI
     function view_normal_users()
     {
        $query="SELECT erm.user_role_name,ud.*,um.user_name,um.mobile_no,um.email_id,um.password,um.user_role,um.email_verify,um.created_at,um.mobile_verify,um.status,ci.city_name,up.total_points
-FROM user_details AS ud LEFT JOIN user_master AS um ON ud.user_id=um.id LEFT JOIN city_master AS ci ON ci.id=ud.city_id LEFT JOIN user_points_count AS up ON up.user_id=ud.user_id LEFT JOIN user_role_master AS erm ON um.user_role=erm.id WHERE um.user_role='3' ORDER BY ud.id  DESC";
+FROM user_details AS ud LEFT JOIN user_master AS um ON ud.user_id=um.id LEFT JOIN city_master AS ci ON ci.id=ud.city_id LEFT JOIN user_points_count AS up ON up.user_id=ud.user_id LEFT JOIN user_role_master AS erm ON um.user_role=erm.id WHERE um.user_role='3'  OR um.user_role = '2' ORDER BY ud.id  DESC";
         $udresu=$this->db->query($query);
          $udres=$udresu->result();
           return $udres;

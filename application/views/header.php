@@ -137,7 +137,8 @@
                     <ul class="list-unstyled">
                         <li id="createuser"><a href="<?php echo base_url();?>users/home">Create Sub-admin</a></li>
                         <li id="adminuser"><a href="<?php echo base_url();?>users/view">View Sub-admin</a></li>
-                          <li id="normaluser"><a href="<?php echo base_url();?>users/view_normal_users">Heyla Users</a></li>
+                        <li id="normaluser"><a href="<?php echo base_url();?>users/view_normal_users">Heyla Users/Organizers</a></li>
+						<li id="org_request"><a href="<?php echo base_url();?>dashboard/get_all_organiser_request">Organizer Requests</a></li>
                         <!-- <li id="followers"><a href="<?php echo base_url();?>users/view_followers">View User Followers</a></li> -->
                         <!--li id="guestuser"><a href="<?php echo base_url();?>guestuser/home">Guest User</a></li-->
 
@@ -146,7 +147,7 @@
                 <li class="has_sub" id="track">
                     <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-file-text-o" aria-hidden="true"></i></i><span> Events Record</span></a>
                     <ul class="list-unstyled">
-                        <li id="org_request"><a href="<?php echo base_url();?>dashboard/get_all_organiser_request">Organizer Requests</a></li>
+                        
                         <li id="org_track"><a href="<?php echo base_url();?>tracking/organiser_event_tracking">Organizer Events</a></li>
                         <li id="admin_event_track"><a href="<?php echo base_url();?>tracking/admin_event_tracking">Admin Events</a></li>
                         <li id="org_event_track"><a href="<?php echo base_url();?>tracking/organiser_track_date">Organizer Events by Date</a></li>
