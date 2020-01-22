@@ -96,6 +96,16 @@
 	position: relative;
 	z-index: 1;
 }
+
+.user-rating span.checked_star {
+	display: inline-block;
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+	position: relative;
+	z-index: 1;
+}
+
 .user-rating span {
 	margin-left: -15px;
 }
@@ -105,10 +115,15 @@
 	/*padding-right: 5px;*/
 }
 .user-rating span.checked_star:before {
-	color:#ffd100 !important;
-content: "\f005";
+	
+	content: "\f005";
 }
 .user-rating input:hover + span.star:before, .user-rating input:hover + span.star ~ span.star:before, .user-rating input:checked + span.star:before, .user-rating input:checked + span.star ~ span.star:before {
+	color: #ffd100;
+	content:"\f005";
+}
+
+.user-rating input:hover + span.checked_star:before, .user-rating input:hover + span.checked_star ~ span.checked_star:before, .user-rating input:checked + span.checked_star:before, .user-rating input:checked + span.checked_star ~ span.checked_star:before {
 	color: #ffd100;
 	content:"\f005";
 }
@@ -117,15 +132,7 @@ content: "\f005";
 	color: #ffd100;
 	font-size: 20px;
 }
-.selected{
-	color: #ffd100;
-	content:"\f005";
-}
-	
-span.fa.fa-star.checked{
-	color: yellow;
 
-}
 
 
 #galpop-content img{
@@ -134,9 +141,7 @@ span.fa.fa-star.checked{
 .event_heading{
 	margin-top: 15px;
 }
-.fa{
-	    color: #8e9398;
-}
+
 
 
 
@@ -357,15 +362,12 @@ foreach($event_details as $res){
   </div>
    </div>
  </div>
+ 
+ 
  <div class="modal fade " id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="false">
  <div class="modal-dialog">
  <div class="modal-content">
- <div class="modal-header">
-   <h4 class="modal-title">Write review</h4>
-   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
- </div>
- <div class="modal-body" id="modal-body">
-   <center>
+ <center>
 
 	<?php if (count($event_reviews_users)>0){
 		foreach($event_reviews_users as $reviewres){
@@ -373,51 +375,30 @@ foreach($event_details as $res){
 			$event_rating = $reviewres->event_rating;
 			$comments = $reviewres->comments;
 		}?>
-
+<div class="modal-header">
+   <h4 class="modal-title">Update review</h4>
+   <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="cursor:pointer;"><span aria-hidden="true">&times;</span></button>
+ </div>
+ <div class="modal-body" id="modal-body">
 	<form name="frmReview" id="" action="#" method="post" enctype="multipart/form-data" class="form" autocomplete="off">
        <div class="form-group row">
        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-		<table width="100%" border="0" cellspacing="2" cellpadding="2">
-		  <tr>
-			<td width="15%">Old Rating :</td>
-			<td width="20%"><span class="rated_star">
+	          <div class="rating">
+	             <span class="user-rating">
 				<?php
-					 for ($i=1; $i <6; $i++) {
-						if ($i <= $event_rating){
-							echo "<img src='".base_url()."assets/front/images/rated.png' class='img-responsive' style='margin-right:2px;'>";
-						} else {
-							echo "<img src='".base_url()."assets/front/images/unrated.png' class='img-responsive' style='margin-right:2px;'>";
-						}
-					}
-				?>
-				</span></td>
-				<td width="22%">&nbsp;</td>
-			<td width="17%">New Rating :</td>
-			<td width="26%">
-			
-			 <span class="user-rating">
-			 <?php
-			 	
-			 $j=1;
+				$j=1;
 				for($i=5; $i>=1; $i=$i-1)
 				{
-				
 					if ($i <= $event_rating){ ?>
-						
-					<input type="radio" name="rating" id="rating_<?php echo $j; ?>" value="<?php echo $i; ?>" checked="checked"><span class="star checked_star"></span>
-						
-
+					<input type="radio" name="rating" id="rating_<?php echo $j; ?>" value="<?php echo $i; ?>" class="selected-rating"><span class="checked_star"></span>
 					<?php } else { ?>
 						<input type="radio" name="rating" id="rating_'<?php echo $j; ?>" value="<?php echo $i; ?>" ><span class="star"></span>
 					<?php }
-$j+=1;
+					$j+=1;
 				}  
 			?>
              </span>
-			 </td>
-		  </tr>
-		</table>
-
+           </div>
          </div>
        </div>
        <div class="form-group row">
@@ -433,15 +414,20 @@ $j+=1;
          </div>
        </div>
     </form>
+</div>
 
-	<?php } else { ?>
+<?php } else { ?>
 
+<div class="modal-header">
+<h4 class="modal-title">Write review</h4>
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="cursor:pointer;"><span aria-hidden="true">&times;</span></button>
+</div>
+ <div class="modal-body" id="modal-body">
 	<form name="frmReview" id="" action="#" method="post" enctype="multipart/form-data" class="form" autocomplete="off">
        <div class="form-group">
        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
            <div class="rating">
-	
-             <span class="user-rating">
+	             <span class="user-rating">
 				 <input type="radio" name="rating" id="rating_1" value="5"><span class="star"></span>
 				 <input type="radio" name="rating" id="rating_2" value="4"><span class="star"></span>
 				 <input type="radio" name="rating" id="rating_3" value="3"><span class="star"></span>
@@ -464,13 +450,9 @@ $j+=1;
          </div>
        </div>
     </form>
-
-	<?php } ?>
-
-
-   </center>
  </div>
-
+	<?php } ?>
+   </center>
  </div>
  </div>
  </div>

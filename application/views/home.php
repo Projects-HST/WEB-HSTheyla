@@ -225,7 +225,7 @@
                           <span class="counter"><?php foreach ($reviews as $res) {
                             echo $res->reviews;
                           } ?></span>
-                         <b style="font-size:14px;">Unrestrained User Reviews</b>
+                         <b style="font-size:14px;">Unreviewed User Comments</b>
                       </div>
                   </div>
                 <!-- </a> -->
