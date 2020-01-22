@@ -86,11 +86,8 @@
 	z-index: 2;
 	cursor: pointer;
 }
-.user-rating span.star:before {
-	color: #777777;
-	content:"ï€†";
-	/*padding-right: 5px;*/
-}
+
+
 .user-rating span.star {
 	display: inline-block;
 	font-family: FontAwesome;
@@ -107,6 +104,10 @@
 	content:"\f006";
 	/*padding-right: 5px;*/
 }
+.user-rating span.checked_star:before {
+	color:#ffd100 !important;
+content: "\f005";
+}
 .user-rating input:hover + span.star:before, .user-rating input:hover + span.star ~ span.star:before, .user-rating input:checked + span.star:before, .user-rating input:checked + span.star ~ span.star:before {
 	color: #ffd100;
 	content:"\f005";
@@ -116,7 +117,11 @@
 	color: #ffd100;
 	font-size: 20px;
 }
-
+.selected{
+	color: #ffd100;
+	content:"\f005";
+}
+	
 span.fa.fa-star.checked{
 	color: yellow;
 
@@ -388,25 +393,28 @@ foreach($event_details as $res){
 				</span></td>
 				<td width="22%">&nbsp;</td>
 			<td width="17%">New Rating :</td>
-			<td width="26%"><span class="user-rating">
-			 <input type="radio" name="rating" id="rating_1" value="5"><span class="star"></span>
-             <input type="radio" name="rating" id="rating_2" value="4"><span class="star"></span>
-             <input type="radio" name="rating" id="rating_3" value="3"><span class="star"></span>
-             <input type="radio" name="rating" id="rating_4" value="2"><span class="star"></span>
-             <input type="radio" name="rating" id="rating_5" value="1"><span class="star"></span>
+			<td width="26%">
+			
+			 <span class="user-rating">
 			 <?php
-			 /* echo $event_rating;
+			 	
+			 $j=1;
 				for($i=5; $i>=1; $i=$i-1)
-				//for ($i=1; $i <6; $i++)
 				{
-					if ($i <= $event_rating){
-						echo '<input type="radio" name="rating" id="rating_'.$i.'" value="'.$i.'"><span class="star"></span>';
-					} else {
-						echo '<input type="radio" name="rating" id="rating_'.$i.'" value="'.$i.'" checked><span class="star"></span>';
-					}
-				}  */
+				
+					if ($i <= $event_rating){ ?>
+						
+					<input type="radio" name="rating" id="rating_<?php echo $j; ?>" value="<?php echo $i; ?>" checked="checked"><span class="star checked_star"></span>
+						
+
+					<?php } else { ?>
+						<input type="radio" name="rating" id="rating_'<?php echo $j; ?>" value="<?php echo $i; ?>" ><span class="star"></span>
+					<?php }
+$j+=1;
+				}  
 			?>
-             </span></td>
+             </span>
+			 </td>
 		  </tr>
 		</table>
 
