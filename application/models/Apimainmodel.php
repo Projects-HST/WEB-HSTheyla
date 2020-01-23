@@ -814,7 +814,7 @@ class Apimainmodel extends CI_Model {
         }
 
     }else{
-        $response = array("status" => "Error", "msg" => "Something Went Wrong!");
+        $response = array("status" => "Error", "msg" => "This email or mobile number are not registered with us!");
     }
     return $response;
   }
