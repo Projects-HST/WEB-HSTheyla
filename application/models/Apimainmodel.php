@@ -784,7 +784,7 @@ class Apimainmodel extends CI_Model {
   //#################### Check Account Activated ####################//
 
   function check_account_activate($email_or_mobile){
-    $select_mobile="SELECT * FROM user_master WHERE (mobile_no='$email_or_mobile' or email_id='$email_or_mobile')";
+    $select_mobile="SELECT * FROM user_master WHERE (mobile_no='$email_or_mobile' or email_id='$email_or_mobile') and status='N'";
     $res_mobile= $this->db->query($select_mobile);
     if($res_mobile->num_rows()==1){
         $result=$res_mobile->result();
