@@ -842,6 +842,24 @@ class Apimainmodel extends CI_Model {
   }
 
 
+  //#################### Request to activate account ####################//
+
+  function request_to_activate($email_or_mobile){
+    $email_id='admin@heylaapp.com';
+    $subject = "User account activation request";
+    $email_message = 'Hi,<br> Welcome! <br> User  have requested to activated registered Heyla account
+    use this Email or mobile   <b>'.$email_or_mobile.'</b> to check. <br><br> With love,<br> Team Heyla <br><br><br><br>
+    <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.<small>';
+    $result=$this->sendMail($email_id,$subject,$email_message);
+    if($result){
+      $response = array("status" => "success", "msg" => "Account activation request sent  successfully");
+    }else{
+      $response = array("status" => "success", "msg" => "Account activation request sent successfully");
+    }
+      return $response;
+  }
+
+
 //#################### Update Mobile ####################//
 	public function Update_mobile($old_mobile_no,$new_mobile_no)
 	{
