@@ -128,7 +128,14 @@ $('#otp_form').hide();
 						$('#otp_form').show();
 						$('#reset_section').hide();
 					}else if (response == "Adminrequest") {
-							sweetAlert("Success", "We will get back to you sooner via email.", "success");
+								swal({
+								title: "Success",
+								text: "We will get back to you sooner via email.",
+								type: "success"
+							}).then(function() {
+								location.href = '<?php echo base_url(); ?>';
+							});
+							//sweetAlert("Success", "We will get back to you sooner via email.", "success");
 					 } else {
 						   sweetAlert("Oops...", response, "error");
 					}
