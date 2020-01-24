@@ -63,7 +63,7 @@ Class Mailmodel extends CI_Model
 	 $headers = "MIME-Version: 1.0" . "\r\n";
 	 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 	 // Additional headers
-	 $headers .= 'From: Webmaster<hello@heylaapp.com>' . "\r\n";
+	 $headers .= 'From: Webmaster<info@heylaapp.com>' . "\r\n";
 
 	  $sql="SELECT * FROM user_master WHERE id IN ($user_ids)";
 	  $result=$this->db->query($sql);

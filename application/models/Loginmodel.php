@@ -815,7 +815,7 @@ Class Loginmodel extends CI_Model
       }else{
         $query="INSERT INTO contact_form (name,email,subject,message,created_at,updated_by) VALUES('$name','$email','$subject','$msg',NOW(),NOW())";
         $resultset=$this->db->query($query);
-        $to="hello@heylaapp.com,kamal.happysanz@gmail.com";
+        $to="info@heylaapp.com,kamal.happysanz@gmail.com";
         $subject="Contact Form Enquiry";
         $htmlContent = '
          <html>
@@ -1105,7 +1105,7 @@ Class Loginmodel extends CI_Model
 						  echo "OTPsms";
 						}
 				}else{
-					$email_id = "senmaran@gmail.com";
+					$email_id = "info@heylaapp.com";
 					$subject = "Heyla User account reactivation";
 					$email_message = 'Hi Admin,! <br> User - '.$chk_username.' requested to reactivate Heyla account. <br><br> With love,<br> Team Heyla <br><br><br><br> <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.<small>';
 					//$this->load->model('mailmodel');
