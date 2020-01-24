@@ -1074,7 +1074,7 @@ Class Loginmodel extends CI_Model
 	  
 	  
 	function chk_account($chk_username){
-		echo $select_mobile="SELECT * FROM user_master WHERE (mobile_no='$chk_username' or email_id='$chk_username')";
+		$select_mobile="SELECT * FROM user_master WHERE (mobile_no='$chk_username' or email_id='$chk_username')";
 		$res_mobile= $this->db->query($select_mobile);
 		if($res_mobile->num_rows()==1){
 			$result=$res_mobile->result();
