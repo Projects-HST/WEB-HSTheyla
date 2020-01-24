@@ -1153,15 +1153,15 @@ Class Loginmodel extends CI_Model
 				 $email_message = 'Hi,<br> Welcome! <br> You have requested to reactivate registered Heyla account use this code to <b>'.$OTP.'</b> to verify. <br><br> With love,<br> Team Heyla <br><br><br><br> <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.<small>';
 				 $this->load->model('mailmodel');
 				 $this->mailmodel->sendMail($email_id,$subject,$email_message);
-				  echo "OTPemail";
+				  echo "OTP sent to your email.";
 				}else{
 				  $this->load->model('smsmodel');
 				  $mobile_message = 'Dear user, Use the code '.$OTP.' to complete your Reactivation .- Team Heyla';
 				  $this->smsmodel->sendOTPtomobile($mobile_no,$mobile_message);
-				  echo "OTPsms";
+				  echo "OTP sent to your mobile.";
 				}
 		}else{
-			echo "Error";
+			echo "Otp Error";
 		}
 	}
   
