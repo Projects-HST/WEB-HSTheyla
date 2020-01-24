@@ -1105,7 +1105,7 @@ Class Loginmodel extends CI_Model
 						  echo "OTPsms";
 						}
 				}else{
-					$email_id = "info@heylaapp.com";
+					$email_id = "myheylaapp@gmail.com";
 					$subject = "Heyla User account reactivation";
 					$email_message = 'Hi Admin,! <br> User - '.$chk_username.' requested to reactivate Heyla account. <br><br> With love,<br> Team Heyla <br><br><br><br> <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.<small>';
 					//$this->load->model('mailmodel');
