@@ -128,7 +128,7 @@ $('#otp_form').hide();
 						$('#otp_form').show();
 						$('#reset_section').hide();
 					}else if (response == "Adminrequest") {
-							sweetAlert("Sucess", "We will get back to you sooner via email.", "sucess");
+							sweetAlert("Success", "We will get back to you sooner via email.", "success");
 					 } else {
 						   sweetAlert("Oops...", response, "error");
 					}
