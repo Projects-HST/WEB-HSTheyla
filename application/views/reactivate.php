@@ -164,7 +164,7 @@ $('#otp_form').hide();
                  if (response.status== "success") {
                    $.removeCookie("mobile_cookie");
                      swal({
-                        title: " ",
+                        title: "Success",
                         text: "Account Activated.",
                         type: "success"
                     }).then(function() {
