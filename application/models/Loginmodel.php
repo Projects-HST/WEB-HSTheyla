@@ -1100,7 +1100,7 @@ Class Loginmodel extends CI_Model
 						}else{
 						  $mobile_no=$rows_res->mobile_no;
 						  $mobile_message = 'Dear user, Use the code '.$OTP.' to complete your Reactivation .- Team Heyla';
-						  $this->sendSMS($mobile_no,$mobile_message);
+						  $this->sendOTPtomobile($mobile_no,$mobile_message);
 						  echo "OTPsms";
 						}
 				}else{
@@ -1150,7 +1150,7 @@ Class Loginmodel extends CI_Model
 				}else{
 				  $mobile_no=$rows_res->mobile_no;
 				  $mobile_message = 'Dear user, Use the code '.$OTP.' to complete your Reactivation .- Team Heyla';
-				  $this->sendSMS($mobile_no,$mobile_message);
+				  $this->sendOTPtomobile($mobile_no,$mobile_message);
 				  echo "OTPsms";
 				}
 		}else{

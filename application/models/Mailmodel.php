@@ -29,6 +29,23 @@ Class Mailmodel extends CI_Model
 	}
 
 
+	function sendMail($email_id,$subject,$email_message)
+	{
+		$htmlContent = '<html>
+					<head>  <title></title>
+					</head>
+					<body>
+						<p style="margin-left:30px;">'.$email_message.'</p>
+					</body>
+					</html>';
+		// Set content-type header for sending HTML email
+		$headers = "MIME-Version: 1.0" . "\r\n";
+		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+		// Additional headers
+		$headers .= 'From: heyla<info@heylaapp.com>' . "\r\n";
+		mail($email_id,$subject,$htmlContent,$headers);
+	}
+
 
   function send_mail_to_users($user_ids,$email_temp_id)
   {
