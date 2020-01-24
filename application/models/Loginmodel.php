@@ -1164,8 +1164,11 @@ Class Loginmodel extends CI_Model
 			echo "Otp Error";
 		}
 	}
-  
-	  
+
+
+
+
+
 /* 	  function ac_activate($name,$mobile,$email){
      
         $to="hello@heylaapp.com";
