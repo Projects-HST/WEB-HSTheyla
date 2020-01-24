@@ -2059,7 +2059,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	public function List_eventreview($user_id,$event_id)
 	{
 
-			$ureview_query = "SELECT A.id,A.event_id,C.event_name,A.event_rating,A.comments,B.user_name,D.name FROM event_reviews A, user_master B, events C,user_details D  WHERE A.event_id = '$event_id' AND A.user_id ='$user_id' AND A.status='N' AND A.user_id=B.id AND D.user_id=B.id  AND A.event_id = C.id ORDER by A.id DESC";
+			$ureview_query = "SELECT A.id,A.event_id,C.event_name,A.event_rating,A.comments,D.name as user_name FROM event_reviews A, user_master B, events C,user_details D  WHERE A.event_id = '$event_id' AND A.user_id ='$user_id' AND A.status='N' AND A.user_id=B.id AND D.user_id=B.id  AND A.event_id = C.id ORDER by A.id DESC";
 			$ureview_res = $this->db->query($ureview_query);
 			$ureview_res->num_rows();
 			if($ureview_res->num_rows()>0){
@@ -2069,7 +2069,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			}
 			//print_r($ureview_result);
 
-	        $review_query = "SELECT A.id,A.event_id,C.event_name,A.event_rating,A.comments,B.user_name,D.name FROM event_reviews A, user_master B, events C,user_details D  WHERE A.event_id = '$event_id' AND A.status='Y' AND A.user_id=B.id AND D.user_id=B.id AND A.event_id = C.id ORDER by A.id DESC";
+	        $review_query = "SELECT A.id,A.event_id,C.event_name,A.event_rating,A.comments,D.name as user_name FROM event_reviews A, user_master B, events C,user_details D  WHERE A.event_id = '$event_id' AND A.status='Y' AND A.user_id=B.id AND D.user_id=B.id AND A.event_id = C.id ORDER by A.id DESC";
 			$review_res = $this->db->query($review_query);
 			$review_result = $review_res->result();
 
