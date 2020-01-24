@@ -784,7 +784,7 @@ class Apimainmodel extends CI_Model {
   //#################### Check Account Activated ####################//
 
   function check_account_activate($email_or_mobile){
-    $select_mobile="SELECT * FROM user_master WHERE (mobile_no='$email_or_mobile' or email_id='$email_or_mobile')";
+    $select_mobile="SELECT * FROM user_master WHERE (mobile_no='$email_or_mobile' or email_id='$email_or_mobile') and status='N'";
     $res_mobile= $this->db->query($select_mobile);
     if($res_mobile->num_rows()==1){
         $result=$res_mobile->result();
@@ -814,7 +814,7 @@ class Apimainmodel extends CI_Model {
         }
 
     }else{
-        $response = array("status" => "Error", "msg" => "Something Went Wrong!");
+        $response = array("status" => "Error", "msg" => "This email or mobile number are not registered with us!");
     }
     return $response;
   }
@@ -837,6 +837,24 @@ class Apimainmodel extends CI_Model {
         }
     }else{
         $response = array("status" => "Error", "msg" => "Something Went Wrong!");
+    }
+      return $response;
+  }
+
+
+  //#################### Request to activate account ####################//
+
+  function request_to_activate($email_or_mobile){
+    $email_id='ganesh@happysanztech.com';
+    $subject = "User account activation request";
+    $email_message = 'Hi,<br> Welcome! <br> User  have requested to activated registered Heyla account
+    use this Email or mobile   <b>'.$email_or_mobile.'</b> to check. <br><br> With love,<br> Team Heyla <br><br><br><br>
+    <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.<small>';
+    $result=$this->sendMail($email_id,$subject,$email_message);
+    if($result){
+      $response = array("status" => "success", "msg" => "Account activation request sent  successfully");
+    }else{
+      $response = array("status" => "success", "msg" => "Account activation request sent successfully");
     }
       return $response;
   }
@@ -2041,7 +2059,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 	public function List_eventreview($user_id,$event_id)
 	{
 
-			$ureview_query = "SELECT A.id,A.event_id,C.event_name,A.event_rating,A.comments,B.user_name FROM event_reviews A, user_master B, events C  WHERE A.event_id = '$event_id' AND A.user_id ='$user_id' AND A.status='N' AND A.user_id=B.id AND A.event_id = C.id ORDER by A.id DESC";
+			$ureview_query = "SELECT A.id,A.event_id,C.event_name,A.event_rating,A.comments,D.name as user_name FROM event_reviews A, user_master B, events C,user_details D  WHERE A.event_id = '$event_id' AND A.user_id ='$user_id' AND A.status='N' AND A.user_id=B.id AND D.user_id=B.id  AND A.event_id = C.id ORDER by A.id DESC";
 			$ureview_res = $this->db->query($ureview_query);
 			$ureview_res->num_rows();
 			if($ureview_res->num_rows()>0){
@@ -2051,7 +2069,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			}
 			//print_r($ureview_result);
 
-	        $review_query = "SELECT A.id,A.event_id,C.event_name,A.event_rating,A.comments,B.user_name FROM event_reviews A, user_master B, events C  WHERE A.event_id = '$event_id' AND A.status='Y' AND A.user_id=B.id AND A.event_id = C.id ORDER by A.id DESC";
+	        $review_query = "SELECT A.id,A.event_id,C.event_name,A.event_rating,A.comments,D.name as user_name FROM event_reviews A, user_master B, events C,user_details D  WHERE A.event_id = '$event_id' AND A.status='Y' AND A.user_id=B.id AND D.user_id=B.id AND A.event_id = C.id ORDER by A.id DESC";
 			$review_res = $this->db->query($review_query);
 			$review_result = $review_res->result();
 
