@@ -128,8 +128,7 @@ $('#otp_form').hide();
 						$('#otp_form').show();
 						$('#reset_section').hide();
 					}else if (response == "Adminrequest") {
-						swal('We will get back to you sooner via email.');
-						location.href = '<?php echo base_url(); ?>';
+							sweetAlert("Sucess", "We will get back to you sooner via email.", "sucess");
 					 } else {
 						   sweetAlert("Oops...", response, "error");
 					}
