@@ -128,9 +128,8 @@ $('#otp_form').hide();
 						$('#otp_form').show();
 						$('#reset_section').hide();
 					}else if (response == "Adminrequest") {
-						swal('Please give us some time to review your profile. We will get back to you sooner via email.');
-						$('#otp_form').show();
-						$('#reset_section').hide();
+						swal('We will get back to you sooner via email.');
+						location.href = '<?php echo base_url(); ?>';
 					 } else {
 						   sweetAlert("Oops...", response, "error");
 					}
