@@ -188,7 +188,6 @@ $('#formsignup').validate({ // initialize the plugin
         }
     });
 
-	
 function logout(){
   swal({
     title: '',
