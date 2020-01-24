@@ -44,9 +44,9 @@ Class Smsmodel extends CI_Model
 		curl_close($curl);
 
 		if ($err) {
-		echo "cURL Error #:" . $err;
+			echo "cURL Error #:" . $err;
 		} else {
-			echo $response;
+			//echo $response;
 		}
 
 	}
