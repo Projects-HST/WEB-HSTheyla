@@ -1142,6 +1142,8 @@ Class Loginmodel extends CI_Model
 		$check_user_deactivated="SELECT * FROM user_master WHERE (mobile_no='$user_name' or email_id='$user_name') AND status='N'";
 		$res_checked= $this->db->query($check_user_deactivated);
 		if($res_checked->num_rows()==1){
+			 foreach($res_checked as $rows_res){}
+			 
 			  $email_id=$rows_res->email_id;
 			  $OTP = $rows_res->mobile_otp;
 				if($email_id == $user_name){
