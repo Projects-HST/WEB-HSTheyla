@@ -1142,10 +1142,10 @@ Class Loginmodel extends CI_Model
 		$check_user_deactivated="SELECT * FROM user_master WHERE (mobile_no='$user_name' or email_id='$user_name') AND status='N'";
 		$res_checked= $this->db->query($check_user_deactivated);
 		if($res_checked->num_rows()==1){
-			 foreach($res_checked as $rows_res){}
-			 
-			  $email_id=$rows_res->email_id;
-			  $OTP = $rows_res->mobile_otp;
+			 foreach($res_checked as $rows_res){
+			  echo $email_id=$rows_res->email_id;
+			   echo $OTP = $rows_res->mobile_otp;
+			  }
 				if($email_id == $user_name){
 				 $subject = "Heyla User account activation";
 				 $email_message = 'Hi,<br> Welcome! <br> You have requested to reactivate registered Heyla account use this code to <b>'.$OTP.'</b> to verify. <br><br> With love,<br> Team Heyla <br><br><br><br> <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.<small>';
