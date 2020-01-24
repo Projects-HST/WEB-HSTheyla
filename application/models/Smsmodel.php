@@ -5,7 +5,6 @@ Class Smsmodel extends CI_Model
 	public function __construct()
 	{
 	  parent::__construct();
-
 	}
 
 	public function sendOTPtomobile($mob,$mobile_message)
