@@ -135,7 +135,6 @@ $('#otp_form').hide();
 							}).then(function() {
 								location.href = '<?php echo base_url(); ?>';
 							});
-							//sweetAlert("Success", "We will get back to you sooner via email.", "success");
 					 } else {
 						   sweetAlert("Oops...", response, "error");
 					}
