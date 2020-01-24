@@ -66,7 +66,8 @@ $secondhalf = array_slice($res, $len / 2);
               <li class="list-inline-item"><a href="<?php echo base_url(); ?>about-us">About</a></li>
               <li class="list-inline-item"><a href="<?php echo base_url(); ?>">Events</a></li>
               <li class="list-inline-item"><a href="<?php echo base_url(); ?>faq">FAQ</a></li>
-			  <li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#acModal">Reactivate Account</a></li>
+			  <!--<li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#acModal">Reactivate Account</a></li>-->
+			  <li class="list-inline-item"><a href="<?php echo base_url(); ?>reactivate">Reactivate Account</a></li>
               <li class="list-inline-item"><a href="#">Blog</a></li>
               <li class="list-inline-item"><a href="<?php echo base_url(); ?>privacy">Privacy Policy</a></li>
               <li class="list-inline-item"><a href="<?php echo base_url(); ?>payment">Payment Policy</a></li>
@@ -108,31 +109,7 @@ $secondhalf = array_slice($res, $len / 2);
     </div>
 </div>
 
-<div class="modal fade" id="acModal" tabindex="-1" role="dialog" aria-labelledby="acModalModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-          <div class="row popup_body">
-            <div class="col-md-12">
-              <a href="#" class="pull-right close_popup" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></a>
-              <p class="become_organiser_text"> <p class="heading" style="color:#000;font-size:22px;">Account  Reactivation</p>
-              <p class="popup_txt" style="text-align:center;">To reactivate your Heyla account kindly submit the following details.</p>
-				<form class="form" role="form" autocomplete="off" id="ac_form" method="post" enctype="multipart/form-data">
-					<div class="col-xs-6 form_box" style="padding:10px 20px 5px 10px;">
-                        <input type="text" class="form-control" name="name" placeholder="Name" maxlength="30">
-                     </div>
-					<div class="col-xs-6 form_box" style="padding:10px 20px 5px 10px;">
-						<input type="text" class="form-control" id="mobile" name="mobile" placeholder="Mobile Number" maxlength="10">
-					</div>
-					<div class="col-xs-6 form_box" style="padding:10px 20px 5px 10px; margin-bottom:20px;">
-						<input type="email" class="form-control" name="email" placeholder="Email ID" maxlength="50">
-					</div>
-                    <center><button type="submit" id="reactivate" class="btn btn-primary btn-lg">SUBMIT</button></center>
-				</form>
-			</div>
-      </div>
-    </div>
-</div>
-</div>
+
 </body>
 <script src="<?php echo base_url(); ?>assets/plugins/datatables/dataTables.buttons.min.js"></script>
 
@@ -183,8 +160,6 @@ $secondhalf = array_slice($res, $len / 2);
 <script src="<?php echo base_url(); ?>assets/front/js/jquery.cloud9carousel.js"></script>
 <script type="text/javascript">
 
-
-
 $('#formsignup').validate({ // initialize the plugin
         rules: {
         },
@@ -213,47 +188,6 @@ $('#formsignup').validate({ // initialize the plugin
         }
     });
 
-
-	$('#ac_form').validate({ // initialize the plugin
-	rules: {
-       name: {
-            required: true
-        },
-        mobile: {
-            required: true,minlength: 10, maxlength: 10, digits: true
-        },
-		 email: {
-            required: true,email:true
-        }
-    },
-    messages: {
-        name: { required:"Name cannot be empty!"},
-        email: { required:"Email ID cannot be empty!"},
-        mobile: { required:"Mobile number cannot be empty!",minlength: "Please check the number of digits!", maxlength: "Please check the number of digits!"}
-    },
-
-	submitHandler: function(form) {
-		$.ajax({
-			url: "<?php echo base_url(); ?>home/activate",
-			type: 'POST',
-			data: $('#ac_form').serialize(),
-			success: function(response) {
-				if (response == "sucess") {
-					swal({
-						title: "Thank you",
-						text: "Please give us some time to review your profile. We will get back to you sooner via email.",
-						type: "success"
-					}).then(function() {
-						location.href = '<?php echo base_url(); ?>';
-					});
-				} else {
-					sweetAlert("Oops...", response, "error");
-				}
-			}
-		});
-	}
-	
-    });
 	
 function logout(){
   swal({

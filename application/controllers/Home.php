@@ -671,6 +671,7 @@ class Home extends CI_Controller {
 			$mobile_number=$this->input->post('mobile_number');
 			$data=$this->loginmodel->reset_password($mobile_number);
 		}
+		
 		public function mail(){
 			$name=$this->db->escape_str($this->input->post('name'));
 			$email=$this->db->escape_str($this->input->post('email'));
@@ -1237,17 +1238,39 @@ class Home extends CI_Controller {
 		public function deactivate($user_id)
 		{
 			$datas['ac_remove'] = $this->loginmodel->ac_remove($user_id);
-
 			$datas=$this->session->userdata();
 			$this->session->unset_userdata($datas);
 			$this->session->sess_destroy();
 			redirect('/');
 		}
 
-		public function activate(){
-			$name=$this->input->post('name');
-			$mobile=$this->input->post('mobile');
-			$email=$this->input->post('email');
-			$data = $this->loginmodel->ac_activate($name,$mobile,$email);
+		public function reactivate(){
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+
+				$this->load->view('front_header');
+				$this->load->view('reactivate');
+				$this->load->view('front_footer');
 		}
+
+		public function chk_username()
+		{
+			$chk_username = $this->input->post('username');
+			$data = $this->loginmodel->chk_account($chk_username); 
+		}
+
+		public function username_otp_check()
+		{
+			$mobile_otp = $this->input->post('mobile_otp');
+			$user_name = $this->input->post('user_name');
+			$data['res']= $this->loginmodel->reactivate_account($user_name,$mobile_otp); 
+			echo json_encode($data['res']);
+		}
+
+		public function username_resend_otp(){
+			$user_name=$this->input->post('user_name');
+			$datas =$this->loginmodel->username_resend_otp($user_name);
+		}
+		
 }

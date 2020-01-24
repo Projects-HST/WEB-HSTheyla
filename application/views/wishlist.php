@@ -1,6 +1,6 @@
 <style>
 .wishlist_active{
-    border-left: 4px solid #458ecc;
+  background-color: #696969;
 }
 .footer_section{
   display: none;

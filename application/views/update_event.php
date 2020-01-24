@@ -36,8 +36,8 @@
 .form-control{
   font-size: 16px;
 }
-.createevent_active{
-  border-left: 4px solid #458ecc;
+.viewevents_active{
+   	 background-color: #696969;
 }
 .card{
   background-color: #fff;

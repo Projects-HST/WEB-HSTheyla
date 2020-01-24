@@ -1074,7 +1074,92 @@ Class Loginmodel extends CI_Model
 	  }
 	  
 	  
-	  function ac_activate($name,$mobile,$email){
+	function chk_account($chk_username){
+		$select_mobile="SELECT * FROM user_master WHERE (mobile_no='$chk_username' or email_id='$chk_username')";
+		$res_mobile= $this->db->query($select_mobile);
+		if($res_mobile->num_rows()==1){
+			$result=$res_mobile->result();
+			  foreach($result as $rows_res){}
+			
+				$check_user_deactivated="SELECT * FROM user_master WHERE (mobile_no='$chk_username' or email_id='$chk_username') AND updated_by='$rows_res->id' and status='N'";
+				$res_checked= $this->db->query($check_user_deactivated);
+				if($res_checked->num_rows()==1){
+					  
+					  $digits = 4;
+					  $OTP = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT);
+					  
+					  $update="UPDATE user_master SET mobile_otp='$OTP' WHERE id='$rows_res->id'";
+					  $excute=$this->db->query($update);
+					  
+					  $email_id=$rows_res->email_id;
+						if($email_id == $chk_username){
+						  $subject = "Heyla User account reactivation";
+						  $email_message = 'Hi,<br> Welcome! <br> You have requested to reactivate registered Heyla account use this code to <b>'.$OTP.'</b> to verify. <br><br> With love,<br> Team Heyla <br><br><br><br> <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.<small>';
+						  $this->sendMail($email_id,$subject,$email_message);
+						  echo "OTPemail";
+						}else{
+						  $mobile_no=$rows_res->mobile_no;
+						  $mobile_message = 'Dear user, Use the code '.$OTP.' to complete your Reactivation .- Team Heyla';
+						  $this->sendSMS($mobile_no,$mobile_message);
+						  echo "OTPsms";
+						}
+				}else{
+					$email_id = "senmaran@gmail.com";
+					$subject = "Heyla User account reactivation";
+					$email_message = 'Hi Admin,! <br> User - '.$chk_username.' requested to reactivate Heyla account. <br><br> With love,<br> Team Heyla <br><br><br><br> <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.<small>';
+					$this->sendMail($email_id,$subject,$email_message);
+					echo "Adminrequest";
+			}
+		}else{
+			echo "Error";
+		}
+   
+	}
+  
+	  function reactivate_account($email_or_mobile,$code){
+			$check_user_deactivated="SELECT * FROM user_master WHERE (mobile_no='$email_or_mobile' or email_id='$email_or_mobile') AND mobile_otp='$code' and status='N'";
+			$res_checked= $this->db->query($check_user_deactivated);
+			if($res_checked->num_rows()==1){
+				$update="UPDATE user_master SET status='Y' WHERE (mobile_no='$email_or_mobile' or email_id='$email_or_mobile')";
+				$excute=$this->db->query($update);
+				if($excute){
+				   $data= array("status" => "success","msg" => "Otp Verified Successfully");
+					return $data;
+				}else{
+					 $data= array("status" => "error","msg" => "Otp Error");
+					return $data;
+				}
+			}else{
+				 $data= array("status" => "error","msg" => "Otp Error");
+				return $data;
+			}
+	  }
+	  
+	  
+	function username_resend_otp($user_name){
+		$check_user_deactivated="SELECT * FROM user_master WHERE (mobile_no='$user_name' or email_id='$user_name') AND status='N'";
+		$res_checked= $this->db->query($check_user_deactivated);
+		if($res_checked->num_rows()==1){
+			  $email_id=$rows_res->email_id;
+			  $OTP = $rows_res->mobile_otp;
+				if($email_id == $user_name){
+				  $subject = "Heyla User account activation";
+				 $email_message = 'Hi,<br> Welcome! <br> You have requested to reactivate registered Heyla account use this code to <b>'.$OTP.'</b> to verify. <br><br> With love,<br> Team Heyla <br><br><br><br> <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.<small>';
+				  $this->sendMail($email_id,$subject,$email_message);
+				  echo "OTPemail";
+				}else{
+				  $mobile_no=$rows_res->mobile_no;
+				  $mobile_message = 'Dear user, Use the code '.$OTP.' to complete your Reactivation .- Team Heyla';
+				  $this->sendSMS($mobile_no,$mobile_message);
+				  echo "OTPsms";
+				}
+		}else{
+			echo "Error";
+		}
+	}
+  
+	  
+/* 	  function ac_activate($name,$mobile,$email){
      
         $to="hello@heylaapp.com";
         $subject="Account Reactivation Request";
@@ -1104,6 +1189,6 @@ Class Loginmodel extends CI_Model
         echo "failed";
      }
 
-    }
+    } */
 
 }

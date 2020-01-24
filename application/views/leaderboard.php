@@ -1,27 +1,27 @@
 <style>
-
 .leaderboard_active{
-    border-left: 4px solid #458ecc;
+	 background-color: #696969;
 }
 .box{
   background-color: #fff;
   padding: 12px;
   margin-bottom: 15px;
   margin-right: -15px;
+  border: 1px solid #d5d5d5;
 }
 .login_box{
     background-color: #fff;
     padding: 38px;
     margin-right: -15px;
+	border: 1px solid #d5d5d5;
 }
 .points_tab_section{
-padding-left: 50px;
-padding-right: 50px;
+	padding-left: 50px;
+	padding-right: 50px;
 }
 .total_points_tab{
   margin-left: 50px;
   margin-right: 50px;
-
 }
 .footer_section{
   display: none;

@@ -39,7 +39,7 @@
 <body>
 <div id="navbar-wrapper">
       <header>
-          <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color:#fff;">
+          <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color:#478ecc;">
               <div class="container-fluid">
                   <div class="navbar-header">
                       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
@@ -49,7 +49,7 @@
                           <span class="icon-bar"></span>
                       </button>
                       <a class="navbar-brand" href="<?php echo base_url(); ?>">
-                          <img src="<?php echo base_url(); ?>assets/front/images/heyla_logo.png" alt="heylaapp" style="width:125px;">
+                          <img src="<?php echo base_url(); ?>assets/front/images/logo_white.png" alt="heylaapp" style="width:125px;">
                       </a>
                   </div>
                   <div id="navbar-collapse" class="collapse navbar-collapse">
@@ -110,7 +110,7 @@
               <ul id="sidemenu" class="sidebar-nav">
                   <li>
                       <a href="<?php echo base_url(); ?>leaderboard" class="leaderboard_active">
-                          <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/dashboard.png"></span>
+                          <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/leaderboard.png"></span>
                           <span class="sidebar-title">Leaderboard</span>
                       </a>
                   </li>
@@ -170,7 +170,7 @@
                   </li>-->
 				  <li class="side-menu">
                       <a class="user_points" onclick="delete_ac(<?php echo $user_id;?>)" style="cursor:pointer;">
-                        <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/del_ac.png"></span>
+                        <span class="sidebar-icon"><img src="<?php echo base_url();  ?>assets/front/icons/deactivate_account.png"></span>
                         <span class="sidebar-title">Deactivate Account</span>
                       </a>
                   </li>

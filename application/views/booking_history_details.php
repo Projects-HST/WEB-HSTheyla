@@ -8,7 +8,7 @@
   box-shadow: 3px 11px 15px 0px #959696;
 }
 .booking_history_active{
-  border-left: 4px solid #458ecc;
+  background-color: #696969;
 }
 .footer_section{
   display: none;

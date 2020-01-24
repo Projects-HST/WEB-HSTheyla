@@ -1,6 +1,6 @@
 <style>
 .booking_history_active{
-  border-left: 4px solid #458ecc;
+  background-color: #696969;
 }
 .profile_tab{
   height: 100vh;

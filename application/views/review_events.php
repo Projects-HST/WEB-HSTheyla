@@ -1,6 +1,6 @@
 <style>
 .review_active{
-  border-left: 4px solid #458ecc;
+  background-color: #696969;
 }
 .event_section{
   height: 100vh;

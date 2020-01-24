@@ -1,7 +1,5 @@
 <style>
-.user_points{
-    border-left: 4px solid #458ecc;
-}
+
 .event_section{
   height: 100vh;
 }

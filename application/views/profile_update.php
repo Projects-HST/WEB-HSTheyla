@@ -11,7 +11,7 @@
   display: none;
 }
 .profile_active {
-    border-left: 4px solid #458ecc;
+	 background-color: #696969;
 }
 .form-control-label{
   font-size: 18px;

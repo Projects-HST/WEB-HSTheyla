@@ -1,4 +1,7 @@
 <style>
+.review_active{
+  background-color: #696969;
+}
 .event_section{
   height: 100vh;
 }

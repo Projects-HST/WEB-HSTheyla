@@ -37,7 +37,7 @@
   font-size: 16px;
 }
 .createevent_active{
-  border-left: 4px solid #458ecc;
+	 background-color: #696969;
 }
 .card{
   background-color: #fff;

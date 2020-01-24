@@ -75,7 +75,7 @@ transform: rotate(-90deg);
   margin-top: 8px;
 }
 #sidebar-wrapper{
-    background-color: #fff !important;
+    background-color: #293033 !important;
 }
 .plan_details{
   font-size: 12px;
@@ -173,7 +173,7 @@ transform: rotate(-90deg);
 #sidebar-wrapper .sidebar-nav li a {
     display: block;
     text-decoration: none;
-    color: #000;
+    color: #ffffff;
     font-size: 18px;
 }
 
@@ -273,7 +273,8 @@ transform: rotate(-90deg);
 .welcome_name{
   font-size: 16px;
   font-weight: 600;
-  margin-top: 20px;
+  margin-top: 23px;
+  color:#ffffff;
 }
 .red_txt_label {
     color: #ec0000;
