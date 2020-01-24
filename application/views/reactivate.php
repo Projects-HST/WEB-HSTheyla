@@ -187,7 +187,7 @@ $('#otp_form').hide();
 		data: {
            user_name: user_name
        },
-       cache: false,
+		 cache: false,
 		 success: function(response){
          swal(response);
        }
