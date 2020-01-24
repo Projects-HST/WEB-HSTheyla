@@ -1068,7 +1068,7 @@ Class Loginmodel extends CI_Model
 	}
 	
 	  function ac_remove($user_id){
-		  $sql = "UPDATE user_master SET status ='N' WHERE id='$user_id'";
+		  $sql = "UPDATE user_master SET status ='N',updated_by='$user_id',updated_at=NOW() WHERE id='$user_id'";
 		  $resu=$this->db->query($sql);
 	  }
 	  
