@@ -1095,13 +1095,13 @@ Class Loginmodel extends CI_Model
 						  $subject = "Heyla User account reactivation";
 						  $email_message = 'Hi,<br> Welcome! <br> You have requested to reactivate registered Heyla account use this code to <b>'.$OTP.'</b> to verify. <br><br> With love,<br> Team Heyla <br><br><br><br> <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.<small>';
 						  $this->load->model('mailmodel');
-						  $this->sendMail($email_id,$subject,$email_message);
+						  $this->mailmodel->sendMail($email_id,$subject,$email_message);
 						  echo "OTPemail";
 						}else{
 						  $mobile_no=$rows_res->mobile_no;
 						  $this->load->model('smsmodel');
 						  $mobile_message = 'Dear user, Use the code '.$OTP.' to complete your Reactivation .- Team Heyla';
-						  $this->sendOTPtomobile($mobile_no,$mobile_message);
+						  $this->smsmodel->sendOTPtomobile($mobile_no,$mobile_message);
 						  echo "OTPsms";
 						}
 				}else{
@@ -1109,7 +1109,7 @@ Class Loginmodel extends CI_Model
 					$subject = "Heyla User account reactivation";
 					$email_message = 'Hi Admin,! <br> User - '.$chk_username.' requested to reactivate Heyla account. <br><br> With love,<br> Team Heyla <br><br><br><br> <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.<small>';
 					$this->load->model('mailmodel');
-					$this->sendMail($email_id,$subject,$email_message);
+					$this->mailmodel->sendMail($email_id,$subject,$email_message);
 					echo "Adminrequest";
 			}
 		}else{
@@ -1148,12 +1148,12 @@ Class Loginmodel extends CI_Model
 				 $subject = "Heyla User account activation";
 				 $email_message = 'Hi,<br> Welcome! <br> You have requested to reactivate registered Heyla account use this code to <b>'.$OTP.'</b> to verify. <br><br> With love,<br> Team Heyla <br><br><br><br> <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.<small>';
 				 $this->load->model('mailmodel');
-				 $this->sendMail($email_id,$subject,$email_message);
+				 $this->mailmodel->sendMail($email_id,$subject,$email_message);
 				  echo "OTPemail";
 				}else{
 				  $this->load->model('smsmodel');
 				  $mobile_message = 'Dear user, Use the code '.$OTP.' to complete your Reactivation .- Team Heyla';
-				  $this->sendOTPtomobile($mobile_no,$mobile_message);
+				  $this->smsmodel->sendOTPtomobile($mobile_no,$mobile_message);
 				  echo "OTPsms";
 				}
 		}else{
