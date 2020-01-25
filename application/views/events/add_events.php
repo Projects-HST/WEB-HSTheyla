@@ -383,7 +383,12 @@
         email:"This field cannot be empty!",
         event_status:"Select status",
 		txtLatitude:"This field cannot be empty!",
-		txtLongitude:"This field cannot be empty!",
+		  number: "Decimal and Numbers Only"
+        },
+		txtLongitude:{
+          required:"This field cannot be empty!",
+		  number: "Decimal and Numbers Only"
+        },
 		eventbanner:{
           required:"Select banner",
           accept:"Please upload .jpg or .png .",
