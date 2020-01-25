@@ -342,6 +342,20 @@ $(document).ready(function () {
       return this.optional(element) || (element.files[0].size <= param)
   }, 'File size must be less than 1 MB');
 
+
+	$.validator.addMethod('latCoord', function(value, element) {
+	  console.log(this.optional(element))
+	return this.optional(element) ||
+	  value.length >= 4 && /^(?=.)-?((8[0-5]?)|([0-7]?[0-9]))?(?:\.[0-9]{1,20})?$/.test(value);
+	}, 'Your Latitude format has error.')
+
+	$.validator.addMethod('longCoord', function(value, element) {
+	  console.log(this.optional(element))
+	return this.optional(element) ||
+	  value.length >= 4 && /^(?=.)-?((0?[8-9][0-9])|180|([0-1]?[0-7]?[0-9]))?(?:\.[0-9]{1,20})?$/.test(value);
+	}, 'Your Longitude format has error.')
+
+
     $('#eventform').validate({ // initialize the plugin
        rules: {
          category:{required:true },
@@ -363,8 +377,8 @@ $(document).ready(function () {
          contact_person:{required:true },
          email:{required:true },
          event_status:{required:true },
-         txtLatitude:{required:true,number: true },
-         txtLongitude:{required:true,number: true },
+         txtLatitude:{required:true,latCoord: true },
+		 txtLongitude:{required:true,longCoord: true },
 		 eventbanner:{required:true }
         },
 
@@ -394,13 +408,13 @@ $(document).ready(function () {
         email:"Enter Email",
         event_status:"Select Status",
         txtLatitude:{
-          required:"This field cannot be empty!",
-		  number: "Decimal and Numbers Only"
-        },
+		  required:"This field cannot be empty!",
+		  latCoord: "Your Latitude format has error."
+		},
 		txtLongitude:{
-          required:"This field cannot be empty!",
-		  number: "Decimal and Numbers Only"
-        },
+		  required:"This field cannot be empty!",
+		  longCoord: "Your Longitude format has error."
+		},
 		eventbanner:{
           required:"Select banner",
           accept:"Please upload .jpg or .png .",
