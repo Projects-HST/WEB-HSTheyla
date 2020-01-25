@@ -384,11 +384,11 @@
         event_status:"Select status",
 		txtLatitude:{
           required:"This field cannot be empty!",
-		  number: "Decimal and Numbers Only"
+		  latCoord: "Decimal and Numbers Only"
         },
 		txtLongitude:{
           required:"This field cannot be empty!",
-		  number: "Decimal and Numbers Only"
+		  longCoord: "Decimal and Numbers Only"
         },
 		eventbanner:{
           required:"Select banner",
