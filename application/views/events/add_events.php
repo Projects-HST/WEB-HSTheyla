@@ -313,6 +313,20 @@
       return this.optional(element) || (element.files[0].size <= param)
   }, 'File size must be less than 1 MB');
   
+  
+	$.validator.addMethod('latCoord', function(value, element) {
+	  console.log(this.optional(element))
+	return this.optional(element) ||
+	  value.length >= 4 && /^(?=.)-?((8[0-5]?)|([0-7]?[0-9]))?(?:\.[0-9]{1,20})?$/.test(value);
+	}, 'Your Latitude format has error.')
+
+	$.validator.addMethod('longCoord', function(value, element) {
+	  console.log(this.optional(element))
+	return this.optional(element) ||
+	  value.length >= 4 && /^(?=.)-?((0?[8-9][0-9])|180|([0-1]?[0-7]?[0-9]))?(?:\.[0-9]{1,20})?$/.test(value);
+	}, 'Your Longitude format has error.')
+
+
     $('#eventform').validate({ // initialize the plugin
        rules: {
          category:{required:true },
@@ -334,8 +348,8 @@
          contact_person:{required:true},
          email:{required:true },
          event_status:{required:true },
-         txtLatitude:{required:true,number: true },
-         txtLongitude:{required:true,number: true },
+         txtLatitude:{required:true,latCoord: true },
+         txtLongitude:{required:true,longCoord: true },
 		 eventbanner:{required:true,accept: "jpg,jpeg,png", filesize: 1048576  }
         },
 
