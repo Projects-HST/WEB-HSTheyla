@@ -314,7 +314,7 @@
   }, 'File size must be less than 1 MB');
   
   
-	$.validator.addMethod('latCoord', function(value, element) {
+	 $.validator.addMethod('latCoord', function(value, element) {
 	  console.log(this.optional(element))
 	return this.optional(element) ||
 	  value.length >= 4 && /^(?=.)-?((8[0-5]?)|([0-7]?[0-9]))?(?:\.[0-9]{1,20})?$/.test(value);
@@ -382,7 +382,8 @@
 
         email:"This field cannot be empty!",
         event_status:"Select status",
-		txtLatitude:"This field cannot be empty!",
+		txtLatitude:{
+          required:"This field cannot be empty!",
 		  number: "Decimal and Numbers Only"
         },
 		txtLongitude:{
