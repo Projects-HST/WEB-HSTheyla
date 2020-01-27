@@ -17,7 +17,7 @@
                         <div class="col-xs-6 form_box">
                             <div class="left-inner-addon">
                                 <i class="fas fa-mobile-alt"></i>
-                                <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Mobile Number" maxlength="10"/>
+                                <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Mobile Number" maxlength="12"/>
                             </div>
                         </div>
                         <div class="col-xs-6 form_box">
@@ -81,12 +81,12 @@
                 <div class="col-xs-6 form_box">
                     <div class="left-inner-addon">
 
-                        <input type="text" class="form-control" name="mobile_otp" id="mobile_otp" placeholder="OTP" />
+                        <input type="text" class="form-control" name="mobile_otp" id="mobile_otp" placeholder="OTP" maxlength="4" />
                     </div>
                     <small><a  href="#" class="pull-right btn_resend_otp" onclick="resend_otp_function()" >Resend OTP</a></small>
                 </div>
                 <div class="col-xs-12">
-                    <input type="submit" class="btn btn-primary btn-block btn-login" placeholder="Password" value="Verfiy OTP" />
+                    <input type="submit" class="btn btn-primary btn-block btn-login" placeholder="Password" value="Verfiy OTP"  />
                 </div>
               </form>
 
@@ -145,7 +145,7 @@ $('#formsignup').validate({ // initialize the plugin
                 }
         },
         mobile: {
-            required: true,minlength: 10, maxlength: 10, digits: true,
+            required: true,minlength: 8, maxlength: 12, digits: true,
             remote: {
                    url: "<?php echo base_url(); ?>home/existmobile",
                    type: "post"

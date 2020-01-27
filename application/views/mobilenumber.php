@@ -40,7 +40,7 @@
             <p id="mobilenum"></p>
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" id="mobileotp" name="mobileotp"  placeholder="Enter OTP">
+            <input type="text" class="form-control" id="mobileotp" name="mobileotp"  placeholder="Enter OTP" maxlength="4">
             <p id="mobilemsg"></p>
         </div>
         <button type="submit" id="submit" class="btn btn-event btn-lg">Submit</button>
