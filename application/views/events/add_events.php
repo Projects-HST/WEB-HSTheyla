@@ -91,12 +91,12 @@
                       <div class="form-group row">
                           <label for="latitude" class="col-sm-2 col-form-label">Event Latitude <span class="error">*</span></label>
                           <div class="col-sm-4">
-                              <input class="form-control" type="text" name="txtLatitude"  id="latu" maxlength="20">
+                              <input class="form-control" type="text" name="txtLatitude"  id="latu" maxlength="9">
                               <div id="ermsg"></div> <div id="ermsg2"></div>
                           </div>
                             <label for="longitude" class="col-sm-2 col-form-label">Event Longitude <span class="error">*</span></label>
                           <div class="col-sm-4">
-                              <input class="form-control" type="text" name="txtLongitude" id="lon" maxlength="20">
+                              <input class="form-control" type="text" name="txtLongitude" id="lon" maxlength="9">
                                <div id="ermsg1"></div> <div id="ermsg3"></div>
                           </div>
                       </div>
@@ -317,13 +317,13 @@
 	$.validator.addMethod('latCoord', function(value, element) {
 	  console.log(this.optional(element))
 	return this.optional(element) ||
-	  value.length >= 4 && /^(?=.)-?((8[0-5]?)|([0-7]?[0-9]))?(?:\.[0-9]{1,6})?$/.test(value);
+	  value.length >= 4 && /^(?=.)-?((8[0-5]?)|([0-7]?[0-9]))?(?:\.[0-9]{1,20})?$/.test(value);
 	}, 'Your Latitude format has error.')
 
 	$.validator.addMethod('longCoord', function(value, element) {
 	  console.log(this.optional(element))
 	return this.optional(element) ||
-	  value.length >= 4 && /^(?=.)-?((0?[8-9][0-9])|180|([0-1]?[0-7]?[0-9]))?(?:\.[0-9]{1,6})?$/.test(value);
+	  value.length >= 4 && /^(?=.)-?((0?[8-9][0-9])|180|([0-1]?[0-7]?[0-9]))?(?:\.[0-9]{1,20})?$/.test(value);
 	}, 'Your Longitude format has error.')
 
 
