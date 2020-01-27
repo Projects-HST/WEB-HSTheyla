@@ -94,12 +94,12 @@
 
                             <label for="latitude" class="col-sm-2 col-form-label">Event Latitude <span class="error">*</span></label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" name="txtLatitude" value="<?php echo $rows->event_latitude; ?>" id="latu" maxlength="9">
+                                <input class="form-control" type="text" name="txtLatitude" value="<?php echo $rows->event_latitude; ?>" id="latu" maxlength="10">
                                 <div id="ermsg"></div> <div id="ermsg2"></div>
                             </div>
                               <label for="longitude" class="col-sm-2 col-form-label">Event Longitude <span class="error">*</span></label>
                             <div class="col-sm-4">
-                                <input class="form-control" type="text" value="<?php echo $rows->event_longitude; ?>" name="txtLongitude" id="lon" maxlength="9">
+                                <input class="form-control" type="text" value="<?php echo $rows->event_longitude; ?>" name="txtLongitude" id="lon" maxlength="10">
                                  <div id="ermsg1"></div> <div id="ermsg3"></div>
                             </div>
                         </div>
