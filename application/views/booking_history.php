@@ -43,7 +43,7 @@
 						  <p class="plan_details">Plan : <?php echo $res->plan_name; ?></p>
 						  <p class="plan_details">Number of Tickets : <?php echo $res->number_of_seats; ?></p>
 						  <p class="plan_details">Total Amount :  <?php echo $res->total_amount; ?></p>
-						  <p class="plan_details">Booking Date : <?php $sdate=$rows->show_date;  echo date('d-m-Y', strtotime($sdate)); ?> <?php //echo $res->show_date; ?>
+						  <p class="plan_details">Booking Date : <?php $sdate=$res->show_date;  echo date('d-m-Y', strtotime($sdate)); ?> <?php //echo $res->show_date; ?>
 						  <a href="<?php echo base_url(); ?>home/user_booking_history/<?php echo $res->order_id; ?>/<?php echo $res->payment_gateway; ?>" class="btn btn-default btn-xs pull-right" role="button">
 						  <i class="fa fa-eye"></i></a></p>
 				 </div>
