@@ -58,7 +58,7 @@
                     </div>
                     <div class="row" style="padding:5px;">
                         <div class="col-sm-3"><p class="summary_text">Show Date Time  : </p></div>
-                        <div class="col-sm-3"><p class="summary_value"><?php echo $rows->show_date; ?> - <?php echo $rows->show_time; ?></p></div>
+                        <div class="col-sm-3"><p class="summary_value"><?php $sdate=$rows->show_date;  echo date('d-m-Y', strtotime($sdate)); ?><?php //echo $rows->show_date; ?> - <?php echo $rows->show_time; ?></p></div>
                         <div class="col-sm-3"></div>
                     </div>
         <div class="row" style="padding:5px;">
