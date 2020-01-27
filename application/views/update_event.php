@@ -139,7 +139,7 @@ function get_times( $default = '10:00', $interval = '+15 minutes' )
 				</div>
 					<label for="longitude" class="col-sm-2 col-form-label">Event Longitude <span class="red_txt_label">*</span></label>
 				<div class="col-sm-4">
-						<input class="form-control" type="text" name="txtLongitude" id="lon" value="<?php echo $rows->event_longitude; ?>" maxlength="10">
+						<input class="form-control" type="text" name="txtLongitude" id="lon" value="<?php echo $rows->event_longitude; ?>" maxlength="11">
 						 <div id="ermsg1"></div> <div id="ermsg3"></div>
 				</div>
 		</div>
