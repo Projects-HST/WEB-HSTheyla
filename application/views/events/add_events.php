@@ -267,8 +267,8 @@
 				var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
 				google.maps.event.addListener(map, 'click', function (e)
 				{
-				 var la=e.latLng.lat();
-				 var lo=e.latLng.lng();
+				 var la=e.latLng.lat().toFixed(6) ;
+				 var lo=e.latLng.lng().toFixed(6) ;
 				 document.getElementById("latu").value=la;
 				 document.getElementById("lon").value=lo;
 				});
