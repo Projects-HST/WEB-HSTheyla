@@ -31,7 +31,7 @@
               <form action="" method="post" id="otp_form_validate" class="otp_form_validate">
                 <div class="form-group">
                   <label for="exampleInputPassword1">Please enter the OTP</label>
-                    <input type="text" class="form-control" name="mobile_otp" id="mobile_otp" placeholder="OTP" />
+                    <input type="text" class="form-control" name="mobile_otp" id="mobile_otp" placeholder="OTP" maxlength="4" />
                       <small><a  href="#" class="pull-right btn_resend_otp" onclick="resend_otp_function()" >Resend OTP</a></small>
                 </div>
                 <div class="form-group">
