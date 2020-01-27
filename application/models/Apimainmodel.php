@@ -1252,6 +1252,29 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 //#################### Reset Password End ####################//
 
 
+  function change_password($user_id,$password,$oldpassword){
+    $check="SELECT * FROM user_master WHERE id='$user_id' AND password=md5('$oldpassword')";
+    $res_check=$this->db->query($check);
+    if($res_check->num_rows()==1){
+
+      $update_sql = "UPDATE user_master SET password = md5('$password'),updated_at=NOW() WHERE id='$user_id'";
+      $update_result = $this->db->query($update_sql);
+      if($update_result){
+          $response = array("status" => "success", "msg" => "Password Updated");
+      }else{
+          $response = array("status" => "success", "msg" => "Something went wrong!");
+      }
+
+    }else{
+        $response = array("status" => "success", "msg" => "Password didn't match");
+
+
+    }
+    	return $response;
+
+  }
+
+
 //#################### Select Country ####################//
 	public function Select_country($user_id)
 	{
