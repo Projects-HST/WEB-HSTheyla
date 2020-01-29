@@ -1262,11 +1262,11 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
       if($update_result){
           $response = array("status" => "success", "msg" => "Password Updated");
       }else{
-          $response = array("status" => "success", "msg" => "Something went wrong!");
+          $response = array("status" => "error", "msg" => "Something went wrong!");
       }
 
     }else{
-        $response = array("status" => "success", "msg" => "Old Password didn't match");
+        $response = array("status" => "error", "msg" => "Old Password didn't match");
 
 
     }
