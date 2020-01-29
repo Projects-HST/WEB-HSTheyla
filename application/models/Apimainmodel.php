@@ -1266,7 +1266,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
       }
 
     }else{
-        $response = array("status" => "success", "msg" => "Password didn't match");
+        $response = array("status" => "success", "msg" => "Old Password didn't match");
 
 
     }
