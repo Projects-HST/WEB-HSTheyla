@@ -1184,7 +1184,7 @@ Class Loginmodel extends CI_Model
 					   
 					  $email_id=$rows_res->email_id;
 						if($email_id == $chk_username){
-						  $subject = "Heyla User account reactivation";
+						  $subject = "Heyla User - Change Password Request";
 						  $email_message = 'Hi,<br> Welcome! <br> You have requested to change password for Heyla account use this code to <b>'.$OTP.'</b> to verify. <br><br> With love,<br> Team Heyla <br><br><br><br> <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.<small>';
 						  //$this->load->model('mailmodel');
 						  $this->mailmodel->sendMail($email_id,$subject,$email_message);
@@ -1253,7 +1253,7 @@ Class Loginmodel extends CI_Model
 			   $OTP = $rows_res->mobile_otp;
 			  }
 				if($email_id == $user_name){
-				 $subject = "Heyla User New Password";
+				 $subject = "Heyla User - Change Password Request";
 				 $email_message = 'Hi,<br> Welcome! <br> You have requested to change password for Heyla account use this code to <b>'.$OTP.'</b> to verify. <br><br> With love,<br> Team Heyla <br><br><br><br> <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.<small>';
 				 //$this->load->model('mailmodel');
 				 $this->mailmodel->sendMail($email_id,$subject,$email_message);
