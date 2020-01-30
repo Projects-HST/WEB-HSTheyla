@@ -1073,6 +1073,8 @@ Class Loginmodel extends CI_Model
 	  }
 	  
 	  
+	//-----------------------------------------------------------------//  
+	  
 	function chk_account($chk_username){
 		$select_mobile="SELECT * FROM user_master WHERE (mobile_no='$chk_username' or email_id='$chk_username')";
 		$res_mobile= $this->db->query($select_mobile);
@@ -1166,40 +1168,107 @@ Class Loginmodel extends CI_Model
 		}
 	}
 
+//-----------------------------------------------------------------//
 
+		function pass_chk_account($chk_username){
+		$select_mobile="SELECT * FROM user_master WHERE (mobile_no='$chk_username' or email_id='$chk_username')";
+		$res_mobile= $this->db->query($select_mobile);
+		if($res_mobile->num_rows()==1){
+			$result=$res_mobile->result();
+			  foreach($result as $rows_res){}
+					  $digits = 4;
+					  $OTP = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT);
+					  
+					  $update="UPDATE user_master SET mobile_otp='$OTP' WHERE id='$rows_res->id'";
+					  $excute=$this->db->query($update);
+					   
+					  $email_id=$rows_res->email_id;
+						if($email_id == $chk_username){
+						  $subject = "Heyla User account reactivation";
+						  $email_message = 'Hi,<br> Welcome! <br> You have requested to change password for Heyla account use this code to <b>'.$OTP.'</b> to verify. <br><br> With love,<br> Team Heyla <br><br><br><br> <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.<small>';
+						  //$this->load->model('mailmodel');
+						  $this->mailmodel->sendMail($email_id,$subject,$email_message);
+						  echo "OTPemail";
+						}else{
+						  $mobile_no=$rows_res->mobile_no;
+						 // $this->load->model('smsmodel');
+						  $mobile_message = 'Dear user, Use the code '.$OTP.' to change passwaord varification.';
+						  $this->smsmodel->sendOTPtomobile($mobile_no,$mobile_message);
+						  echo "OTPsms";
+						}
+		}else{
+			echo "Error";
+		}
+   
+	}
+  
+	  function pass_reactivate_account($email_or_mobile,$code){
+			$check_user_deactivated="SELECT * FROM user_master WHERE (mobile_no='$email_or_mobile' or email_id='$email_or_mobile') AND mobile_otp='$code'";
+			$res_checked= $this->db->query($check_user_deactivated);
+			if($res_checked->num_rows()==1){
+				$result=$res_checked->result();
+				foreach($result as $rows_res){}
+				$digits = 6;
+				$OTP = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT);
+				$change_password = md5($OTP);
+				
+				$update="UPDATE user_master SET password='$change_password' WHERE (mobile_no='$email_or_mobile' or email_id='$email_or_mobile')";
+				$excute=$this->db->query($update);
 
-
-
-/* 	  function ac_activate($name,$mobile,$email){
-     
-        $to="hello@heylaapp.com";
-        $subject="Account Reactivation Request";
-        $htmlContent = '
-         <html>
-         <head>
-         <title>Contact Form</title>
-            </head>
-            <body>
-              <div class="mail-content">
-                <p>Name - '.$name.'</p>
-                <p>Email - '.$email.'</p>
-                <p>Mobile - '.$mobile.'</p>
-              </div>
-            </body>
-         </html>';
-     $headers = "MIME-Version: 1.0" . "\r\n";
-     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-     // Additional headers
-	 $headers .= 'From: Account Reactivation<'.$email.'>' . "\r\n";
-     //$headers .= 'From: '.$email. "\r\n";
-	
-     $sent= mail($to,$subject,$htmlContent,$headers);
-     if($sent){
-       echo "sucess";
-     }else{
-        echo "failed";
-     }
-
-    } */
+				$email_id=$rows_res->email_id;
+				if($email_id == $email_or_mobile){
+				  $subject = "Heyla User New Password";
+				  $email_message = 'Hi,<br> Welcome! <br> You have requested to change password for Heyla account use this password to <b>'.$OTP.'</b> change your password. <br><br> With love,<br> Team Heyla <br><br><br><br> <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.<small>';
+				  //$this->load->model('mailmodel');
+				  $this->mailmodel->sendMail($email_id,$subject,$email_message);
+				}else{
+				  $mobile_no=$rows_res->mobile_no;
+				   // $this->load->model('smsmodel');
+				  $mobile_message = 'Dear user, Use the passsword '.$OTP.' to change password your Heyla account.';
+				  $this->smsmodel->sendOTPtomobile($mobile_no,$mobile_message);
+				}
+				
+				if($excute){
+				   $data= array("status" => "success","msg" => "Otp Verified Successfully");
+					return $data;
+				}else{
+					 $data= array("status" => "error","msg" => "Otp Error");
+					return $data;
+				}
+			}else{
+				 $data= array("status" => "error","msg" => "Otp Error");
+				return $data;
+			}
+	  }
+	  
+	  
+	function pass_resend_otp($user_name){
+		$check_user_deactivated="SELECT * FROM user_master WHERE (mobile_no='$user_name' or email_id='$user_name')";
+		$res_checked= $this->db->query($check_user_deactivated);
+		$result=$res_checked->result();
+		
+		if($res_checked->num_rows()==1){
+			 foreach($result as $rows_res){
+			   $email_id=$rows_res->email_id;
+			   $OTP = $rows_res->mobile_otp;
+			  }
+				if($email_id == $user_name){
+				 $subject = "Heyla User New Password";
+				 $email_message = 'Hi,<br> Welcome! <br> You have requested to change password for Heyla account use this code to <b>'.$OTP.'</b> to verify. <br><br> With love,<br> Team Heyla <br><br><br><br> <small>This is an auto-generated email intended for notification purpose only. Do not reply to this email.<small>';
+				 //$this->load->model('mailmodel');
+				 $this->mailmodel->sendMail($email_id,$subject,$email_message);
+				  echo "OTP sent to your email.";
+				}else{
+				  $mobile_no=$rows_res->mobile_no;
+				 // $this->load->model('smsmodel');
+				  $mobile_message = 'Dear user, Use the code '.$OTP.' to change passwaord varification.';
+				  $this->smsmodel->sendOTPtomobile($mobile_no,$mobile_message);
+				  echo "OTP sent to your mobile.";
+				}
+		}else{
+			echo "Error";
+		}
+	}
+//-----------------------------------------------------------------//
 
 }

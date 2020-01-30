@@ -1,34 +1,37 @@
 <script src="<?php echo base_url(); ?>assets/front/js/jquery.cookie.js"></script>
+ 
+<div class="container-fluid signinbg">
+    <div class="row">
+        <div class="col-md-3"></div>
+		<div class="col-md-6 col-sm-12 col-md-auto signin-div">
+		
 
-    <section class="">
-      <div class="container">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="reset_section">
-          <div class="verify-text" style="    margin-bottom: 100px;">
-            <center>
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="reset_section">
+		<div class="verify-text" style="margin-bottom:80px;padding-top:20px;">
+		     <center>
                 <img src="<?php echo base_url(); ?>assets/front/images/forgot_password.png" class="img-responsive imgsize_80 forgot_img">
-              <form action="" method="post" id="resetform" class="resetform">
+              <form action="" method="post" id="activateform" class="activateform">
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Please enter your registered mobile number to reset your password</label>
-                  <input type="text" class="form-control" id="mobile_number" name="mobile_number" placeholder="">
+				<p class="login-heading">Change Password</p>
+				  <p>To change password your Heyla account kindly <br>submit the details.</p>
+				  <input type="text" class="form-control" name="username" id="username"  placeholder="Mobile Number/Email ID" maxlength="50" />
                 </div>
                 <div class="form-group">
-
                   <input type="submit" class=" btn_no_radius btn btn-login" id="" value="Submit">
                 </div>
               </form>
             </center>
-          </div>
-        </div>
-
-
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="otp_form">
-          <div class="verify-text" style="    margin-bottom: 100px;">
+		</div>
+		</div>
+		
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="otp_form">
+          <div class="verify-text" style="margin-bottom:80px;">
             <center>
           <img src="<?php echo base_url(); ?>assets/front/images/forgot_password.png" class="img-responsive imgsize_80 forgot_img">
               <form action="" method="post" id="otp_form_validate" class="otp_form_validate">
                 <div class="form-group">
                   <label for="exampleInputPassword1">Please enter the OTP</label>
-                    <input type="text" class="form-control" name="mobile_otp" id="mobile_otp" placeholder="OTP" />
+                    <input type="text" class="form-control" name="mobile_otp" id="mobile_otp" placeholder="OTP" maxlength="4" />
                       <small><a  href="#" class="pull-right btn_resend_otp" onclick="resend_otp_function()" >Resend OTP</a></small>
                 </div>
                 <div class="form-group">
@@ -39,13 +42,14 @@
             </center>
           </div>
         </div>
+		
+		<div class="col-md-3"></div>
+	</div>
+	</div>
+</div>
 
-
-      </div>
-    </section>
-
+ 
     <style>
-
     .modal {
       text-align: center;
       padding: 0!important;
@@ -99,43 +103,38 @@ $('#otp_form').hide();
 
    $('.verify-page').height($(window).height());
 
-
-
-
-
-
-   $('#resetform').validate({ // initialize the plugin
+   $('#activateform').validate({ // initialize the plugin
        rules: {
-           mobile_number: {required: true},
+           username: {required: true},
        },
        messages: {
-           mobile_number: "Mobile number is required!"
+           username: "This field cannot be empty!"
        },
        submitHandler: function(form) {
-         var mobile=$('#mobile_number').val();
+         var mobile=$('#username').val();
 
          $.cookie("mobile_cookie", mobile);
            $.ajax({
-               url: "<?php echo base_url(); ?>home/reset_password",
+               url: "<?php echo base_url(); ?>home/pass_chk_username",
                type: 'POST',
-               data: $('#resetform').serialize(),
+               data: $('#activateform').serialize(),
                success: function(response) {
-
-                   if (response == "OTP Resent") {
-            swal('OTP sent to mobile number.');
-            $('#otp_form').show();
-            $('#reset_section').hide();
-                   } else {
-                       sweetAlert("Oops...", response, "error");
-                   }
+					if (response == "OTPemail") {
+						swal('OTP sent to your email.');
+						$('#otp_form').show();
+						$('#reset_section').hide();
+					} else if (response == "OTPsms") {
+						swal('OTP sent to your mobile.');
+						$('#otp_form').show();
+						$('#reset_section').hide();
+					}
+					 else {
+						   sweetAlert("Oops...", response, "error");
+					}
                }
            });
        }
    });
-
-
-
-
 
    $('#otp_form_validate').validate({
        rules: {
@@ -147,25 +146,22 @@ $('#otp_form').hide();
            mobile_otp: { required:"OTP cannot be empty!"}
        },
        submitHandler: function(form) {
-           var mobile=$.cookie("mobile_cookie");
-           var ency_mobile=btoa(mobile*987654);
-
+           var user_name=$.cookie("mobile_cookie");
            var mobile_otp=$('#mobile_otp').val();
            $.ajax({
-               url: "<?php echo base_url(); ?>home/password_otp_check",
+               url: "<?php echo base_url(); ?>home/pass_otp_check",
                type: 'POST',
                dataType : 'json',
-               data: { mobile_otp: mobile_otp,mobile : mobile},
+               data: { mobile_otp: mobile_otp,user_name : user_name},
                success: function(response) {
-
                  if (response.status== "success") {
                    $.removeCookie("mobile_cookie");
                      swal({
-                        title: " ",
-                        text: "Mobile number verified.",
+                        title: "Success",
+                        text: "New Password send to your Mobile/Email",
                         type: "success"
                     }).then(function() {
-                        location.href = '<?php echo base_url(); ?>home/reset/'+ency_mobile+'';
+                        location.href = '<?php echo base_url(); ?>home/change_password';
                     });
                    } else {
                        sweetAlert("Oops...", response.msg, "error");
@@ -175,18 +171,18 @@ $('#otp_form').hide();
        }
    });
 
+   
    function resend_otp_function(){
-     var mobile=$.cookie("mobile_cookie");
+     var user_name=$.cookie("mobile_cookie");
      $.ajax({
-         method: "post",
-       url: "<?php echo base_url(); ?>home/mobile_otp_update",
-       data: {
-           mobile: mobile
+        method: "post",
+		url: "<?php echo base_url(); ?>home/pass_resend_otp",
+		data: {
+           user_name: user_name
        },
-       cache: false,
-       success: function(response){
+		 cache: false,
+		 success: function(response){
          swal(response);
-
        }
      });
    }

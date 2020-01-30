@@ -853,7 +853,7 @@ class Home extends CI_Controller {
 		}
 
 
-			public function remove_img(){
+	public function remove_img(){
 		 $datas=$this->session->userdata();
 		 $user_id=$this->session->userdata('id');
 		 $user_type=$this->session->userdata('user_type');
@@ -951,9 +951,17 @@ class Home extends CI_Controller {
 			$user_id=$this->session->userdata('id');
 			$user_role=$this->session->userdata('user_role');
 			if($user_role==3 || $user_role==2){
-				$this->load->view('dash_header');
-				$this->load->view('change_password');
-				$this->load->view('dash_footer');
+				$datas['res']=$this->loginmodel->getuserinfo($user_id);
+				foreach($datas['res'] as $rows){
+					$user_password = $rows->password;
+				};
+				if ($user_password == ''){
+					redirect('/passwordcheck');
+				}else {
+					$this->load->view('dash_header');
+					$this->load->view('change_password');
+					$this->load->view('dash_footer');
+				}
 			}else{
 				redirect('/');
 			}
@@ -1244,6 +1252,8 @@ class Home extends CI_Controller {
 			redirect('/');
 		}
 
+//-----------------------------------------------------------------//
+
 		public function reactivate(){
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
@@ -1272,5 +1282,38 @@ class Home extends CI_Controller {
 			$user_name=$this->input->post('user_name');
 			$datas =$this->loginmodel->username_resend_otp($user_name);
 		}
+		
+//-----------------------------------------------------------------//
+		public function password_check(){
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+
+				$this->load->view('front_header');
+				$this->load->view('password_check');
+				$this->load->view('front_footer');
+		}
+
+		public function pass_chk_username()
+		{
+			$chk_username = $this->input->post('username');
+			$data = $this->loginmodel->pass_chk_account($chk_username); 
+		}
+
+		public function pass_otp_check()
+		{
+			$mobile_otp = $this->input->post('mobile_otp');
+			$user_name = $this->input->post('user_name');
+			$data['res']= $this->loginmodel->pass_reactivate_account($user_name,$mobile_otp); 
+			echo json_encode($data['res']);
+		}
+
+		public function pass_resend_otp(){
+			$user_name=$this->input->post('user_name');
+			$datas =$this->loginmodel->pass_resend_otp($user_name);
+		}
+//-----------------------------------------------------------------//		
+		
+		
 		
 }

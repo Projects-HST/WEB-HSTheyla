@@ -87,6 +87,7 @@ $route['user_points'] = 'home/checkpoints';
 $route['deactive'] = 'home/deactive';
 $route['logout'] = 'home/logout';
 $route['reactivate'] = 'home/reactivate';
+$route['passwordcheck'] = 'home/password_check';
 $route['webflow'] = 'eventlist/webflow';
 $route['appflow'] = 'eventlist/appflow';
 $route['(:any)/eventdetails/(:any)/(:any)'] = 'eventlist/eventdetails/$2/$3';
