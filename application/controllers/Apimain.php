@@ -712,6 +712,43 @@ class Apimain extends CI_Controller {
 
 //-----------------------------------------------//
 
+
+	public function change_password()
+	{
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
+
+		if(!$this->checkMethod())
+		{
+			return FALSE;
+		}
+
+		if($_POST == FALSE)
+		{
+			$res = array();
+			$res["opn"] = "Reset Password";
+			$res["scode"] = 204;
+			$res["message"] = "Input error";
+
+			echo json_encode($res);
+			return;
+		}
+
+		$user_id = '';
+		$password = '';
+
+		$user_id = $this->input->post("user_id");
+	 	$password = $this->input->post("password");
+		$oldpassword = $this->input->post("old_password");
+
+		$data['result']=$this->apimainmodel->change_password($user_id,$password,$oldpassword);
+		$response = $data['result'];
+		echo json_encode($response);
+	}
+
+//-----------------------------------------------//
+
+//-----------------------------------------------//
+
 	public function selectCountry()
 	{
 		$_POST = json_decode(file_get_contents("php://input"), TRUE);

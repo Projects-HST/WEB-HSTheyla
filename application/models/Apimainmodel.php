@@ -441,7 +441,7 @@ class Apimainmodel extends CI_Model {
 
 		if ( $user_id != "") {
 
-		    $sql = "SELECT A.id as userid, A.user_name, A.mobile_no, A.email_id, A.email_verify, A.login_count, A.user_role, B.name, B.birthdate, B.gender, B.occupation, B.address_line1, B.address_line2, B.address_line3, B.country_id, B. state_id, B.city_id, B.zip, B.user_picture, B.newsletter_status, B.referal_code, C.user_role_name FROM user_master A, user_details B, user_role_master C WHERE A.id=B.user_id AND A.user_role = C.id AND A.id ='".$user_id."'";
+		    $sql = "SELECT A.id as userid, A.user_name, A.mobile_no, A.email_id, A.email_verify, A.login_count, A.user_role, B.name, if(B.birthdate='0000-00-00','',B.birthdate) as birthdate, B.gender, B.occupation, B.address_line1, B.address_line2, B.address_line3, B.country_id, B. state_id, B.city_id, B.zip, B.user_picture, B.newsletter_status, B.referal_code, C.user_role_name FROM user_master A, user_details B, user_role_master C WHERE A.id=B.user_id AND A.user_role = C.id AND A.id ='".$user_id."'";
 			$user_result = $this->db->query($sql);
 			$ress = $user_result->result();
 
@@ -1250,6 +1250,29 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 			return $response;
 	}
 //#################### Reset Password End ####################//
+
+
+  function change_password($user_id,$password,$oldpassword){
+    $check="SELECT * FROM user_master WHERE id='$user_id' AND password=md5('$oldpassword')";
+    $res_check=$this->db->query($check);
+    if($res_check->num_rows()==1){
+
+      $update_sql = "UPDATE user_master SET password = md5('$password'),updated_at=NOW() WHERE id='$user_id'";
+      $update_result = $this->db->query($update_sql);
+      if($update_result){
+          $response = array("status" => "success", "msg" => "Password Updated");
+      }else{
+          $response = array("status" => "error", "msg" => "Something went wrong!");
+      }
+
+    }else{
+        $response = array("status" => "error", "msg" => "Old Password didn't match");
+
+
+    }
+    	return $response;
+
+  }
 
 
 //#################### Select Country ####################//
