@@ -721,7 +721,7 @@ foreach($event_details as $res){
 						text: " Review Updated.",
 						type: "success"
 						}).then(function() {
-						location.reload();
+							location.reload();
 						});
 				 }
 			}

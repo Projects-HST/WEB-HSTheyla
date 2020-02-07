@@ -10,7 +10,7 @@ class Home extends CI_Controller {
 		$this->load->model('loginmodel');
 		$this->load->model('apimainmodel');
 	//	$this->load->model('facebook');
-	  $this->load->model('smsmodel');
+		$this->load->model('smsmodel');
 		$this->load->model('eventlistmodel');
 		$this->load->model('organizermodel');
 		$this->load->model('organizerbookingmodel');
@@ -43,12 +43,18 @@ class Home extends CI_Controller {
 		}
 
 	}
-
-
+		public function chk_active_users()
+		{
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			if(!empty($user_id)){
+				$data = $this->loginmodel->chk_user_actvie($user_id);
+			}
+		}
 
 		public function about()
 		{
-
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
 			$user_role=$this->session->userdata('user_role');
@@ -984,6 +990,7 @@ class Home extends CI_Controller {
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
 			$user_role=$this->session->userdata('user_role');
+			
 			if($user_role==3 || $user_role==2){
 			$datas['user_points'] = $this->loginmodel->get_points($user_id);
 			$this->load->view('dash_header');

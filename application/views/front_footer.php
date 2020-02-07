@@ -232,6 +232,24 @@ $(document).ready(function() {
 });
 
 
+function chk_active_users(){
+ $.ajax({
+		url: "<?php echo base_url(); ?>home/chk_active_users",
+		type: 'POST',
+		//data: $('#formsignup').serialize(),
+		success: function(response) {
+			if (response == "logout") {
+				swal({
+					  title: "Account Deactivated",
+					  text: "Please contact admin!",
+					  icon: "info"
+				  })
+				  setTimeout(function(){ location.href = '<?php echo base_url(); ?>/home/logout'; }, 2000);
+			} 
+		}
+	});
+}
+
 
 </script>
 </html>

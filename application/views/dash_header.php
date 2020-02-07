@@ -26,8 +26,9 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'UA-92904528-2');
+  
+  
 </script>
 </head>
 
@@ -36,7 +37,7 @@
   cursor: pointer;
 }
 </style>
-<body>
+<body onload="chk_active_users()">
 <div id="navbar-wrapper">
       <header>
           <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color:#478ecc;">

@@ -276,11 +276,20 @@ Class Loginmodel extends CI_Model
 
    }
 
-
    function getuserinfo($user_id){
      $quer="SELECT us.*,ud.* FROM user_master AS us LEFT JOIN user_details AS ud ON us.id=ud.user_id WHERE us.id='$user_id'";
      $resultset=$this->db->query($quer);
      return $resultset->result();
+   }
+
+   function chk_user_actvie($user_id){
+		$quer="SELECT * FROM user_master WHERE id='$user_id' AND status = 'N'";
+		$resultset=$this->db->query($quer);
+		  if($resultset->num_rows()==1){
+			echo "logout";
+		 }else{
+			echo "login";
+		 }
    }
 
    function check_email($email){

@@ -32,11 +32,17 @@
                 <td><?php echo $value->event_name;?> </td>
                 <td><?php echo $value->event_rating; ?></td>
                 <td><?php echo $value->comments;?></td>
-
-               <td><a href="<?php echo base_url(); ?>reviews/display/<?php echo $value->id; ?>/Y/<?php echo $value->event_id; ?>/<?php echo $value->user_id; ?>" class="btn btn-success waves-effect waves-light">
+				<td>
+				<a href="#" onclick="return confirm_display(<?php echo $value->id; ?>,'Y',<?php echo $value->event_id;?>,<?php echo $value->user_id; ?>)" class="btn btn-success waves-effect waves-light">Display </a>
+                &nbsp;
+				<a href="#" onclick="return confirm_archive(<?php echo $value->id; ?>,'A',<?php echo $value->event_id;?>,<?php echo $value->user_id; ?>)" class="btn btn-warning waves-effect waves-light">Archive </a>
+			   <!--
+			   <a href="<?php echo base_url(); ?>reviews/display/<?php echo $value->id; ?>/Y/<?php echo $value->event_id; ?>/<?php echo $value->user_id; ?>" class="btn btn-success waves-effect waves-light">
                    Display </a>
                    &nbsp;<a href="<?php echo base_url(); ?>reviews/archive/<?php echo $value->id; ?>/A/<?php echo $value->event_id; ?>/<?php echo $value->user_id; ?>" class="btn btn-warning waves-effect waves-light">
-             Archive</a>  </td>
+             Archive</a>  
+			 -->
+			 </td>
             </tr>
           <?php $i++; }  } else{ echo "<p class=card-text> No Reviews Found </p>";}?>
             </tbody>
@@ -67,4 +73,38 @@
 		"ordering": false
     });
 } );
+
+function confirm_display(id,sts,event_id,userid){
+  swal({
+      title: '',
+      text: "Are you sure want to display?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+  }).then(function(){
+		window.location.href='<?php echo base_url(); ?>reviews/display/'+id+'/'+sts+'/'+event_id+'/'+userid;
+  }).catch(function(reason){
+
+  });
+}
+
+function confirm_archive(id,sts,event_id,userid){
+  swal({
+      title: '',
+      text: "Are you sure want to archive?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+  }).then(function(){
+		window.location.href='<?php echo base_url(); ?>reviews/archive/'+id+'/'+sts+'/'+event_id+'/'+userid;
+  }).catch(function(reason){
+
+  });
+}
 </script>

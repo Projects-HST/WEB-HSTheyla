@@ -45,8 +45,9 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'UA-92904528-2');
+
+		
     </script>
 </head>
 
@@ -55,14 +56,13 @@
 .modal-dialog{
   max-width:700px;
 }
-
 .dropdown-menu>li:hover, .dropdown-menu>li:focus {
     color: #262626;
     text-decoration: none;
     background-color: #f5f5f5;
 }
 </style>
-<body>
+ <body onload="chk_active_users()"> 
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color:#fff;z-index: 100">

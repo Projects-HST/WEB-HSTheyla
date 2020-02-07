@@ -66,13 +66,19 @@ class Reviews extends CI_Controller
 	
     public function display($id,$sts,$event_id,$userid)
     {
+/* 		echo $id;
+		echo $sts;
+		echo $event_id;
+		echo $userid;
+		
+		exit; */
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
        if($user_role == 1 || $user_role == 4)
        {
-		    $datas = $this->reviewsmodel->reviews_status($id,$sts,$user_id,$event_id,$userid);
-				if($datas['status']=="success"){
+		  $datas = $this->reviewsmodel->reviews_status($id,$sts,$user_id,$event_id,$userid);
+			if($datas['status']=="success"){
 		       $this->session->set_flashdata('msg','Updated Successfully');
 			   redirect('reviews/view_reviews');
 		     }else{
@@ -87,20 +93,27 @@ class Reviews extends CI_Controller
 
      public function archive($id,$sts,$event_id,$userid)
     {
+		
+/* 		echo $id;
+		echo $sts;
+		echo $event_id;
+		echo $userid;
+		exit; */
+		
     	$datas=$this->session->userdata();
 	    $user_id=$this->session->userdata('id');
 	    $user_role=$this->session->userdata('user_role');
       if($user_role == 1 || $user_role == 4)
       {
-      $datas = $this->reviewsmodel->reviews_status($id,$sts,$user_id,$event_id,$userid);
-	  if($datas['status']=="success")
-       {
-	       $this->session->set_flashdata('msg','Updated Successfully');
-		   redirect('reviews/view_reviews');
-       }else{
-           $this->session->set_flashdata('msg','Faild To Update');
-	     redirect('reviews/view_reviews');
-          }
+		$datas = $this->reviewsmodel->reviews_status($id,$sts,$user_id,$event_id,$userid);
+			if($datas['status']=="success")
+			{
+				$this->session->set_flashdata('msg','Updated Successfully');
+				redirect('reviews/view_reviews');
+			}else{
+				$this->session->set_flashdata('msg','Faild To Update');
+				redirect('reviews/view_reviews');
+			}
       }else{
      	 redirect('/');
       }
@@ -116,7 +129,5 @@ class Reviews extends CI_Controller
 		redirect('/reviews/home');
 	}
    
-
-
 }
 ?>
