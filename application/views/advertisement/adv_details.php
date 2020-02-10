@@ -92,7 +92,7 @@
                         <div class="form-group row">
                              <label for="Banner" class="col-sm-2 col-form-label">Banner </label>
                             <div class="col-sm-4">
-                                <input type="file" name="eventbanner" id="file_upload" class="form-control" accept="image/*" >
+                                <input type="file" name="eventbanner" id="eventbanner" class="form-control" accept="image/*" >
                                 <span style="color: red;">Size: 985*550px</span>
                             </div>
                             <div class="col-sm-4">
@@ -236,6 +236,10 @@ function confirmGetMessage(adid)
 	  autoclose: true
 	});
 
+  $.validator.addMethod('filesize', function (value, element, param) {
+      return this.optional(element) || (element.files[0].size <= param)
+  }, 'File size must be less than 1 MB');
+  
     $('#aform').validate({ // initialize the plugin
        rules: {
          start_date:{required:true },
@@ -243,6 +247,7 @@ function confirmGetMessage(adid)
          start_time:{required:true },
          end_time:{required:true },
          adv_plan:{required:true },
+		 eventbanner:{required:true,accept: "jpg,jpeg,png", filesize: 1048576  },
          status:{required:true }
         },
         messages: {
@@ -251,6 +256,11 @@ function confirmGetMessage(adid)
         end_date:"This field cannot be empty!",
         end_time:"Select end time",
         adv_plan:"Select plan ",
+		eventbanner:{
+          required:"Select banner",
+          accept:"Please upload .jpg or .png .",
+          fileSize:"File must be JPG or PNG, less than 1MB"
+        },
         status:"Select status",
                },
          });

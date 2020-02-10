@@ -103,17 +103,17 @@
                          <div class="form-group row">
                              <label for="Banner" class="col-sm-2 col-form-label">Banner</label>
                             <div class="col-sm-4">
-                                <input type="file" name="eventbanner" id="file_upload" class="form-control" accept="image/*" >
+                                <input type="file" name="eventbanner" id="eventbanner" class="form-control" accept="image/*" >
                                 <input type="hidden" name="currentcpic" class="form-control" value="<?php echo $res->banner;?>" >
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-4"><img src="<?php echo base_url(); ?>assets/events/slider/<?php echo $res->banner; ?>" class="img-circle">
                             </div>
-                        </div
+                        </div>
+					
                            <div class="form-group">
                               <label class="col-sm-4 col-form-label"></label>
                               <button type="submit" class="btn btn-success waves-effect waves-light">
                               Save </button>
-
                            </div>
                      </div>
                      </form>
@@ -144,7 +144,10 @@
 		 autoclose: true
       });
 
-
+  $.validator.addMethod('filesize', function (value, element, param) {
+      return this.optional(element) || (element.files[0].size <= param)
+  }, 'File size must be less than 1 MB');
+  
     $('#aform').validate({ // initialize the plugin
        rules: {
          start_date:{required:true },
@@ -152,6 +155,7 @@
          start_time:{required:true },
          end_time:{required:true },
          adv_plan:{required:true },
+		 eventbanner:{required:false,accept: "jpg,jpeg,png", filesize: 1048576  },
          status:{required:true }
         },
         messages: {
@@ -160,6 +164,10 @@
         end_date:"Select end date",
         end_time:"Select end time",
         adv_plan:"Select plan",
+		eventbanner:{
+          accept:"Please upload .jpg or .png .",
+          fileSize:"File must be JPG or PNG, less than 1MB"
+        },
         status:"Select status",
                },
          });

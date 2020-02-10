@@ -26,8 +26,8 @@ function add_advertisement_plan_details($user_id,$planname,$planrate)
     {
 
         $query="INSERT INTO advertisement_plan(plan_name,plan_rate,created_by,created_at) VALUES ('$planname','$planrate','$user_id',NOW()) ";
-         $resultset=$this->db->query($query);
-	        $data= array("status"=>"success");
+       $resultset=$this->db->query($query);
+	   $data= array("status"=>"success");
 	     return $data;
     }else{
        $data= array("status"=>"Already Exist");

@@ -269,6 +269,7 @@ class Advertisement extends CI_Controller
         $status       = $this->input->post('status');
 
 		$currentcpic    = $this->input->post('currentcpic');
+		
        	$event_pic      = $_FILES['eventbanner']['name'];
         $temp = pathinfo($event_pic, PATHINFO_EXTENSION);
         $file_name      = time() . rand(1, 5) . rand(6, 10);
