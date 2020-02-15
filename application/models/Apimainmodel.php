@@ -3034,12 +3034,12 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
         $insert="INSERT INTO organiser_request(user_id,message,req_status,created_at) VALUES ('$user_id','I want to become a Organiser  with Heyla','Pending',NOW())";
         $excute_query = $this->db->query($insert);
         if($excute_query){
-           $response = array("status" => "success", "msg" => "Your request is accepted and waiting for approval!.");
+           $response = array("status" => "success", "msg" => "Your application to become an organizer has been registered. We will get back to you shortly.");
         }else{
            $response = array("status" => "error", "msg" => "Something went Wrong!");
         }
     }else{
-      $response=array("status"=>"error","msg"=>"Your Request Already Exists!");
+      $response=array("status"=>"error","msg"=>"You have already requested and waiting for Approval");
     }
     return $response;
 
@@ -3056,7 +3056,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
       foreach($result as $rows){}
         $status=$rows->req_status;
         if($status=='Pending'){
-          $response=array("status"=>"success","msg"=>"Your Request Is Pending waiting for Approval!");
+          $response=array("status"=>"success","msg"=>"Your application to become an organizer has been registered. We will get back to you shortly.");
         }else if($status=='Approved'){
           $response=array("status"=>"success","msg"=>"Your Request Is Approved!.");
         }else{
