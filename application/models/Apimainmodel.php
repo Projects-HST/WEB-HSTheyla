@@ -3028,10 +3028,10 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 
   function user_organiser_request($user_id){
 
-   $check="SELECT * FROM organiser_request where user_id='$user_id'";
+    $check="SELECT * FROM organiser_request where user_id='$user_id'";
     $excute_query = $this->db->query($check);
     if($excute_query->num_rows()==0){
-        $insert="INSERT INTO organiser_request(user_id,message,req_status,created_at,created_by) VALUES ('$user_id','I want to become a Organiser  with Heyla','Pending','$user_id',NOW())";
+        $insert="INSERT INTO organiser_request(user_id,message,req_status,created_at) VALUES ('$user_id','I want to become a Organiser  with Heyla','Pending',NOW())";
         $excute_query = $this->db->query($insert);
         if($excute_query){
            $response = array("status" => "success", "msg" => "Your request is accepted and waiting for approval!.");

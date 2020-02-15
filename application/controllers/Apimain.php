@@ -2417,25 +2417,23 @@ class Apimain extends CI_Controller {
 
 		$_POST = json_decode(file_get_contents("php://input"), TRUE);
 
-			if(!$this->checkMethod())
-			{
-				return FALSE;
-			}
+		if(!$this->checkMethod())
+		{
+			return FALSE;
+		}
 
-			if($_POST == FALSE)
-			{
-				$res = array();
-				$res["opn"] = "User";
-				$res["scode"] = 204;
-				$res["message"] = "Input error";
+		if($_POST == FALSE)
+		{
+			$res = array();
+			$res["opn"] = "Input error";
+			$res["scode"] = 204;
+			$res["message"] = "Input error";
 
-				echo json_encode($res);
-				return;
-			}
+			echo json_encode($res);
+			return;
+		}
 
-
-	 	$user_id = $this->input->post("user_id");
-
+	$user_id = $this->input->post("user_id");
 		$data['result']=$this->apimainmodel->user_organiser_request($user_id);
 		$response = $data['result'];
 		echo json_encode($response);
