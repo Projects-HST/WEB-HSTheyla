@@ -2441,6 +2441,38 @@ class Apimain extends CI_Controller {
 
 //-----------------------------------------------//
 
+
+//------------------User organiser Request-----------------------------//
+
+	public function check_organiser_request()
+	{
+
+		$_POST = json_decode(file_get_contents("php://input"), TRUE);
+
+		if(!$this->checkMethod())
+		{
+			return FALSE;
+		}
+
+		if($_POST == FALSE)
+		{
+			$res = array();
+			$res["opn"] = "Input error";
+			$res["scode"] = 204;
+			$res["message"] = "Input error";
+
+			echo json_encode($res);
+			return;
+		}
+
+	$user_id = $this->input->post("user_id");
+		$data['result']=$this->apimainmodel->check_organiser_request($user_id);
+		$response = $data['result'];
+		echo json_encode($response);
+	}
+
+//-----------------------------------------------//
+
 //------------------User Notifications-----------------------------//
 
 	public function new_notification()

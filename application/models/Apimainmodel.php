@@ -3045,6 +3045,27 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
 
 
   }
+
+  function check_organiser_request($user_id){
+    $check="SELECT * FROM organiser_request where user_id='$user_id'";
+    $excute_query = $this->db->query($check);
+    if($excute_query->num_rows()==0){
+        $response=array("status"=>"error","msg"=>"No request found");
+    }else{
+      $result=$excute_query->result();
+      foreach($result as $rows){}
+        $status=$rows->req_status;
+        if($status=='Pending'){
+          $response=array("status"=>"success","msg"=>"Your Request Is Pending waiting for Approval!");
+        }else if($status=='Approved'){
+          $response=array("status"=>"success","msg"=>"Your Request Is Approved!.");
+        }else{
+          $response=array("status"=>"success","msg"=>"Your Request Is Denied Please Contact Heyla team!");
+        }
+
+    }
+    return $response;
+  }
   //#################### User Organiser Request ###############//
 
 
