@@ -3056,7 +3056,8 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
       foreach($result as $rows){}
         $status=$rows->req_status;
         if($status=='Pending'){
-          $response=array("status"=>"success","msg"=>"Your application to become an organizer has been registered. We will get back to you shortly.");
+          $response=array("status"=>"success","msg"=>"You have been approved as an organizer!.<br> 
+Sign in to Heyla web app to create and organize events.");
         }else if($status=='Approved'){
           $response=array("status"=>"success","msg"=>"Approved");
         }else{
