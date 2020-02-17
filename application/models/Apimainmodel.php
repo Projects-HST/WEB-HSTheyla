@@ -3050,7 +3050,7 @@ public function Profile_update($user_id,$full_name,$user_name,$date_of_birth,$ge
     $check="SELECT * FROM organiser_request where user_id='$user_id'";
     $excute_query = $this->db->query($check);
     if($excute_query->num_rows()==0){
-        $response=array("status"=>"error","msg"=>$check);
+        $response=array("status"=>"error","msg"=>"No request found");
     }else{
       $result=$excute_query->result();
       foreach($result as $rows){}
