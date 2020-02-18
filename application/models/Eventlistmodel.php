@@ -41,14 +41,14 @@ Class Eventlistmodel extends CI_Model
 
 	function getadv_events()
     {
-		$current_date = date("Y-m-d");
-      	/* $sql="select ev.*, aeh.banner, ci.city_name, cy.country_name, count(ep.event_id) as popularity
+		//$current_date = date("Y-m-d");
+						/* $sql="select ev.*, aeh.banner, ci.city_name, cy.country_name, count(ep.event_id) as popularity
                         from events as ev
                         left join event_popularity as ep on ep.event_id = ev.id
                         LEFT JOIN city_master AS ci ON ev.event_city = ci.id
                         LEFT JOIN country_master AS cy ON ev.event_country = cy.id
                         LEFT JOIN adv_event_history AS aeh ON aeh.event_id = ev.id
-                        WHERE ev.event_status  ='Y' AND aeh.status = 'Y' AND aeh.date_to >= '$current_date' group by ev.id, aeh.event_id"; */
+                        WHERE ev.event_status  ='Y' AND aeh.status = 'Y' AND aeh.date_to >= '$current_date' group by ev.id, aeh.event_id"; 
 						
 						
 						$sql="SELECT
@@ -66,7 +66,21 @@ Class Eventlistmodel extends CI_Model
 							GROUP BY
 								ah.event_id
 							ORDER BY
-								ap.plan_rate DESC,ah.date_from";
+								ap.plan_rate DESC,ah.date_from";*/
+								
+		$sql=" SELECT ev.*,
+			ah.banner,
+			ah.date_to,
+			ah.date_from,
+			ap.plan_rate
+		FROM
+			adv_event_history ah,
+			events ev,
+			advertisement_plan ap
+		WHERE
+			ah.event_id = ev.id AND ah.adv_plan_id = ap.id AND ah.status = 'Y' AND CURDATE() between date_from and date_to
+		ORDER BY
+			ap.id";
 	
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();

@@ -16,7 +16,7 @@
                               <label class="col-sm-4 col-form-label">Date <span class="error">*</span></label>
                               <div class="col-sm-6">
 
-                                <input id="sdate" type="hidden" class="form-control" name="showdate" value="<?php echo $newDate = date("d-m-Y",strtotime($res->show_date)); ?>" >
+                               
 
                                 <!--div style="display: none;"-->
                                  <select class="form-control" name="showdate">
@@ -28,14 +28,14 @@
                                     $end_date =  date('Y-m-d', strtotime($end_date));
                                     $day = 86400; // Day in seconds
                                     $format = 'd-m-Y'; // Output format (see PHP date funciton)
+									$sformat = 'Y-m-d'; // Output format (see PHP date funciton)
                                     $sTime = strtotime($start_date); // Start as time
                                     $eTime = strtotime($end_date); // End as time
                                     $numDays = round(($eTime - $sTime) / $day) + 1;
                                     $days = array();
                                     for ($d = 0; $d < $numDays; $d++)
                                     {  ?>
-                                    <option>
-                                    <?php echo $days[] = date($format, ($sTime + ($d * $day))); echo'<br>';?></option>
+                                    <option value="<?php echo $days[] = date($sformat, ($sTime + ($d * $day)));?>"><?php echo $days[] = date($format, ($sTime + ($d * $day)));?></option>
                                    <?php } ?>
                                  </select>
                     <script language="JavaScript">document.plantimeform.showdate.value="<?php echo $days[] = $res->show_date; ?>";</script>

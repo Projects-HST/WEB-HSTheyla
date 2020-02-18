@@ -36,7 +36,7 @@ th{
                  <th>Date & Time</th>
                  <th>Seats</th>
                  <th>Booking Date</th>
-                 <!--th>Amount</th-->
+                 <th>View</th>
               </tr>
            </thead>
            <tbody>
@@ -53,7 +53,7 @@ th{
                  <td><?php echo $rows->number_of_seats; ?></td>
                  <td><?php $date=date_create($rows->booking_date);
                        echo date_format($date,"d-m-Y"); ?></td>
-                  <!--td><?php echo $rows->total_amount; ?></td-->
+                  <td><a href="<?php echo base_url(); ?>home/bookedevents_details/<?php echo $rows->order_id; ?>/<?php echo $rows->payment_gateway; ?>" class="btn btn-default btn-xs" role="button"><i class="fa fa-eye"></i></a></td>
               </tr>
              <?php $i++;  }  ?>
            </tbody>
@@ -72,11 +72,12 @@ $(document).ready(function() {
 		"bAutoWidth": false,
 		"columns": [
 					{ "width": "7%" },
-					{ "width": "48%" },
+					{ "width": "38%" },
+					{ "width": "15%" },
+					{ "width": "18%" },
 					{ "width": "5%" },
-					{ "width": "20%" },
-					{ "width": "5%" },
-					{ "width": "15%" }
+					{ "width": "12%" },
+					{ "width": "5%" }
 				  ]
     });
 } );

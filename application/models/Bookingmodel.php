@@ -93,7 +93,7 @@ function add_shows_times_details($plan_id,$eventid,$showtime,$show_date,$seats,$
     $timinsert="INSERT INTO booking_plan_timing(event_id,plan_id,show_date,show_time,seat_available,created_by,created_at) VALUES ('$eventid','$plan_id','$show_date','$showtime','$seats','$user_id',NOW())";
      $timinsert1=$this->db->query($timinsert);
      $data= array("status"=>"success");
-     return $data;
+		return $data;
     }else{
        $data= array("status"=>"AE");
        return $data;

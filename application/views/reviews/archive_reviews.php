@@ -30,8 +30,11 @@
                           <td><?php echo $value->event_name;?> </td>
                           <td><?php echo $value->event_rating; ?></td>
                             <td><?php echo $value->comments;?></td>
-                           <td><a href="<?php echo base_url(); ?>reviews/display/<?php echo $value->id; ?>/Y/<?php echo $value->event_id; ?>/<?php echo $value->user_id; ?>" class="btn btn-primary waves-effect waves-light">
-                               Display </a>  </td>
+							
+							
+                           <td>
+						   <a href="#" onclick="return confirm_display(<?php echo $value->id; ?>,'Y',<?php echo $value->event_id;?>,<?php echo $value->user_id; ?>)" class="btn btn-success waves-effect waves-light">Display </a>					   
+						   <!--<a href="<?php echo base_url(); ?>reviews/display/<?php echo $value->id; ?>/Y/<?php echo $value->event_id; ?>/<?php echo $value->user_id; ?>" class="btn btn-primary waves-effect waves-light">Display </a>--></td>
                         </tr>
                       <?php $i++; }  }else{ echo "<p class=card-text> No Reviews Found </p>";}?>
                         </tbody>
@@ -45,7 +48,7 @@
          </div>
 		   <!-- container -->
       </div>
-     <!-- Page content Wrapper href="<?php echo base_url();?>advertisement/delete_history_all/<?php echo $rows->id;?>" -->
+     <!-- Page content Wrapper -->
    </div>
     <!-- Top Bar Start -->
 </div>
@@ -62,4 +65,21 @@
 		"ordering": false
     });
 } );
+
+function confirm_display(id,sts,event_id,userid){
+  swal({
+      title: '',
+      text: "Are you sure want to display?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+  }).then(function(){
+		window.location.href='<?php echo base_url(); ?>reviews/display/'+id+'/'+sts+'/'+event_id+'/'+userid;
+  }).catch(function(reason){
+
+  });
+}
 </script>

@@ -540,7 +540,8 @@ foreach($event_details as $res){
 			for (var i = 0; i < dataArray.length; i++){
 				var plan_name = dataArray[i].plan_name;
 				var plantime_id = dataArray[i].plantime_id;
-			result +="<option value='"+plan_name+"'>"+plan_name+"</option>";
+				var seat_rate = dataArray[i].seat_rate;
+			result +="<option value='"+plan_name+"'>"+plan_name+" - ₹"+seat_rate+"</option>";
 			};
 			result +="</select>";
 

@@ -131,6 +131,8 @@ class Advertisement extends CI_Controller
             redirect('/');
         }
     }
+	
+	
     public function add_adv_history()
     {
         $datas       = $this->session->userdata();
@@ -237,7 +239,7 @@ class Advertisement extends CI_Controller
         $user_role      = $this->session->userdata('user_role');
         $datas['edit']  = $this->advertisementmodel->getall_adv_history($id);
         $datas['plans'] = $this->advertisementmodel->getall_adv_plans();
-		
+		//print_r($datas);
 		
         if ($user_role == 1 || $user_role == 4) {
             $this->load->view('header');
@@ -304,35 +306,57 @@ class Advertisement extends CI_Controller
     }
     public function update_adv_history_all()
     {
-        $datas       = $this->session->userdata();
-        $user_id     = $this->session->userdata('id');
-        $user_role   = $this->session->userdata('user_role');
-        $event_id    = $this->input->post('event_id');
-        $id          = $this->input->post('id');
-        $category_id = $this->input->post('category_id');
-        $sdate       = $this->input->post('start_date');
-        $dateTime    = new DateTime($sdate);
-        $start_date  = date_format($dateTime, 'Y-m-d');
-        $edate       = $this->input->post('end_date');
-        $dateTime    = new DateTime($edate);
-        $end_date    = date_format($dateTime, 'Y-m-d');
+         $datas        = $this->session->userdata();
+        $user_id      = $this->session->userdata('id');
+        $user_role    = $this->session->userdata('user_role');
+        $event_id     = $this->input->post('event_id');
+        $id           = $this->input->post('id');
+        $category_id  = $this->input->post('category_id');
+        $sdate        = $this->input->post('start_date');
+        $dateTime     = new DateTime($sdate);
+        $start_date   = date_format($dateTime, 'Y-m-d');
+        $edate        = $this->input->post('end_date');
+        $dateTime     = new DateTime($edate);
+        $end_date     = date_format($dateTime, 'Y-m-d');
         //$start_date=$this->input->post('start_date');
         //$end_date=$this->input->post('end_date');
-        $start_time  = $this->input->post('start_time');
-        $end_time    = $this->input->post('end_time');
-        $adv_plan    = $this->input->post('adv_plan');
-        $status      = $this->input->post('status');
-        $datas       = $this->advertisementmodel->aupdate_advertisement_plan_history($id, $event_id, $category_id, $start_date, $end_date, $start_time, $end_time, $adv_plan, $status, $user_id);
-        $sta         = $datas['status'];
+        $start_time   = $this->input->post('start_time');
+        $end_time     = $this->input->post('end_time');
+        $adv_plan     = $this->input->post('adv_plan');
+        $status       = $this->input->post('status');
+
+		$currentcpic    = $this->input->post('currentcpic');
+		
+       	$event_pic      = $_FILES['eventbanner']['name'];
+        $temp = pathinfo($event_pic, PATHINFO_EXTENSION);
+        $file_name      = time() . rand(1, 5) . rand(6, 10);
+        $event_banner   = $file_name. '.' .$temp;
+        $uploaddir      = 'assets/events/slider/';
+        $profilepic     = $uploaddir . $event_banner;
+        move_uploaded_file($_FILES['eventbanner']['tmp_name'], $profilepic);
+
+		if (empty($event_pic)) {
+            $event_banner = $currentcpic;
+        } else {
+            $event_banner = $event_banner;
+        }
+
+        // echo $start_time;
+        //echo $end_time; exit;
+        $datas        = $this->advertisementmodel->aupdate_advertisement_plan_history($id, $event_id, $category_id, $start_date, $end_date, $start_time, $end_time, $adv_plan, $status, $user_id,$event_banner);
+        $sta          = $datas['status'];
+        //$eid          = str_replace(' ', '', $event_id);
+        //$ecategory_id = str_replace(' ', '', $category_id);
         if ($sta == "success") {
             $this->session->set_flashdata('msg', 'Changes made are saved');
-            redirect('advertisement/view_adv_history', $datas);
-        } else if ($sta == "Already Exist") {
-            $this->session->set_flashdata('msg', 'Already Exist');
-            redirect('advertisement/view_adv_history', $datas);
+            //redirect('examinationresult/exam_mark_details?var1='.$clsmastid.'&var2='.$exam_id.'',$datas);
+            redirect('advertisement/view_adv_history');
+        } else if ($sta == "AE") {
+            $this->session->set_flashdata('msg', 'Dates are occupied! Please re-schedule your plan to some other dates. ');
+            redirect('advertisement/view_adv_history');
         } else {
             $this->session->set_flashdata('msg', 'Something went wrong! Please try again later.');
-            redirect('advertisement/view_adv_history', $datas);
+            redirect('advertisement/view_adv_history');
         }
     }
     public function view_adv_history()
@@ -350,5 +374,78 @@ class Advertisement extends CI_Controller
             redirect('/');
         }
     }
+	
+	public function assign_advertisement($plan_id)
+    {
+        $datas                = $this->session->userdata();
+        $user_id              = $this->session->userdata('id');
+        $user_role            = $this->session->userdata('user_role');
+        $datas['adv_events']  = $this->advertisementmodel->getall_advevents_details();
+		$datas['adv_plan_history']  = $this->advertisementmodel->get_plan_advevents_details($plan_id);
+		//print_r($datas['adv_plan_history']);
+		$datas['plan_id']    = $plan_id;
+		
+        if ($user_role == 1 || $user_role == 4) {
+            $this->load->view('header');
+            $this->load->view('advertisement/assign_advertisement', $datas);
+            $this->load->view('footer');
+        } else {
+            redirect('/');
+        }
+    }
+	
+	 public function add_plan_history()
+    {
+        $datas       = $this->session->userdata();
+        $user_id     = $this->session->userdata('id');
+        $user_role   = $this->session->userdata('user_role');
+		
+        $event_cat_id    = $this->input->post('event_id');
+        $result = explode("|", $event_cat_id);
+        $event_id=$result[0];  
+        $category_id= $result[1];
+		
+        $sdate       = $this->input->post('start_date');
+        $dateTime    = new DateTime($sdate);
+        $start_date  = date_format($dateTime, 'Y-m-d');
+        $edate       = $this->input->post('end_date');
+        $dateTime    = new DateTime($edate);
+        $end_date    = date_format($dateTime, 'Y-m-d');
+        
+/*      $start_time  = $this->input->post('start_time');
+        $end_time    = $this->input->post('end_time'); */
+        $plan_id    = $this->input->post('plan_id');
+
+		$event_pic      = $_FILES['eventbanner']['name'];
+        $temp = pathinfo($event_pic, PATHINFO_EXTENSION);
+        $file_name      = time() . rand(1, 5) . rand(6, 10);
+        $event_banner   = $file_name. '.' .$temp;
+        $uploaddir      = 'assets/events/slider/';
+        $profilepic     = $uploaddir . $event_banner;
+        move_uploaded_file($_FILES['eventbanner']['tmp_name'], $profilepic);
+
+        $status      = $this->input->post('status');
+        $datas       = $this->advertisementmodel->add_plan_history($event_id, $category_id, $start_date, $end_date, $plan_id, $status, $user_id,$event_banner);
+        $sta         = $datas['status'];
+        
+		//$id=$datas['eid'];
+        //$category_id=$datas['cid'];
+		 //$category_id = str_replace(' ', '', $datas['cid']);
+        $id          = str_replace(' ', '', $datas['plan_id']);
+        //print_r($sta);exit;
+		
+        if ($sta == "success") {
+            $this->session->set_flashdata('msg', 'Advertisement details added');
+            redirect('advertisement/view_adv_history');
+            //redirect('advertisement/add_advertisement_details/' . $id . '/' . $category_id . '', $datas);
+        } else if ($sta == "AE") {
+            $this->session->set_flashdata('msg', 'Dates are occupied! Please re-schedule your plan to some other dates. ');
+            redirect('advertisement/assign_advertisement/' . $id );
+        } else {
+            $this->session->set_flashdata('msg', 'Something went wrong! Please try again later.');
+            redirect('advertisement/assign_advertisement/' . $id );
+        }
+    }
+	
 }
 ?>

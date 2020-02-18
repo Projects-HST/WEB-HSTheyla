@@ -37,7 +37,7 @@
                          <div class="form-group row">
                             <label for="stime" class="col-sm-2 col-form-label">Event Name</label>
                             <div class="col-sm-4">
-                              <input type="text" class="form-control" readonly="" value="<?php echo $res->event_name;   ?>">
+                             <input type="text" class="form-control" readonly="" value="<?php echo $res->event_name;   ?>">
                             <input type="hidden" class="form-control"  name="event_id" value="<?php echo $res->event_id;?>" >
                             <input type="hidden" class="form-control"  name="id" value="<?php echo $res->id;?>" >
                              </div>

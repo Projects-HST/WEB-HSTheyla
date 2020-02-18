@@ -213,9 +213,9 @@ class Booking extends CI_Controller
 	    $showtime=$this->input->post('showtime');
 	    $seats=$this->input->post('seats');
 
-	    $sdate=$this->input->post('showdate');
-		$dateTime = new DateTime($sdate);
-		$show_date=date_format($dateTime,'Y-m-d');
+	    $show_date=$this->input->post('showdate');
+		//$dateTime = new DateTime($sdate);
+		//$show_date=date_format($dateTime,'Y-m-d');
 
 	    $datas = $this->bookingmodel->update_shows_times_details($time_id,$plan_id,$eventid,$show_date,$showtime,$seats,$user_id);
         $sta=$datas['status'];

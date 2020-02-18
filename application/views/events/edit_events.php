@@ -69,7 +69,7 @@
 
                             <label for="Name" class="col-sm-2 col-form-label">Event Name <span class="error">*</span></label>
                             <div class="col-sm-4">
-                              <input class="form-control" type="text" required="" name="event_name" value="<?php echo $rows->event_name; ?>" maxlength="100">
+                              <input class="form-control" type="text" required="" name="event_name" value="<?php echo htmlentities($rows->event_name); ?>" maxlength="100">
                             </div>
 
                         </div>

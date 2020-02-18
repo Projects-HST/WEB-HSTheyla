@@ -15,7 +15,7 @@ class Home extends CI_Controller {
 		$this->load->model('organizermodel');
 		$this->load->model('organizerbookingmodel');
 		$this->load->helper('url');
-
+		$this->load->model('bookingmodel');
 		$this->load->library('session');
 
 	}
@@ -1115,25 +1115,227 @@ class Home extends CI_Controller {
 
 		}
 
+//-------------------------org_plan----------------------------------
+
+		public function org_booking_plan($id){
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			if($user_role==2){
+			$id = base64_decode($id);
+			$datas['view_plan'] = $this->bookingmodel->view_plan_details($id);
+			$datas['eventid']=$id;
+			$this->load->view('dash_header');
+			$this->load->view('org_booking_plan', $datas);
+			$this->load->view('dash_footer');
+			}else{
+					redirect('/');
+				 }
+		}
+
+	public function add_event_plan()
+	{
+		$datas=$this->session->userdata();
+	    $user_id=$this->session->userdata('id');
+	    $user_role=$this->session->userdata('user_role');
+
+	    $planname=$this->input->post('planname');
+	    $amount=$this->input->post('amount');
+	    $eventid=$this->input->post('event_id');
+
+	    $datas = $this->bookingmodel->add_events_details($eventid,$planname,$amount,$user_id);
+	    $eventid=base64_encode($eventid);
+        $sta=$datas['status'];
+        //print_r($sta);exit;
+        if($sta=="success"){
+	       $this->session->set_flashdata('msg','Ticket plan created successfully');
+		   redirect('booking_plan/'.$eventid.'');
+	     }else if($sta=="AE"){
+	     	 $this->session->set_flashdata('msg','Ticket plan already exists!');
+		     redirect('booking_plan/'.$eventid.'');
+	     }else{
+	     	 $this->session->set_flashdata('msg','Something went wrong! Please try again later.');
+		     redirect('booking_plan/'.$eventid.'');
+	     }
+	}
+
+		public function org_edit_booking_plan($id){
+			$datas=$this->session->userdata();
+			$user_id=$this->session->userdata('id');
+			$user_role=$this->session->userdata('user_role');
+			if($user_role==2){
+			 $dec_id = base64_decode($id);
+			 $plan_id = ($dec_id/564738);
+			$datas['edit']=$this->bookingmodel->edit_events_plans($plan_id);	
+			$this->load->view('dash_header');
+			$this->load->view('org_edit_booking_plan', $datas);
+			$this->load->view('dash_footer');
+			}else{
+					redirect('/');
+				 }
+		}
+
+	public function org_update_plans()
+	{
+		$datas=$this->session->userdata();
+	    $user_id=$this->session->userdata('id');
+	    $user_role=$this->session->userdata('user_role');
+
+	    $planname=$this->input->post('planname');
+	    $amount=$this->input->post('amount');
+	    $eventid=$this->input->post('event_id');
+	    $planid=$this->input->post('plan_id');
+
+	    $datas = $this->bookingmodel->update_events_details($eventid,$planid,$planname,$amount,$user_id);
+        $sta=$datas['status'];
+        $eventid=base64_encode($eventid);
+       // print_r($sta);exit;
+        if($sta=="success"){
+			$this->session->set_flashdata('msg','Changes made are saved');
+			redirect('booking_plan/'.$eventid.'');
+	     }else{
+	     	 $this->session->set_flashdata('msg','Something went wrong! Please try again later.');
+		     redirect('booking_plan/'.$eventid.'');
+	     }
+	}
+
+//-------------------------show_time----------------------------------
+
+    public function add_show_time($plaid,$eveid)
+    {
+        $datas=$this->session->userdata();
+	    $user_id=$this->session->userdata('id');
+	    $user_role=$this->session->userdata('user_role');
+
+        $datas['plan_time'] = $this->bookingmodel->view_plan_time_details($plaid,$eveid);
+        $datas['dates'] = $this->bookingmodel->view_events_dates($eveid);
+
+        $datas['planid']=$plaid;
+        $datas['eventid']=$eveid;
+       
+		if($user_role == 2)
+		{
+		  $this->load->view('dash_header');
+		  $this->load->view('org_show_time',$datas);
+		  $this->load->view('dash_footer');
+	 	}else{
+	 			redirect('/');
+	 		 }
+    }
+
+    public function add_show_times_details()
+    {
+        $datas=$this->session->userdata();
+	    $user_id=$this->session->userdata('id');
+	    $user_role=$this->session->userdata('user_role');
+
+	    $plan_id=$this->input->post('plan_id');
+	    $eventid=$this->input->post('event_id');
+	    $showtime=$this->input->post('showtime');
+	    $seats=$this->input->post('seats');
+
+	    //$showdate=$this->input->post('showdate');
+	    $sdate=$this->input->post('showdate');
+		$dateTime = new DateTime($sdate);
+		$show_date=date_format($dateTime,'Y-m-d');
+
+	    $datas = $this->bookingmodel->add_shows_times_details($plan_id,$eventid,$showtime,$show_date,$seats,$user_id);
+        $sta=$datas['status'];
+       // print_r($sta);exit;
+        if($sta=="success"){
+	       $this->session->set_flashdata('msg','Show timing created successfully');
+		   redirect('home/add_show_time/'.$plan_id.'/'.$eventid.'');
+	     }else if($sta=="AE"){
+	     	 $this->session->set_flashdata('msg','Show timing already exists!');
+		    redirect('home/add_show_time/'.$plan_id.'/'.$eventid.'');
+	     }else{
+	     	 $this->session->set_flashdata('msg','Something went wrong! Please try again later.');
+		    redirect('home/add_show_time/'.$plan_id.'/'.$eventid.'');
+	     }
+    }
+
+    public function edit_show_time($id)
+    {
+    	$datas=$this->session->userdata();
+	    $user_id=$this->session->userdata('id');
+	    $user_role=$this->session->userdata('user_role');
+        $datas['edit']=$this->bookingmodel->edit_plans_time($id);
+        if($user_role == 2)
+		{
+		  $this->load->view('dash_header');
+		  $this->load->view('org_edit_show_time',$datas);
+		  $this->load->view('dash_footer');
+	 	}else{
+	 			redirect('/');
+	 		 }
+
+    }
+
+    public function update_show_times_details()
+    {
+    	$datas=$this->session->userdata();
+	    $user_id=$this->session->userdata('id');
+	    $user_role=$this->session->userdata('user_role');
+
+        $time_id=$this->input->post('time_id');
+	    $plan_id=$this->input->post('plan_id');
+	    $eventid=$this->input->post('event_id');
+	    $showtime=$this->input->post('showtime');
+	    $seats=$this->input->post('seats');
+
+	    $show_date=$this->input->post('showdate');
+		//$dateTime = new DateTime($sdate);
+		//$show_date=date_format($dateTime,'Y-m-d');
+
+	    $datas = $this->bookingmodel->update_shows_times_details($time_id,$plan_id,$eventid,$show_date,$showtime,$seats,$user_id);
+        $sta=$datas['status'];
+        //print_r($sta);exit;
+        if($sta=="success"){
+	       $this->session->set_flashdata('msg','Changes made are saved');
+		   redirect('home/add_show_time/'.$plan_id.'/'.$eventid.'');
+	     }else{
+	     	 $this->session->set_flashdata('msg','Something went wrong! Please try again later.');
+		    redirect('home/add_show_time/'.$plan_id.'/'.$eventid.'');
+	     }
+    }
+
+
+
+
 
 
 		public function bookedevents()
 		{
+				$datas=$this->session->userdata();
+				$user_id=$this->session->userdata('id');
+				$user_role=$this->session->userdata('user_role');
+				$datas['res']=$this->loginmodel->getuserinfo($user_id);
+				$datas['view'] = $this->organizerbookingmodel->get_all_booking_details($user_id);
+					if($user_role==3 || $user_role==2){
+				$this->load->view('dash_header');
+				$this->load->view('booked_events', $datas);
+				$this->load->view('dash_footer');
+			}else{
+				redirect('/');
+			}
+		}
+
+
+		public function bookedevents_details($order_id,$gateway){
 			$datas=$this->session->userdata();
 			$user_id=$this->session->userdata('id');
 			$user_role=$this->session->userdata('user_role');
-			$datas['res']=$this->loginmodel->getuserinfo($user_id);
-			$datas['view'] = $this->organizerbookingmodel->get_all_booking_details($user_id);
-				if($user_role==3 || $user_role==2){
-			$this->load->view('dash_header');
-			$this->load->view('booked_events', $datas);
-			$this->load->view('dash_footer');
-		}else{
-			redirect('/');
+			$datas['booking_details'] = $this->loginmodel->get_booking_history($order_id,$gateway);
+			$datas['event_attendees'] = $this->loginmodel->disp_event_attendees($order_id);
+			if($user_role==3 || $user_role==2){
+				$this->load->view('dash_header');
+				$this->load->view('booked_events_details', $datas);
+				$this->load->view('dash_footer');
+			}else{
+				redirect('/');
+			}
 		}
-	}
-
-
+		
 
 		public function reviewevents()
 		{

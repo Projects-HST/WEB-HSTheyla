@@ -56,7 +56,7 @@
                         <table id="" class="table table-striped table-bordered" cellspacing="0" width="100%">
                            <thead>
                               <tr>
-							                  <th>S. No</th>
+							    <th>S. No</th>
                                 <th>Advertisement Plan</th>
                                 <th>Plan Price</th>
                                 <th>Actions</th>
@@ -76,8 +76,10 @@
                                 <td>
                                    <a href="<?php echo base_url();?>advertisement/edit_plans/<?php echo $rows->id;?>">
                                    <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
-                                   <!--a onclick="confirmGetMessage(<?php echo $pid;?>)">
-                                  <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
+								   <a href="<?php echo base_url();?>advertisement/assign_advertisement/<?php echo $rows->id;?>">
+								    <img title="Edit" src="<?php echo base_url();?>assets/icons/booking.png" />
+                                  <!-- <a onclick="confirmGetMessage(<?php echo $pid;?>)">
+                                  <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>-->
                                 </td>
                               </tr>
                              <?php $i++;  }  ?>

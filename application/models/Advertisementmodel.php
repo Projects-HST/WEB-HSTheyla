@@ -12,7 +12,7 @@ Class Advertisementmodel extends CI_Model
 
 function view_advertisement_plan_details()
 {
-	  $sql="SELECT * FROM advertisement_plan ORDER BY id DESC";
+	  $sql="SELECT * FROM advertisement_plan ORDER BY id";
 	  $resu=$this->db->query($sql);
 	  $res=$resu->result();
 	  return $res;
@@ -66,6 +66,29 @@ function getall_events_details()
   	return $res;
 }
 
+function getall_advevents_details()
+{
+  //$sql="SELECT ev.*,ci.city_name,ca.category_name FROM city_master AS ci,category_master AS ca,events AS ev WHERE ev.adv_status='Y' AND ev.category_id=ca.id AND ev.event_city=ci.id ORDER BY ev.id DESC";
+  
+	  $sql="SELECT
+		ev.*,
+		ci.city_name,
+		ca.category_name
+	FROM
+		city_master AS ci,
+		category_master AS ca,
+		events AS ev
+	WHERE
+		ev.adv_status = 'Y' AND ev.event_status ='Y' AND ev.end_date >= CURRENT_DATE() AND ev.category_id = ca.id AND ev.event_city = ci.id
+	ORDER BY
+		ev.id
+	DESC";
+
+  	$resu=$this->db->query($sql);
+  	$res=$resu->result();
+  	return $res;
+}
+
 function getall_adv_history_details($id,$category_id)
 {
   $adv="SELECT ah.*,ca.category_name,ev.event_name,ap.plan_name FROM adv_event_history AS ah,advertisement_plan AS ap,category_master AS ca,events AS ev WHERE ah.event_id=ev.id AND ah.category_id=ca.id AND ah.adv_plan_id=ap.id AND ah.event_id='$id' AND ah.category_id='$category_id' ORDER BY ah.id DESC";
@@ -114,6 +137,75 @@ function getall_adv_history($id)
   return $adv2;
 }
 
+
+function view_adv_history_details()
+{
+  $adv1="SELECT ah.*,ca.category_name,ev.event_name,ap.plan_name FROM adv_event_history AS ah,advertisement_plan AS ap,category_master AS ca,events AS ev WHERE ah.event_id=ev.id AND ah.category_id=ca.id AND ah.adv_plan_id=ap.id ORDER BY ah.id DESC";
+  $adv12=$this->db->query($adv1);
+  $adv23=$adv12->result();
+  return $adv23;
+}
+
+function get_plan_advevents_details($plan_id)
+{
+	  $adv1="SELECT
+		ah.*,
+		ca.category_name,
+		ev.event_name,
+		ap.plan_name
+	FROM
+		adv_event_history AS ah,
+		advertisement_plan AS ap,
+		category_master AS ca,
+		events AS ev
+	WHERE
+		ah.adv_plan_id = '$plan_id' AND ah.event_id = ev.id AND ah.category_id = ca.id AND ah.adv_plan_id = ap.id
+	ORDER BY
+		ah.id
+	DESC";
+  $adv12=$this->db->query($adv1);
+  $adv23=$adv12->result();
+  return $adv23;
+}
+
+function add_plan_history($event_id,$category_id,$start_date,$end_date,$plan_id,$status,$user_id,$event_banner)
+{
+	$check="SELECT * from adv_event_history where '$start_date' >= date_from and '$start_date' <= date_to AND adv_plan_id = '$plan_id' AND status = 'Y'";
+	$result=$this->db->query($check);
+    if($result->num_rows()==0)
+    {
+			$check1="SELECT * from adv_event_history where '$end_date' >= date_from and '$end_date' <= date_to AND adv_plan_id = '$plan_id' AND status = 'Y'";
+			$result1=$this->db->query($check1);
+				if($result1->num_rows()==0)
+				{
+					$hsql="INSERT INTO adv_event_history(event_id,category_id,date_from,date_to,time_from,time_to,adv_plan_id,banner,status,created_by,created_at) VALUES ('$event_id','$category_id','$start_date','$end_date','$start_time','$end_time','$plan_id','$event_banner','$status','$user_id',NOW())";
+					$hsql1=$this->db->query($hsql);
+					$data= array("status"=>"success");
+					return $data;
+					
+				} else {
+					$data = array("status"=>"AE","plan_id"=>"$plan_id");
+					return $data;
+			}
+	} else {
+				$data = array("status"=>"AE","plan_id"=>"$plan_id");
+					return $data;
+	}
+	
+	/* exit;
+    $result=$this->db->query($check);
+    if($result->num_rows()==0)
+    {
+		$hsql="INSERT INTO adv_event_history(event_id,category_id,date_from,date_to,time_from,time_to,adv_plan_id,banner,status,created_by,created_at) VALUES ('$event_id','$category_id','$start_date','$end_date','$start_time','$end_time','$plan_id','$event_banner','$status','$user_id',NOW())";
+		$hsql1=$this->db->query($hsql);
+		$data= array("status"=>"success");
+	    return $data;
+	}else{
+		$data= array("status"=>"AE","plan_id"=>"$plan_id");
+		return $data;
+	} */
+}
+
 function aupdate_advertisement_plan_history($id,$event_id,$category_id,$start_date,$end_date,$start_time,$end_time,$adv_plan,$status,$user_id,$event_banner)
 {
   // $check="SELECT * FROM adv_event_history WHERE DATEDIFF(date_to,'$end_date') >= 0 AND event_id='$event_id'";
@@ -123,7 +215,8 @@ function aupdate_advertisement_plan_history($id,$event_id,$category_id,$start_da
   // if($result->num_rows()==0)
   // {
 	 $usql="UPDATE adv_event_history SET event_id='$event_id',category_id='$category_id',date_from='$start_date',date_to='$end_date',time_from='$start_time',time_to='$end_time',adv_plan_id='$adv_plan',banner='$event_banner',status='$status',updated_by='$user_id',updated_at=NOW() WHERE id='$id'";
-
+	 //exit;
+	//$usql="UPDATE adv_event_history SET status='$status',updated_by='$user_id',updated_at=NOW() WHERE id='$id'";
 	$usql1=$this->db->query($usql);
 	$data= array("status"=>"success");
 	return $data;
@@ -131,14 +224,6 @@ function aupdate_advertisement_plan_history($id,$event_id,$category_id,$start_da
 //   $data= array("status"=>"AE","eid"=>"$event_id","cid"=>"$category_id");
 //   return $data;
 // }
-}
-
-function view_adv_history_details()
-{
-  $adv1="SELECT ah.*,ca.category_name,ev.event_name,ap.plan_name FROM adv_event_history AS ah,advertisement_plan AS ap,category_master AS ca,events AS ev WHERE ah.event_id=ev.id AND ah.category_id=ca.id AND ah.adv_plan_id=ap.id ORDER BY ah.id DESC";
-  $adv12=$this->db->query($adv1);
-  $adv23=$adv12->result();
-  return $adv23;
 }
 
 }?>

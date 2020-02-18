@@ -12,7 +12,7 @@ th{
                <div class="col-lg-8">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title"> Create  Show Timings </h4>
+                        <h4 class="mt-0 header-title"> Create Show Timings </h4>
                         <form  method="post"  enctype="multipart/form-data" action="<?php echo base_url();?>booking/add_show_times_details" name="plantimeform" id="plantimeform">
 
                             <div class="form-group row">

@@ -30,66 +30,42 @@
                <div class="col-lg-12">
                   <div class="card m-b-20">
                      <div class="card-block">
-                        <h4 class="mt-0 header-title"> Edit  Advertisement Details</h4>
-                        <form  method="post" action="<?php echo base_url();?>advertisement/update_adv_history_all" name="advertisementform" enctype="multipart/form-data" onSubmit='return check();'>
+                        <h4 class="mt-0 header-title"> Edit Advertisement Details</h4>
+                        <form  method="post" action="<?php echo base_url();?>advertisement/update_adv_history_all" name="advertisementform" enctype="multipart/form-data" id="aform" onSubmit='return check();'>
                          <?php foreach($edit AS $res){}?>
 
                          <div class="form-group row">
-
                             <label for="stime" class="col-sm-2 col-form-label">Event Name</label>
                             <div class="col-sm-4">
-                              <input type="text" class="form-control" readonly="" value="<?php echo $res->event_name;   ?>">
-                            <input type="hidden" class="form-control"  name="event_id" value=" <?php echo $res->event_id;?>" >
-                            <input type="hidden" class="form-control"  name="id" value=" <?php echo $res->id;?>" >
+                              <input type="text" class="form-control" readonly="" value="<?php echo htmlentities($res->event_name);   ?>">
                              </div>
 
-                            <label for="etime" class="col-sm-2 col-form-label">Category Name</label>
+                            <label for="etime" class="col-sm-2 col-form-label">Category</label>
                             <div class="col-sm-4">
-                              <input type="text" class="form-control" readonly="" value=" <?php echo $res->category_name;   ?>">
-                            <input type="hidden" class="form-control"  name="category_id" value=" <?php echo $res->category_id;?>" >
-
+                              <input type="text" class="form-control" readonly="" value="<?php echo $res->category_name;   ?>">
+								
                             </div>
                         </div>
 
                        <div class="form-group row">
-                            <label for="sdate" class="col-sm-2 col-form-label">Start Date</label>
+                            <label for="sdate" class="col-sm-2 col-form-label">Start Date <span class="error">*</span></label>
                             <div class="col-sm-4">
-                              <div class="input-group">
-                                <input type="text" class="form-control"  name="start_date"  value="<?php $date=date_create($res->date_from);echo date_format($date,"m-d-Y");  ?>" id="datepicker-autoclose">
-                                <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
-                            </div>
+
+                                <input type="text" class="form-control datepicker"  name="start_date" readonly="" value="<?php $date=date_create($res->date_from);echo date_format($date,"d-m-Y");  ?>" id="datepicker1">
+
                             </div>
 
-                             <label for="edate" class="col-sm-2 col-form-label">End Date</label>
+                             <label for="edate" class="col-sm-2 col-form-label">End Date <span class="error">*</span></label>
                             <div class="col-sm-4">
-                               <div class="input-group">
-                                <input type="text" class="form-control" required="" name="end_date" value="<?php $date=date_create($res->date_to);echo date_format($date,"m-d-Y");  ?>" id="datepicker">
-                                <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
-                            </div>
+
+                                <input type="text" class="form-control datepicker" readonly="" name="end_date" value="<?php $date=date_create($res->date_to);echo date_format($date,"d-m-Y");  ?>" id="datepicker2">
+
                             </div>
                         </div>
-                        <!--div class="form-group row">
-                             <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
-                            <div class="col-sm-4">
-                                <select name="start_time" required="" class="form-control" >
-                                     <option value="">Select Start Time</option>
-                            <option value=""><?php echo get_times(); ?></option>
-                        </select>
-                            <script language="JavaScript">document.advertisementform.start_time.value="<?php echo $res->time_from; ?>";</script>
-                            </div>
 
-                             <label for="etime" class="col-sm-2 col-form-label">End Time</label>
-                            <div class="col-sm-4">
-                                <select name="end_time" required="" class="form-control" >
-                                     <option value="">Select End Time</option>
-                            <option value=""><?php echo get_times(); ?></option>
-                        </select>
-                        <script language="JavaScript">document.advertisementform.end_time.value="<?php echo $res->time_to; ?>";</script>
-                            </div>
 
-                        </div-->
 
-                        <div class="form-group row">
+                         <!-- <div class="form-group row">
                             <label for="stime" class="col-sm-2 col-form-label">Start Time</label>
                             <div class="col-sm-4">
                                <input  type="text" class="form-control" id="stime" name="start_time" value="<?php echo $res->time_from; ?>">
@@ -98,14 +74,13 @@
                             <div class="col-sm-4">
                               <input  type="text" class="form-control" id="etime" name="end_time" value="<?php echo $res->time_to; ?>">
                             </div>
-                        </div>
+                        </div> -->
 
 
                         <div class="form-group row">
-                             <label for="ecost" class="col-sm-2 col-form-label">Plans</label>
+                             <label for="ecost" class="col-sm-2 col-form-label">Plan <span class="error">*</span></label>
                             <div class="col-sm-4">
-                                 <select class="form-control" required="" name="adv_plan">
-                                    <option value="Free">Select Plans </option>
+                                 <select class="form-control" name="adv_plan" readonly="">
                                     <?php foreach ($plans as $values) {?>
                                     <option value="<?php echo $values->id; ?>"><?php  echo $values->plan_name; ?></option>
                                    <?php  } ?>
@@ -113,21 +88,33 @@
                                 </select>
                                 <script language="JavaScript">document.advertisementform.adv_plan.value="<?php echo $res->adv_plan_id; ?>";</script>
                             </div>
-                            <label for="Status" class="col-sm-2 col-form-label">Status</label>
+                            <label for="Status" class="col-sm-2 col-form-label">Banner Status <span class="error">*</span></label>
                             <div class="col-sm-4">
                                <select class="form-control" name="status">
-                                    <option value="">Select Status</option>
-                                    <option value="Y">Yes</option>
-                                    <option value="N">No</option>
+                                    <option value="Y">Active</option>
+                                    <option value="N">Inactive</option>
                                 </select>
                                  <script language="JavaScript">document.advertisementform.status.value="<?php echo $res->status; ?>";</script>
                             </div>
                         </div>
+
+                         <div class="form-group row">
+                             <label for="Banner" class="col-sm-2 col-form-label">Banner</label>
+                            <div class="col-sm-4">
+                                <input type="file" name="eventbanner" id="eventbanner" class="form-control" accept="image/*" >
+                                <input type="hidden" name="currentcpic" class="form-control" value="<?php echo $res->banner;?>" >
+                            </div>
+                            <div class="col-sm-4"><img src="<?php echo base_url(); ?>assets/events/slider/<?php echo $res->banner; ?>" class="img-circle">
+                            </div>
+                        </div>
+					
                            <div class="form-group">
                               <label class="col-sm-4 col-form-label"></label>
-                              <button type="submit" class="btn btn-primary waves-effect waves-light">
-                              Update </button>
-
+							  <input type="hidden" class="form-control"  name="event_id" value="<?php echo $res->event_id;?>" >
+                            <input type="hidden" class="form-control"  name="id" value="<?php echo $res->id;?>" >
+							<input type="hidden" class="form-control"  name="category_id" value="<?php echo $res->category_id;?>" >
+                              <button type="submit" class="btn btn-success waves-effect waves-light">
+                              Save </button>
                            </div>
                      </div>
                      </form>
@@ -145,18 +132,52 @@
 </div>
 <!-- content -->
 <script type="text/javascript">
-  $('#history').addClass("active");
+
+  $('#list').addClass("active");
   $('#advertisement').addClass("has_sub active nav-active");
 
   $('#stime').timepicki();
   $('#etime').timepicki();
 
+ $(document).ready(function () {
+  $( ".datepicker" ).datepicker({
+        format: 'dd-mm-yyyy',
+		 autoclose: true
+      });
 
+  $.validator.addMethod('filesize', function (value, element, param) {
+      return this.optional(element) || (element.files[0].size <= param)
+  }, 'File size must be less than 1 MB');
+  
+    $('#aform').validate({ // initialize the plugin
+       rules: {
+         start_date:{required:true },
+         end_date:{required:true },
+         start_time:{required:true },
+         end_time:{required:true },
+         adv_plan:{required:true },
+		 eventbanner:{required:false,accept: "jpg,jpeg,png", filesize: 1048576  },
+         status:{required:true }
+        },
+        messages: {
+        start_date:"Select start date",
+        start_time:"Select start time",
+        end_date:"Select end date",
+        end_time:"Select end time",
+        adv_plan:"Select plan",
+		eventbanner:{
+          accept:"Please upload .jpg or .png .",
+          fileSize:"File must be JPG or PNG, less than 1MB"
+        },
+        status:"Select status",
+               },
+         });
+   });
   function check()
     {
 
-      var fdate = document.getElementById("datepicker-autoclose").value;
-      var tdate = document.getElementById("datepicker").value;
+      var fdate = document.getElementById("datepicker1").value;
+      var tdate = document.getElementById("datepicker2").value;
 
        //alert(fdate);alert(tdate);
       var chunks = fdate.split('-');
@@ -199,19 +220,23 @@
     }else{
       var date1 = new Date(formattedDate);
       var date2 = new Date(formattedDate1);
-
-      var strStartTime = document.getElementById("stime").value;
-      var strEndTime = document.getElementById("etime").value;
-      var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
-      var endTime = new Date(startTime);
-       endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
-      var a=formattedDate + '' + strStartTime;
-      var b=formattedDate1 + '' + strEndTime;
-      //alert(startTime);alert(endTime); alert(a);alert(b);
-      if (a == b || a > b) {
-      alert("Start Date & Time is greater than end Date & Time");
-      return false;
-      }
+      var y1=chunks[2];
+      var y2=chunks1[2];
+      if(y1<y2){
+            //alert(chunks[2]);alert(chunks1[2]);
+        }else{
+            var strStartTime = document.getElementById("stime").value;
+            var strEndTime = document.getElementById("etime").value;
+            var startTime = date1.setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+            var endTime = new Date(startTime);
+             endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+            var a=formattedDate + '' + strStartTime;
+            var b=formattedDate1 + '' + strEndTime;
+            //alert(startTime);alert(endTime); alert(a);alert(b);
+            if (a == b || a > b) {
+            alert("Start Date & Time is greater than end Date & Time");
+            return false; }
+          }
     }
       function GetHours(d)
       {

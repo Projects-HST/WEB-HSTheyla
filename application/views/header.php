@@ -86,7 +86,8 @@
                           <li id="state"><a href="<?php echo base_url();?>state/home">State</a></li>
                           <li id="city"><a href="<?php echo base_url();?>city/home">City/Area</a></li>
                           <li id="category"><a href="<?php echo base_url();?>category/home">Category</a></li>
-                          <!-- <li id="userrole"><a href="<?php echo base_url();?>userrole/home">User Role</a></li> -->
+						  <!--<li id="location"><a href="<?php echo base_url();?>location/home">Location</a></li>
+                           <li id="userrole"><a href="<?php echo base_url();?>userrole/home">User Role</a></li> -->
                       </ul>
                   </li>
               <?php   } ?>
@@ -104,9 +105,10 @@
                     <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i><span> Advertisement </span> </a>
                     <ul class="list-unstyled">
                         <li id="plan"><a href="<?php echo base_url();?>advertisement/home"> Add Plan</a></li>
-                        <li id="list"><a href="<?php echo base_url();?>advertisement/view_adv_plan">Banner Advertisement</a></li>
                         <li id="history"><a href="<?php echo base_url();?>advertisement/view_adv_history">History</a></li>
-                        <!-- <li id="popup"><a href="#">Add Popup Adv. </a></li>
+                        <!-- 
+						<li id="list"><a href="<?php echo base_url();?>advertisement/view_adv_plan">Banner Advertisement</a></li>
+						<li id="popup"><a href="#">Add Popup Adv. </a></li>
                         <li id="offers"><a href="#">Add Offers </a></li> -->
                     </ul>
                 </li>

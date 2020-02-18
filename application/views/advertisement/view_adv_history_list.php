@@ -42,14 +42,15 @@
                               <tr>
 							     <th>S. No</th>
                                  <th style="width:250px;">Event</th>
-                                 <th>Category </th>
+								 <th>Plan</th>
+                                 <!--<th>Category </th>-->
                                  <th>From Date</th>
                                  <th>To Date</th>
                                  <!-- <th>From Time</th> -->
                                  <!-- <th>To Time</th> -->
-                                 <th>Plan</th>
-                                 <!--<th>Status</th>-->
-                                 <!--th>Action</th-->
+                                 
+                                 <th>Status</th>
+                                 <th>Action</th>
                               </tr>
                            </thead>
                            <tbody>
@@ -62,21 +63,22 @@
                               <tr>
                                  <td><?php  echo $i; ?></td>
                                  <td><?php  echo $rows->event_name; ?></td>
-                                 <td> <?php echo $rows->category_name; ?></td>
+								 <td><?php  echo $rows->plan_name; ?></td>
+                                 <!--<td> <?php echo $rows->category_name; ?></td>-->
                                  <td><?php  $date=date_create($rows->date_from);
                                        echo date_format($date,"d-m-Y");  ?></td>
                                  <td> <?php $date=date_create($rows->date_to);
                                        echo date_format($date,"d-m-Y"); ?></td>
                                  <!-- <td><?php  echo date("g:i a",strtotime("$rows->time_from")); ?></td>
                                  <td> <?php echo date("g:i a",strtotime("$rows->time_to")); ?></td> -->
-                                 <td><?php  echo $rows->plan_name; ?></td>
-                                    <!--<td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Deactive </button>'; }?></td>
+                                 
+                                    <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Inactive </button>'; }?></td>
                                  <td>
                                   <a href="<?php echo base_url();?>advertisement/edit_history_all/<?php echo $rows->id;?>">
                                   <img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
-                                 <a onclick="confirmGetMessage(<?php echo $ahid;?>)" >
+                                 <a onclick="confirmGetMessage(<?php echo $ahid;?>)" style="cursor:pointer;">
                                  <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a>
-                               </td-->
+                               </td>
 
 
                               </tr>
@@ -115,30 +117,37 @@
 
   function confirmGetMessage(ahid)
   {
-    var r=confirm("Do you want to delete this?")
-    if (r==true) {
+	swal({
+		title: '',
+		text: "Do you want to delete this?",
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Yes',
+		cancelButtonText: 'No'
+  }).then(function(){
     $.ajax({
       url: "<?php echo base_url(); ?>advertisement/delete_history_all",
       type: 'POST',
       data: { advid: ahid },
       success: function(response) {
-      //alert(response);exit;
           if (response == "success") {
               swal({
                   title: "Success",
                   text: "Deleted Successfully",
                   type: "success"
               }).then(function() {
-                  location.href = '<?php echo base_url(); ?>advertisement/view_adv_plan';
+                  location.href = '<?php echo base_url(); ?>advertisement/view_adv_history';
               });
           } else {
               sweetAlert("Oops...", response, "error");
           }
       }
     });
-    }else{
-        swal("Cancelled", "Process Cancel :)", "error");
-       }
- }
-
+	}).catch(function(reason){
+		swal("Cancelled", "Process Cancel :)", "error");
+	});
+ 
+  }
 </script>
