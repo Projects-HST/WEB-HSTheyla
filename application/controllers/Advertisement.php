@@ -267,8 +267,8 @@ class Advertisement extends CI_Controller
         //$end_date=$this->input->post('end_date');
         //$start_time   = $this->input->post('start_time');
         //$end_time     = $this->input->post('end_time');
-        echo $adv_plan  = $this->input->post('adv_plan');
-        echo $status    = $this->input->post('status');
+         $adv_plan  = $this->input->post('adv_plan');
+         $status    = $this->input->post('status');
 
 		$currentcpic    = $this->input->post('currentcpic');
 		
@@ -319,10 +319,10 @@ class Advertisement extends CI_Controller
         $end_date     = date_format($dateTime, 'Y-m-d');
         //$start_date=$this->input->post('start_date');
         //$end_date=$this->input->post('end_date');
-        $start_time   = $this->input->post('start_time');
-        $end_time     = $this->input->post('end_time');
-        $adv_plan     = $this->input->post('adv_plan');
-        $status       = $this->input->post('status');
+       // $start_time   = $this->input->post('start_time');
+        //$end_time     = $this->input->post('end_time');
+        echo $adv_plan     = $this->input->post('adv_plan');
+        echo $status       = $this->input->post('status');
 
 		$currentcpic    = $this->input->post('currentcpic');
 		
@@ -342,7 +342,7 @@ class Advertisement extends CI_Controller
 
         // echo $start_time;
         //echo $end_time; exit;
-        $datas        = $this->advertisementmodel->aupdate_advertisement_plan_history($id, $event_id, $category_id, $start_date, $end_date, $start_time, $end_time, $adv_plan, $status, $user_id,$event_banner);
+        $datas        = $this->advertisementmodel->aupdate_advertisement_plan_history($id, $event_id, $category_id, $start_date,$end_date,$adv_plan,$status, $user_id,$event_banner);
         $sta          = $datas['status'];
         //$eid          = str_replace(' ', '', $event_id);
         //$ecategory_id = str_replace(' ', '', $category_id);
