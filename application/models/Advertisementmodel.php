@@ -180,7 +180,7 @@ function add_plan_history($event_id,$category_id,$start_date,$end_date,$plan_id,
 				{
 					$hsql="INSERT INTO adv_event_history(event_id,category_id,date_from,date_to,adv_plan_id,banner,status,created_by,created_at) VALUES ('$event_id','$category_id','$start_date','$end_date','$plan_id','$event_banner','$status','$user_id',NOW())";
 					$hsql1=$this->db->query($hsql);
-					$data= array("status"=>"success");
+					$data= array("status"=>"success","plan_id"=>"$plan_id");
 					return $data;
 					
 				} else {

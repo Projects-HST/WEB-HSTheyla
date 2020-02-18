@@ -426,12 +426,10 @@ class Advertisement extends CI_Controller
 
         $status      = $this->input->post('status');
         $datas       = $this->advertisementmodel->add_plan_history($event_id, $category_id, $start_date, $end_date, $plan_id, $status, $user_id,$event_banner);
+
         $sta         = $datas['status'];
-        
-		//$id=$datas['eid'];
-        //$category_id=$datas['cid'];
-		 //$category_id = str_replace(' ', '', $datas['cid']);
-        $id          = str_replace(' ', '', $datas['plan_id']);
+		$id         = $datas['plan_id'];
+       // $id          = str_replace(' ', '', $datas['plan_id']);
         //print_r($sta);exit;
 		
         if ($sta == "success") {
