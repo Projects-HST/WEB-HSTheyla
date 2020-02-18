@@ -148,7 +148,7 @@ function view_adv_history_details()
 
 function get_plan_advevents_details($plan_id)
 {
-	  $adv1="SELECT
+	$adv1="SELECT
 		ah.*,
 		ca.category_name,
 		ev.event_name,
@@ -174,18 +174,18 @@ function add_plan_history($event_id,$category_id,$start_date,$end_date,$plan_id,
 	$result=$this->db->query($check);
     if($result->num_rows()==0)
     {
-			$check1="SELECT * from adv_event_history where '$end_date' >= date_from and '$end_date' <= date_to AND adv_plan_id = '$plan_id' AND status = 'Y'";
-			$result1=$this->db->query($check1);
-				if($result1->num_rows()==0)
-				{
-					$hsql="INSERT INTO adv_event_history(event_id,category_id,date_from,date_to,adv_plan_id,banner,status,created_by,created_at) VALUES ('$event_id','$category_id','$start_date','$end_date','$plan_id','$event_banner','$status','$user_id',NOW())";
-					$hsql1=$this->db->query($hsql);
-					$data= array("status"=>"success","plan_id"=>"$plan_id");
-					return $data;
-					
-				} else {
-					$data = array("status"=>"AE","plan_id"=>"$plan_id");
-					return $data;
+		$check1="SELECT * from adv_event_history where '$end_date' >= date_from and '$end_date' <= date_to AND adv_plan_id = '$plan_id' AND status = 'Y'";
+		$result1=$this->db->query($check1);
+			if($result1->num_rows()==0)
+			{
+				$hsql="INSERT INTO adv_event_history(event_id,category_id,date_from,date_to,adv_plan_id,banner,status,created_by,created_at) VALUES ('$event_id','$category_id','$start_date','$end_date','$plan_id','$event_banner','$status','$user_id',NOW())";
+				$hsql1=$this->db->query($hsql);
+				$data= array("status"=>"success","plan_id"=>"$plan_id");
+				return $data;
+				
+			} else {
+				$data = array("status"=>"AE","plan_id"=>"$plan_id");
+				return $data;
 			}
 	} else {
 				$data = array("status"=>"AE","plan_id"=>"$plan_id");
