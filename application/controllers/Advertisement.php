@@ -429,8 +429,6 @@ class Advertisement extends CI_Controller
 
         $sta         = $datas['status'];
 		$id         = $datas['plan_id'];
-       // $id          = str_replace(' ', '', $datas['plan_id']);
-        //print_r($sta);exit;
 		
         if ($sta == "success") {
             $this->session->set_flashdata('msg', 'Advertisement details added');
