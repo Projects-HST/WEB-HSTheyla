@@ -51,7 +51,7 @@ th{
                   <td><?php $date=date_create($rows->show_date);
                        echo date_format($date,"d-m-Y");  ?> ( <?php echo $rows->show_time; ?> ) </td>
                  <td><?php echo $rows->number_of_seats; ?></td>
-                 <td><?php $date=date_create($rows->booking_date);
+                 <td><?php $date=date_create($rows->created_at);
                        echo date_format($date,"d-m-Y"); ?></td>
                   <td><a href="<?php echo base_url(); ?>home/bookedevents_details/<?php echo $rows->order_id; ?>/<?php echo $rows->payment_gateway; ?>" class="btn btn-default btn-xs" role="button"><i class="fa fa-eye"></i></a></td>
               </tr>
