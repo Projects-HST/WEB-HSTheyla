@@ -77,7 +77,7 @@
                success: function(response) {
 
                    if (response == "success") {
-                     swal({
+               swal({
                 title: " ",
                 text: "Your password have been reset.",
                 type: "success"

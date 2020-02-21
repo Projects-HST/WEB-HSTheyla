@@ -16,10 +16,12 @@
 </style>
 
 <div class="col-sm-12 col-md-12 " id="content">
-    <h3 class="dashboard_tab"></h3>
+    <h3 class="dashboard_tab">Booking Details</h3>
 </div>
 <div class="col-md-12 ">
+	
   <div class="card-block" style="padding:20px;">
+		
               <?php foreach($booking_details as $rows){}?>
                   <div class="row" style="padding:5px;">
                         <div class="col-sm-3"><p class="summary_text">Event Name  : </p></div>
@@ -72,13 +74,14 @@
                         <div class="col-sm-3"></div>
                     </div>
   </div>
-    <div class="card-header card-header-title">
-    <h3 class="mb-0 booking_attendees_title">Booked by</h3>
-  </div>
-  <div class="card-block" style="padding:20px;">
-  <div class="row" style="padding:5px;">
+  
+			  <div class="card-header card-header-title">
+				<h3 class="mb-0 booking_attendees_title">Booked by</h3>
+			  </div>
+			  <div class="card-block" style="padding:20px;">
+			  <div class="row" style="padding:5px;">
                         <div class="col-sm-3"><p class="summary_text">Name  : </p></div>
-                        <div class="col-sm-3"><p class="summary_value"><?php echo $rows->user_name; ?></p></div>
+                        <div class="col-sm-3"><p class="summary_value"><?php echo $rows->name; ?></p></div>
                         <div class="col-sm-3"></div>
                     </div>
 					<div class="row" style="padding:5px;">
@@ -91,7 +94,7 @@
                         <div class="col-sm-3"><p class="summary_value"><?php echo $rows->email_id; ?><p class="summary_value"></div>
                         <div class="col-sm-3"></div>
                     </div>
-  </div>
+			</div>
   
   <div class="card-header card-header-title">
     <h3 class="mb-0 booking_attendees_title">Booking Attendees</h3>
