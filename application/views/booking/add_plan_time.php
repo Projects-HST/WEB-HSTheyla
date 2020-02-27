@@ -19,6 +19,7 @@ th{
                               <label class="col-sm-4 col-form-label">Date <span class="error">*</span></label>
                               <div class="col-sm-6">
                                  <select class="form-control" name="showdate">
+								 <!--<option value="all">Select All</option>-->
                                    <?php
                                    foreach($dates as $rows1) { }
                                     $start_date=$rows1->start_date;

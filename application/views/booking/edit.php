@@ -30,6 +30,17 @@
                                  <input class="form-control"  type="text" name="amount"  value="<?php echo $res->seat_rate ;?>" maxlength="11">
                               </div>
                            </div>
+						   <div class="form-group row">
+                              <label class="col-sm-4 col-form-label">Status <span class="error">*</span></label>
+                              <div class="col-sm-6">
+                                <select class="form-control" name="status">
+                                    <option value="Y">Active</option>
+                                    <option value="N">Inactive</option>
+                                 </select>
+								 <script language="JavaScript">document.planform.status.value="<?php echo $res->status; ?>";</script>
+                              </div>
+                           </div>
+						   
                            <div class="form-group">
                               <label class="col-sm-4 col-form-label"></label>
                               <button type="submit" class="btn btn-success waves-effect waves-light">
@@ -58,14 +69,14 @@
     $('#planform').validate({ // initialize the plugin
        rules: {
          planname:{required:true },
-         seats:{required:true },
-         amount:{required:true,number:true }
+         amount:{required:true,number:true },
+		 status:{required:true }
         },
 
         messages: {
-        planname:"Enter plan name",
-        seats:"Enter  Seats",
-       amount:{required:"Enter amount",number:"This doesn't seem to be an amount!"}
+        planname:"Plan name cannot be empty",
+		amount:{required:"Amount cannot be empty",number:"This doesn't seem to be an amount!"},
+		status:"Status cannot be empty"
                },
          });
    });

@@ -26,6 +26,17 @@
                                  <input class="form-control" type="text" name="amount" maxlength="10">
                               </div>
                            </div>
+						   <div class="form-group row">
+                              <label class="col-sm-4 col-form-label">Status <span class="error">*</span></label>
+                              <div class="col-sm-6">
+                                 <select class="form-control" name="status">
+                                    <option value="">Select Status</option>
+                                    <option value="Y">Active</option>
+                                    <option value="N">Inactive</option>
+                                 </select>
+                              </div>
+                           </div>
+						   
                            <div class="form-group">
                               <label class="col-sm-4 col-form-label"></label>
                               <button type="submit" class="btn btn-success waves-effect waves-light">
@@ -56,6 +67,7 @@
                                  <th>Plan Name</th>
                                  <th>Event  Name</th>
                                  <th>Amount</th>
+								 <th>Status</th>
                                  <th>Actions</th>
                               </tr>
                            </thead>
@@ -65,16 +77,18 @@
                                  foreach($view_plan as $rows) {
                                     $eveid=$rows->event_id;
                                     $plaid=$rows->id;
+									$status=$rows->status;
                                  ?>
                               <tr>
                                  <td><?php  echo $i; ?></td>
                                  <td><?php  echo $rows->plan_name; ?></td>
                                  <td><?php  echo $rows->event_name; ?></td>
                                  <td><?php  echo $rows->seat_rate; ?></td>
+								 <td><?php if($status=='Y'){ echo'<button type="button" class="btn btn-secondary btn-success btn-sm"> Active </button>'; }else{ echo'<button type="button" class="btn btn-secondary btn-primary btn-sm"> Inactive </button>'; }?></td>
                                  <td>
                                     <a href="<?php echo base_url();?>booking/edit_plan/<?php echo $rows->id;?>"><img title="Edit" src="<?php echo base_url();?>assets/icons/edit.png" /></a>
-                                    <a href="<?php echo base_url();?>booking/add_show_time/<?php echo $plaid;?>/<?php echo $eveid;?>">
-                              <img title="Show Timings" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
+                                    <a href="<?php echo base_url();?>booking/add_show_time/<?php echo $plaid;?>/<?php echo $eveid;?>"><img title="Show Timings" src="<?php echo base_url();?>assets/icons/booking.png"/></a>
+									
                                <!--a href="<?php echo base_url();?>booking/delete_plan/<?php echo $plaid;?>/<?php echo $eveid;?>">
                               <img title="Delete" src="<?php echo base_url();?>assets/icons/delete.png"/></a-->
                                  </td>
@@ -114,16 +128,15 @@
    $('#planform').validate({ // initialize the plugin
       rules: {
         planname:{required:true },
-        seats:{required:true },
-        amount:{required:true,number:true }
+        amount:{required:true,number:true },
+		status:{required:true }
        },
 
        messages: {
        planname:"Plan name cannot be empty",
-       seats:"Enter  Seats",
-       amount:{required:"Amount cannot be empty",number:"This doesn't seem to be an amount!"}
-
-              },
+       amount:{required:"Amount cannot be empty",number:"This doesn't seem to be an amount!"},
+	   status:"Status cannot be empty"
+          },
         });
    });
 

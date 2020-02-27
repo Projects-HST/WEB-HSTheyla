@@ -43,11 +43,11 @@ class Booking extends CI_Controller
 	    $user_role=$this->session->userdata('user_role');
 
 	    $planname=$this->input->post('planname');
-
 	    $amount=$this->input->post('amount');
 	    $eventid=$this->input->post('event_id');
+		$status=$this->input->post('status');
 
-	    $datas = $this->bookingmodel->add_events_details($eventid,$planname,$amount,$user_id);
+	    $datas = $this->bookingmodel->add_events_details($eventid,$planname,$amount,$status,$user_id);
 	    $eventid=base64_encode($eventid);
         $sta=$datas['status'];
         //print_r($sta);exit;
@@ -87,12 +87,13 @@ class Booking extends CI_Controller
 	    $user_role=$this->session->userdata('user_role');
 
 	    $planname=$this->input->post('planname');
-
 	    $amount=$this->input->post('amount');
 	    $eventid=$this->input->post('event_id');
 	    $planid=$this->input->post('plan_id');
+		$status=$this->input->post('status');
 
-	    $datas = $this->bookingmodel->update_events_details($eventid,$planid,$planname,$amount,$user_id);
+	    $datas = $this->bookingmodel->update_events_details($eventid,$planid,$planname,$amount,$status,$user_id);
+		
         $sta=$datas['status'];
         $eventid=base64_encode($eventid);
         //print_r($sta);exit;
@@ -167,10 +168,18 @@ class Booking extends CI_Controller
 	    $sdate=$this->input->post('showdate');
 		$dateTime = new DateTime($sdate);
 		$show_date=date_format($dateTime,'Y-m-d');
+		
+		/* if ($sdate == 'all'){
+			$show_date = $sdate;
+		} else {
+			$dateTime = new DateTime($sdate);
+			$show_date=date_format($dateTime,'Y-m-d');
+		} */
 
 	    $datas = $this->bookingmodel->add_shows_times_details($plan_id,$eventid,$showtime,$show_date,$seats,$user_id);
-        $sta=$datas['status'];
-        //print_r($sta);exit;
+        
+		
+		$sta=$datas['status'];
         if($sta=="success"){
 	       $this->session->set_flashdata('msg','Show timing created successfully');
 		   redirect('booking/add_show_time/'.$plan_id.'/'.$eventid.'');

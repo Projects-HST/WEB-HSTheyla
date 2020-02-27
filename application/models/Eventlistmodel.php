@@ -509,7 +509,7 @@ Class Eventlistmodel extends CI_Model
 
 	function booking_plans($event_id,$plan_date,$plan_time)
     {
-		$sql="SELECT B.plan_name,B.seat_rate,A.event_id,A.plan_id,A.id AS plantime_id, A.show_date,A.show_time,A.seat_available FROM booking_plan_timing A,booking_plan B WHERE A.event_id  = '$event_id' AND show_date = '$plan_date' AND show_time = '$plan_time' AND A.seat_available>0 AND A.plan_id = B.id";
+		$sql="SELECT B.plan_name,B.seat_rate,A.event_id,A.plan_id,A.id AS plantime_id, A.show_date,A.show_time,A.seat_available FROM booking_plan_timing A,booking_plan B WHERE A.event_id  = '$event_id' AND show_date = '$plan_date' AND show_time = '$plan_time' AND A.seat_available>0 AND A.plan_id = B.id AND B.status = 'Y'";
 	  	$resu=$this->db->query($sql);
 	  	$res=$resu->result();
 		return $res;

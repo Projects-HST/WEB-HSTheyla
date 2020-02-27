@@ -18,18 +18,18 @@ function view_plan_details($id)
 	  return $res;
 }
 
-function add_events_details($eventid,$planname,$amount,$user_id)
+function add_events_details($eventid,$planname,$amount,$status,$user_id)
 {
 
   $check_eve="SELECT * FROM booking_plan WHERE event_id='$eventid' AND plan_name='$planname'";
   $result=$this->db->query($check_eve);
   if($result->num_rows()==0)
    {
-    $query="INSERT INTO booking_plan(event_id,plan_name,seat_rate,created_by,created_at) VALUES ('$eventid','$planname','$amount','$user_id',NOW())";
-     $resultset=$this->db->query($query);
+		$query="INSERT INTO booking_plan(event_id,plan_name,seat_rate,status,created_by,created_at) VALUES ('$eventid','$planname','$amount','$status','$user_id',NOW())";
+		$resultset=$this->db->query($query);
 
-    $update="UPDATE events SET booking_status='Y',updated_by='$user_id',updated_at=NOW() WHERE id='$eventid' ";
-     $update1=$this->db->query($update);
+		$update="UPDATE events SET booking_status='Y',updated_by='$user_id',updated_at=NOW() WHERE id='$eventid' ";
+		$update1=$this->db->query($update);
 
      $data= array("status"=>"success");
      return $data;
@@ -50,9 +50,9 @@ function edit_events_plans($id)
 
 
 
-function update_events_details($eventid,$planid,$planname,$amount,$user_id)
+function update_events_details($eventid,$planid,$planname,$amount,$status,$user_id)
 {
-   $sql="UPDATE booking_plan SET event_id='$eventid',plan_name='$planname',seat_rate='$amount',updated_by='$user_id',updated_at=NOW() WHERE  id='$planid'";
+   $sql="UPDATE booking_plan SET event_id='$eventid',plan_name='$planname',seat_rate='$amount',status='$status',updated_by='$user_id',updated_at=NOW() WHERE  id='$planid'";
    $resultset1=$this->db->query($sql);
    $data= array("status"=>"success");
    return $data;
@@ -78,7 +78,7 @@ function booking_seats_details($plaid,$eveid)
 
 function view_events_dates($eveid)
 {
-   $date="SELECT event_name,start_date,end_date FROM events  WHERE id='$eveid'";
+  $date="SELECT event_name,start_date,end_date FROM events  WHERE id='$eveid'";
   $date1=$this->db->query($date);
   $date2=$date1->result();
   return $date2;
@@ -86,19 +86,71 @@ function view_events_dates($eveid)
 
 function add_shows_times_details($plan_id,$eventid,$showtime,$show_date,$seats,$user_id)
 {
-  $check_time="SELECT * FROM booking_plan_timing WHERE event_id='$eventid' AND plan_id='$plan_id' AND show_time='$showtime' AND show_date='$show_date'";
-  $result=$this->db->query($check_time);
-  if($result->num_rows()==0)
-   {
-    $timinsert="INSERT INTO booking_plan_timing(event_id,plan_id,show_date,show_time,seat_available,created_by,created_at) VALUES ('$eventid','$plan_id','$show_date','$showtime','$seats','$user_id',NOW())";
-     $timinsert1=$this->db->query($timinsert);
-     $data= array("status"=>"success");
-		return $data;
-    }else{
-       $data= array("status"=>"AE");
-       return $data;
-        }
-}
+	
+			$check_time="SELECT * FROM booking_plan_timing WHERE event_id='$eventid' AND plan_id='$plan_id' AND show_time='$showtime' AND show_date='$show_date'";
+			$result=$this->db->query($check_time);
+			if($result->num_rows()==0)
+			{
+				$timinsert="INSERT INTO booking_plan_timing(event_id,plan_id,show_date,show_time,seat_available,created_by,created_at) VALUES ('$eventid','$plan_id','$show_date','$showtime','$seats','$user_id',NOW())";
+				$timinsert1=$this->db->query($timinsert);
+				$data= array("status"=>"success");
+				return $data;
+			}else{
+				$data= array("status"=>"AE");
+				return $data;
+				}
+							
+	/* if ($show_date = "all"){
+		$date="SELECT event_name,start_date,end_date FROM events  WHERE id='$eventid'";
+		$res_date=$this->db->query($date);
+		if($res_date->num_rows()>0)
+		{
+			foreach($res_date->result() as $rows) {}
+
+			 $start_date=$rows->start_date;
+			 $end_date=$rows->end_date;
+
+			$start_date = date('Y-m-d', strtotime($start_date));
+			$end_date =  date('Y-m-d', strtotime($end_date));
+			$day = 86400; // Day in seconds
+			$format = 'Y-m-d'; // Output format (see PHP date funciton)
+			$sTime = strtotime($start_date); // Start as time
+			$eTime = strtotime($end_date); // End as time
+			$numDays = round(($eTime - $sTime) / $day) + 1;
+
+			for($i=0; $i<$numDays; $i++){
+					$sdays = date($format, ($sTime + ($i * $day)));
+	
+					$check_time="SELECT * FROM booking_plan_timing WHERE event_id='$eventid' AND plan_id='$plan_id' AND show_time='$showtime' AND show_date='$sdays'";
+					 $check_time_result=$this->db->query($check_time);
+						if($check_time_result->num_rows()==0)
+						{
+							$timinsert="INSERT INTO booking_plan_timing(event_id,plan_id,show_date,show_time,seat_available,created_by,created_at) VALUES ('$eventid','$plan_id','$sdays','$showtime','$seats','$user_id',NOW())";
+							$timinsert1=$this->db->query($timinsert);
+							$data= array("status"=>"success");
+						}else{
+							$data= array("status"=>"AE");
+						} 
+				return $data;
+			}
+		}
+		} else {
+			
+						$check_time="SELECT * FROM booking_plan_timing WHERE event_id='$eventid' AND plan_id='$plan_id' AND show_time='$showtime' AND show_date='$show_date'";
+						$result=$this->db->query($check_time);
+						if($result->num_rows()==0)
+						{
+							$timinsert="INSERT INTO booking_plan_timing(event_id,plan_id,show_date,show_time,seat_available,created_by,created_at) VALUES ('$eventid','$plan_id','$show_date','$showtime','$seats','$user_id',NOW())";
+							$timinsert1=$this->db->query($timinsert);
+							$data= array("status"=>"success");
+							return $data;
+						}else{
+							$data= array("status"=>"AE");
+							return $data;
+							}
+			
+		} */
+	}
 
 function edit_plans_time($id)
 {
