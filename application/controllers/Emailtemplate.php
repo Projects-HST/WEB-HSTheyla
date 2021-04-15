@@ -156,15 +156,15 @@ class Emailtemplate extends CI_Controller
 			$user_role=$this->session->userdata('user_role');
 
 			if($user_role == 1 || $user_role == 4){
-				$cityid=$this->input->post('cityid');
+				$cityid = $this->input->post('cityid');
 
 				if($cityid!=''){
-					$datas['city_id']=$cityid;
-				 $datas['view'] = $this->emailtemplatemodel->getall_search_users_details($cityid);
+					$datas['city_id'] = $cityid;
+					$datas['view'] = $this->emailtemplatemodel->getall_search_users_details($cityid);
 				}else{
+					$datas['city_id']=0;
 					$datas['view'] = $this->emailtemplatemodel->getall_users_details();
 				}
-
 					$datas['email_tem'] = $this->emailtemplatemodel->getall_email_template();
 					$datas['city_list'] = $this->emailtemplatemodel->getall_city_list();
 

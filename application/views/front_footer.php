@@ -101,7 +101,7 @@ $secondhalf = array_slice($res, $len / 2);
               		  <center><button type="submit" id="submit" class="btn btn-primary btn-lg">Request Now</button></center>
                       </form>
               		<?php } else { ?>
-              		<center><a class="btn btn-lg btn-primary btn-lg" href="<?php echo base_url(); ?>/signin" role="button">Sign In</a></center>
+              		<center><a class="btn btn-lg btn-primary btn-lg" href="<?php echo base_url(); ?>signin" role="button">Sign In</a></center>
               		<?php } ?>
             </div>
         </div>

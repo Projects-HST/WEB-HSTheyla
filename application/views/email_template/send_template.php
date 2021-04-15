@@ -7,13 +7,15 @@
             <div class="row">
 
               <div class="col-md-6 col-lg-6 col-xl-3">
-                  <select class="form-control" name="cityid" id="cityname" >
+                  <select class="form-control" name="cityid" id="cityid" >
                     <option value="">Select City/Area</option>
                     <?php  foreach($city_list as $rows_city){ ?>
                       <option value="<?php echo $rows_city->id; ?>"><?php echo $rows_city->city_name; ?></option>
                       <?php  } ?>
                   </select>
-                  <script>$('#cityname').val('<?php echo $city_id; ?>');</script>
+				  <?php if ($city_id!=''){ ?>
+					<script>$('#cityid').val('<?php echo $city_id; ?>');</script>
+				  <?php } ?>
 
               </div>
 
@@ -73,7 +75,9 @@
                             </tr>
                            <?php $i++;  } ?>
                            <div style="display: none;">
+						   <?php if(!empty($a)) {?>
                              <input type="text" name="userid[]"  class="demo" value="<?php echo $a; ?>">
+						  <?php } ?>
                            </div>
                            <?php  }else{
 
@@ -91,7 +95,11 @@
                                <td><?php  echo $res->mobile_no; ?></td>
                             </tr>
                        <?php $i++;  } ?>
-                       		<div style="display: none;"><input type="text" name="userid[]"  class="demo" value="<?php echo $b; ?>"></div>
+                       		<div style="display: none;">
+							 <?php if(!empty($b)) {?>
+								<input type="text" name="userid[]"  class="demo" value="<?php echo $b; ?>">
+							<?php } ?>
+							</div>
                        <?php }?>
                      </tbody>
                         </table>
